@@ -7,6 +7,7 @@ public class PlacePin : MonoBehaviour {
     public GameObject stuffsprefab;
     public Transform PinSpanw;
 
+
     public void placeThePin()
     {
         Instantiate(stuffsprefab, PinSpanw.position, PinSpanw.rotation);

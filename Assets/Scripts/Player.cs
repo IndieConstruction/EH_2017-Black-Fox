@@ -18,11 +18,8 @@ public class Player : MonoBehaviour {
     MovementController movment;
     PlacePin pinPlacer;
 
-    public PlayerID PlayerID
-    {
-        get { return playerID; }
-    }
-    
+    int pinSide = 1; // 1 destra | -1 sinistra
+
     public float Life
     {
         get;
@@ -44,7 +41,7 @@ public class Player : MonoBehaviour {
     void Update()
     {
         ActionReader();
-
+        /*
         if (Input.GetKeyDown(KeyCode.A))
         {
             pinPlacer.ChangePinSpawnPosition(-1);
@@ -55,23 +52,35 @@ public class Player : MonoBehaviour {
             pinPlacer.ChangePinSpawnPosition(1);
             pinPlacer.placeThePin();
         }
+        */
     }
     #region Controller Input
     void ActionReader()
     {
-        if (InputManager.GetButtonDown("PlacePin"))
-        {
-
-        }
         if (InputManager.GetButtonDown("ChangeSide"))
         {
-
+            if (pinSide == -1)
+            {
+                pinSide = 1;
+            }               
+            else if (pinSide == 1)
+            {
+                pinSide = -1;
+            }
+            pinPlacer.ChangePinSpawnPosition(pinSide);
         }
-        float horizontalAxis = InputManager.GetAxis("Horizontal", playerID);
-        float verticalAxis = InputManager.GetAxis("Vertical", playerID);
-        float forwardParameter = InputManager.GetAxis("RightTrigger", playerID);
-        movment.Movement(forwardParameter);
-        movment.RotationTowards(new Vector3(horizontalAxis, 0f, verticalAxis));
+
+        if (InputManager.GetButtonDown("PlacePin"))
+        {
+            pinPlacer.placeThePin();
+        }
+
+        if (InputManager.GetAxis("LeftTrigger") >= 0.8f)
+        {
+            //Shoot
+        }
+        movment.Movement(InputManager.GetAxis("RightTrigger", playerID));
+        movment.RotationTowards(new Vector3(InputManager.GetAxis("Horizontal", playerID), 0f, InputManager.GetAxis("Vertical", playerID)));
     }
     #endregion
 }

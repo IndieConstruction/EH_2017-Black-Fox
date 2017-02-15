@@ -8,9 +8,7 @@ public class Player : MonoBehaviour {
     [SerializeField]
     PlayerID playerID;
 
-    public float Speed;
     public float RotationSpeed;
-
 
     public float life;
     public int points;

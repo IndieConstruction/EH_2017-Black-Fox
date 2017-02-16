@@ -15,6 +15,7 @@ public class Player : MonoBehaviour {
 
     MovementController movment;
     PlacePin pinPlacer;
+    Shoot shoot;
 
     int pinSide = 1; // 1 destra | -1 sinistra
 
@@ -34,28 +35,21 @@ public class Player : MonoBehaviour {
     {
         movment = GetComponent<MovementController>();
         pinPlacer = GetComponent<PlacePin>();
+        shoot = GetComponent<Shoot>();
     }
 
     void Update()
     {
+        
         ActionReader();
-        /*
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            pinPlacer.ChangePinSpawnPosition(-1);
-            pinPlacer.placeThePin();
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            pinPlacer.ChangePinSpawnPosition(1);
-            pinPlacer.placeThePin();
-        }
-        */
+        
     }
+
+
     #region Controller Input
     void ActionReader()
     {
-        if (InputManager.GetButtonDown("Button X")) // change side of pin
+        if (InputManager.GetButtonDown("Button X", playerID)) // change side of pin
         {
             if (pinSide == -1)
             {
@@ -68,14 +62,14 @@ public class Player : MonoBehaviour {
             pinPlacer.ChangePinSpawnPosition(pinSide);
         }
 
-        if (InputManager.GetButtonDown("Button A")) // place pin
+        if (InputManager.GetButtonDown("Button A", playerID)) // place pin
         {
             pinPlacer.placeThePin();
         }
 
-        if (InputManager.GetAxis("Left Trigger") >= 0.8f) // shoot
+        if (InputManager.GetButtonDown("Left Trigger", playerID)) // shoot
         {
-            //Shoot
+            shoot.ShootBullet(100);
         }
         float thrust = InputManager.GetAxis("Right Trigger", playerID); // add thrust
         Vector3 faceDirection = new Vector3(InputManager.GetAxis("Left Stick Horizontal", playerID), 0f, InputManager.GetAxis("Left Stick Vertical", playerID)); // rotate

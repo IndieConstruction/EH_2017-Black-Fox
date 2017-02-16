@@ -6,11 +6,12 @@ public class Shoot : MonoBehaviour {
 
     public Rigidbody projectile;
     public Transform bulletspawn;
+    public float bulletSpeed;    
 
-    public void ShootBullet(int _speed)
+    public void ShootBullet()
     {
         Rigidbody instantiatedProjectile = Instantiate(projectile, bulletspawn.position, bulletspawn.rotation);
-        instantiatedProjectile.AddRelativeForce(Vector3.forward * _speed, ForceMode.Impulse);
-        Destroy(instantiatedProjectile.gameObject, 2f);
+        instantiatedProjectile.AddRelativeForce(Vector3.forward * bulletSpeed, ForceMode.Impulse);
+        Destroy(instantiatedProjectile.gameObject, 5f);
     }
 }

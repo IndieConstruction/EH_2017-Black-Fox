@@ -8,8 +8,6 @@ public class Player : MonoBehaviour {
     [SerializeField]
     PlayerID playerID;
 
-    public float RotationSpeed;
-
     public float life;
     public int points;
 
@@ -51,27 +49,25 @@ public class Player : MonoBehaviour {
     {
         if (InputManager.GetButtonDown("Right Bumper", playerID)) // place pin
         {
-            pinPlacer.ChangePinSpawnPosition(600);
+            pinPlacer.ChangePinSpawnPosition("Right");
             pinPlacer.placeThePin();
         }
 
         if (InputManager.GetButtonDown("Left Bumper", playerID)) // place pin
         {
-            pinPlacer.ChangePinSpawnPosition(-600);
+            pinPlacer.ChangePinSpawnPosition("Left");
             pinPlacer.placeThePin();
         }
 
         if (InputManager.GetButtonDown("Button A", playerID)) // shoot
         {
-            shoot.ShootBullet(100);
+            shoot.ShootBullet();
         }
         float thrust = InputManager.GetAxis("Right Trigger", playerID); // add thrust
         Vector3 faceDirection = new Vector3(InputManager.GetAxis("Left Stick Horizontal", playerID), 0f, InputManager.GetAxis("Left Stick Vertical", playerID)); // rotate
         movment.Movement(thrust); 
         movment.RotationTowards(faceDirection); 
     }
-
-
 
     void CheckAxis(string _axis, float _parameter)
     {
@@ -91,7 +87,6 @@ public class Player : MonoBehaviour {
             Read = false;
 
     }
-
 
     #endregion
 }

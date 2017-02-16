@@ -19,7 +19,7 @@ public class PlacePin : MonoBehaviour {
     /// <param name="_direction">Set the side of the PinSpawnPoint(1 Right; -1 Left)</param>
     public void ChangePinSpawnPosition(int _direction)
     {
-        float TRanformX = 0f;
+        /*float TRanformX = 0f;
         if(_direction == 1)
         {
             TRanformX = PinSpanw.localPosition.x;
@@ -27,8 +27,8 @@ public class PlacePin : MonoBehaviour {
         else if (_direction == -1)
         {
             TRanformX = -PinSpanw.localPosition.x;
-        }
+        }*/
 
-        PinSpanw.localPosition = new Vector3(TRanformX, PinSpanw.localPosition.y, PinSpanw.localPosition.z);
+        PinSpanw.localPosition = new Vector3(_direction, PinSpanw.localPosition.y, PinSpanw.localPosition.z);
     } 
 }

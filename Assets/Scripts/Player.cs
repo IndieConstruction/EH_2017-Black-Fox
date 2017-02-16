@@ -49,25 +49,19 @@ public class Player : MonoBehaviour {
     #region Controller Input
     void ActionReader()
     {
-        if (InputManager.GetButtonDown("Button X", playerID)) // change side of pin
+        if (InputManager.GetButtonDown("Right Bumper", playerID)) // place pin
         {
-            if (pinSide == -1)
-            {
-                pinSide = 1;
-            }               
-            else if (pinSide == 1)
-            {
-                pinSide = -1;
-            }
-            pinPlacer.ChangePinSpawnPosition(pinSide);
-        }
-
-        if (InputManager.GetButtonDown("Button A", playerID)) // place pin
-        {
+            pinPlacer.ChangePinSpawnPosition(600);
             pinPlacer.placeThePin();
         }
 
-        if (InputManager.GetButtonDown("Left Trigger", playerID)) // shoot
+        if (InputManager.GetButtonDown("Left Bumper", playerID)) // place pin
+        {
+            pinPlacer.ChangePinSpawnPosition(-600);
+            pinPlacer.placeThePin();
+        }
+
+        if (InputManager.GetButtonDown("Button A", playerID)) // shoot
         {
             shoot.ShootBullet(100);
         }
@@ -76,5 +70,28 @@ public class Player : MonoBehaviour {
         movment.Movement(thrust); 
         movment.RotationTowards(faceDirection); 
     }
+
+
+
+    void CheckAxis(string _axis, float _parameter)
+    {
+        bool Read = false;
+
+        //La variabile partendo falsa, permette di entrare nel ciclo if.
+        if (Read == false)
+        {
+            if (Input.GetAxisRaw(_axis) >= _parameter)
+            {
+                //una volta entrata la prima volta la variabile read ritorna vera ed esce dal primo if.
+                Read = true;
+                Debug.Log("Destra");
+            }
+        }
+        if (Input.GetAxisRaw(_axis) <= 0.15f)
+            Read = false;
+
+    }
+
+
     #endregion
 }

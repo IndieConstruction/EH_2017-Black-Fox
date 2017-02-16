@@ -8,15 +8,12 @@ public class Player : MonoBehaviour {
     [SerializeField]
     PlayerID playerID;
 
-    public float RotationSpeed;
-
     public float life;
     public int points;
 
     MovementController movment;
     PlacePin pinPlacer;
-
-    int pinSide = 1; // 1 destra | -1 sinistra
+    Shoot shoot;
 
     public float Life
     {
@@ -34,53 +31,57 @@ public class Player : MonoBehaviour {
     {
         movment = GetComponent<MovementController>();
         pinPlacer = GetComponent<PlacePin>();
+        shoot = GetComponent<Shoot>();
     }
 
     void Update()
     {
         ActionReader();
-        /*
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            pinPlacer.ChangePinSpawnPosition(-1);
-            pinPlacer.placeThePin();
-        }
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            pinPlacer.ChangePinSpawnPosition(1);
-            pinPlacer.placeThePin();
-        }
-        */
     }
+
+
     #region Controller Input
     void ActionReader()
     {
-        if (InputManager.GetButtonDown("Button X")) // change side of pin
+        if (InputManager.GetButtonDown("Right Bumper", playerID)) // place right pin
         {
-            if (pinSide == -1)
-            {
-                pinSide = 1;
-            }               
-            else if (pinSide == 1)
-            {
-                pinSide = -1;
-            }
-            pinPlacer.ChangePinSpawnPosition(pinSide);
-        }
-
-        if (InputManager.GetButtonDown("Button A")) // place pin
-        {
+            pinPlacer.ChangePinSpawnPosition("Right");
             pinPlacer.placeThePin();
         }
 
-        if (InputManager.GetAxis("Left Trigger") >= 0.8f) // shoot
+        if (InputManager.GetButtonDown("Left Bumper", playerID)) // place left pin
         {
-            //Shoot
+            pinPlacer.ChangePinSpawnPosition("Left");
+            pinPlacer.placeThePin();
+        }
+
+        if (InputManager.GetButtonDown("Button A", playerID)) // shoot
+        {
+            shoot.ShootBullet();
         }
         float thrust = InputManager.GetAxis("Right Trigger", playerID); // add thrust
         Vector3 faceDirection = new Vector3(InputManager.GetAxis("Left Stick Horizontal", playerID), 0f, InputManager.GetAxis("Left Stick Vertical", playerID)); // rotate
-        movment.Movement(thrust); 
+        movment.Movement(-thrust); // il grilletto destro ritorna un valore negativo
         movment.RotationTowards(faceDirection); 
     }
+
+    void CheckAxis(string _axis, float _parameter)
+    {
+        bool Read = false;
+
+        //La variabile partendo falsa, permette di entrare nel ciclo if.
+        if (Read == false)
+        {
+            if (Input.GetAxisRaw(_axis) >= _parameter)
+            {
+                //una volta entrata la prima volta la variabile read ritorna vera ed esce dal primo if.
+                Read = true;
+                Debug.Log("Destra");
+            }
+        }
+        if (Input.GetAxisRaw(_axis) <= 0.15f)
+            Read = false;
+    }
+
     #endregion
 }

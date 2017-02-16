@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class MovementController : MonoBehaviour {
 
+    public float RotationSpeed;
+    public float MovmentSpeed;
     Rigidbody Rigid;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         Rigid = GetComponent<Rigidbody>();
 	}
 	
@@ -17,7 +19,7 @@ public class MovementController : MonoBehaviour {
     /// <param name="_Speed">the speed that the object must to have</param>
     public void Movement(float _Speed)
     {
-        Rigid.AddRelativeForce(Vector3.forward * _Speed, ForceMode.Acceleration);
+        Rigid.AddRelativeForce(Vector3.forward * _Speed * MovmentSpeed, ForceMode.Acceleration);
     }
 
     /// <summary>
@@ -26,7 +28,7 @@ public class MovementController : MonoBehaviour {
     /// <param name="_rotationSpeed">the speed of rotation (Positive to turn left, Negative to tirn right) </param>
     public void RotationTowards(Vector3 axis)
     {
-        Vector3 newDir = Vector3.RotateTowards(transform.forward, axis, Time.deltaTime, 0.0F);
+        Vector3 newDir = Vector3.RotateTowards(transform.forward, axis, Time.deltaTime * RotationSpeed, 0.0F);
         transform.rotation = Quaternion.LookRotation(newDir);
     }
 

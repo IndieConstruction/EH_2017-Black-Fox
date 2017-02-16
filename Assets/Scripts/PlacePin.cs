@@ -7,28 +7,41 @@ public class PlacePin : MonoBehaviour {
     public GameObject stuffsprefab;
     public Transform PinSpanw;
 
+    bool isLeft = false;
+    
+    float xPosValue;
+    float xNegValue;
+    float xValue;
+
+    private void Start()
+    {
+        float pinXvalue = PinSpanw.localPosition.x;
+        xPosValue = xValue = pinXvalue;
+        xNegValue = -pinXvalue;
+    }
 
     public void placeThePin()
     {
-        Instantiate(stuffsprefab, PinSpanw.position, PinSpanw.rotation);
+        Instantiate(stuffsprefab, PinSpanw.position, PinSpanw.rotation);        
     }
 
     /// <summary>
     /// Change the position of the PinSpawnPoint
     /// </summary>
     /// <param name="_direction">Set the side of the PinSpawnPoint(1 Right; -1 Left)</param>
-    public void ChangePinSpawnPosition(int _direction)
+    public void ChangePinSpawnPosition(string _side)
     {
-        float TRanformX = 0f;
-        if(_direction == 1)
+        if (_side == "Left" && !isLeft)
         {
-            TRanformX = PinSpanw.localPosition.x;
+            xValue = xNegValue;
+            isLeft = true;
         }
-        else if (_direction == -1)
+        else if (_side == "Right" && isLeft)
         {
-            TRanformX = -PinSpanw.localPosition.x;
+            xValue = xPosValue;
+            isLeft = false;
         }
 
-        PinSpanw.localPosition = new Vector3(TRanformX, PinSpanw.localPosition.y, PinSpanw.localPosition.z);
+        PinSpanw.localPosition = new Vector3(xValue, PinSpanw.localPosition.y, PinSpanw.localPosition.z);
     } 
 }

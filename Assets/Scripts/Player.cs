@@ -38,9 +38,8 @@ public class Player : MonoBehaviour {
 
     void Update()
     {
-        
+
         ActionReader();
-        
     }
 
 
@@ -65,7 +64,7 @@ public class Player : MonoBehaviour {
         }
         float thrust = InputManager.GetAxis("Right Trigger", playerID); // add thrust
         Vector3 faceDirection = new Vector3(InputManager.GetAxis("Left Stick Horizontal", playerID), 0f, InputManager.GetAxis("Left Stick Vertical", playerID)); // rotate
-        movment.Movement(thrust); 
+        movment.Movement(-thrust); // il grilletto destro ritorna un valore negativo
         movment.RotationTowards(faceDirection); 
     }
 

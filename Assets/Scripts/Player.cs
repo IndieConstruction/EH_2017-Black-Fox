@@ -55,7 +55,7 @@ public class Player : MonoBehaviour {
     #region Controller Input
     void ActionReader()
     {
-        if (InputManager.GetButtonDown("ChangeSide"))
+        if (InputManager.GetButtonDown("Button X")) // change side of pin
         {
             if (pinSide == -1)
             {
@@ -68,17 +68,19 @@ public class Player : MonoBehaviour {
             pinPlacer.ChangePinSpawnPosition(pinSide);
         }
 
-        if (InputManager.GetButtonDown("PlacePin"))
+        if (InputManager.GetButtonDown("Button A")) // place pin
         {
             pinPlacer.placeThePin();
         }
 
-        if (InputManager.GetAxis("LeftTrigger") >= 0.8f)
+        if (InputManager.GetAxis("Left Trigger") >= 0.8f) // shoot
         {
             //Shoot
         }
-        movment.Movement(InputManager.GetAxis("RightTrigger", playerID));
-        movment.RotationTowards(new Vector3(InputManager.GetAxis("Horizontal", playerID), 0f, InputManager.GetAxis("Vertical", playerID)));
+        float thrust = InputManager.GetAxis("Right Trigger", playerID); // add thrust
+        Vector3 faceDirection = new Vector3(InputManager.GetAxis("Left Stick Horizontal", playerID), 0f, InputManager.GetAxis("Left Stick Vertical", playerID)); // rotate
+        movment.Movement(thrust); 
+        movment.RotationTowards(faceDirection); 
     }
     #endregion
 }

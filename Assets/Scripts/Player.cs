@@ -15,8 +15,6 @@ public class Player : MonoBehaviour {
     PlacePin pinPlacer;
     Shoot shoot;
 
-    int pinSide = 1; // 1 destra | -1 sinistra
-
     public float Life
     {
         get;
@@ -83,7 +81,6 @@ public class Player : MonoBehaviour {
         }
         if (Input.GetAxisRaw(_axis) <= 0.15f)
             Read = false;
-
     }
 
     #endregion

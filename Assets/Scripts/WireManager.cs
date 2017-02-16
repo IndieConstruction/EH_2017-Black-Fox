@@ -12,7 +12,7 @@ public class WireManager : MonoBehaviour {
     
 
     List<GameObject> wire = new List<GameObject>();
-    float extesionRadius;
+    float radius;
 	
 	void Start () {
         //Setup for the MasterHead of the Wire
@@ -22,7 +22,7 @@ public class WireManager : MonoBehaviour {
             GetComponent<HingeJoint>().connectedBody = HeadAnchor;            
         }
 
-        extesionRadius = GetComponent<SphereCollider>().radius;
+        radius = GetComponent<SphereCollider>().radius;
         Fill();
         
 	}
@@ -33,6 +33,22 @@ public class WireManager : MonoBehaviour {
             Extend();
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!other.Equals(TailAnchor.gameObject))
+            return;
+
+        if (TailAnchor.GetComponent<HingeJoint>() == null)
+            TailAnchor.gameObject.AddComponent<HingeJoint>();
+
+        GameObject lastTail = wire[wire.Count - 1].GetComponentInChildren<CapsuleCollider>().gameObject;
+        wire[wire.Count - 1].transform.Translate(TailAnchor.transform.position);
+        TailAnchor.GetComponent<HingeJoint>().connectedBody = lastTail.GetComponent<Rigidbody>();
+        TailAnchor.GetComponent<HingeJoint>().connectedAnchor = lastTail.GetComponent<CapsuleCollider>().center;
+
+    }
+
+
     /// <summary>
     /// Create a Wire between the Head and the Tail Anchor
     /// </summary>
@@ -42,20 +58,16 @@ public class WireManager : MonoBehaviour {
             return;
 
         Vector3 spaceToFill = HeadAnchor.transform.position - TailAnchor.transform.position;
-        float piecesNeeded = spaceToFill.magnitude / extesionRadius;
+        spaceToFill /= gameObject.transform.localScale.magnitude;
+        float piecesNeeded = spaceToFill.magnitude / radius;
 
-        for (int i = 0; i < (int) piecesNeeded; i++)
+        for (int i = 0; i < piecesNeeded; i++)
         {
            Extend();
         }
 
-        if (TailAnchor.GetComponent<HingeJoint>() == null)
-            TailAnchor.gameObject.AddComponent<HingeJoint>();
-
-        GameObject lastTail = wire[wire.Count - 1].GetComponentInChildren<CapsuleCollider>().gameObject;
-        wire[wire.Count - 1].transform.Translate(TailAnchor.transform.position);
-        TailAnchor.GetComponent<HingeJoint>().connectedBody = lastTail.GetComponent<Rigidbody>();
-        TailAnchor.GetComponent<HingeJoint>().connectedAnchor = lastTail.GetComponent<CapsuleCollider>().center;
+        Vector3 tailPosition = wire[wire.Count - 1].transform.position;
+        tailPosition = Vector3.MoveTowards(tailPosition, TailAnchor.transform.position, Mathf.Infinity);
     }
 
 
@@ -65,9 +77,7 @@ public class WireManager : MonoBehaviour {
     void Extend()
     {
         GameObject lastTail = wire[wire.Count - 1].GetComponentInChildren<CapsuleCollider>().gameObject;
-        GameObject newPiece = Instantiate<GameObject>(this.gameObject, //nuovo elemento da aggiunere
-                                                    lastTail.transform.position,//posizione
-                                                    lastTail.transform.rotation); //rotazione
+        GameObject newPiece = Instantiate<GameObject>(this.gameObject, lastTail.transform.position, lastTail.transform.rotation);
 
         newPiece.GetComponent<WireManager>().IsMasterHead = false;
         wire.Add(newPiece);

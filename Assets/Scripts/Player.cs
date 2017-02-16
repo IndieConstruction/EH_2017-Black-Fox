@@ -38,7 +38,6 @@ public class Player : MonoBehaviour {
 
     void Update()
     {
-
         ActionReader();
     }
 
@@ -46,13 +45,13 @@ public class Player : MonoBehaviour {
     #region Controller Input
     void ActionReader()
     {
-        if (InputManager.GetButtonDown("Right Bumper", playerID)) // place pin
+        if (InputManager.GetButtonDown("Right Bumper", playerID)) // place right pin
         {
             pinPlacer.ChangePinSpawnPosition("Right");
             pinPlacer.placeThePin();
         }
 
-        if (InputManager.GetButtonDown("Left Bumper", playerID)) // place pin
+        if (InputManager.GetButtonDown("Left Bumper", playerID)) // place left pin
         {
             pinPlacer.ChangePinSpawnPosition("Left");
             pinPlacer.placeThePin();

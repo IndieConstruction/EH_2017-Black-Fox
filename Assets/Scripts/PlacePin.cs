@@ -8,6 +8,17 @@ public class PlacePin : MonoBehaviour {
     public Transform PinSpanw;
 
     bool isLeft = false;
+    
+    float xPosValue;
+    float xNegValue;
+    float xValue;
+
+    private void Start()
+    {
+        float pinXvalue = PinSpanw.localPosition.x;
+        xPosValue = xValue = pinXvalue;
+        xNegValue = -pinXvalue;
+    }
 
     public void placeThePin()
     {
@@ -20,16 +31,17 @@ public class PlacePin : MonoBehaviour {
     /// <param name="_direction">Set the side of the PinSpawnPoint(1 Right; -1 Left)</param>
     public void ChangePinSpawnPosition(string _side)
     {
-        float tranformX = 0f;
-        if (_side == "Left")
+        if (_side == "Left" && !isLeft)
         {
-            tranformX = -600f;
+            xValue = xNegValue;
+            isLeft = true;
         }
-        else if (_side == "Right")
+        else if (_side == "Right" && isLeft)
         {
-            tranformX = 600f;
+            xValue = xPosValue;
+            isLeft = false;
         }
 
-        PinSpanw.localPosition = new Vector3(tranformX, PinSpanw.localPosition.y, PinSpanw.localPosition.z);
+        PinSpanw.localPosition = new Vector3(xValue, PinSpanw.localPosition.y, PinSpanw.localPosition.z);
     } 
 }

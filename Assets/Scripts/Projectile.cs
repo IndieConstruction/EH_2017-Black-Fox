@@ -27,14 +27,14 @@ public class Projectile : MonoBehaviour {
         GameObject ownerObj = Owner.GetOwner();
         if (!other.gameObject.Equals(ownerObj))
         {
-            IDamageable damageables = other.gameObject.GetComponent<IDamageable>();
-            if (damageables != null)
+            IDamageable objectToDamage = other.gameObject.GetComponent<IDamageable>();
+            if (objectToDamage != null)
             {
                 foreach (IDamageable item in Owner.GetDamageable())
                 {
-                    if (item.GetType() == damageables.GetType())
+                    if (item.GetType() == objectToDamage.GetType())
                     {
-                        ownerObj.GetComponent<Player>().Points = damageables.Damage(Damage);
+                        ownerObj.GetComponent<Player>().Points = objectToDamage.Damage(Damage);
                         Destroy(gameObject);        
                     }
                 }

@@ -9,8 +9,9 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
     [SerializeField]
     PlayerID playerID;
 
-    public float life;
-    public float points;
+    public float life = 10;
+    public float points = 0;
+    float killPoints = 100;
 
     public List<GameObject> DamageablesPrefabs = new List<GameObject>();
     List<IDamageable> Damageables = new List<IDamageable>();
@@ -24,17 +25,13 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
     public float Life
     {
         get { return life; }
-        set
-        {
-            if (isAlive)
-                life = value;
-        }
+        set { life = value; }
     }
 
     public float Points
     {
         get { return points; }
-        set { points = value; }
+        set { points += value; }
     }
 
     void Start ()
@@ -54,12 +51,7 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
 
     private void ChechLife()
     {
-        if(Life < 1)
-        {
-            isAlive = false;
-            Debug.Log("Sei Morto n# " + playerID);
-            gameObject.SetActive(false);
-        } 
+
     }
 
     private void LoadIDamageablePrefab()
@@ -117,14 +109,6 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
 
     #region Interfaces
 
-    #region IDamageable
-    public void Damage(float _damage)
-    {
-        Life -= _damage;
-        Debug.Log("Damage : " + _damage + " # Life : " + Life);
-    }
-    #endregion
-
     #region IShooter
     public List<IDamageable> GetDamageable()
     {
@@ -134,6 +118,29 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
     public GameObject GetOwner()
     {
         return gameObject;
+    }
+    #endregion
+
+    #region IDamageable
+    public float Damage(float _damage)
+    {
+        if(isAlive)
+        {
+            Life -= _damage;
+            if (Life < 1)
+            {
+                isAlive = false;
+                Debug.Log("Sei Morto n# " + playerID);
+                gameObject.SetActive(false);
+                return killPoints;
+            }
+            else
+            {
+                Debug.Log("Damage : " + _damage + " # Life : " + Life);
+                return 0;
+            }
+        }
+        return 0;
     }
     #endregion
 

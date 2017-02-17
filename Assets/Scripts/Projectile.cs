@@ -24,7 +24,8 @@ public class Projectile : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.gameObject.Equals(Owner.GetOwner()))
+        GameObject ownerObj = Owner.GetOwner();
+        if (!other.gameObject.Equals(ownerObj))
         {
             IDamageable damageables = other.gameObject.GetComponent<IDamageable>();
             if (damageables != null)
@@ -32,9 +33,9 @@ public class Projectile : MonoBehaviour {
                 foreach (IDamageable item in Owner.GetDamageable())
                 {
                     if (item.GetType() == damageables.GetType())
-                    { 
-                        Destroy(gameObject);
-                        damageables.Damage(Damage);              
+                    {
+                        ownerObj.GetComponent<Player>().Points = damageables.Damage(Damage);
+                        Destroy(gameObject);        
                     }
                 }
             }

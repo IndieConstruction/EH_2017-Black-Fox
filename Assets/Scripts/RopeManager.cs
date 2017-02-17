@@ -12,7 +12,7 @@ public class RopeManager : MonoBehaviour {
     //Transform of the point to connect to this GameObject
     public Transform Target;
 
-    public float FiniteElementDensity = 1f;                      //Density of Joints per unity (of Unity)
+    public float FiniteElementDensity = 1f;                         //Density of Joints per unity (of Unity)
     public float RopeDrag = .1f;                                    //Each Joint Drag
     public float RopeMass = .1f;                                    //Each Joint Mass
     public float RopeColliderRadius = 1f;                           //Radius of the SphereCollider in Joints
@@ -23,10 +23,6 @@ public class RopeManager : MonoBehaviour {
     private bool rope = false;
 
     public Vector3 SwingAxis = Vector3.one;                         //Sets which axis the Joint will swing on
-    public float LowTwistLimt = -100f;                              //The lower limit of the Joint axes
-    public float HighTwistLimit = 100f;                             //The upper limit of the joint axes
-    public float Swing1Limit = 20f;                                 //The initial position of the joint axes;
-
 
     private void Awake()
     {
@@ -74,24 +70,17 @@ public class RopeManager : MonoBehaviour {
 
         for (int i = 0; i < totalJoints-1; i++)
         {
+            //Check if joints[i] is actually a new istantiated Obj.
+            //If it is, set the his position
             if (joints[i].GetComponent<Transform>() == null)
             {
                 joints[i].AddComponent<Transform>();
                 Vector3 pos = (separation * i) + transform.position;
                 joints[i].transform.position = pos;
+                AdjustJoint(i);
             }
 
-            if (joints[i].GetComponent<SphereCollider>() == null)
-                joints[i].AddComponent<SphereCollider>();
-
-            if (joints[i].GetComponent<HingeJoint>() == null)
-                joints[i].AddComponent<HingeJoint>();
-
-            if (joints[i].GetComponent<Rigidbody>() == null)
-                joints[i].AddComponent<Rigidbody>();
-
-            AdjustJoint(i);
-            AdjustJointPhysics(i);            
+            AdjustJointPhysics(joints[i],joints[i-1].GetComponent<Rigidbody>());            
         }
 
         //Setup of the Target's HingeJoint
@@ -101,9 +90,6 @@ public class RopeManager : MonoBehaviour {
         lastHJ = Target.gameObject.GetComponent<HingeJoint>();
         lastHJ.connectedBody = joints[totalJoints - 1].GetComponent<Rigidbody>();
         lastHJ.axis = SwingAxis;
-        JointLimits lastHJlimits = lastHJ.limits;
-        lastHJlimits.min = LowTwistLimt;
-        lastHJlimits.max = HighTwistLimit;
 
         Target.parent = transform;
 
@@ -130,21 +116,38 @@ public class RopeManager : MonoBehaviour {
     /// Set the parameter of SphereCollider, Rigidbody and HingeJoint
     /// </summary>
     /// <param name="n">The index of the list of GameObjects</param>
-    void AdjustJointPhysics(int n)
+    void AdjustJointPhysics(GameObject _jointToSetup, Rigidbody _rbToConnect)
     {
-        SphereCollider coll = joints[n].GetComponent<SphereCollider>();
-        Rigidbody rigid = joints[n].GetComponent<Rigidbody>();
-        HingeJoint hj = joints[n].GetComponent<HingeJoint>();
-        JointLimits hjLimits = hj.limits;
+        SphereCollider coll;
+        Rigidbody rigid;
+        HingeJoint hj;
 
+        //Reference to SphereCollider
+        if (_jointToSetup.GetComponent<SphereCollider>() == null)
+        {
+            coll = _jointToSetup.AddComponent<SphereCollider>();
+        }else
+            coll = _jointToSetup.GetComponent<SphereCollider>();
+        //Reference to Rigidbody
+        if (_jointToSetup.GetComponent<Rigidbody>() == null)
+        {
+            rigid = _jointToSetup.AddComponent<Rigidbody>();
+        }else
+            rigid = _jointToSetup.GetComponent<Rigidbody>();
+        //Reference to HingeJoint
+        if (_jointToSetup.GetComponent<HingeJoint>() == null)
+        {
+            hj = _jointToSetup.AddComponent<HingeJoint>();
+        }else
+            hj = _jointToSetup.GetComponent<HingeJoint>();
+
+        //Setup of the HingeJoint
         hj.axis = SwingAxis;
-        hj.connectedBody = (n == 1) ? GetComponent<Rigidbody>() : joints[n - 1].GetComponent<Rigidbody>();
-        hjLimits.min = LowTwistLimt;
-        hjLimits.max = HighTwistLimit;
-
+        hj.connectedBody = _rbToConnect;
+        //Setup of the Rigidbody
         rigid.drag = RopeDrag;
         rigid.mass = RopeMass;
-
+        //Setup of the SphereCollider
         coll.radius = RopeColliderRadius;
     }
 }

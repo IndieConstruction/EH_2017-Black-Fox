@@ -2,29 +2,36 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TeamUtility.IO;
+using System;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour, IShooter, IDamageable {
 
     [SerializeField]
     PlayerID playerID;
 
-    public float life;
-    public int points;
+    public float life = 10;
+    public float points = 0;
+    float killPoints = 100;
+
+    public List<GameObject> DamageablesPrefabs = new List<GameObject>();
+    List<IDamageable> Damageables = new List<IDamageable>();
 
     MovementController movment;
     PlacePin pinPlacer;
     Shoot shoot;
 
+    bool isAlive = true;
+
     public float Life
     {
-        get;
-        set;
+        get { return life; }
+        set { life = value; }
     }
 
     public float Points
     {
-        get;
-        set;
+        get { return points; }
+        set { points += value; }
     }
 
     void Start ()
@@ -32,13 +39,29 @@ public class Player : MonoBehaviour {
         movment = GetComponent<MovementController>();
         pinPlacer = GetComponent<PlacePin>();
         shoot = GetComponent<Shoot>();
+
+        LoadIDamageablePrefab();
     }
 
     void Update()
     {
         ActionReader();
+        ChechLife();
     }
 
+    private void ChechLife()
+    {
+
+    }
+
+    private void LoadIDamageablePrefab()
+    {
+        foreach (var k in DamageablesPrefabs)
+        {
+            if (k.GetComponent<IDamageable>() != null)
+                Damageables.Add(k.GetComponent<IDamageable>());
+        }
+    }
 
     #region Controller Input
     void ActionReader()
@@ -82,6 +105,44 @@ public class Player : MonoBehaviour {
         if (Input.GetAxisRaw(_axis) <= 0.15f)
             Read = false;
     }
+    #endregion
+
+    #region Interfaces
+
+    #region IShooter
+    public List<IDamageable> GetDamageable()
+    {
+        return Damageables;
+    }
+
+    public GameObject GetOwner()
+    {
+        return gameObject;
+    }
+    #endregion
+
+    #region IDamageable
+    public float Damage(float _damage)
+    {
+        if(isAlive)
+        {
+            Life -= _damage;
+            if (Life < 1)
+            {
+                isAlive = false;
+                Debug.Log("Sei Morto n# " + playerID);
+                gameObject.SetActive(false);
+                return killPoints;
+            }
+            else
+            {
+                Debug.Log("Damage : " + _damage + " # Life : " + Life);
+                return 0;
+            }
+        }
+        return 0;
+    }
+    #endregion
 
     #endregion
 }

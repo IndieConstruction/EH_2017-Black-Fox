@@ -1,0 +1,5 @@
+
+
+### Cose Non Funzionanti Correttamente ###
+	
+	- Quando un proiettilke colpisce un agente toglie più volte alla vita il danno che dovrebbe fare

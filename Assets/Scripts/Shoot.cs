@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Shoot : MonoBehaviour {
 
-    public Rigidbody projectile;
+    public GameObject projectile;
     public Transform bulletspawn;
     public float bulletSpeed;    
 
     public void ShootBullet()
     {
-        Rigidbody instantiatedProjectile = Instantiate(projectile, bulletspawn.position, bulletspawn.rotation);
-        instantiatedProjectile.AddRelativeForce(Vector3.forward * bulletSpeed, ForceMode.Impulse);
-        Destroy(instantiatedProjectile.gameObject, 5f);
+        GameObject instantiatedProjectile = Instantiate(projectile, bulletspawn.position, bulletspawn.rotation);
+        instantiatedProjectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * bulletSpeed, ForceMode.Impulse);
+        instantiatedProjectile.GetComponent<Projectile>().SetOwner(GetComponentInParent<IShooter>());
     }
 }

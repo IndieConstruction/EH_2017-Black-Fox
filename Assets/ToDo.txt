@@ -2,4 +2,9 @@
 
 ### Cose Non Funzionanti Correttamente ###
 	
-	- Quando un proiettilke colpisce un agente toglie più volte alla vita il danno che dovrebbe fare
+	[x] - Quando un proiettilke colpisce un agente toglie più volte alla vita il danno che dovrebbe fare
+	[ ] - Decidere se tenere o meno la retromarcia
+
+
+	[ ] : da fare.
+	[x] : fatto.

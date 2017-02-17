@@ -20,6 +20,10 @@ public class PlacePin : MonoBehaviour {
         xNegValue = -pinXvalue;
     }
 
+
+    /// <summary>
+    /// Instantiate the pin on the PinSpawn
+    /// </summary>
     public void placeThePin()
     {
         Instantiate(stuffsprefab, PinSpanw.position, PinSpanw.rotation);        
@@ -28,7 +32,7 @@ public class PlacePin : MonoBehaviour {
     /// <summary>
     /// Change the position of the PinSpawnPoint
     /// </summary>
-    /// <param name="_direction">Set the side of the PinSpawnPoint(1 Right; -1 Left)</param>
+    /// <param name="_direction">Set the side of the PinSpawnPoint</param>
     public void ChangePinSpawnPosition(string _side)
     {
         if (_side == "Left" && !isLeft)

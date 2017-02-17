@@ -8,9 +8,11 @@ public class Projectile : MonoBehaviour {
     float startTime;
     float timeToCount = 5f;
     float Damage = 1;
+    GameObject ownerObj;
 
     void Start()
     {
+        ownerObj = Owner.GetOwner();
         startTime = Time.time;
     }
 
@@ -24,7 +26,6 @@ public class Projectile : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        GameObject ownerObj = Owner.GetOwner();
         if (!other.gameObject.Equals(ownerObj))
         {
             IDamageable damageables = other.gameObject.GetComponent<IDamageable>();
@@ -34,8 +35,9 @@ public class Projectile : MonoBehaviour {
                 {
                     if (item.GetType() == damageables.GetType())
                     {
-                        ownerObj.GetComponent<Player>().Points = damageables.Damage(Damage);
-                        Destroy(gameObject);        
+                        ownerObj.GetComponent<Player>().Points += damageables.Damage(Damage);
+                        Destroy(gameObject);
+                        break;       
                     }
                 }
             }

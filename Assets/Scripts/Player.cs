@@ -93,10 +93,17 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
 
 
         // Ruota e Muove l'agente
+        /* 
+         * Appunto sul funzionamento degli assi dei Trigger :
+         * - se imposto ad entrambi i Trigger il 3th axis, uno funziona come l'opposto dell'altro, anche se ne viene usato solamente uno dallo script (es. Accelera e Frena).
+         * - per separarne l'uso vanno settati al Left Trigger il 9th axis e al Right Trigger il 10th axis.
+         * - modificarli a seconda dell'uso che se ne vuole fare.
+         */
+
         float thrust = InputManager.GetAxis("Right Trigger", playerID);                                                                                             // Add thrust
         Vector3 faceDirection = new Vector3(InputManager.GetAxis("Left Stick Horizontal", playerID), 0f, InputManager.GetAxis("Left Stick Vertical", playerID));    // Indica in che direzione ruotare l'agente
-        movment.Movement(-thrust);                                                                                                                                  // Il grilletto destro ritorna un valore negativo
-        movment.RotationTowards(faceDirection);                                                                                                                     // Ruota
+        movment.Movement(thrust);                                                                                                                                   // Muove l'agente
+        movment.RotationTowards(faceDirection);                                                                                                                     // Ruota l'agente
     }
 
     /// <summary>

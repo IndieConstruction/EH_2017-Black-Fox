@@ -3,7 +3,8 @@
 ### Cose Non Funzionanti Correttamente ###
 	
 	[x] - Quando un proiettilke colpisce un agente toglie più volte alla vita il danno che dovrebbe fare
-	[ ] - Decidere se tenere o meno la retromarcia
+	[x] - Tolta la retromarcia - Decidere se rimettere o meno la retromarcia ?
+	[ ] - Mettere i perni in modo che ostacolino il movimento degli agenti (che ci vadano a sbattere contro)
 
 
 	[ ] : da fare.

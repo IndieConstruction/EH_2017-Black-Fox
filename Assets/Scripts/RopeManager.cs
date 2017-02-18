@@ -81,7 +81,7 @@ public class RopeManager : MonoBehaviour {
             joints.Add(new GameObject());
 
         //Set the last of the list as the Target        
-        joints.Add(Target.gameObject);//ELEMENTO NON ISTANZIATO! Correggi
+        joints.Add(Target.gameObject);
     }
 
     /// <summary>
@@ -97,7 +97,7 @@ public class RopeManager : MonoBehaviour {
         for (int i = joints.LastIndexOf(origin.gameObject); i < totalJoints-1; i++)
         {   
             //Create a new joint
-            joints[i] = new GameObject("Joint " + i);
+            joints[i].name = ("Joint " + i);
             
             pos = (separation * i) + origin.position;
             joints[i].transform.position = pos;

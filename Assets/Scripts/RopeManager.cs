@@ -8,10 +8,11 @@ using UnityEngine;
 /// Used to manage the rope between the component and the Target position
 /// </summary>
 public class RopeManager : MonoBehaviour {
+        
+    public Transform Target;                                        //Transform of the point to connect to this GameObject
+    private Transform origin;                                       //Transform of the point of origin of the Rope (also set as last element of the Rope)
 
-    //Transform of the point to connect to this GameObject
-    public Transform Target;
-
+    public float RopeMaxLength = 1f;                                //Max length of the rope (in Unity's unity)
     public float FiniteElementDensity = 1f;                         //Density of Joints per unity (of Unity)
     public float RopeDrag = .1f;                                    //Each Joint Drag
     public float RopeMass = .1f;                                    //Each Joint Mass
@@ -20,102 +21,126 @@ public class RopeManager : MonoBehaviour {
     private List<GameObject> joints = new List<GameObject>();       //Collection of Joints that describe the rope
     private LineRenderer lineRend;                                  //Reference to the LineRenderer
     private int totalJoints = 0;                                    //Total amount of Joints
+    private float ropeCurrentLength;                                //Current length of the rope (in Unity's unity)
     private bool rope = false;
 
-    public Vector3 SwingAxis = Vector3.one;                         //Sets which axis the Joint will swing on
+    public Vector3 SwingAxis = new Vector3(1,0,1);                  //Sets which axis the Joint will swing on
 
     private void Awake()
     {
+        //Get reference to LineRederer
+        lineRend = GetComponent<LineRenderer>();
+
+        //Set this gameObject as origin of the rope
+        origin = transform;
+        joints.Add(gameObject);
+        totalJoints++;
+
+        //Build the Rope
+        UpdateJoints();
         ExtendRope();
     }
 
-    private void Update()
-    {
-
-    }
+    //------------
+    //Inserire il controllo dell'ultimo pezzo della fune, se ancora connesso o meno
+    //------------
 
     /// <summary>
-    /// Update the Joints number and position to fit the required FiniteElementDensity
-    /// This method can only increase the number of Joints, extending the Rope
+    /// Update the Joints number to fit the required FiniteElementDensity
+    /// This method can only increase the number of Joints
     /// </summary>
     void UpdateJoints()
     {
-        //Check if it's really neede the Update of Joints
-        int totalJointsNeeded = (int)(Vector3.Distance(transform.position, Target.position) * FiniteElementDensity);
-        if (totalJointsNeeded < totalJoints)
-            return;
-
         //Update of the Joints to fit the needs
-        totalJoints = totalJointsNeeded;
+        ropeCurrentLength = Vector3.Distance(origin.position, Target.position);
+        totalJoints = (int)(ropeCurrentLength * FiniteElementDensity);
+        
         //Update the position of the points for the Line Renderer
         lineRend.numPositions = totalJoints;
-        //Update of the list Object and Position of the Joints
-        while (joints.Count < totalJoints)
-        {
-            joints.Add(new GameObject());
-        }
-        //Set the first and last of the list as this and the Target
-        joints[0] = gameObject;
-        joints[joints.Count - 1] = Target.gameObject;
+        //Increase the length of the rope
+        joints = new List<GameObject>(totalJoints);
+        //Set the last of the list as the Target        
+        joints[totalJoints - 1] = Target.gameObject;//ELEMENTO NON ISTANZIATO! Correggi
     }
 
     /// <summary>
-    /// Extend the Rope toward the Target position
+    /// Extend the Rope from the last Joint toward the Target position
     /// </summary>
     void ExtendRope()
     {
-        UpdateJoints();
+        Vector3 pos;
 
-        var separation = ((Target.position)-transform.position)/(totalJoints-1);
+        //Measure the reqired offset between the joints
+        var separation = ((Target.position)-origin.position)/(totalJoints-1);
 
-        for (int i = 0; i < totalJoints-1; i++)
-        {
-            //Check if joints[i] is actually a new istantiated Obj.
-            //If it is, set the his position
-            if (joints[i].GetComponent<Transform>() == null)
-            {
-                joints[i].AddComponent<Transform>();
-                Vector3 pos = (separation * i) + transform.position;
-                joints[i].transform.position = pos;
-                AdjustJoint(i);
-            }
+        for (int i = joints.LastIndexOf(origin.gameObject); i < totalJoints-1; i++)
+        {   
+            //Create a new joint
+            joints[i] = new GameObject("Joint " + i);
+            
+            pos = (separation * i) + origin.position;
+            joints[i].transform.position = pos;
 
-            AdjustJointPhysics(joints[i],joints[i-1].GetComponent<Rigidbody>());            
+            //Set the parent of the joint
+            joints[i].transform.parent = transform;
+
+            //Set SphereColliders, Rigidbodies and HingeJoints
+            if (i == 0)
+                AdjustJointPhysics(joints[0]);
+            else
+                AdjustJointPhysics(joints[i],joints[i-1].GetComponent<Rigidbody>());            
         }
 
         //Setup of the Target's HingeJoint
-        HingeJoint lastHJ;
-        if (Target.gameObject.GetComponent<HingeJoint>() == null)
-            Target.gameObject.AddComponent<HingeJoint>();
-        lastHJ = Target.gameObject.GetComponent<HingeJoint>();
-        lastHJ.connectedBody = joints[totalJoints - 1].GetComponent<Rigidbody>();
-        lastHJ.axis = SwingAxis;
-
-        Target.parent = transform;
+        AdjustJointPhysics(Target.gameObject);
 
         //set the Rope as existing
         rope = true;
     }
 
     /// <summary>
-    /// Set generic parameters of the joints
+    /// Set the parameter of SphereCollider, Rigidbody and HingeJoint
     /// </summary>
-    /// <param name="n">The index of the list of GameObjects</param>
-    void AdjustJoint(int n)
+    /// <param name="_jointToSetup">The Joint to setup</param>
+    void AdjustJointPhysics(GameObject _jointToSetup)
     {
-        //Set the name of the joint
-        if(n != 0 && n!= totalJoints-1)
-            joints[n].name = "Joint " + n;
+        SphereCollider coll = null;
+        Rigidbody rigid;
+        HingeJoint hj;
 
-        //Set the parent of the joint
-        joints[n].transform.parent = transform;
+        if(_jointToSetup != Target.gameObject)
+        {
+            //Reference to SphereCollider
+            if (_jointToSetup.GetComponent<SphereCollider>() == null)
+                coll = _jointToSetup.AddComponent<SphereCollider>();
+            else
+                coll = _jointToSetup.GetComponent<SphereCollider>();
+        }        
 
+        //Reference to HingeJoint
+        if (_jointToSetup.GetComponent<HingeJoint>() == null)
+            hj = _jointToSetup.AddComponent<HingeJoint>();
+        else
+            hj = _jointToSetup.GetComponent<HingeJoint>();
+
+        //Reference to Rigidbody
+        rigid = _jointToSetup.GetComponent<Rigidbody>();
+
+        //Setup of the HingeJoint
+        hj.axis = SwingAxis;
+        //Setup of the Rigidbody
+        rigid.drag = RopeDrag;
+        rigid.mass = RopeMass;
+        if (_jointToSetup != Target.gameObject)
+            //Setup of the SphereCollider
+            coll.radius = RopeColliderRadius;
     }
 
     /// <summary>
     /// Set the parameter of SphereCollider, Rigidbody and HingeJoint
     /// </summary>
-    /// <param name="n">The index of the list of GameObjects</param>
+    /// <param name="_jointToSetup">The Joint to setup</param>
+    /// <param name="_rbToConnect">The Rigidbody to which connet the Joint</param>
     void AdjustJointPhysics(GameObject _jointToSetup, Rigidbody _rbToConnect)
     {
         SphereCollider coll;
@@ -124,21 +149,20 @@ public class RopeManager : MonoBehaviour {
 
         //Reference to SphereCollider
         if (_jointToSetup.GetComponent<SphereCollider>() == null)
-        {
             coll = _jointToSetup.AddComponent<SphereCollider>();
-        }else
+        else
             coll = _jointToSetup.GetComponent<SphereCollider>();
+
         //Reference to Rigidbody
         if (_jointToSetup.GetComponent<Rigidbody>() == null)
-        {
             rigid = _jointToSetup.AddComponent<Rigidbody>();
-        }else
+        else
             rigid = _jointToSetup.GetComponent<Rigidbody>();
+
         //Reference to HingeJoint
         if (_jointToSetup.GetComponent<HingeJoint>() == null)
-        {
             hj = _jointToSetup.AddComponent<HingeJoint>();
-        }else
+        else
             hj = _jointToSetup.GetComponent<HingeJoint>();
 
         //Setup of the HingeJoint

@@ -13,12 +13,15 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
     public float points = 0;
     float killPoints = 100;
 
-    public List<GameObject> DamageablesPrefabs = new List<GameObject>();            // Lista di Oggetti passati attraverso unity
-    List<IDamageable> Damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable.
+    List<GameObject> DamageablesPrefabs;                                            // Lista di Oggetti passati attraverso unity
+    List<IDamageable> Damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable
 
     MovementController movment;
     PlacePin pinPlacer;
     Shoot shoot;
+
+    public float fireRate = 0.5F;                                                   // rateo di fuoco in secondi
+    float nextFire;
 
     bool isAlive = true;        // Indica se l'agente è vivo o morto.
     
@@ -54,17 +57,20 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
         ActionReader();
     }
 
-    
-
     /// <summary>
     /// Salva all'interno della lista di oggetti IDamageable, gli oggetti facenti parti della lista DamageablesPrefabs
     /// </summary>
     private void LoadIDamageablePrefab()
     {
+
+        //WARNING - se l'oggetto che che fa parte della lista di GameObject non ha l'interfaccia IDamageable non farà parte degli oggetti danneggiabili.
+
+        DamageablesPrefabs = PrefabUtily.LoadAllPrefabsWithComponentOfType<IDamageable>("Prefabs", gameObject);      
+
         foreach (var k in DamageablesPrefabs)
         {
-            if (k.GetComponent<IDamageable>() != null)                  //WARNING\\ se l'oggetto che che fa parte della lista di GameObject non ha l'interfaccia IDamageable
-                Damageables.Add(k.GetComponent<IDamageable>());         // non farà parte degli oggetti danneggiabili.
+            if (k.GetComponent<IDamageable>() != null)
+                Damageables.Add(k.GetComponent<IDamageable>());
         }
     }
 
@@ -91,6 +97,11 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
             shoot.ShootBullet();
         }
 
+        if (InputManager.GetButton("Button A", playerID) && Time.time > nextFire)       // shoot at certain rate
+        {
+            nextFire = Time.time + fireRate;
+            shoot.ShootBullet();
+        }
 
         // Ruota e Muove l'agente
         /* 
@@ -166,14 +177,12 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
             Life -= _damage;                                //Diminuisce la vita dell'agente in base ai danni passatigli da _damage
             if (Life < 1)                                   //Controlla se dopo aver danneggiato l'agente, la sua vita è arrivata a 0
             {                                               
-                isAlive = false;                            // se è uguale a 0, isAlive diventa false
-                Debug.Log("Sei Morto n# " + playerID);      
+                isAlive = false;                            // se è uguale a 0, isAlive diventa false    
                 gameObject.SetActive(false);                //Disattiva l'agente
                 return killPoints;                          //Ritorna i punti da assegnare a chi ha ucciso
             }
             else                                            //Se l'agente rimane vivo ritorna 0.
             {
-                Debug.Log("Damage : " + _damage + " # Life : " + Life);
                 return 0;
             }
         }

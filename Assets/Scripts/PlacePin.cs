@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlacePin : MonoBehaviour {
 
-    public GameObject stuffsprefab;
+    public GameObject PinPrefab;
     public Transform PinSpanw;
 
     bool isLeft = false;
@@ -26,7 +26,7 @@ public class PlacePin : MonoBehaviour {
     /// </summary>
     public void placeThePin()
     {
-        Instantiate(stuffsprefab, PinSpanw.position, PinSpanw.rotation);        
+        Instantiate(PinPrefab, PinSpanw.position, PinSpanw.rotation);        
     }
 
     /// <summary>

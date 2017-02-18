@@ -14,11 +14,14 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
     float killPoints = 100;
 
     List<GameObject> DamageablesPrefabs;                                            // Lista di Oggetti passati attraverso unity
-    List<IDamageable> Damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable.
+    List<IDamageable> Damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable
 
     MovementController movment;
     PlacePin pinPlacer;
     Shoot shoot;
+
+    public float fireRate = 0.5F;                                                   // rateo di fuoco in secondi
+    float nextFire;
 
     bool isAlive = true;        // Indica se l'agente è vivo o morto.
     
@@ -94,6 +97,11 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
             shoot.ShootBullet();
         }
 
+        if (InputManager.GetButton("Button A", playerID) && Time.time > nextFire)       // shoot at certain rate
+        {
+            nextFire = Time.time + fireRate;
+            shoot.ShootBullet();
+        }
 
         // Ruota e Muove l'agente
         /* 

@@ -6,8 +6,11 @@ public class Shoot : MonoBehaviour {
 
     public GameObject projectile;
     public Transform bulletspawn;
-    public float bulletSpeed;    
+    public float bulletSpeed;
 
+    /// <summary>
+    /// Spara un proiettile
+    /// </summary>
     public void ShootBullet()
     {
         GameObject instantiatedProjectile = Instantiate(projectile, bulletspawn.position, bulletspawn.rotation);

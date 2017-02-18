@@ -41,9 +41,27 @@ public class RopeManager : MonoBehaviour {
         ExtendRope();
     }
 
-    //------------
-    //Inserire il controllo dell'ultimo pezzo della fune, se ancora connesso o meno
-    //------------
+    void LateUpdate()
+    {
+        // Does rope exist? If so, update its position
+        if (rope)
+        {
+            for (int i = 0; i < totalJoints; i++)
+            {
+                if (i == 0) 
+                    lineRend.SetPosition(i, transform.position);
+
+                else if (i == totalJoints - 1)
+                    lineRend.SetPosition(i, Target.position);
+
+                else
+                    lineRend.SetPosition(i, joints[i].transform.position);
+            }
+            lineRend.enabled = true;
+        }
+        else
+            lineRend.enabled = false;
+    }
 
     /// <summary>
     /// Update the Joints number to fit the required FiniteElementDensity
@@ -51,6 +69,7 @@ public class RopeManager : MonoBehaviour {
     /// </summary>
     void UpdateJoints()
     {
+        int oldJointsAmount = totalJoints;
         //Update of the Joints to fit the needs
         ropeCurrentLength = Vector3.Distance(origin.position, Target.position);
         totalJoints = (int)(ropeCurrentLength * FiniteElementDensity);
@@ -58,9 +77,11 @@ public class RopeManager : MonoBehaviour {
         //Update the position of the points for the Line Renderer
         lineRend.numPositions = totalJoints;
         //Increase the length of the rope
-        joints = new List<GameObject>(totalJoints);
+        for (int i = oldJointsAmount; i < totalJoints-2; i++)
+            joints.Add(new GameObject());
+
         //Set the last of the list as the Target        
-        joints[totalJoints - 1] = Target.gameObject;//ELEMENTO NON ISTANZIATO! Correggi
+        joints.Add(Target.gameObject);//ELEMENTO NON ISTANZIATO! Correggi
     }
 
     /// <summary>

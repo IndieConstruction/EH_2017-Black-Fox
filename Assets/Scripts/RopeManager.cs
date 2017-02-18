@@ -95,10 +95,10 @@ public class RopeManager : MonoBehaviour {
         var separation = ((Target.position)-origin.position)/(totalJoints-1);
 
         for (int i = joints.LastIndexOf(origin.gameObject); i < totalJoints-1; i++)
-        {   
-            //Create a new joint
-            joints[i] = new GameObject("Joint " + i);
-            
+        {
+            //Create a joint
+            joints[i].name = ("Joint " + i);
+
             pos = (separation * i) + origin.position;
             joints[i].transform.position = pos;
 

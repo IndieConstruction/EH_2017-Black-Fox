@@ -59,8 +59,16 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
     /// </summary>
     private void LoadIDamageablePrefab()
     {
-        DamageablesPrefabs = PrefabUtily.LoadAllPrefabsWithComponentOfType<IDamageable>("Prefabs", gameObject);      //WARNING - se l'oggetto che che fa parte della lista di GameObject non ha l'interfaccia IDamageable  non farà parte degli oggetti danneggiabili.
-        Debug.Log(DamageablesPrefabs.Count);                                                                                                                       
+
+        //WARNING - se l'oggetto che che fa parte della lista di GameObject non ha l'interfaccia IDamageable non farà parte degli oggetti danneggiabili.
+
+        DamageablesPrefabs = PrefabUtily.LoadAllPrefabsWithComponentOfType<IDamageable>("Prefabs", gameObject);      
+
+        foreach (var k in DamageablesPrefabs)
+        {
+            if (k.GetComponent<IDamageable>() != null)
+                Damageables.Add(k.GetComponent<IDamageable>());
+        }
     }
 
     #region Controller Input
@@ -161,14 +169,12 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
             Life -= _damage;                                //Diminuisce la vita dell'agente in base ai danni passatigli da _damage
             if (Life < 1)                                   //Controlla se dopo aver danneggiato l'agente, la sua vita è arrivata a 0
             {                                               
-                isAlive = false;                            // se è uguale a 0, isAlive diventa false
-                Debug.Log("Sei Morto n# " + playerID);      
+                isAlive = false;                            // se è uguale a 0, isAlive diventa false    
                 gameObject.SetActive(false);                //Disattiva l'agente
                 return killPoints;                          //Ritorna i punti da assegnare a chi ha ucciso
             }
             else                                            //Se l'agente rimane vivo ritorna 0.
             {
-                Debug.Log("Damage : " + _damage + " # Life : " + Life);
                 return 0;
             }
         }

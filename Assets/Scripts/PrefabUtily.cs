@@ -70,7 +70,7 @@ public class PrefabUtily {
     /// <returns></returns>
     private static List<GameObject> RemoveItemFromList(List<GameObject> _listGameObj, GameObject _itemToIgnore)
     {
-        GameObject itemToRemove = new GameObject();
+        GameObject itemToRemove = null;
 
         foreach (GameObject item in _listGameObj)
         {

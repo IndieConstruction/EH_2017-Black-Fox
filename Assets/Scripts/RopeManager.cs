@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent (typeof(LineRenderer))]
-[RequireComponent (typeof(HingeJoint))]
+[RequireComponent(typeof(LineRenderer))]
+[RequireComponent(typeof(HingeJoint))]
 /// <summary>
 /// Used to manage the rope between the component and the Target position
 /// </summary>
-public class RopeManager : MonoBehaviour {
-        
+public class RopeManager : MonoBehaviour
+{
+
     public Transform Target;                                        //Transform of the point to connect to this GameObject
     private Transform origin;                                       //Transform of the point of origin of the Rope (also set as last element of the Rope)
 
@@ -24,7 +25,7 @@ public class RopeManager : MonoBehaviour {
     private float ropeCurrentLength;                                //Current length of the rope (in Unity's unity)
     private bool rope = false;
 
-    public Vector3 SwingAxis = new Vector3(1,0,1);                  //Sets which axis the Joint will swing on
+    public Vector3 SwingAxis = new Vector3(1, 0, 1);                  //Sets which axis the Joint will swing on
 
     private void Awake()
     {
@@ -48,7 +49,7 @@ public class RopeManager : MonoBehaviour {
         {
             for (int i = 0; i < totalJoints; i++)
             {
-                if (i == 0) 
+                if (i == 0)
                     lineRend.SetPosition(i, transform.position);
 
                 else if (i == totalJoints - 1)
@@ -73,15 +74,15 @@ public class RopeManager : MonoBehaviour {
         //Update of the Joints to fit the needs
         ropeCurrentLength = Vector3.Distance(origin.position, Target.position);
         totalJoints = (int)(ropeCurrentLength * FiniteElementDensity);
-        
+
         //Update the position of the points for the Line Renderer
         lineRend.numPositions = totalJoints;
         //Increase the length of the rope
-        for (int i = oldJointsAmount; i < totalJoints-2; i++)
+        for (int i = oldJointsAmount; i < totalJoints - 2; i++)
             joints.Add(new GameObject());
 
         //Set the last of the list as the Target        
-        joints.Add(Target.gameObject);//ELEMENTO NON ISTANZIATO! Correggi
+        joints.Add(Target.gameObject);
     }
 
     /// <summary>
@@ -92,11 +93,11 @@ public class RopeManager : MonoBehaviour {
         Vector3 pos;
 
         //Measure the reqired offset between the joints
-        var separation = ((Target.position)-origin.position)/(totalJoints-1);
+        var separation = ((Target.position) - origin.position) / (totalJoints - 1);
 
-        for (int i = joints.LastIndexOf(origin.gameObject); i < totalJoints-1; i++)
+        for (int i = joints.LastIndexOf(origin.gameObject)+1; i < totalJoints - 2; i++)
         {
-            //Create a joint
+            //Create a new joint
             joints[i].name = ("Joint " + i);
 
             pos = (separation * i) + origin.position;
@@ -109,7 +110,7 @@ public class RopeManager : MonoBehaviour {
             if (i == 0)
                 AdjustJointPhysics(joints[0]);
             else
-                AdjustJointPhysics(joints[i],joints[i-1].GetComponent<Rigidbody>());            
+                AdjustJointPhysics(joints[i], joints[i - 1].GetComponent<Rigidbody>());
         }
 
         //Setup of the Target's HingeJoint
@@ -129,14 +130,14 @@ public class RopeManager : MonoBehaviour {
         Rigidbody rigid;
         HingeJoint hj;
 
-        if(_jointToSetup != Target.gameObject)
+        if (_jointToSetup != Target.gameObject)
         {
             //Reference to SphereCollider
             if (_jointToSetup.GetComponent<SphereCollider>() == null)
                 coll = _jointToSetup.AddComponent<SphereCollider>();
             else
                 coll = _jointToSetup.GetComponent<SphereCollider>();
-        }        
+        }
 
         //Reference to HingeJoint
         if (_jointToSetup.GetComponent<HingeJoint>() == null)
@@ -196,3 +197,4 @@ public class RopeManager : MonoBehaviour {
         coll.radius = RopeColliderRadius;
     }
 }
+

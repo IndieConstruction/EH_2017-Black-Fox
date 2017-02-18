@@ -13,7 +13,7 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
     public float points = 0;
     float killPoints = 100;
 
-    public List<GameObject> DamageablesPrefabs = new List<GameObject>();            // Lista di Oggetti passati attraverso unity
+    List<GameObject> DamageablesPrefabs;                                            // Lista di Oggetti passati attraverso unity
     List<IDamageable> Damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable.
 
     MovementController movment;
@@ -54,18 +54,13 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
         ActionReader();
     }
 
-    
-
     /// <summary>
     /// Salva all'interno della lista di oggetti IDamageable, gli oggetti facenti parti della lista DamageablesPrefabs
     /// </summary>
     private void LoadIDamageablePrefab()
     {
-        foreach (var k in DamageablesPrefabs)
-        {
-            if (k.GetComponent<IDamageable>() != null)                  //WARNING\\ se l'oggetto che che fa parte della lista di GameObject non ha l'interfaccia IDamageable
-                Damageables.Add(k.GetComponent<IDamageable>());         // non farà parte degli oggetti danneggiabili.
-        }
+        DamageablesPrefabs = PrefabUtily.LoadAllPrefabsWithComponentOfType<IDamageable>("Prefabs", gameObject);      //WARNING - se l'oggetto che che fa parte della lista di GameObject non ha l'interfaccia IDamageable  non farà parte degli oggetti danneggiabili.
+        Debug.Log(DamageablesPrefabs.Count);                                                                                                                       
     }
 
     #region Controller Input

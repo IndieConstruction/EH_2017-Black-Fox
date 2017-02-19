@@ -17,6 +17,8 @@ public class RopeManager : MonoBehaviour
     public float FiniteElementDensity = 1f;                         //Density of Joints per unity (of Unity)
     public float RopeDrag = .1f;                                    //Each Joint Drag
     public float RopeMass = .1f;                                    //Each Joint Mass
+    public float SwingMinAngle = -180f;                             //Minimum amount of swing
+    public float SwingMaxAngle = 180f;                              //Maximum amount of swing
     public float RopeWidth = 1f;                                    //LineRenderer Width
 
     private List<GameObject> joints = new List<GameObject>();       //Collection of Joints that describe the rope
@@ -158,6 +160,11 @@ public class RopeManager : MonoBehaviour
 
         //Setup of the HingeJoint
         hj.axis = SwingAxis;
+        hj.useLimits = true;
+        JointLimits hjLimit = hj.limits;
+        hjLimit.min = SwingMinAngle;
+        hjLimit.max = SwingMaxAngle;
+        hj.enablePreprocessing = false;
         if (_jointToSetup == Target.gameObject)
             hj.connectedBody = joints[joints.LastIndexOf(Target.gameObject) -1].GetComponent<Rigidbody>();
         //Setup of the Rigidbody
@@ -196,6 +203,11 @@ public class RopeManager : MonoBehaviour
 
         //Setup of the HingeJoint
         hj.axis = SwingAxis;
+        hj.useLimits = true;
+        JointLimits hjLimit = hj.limits;
+        hjLimit.min = SwingMinAngle;
+        hjLimit.max = SwingMaxAngle;
+        hj.enablePreprocessing = false;
         hj.connectedBody = _rbToConnect;
         //Setup of the Rigidbody
         rigid.drag = RopeDrag;

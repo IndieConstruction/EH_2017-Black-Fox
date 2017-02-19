@@ -23,6 +23,7 @@ public class RopeManager : MonoBehaviour
 
     private List<GameObject> joints = new List<GameObject>();       //Collection of Joints that describe the rope
     private LineRenderer lineRend;                                  //Reference to the LineRenderer
+    private JointLimits hjLimit = new JointLimits();
     private int totalJoints = 0;                                    //Total amount of Joints
     private float ropeCurrentLength;                                //Current length of the rope (in Unity's unity)
     private float ropeStretching;                                   //Distance -----
@@ -47,6 +48,8 @@ public class RopeManager : MonoBehaviour
         lineRend = GetComponent<LineRenderer>();
         //RopeManager setup
         lineRend.widthMultiplier = RopeWidth;
+        hjLimit.min = SwingMinAngle;
+        hjLimit.max = SwingMaxAngle;
 
         //Set this gameObject as origin of the rope
         origin = transform;
@@ -99,7 +102,7 @@ public class RopeManager : MonoBehaviour
         //Update the position of the points for the Line Renderer
         lineRend.numPositions = totalJoints;
         //Increase the length of the rope
-        for (int i = oldJointsAmount; i < totalJoints - 2; i++)
+        for (int i = oldJointsAmount; i < totalJoints - 1; i++)
             joints.Add(new GameObject());
 
         //Set the last of the list as the Target        
@@ -116,7 +119,7 @@ public class RopeManager : MonoBehaviour
         //Measure the reqired offset between the joints
         var separation = ((Target.position) - origin.position) / (totalJoints - 1);
 
-        for (int i = joints.LastIndexOf(origin.gameObject)+1; i < totalJoints - 2; i++)
+        for (int i = joints.LastIndexOf(origin.gameObject)+1; i < totalJoints - 1; i++)
         {
             //Create a new joint
             joints[i].name = ("Joint " + i);
@@ -162,9 +165,6 @@ public class RopeManager : MonoBehaviour
         //Setup of the HingeJoint
         hj.axis = SwingAxis;
         hj.useLimits = true;
-        JointLimits hjLimit = hj.limits;
-        hjLimit.min = SwingMinAngle;
-        hjLimit.max = SwingMaxAngle;
         hj.limits = hjLimit;
         hj.enablePreprocessing = false;
         if (_jointToSetup == Target.gameObject)
@@ -191,24 +191,20 @@ public class RopeManager : MonoBehaviour
         else
             coll = _jointToSetup.GetComponent<SphereCollider>();
 
-        //Reference to Rigidbody
-        if (_jointToSetup.GetComponent<Rigidbody>() == null)
-            rigid = _jointToSetup.AddComponent<Rigidbody>();
-        else
-            rigid = _jointToSetup.GetComponent<Rigidbody>();
-
         //Reference to HingeJoint
         if (_jointToSetup.GetComponent<HingeJoint>() == null)
             hj = _jointToSetup.AddComponent<HingeJoint>();
         else
             hj = _jointToSetup.GetComponent<HingeJoint>();
 
+        //Reference to Rigidbody
+        rigid = _jointToSetup.GetComponent<Rigidbody>();
+
+        
+
         //Setup of the HingeJoint
         hj.axis = SwingAxis;
         hj.useLimits = true;
-        JointLimits hjLimit = hj.limits;
-        hjLimit.min = SwingMinAngle;
-        hjLimit.max = SwingMaxAngle;
         hj.limits = hjLimit;
         hj.enablePreprocessing = false;
         hj.connectedBody = _rbToConnect;

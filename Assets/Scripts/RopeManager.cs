@@ -17,7 +17,7 @@ public class RopeManager : MonoBehaviour
     public float FiniteElementDensity = 1f;                         //Density of Joints per unity (of Unity)
     public float RopeDrag = .1f;                                    //Each Joint Drag
     public float RopeMass = .1f;                                    //Each Joint Mass
-    public float RopeColliderRadius = 1f;                           //Radius of the SphereCollider in Joints
+    public float RopeWidth = 1f;                                    //LineRenderer Width and radius of the SphereCollider in Joints
 
     private List<GameObject> joints = new List<GameObject>();       //Collection of Joints that describe the rope
     private LineRenderer lineRend;                                  //Reference to the LineRenderer
@@ -31,6 +31,8 @@ public class RopeManager : MonoBehaviour
     {
         //Get reference to LineRederer
         lineRend = GetComponent<LineRenderer>();
+        //RopeManager setup
+        lineRend.widthMultiplier = RopeWidth;
 
         //Set this gameObject as origin of the rope
         origin = transform;
@@ -126,18 +128,8 @@ public class RopeManager : MonoBehaviour
     /// <param name="_jointToSetup">The Joint to setup</param>
     void AdjustJointPhysics(GameObject _jointToSetup)
     {
-        SphereCollider coll = null;
-        Rigidbody rigid;
         HingeJoint hj;
-
-        if (_jointToSetup != Target.gameObject)
-        {
-            //Reference to SphereCollider
-            if (_jointToSetup.GetComponent<SphereCollider>() == null)
-                coll = _jointToSetup.AddComponent<SphereCollider>();
-            else
-                coll = _jointToSetup.GetComponent<SphereCollider>();
-        }
+        Rigidbody rigid;
 
         //Reference to HingeJoint
         if (_jointToSetup.GetComponent<HingeJoint>() == null)
@@ -145,17 +137,16 @@ public class RopeManager : MonoBehaviour
         else
             hj = _jointToSetup.GetComponent<HingeJoint>();
 
-        //Reference to Rigidbody
+        //Reference to Rigidbody (existence assured by the presence of the HingeJoint)
         rigid = _jointToSetup.GetComponent<Rigidbody>();
 
         //Setup of the HingeJoint
         hj.axis = SwingAxis;
+        if (_jointToSetup == Target.gameObject)
+            hj.connectedBody = joints[joints.LastIndexOf(Target.gameObject) -1].GetComponent<Rigidbody>();
         //Setup of the Rigidbody
         rigid.drag = RopeDrag;
         rigid.mass = RopeMass;
-        if (_jointToSetup != Target.gameObject)
-            //Setup of the SphereCollider
-            coll.radius = RopeColliderRadius;
     }
 
     /// <summary>
@@ -194,7 +185,7 @@ public class RopeManager : MonoBehaviour
         rigid.drag = RopeDrag;
         rigid.mass = RopeMass;
         //Setup of the SphereCollider
-        coll.radius = RopeColliderRadius;
+        coll.radius = RopeWidth;
     }
 }
 

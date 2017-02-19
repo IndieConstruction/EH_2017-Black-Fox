@@ -17,7 +17,7 @@ public class RopeManager : MonoBehaviour
     public float FiniteElementDensity = 1f;                         //Density of Joints per unity (of Unity)
     public float RopeDrag = .1f;                                    //Each Joint Drag
     public float RopeMass = .1f;                                    //Each Joint Mass
-    public float RopeWidth = 1f;                                    //LineRenderer Width and radius of the SphereCollider in Joints
+    public float RopeWidth = 1f;                                    //LineRenderer Width
 
     private List<GameObject> joints = new List<GameObject>();       //Collection of Joints that describe the rope
     private LineRenderer lineRend;                                  //Reference to the LineRenderer
@@ -25,7 +25,18 @@ public class RopeManager : MonoBehaviour
     private float ropeCurrentLength;                                //Current length of the rope (in Unity's unity)
     private bool rope = false;
 
-    public Vector3 SwingAxis = new Vector3(1, 0, 1);                  //Sets which axis the Joint will swing on
+    public Vector3 SwingAxis = new Vector3(1, 0, 1);                  //Sets which axis the Joint will swing 
+    private float sphereColliderRadius
+    {
+        get {
+            //SphereCollider's radius can't be larger than the rope
+            var offSet = Vector3.Distance(transform.position, Target.position) / (totalJoints - 1);
+            if (offSet > RopeWidth)
+                return RopeWidth;
+            else
+                return offSet;
+        }
+    }                             //Radius of the SphereCollider in Joints
 
     private void Awake()
     {
@@ -42,6 +53,11 @@ public class RopeManager : MonoBehaviour
         //Build the Rope
         UpdateJoints();
         ExtendRope();
+    }
+
+    private void Update()
+    {
+        //------Inserire la gestione dell'alungamento
     }
 
     void LateUpdate()
@@ -185,7 +201,7 @@ public class RopeManager : MonoBehaviour
         rigid.drag = RopeDrag;
         rigid.mass = RopeMass;
         //Setup of the SphereCollider
-        coll.radius = RopeWidth;
+        coll.radius = sphereColliderRadius;
     }
 }
 

@@ -95,6 +95,7 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
         if (InputManager.GetButtonDown("Button A", playerID))                            // shoot
         {
             shoot.ShootBullet();
+            nextFire = Time.time + fireRate;
         }
 
         if (InputManager.GetButton("Button A", playerID) && Time.time > nextFire)       // shoot at certain rate

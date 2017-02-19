@@ -9,7 +9,7 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
     [SerializeField]
     PlayerID playerID;
 
-    float life = 10;
+    public float life = 10;
     public float points = 0;
     float killPoints = 100;
 
@@ -20,7 +20,7 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
     PlacePin pinPlacer;
     Shoot shoot;
 
-    public float fireRate = 0.5F;                                                   // rateo di fuoco in secondi
+    public float fireRate;                                                   // rateo di fuoco in secondi
     float nextFire;
 
     bool isAlive = true;        // Indica se l'agente è vivo o morto.
@@ -91,18 +91,19 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
             pinPlacer.ChangePinSpawnPosition("Left");
             pinPlacer.placeThePin();
         }
-
+        
         if (InputManager.GetButtonDown("Button A", playerID))                            // shoot
         {
+            nextFire = Time.time + fireRate;
             shoot.ShootBullet();
             nextFire = Time.time + fireRate;
         }
-
-        if (InputManager.GetButton("Button A", playerID) && Time.time > nextFire)       // shoot at certain rate
+        else if (InputManager.GetButton("Button A", playerID) && Time.time > nextFire)       // shoot at certain rate
         {
             nextFire = Time.time + fireRate;
             shoot.ShootBullet();
         }
+        
 
         // Ruota e Muove l'agente
         /* 
@@ -116,7 +117,7 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
         Vector3 faceDirection = new Vector3(InputManager.GetAxis("Left Stick Horizontal", playerID), 0f, InputManager.GetAxis("Left Stick Vertical", playerID));    // Indica in che direzione ruotare l'agente
         movment.Movement(thrust);                                                                                                                                   // Muove l'agente
         movment.RotationTowards(faceDirection);                                                                                                                     // Ruota l'agente
-    }
+    }    
 
     /// <summary>
     /// -Al momento non utilizzata-

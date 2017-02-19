@@ -38,8 +38,8 @@
       <negative>None</negative>
       <altNegative>None</altNegative>
       <deadZone>0</deadZone>
-      <gravity>0</gravity>
-      <sensitivity>0</sensitivity>
+      <gravity>1</gravity>
+      <sensitivity>1</sensitivity>
       <snap>false</snap>
       <invert>false</invert>
       <type>Button</type>
@@ -53,8 +53,8 @@
       <negative>None</negative>
       <altNegative>None</altNegative>
       <deadZone>0</deadZone>
-      <gravity>0</gravity>
-      <sensitivity>0</sensitivity>
+      <gravity>1</gravity>
+      <sensitivity>1</sensitivity>
       <snap>false</snap>
       <invert>false</invert>
       <type>Button</type>
@@ -65,15 +65,15 @@
       <description />
       <positive>UpArrow</positive>
       <altPositive>None</altPositive>
-      <negative>DownArrow</negative>
+      <negative>None</negative>
       <altNegative>None</altNegative>
       <deadZone>0</deadZone>
-      <gravity>0</gravity>
+      <gravity>1</gravity>
       <sensitivity>1</sensitivity>
       <snap>true</snap>
-      <invert>true</invert>
+      <invert>false</invert>
       <type>DigitalAxis</type>
-      <axis>2</axis>
+      <axis>9</axis>
       <joystick>0</joystick>
     </AxisConfiguration>
     <AxisConfiguration name="Right Bumper">

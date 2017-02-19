@@ -13,6 +13,8 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
     public float points = 0;
     float killPoints = 100;
 
+    UIDisplay displatLife;
+
     List<GameObject> DamageablesPrefabs;                                            // Lista di Oggetti passati attraverso unity
     List<IDamageable> Damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable
 
@@ -48,6 +50,7 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
         movment = GetComponent<MovementController>();
         pinPlacer = GetComponent<PlacePin>();
         shoot = GetComponent<Shoot>();
+        displatLife = GetComponent<UIDisplay>();
 
         LoadIDamageablePrefab();
     }
@@ -177,6 +180,8 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
         if(isAlive)                                         //Controlla se l'agente è vivo
         {
             Life -= _damage;                                //Diminuisce la vita dell'agente in base ai danni passatigli da _damage
+            displatLife.SetSliderValue(Life);
+
             if (Life < 1)                                   //Controlla se dopo aver danneggiato l'agente, la sua vita è arrivata a 0
             {                                               
                 isAlive = false;                            // se è uguale a 0, isAlive diventa false    

@@ -25,6 +25,7 @@ public class RopeManager : MonoBehaviour
     private LineRenderer lineRend;                                  //Reference to the LineRenderer
     private int totalJoints = 0;                                    //Total amount of Joints
     private float ropeCurrentLength;                                //Current length of the rope (in Unity's unity)
+    private float ropeStretching;                                   //Distance -----
     private bool rope = false;
 
     public Vector3 SwingAxis = new Vector3(1, 0, 1);                  //Sets which axis the Joint will swing 
@@ -164,6 +165,7 @@ public class RopeManager : MonoBehaviour
         JointLimits hjLimit = hj.limits;
         hjLimit.min = SwingMinAngle;
         hjLimit.max = SwingMaxAngle;
+        hj.limits = hjLimit;
         hj.enablePreprocessing = false;
         if (_jointToSetup == Target.gameObject)
             hj.connectedBody = joints[joints.LastIndexOf(Target.gameObject) -1].GetComponent<Rigidbody>();
@@ -207,6 +209,7 @@ public class RopeManager : MonoBehaviour
         JointLimits hjLimit = hj.limits;
         hjLimit.min = SwingMinAngle;
         hjLimit.max = SwingMaxAngle;
+        hj.limits = hjLimit;
         hj.enablePreprocessing = false;
         hj.connectedBody = _rbToConnect;
         //Setup of the Rigidbody

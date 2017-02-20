@@ -116,10 +116,17 @@ public class Player : MonoBehaviour, IShooter, IDamageable {
          * - modificarli a seconda dell'uso che se ne vuole fare.
          */
 
-        float thrust = InputManager.GetAxis("Right Trigger", playerID);                                                                                             // Add thrust
-        Vector3 faceDirection = new Vector3(InputManager.GetAxis("Left Stick Horizontal", playerID), 0f, InputManager.GetAxis("Left Stick Vertical", playerID));    // Indica in che direzione ruotare l'agente
-        movment.Movement(thrust);                                                                                                                                   // Muove l'agente
-        movment.RotationTowards(faceDirection);                                                                                                                     // Ruota l'agente
+
+        /*
+         *  Rotazione in base allo schermo -- NON CANCELLARE !
+         *  Vector3 faceDirection = new Vector3(InputManager.GetAxis("Left Stick Horizontal", playerID), 0f, InputManager.GetAxis("Left Stick Vertical", playerID));    
+         *  movment.RotationTowards(faceDirection); 
+         */
+
+        float thrust = InputManager.GetAxis("Right Trigger", playerID);              // Add thrust   
+        movment.Rotation(InputManager.GetAxis("Left Stick Horizontal", playerID));  // Ruota l'agente
+        movment.Movement(thrust);                                                   // Muove l'agente                                                                                
+
     }    
 
     /// <summary>

@@ -15,11 +15,13 @@ public class RopeManager : MonoBehaviour
 
     public float RopeMaxLength = 1f;                                //Max length of the rope (in Unity's unity)
     public float FiniteElementDensity = 1f;                         //Density of Joints per unity (of Unity)
+    public float RopeWidth = 1f;                                    //LineRenderer Width
+    public bool AutoSet=true;                                            //Setup for HingeJoints and Rigidbodies
+    public Vector3 SwingAxis = new Vector3(1, 0, 1);                //Sets which axis the Joint will swing 
     public float RopeDrag = .1f;                                    //Each Joint Drag
     public float RopeMass = .1f;                                    //Each Joint Mass
     public float SwingMinAngle = -180f;                             //Minimum amount of swing
-    public float SwingMaxAngle = 180f;                              //Maximum amount of swing
-    public float RopeWidth = 1f;                                    //LineRenderer Width
+    public float SwingMaxAngle = 180f;                              //Maximum amount of swing    
 
     private List<GameObject> joints = new List<GameObject>();       //Collection of Joints that describe the rope
     private LineRenderer lineRend;                                  //Reference to the LineRenderer
@@ -27,9 +29,7 @@ public class RopeManager : MonoBehaviour
     private int totalJoints = 0;                                    //Total amount of Joints
     private float ropeCurrentLength;                                //Current length of the rope (in Unity's unity)
     private float ropeStretching;                                   //Distance -----
-    private bool rope = false;
 
-    public Vector3 SwingAxis = new Vector3(1, 0, 1);                  //Sets which axis the Joint will swing 
     private float sphereColliderRadius
     {
         get {
@@ -46,6 +46,18 @@ public class RopeManager : MonoBehaviour
     {
         //Get reference to LineRederer
         lineRend = GetComponent<LineRenderer>();
+        //Setup of the joints based onthe the current HingeJoint and Rigidbody
+        if(AutoSet == true)
+        {
+            HingeJoint hj = GetComponent<HingeJoint>();
+            Rigidbody rb = GetComponent<Rigidbody>();
+            hjLimit = hj.limits;
+            SwingAxis = hj.axis;
+            RopeDrag = rb.drag;
+            RopeMass = rb.mass;
+            SwingMinAngle = hjLimit.min;
+            SwingMaxAngle = hjLimit.max;
+        }
         //RopeManager setup
         lineRend.widthMultiplier = RopeWidth;
         hjLimit.min = SwingMinAngle;
@@ -68,9 +80,6 @@ public class RopeManager : MonoBehaviour
 
     void LateUpdate()
     {
-        // Does rope exist? If so, update its position
-        if (rope)
-        {
             for (int i = 0; i < totalJoints; i++)
             {
                 if (i == 0)
@@ -82,10 +91,6 @@ public class RopeManager : MonoBehaviour
                 else
                     lineRend.SetPosition(i, joints[i].transform.position);
             }
-            lineRend.enabled = true;
-        }
-        else
-            lineRend.enabled = false;
     }
 
     /// <summary>

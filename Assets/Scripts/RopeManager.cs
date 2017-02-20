@@ -69,13 +69,12 @@ public class RopeManager : MonoBehaviour
         totalJoints++;
 
         //Build the Rope
-        UpdateJoints();
         ExtendRope();
     }
 
     private void Update()
     {
-        //------Inserire la gestione dell'alungamento
+        
     }
 
     void LateUpdate()
@@ -119,6 +118,8 @@ public class RopeManager : MonoBehaviour
     /// </summary>
     void ExtendRope()
     {
+        UpdateJoints();
+
         Vector3 pos;
 
         //Measure the reqired offset between the joints
@@ -144,9 +145,6 @@ public class RopeManager : MonoBehaviour
 
         //Setup of the Target's HingeJoint
         AdjustJointPhysics(Target.gameObject);
-
-        //set the Rope as existing
-        rope = true;
     }
 
     /// <summary>

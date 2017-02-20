@@ -2,9 +2,13 @@
 
 ### Cose Non Funzionanti Correttamente ###
 	
-	[x] - Quando un proiettilke colpisce un agente toglie più volte alla vita il danno che dovrebbe fare
-	[x] - Tolta la retromarcia - Decidere se rimettere o meno la retromarcia ?
-	[x] - Mettere i perni in modo che ostacolino il movimento degli agenti (che ci vadano a sbattere contro)
+	[ ]Piazzamento Perni assegna Munizioni al Avatar
+	[ ]Corda si allunga e collega correttamente
+	[ ]Aggiornare la matrice "Layer" delle collisioni per Corda/Perni
+	[ ]Spawn points per Avatar e ExternalAgent
+	[ ]Manager che gestisce le scene e fa da database temporaneo per penteggi, numero di round e valori di vita del Core
+	[ ]Sistema di spawn random di agenti esterni con movimento verso il nucleo 
+	[ ]Sistema per configurare i controlli anche per tutti quelli che non sono Luca
 
 
 	[ ] : da fare.

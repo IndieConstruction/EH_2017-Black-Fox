@@ -4,7 +4,7 @@ using UnityEngine;
 using TeamUtility.IO;
 using System;
 
-public class Player : MonoBehaviour, IShooter, IDamageable {
+public class Avatar : MonoBehaviour, IShooter, IDamageable {
 
     [SerializeField]
     PlayerID playerID;

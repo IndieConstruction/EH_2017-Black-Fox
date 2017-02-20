@@ -18,7 +18,6 @@ public class Projectile : MonoBehaviour {
 
     void Update()
     {
-
         if (Time.time >= startTime + timeToCount)
         {
             Destroy(gameObject);
@@ -40,7 +39,7 @@ public class Projectile : MonoBehaviour {
                     // E' presente l'oggetto con cui il proiettile è entrato in collisione.
                     if (item.GetType() == damageables.GetType())
                     {
-                        ownerObj.GetComponent<Avatar>().Points = damageables.Damage(Damage);           // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia e se lo distrugge assegna i punti dell'uccisione all'agente che lo ha ucciso
+                        damageables.Damage(Damage);           // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia e se lo distrugge assegna i punti dell'uccisione all'agente che lo ha ucciso
                         Destroy(gameObject);                                                            //Distrugge il proiettile
                         break;                                                                          // Ed esce dal foreach.
                     }

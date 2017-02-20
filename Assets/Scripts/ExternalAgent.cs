@@ -1,16 +1,26 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExternalAgent : MonoBehaviour {
+public class ExternalAgent : MonoBehaviour, IDamageable {
 
-	// Use this for initialization
-	void Start () {
+    void Start ()
+    {
 		
 	}
 	
-	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
 		
 	}
+
+    #region Interface
+
+    public void Damage(float _damage)
+    {
+        throw new NotImplementedException();
+    }
+
+    #endregion
 }

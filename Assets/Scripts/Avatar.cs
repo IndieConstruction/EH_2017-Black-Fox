@@ -9,9 +9,8 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
     [SerializeField]
     PlayerID playerID;
 
-    public float life = 10;
-    public float points = 0;
-    float killPoints = 100;
+    public float life = 10;                                                         // Vita
+    public float powerPoints = 100;                                                 //Punti Potenziamneto
 
     UIDisplay displatLife;
 
@@ -39,10 +38,10 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
     /// <summary>
     /// Punti dell'agente
     /// </summary>
-    public float Points
+    public float PowerPoints
     {
-        get { return points; }
-        set { points += value; }
+        get { return powerPoints; }
+        set { powerPoints += value; }
     }
 
     void Start ()
@@ -182,7 +181,7 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
     /// </summary>
     /// <param name="_damage">La quantità di danni che subisce</param>
     /// <returns></returns>
-    public float Damage(float _damage)
+    public void Damage(float _damage)
     {
         if(isAlive)                                         //Controlla se l'agente è vivo
         {
@@ -193,14 +192,8 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
             {                                               
                 isAlive = false;                            // se è uguale a 0, isAlive diventa false    
                 gameObject.SetActive(false);                //Disattiva l'agente
-                return killPoints;                          //Ritorna i punti da assegnare a chi ha ucciso
-            }
-            else                                            //Se l'agente rimane vivo ritorna 0.
-            {
-                return 0;
             }
         }
-        return 0;
     }
     #endregion
 

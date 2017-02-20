@@ -28,8 +28,15 @@ public class MovementController : MonoBehaviour {
     /// <param name="_rotationSpeed">the speed of rotation (Positive to turn left, Negative to tirn right) </param>
     public void RotationTowards(Vector3 axis)
     {
+        //Rotazione in base allo schermo -- NON CANCELLARE !
         Vector3 newDir = Vector3.RotateTowards(transform.forward, axis, Time.deltaTime * RotationSpeed, 0.0F);
         transform.rotation = Quaternion.LookRotation(newDir);
+    }
+
+    public void Rotation(float _direction)
+    {
+        //rotazione in bsase all'agente
+        transform.Rotate(Vector3.up * RotationSpeed * _direction * Time.deltaTime);
     }
 
 

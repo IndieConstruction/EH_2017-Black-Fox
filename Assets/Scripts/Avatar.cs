@@ -6,7 +6,7 @@ using System;
 public class Avatar : MonoBehaviour, IShooter, IDamageable {
 
     public PlayerID playerID;
-
+    public string name;                                                             // Nome giocatore
     public float life = 10;                                                         // Vita
     public float powerPoints = 100;                                                 //Punti Potenziamneto
 
@@ -22,10 +22,19 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
     public float fireRate;                                                   // rateo di fuoco in secondi
     float nextFire;
 
-    bool isAlive = true;        // Indica se l'agente è vivo o morto.
+    bool isAlive = true;                                                    // Indica se l'agente è vivo o morto.
 
     /// <summary>
-    /// La vita dell'agente
+    /// Il nome del giocatore che controlla l'avatar
+    /// </summary>
+    public string Name
+    {
+        get { return name; }
+        set { name = value; }
+    }
+
+    /// <summary>
+    /// La vita dell'avatar
     /// </summary>
     public float Life
     {
@@ -34,12 +43,20 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
     }
 
     /// <summary>
-    /// Punti dell'agente
+    /// Punti dell'avatar
     /// </summary>
     public float PowerPoints
     {
         get { return powerPoints; }
         set { powerPoints += value; }
+    }
+
+    /// <summary>
+    /// Stato dell'avatar
+    /// </summary>
+    public bool IsAlive
+    {
+        get { return isAlive; }
     }
 
     void Start ()

@@ -16,7 +16,7 @@ public class RopeManager : MonoBehaviour
     public float RopeMaxLength = 1f;                                //Max length of the rope (in Unity's unity)
     public float FiniteElementDensity = 1f;                         //Density of Joints per unity (of Unity)
     public float RopeWidth = 1f;                                    //LineRenderer Width
-    public bool AutoSet=true;                                            //Setup for HingeJoints and Rigidbodies
+    public bool AutoSet = true;                                     //Setup for HingeJoints and Rigidbodies
     public Vector3 SwingAxis = new Vector3(1, 0, 1);                //Sets which axis the Joint will swing 
     public float RopeDrag = .1f;                                    //Each Joint Drag
     public float RopeMass = .1f;                                    //Each Joint Mass
@@ -32,7 +32,8 @@ public class RopeManager : MonoBehaviour
 
     private float sphereColliderRadius
     {
-        get {
+        get
+        {
             //SphereCollider's radius can't be larger than the rope
             var offSet = Vector3.Distance(transform.position, Target.position) / (totalJoints - 1);
             if (offSet > RopeWidth)
@@ -47,7 +48,7 @@ public class RopeManager : MonoBehaviour
         //Get reference to LineRederer
         lineRend = GetComponent<LineRenderer>();
         //Setup of the joints based onthe the current HingeJoint and Rigidbody
-        if(AutoSet == true)
+        if (AutoSet == true)
         {
             HingeJoint hj = GetComponent<HingeJoint>();
             Rigidbody rb = GetComponent<Rigidbody>();
@@ -74,22 +75,22 @@ public class RopeManager : MonoBehaviour
 
     private void Update()
     {
-        
+
     }
 
     void LateUpdate()
     {
-            for (int i = 0; i < totalJoints; i++)
-            {
-                if (i == 0)
-                    lineRend.SetPosition(i, transform.position);
+        for (int i = 0; i < totalJoints; i++)
+        {
+            if (i == 0)
+                lineRend.SetPosition(i, transform.position);
 
-                else if (i == totalJoints - 1)
-                    lineRend.SetPosition(i, Target.position);
+            else if (i == totalJoints - 1)
+                lineRend.SetPosition(i, Target.position);
 
-                else
-                    lineRend.SetPosition(i, joints[i].transform.position);
-            }
+            else
+                lineRend.SetPosition(i, joints[i].transform.position);
+        }
     }
 
     /// <summary>
@@ -125,7 +126,7 @@ public class RopeManager : MonoBehaviour
         //Measure the reqired offset between the joints
         var separation = ((Target.position) - origin.position) / (totalJoints - 1);
 
-        for (int i = joints.LastIndexOf(origin.gameObject)+1; i < totalJoints - 1; i++)
+        for (int i = joints.LastIndexOf(origin.gameObject) + 1; i < totalJoints - 1; i++)
         {
             //Create a new joint
             joints[i].name = ("Joint " + i);
@@ -171,7 +172,7 @@ public class RopeManager : MonoBehaviour
         hj.limits = hjLimit;
         hj.enablePreprocessing = false;
         if (_jointToSetup == Target.gameObject)
-            hj.connectedBody = joints[joints.LastIndexOf(Target.gameObject) -1].GetComponent<Rigidbody>();
+            hj.connectedBody = joints[joints.LastIndexOf(Target.gameObject) - 1].GetComponent<Rigidbody>();
         //Setup of the Rigidbody
         rigid.drag = RopeDrag;
         rigid.mass = RopeMass;

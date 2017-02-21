@@ -1,13 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TeamUtility.IO;
 using System;
 
 public class Avatar : MonoBehaviour, IShooter, IDamageable {
 
-    [SerializeField]
-    PlayerID playerID;
+    public PlayerID playerID;
 
     public float life = 10;                                                         // Vita
     public float powerPoints = 100;                                                 //Punti Potenziamneto
@@ -56,7 +54,7 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
 
     void Update()
     {
-        ActionReader();
+        InputReader();
     }
 
     /// <summary>
@@ -77,35 +75,35 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
     }
 
     #region Controller Input
+
     /// <summary>
     /// Racchiude i controlli per piazzare i chiodi, sparare, ruotare e muoversi
     /// </summary>
-    void ActionReader()
+    void InputReader()
     {
-        if (InputManager.GetButtonDown("Right Bumper", playerID))                       // place right pin
+        if (Input.GetButtonDown(string.Concat("Joy" + ((int)playerID + 1) + "_RightBumper")))                       // place right pin
         {
             pinPlacer.ChangePinSpawnPosition("Right");
             pinPlacer.placeThePin();
         }
-
-        if (InputManager.GetButtonDown("Left Bumper", playerID))                        // place left pin
+        
+        if (Input.GetButtonDown(string.Concat("Joy" + ((int)playerID + 1) + "_LeftBumper")))                        // place left pin
         {
             pinPlacer.ChangePinSpawnPosition("Left");
             pinPlacer.placeThePin();
         }
-        
-        if (InputManager.GetButtonDown("Button A", playerID))                            // shoot
+
+        if (Input.GetButtonDown(string.Concat("Joy" + ((int)playerID + 1) + "_ButtonA")))                            // shoot
         {
             nextFire = Time.time + fireRate;
             shoot.ShootBullet();
             nextFire = Time.time + fireRate;
         }
-        else if (InputManager.GetButton("Button A", playerID) && Time.time > nextFire)       // shoot at certain rate
+        else if (Input.GetButton(string.Concat("Joy" + ((int)playerID + 1) + "_ButtonA")) && Time.time > nextFire)       // shoot at certain rate
         {
             nextFire = Time.time + fireRate;
             shoot.ShootBullet();
         }
-        
 
         // Ruota e Muove l'agente
         /* 
@@ -121,12 +119,12 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
          *  Vector3 faceDirection = new Vector3(InputManager.GetAxis("Left Stick Horizontal", playerID), 0f, InputManager.GetAxis("Left Stick Vertical", playerID));    
          *  movment.RotationTowards(faceDirection); 
          */
-
-        float thrust = InputManager.GetAxis("Right Trigger", playerID);              // Add thrust   
-        movment.Rotation(InputManager.GetAxis("Left Stick Horizontal", playerID));  // Ruota l'agente
+         
+        
+        float thrust = Input.GetAxis((string.Concat("Joy" + ((int)playerID + 1) + "_RightTrigger")));              // Add thrust   
+        movment.Rotation(Input.GetAxis((string.Concat("Joy" + ((int)playerID + 1) + "_LeftStickHorizontal"))));  // Ruota l'agente
         movment.Movement(thrust);                                                   // Muove l'agente                                                                                
-
-    }    
+    }
 
     /// <summary>
     /// -Al momento non utilizzata-
@@ -198,4 +196,9 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
     #endregion
 
     #endregion
+}
+
+public enum PlayerID
+{
+    One, Two, Three, Four
 }

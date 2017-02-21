@@ -218,6 +218,7 @@ public class RopeManager : MonoBehaviour
         rigid.mass = RopeMass;
         //Setup of the SphereCollider
         coll.radius = sphereColliderRadius;
+        coll.isTrigger = false;
     }
 }
 

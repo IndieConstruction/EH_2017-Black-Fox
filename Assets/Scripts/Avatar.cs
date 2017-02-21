@@ -23,11 +23,11 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
     float nextFire;
 
     bool isAlive = true;        // Indica se l'agente è vivo o morto.
-    
+
     /// <summary>
     /// La vita dell'agente
     /// </summary>
-    float Life
+    public float Life
     {
         get { return life; }
         set { life = value; }
@@ -81,25 +81,25 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
     /// </summary>
     void InputReader()
     {
-        if (Input.GetButtonDown(string.Concat("Joy" + ((int)playerID + 1) + "_RightBumper")))                       // place right pin
+        if (Input.GetButtonDown(string.Concat("Joy" + ((int)playerID) + "_RightBumper")))                       // place right pin
         {
             pinPlacer.ChangePinSpawnPosition("Right");
             pinPlacer.placeThePin();
         }
         
-        if (Input.GetButtonDown(string.Concat("Joy" + ((int)playerID + 1) + "_LeftBumper")))                        // place left pin
+        if (Input.GetButtonDown(string.Concat("Joy" + ((int)playerID) + "_LeftBumper")))                        // place left pin
         {
             pinPlacer.ChangePinSpawnPosition("Left");
             pinPlacer.placeThePin();
         }
 
-        if (Input.GetButtonDown(string.Concat("Joy" + ((int)playerID + 1) + "_ButtonA")))                            // shoot
+        if (Input.GetButtonDown(string.Concat("Joy" + ((int)playerID) + "_ButtonA")))                            // shoot
         {
             nextFire = Time.time + fireRate;
             shoot.ShootBullet();
             nextFire = Time.time + fireRate;
         }
-        else if (Input.GetButton(string.Concat("Joy" + ((int)playerID + 1) + "_ButtonA")) && Time.time > nextFire)       // shoot at certain rate
+        else if (Input.GetButton(string.Concat("Joy" + ((int)playerID) + "_ButtonA")) && Time.time > nextFire)       // shoot at certain rate
         {
             nextFire = Time.time + fireRate;
             shoot.ShootBullet();
@@ -115,12 +115,12 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
 
         /*
          *  Rotazione in base allo schermo -- NON CANCELLARE !
-         *  Vector3 faceDirection = new Vector3(Input.GetAxis(string.Concat("Joy" + ((int)playerID + 1) + "_LeftStickHorizontal")), 0f, Input.GetAxis(string.Concat("Joy" + ((int)playerID + 1) + "_LeftStickVerical"))); 
+         *  Vector3 faceDirection = new Vector3(Input.GetAxis(string.Concat("Joy" + ((int)playerID) + "_LeftStickHorizontal")), 0f, Input.GetAxis(string.Concat("Joy" + ((int)playerID) + "_LeftStickVerical"))); 
          *  movment.RotationTowards(faceDirection); 
          */
 
-        float thrust = Input.GetAxis(string.Concat("Joy" + ((int)playerID + 1) + "_RightTrigger"));              // Add thrust   
-        movment.Rotation(Input.GetAxis(string.Concat("Joy" + ((int)playerID + 1) + "_LeftStickHorizontal")));  // Ruota l'agente
+        float thrust = Input.GetAxis(string.Concat("Joy" + ((int)playerID) + "_RightTrigger"));              // Add thrust   
+        movment.Rotation(Input.GetAxis(string.Concat("Joy" + ((int)playerID) + "_LeftStickHorizontal")));  // Ruota l'agente
         movment.Movement(thrust);                                                   // Muove l'agente                                                                                
     }
 
@@ -198,5 +198,5 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
 
 public enum PlayerID
 {
-    One, Two, Three, Four
+    Zero, One, Two, Three, Four
 }

@@ -7,5 +7,5 @@ using UnityEngine;
 /// </summary>
 public interface IDamageable {
 
-    void Damage(float _damage);
+    float Damage(float _damage);
 }

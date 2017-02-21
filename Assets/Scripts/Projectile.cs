@@ -39,7 +39,7 @@ public class Projectile : MonoBehaviour {
                     // E' presente l'oggetto con cui il proiettile è entrato in collisione.
                     if (item.GetType() == damageables.GetType())
                     {
-                        damageables.Damage(Damage);           // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia e se lo distrugge assegna i punti dell'uccisione all'agente che lo ha ucciso
+                        ownerObj.GetComponent<Avatar>().PowerPoint += damageables.Damage(Damage);          // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia e se lo distrugge assegna i punti dell'uccisione all'agente che lo ha ucciso
                         Destroy(gameObject);                                                            //Distrugge il proiettile
                         break;                                                                          // Ed esce dal foreach.
                     }

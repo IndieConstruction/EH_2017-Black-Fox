@@ -10,6 +10,8 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
     float powerPoint;                                                        //Punti Potenziamneto
     string playerName;                                                       //Il nome del Player da associare all'avatar
 
+    float killPoint = 1f;
+
     UIDisplay displatLife;
 
     List<GameObject> DamageablesPrefabs;                                            // Lista di Oggetti passati attraverso unity
@@ -202,19 +204,23 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
     /// </summary>
     /// <param name="_damage">La quantità di danni che subisce</param>
     /// <returns></returns>
-    public void Damage(float _damage)
+    public float Damage(float _damage)
     {
-        if(isAlive)                                         //Controlla se l'agente è vivo
+        if (isAlive)
         {
-            Life -= _damage;                                //Diminuisce la vita dell'agente in base ai danni passatigli da _damage
-            displatLife.SetSliderValue(Life);
-
-            if (Life < 1)                                   //Controlla se dopo aver danneggiato l'agente, la sua vita è arrivata a 0
-            {                                               
-                isAlive = false;                            // se è uguale a 0, isAlive diventa false    
-                gameObject.SetActive(false);                //Disattiva l'agente
+            Life -= _damage;
+            if (Life < 1)
+            {
+                isAlive = false;
+                gameObject.SetActive(false);
+                return killPoint;
+            }
+            else
+            {
+                return 0;
             }
         }
+        return 0;
     }
     #endregion
 

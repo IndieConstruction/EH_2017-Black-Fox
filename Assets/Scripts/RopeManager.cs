@@ -203,7 +203,8 @@ public class RopeManager : MonoBehaviour
         //Reference to Rigidbody
         rigid = _jointToSetup.GetComponent<Rigidbody>();
 
-        
+        //Set the proper layer ("Rope")
+        _jointToSetup.layer = 9;
 
         //Setup of the HingeJoint
         hj.axis = SwingAxis;

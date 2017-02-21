@@ -8,8 +8,10 @@ public class GameManager : MonoBehaviour {
     //Variabile che contiene il valore della vita del core
     public float CoreLife;
     public bool CoreIsAlive;
-    SceneController sceneControlle;
+    public SceneController sceneController;
     List<AvatarParameters> avatarParameters = new List<AvatarParameters>();
+
+    
     
 
 
@@ -29,7 +31,7 @@ public class GameManager : MonoBehaviour {
             Destroy(gameObject);
         }
         
-        sceneControlle = FindObjectOfType<SceneController>();
+        sceneController = FindObjectOfType<SceneController>();
     }
 
     // Use this for initialization
@@ -38,13 +40,7 @@ public class GameManager : MonoBehaviour {
         
 	}
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            sceneControlle.ReloadCurrentRound();
-        }
-    }
+   
 
 
     public void AddPlayer(PlayerID _IDPlayer, string _name, float _life, float _powerPoint)
@@ -75,6 +71,5 @@ public class GameManager : MonoBehaviour {
             }
         }
     }
-
 
 }

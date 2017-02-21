@@ -30,7 +30,8 @@ public class Core : MonoBehaviour, IDamageable {
         Life -= _damage;
         if (Life < 1) {
             CoreIsAlive = false;
-
+            GameManager.Instance.sceneController.ReloadCurrentRound();
+            
         }
 
         GameManager.Instance.CoreLife = Life;

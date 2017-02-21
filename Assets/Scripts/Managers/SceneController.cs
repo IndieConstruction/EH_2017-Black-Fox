@@ -10,8 +10,15 @@ public class SceneController : MonoBehaviour {
 
     public void ReloadCurrentRound()
     {
+        
         string SceneName = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(SceneName,LoadSceneMode.Single);
+    }
+
+    public void OpenTestScene()
+    {
+        Debug.Log("Apri Scena");
+        //SceneManager.LoadScene(1);
     }
 
     #endregion

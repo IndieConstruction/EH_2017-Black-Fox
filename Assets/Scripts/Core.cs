@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Core : MonoBehaviour {
+public class Core : MonoBehaviour, IDamageable {
 
     float life;
     bool CoreIsAlive = true;
@@ -35,7 +35,7 @@ public class Core : MonoBehaviour {
 
         GameManager.Instance.CoreLife = Life;
 
-        return Life;
+        return 0;
     }
 
     #endregion

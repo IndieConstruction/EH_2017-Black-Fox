@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour {
     public bool CoreIsAlive;
     SceneController sceneControlle;
     List<AvatarParameters> avatarParameters = new List<AvatarParameters>();
+    
+
 
     public static GameManager Instance;
 
@@ -23,7 +25,10 @@ public class GameManager : MonoBehaviour {
         if (Instance == null)
         {
             Instance = this;
+        } else {
+            Destroy(gameObject);
         }
+        
         sceneControlle = FindObjectOfType<SceneController>();
     }
 

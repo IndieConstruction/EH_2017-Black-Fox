@@ -17,7 +17,7 @@ public class ExternalAgent : MonoBehaviour, IDamageable {
 
     #region Interface
 
-    public void Damage(float _damage)
+    public float Damage(float _damage)
     {
         throw new NotImplementedException();
     }

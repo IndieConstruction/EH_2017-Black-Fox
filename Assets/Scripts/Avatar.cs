@@ -6,10 +6,9 @@ using System;
 public class Avatar : MonoBehaviour, IShooter, IDamageable {
 
     public PlayerID playerID;
-    public string name;                                                             // Nome giocatore
     public float life = 10;                                                         // Vita
     public float powerPoints = 100;                                                 //Punti Potenziamneto
-    public string PlayerName;                                                       //Il nome del Player da associare all'avatar
+    public string playerName;                                                       //Il nome del Player da associare all'avatar
 
 
 
@@ -30,10 +29,10 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
     /// <summary>
     /// Il nome del giocatore che controlla l'avatar
     /// </summary>
-    public string Name
+    public string PlayerName
     {
-        get { return name; }
-        set { name = value; }
+        get { return playerName; }
+        set { playerName = value; }
     }
 
     /// <summary>

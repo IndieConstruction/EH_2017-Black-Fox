@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Core : MonoBehaviour, IDamageable {
 
-    float life;
+    float life = 10;
     bool CoreIsAlive = true;
 
     #region API

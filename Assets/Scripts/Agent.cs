@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Avatar : MonoBehaviour, IShooter, IDamageable {
+public class Agent : MonoBehaviour, IShooter, IDamageable {
 
     public PlayerID playerID;
     float life = 10;                                                            // Vita

@@ -9,6 +9,9 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
 
     public float life = 10;                                                         // Vita
     public float powerPoints = 100;                                                 //Punti Potenziamneto
+    public string PlayerName;                                                       //Il nome del Player da associare all'avatar
+
+
 
     UIDisplay displatLife;
 

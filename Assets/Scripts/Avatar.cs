@@ -10,8 +10,6 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
     public float powerPoints = 100;                                                 //Punti Potenziamneto
     public string playerName;                                                       //Il nome del Player da associare all'avatar
 
-
-
     UIDisplay displatLife;
 
     List<GameObject> DamageablesPrefabs;                                            // Lista di Oggetti passati attraverso unity
@@ -67,7 +65,6 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
         pinPlacer = GetComponent<PlacePin>();
         shoot = GetComponent<Shoot>();
         displatLife = GetComponent<UIDisplay>();
-
         LoadIDamageablePrefab();
     }
 

@@ -6,9 +6,9 @@ using System;
 public class Avatar : MonoBehaviour, IShooter, IDamageable {
 
     public PlayerID playerID;
-    public float life = 10;                                                         // Vita
-    public float powerPoints = 100;                                                 //Punti Potenziamneto
-    public string playerName;                                                       //Il nome del Player da associare all'avatar
+    float life = 10;                                                            // Vita
+    float powerPoint;                                                        //Punti Potenziamneto
+    string playerName;                                                       //Il nome del Player da associare all'avatar
 
     UIDisplay displatLife;
 
@@ -18,6 +18,7 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
     MovementController movment;
     PlacePin pinPlacer;
     Shoot shoot;
+    GameManager gameManager;
 
     public float fireRate;                                                   // rateo di fuoco in secondi
     float nextFire;
@@ -39,16 +40,20 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
     public float Life
     {
         get { return life; }
-        set { life = value; }
+        set { life = value;
+            gameManager.SetPlayerLife(playerID, life);
+            }
     }
 
     /// <summary>
     /// Punti dell'avatar
     /// </summary>
-    public float PowerPoints
+    public float PowerPoint
     {
-        get { return powerPoints; }
-        set { powerPoints += value; }
+        get { return powerPoint; }
+        set { powerPoint = value;
+            gameManager.SetPlayerPowerPoint(playerID, powerPoint);
+            }
     }
 
     /// <summary>
@@ -61,11 +66,15 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
 
     void Start ()
     {
+        gameManager = GameManager.Instance;
         movment = GetComponent<MovementController>();
         pinPlacer = GetComponent<PlacePin>();
         shoot = GetComponent<Shoot>();
         displatLife = GetComponent<UIDisplay>();
         LoadIDamageablePrefab();
+
+        playerName = "Player" + playerID;
+        gameManager.AddPlayer(playerID, playerName, life, powerPoint);
     }
 
     void Update()

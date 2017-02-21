@@ -113,16 +113,14 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
          * - modificarli a seconda dell'uso che se ne vuole fare.
          */
 
-
         /*
          *  Rotazione in base allo schermo -- NON CANCELLARE !
-         *  Vector3 faceDirection = new Vector3(InputManager.GetAxis("Left Stick Horizontal", playerID), 0f, InputManager.GetAxis("Left Stick Vertical", playerID));    
+         *  Vector3 faceDirection = new Vector3(Input.GetAxis(string.Concat("Joy" + ((int)playerID + 1) + "_LeftStickHorizontal")), 0f, Input.GetAxis(string.Concat("Joy" + ((int)playerID + 1) + "_LeftStickVerical"))); 
          *  movment.RotationTowards(faceDirection); 
          */
-         
-        
-        float thrust = Input.GetAxis((string.Concat("Joy" + ((int)playerID + 1) + "_RightTrigger")));              // Add thrust   
-        movment.Rotation(Input.GetAxis((string.Concat("Joy" + ((int)playerID + 1) + "_LeftStickHorizontal"))));  // Ruota l'agente
+
+        float thrust = Input.GetAxis(string.Concat("Joy" + ((int)playerID + 1) + "_RightTrigger"));              // Add thrust   
+        movment.Rotation(Input.GetAxis(string.Concat("Joy" + ((int)playerID + 1) + "_LeftStickHorizontal")));  // Ruota l'agente
         movment.Movement(thrust);                                                   // Muove l'agente                                                                                
     }
 

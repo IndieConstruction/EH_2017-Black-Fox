@@ -53,6 +53,8 @@ public class RopeManager : MonoBehaviour
         {
             HingeJoint hj = GetComponent<HingeJoint>();
             Rigidbody rb = GetComponent<Rigidbody>();
+            hj.autoConfigureConnectedAnchor = false;
+            hj.connectedAnchor = origin.transform.position;
             hjLimit = hj.limits;
             SwingAxis = hj.axis;
             RopeDrag = rb.drag;
@@ -73,6 +75,11 @@ public class RopeManager : MonoBehaviour
 
         //Build the Rope
         ExtendRope();
+    }
+
+    private void Start()
+    {
+        GetComponent<HingeJoint>().connectedAnchor = origin.transform.position;
     }
 
     private void Update()

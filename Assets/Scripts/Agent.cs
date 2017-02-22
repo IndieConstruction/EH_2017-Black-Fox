@@ -6,13 +6,7 @@ using System;
 public class Agent : MonoBehaviour, IShooter, IDamageable {
 
     public PlayerID playerID;
-    float life = 10;                                                            // Vita
-    float powerPoint;                                                        //Punti Potenziamneto
-    string playerName;                                                       //Il nome del Player da associare all'avatar
-
-    float killPoint = 1f;
-
-    UIDisplay displatLife;
+    float life = 10;                                                         // Vita
 
     List<GameObject> DamageablesPrefabs;                                            // Lista di Oggetti passati attraverso unity
     List<IDamageable> Damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable
@@ -28,34 +22,12 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
     bool isAlive = true;                                                    // Indica se l'agente è vivo o morto.
 
     /// <summary>
-    /// Il nome del giocatore che controlla l'avatar
-    /// </summary>
-    public string PlayerName
-    {
-        get { return playerName; }
-        set { playerName = value; }
-    }
-
-    /// <summary>
     /// La vita dell'avatar
     /// </summary>
     public float Life
     {
         get { return life; }
-        set { life = value;
-
-            }
-    }
-
-    /// <summary>
-    /// Punti dell'avatar
-    /// </summary>
-    public float PowerPoint
-    {
-        get { return powerPoint; }
-        set { powerPoint = value;
-
-            }
+        set { life = value;}
     }
 
     /// <summary>
@@ -72,10 +44,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
         movment = GetComponent<MovementController>();
         pinPlacer = GetComponent<PlacePin>();
         shoot = GetComponent<Shoot>();
-        displatLife = GetComponent<UIDisplay>();
         LoadIDamageablePrefab();
-
-        playerName = "Player" + playerID;
     }
 
     void Update()
@@ -107,25 +76,25 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
     /// </summary>
     void InputReader()
     {
-        if (Input.GetButtonDown(string.Concat("Joy" + ((int)playerID) + "_RightBumper")))                       // place right pin
+        if (Input.GetButtonDown(string.Concat("Joy" + ((int)playerID + 1) + "_RightBumper")))                       // place right pin
         {
             pinPlacer.ChangePinSpawnPosition("Right");
             pinPlacer.placeThePin();
         }
         
-        if (Input.GetButtonDown(string.Concat("Joy" + ((int)playerID) + "_LeftBumper")))                        // place left pin
+        if (Input.GetButtonDown(string.Concat("Joy" + ((int)playerID + 1) + "_LeftBumper")))                        // place left pin
         {
             pinPlacer.ChangePinSpawnPosition("Left");
             pinPlacer.placeThePin();
         }
 
-        if (Input.GetButtonDown(string.Concat("Joy" + ((int)playerID) + "_ButtonA")))                            // shoot
+        if (Input.GetButtonDown(string.Concat("Joy" + ((int)playerID + 1) + "_ButtonA")))                            // shoot
         {
             nextFire = Time.time + fireRate;
             shoot.ShootBullet();
             nextFire = Time.time + fireRate;
         }
-        else if (Input.GetButton(string.Concat("Joy" + ((int)playerID) + "_ButtonA")) && Time.time > nextFire)       // shoot at certain rate
+        else if (Input.GetButton(string.Concat("Joy" + ((int)playerID + 1) + "_ButtonA")) && Time.time > nextFire)       // shoot at certain rate
         {
             nextFire = Time.time + fireRate;
             shoot.ShootBullet();
@@ -145,32 +114,9 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
          *  movment.RotationTowards(faceDirection); 
          */
 
-        float thrust = Input.GetAxis(string.Concat("Joy" + ((int)playerID) + "_RightTrigger"));              // Add thrust   
-        movment.Rotation(Input.GetAxis(string.Concat("Joy" + ((int)playerID) + "_LeftStickHorizontal")));  // Ruota l'agente
+        float thrust = Input.GetAxis(string.Concat("Joy" + ((int)playerID + 1) + "_RightTrigger"));              // Add thrust   
+        movment.Rotation(Input.GetAxis(string.Concat("Joy" + ((int)playerID + 1) + "_LeftStickHorizontal")));  // Ruota l'agente
         movment.Movement(thrust);                                                   // Muove l'agente                                                                                
-    }
-
-    /// <summary>
-    /// -Al momento non utilizzata-
-    /// </summary>
-    /// <param name="_axis"></param>
-    /// <param name="_parameter"></param>
-    void CheckAxis(string _axis, float _parameter)
-    {
-        bool Read = false;
-
-        //La variabile partendo falsa, permette di entrare nel ciclo if.
-        if (Read == false)
-        {
-            if (Input.GetAxisRaw(_axis) >= _parameter)
-            {
-                //una volta entrata la prima volta la variabile read ritorna vera ed esce dal primo if.
-                Read = true;
-                Debug.Log("Destra");
-            }
-        }
-        if (Input.GetAxisRaw(_axis) <= 0.15f)
-            Read = false;
     }
     #endregion
 
@@ -222,7 +168,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
 
 public enum PlayerID
 {
-    Zero, One, Two, Three, Four
+    One, Two, Three, Four
 }
 
 

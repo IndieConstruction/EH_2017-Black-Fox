@@ -8,11 +8,11 @@ public class Projectile : MonoBehaviour {
     float startTime;
     float timeToCount = 5f;
     float Damage = 1;
-    GameObject ownerObj;
+    Agent agent;
 
     void Start()
     {
-        ownerObj = Owner.GetOwner();            //Salva all'interno di ownerObj l'Owner (cioé colui che l'ha sparato)
+        agent = Owner.GetOwner();            //Salva all'interno di ownerObj l'Owner (cioé colui che l'ha sparato)
         startTime = Time.time;
     }
 
@@ -27,7 +27,7 @@ public class Projectile : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         //Se il gameobject con cui è entrato in collisione è diverso da quello che lo ha sparato, allora entra nell'if.
-        if (!other.gameObject.Equals(ownerObj))
+        if (!other.gameObject.Equals(agent))
         {
             // Controlla se l'oggetto con cui ha colliso ha l'interfaccia IDamageable e salva un riferimento di tale interfaccia
             IDamageable damageables = other.gameObject.GetComponent<IDamageable>();                 
@@ -39,9 +39,9 @@ public class Projectile : MonoBehaviour {
                     // E' presente l'oggetto con cui il proiettile è entrato in collisione.
                     if (item.GetType() == damageables.GetType())
                     {
-                        damageables.Damage(Damage);           // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia e se lo distrugge assegna i punti dell'uccisione all'agente che lo ha ucciso
-                        Destroy(gameObject);                                                            //Distrugge il proiettile
-                        break;                                                                          // Ed esce dal foreach.
+                        damageables.Damage(Damage);         // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia e se lo distrugge assegna i punti dell'uccisione all'agente che lo ha ucciso
+                        Destroy(gameObject);                //Distrugge il proiettile
+                        break;                              // Ed esce dal foreach.
                     }
                 }
             }

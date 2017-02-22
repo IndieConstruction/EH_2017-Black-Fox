@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Core : MonoBehaviour {
+public class Core : MonoBehaviour, IDamageable {
 
-    float life;
+    float life = 10;
     bool CoreIsAlive = true;
 
     #region API
@@ -25,17 +25,14 @@ public class Core : MonoBehaviour {
 
     #region Interfacce
 
-    public float Damage(float _damage)
+    public void Damage(float _damage)
     {
         Life -= _damage;
         if (Life < 1) {
             CoreIsAlive = false;
-
+            GameManager.Instance.sceneController.ReloadCurrentRound();          
         }
-
         GameManager.Instance.CoreLife = Life;
-
-        return Life;
     }
 
     #endregion

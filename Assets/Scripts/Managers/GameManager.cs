@@ -8,7 +8,11 @@ public class GameManager : MonoBehaviour {
     //Variabile che contiene il valore della vita del core
     public float CoreLife;
     public bool CoreIsAlive;
-    SceneController sceneControlle;
+    public SceneController sceneController;
+
+    
+    
+
 
     public static GameManager Instance;
 
@@ -22,8 +26,11 @@ public class GameManager : MonoBehaviour {
         if (Instance == null)
         {
             Instance = this;
+        } else {
+            Destroy(gameObject);
         }
-        sceneControlle = FindObjectOfType<SceneController>();
+        
+        sceneController = FindObjectOfType<SceneController>();
     }
 
     // Use this for initialization
@@ -31,16 +38,4 @@ public class GameManager : MonoBehaviour {
         //core = FindObjectOfType<Core>();
         
 	}
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            sceneControlle.ReloadCurrentRound();
-        }
-    }
-
-
-
-
 }

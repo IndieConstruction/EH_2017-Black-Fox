@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Avatar : MonoBehaviour, IShooter, IDamageable {
+public class Agent : MonoBehaviour, IShooter, IDamageable {
 
     public PlayerID playerID;
-    public float life = 10;                                                         // Vita
-    public float powerPoints = 100;                                                 //Punti Potenziamneto
-    public string playerName;                                                       //Il nome del Player da associare all'avatar
+    float life = 10;                                                            // Vita
+    float powerPoint;                                                        //Punti Potenziamneto
+    string playerName;                                                       //Il nome del Player da associare all'avatar
 
-
+    float killPoint = 1f;
 
     UIDisplay displatLife;
 
@@ -20,6 +20,7 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
     MovementController movment;
     PlacePin pinPlacer;
     Shoot shoot;
+    GameManager gameManager;
 
     public float fireRate;                                                   // rateo di fuoco in secondi
     float nextFire;
@@ -41,16 +42,20 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
     public float Life
     {
         get { return life; }
-        set { life = value; }
+        set { life = value;
+            gameManager.SetPlayerLife(playerID, life);
+            }
     }
 
     /// <summary>
     /// Punti dell'avatar
     /// </summary>
-    public float PowerPoints
+    public float PowerPoint
     {
-        get { return powerPoints; }
-        set { powerPoints += value; }
+        get { return powerPoint; }
+        set { powerPoint = value;
+            gameManager.SetPlayerPowerPoint(playerID, powerPoint);
+            }
     }
 
     /// <summary>
@@ -63,12 +68,15 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
 
     void Start ()
     {
+        gameManager = GameManager.Instance;
         movment = GetComponent<MovementController>();
         pinPlacer = GetComponent<PlacePin>();
         shoot = GetComponent<Shoot>();
         displatLife = GetComponent<UIDisplay>();
-
         LoadIDamageablePrefab();
+
+        playerName = "Player" + playerID;
+        gameManager.AddPlayer(playerID, playerName, life, powerPoint);
     }
 
     void Update()
@@ -183,9 +191,9 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
     /// Ritorna il gameobject a cui è attaccato il component
     /// </summary>
     /// <returns></returns>
-    public GameObject GetOwner()
+    public Agent GetOwner()
     {
-        return gameObject;
+        return this;
     }
 
     #endregion
@@ -198,15 +206,13 @@ public class Avatar : MonoBehaviour, IShooter, IDamageable {
     /// <returns></returns>
     public void Damage(float _damage)
     {
-        if(isAlive)                                         //Controlla se l'agente è vivo
+        if (isAlive)
         {
-            Life -= _damage;                                //Diminuisce la vita dell'agente in base ai danni passatigli da _damage
-            displatLife.SetSliderValue(Life);
-
-            if (Life < 1)                                   //Controlla se dopo aver danneggiato l'agente, la sua vita è arrivata a 0
-            {                                               
-                isAlive = false;                            // se è uguale a 0, isAlive diventa false    
-                gameObject.SetActive(false);                //Disattiva l'agente
+            Life -= _damage;
+            if (Life < 1)
+            {
+                isAlive = false;
+                gameObject.SetActive(false);
             }
         }
     }
@@ -219,3 +225,5 @@ public enum PlayerID
 {
     Zero, One, Two, Three, Four
 }
+
+

@@ -7,5 +7,5 @@ using UnityEngine;
 /// </summary>
 public interface ICollectablePoints
 {
-    void CollectPoints(Avatar _killer, Avatar _victim);
+   
 }

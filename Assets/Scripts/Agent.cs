@@ -6,7 +6,6 @@ using XInputDotNetPure;
 
 public class Agent : MonoBehaviour, IShooter, IDamageable, ICollectablePoints {
 
-    public bool UseXInput;
     public bool UseKeyboard;
 
     // XInput Variables

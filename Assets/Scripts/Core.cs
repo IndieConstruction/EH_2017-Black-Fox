@@ -25,18 +25,14 @@ public class Core : MonoBehaviour, IDamageable {
 
     #region Interfacce
 
-    public float Damage(float _damage)
+    public void Damage(float _damage)
     {
         Life -= _damage;
         if (Life < 1) {
             CoreIsAlive = false;
-            GameManager.Instance.sceneController.ReloadCurrentRound();
-            
+            GameManager.Instance.sceneController.ReloadCurrentRound();          
         }
-
         GameManager.Instance.CoreLife = Life;
-
-        return 0;
     }
 
     #endregion

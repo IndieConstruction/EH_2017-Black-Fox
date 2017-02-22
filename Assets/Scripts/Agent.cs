@@ -204,7 +204,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
     /// </summary>
     /// <param name="_damage">La quantità di danni che subisce</param>
     /// <returns></returns>
-    public float Damage(float _damage)
+    public void Damage(float _damage)
     {
         if (isAlive)
         {
@@ -213,14 +213,8 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
             {
                 isAlive = false;
                 gameObject.SetActive(false);
-                return killPoint;
-            }
-            else
-            {
-                return 0;
             }
         }
-        return 0;
     }
     #endregion
 
@@ -231,3 +225,5 @@ public enum PlayerID
 {
     Zero, One, Two, Three, Four
 }
+
+

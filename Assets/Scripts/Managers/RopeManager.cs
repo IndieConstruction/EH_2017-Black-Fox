@@ -91,6 +91,7 @@ public class RopeManager : MonoBehaviour
     private void Update()
     {
         //ISNERIRE LA GESTIONE DELL'ALLUNAMENTO
+        origin.position = transform.position;
     }
 
     void LateUpdate()

@@ -6,6 +6,12 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour {
 
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            ReloadCurrentRound();
+    }
+
     #region API
 
     public void ReloadCurrentRound()
@@ -20,6 +26,7 @@ public class SceneController : MonoBehaviour {
 
     public void OpenTestScene()
     {
+        Debug.Log("openScene");
         SceneManager.LoadScene(1);
     }
 

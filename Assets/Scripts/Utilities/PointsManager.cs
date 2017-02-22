@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XInputDotNetPure;
+
 
 /// <summary>
 /// Gestore dei punti del player
@@ -11,7 +13,7 @@ public class PointsManager {
     int deathPoint;
     int pointToWin;
     List<PlayerPoints> pointsManager = new List<PlayerPoints>()
-        { new PlayerPoints(PlayerID.One), new PlayerPoints(PlayerID.Two), new PlayerPoints(PlayerID.Three), new PlayerPoints(PlayerID.Four) };
+        { new PlayerPoints(PlayerIndex.One), new PlayerPoints(PlayerIndex.Two), new PlayerPoints(PlayerIndex.Three), new PlayerPoints(PlayerIndex.Four) };
 
     public PointsManager(int _killPoint, int _deathPoint, int _pointToWin)
     {
@@ -20,11 +22,11 @@ public class PointsManager {
         pointToWin = _pointToWin;
     }
 
-    public void UpdateKillPoints(PlayerID _killer, PlayerID _victim)
+    public void UpdateKillPoints(PlayerIndex _killer, PlayerIndex _victim)
     {
         foreach (var item in pointsManager)
         {
-            if (item.PlayerID == _killer)
+            if (item.PlayerIndex == _killer)
             {
                 item.KillPoints += killPoint;
                 if(item.KillPoints == pointToWin)
@@ -37,7 +39,7 @@ public class PointsManager {
 
         foreach (var item in pointsManager)
         {
-            if (item.PlayerID == _victim && item.KillPoints > 0)
+            if (item.PlayerIndex == _victim && item.KillPoints > 0)
             {
                 item.KillPoints -= deathPoint;
                 break;
@@ -52,13 +54,13 @@ public class PointsManager {
 public class PlayerPoints
 {
 
-    PlayerID playerID;
+    PlayerIndex playerIndex;
     int powerPoints;
     int killPoints;
 
-    public PlayerID PlayerID
+    public PlayerIndex PlayerIndex
     {
-        get { return playerID; }
+        get { return playerIndex; }
     }
 
     public int KillPoints
@@ -73,8 +75,8 @@ public class PlayerPoints
         set { powerPoints = value; }
     }
 
-    public PlayerPoints(PlayerID _IDPlayer)
+    public PlayerPoints(PlayerIndex _playerIndex)
     {
-        playerID = _IDPlayer;
+        playerIndex = _playerIndex;
     }
 }

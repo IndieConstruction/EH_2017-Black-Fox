@@ -43,7 +43,7 @@ public class Projectile : MonoBehaviour {
                     {
                         if (canCollecte != null)
                         {
-                            canCollecte.CheckIfKillable(agent.playerID);
+                            canCollecte.CheckIfKillable(agent.playerIndex);
                         }
 
                         damageables.Damage(Damage);         // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia e se lo distrugge assegna i punti dell'uccisione all'agente che lo ha ucciso

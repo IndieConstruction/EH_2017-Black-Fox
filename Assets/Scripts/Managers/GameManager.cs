@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XInputDotNetPure;
 
 public class GameManager : MonoBehaviour {
 
@@ -40,7 +41,7 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    public void SetKillPoints(PlayerID _killer, PlayerID _victim)
+    public void SetKillPoints(PlayerIndex _killer, PlayerIndex _victim)
     {
         pointsManager.UpdateKillPoints(_killer, _victim);
     }

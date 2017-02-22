@@ -2,13 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using XInputDotNetPure;
 
 public class Agent : MonoBehaviour, IShooter, IDamageable, ICollectablePoints {
 
-    public PlayerID playerID;
+    public bool UseXInput;
+    public bool UseKeyboard;
+
+    // XInput Variables
+    GamePadState state;
+    GamePadState prevState;
+    public PlayerIndex playerIndex;
+    //####
+
     float life = 10;                                                         // Vita
     bool Killable = false;
-    PlayerID PlayerWhoKillMe;
+    PlayerIndex PlayerWhoKillMe;
 
 
     List<GameObject> DamageablesPrefabs;                                            // Lista di Oggetti passati attraverso unity
@@ -52,7 +61,14 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, ICollectablePoints {
 
     void Update()
     {
-        InputReader();
+        if (UseKeyboard)
+        {
+            KeyboardReader();
+        }
+        else
+        {
+            XInputReader();
+        }
     }
 
     /// <summary>
@@ -72,59 +88,78 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, ICollectablePoints {
         }
     }
 
-    
 
-
-    #region Controller Input
-
-    /// <summary>
-    /// Racchiude i controlli per piazzare i chiodi, sparare, ruotare e muoversi
-    /// </summary>
-    void InputReader()
+    #region KeyboardInput
+    void KeyboardReader()
     {
-        if (Input.GetButtonDown(string.Concat("Joy" + ((int)playerID + 1) + "_RightBumper")))                       // place right pin
+        if (Input.GetButtonDown(string.Concat("Key0_PlaceRight")))                       // place right pin
         {
             pinPlacer.ChangePinSpawnPosition("Right");
             pinPlacer.placeThePin();
         }
-        
-        if (Input.GetButtonDown(string.Concat("Joy" + ((int)playerID + 1) + "_LeftBumper")))                        // place left pin
+
+        if (Input.GetButtonDown(string.Concat("Key0_PlaceLeft")))                        // place left pin
         {
             pinPlacer.ChangePinSpawnPosition("Left");
             pinPlacer.placeThePin();
         }
 
-        if (Input.GetButtonDown(string.Concat("Joy" + ((int)playerID + 1) + "_ButtonA")))                            // shoot
+        if (Input.GetButtonDown(string.Concat("Key0_Fire")))                            // shoot
         {
             nextFire = Time.time + fireRate;
             shoot.ShootBullet();
             nextFire = Time.time + fireRate;
         }
-        else if (Input.GetButton(string.Concat("Joy" + ((int)playerID + 1) + "_ButtonA")) && Time.time > nextFire)       // shoot at certain rate
+        else if (Input.GetButton(string.Concat("Key0_Fire")) && Time.time > nextFire)       // shoot at certain rate
         {
             nextFire = Time.time + fireRate;
             shoot.ShootBullet();
         }
 
-        // Ruota e Muove l'agente
-        /* 
-         * Appunto sul funzionamento degli assi dei Trigger :
-         * - se imposto ad entrambi i Trigger il 3th axis, uno funziona come l'opposto dell'altro, anche se ne viene usato solamente uno dallo script (es. Accelera e Frena).
-         * - per separarne l'uso vanno settati al Left Trigger il 9th axis e al Right Trigger il 10th axis.
-         * - modificarli a seconda dell'uso che se ne vuole fare.
-         */
-
-        /*
-         *  Rotazione in base allo schermo -- NON CANCELLARE !
-         *  Vector3 faceDirection = new Vector3(Input.GetAxis(string.Concat("Joy" + ((int)playerID) + "_LeftStickHorizontal")), 0f, Input.GetAxis(string.Concat("Joy" + ((int)playerID) + "_LeftStickVerical"))); 
-         *  movment.RotationTowards(faceDirection); 
-         */
-
-        float thrust = Input.GetAxis(string.Concat("Joy" + ((int)playerID + 1) + "_RightTrigger"));              // Add thrust   
-        movment.Rotation(Input.GetAxis(string.Concat("Joy" + ((int)playerID + 1) + "_LeftStickHorizontal")));  // Ruota l'agente
-        movment.Movement(thrust);                                                   // Muove l'agente                                                                                
+        float thrust = Input.GetAxis(string.Concat("Key0_Forward"));              // Add thrust   
+        movment.Rotation(Input.GetAxis(string.Concat("Key0_Horizonatal")));  // Ruota l'agente
+        movment.Movement(thrust);                                                                               // Muove l'agente                                                                                
     }
     #endregion
+
+    #region XInput
+
+    void XInputReader()
+    {
+        prevState = state;
+        state = GamePad.GetState(playerIndex);
+
+        if (prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed)
+        {
+            pinPlacer.ChangePinSpawnPosition("Right");
+            pinPlacer.placeThePin();
+        }
+
+        if (prevState.Buttons.LeftShoulder == ButtonState.Released && state.Buttons.LeftShoulder == ButtonState.Pressed)
+        {
+            pinPlacer.ChangePinSpawnPosition("Left");
+            pinPlacer.placeThePin();
+        }
+
+        if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
+        {
+            nextFire = Time.time + fireRate;
+            shoot.ShootBullet();
+            nextFire = Time.time + fireRate;
+        }
+        else if (prevState.Buttons.A == ButtonState.Pressed && state.Buttons.A == ButtonState.Pressed && Time.time > nextFire)
+        {
+            nextFire = Time.time + fireRate;
+            shoot.ShootBullet();
+            nextFire = Time.time + fireRate;
+        }
+
+        movment.Rotation(state.ThumbSticks.Left.X);
+        movment.Movement(state.Triggers.Right);
+    }
+
+    #endregion
+
 
     #region Interfaces
 
@@ -177,19 +212,14 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, ICollectablePoints {
 
     #region ICollectablePoints
 
-    public void CheckIfKillable(PlayerID _playerKiller)
+    public void CheckIfKillable(PlayerIndex _playerKiller)
     {
-        gameManager.SetKillPoints(_playerKiller, playerID);
+        gameManager.SetKillPoints(_playerKiller, playerIndex);
     }
 
     #endregion
 
     #endregion
-}
-
-public enum PlayerID
-{
-    One, Two, Three, Four
 }
 
 

@@ -213,7 +213,8 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, ICollectablePoints {
 
     public void CheckIfKillable(PlayerIndex _playerKiller)
     {
-        gameManager.SetKillPoints(_playerKiller, playerIndex);
+        if(Killable)
+            gameManager.SetKillPoints(_playerKiller, playerIndex);
     }
 
     #endregion

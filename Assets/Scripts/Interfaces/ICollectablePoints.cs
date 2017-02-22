@@ -7,5 +7,5 @@ using UnityEngine;
 /// </summary>
 public interface ICollectablePoints
 {
-   
+    void CheckIfKillable(PlayerID _playerKiller);
 }

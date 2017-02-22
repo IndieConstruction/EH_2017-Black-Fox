@@ -44,5 +44,6 @@ public class GameManager : MonoBehaviour {
     public void SetKillPoints(PlayerIndex _killer, PlayerIndex _victim)
     {
         pointsManager.UpdateKillPoints(_killer, _victim);
+        Debug.Log(_killer + "/" + _victim);
     }
 }

@@ -43,7 +43,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
     {
         get { return life; }
         set { life = value;
-            gameManager.SetPlayerLife(playerID, life);
+
             }
     }
 
@@ -54,7 +54,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
     {
         get { return powerPoint; }
         set { powerPoint = value;
-            gameManager.SetPlayerPowerPoint(playerID, powerPoint);
+
             }
     }
 
@@ -76,7 +76,6 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
         LoadIDamageablePrefab();
 
         playerName = "Player" + playerID;
-        gameManager.AddPlayer(playerID, playerName, life, powerPoint);
     }
 
     void Update()

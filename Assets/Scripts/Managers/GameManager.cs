@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
+    public static GameManager Instance;
+
+    public int KillPoint;
+    public int DeathPoint;
+    public int PointsToWin;
+
     public bool dontDestroyOnLoad;
     //Variabile che contiene il valore della vita del core
     public float CoreLife;
     public bool CoreIsAlive;
     public SceneController sceneController;
-
-    
-    
-
-
-    public static GameManager Instance;
-
+    PointsManager pointsManager;
 
     private void Awake()
     {
@@ -36,6 +36,12 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         //core = FindObjectOfType<Core>();
-        
-	}
+        pointsManager = new PointsManager(KillPoint, DeathPoint, PointsToWin);
+
+    }
+
+    public void SetKillPoints(PlayerID _killer, PlayerID _victim)
+    {
+        pointsManager.UpdateKillPoints(_killer, _victim);
+    }
 }

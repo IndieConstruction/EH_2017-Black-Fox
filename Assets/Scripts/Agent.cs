@@ -191,9 +191,9 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
     /// Ritorna il gameobject a cui è attaccato il component
     /// </summary>
     /// <returns></returns>
-    public GameObject GetOwner()
+    public Agent GetOwner()
     {
-        return gameObject;
+        return this;
     }
 
     #endregion

@@ -14,6 +14,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, ICollectablePoints {
     public PlayerIndex playerIndex;
     //####
 
+    string Name;
     float life = 10;                                                         // Vita
     bool Killable = false;
     PlayerIndex PlayerWhoKillMe;

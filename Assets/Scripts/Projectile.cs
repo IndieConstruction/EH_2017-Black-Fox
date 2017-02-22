@@ -30,20 +30,24 @@ public class Projectile : MonoBehaviour {
         if (!other.gameObject.Equals(agent))
         {
             // Controlla se l'oggetto con cui ha colliso ha l'interfaccia IDamageable e salva un riferimento di tale interfaccia
+            ICollectablePoints canCollecte = other.GetComponent<ICollectablePoints>();
             IDamageable damageables = other.gameObject.GetComponent<IDamageable>();                 
             if (damageables != null)                                                                
             {
+                
                 //Controlla se all'interno della lista di oggetti Danneggiabili, contenuta da Owner (chi ha sparato il proiettile)
                 foreach (IDamageable item in Owner.GetDamageable())
                 {
                     // E' presente l'oggetto con cui il proiettile è entrato in collisione.
                     if (item.GetType() == damageables.GetType())
                     {
-                        damageables.Damage(Damage);         // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia e se lo distrugge assegna i punti dell'uccisione all'agente che lo ha ucciso
-                        /*if ()
+                        if (canCollecte != null)
                         {
+                            canCollecte.CheckIfKillable(agent.playerID);
+                        }
 
-                        }*/
+                        damageables.Damage(Damage);         // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia e se lo distrugge assegna i punti dell'uccisione all'agente che lo ha ucciso
+                        
                        
                         Destroy(gameObject);                //Distrugge il proiettile
                         break;                              // Ed esce dal foreach.

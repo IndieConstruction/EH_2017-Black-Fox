@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Agent : MonoBehaviour, IShooter, IDamageable {
+public class Agent : MonoBehaviour, IShooter, IDamageable, ICollectablePoints {
 
     public PlayerID playerID;
     float life = 10;                                                         // Vita
+    bool Killable = false;
+    PlayerID PlayerWhoKillMe;
+
 
     List<GameObject> DamageablesPrefabs;                                            // Lista di Oggetti passati attraverso unity
     List<IDamageable> Damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable
@@ -68,6 +71,9 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
                 Damageables.Add(k.GetComponent<IDamageable>());
         }
     }
+
+    
+
 
     #region Controller Input
 
@@ -154,6 +160,10 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
         if (isAlive)
         {
             Life -= _damage;
+            if (Life == 1)
+            {
+                Killable = true;
+            }
             if (Life < 1)
             {
                 isAlive = false;
@@ -161,6 +171,17 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
             }
         }
     }
+
+
+    #endregion
+
+    #region ICollectablePoints
+
+    public void CheckIfKillable(PlayerID _playerKiller)
+    {
+        gameManager.SetKillPoints(_playerKiller, playerID);
+    }
+
     #endregion
 
     #endregion

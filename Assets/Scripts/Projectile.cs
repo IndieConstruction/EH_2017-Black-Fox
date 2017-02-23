@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 
-    IShooter Owner;
+    IShooter shooter;
     float startTime;
     float timeToCount = 5f;
     float Damage = 1;
@@ -12,7 +12,7 @@ public class Projectile : MonoBehaviour {
 
     void Start()
     {
-        agent = Owner.GetOwner();            //Salva all'interno di ownerObj l'Owner (cioé colui che l'ha sparato)
+        agent = shooter.GetOwner();            //Salva all'interno di ownerObj l'Owner (cioé colui che l'ha sparato)
         startTime = Time.time;
     }
 
@@ -30,13 +30,13 @@ public class Projectile : MonoBehaviour {
         if (!other.gameObject.Equals(agent))
         {
             // Controlla se l'oggetto con cui ha colliso ha l'interfaccia IDamageable e salva un riferimento di tale interfaccia
-            ICollectablePoints canCollecte = other.GetComponent<ICollectablePoints>();
+            IKillable canCollecte = other.GetComponent<IKillable>();
             IDamageable damageables = other.gameObject.GetComponent<IDamageable>();                 
             if (damageables != null)                                                                
             {
                 
                 //Controlla se all'interno della lista di oggetti Danneggiabili, contenuta da Owner (chi ha sparato il proiettile)
-                foreach (IDamageable item in Owner.GetDamageable())
+                foreach (IDamageable item in shooter.GetDamageable())
                 {
                     // E' presente l'oggetto con cui il proiettile è entrato in collisione.
                     if (item.GetType() == damageables.GetType())
@@ -60,6 +60,6 @@ public class Projectile : MonoBehaviour {
     //Setta chi è il proprietario del proiettile, cioé chi lo spara.
     public void SetOwner(IShooter _owner)
     {
-        Owner = _owner;
+        shooter = _owner;
     }
 }

@@ -9,17 +9,17 @@ using XInputDotNetPure;
 /// </summary>
 public class PointsManager {
 
-    int killPoint;
-    int deathPoint;
-    int pointToWin;
+    int AddPoints;
+    int SubPoints;
+    int pointsToWin;
     List<PlayerPoints> pointsManager = new List<PlayerPoints>()
         { new PlayerPoints(PlayerIndex.One), new PlayerPoints(PlayerIndex.Two), new PlayerPoints(PlayerIndex.Three), new PlayerPoints(PlayerIndex.Four) };
 
-    public PointsManager(int _killPoint, int _deathPoint, int _pointToWin)
+    public PointsManager(int _killPoints, int _deathPoints, int _pointsToWin)
     {
-        killPoint = _killPoint;
-        deathPoint = _deathPoint;
-        pointToWin = _pointToWin;
+        AddPoints = _killPoints;
+        SubPoints = _deathPoints;
+        pointsToWin = _pointsToWin;
     }
 
     public void UpdateKillPoints(PlayerIndex _killer, PlayerIndex _victim)
@@ -28,8 +28,8 @@ public class PointsManager {
         {
             if (item.PlayerIndex == _killer)
             {
-                item.KillPoints += killPoint;
-                if(item.KillPoints == pointToWin)
+                item.KillPoints += AddPoints;
+                if(item.KillPoints == pointsToWin)
                 {
                     //Di al gameManager che il player #n ha vinto
                 }
@@ -41,7 +41,7 @@ public class PointsManager {
         {
             if (item.PlayerIndex == _victim && item.KillPoints > 0)
             {
-                item.KillPoints -= deathPoint;
+                item.KillPoints -= SubPoints;
                 break;
             }
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using XInputDotNetPure;
 
-public class Agent : MonoBehaviour, IShooter, IDamageable, ICollectablePoints {
+public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
 
     public bool UseKeyboard;
     public bool UseController;

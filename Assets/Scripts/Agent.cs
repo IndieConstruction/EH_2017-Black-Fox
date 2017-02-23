@@ -18,6 +18,8 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
     public PlayerIndex playerIndex;
     //####
 
+    KeyCode SwitchInput;
+
     string Name;
     float life = 10;                                                         // Vita
     bool Killable = false;
@@ -58,20 +60,28 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
         pinPlacer = GetComponent<PlacePin>();
         shoot = GetComponent<Shoot>();
         LoadIDamageablePrefab();
+        if (playerIndex == PlayerIndex.Three)
+        {
+            SwitchInput = KeyCode.F3;
+        } else if (playerIndex == PlayerIndex.Four)
+        {
+            SwitchInput = KeyCode.F4;
+        }
+
     }
 
     void Update()
     {
         if (UseAutoSwitch)
         {
-            if (Input.anyKeyDown)
+            if (Input.GetKeyDown(SwitchInput))
             {
-                UseKeyboard = true;
-            }
-            else if(IsControllerUsed)
-            {
-                UseController = true;
-            }
+                if (UseKeyboard == true)
+                    UseKeyboard = false;
+                else
+                    UseKeyboard = true;
+            } 
+            
         }
 
         if (UseKeyboard)

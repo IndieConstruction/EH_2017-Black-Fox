@@ -15,29 +15,33 @@ public class UIManager : MonoBehaviour {
     
     public void SetSliderValue(PlayerIndex _playerIndex, float _life)
     {
-        if (_playerIndex == PlayerIndex.One)
+        if (FindObjectOfType<Canvas>() != null)
         {
-            SliderPlayer1.value = _life / 10;
-        }
+            if (_playerIndex == PlayerIndex.One)
+            {
+                SliderPlayer1.value = _life / 10;
+            }
 
-        if (_playerIndex == PlayerIndex.Two)
-        {
-            SliderPlayer2.value = _life / 10;
-        }
+            if (_playerIndex == PlayerIndex.Two)
+            {
+                SliderPlayer2.value = _life / 10;
+            }
 
-        if (_playerIndex == PlayerIndex.Three)
-        {
-            SliderPlayer3.value = _life / 10;
-        }
+            if (_playerIndex == PlayerIndex.Three)
+            {
+                SliderPlayer3.value = _life / 10;
+            }
 
-        if (_playerIndex == PlayerIndex.Four)
-        {
-            SliderPlayer4.value = _life / 10;
+            if (_playerIndex == PlayerIndex.Four)
+            {
+                SliderPlayer4.value = _life / 10;
+            }
         }
     }
 
     public void SetSliderValue(float _life)
     {
-        CoreSlider.value = _life / 10;
-}
+        if (FindObjectOfType<Canvas>() != null)
+            CoreSlider.value = _life / 10;
+    }
 }

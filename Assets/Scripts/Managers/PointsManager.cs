@@ -31,7 +31,7 @@ public class PointsManager {
                 item.KillPoints += AddPoints;
                 if(item.KillPoints == pointsToWin)
                 {
-                    //Di al gameManager che il player #n ha vinto
+                    
                 }
                 break;
             }
@@ -46,6 +46,12 @@ public class PointsManager {
             }
         }
         
+    }
+
+
+    void WhoWin()
+    {
+        GameManager.Instance.uiManager.WindDisplay.enabled = true;
     }
 }
 

@@ -20,8 +20,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
 
     float life = 10;                                                         // Vita
     bool Killable = false;
-    PlayerIndex PlayerWhoKillMe;
-
+    bool isAlive = true;                                                    // Indica se l'agente è vivo o morto.
 
     List<GameObject> DamageablesPrefabs;                                            // Lista di Oggetti passati attraverso unity
     List<IDamageable> Damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable
@@ -33,8 +32,6 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
 
     public float fireRate;                                                   // rateo di fuoco in secondi
     float nextFire;
-
-    bool isAlive = true;                                                    // Indica se l'agente è vivo o morto.
 
     /// <summary>
     /// La vita dell'avatar
@@ -223,7 +220,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
 
     #endregion
 
-    #region ICollectablePoints
+    #region IKillable
 
     public void CheckIfKillable(PlayerIndex _playerKiller)
     {

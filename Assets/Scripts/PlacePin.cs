@@ -6,6 +6,7 @@ public class PlacePin : MonoBehaviour {
 
     public GameObject PinPrefab;
     public Transform PinSpanw;
+    Agent owner;
 
     bool isLeft = false;
     
@@ -24,7 +25,7 @@ public class PlacePin : MonoBehaviour {
     /// <summary>
     /// Instantiate the pin on the PinSpawn
     /// </summary>
-    public void placeThePin()
+    public void placeThePin(Agent _owner)
     {
         Instantiate(PinPrefab, PinSpanw.position, PinSpanw.rotation);        
     }

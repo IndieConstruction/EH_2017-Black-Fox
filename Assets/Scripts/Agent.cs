@@ -7,6 +7,10 @@ using XInputDotNetPure;
 public class Agent : MonoBehaviour, IShooter, IDamageable, ICollectablePoints {
 
     public bool UseKeyboard;
+    public bool UseController;
+    public bool UseAutoSwitch;
+
+    bool IsControllerUsed;
 
     // XInput Variables
     GamePadState state;
@@ -60,11 +64,23 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, ICollectablePoints {
 
     void Update()
     {
+        if (UseAutoSwitch)
+        {
+            if (Input.anyKeyDown)
+            {
+                UseKeyboard = true;
+            }
+            else if(IsControllerUsed)
+            {
+                UseController = true;
+            }
+        }
+
         if (UseKeyboard)
         {
             KeyboardReader();
         }
-        else
+        else if(UseController)
         {
             XInputReader();
         }
@@ -87,36 +103,35 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, ICollectablePoints {
         }
     }
 
-
     #region KeyboardInput
     void KeyboardReader()
     {
-        if (Input.GetButtonDown(string.Concat("Key0_PlaceRight")))                       // place right pin
+        if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_PlaceRight")))                       // place right pin
         {
             pinPlacer.ChangePinSpawnPosition("Right");
             pinPlacer.placeThePin();
         }
 
-        if (Input.GetButtonDown(string.Concat("Key0_PlaceLeft")))                        // place left pin
+        if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_PlaceLeft")))                        // place left pin
         {
             pinPlacer.ChangePinSpawnPosition("Left");
             pinPlacer.placeThePin();
         }
 
-        if (Input.GetButtonDown(string.Concat("Key0_Fire")))                            // shoot
+        if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_Fire")))                            // shoot
         {
             nextFire = Time.time + fireRate;
             shoot.ShootBullet();
             nextFire = Time.time + fireRate;
         }
-        else if (Input.GetButton(string.Concat("Key0_Fire")) && Time.time > nextFire)       // shoot at certain rate
+        else if (Input.GetButton(string.Concat("Key" + (int)playerIndex + "_Fire")) && Time.time > nextFire)       // shoot at certain rate
         {
             nextFire = Time.time + fireRate;
             shoot.ShootBullet();
         }
 
-        float thrust = Input.GetAxis(string.Concat("Key0_Forward"));              // Add thrust   
-        movment.Rotation(Input.GetAxis(string.Concat("Key0_Horizonatal")));  // Ruota l'agente
+        float thrust = Input.GetAxis(string.Concat("Key" + (int)playerIndex + "_Forward"));              // Add thrust   
+        movment.Rotation(Input.GetAxis(string.Concat("Key" + (int)playerIndex + "_Horizonatal")));  // Ruota l'agente
         movment.Movement(thrust);                                                                               // Muove l'agente                                                                                
     }
     #endregion
@@ -158,7 +173,6 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, ICollectablePoints {
     }
 
     #endregion
-
 
     #region Interfaces
 

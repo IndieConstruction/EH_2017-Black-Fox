@@ -32,7 +32,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
     Shooter shooter;
     GameManager gameManager;
 
-    UIDisplay uiDisplay;
+    //UIManager uiDisplay;
 
     public float fireRate;                                                   // rateo di fuoco in secondi
     float nextFire;
@@ -56,7 +56,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
 
     void Start ()
     {
-        uiDisplay = GetComponent<UIDisplay>();
+        //uiDisplay = GetComponent<UIDisplay>();
 
         gameManager = GameManager.Instance;
         movment = GetComponent<MovementController>();
@@ -215,7 +215,8 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
         if (isAlive)
         {
             Life -= _damage;
-            uiDisplay.SetSliderValue(Life);
+            //uiDisplay.SetSliderValue(Life);
+            GameManager.Instance.uiManager.SetSliderValue(playerIndex, Life);
             if (Life == 1)
             {
                 Killable = true;

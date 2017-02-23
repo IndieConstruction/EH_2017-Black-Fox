@@ -13,11 +13,15 @@ public class GameManager : MonoBehaviour {
 
     public bool dontDestroyOnLoad;
     //Variabile che contiene il valore della vita del core
-    public float coreLife = 10;
+    public float coreLife = 10;                 // La vita del Core
+    public float MaxLifeCore = 10;              // La vita massima che può avere il Core e che viene impostata al riavvio di un round perso
+    public float WaitForSeconds = 3;                // Il tempo che aspetta prima di riavviare la scena
 
     public SceneController sceneController;
     PointsManager pointsManager;
+    public UIManager uiManager;
 
+    
     public float CoreLife
     {
         get
@@ -44,11 +48,13 @@ public class GameManager : MonoBehaviour {
         }
         
         sceneController = FindObjectOfType<SceneController>();
+        
     }
 
     // Use this for initialization
     void Start () {
         //core = FindObjectOfType<Core>();
+        uiManager = GetComponent<UIManager>();
         pointsManager = new PointsManager(KillPoint, DeathPoint, PointsToWin);
 
     }

@@ -29,7 +29,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
 
     MovementController movment;
     PlacePin pinPlacer;
-    Shoot shoot;
+    Shooter shooter;
     GameManager gameManager;
 
     UIDisplay uiDisplay;
@@ -61,7 +61,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
         gameManager = GameManager.Instance;
         movment = GetComponent<MovementController>();
         pinPlacer = GetComponent<PlacePin>();
-        shoot = GetComponent<Shoot>();
+        shooter = GetComponent<Shooter>();
         LoadIDamageablePrefab();
         if (playerIndex == PlayerIndex.Three)
         {
@@ -128,13 +128,13 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
         if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_Fire")))                            // shoot
         {
             nextFire = Time.time + fireRate;
-            shoot.ShootBullet(this);
+            shooter.ShootBullet(this);
             nextFire = Time.time + fireRate;
         }
         else if (Input.GetButton(string.Concat("Key" + (int)playerIndex + "_Fire")) && Time.time > nextFire)       // shoot at certain rate
         {
             nextFire = Time.time + fireRate;
-            shoot.ShootBullet(this);
+            shooter.ShootBullet(this);
         }
 
         float thrust = Input.GetAxis(string.Concat("Key" + (int)playerIndex + "_Forward"));              // Add thrust   
@@ -165,13 +165,13 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
         if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
         {
             nextFire = Time.time + fireRate;
-            shoot.ShootBullet(this);
+            shooter.ShootBullet(this);
             nextFire = Time.time + fireRate;
         }
         else if (prevState.Buttons.A == ButtonState.Pressed && state.Buttons.A == ButtonState.Pressed && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
-            shoot.ShootBullet(this);
+            shooter.ShootBullet(this);
             nextFire = Time.time + fireRate;
         }
 

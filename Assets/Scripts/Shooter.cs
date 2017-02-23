@@ -19,11 +19,4 @@ using UnityEngine;
         instantiatedProjectile.GetComponent<Projectile>().SetOwner(GetComponentInParent<IShooter>());
         Destroy(instantiatedProjectile, LifeTime);
     }
-
-    void Update() {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            //ShootBullet();
-        }
-    }
 }

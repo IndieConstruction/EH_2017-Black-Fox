@@ -25,12 +25,11 @@ public class Projectile : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         //Se il gameobject con cui è entrato in collisione è diverso da quello che lo ha sparato, allora entra nell'if.
-        if (other.gameObject.GetComponent<IShooter>() == null)
-            return;
-        //TODO: Il Proiettile ignora tutti gli oggetti tranne coloro che hanno un IShooter.
-        if (Owner.GetOwner() == other.gameObject.GetComponent<IShooter>().GetOwner())
-            return;
-        
+        if (other.gameObject.GetComponent<IShooter>() != null)
+            //TODO: Il Proiettile ignora tutti gli oggetti tranne coloro che hanno un IShooter.
+            if (Owner.GetOwner() == other.gameObject.GetComponent<IShooter>().GetOwner())
+                return;
+
         // Controlla se l'oggetto con cui ha colliso ha l'interfaccia IDamageable e salva un riferimento di tale interfaccia
             
         IDamageable damageables = other.gameObject.GetComponent<IDamageable>();                 

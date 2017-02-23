@@ -8,7 +8,6 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
 
     public bool UseKeyboard;
     public bool UseController;
-    public bool UseAutoSwitch;
 
     bool IsControllerUsed;
 
@@ -72,23 +71,19 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
 
     void Update()
     {
-        if (UseAutoSwitch)
+        if (Input.GetKeyDown(SwitchInput))
         {
-            if (Input.GetKeyDown(SwitchInput))
-            {
-                if (UseKeyboard == true)
-                    UseKeyboard = false;
-                else
-                    UseKeyboard = true;
-            } 
-            
-        }
-
+            if (UseKeyboard == true)
+                UseKeyboard = false;
+            else
+                UseKeyboard = true;
+        } 
+        
         if (UseKeyboard)
         {
             KeyboardReader();
         }
-        else if(UseController)
+        else
         {
             XInputReader();
         }

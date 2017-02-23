@@ -13,10 +13,22 @@ public class GameManager : MonoBehaviour {
 
     public bool dontDestroyOnLoad;
     //Variabile che contiene il valore della vita del core
-    public float CoreLife;
-    public bool CoreIsAlive;
+    public float coreLife = 10;
+
     public SceneController sceneController;
     PointsManager pointsManager;
+
+    public float CoreLife
+    {
+        get
+        {
+            return coreLife;
+        }
+        set
+        {
+            coreLife = value;
+        }
+    }
 
     private void Awake()
     {
@@ -41,8 +53,17 @@ public class GameManager : MonoBehaviour {
 
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
+
     public void SetKillPoints(PlayerIndex _killer, PlayerIndex _victim)
     {
         pointsManager.UpdateKillPoints(_killer, _victim);
     }
 }
+

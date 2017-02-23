@@ -24,7 +24,6 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
     bool Killable = false;
     bool isAlive = true;                                                    // Indica se l'agente è vivo o morto.
 
-    List<GameObject> DamageablesPrefabs;                                            // Lista di Oggetti passati attraverso unity
     List<IDamageable> Damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable
 
     MovementController movment;
@@ -98,10 +97,9 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
     /// </summary>
     private void LoadIDamageablePrefab()
     {
-
         //WARNING - se l'oggetto che che fa parte della lista di GameObject non ha l'interfaccia IDamageable non farà parte degli oggetti danneggiabili.
 
-        DamageablesPrefabs = PrefabUtily.LoadAllPrefabsWithComponentOfType<IDamageable>("Prefabs", gameObject);
+        List<GameObject> DamageablesPrefabs = PrefabUtily.LoadAllPrefabsWithComponentOfType<IDamageable>("Prefabs", gameObject);
 
         foreach (var k in DamageablesPrefabs)
         {

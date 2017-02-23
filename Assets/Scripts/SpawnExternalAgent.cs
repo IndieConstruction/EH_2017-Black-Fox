@@ -12,7 +12,9 @@ public class SpawnExternalAgent : MonoBehaviour {
     public float angularSpeed;
     public float transSpeed;
 
-	void Start ()
+    List<IDamageable> Damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable
+
+    void Start ()
     {
         target = FindObjectOfType<Core>().transform;
         nextTime = Random.Range(MinTime, MaxTime);
@@ -43,14 +45,30 @@ public class SpawnExternalAgent : MonoBehaviour {
 
     public void InstantiateExternalAgent()
     {
-        GameObject instantiateExternalAgent = Instantiate(LoadIDamageablePrefab(), transform.position, transform.rotation);
-        instantiateExternalAgent.GetComponent<ExternalAgent>().SetTarget(target);
+        GameObject instantiateExternalAgent = Instantiate(LoadExternalAgentPrefab(), transform.position, transform.rotation);
+        instantiateExternalAgent.GetComponent<ExternalAgent>().Initialize(target, Damageables);
+    }
+
+    /// <summary>
+    /// Salva all'interno della lista di oggetti IDamageable, gli oggetti facenti parti della lista DamageablesPrefabs
+    /// </summary>
+    private void LoadIDamageablePrefab()
+    {
+        //WARNING - se l'oggetto che che fa parte della lista di GameObject non ha l'interfaccia IDamageable non farà parte degli oggetti danneggiabili.
+
+        List<GameObject> DamageablesPrefabs = PrefabUtily.LoadAllPrefabsWithComponentOfType<IDamageable>("Prefabs", gameObject);
+
+        foreach (var k in DamageablesPrefabs)
+        {
+            if (k.GetComponent<IDamageable>() != null)
+                Damageables.Add(k.GetComponent<IDamageable>());
+        }
     }
 
     /// <summary>
     /// Ritorna il prefab dell'external agent
     /// </summary>
-    private GameObject LoadIDamageablePrefab()
+    private GameObject LoadExternalAgentPrefab()
     {
         return Resources.Load<GameObject>("Prefabs/ExternalAgents/ExternalAgent");
     }

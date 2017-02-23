@@ -5,34 +5,23 @@ using UnityEngine;
 
 public class Core : MonoBehaviour, IDamageable {
 
-    float life = 10;
-    bool CoreIsAlive = true;
-
-    #region API
-    public float Life
-    {
-        get
-        {
-            return life;
-        }
-        set
-        {
-            life = value;
-        }
-    }
-
-    #endregion
-
     #region Interfacce
 
     public void Damage(float _damage)
     {
-        Life -= _damage;
-        if (Life < 1) {
-            CoreIsAlive = false;
-            GameManager.Instance.sceneController.ReloadCurrentRound();          
+        GameManager.Instance.CoreLife -= _damage;
+        GetComponent<UIDisplay>().SetSliderValue(GameManager.Instance.CoreLife);
+        if (GameManager.Instance.CoreLife < 1) {
+            GetComponent<MeshRenderer>().enabled = false;
+            GetComponent<Collider>().enabled = false;
+            StartCoroutine("ReStart");
         }
-        GameManager.Instance.CoreLife = Life;
+    }
+
+    IEnumerator ReStart()
+    {
+        yield return new WaitForSeconds(3);
+        GameManager.Instance.sceneController.ReloadCurrentRound();
     }
 
     #endregion

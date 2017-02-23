@@ -74,7 +74,7 @@ public class PrefabUtily {
 
         foreach (GameObject item in _listGameObj)
         {
-            if (item.GetType() == _itemToIgnore.GetType())
+            if (item.name == _itemToIgnore.name)
             {
                 itemToRemove = item;
             }

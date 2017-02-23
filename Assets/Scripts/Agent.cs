@@ -8,7 +8,6 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
 
     public bool UseKeyboard;
     public bool UseController;
-    public bool UseAutoSwitch;
 
     bool IsControllerUsed;
 
@@ -17,6 +16,8 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
     GamePadState prevState;
     public PlayerIndex playerIndex;
     //####
+
+    KeyCode SwitchInput;
 
     string Name;
     float life = 10;                                                         // Vita
@@ -30,6 +31,8 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
     PlacePin pinPlacer;
     Shoot shoot;
     GameManager gameManager;
+
+    UIDisplay uiDisplay;
 
     public float fireRate;                                                   // rateo di fuoco in secondi
     float nextFire;
@@ -53,32 +56,38 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
 
     void Start ()
     {
+        uiDisplay = GetComponent<UIDisplay>();
+
         gameManager = GameManager.Instance;
         movment = GetComponent<MovementController>();
         pinPlacer = GetComponent<PlacePin>();
         shoot = GetComponent<Shoot>();
         LoadIDamageablePrefab();
+        if (playerIndex == PlayerIndex.Three)
+        {
+            SwitchInput = KeyCode.F3;
+        } else if (playerIndex == PlayerIndex.Four)
+        {
+            SwitchInput = KeyCode.F4;
+        }
+
     }
 
     void Update()
     {
-        if (UseAutoSwitch)
+        if (Input.GetKeyDown(SwitchInput))
         {
-            if (Input.anyKeyDown)
-            {
+            if (UseKeyboard == true)
+                UseKeyboard = false;
+            else
                 UseKeyboard = true;
-            }
-            else if(IsControllerUsed)
-            {
-                UseController = true;
-            }
-        }
-
+        } 
+        
         if (UseKeyboard)
         {
             KeyboardReader();
         }
-        else if(UseController)
+        else
         {
             XInputReader();
         }
@@ -92,7 +101,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
 
         //WARNING - se l'oggetto che che fa parte della lista di GameObject non ha l'interfaccia IDamageable non farà parte degli oggetti danneggiabili.
 
-        DamageablesPrefabs = PrefabUtily.LoadAllPrefabsWithComponentOfType<IDamageable>("Prefabs", gameObject);      
+        DamageablesPrefabs = PrefabUtily.LoadAllPrefabsWithComponentOfType<IDamageable>("Prefabs", gameObject);
 
         foreach (var k in DamageablesPrefabs)
         {
@@ -206,6 +215,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
         if (isAlive)
         {
             Life -= _damage;
+            uiDisplay.SetSliderValue(Life);
             if (Life == 1)
             {
                 Killable = true;

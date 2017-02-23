@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using XInputDotNetPure;
 
-public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
+public class Agent : MonoBehaviour, IShooter, IDamageable {
 
     public bool UseKeyboard;
     public bool UseController;
@@ -128,13 +128,13 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
         if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_Fire")))                            // shoot
         {
             nextFire = Time.time + fireRate;
-            shooter.ShootBullet(this);
+            shooter.ShootBullet();
             nextFire = Time.time + fireRate;
         }
         else if (Input.GetButton(string.Concat("Key" + (int)playerIndex + "_Fire")) && Time.time > nextFire)       // shoot at certain rate
         {
             nextFire = Time.time + fireRate;
-            shooter.ShootBullet(this);
+            shooter.ShootBullet();
         }
 
         float thrust = Input.GetAxis(string.Concat("Key" + (int)playerIndex + "_Forward"));              // Add thrust   
@@ -165,13 +165,13 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
         if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
         {
             nextFire = Time.time + fireRate;
-            shooter.ShootBullet(this);
+            shooter.ShootBullet();
             nextFire = Time.time + fireRate;
         }
         else if (prevState.Buttons.A == ButtonState.Pressed && state.Buttons.A == ButtonState.Pressed && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
-            shooter.ShootBullet(this);
+            shooter.ShootBullet();
             nextFire = Time.time + fireRate;
         }
 
@@ -197,9 +197,9 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
     /// Ritorna il gameobject a cui è attaccato il component
     /// </summary>
     /// <returns></returns>
-    public Agent GetOwner()
+    public PlayerIndex GetOwner()
     {
-        return this;
+        return playerIndex;
     }
 
     #endregion
@@ -210,35 +210,19 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
     /// </summary>
     /// <param name="_damage">La quantità di danni che subisce</param>
     /// <returns></returns>
-    public void Damage(float _damage)
+    public void Damage(float _damage, PlayerIndex _attacker)
     {
-        if (isAlive)
-        {
-            Life -= _damage;
-            //uiDisplay.SetSliderValue(Life);
-            GameManager.Instance.uiManager.SetSliderValue(playerIndex, Life);
-            if (Life == 1)
-            {
-                Killable = true;
-            }
-            if (Life < 1)
-            {
-                isAlive = false;
-                gameObject.SetActive(false);
-            }
-        }
-    }
+         Life -= _damage;
+         //uiDisplay.SetSliderValue(Life);
+         GameManager.Instance.uiManager.SetSliderValue(playerIndex, Life);
+         
+         if (Life < 1)
+         {
+             gameManager.SetKillPoints(_attacker, playerIndex);
+             gameObject.SetActive(false);
+         }
+    }     
 
-
-    #endregion
-
-    #region IKillable
-
-    public void CheckIfKillable(PlayerIndex _playerKiller)
-    {
-        if(Killable)
-            gameManager.SetKillPoints(_playerKiller, playerIndex);
-    }
 
     #endregion
 

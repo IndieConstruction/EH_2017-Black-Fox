@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XInputDotNetPure;
 
 public class Core : MonoBehaviour, IDamageable {
 
@@ -9,7 +10,7 @@ public class Core : MonoBehaviour, IDamageable {
     
     #region Interfacce
 
-    public void Damage(float _damage)
+    public void Damage(float _damage, PlayerIndex _attacker)
     {
         GameManager.Instance.CoreLife -= _damage;
         FindObjectOfType<UIManager>().SetSliderValue(GameManager.Instance.CoreLife);

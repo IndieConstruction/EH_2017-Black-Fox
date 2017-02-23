@@ -12,9 +12,11 @@ public class UIManager : MonoBehaviour {
     public Slider SliderPlayer4;
     public Slider CoreSlider;
     public Image WindDisplay;
+    public Text TextWindDisplay;
     
     public void SetSliderValue(PlayerIndex _playerIndex, float _life)
     {
+        // TODO: Se sono presenti due Canvas ci saranno dei conflitti
         if (FindObjectOfType<Canvas>() != null)
         {
             if (_playerIndex == PlayerIndex.One)

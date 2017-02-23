@@ -31,7 +31,7 @@ public class PointsManager {
                 item.KillPoints += AddPoints;
                 if(item.KillPoints == pointsToWin)
                 {
-                    
+                    WhoWin(_killer);
                 }
                 break;
             }
@@ -49,9 +49,10 @@ public class PointsManager {
     }
 
 
-    void WhoWin()
+    void WhoWin(PlayerIndex _killer)
     {
         GameManager.Instance.uiManager.WindDisplay.enabled = true;
+        GameManager.Instance.uiManager.TextWindDisplay.text = "Player" + _killer + "\n Ha vinto! "; 
     }
 }
 

@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 
-    IShooter shooter;
+    IShooter Owner;
     float startTime;
     float timeToCount = 5f;
     float Damage = 1;
-    Agent agent;
 
     void Start()
     {
-        agent = shooter.GetOwner();            //Salva all'interno di ownerObj l'Owner (cioé colui che l'ha sparato)
         startTime = Time.time;
     }
 
@@ -27,39 +25,36 @@ public class Projectile : MonoBehaviour {
     private void OnTriggerEnter(Collider other)
     {
         //Se il gameobject con cui è entrato in collisione è diverso da quello che lo ha sparato, allora entra nell'if.
-        if (!other.gameObject.Equals(agent))
+        if (other.gameObject.GetComponent<IShooter>() == null)
+            return;
+        //TODO: Il Proiettile ignora tutti gli oggetti tranne coloro che hanno un IShooter.
+        if (Owner.GetOwner() == other.gameObject.GetComponent<IShooter>().GetOwner())
+            return;
+        
+        // Controlla se l'oggetto con cui ha colliso ha l'interfaccia IDamageable e salva un riferimento di tale interfaccia
+            
+        IDamageable damageables = other.gameObject.GetComponent<IDamageable>();                 
+        if (damageables != null)                                                                
         {
-            // Controlla se l'oggetto con cui ha colliso ha l'interfaccia IDamageable e salva un riferimento di tale interfaccia
-            IKillable canCollecte = other.GetComponent<IKillable>();
-            IDamageable damageables = other.gameObject.GetComponent<IDamageable>();                 
-            if (damageables != null)                                                                
-            {
                 
-                //Controlla se all'interno della lista di oggetti Danneggiabili, contenuta da Owner (chi ha sparato il proiettile)
-                foreach (IDamageable item in shooter.GetDamageable())
-                {
-                    // E' presente l'oggetto con cui il proiettile è entrato in collisione.
-                    if (item.GetType() == damageables.GetType())
-                    {
-                        if (canCollecte != null)
-                        {
-                            canCollecte.CheckIfKillable(agent.playerIndex);
-                        }
-
-                        damageables.Damage(Damage);         // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia e se lo distrugge assegna i punti dell'uccisione all'agente che lo ha ucciso
-                        
-                       
-                        Destroy(gameObject);                //Distrugge il proiettile
-                        break;                              // Ed esce dal foreach.
-                    }
+            //Controlla se all'interno della lista di oggetti Danneggiabili, contenuta da Owner (chi ha sparato il proiettile)
+            foreach (IDamageable item in Owner.GetDamageable())
+            {
+                // E' presente l'oggetto con cui il proiettile è entrato in collisione.
+                if (item.GetType() == damageables.GetType())
+                {  
+                    damageables.Damage(Damage, Owner.GetOwner());         // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia e se lo distrugge assegna i punti dell'uccisione all'agente che lo ha ucciso     
+                    Destroy(gameObject);                //Distrugge il proiettile
+                    break;                              // Ed esce dal foreach.
                 }
             }
         }
+        
     }
 
     //Setta chi è il proprietario del proiettile, cioé chi lo spara.
     public void SetOwner(IShooter _owner)
     {
-        shooter = _owner;
+        Owner = _owner;
     }
 }

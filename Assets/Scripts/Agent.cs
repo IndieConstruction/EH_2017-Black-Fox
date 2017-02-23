@@ -29,10 +29,10 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
 
     MovementController movment;
     PlacePin pinPlacer;
-    Shoot shoot;
+    Shooter shooter;
     GameManager gameManager;
 
-    UIDisplay uiDisplay;
+    //UIManager uiDisplay;
 
     public float fireRate;                                                   // rateo di fuoco in secondi
     float nextFire;
@@ -56,12 +56,12 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
 
     void Start ()
     {
-        uiDisplay = GetComponent<UIDisplay>();
+        //uiDisplay = GetComponent<UIDisplay>();
 
         gameManager = GameManager.Instance;
         movment = GetComponent<MovementController>();
         pinPlacer = GetComponent<PlacePin>();
-        shoot = GetComponent<Shoot>();
+        shooter = GetComponent<Shooter>();
         LoadIDamageablePrefab();
         if (playerIndex == PlayerIndex.Three)
         {
@@ -128,13 +128,13 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
         if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_Fire")))                            // shoot
         {
             nextFire = Time.time + fireRate;
-            shoot.ShootBullet(this);
+            shooter.ShootBullet(this);
             nextFire = Time.time + fireRate;
         }
         else if (Input.GetButton(string.Concat("Key" + (int)playerIndex + "_Fire")) && Time.time > nextFire)       // shoot at certain rate
         {
             nextFire = Time.time + fireRate;
-            shoot.ShootBullet(this);
+            shooter.ShootBullet(this);
         }
 
         float thrust = Input.GetAxis(string.Concat("Key" + (int)playerIndex + "_Forward"));              // Add thrust   
@@ -165,13 +165,13 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
         if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
         {
             nextFire = Time.time + fireRate;
-            shoot.ShootBullet(this);
+            shooter.ShootBullet(this);
             nextFire = Time.time + fireRate;
         }
         else if (prevState.Buttons.A == ButtonState.Pressed && state.Buttons.A == ButtonState.Pressed && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
-            shoot.ShootBullet(this);
+            shooter.ShootBullet(this);
             nextFire = Time.time + fireRate;
         }
 
@@ -215,7 +215,8 @@ public class Agent : MonoBehaviour, IShooter, IDamageable, IKillable {
         if (isAlive)
         {
             Life -= _damage;
-            uiDisplay.SetSliderValue(Life);
+            //uiDisplay.SetSliderValue(Life);
+            GameManager.Instance.uiManager.SetSliderValue(playerIndex, Life);
             if (Life == 1)
             {
                 Killable = true;

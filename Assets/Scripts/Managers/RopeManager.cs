@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(ConfigurableJoint))]
 /// <summary>
 /// Used to manage the rope between the component and the Target position
 /// </summary>
@@ -16,11 +16,20 @@ public class RopeManager : MonoBehaviour
     public float RopeMaxLength = 100000f;                           //Max length of the rope (in Unity's unity)
     public float FiniteElementDensity = 0.01f;                      //Density of Joints per unity (of Unity)
     public float RopeWidth = 100f;                                  //LineRenderer Width
-    public Vector3 SwingAxis = new Vector3(0, 1, 1);                //Sets which axis the Joint will swing
+    public int CollisionLayer = 9;
     private float mass;                                             //Rigidbodies variables
     private float drag;
     private float angularDrag;
     private RigidbodyConstraints constraints = new RigidbodyConstraints();
+    private Vector3 cjAnchor;                                       //Configurable Joint variables
+    private Vector3 cjAxis;
+    private Vector3 cjSecondaryAxis;
+    private ConfigurableJointMotion[] cjMotion = new ConfigurableJointMotion[6];
+    private JointDrive xDrive;
+    private JointDrive yzDrive;
+    private JointProjectionMode projectionMode;
+    private float projectionDistance;
+    private float projectionAngle;
     private List<GameObject> joints = new List<GameObject>();       //Collection of Joints that describe the rope
     private LineRenderer lineRend;                                  //Reference to the LineRenderer
     private int totalJoints = 0;                                    //Total amount of Joints
@@ -39,19 +48,35 @@ public class RopeManager : MonoBehaviour
             else
                 return offSet;
         }
-    }                             //Radius of the SphereCollider in Joints
+    }                           //Radius of the SphereCollider in Joints
 
     private void Awake()
     {
         //Get reference to LineRederer
         lineRend = GetComponent<LineRenderer>();
 
-        //Setup of the joints based onthe the current CharacterJoint and Rigidbody
+        //Setup of the joints based onthe the current ConfigurableJoint and Rigidbody
         Rigidbody rigidOnMe = GetComponent<Rigidbody>();
         mass = rigidOnMe.mass;
         drag = rigidOnMe.drag;
         angularDrag = rigidOnMe.angularDrag;
-        constraints = rigidOnMe.constraints;       
+        constraints = rigidOnMe.constraints;
+
+        ConfigurableJoint cjOnMe = GetComponent<ConfigurableJoint>();
+        cjAnchor = cjOnMe.anchor;
+        cjAxis = cjOnMe.axis;
+        cjSecondaryAxis = cjOnMe.secondaryAxis;
+        cjMotion[0] = cjOnMe.xMotion;
+        cjMotion[1] = cjOnMe.yMotion;
+        cjMotion[2] = cjOnMe.zMotion;
+        cjMotion[3] = cjOnMe.angularXMotion;
+        cjMotion[4] = cjOnMe.angularYMotion;
+        cjMotion[5] = cjOnMe.angularZMotion;
+        xDrive = cjOnMe.xDrive;
+        yzDrive = cjOnMe.angularYZDrive;
+        projectionMode = cjOnMe.projectionMode;
+        projectionDistance = cjOnMe.projectionDistance;
+        projectionAngle = cjOnMe.projectionAngle;
 
         //RopeManager setup
         lineRend.widthMultiplier = RopeWidth;        
@@ -148,20 +173,17 @@ public class RopeManager : MonoBehaviour
     /// <param name="_jointToSetup">The Joint to setup</param>
     void AdjustJointPhysics(GameObject _jointToSetup)
     {
-        HingeJoint currentHJ;
+        ConfigurableJoint currentCJ;
         Rigidbody currentRigid;
 
         //Reference to HingeJoint
-        if (_jointToSetup.GetComponent<HingeJoint>() == null)
-            currentHJ = _jointToSetup.AddComponent<HingeJoint>();
+        if (_jointToSetup.GetComponent<ConfigurableJoint>() == null)
+            currentCJ = _jointToSetup.AddComponent<ConfigurableJoint>();
         else
-            currentHJ = _jointToSetup.GetComponent<HingeJoint>();
+            currentCJ = _jointToSetup.GetComponent<ConfigurableJoint>();
 
         //Reference to Rigidbody (existence assured by the presence of the HingeJoint)
         currentRigid = _jointToSetup.GetComponent<Rigidbody>();
-
-        //Instanciate a JointHolder
-        _jointToSetup.AddComponent<JointHolder>().Init(joints[1].transform.position, distanceOfHolders, StepOfJointHolders);
 
         //Setup of the Rigidbody
         currentRigid.mass = mass;
@@ -169,10 +191,29 @@ public class RopeManager : MonoBehaviour
         currentRigid.angularDrag = angularDrag;
 
         if (_jointToSetup == Target.gameObject)
-            currentHJ.connectedBody = joints[joints.LastIndexOf(Target.gameObject) - 1].GetComponent<Rigidbody>();
+        {
+            //Configurable Joint Setup
+            currentCJ.connectedBody = joints[joints.LastIndexOf(Target.gameObject) - 1].GetComponent<Rigidbody>();
+            
+            currentCJ.anchor = cjAnchor;
+            currentCJ.axis = cjAxis;
+            currentCJ.secondaryAxis = cjSecondaryAxis;
+            currentCJ.xMotion = cjMotion[0];
+            currentCJ.yMotion = cjMotion[1];
+            currentCJ.zMotion = cjMotion[2];
+            currentCJ.angularXMotion = cjMotion[3];
+            currentCJ.angularYMotion = cjMotion[4];
+            currentCJ.angularZMotion = cjMotion[5];
+            currentCJ.xDrive = xDrive;
+            currentCJ.yDrive = yzDrive;
+            currentCJ.projectionMode = projectionMode;
+            currentCJ.projectionDistance = projectionDistance;
+            currentCJ.projectionDistance = projectionAngle;
+        }
+            
 
         //Set the proper layer ("Rope")
-        _jointToSetup.layer = 9;        
+        _jointToSetup.layer = CollisionLayer;        
     }
 
     /// <summary>
@@ -184,7 +225,7 @@ public class RopeManager : MonoBehaviour
     {
         SphereCollider coll;
         Rigidbody currentRigid;
-        HingeJoint currentHJ;
+        ConfigurableJoint currentCJ;
 
         //Reference to SphereCollider
         if (_jointToSetup.GetComponent<SphereCollider>() == null)
@@ -192,32 +233,44 @@ public class RopeManager : MonoBehaviour
         else
             coll = _jointToSetup.GetComponent<SphereCollider>();
 
-        //Reference to HingeJoint
-        if (_jointToSetup.GetComponent<HingeJoint>() == null)
-            currentHJ = _jointToSetup.AddComponent<HingeJoint>();
+        //Reference to ConfigurableJoint
+        if (_jointToSetup.GetComponent<ConfigurableJoint>() == null)
+            currentCJ = _jointToSetup.AddComponent<ConfigurableJoint>();
         else
-            currentHJ = _jointToSetup.GetComponent<HingeJoint>();
+            currentCJ = _jointToSetup.GetComponent<ConfigurableJoint>();
 
         //Reference to Rigidbody
         currentRigid = _jointToSetup.GetComponent<Rigidbody>();
 
-        //Instanciate a JointHolder
-        _jointToSetup.AddComponent<JointHolder>().Init(joints[1].transform.position, distanceOfHolders, StepOfJointHolders);
+        //Configurable Joint Setup        
+        currentCJ.connectedBody = _rbToConnect;
+
+        currentCJ.anchor = cjAnchor;
+        currentCJ.axis = cjAxis;
+        currentCJ.secondaryAxis = cjSecondaryAxis;
+        currentCJ.xMotion = cjMotion[0];
+        currentCJ.yMotion = cjMotion[1];
+        currentCJ.zMotion = cjMotion[2];
+        currentCJ.angularXMotion = cjMotion[3];
+        currentCJ.angularYMotion = cjMotion[4];
+        currentCJ.angularZMotion = cjMotion[5];
+        currentCJ.xDrive = xDrive;
+        currentCJ.yDrive = yzDrive;
+        currentCJ.projectionMode = projectionMode;
+        currentCJ.projectionDistance = projectionDistance;
+        currentCJ.projectionDistance = projectionAngle;
 
         //Setup of the Rigidbody
         currentRigid.mass = mass;
         currentRigid.drag = drag;
         currentRigid.angularDrag = angularDrag;
 
-        //Connection to the proper Rigidbody
-        currentHJ.connectedBody = _rbToConnect;
-
         //Setup of the SphereCollider
         coll.radius = sphereColliderRadius;        
         coll.isTrigger = false;
 
         //Set the proper layer ("Rope")
-        _jointToSetup.layer = 9;
+        _jointToSetup.layer = CollisionLayer;
     }
 
 

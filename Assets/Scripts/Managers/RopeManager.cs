@@ -12,7 +12,7 @@ public class RopeManager : MonoBehaviour
 
     public Transform Target;                                        //Transform of the point to connect to this GameObject
     private Transform origin;                                       //Transform of the point of origin of the Rope (also set as last element of the Rope)
-
+    private Rigidbody anchoredBody;                                 //The Rigidbody connected to the rope
     public float RopeMaxLength = 100000f;                           //Max length of the rope (in Unity's unity)
     public float FiniteElementDensity = 0.01f;                      //Density of Joints per unity (of Unity)
     public float RopeWidth = 100f;                                  //LineRenderer Width
@@ -34,8 +34,6 @@ public class RopeManager : MonoBehaviour
     private LineRenderer lineRend;                                  //Reference to the LineRenderer
     private int totalJoints = 0;                                    //Total amount of Joints
     private float ropeCurrentLength=0;                              //Current length of the rope (in Unity's unity)
-    public float StepOfJointHolders = 0.1f;
-    private float distanceOfHolders = 0;
     
     private float sphereColliderRadius
     {
@@ -54,7 +52,8 @@ public class RopeManager : MonoBehaviour
     {
         //Get reference to LineRederer
         lineRend = GetComponent<LineRenderer>();
-
+        //Get reference to the connected Rigidbody
+        anchoredBody = GetComponent<ConfigurableJoint>().connectedBody;
         //Setup of the joints based onthe the current ConfigurableJoint and Rigidbody
         Rigidbody rigidOnMe = GetComponent<Rigidbody>();
         mass = rigidOnMe.mass;
@@ -92,8 +91,10 @@ public class RopeManager : MonoBehaviour
 
     private void Update()
     {
-        //ISNERIRE LA GESTIONE DELL'ALLUNAMENTO
-        //origin.position = transform.position;
+        if(anchoredBody.velocity.sqrMagnitude > GetComponent<Rigidbody>().velocity.sqrMagnitude)
+        {
+            anchoredBody.AddRelativeForce(anchoredBody.velocity,ForceMode.VelocityChange);
+        }
     }
 
     void LateUpdate()
@@ -120,8 +121,7 @@ public class RopeManager : MonoBehaviour
         int oldJointsAmount = totalJoints;
         //Update of the Joints to fit the needs
         ropeCurrentLength += Vector3.Distance(origin.position, Target.position);
-        distanceOfHolders = (ropeCurrentLength * FiniteElementDensity);
-        totalJoints = (int)distanceOfHolders;
+        totalJoints = (int)(ropeCurrentLength * FiniteElementDensity);
 
         //Update the position of the points for the Line Renderer
         lineRend.numPositions = totalJoints;

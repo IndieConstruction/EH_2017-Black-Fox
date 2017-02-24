@@ -9,8 +9,9 @@ public class ExternalAgent : MonoBehaviour, IDamageable {
     Transform target;
     public float life;
     public float velocity;
+    public float damage;
 
-    List<IDamageable> Damageables;
+    List<IDamageable> damageables;
 
     public float Life
     {
@@ -31,7 +32,7 @@ public class ExternalAgent : MonoBehaviour, IDamageable {
     public void Initialize(Transform _target, List<IDamageable> _damageables)
     {
         target = _target;
-        Damageables = _damageables;
+        damageables = _damageables;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -41,12 +42,12 @@ public class ExternalAgent : MonoBehaviour, IDamageable {
         if (damageable != null)
         {
             //Controlla se all'interno della lista di oggetti Danneggiabili, contenuta da Owner (chi ha sparato il proiettile)
-            foreach (IDamageable item in Damageables)
+            foreach (IDamageable item in damageables)
             {
                 // E' presente l'oggetto con cui il proiettile è entrato in collisione.
                 if (item.GetType() == damageable.GetType())
                 {
-                    //damageable.Damage(Damage, null);        // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia e se lo distrugge assegna i punti dell'uccisione all'agente che lo ha ucciso     
+                    damageable.Damage(damage, null);        // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia e se lo distrugge assegna i punti dell'uccisione all'agente che lo ha ucciso     
                     Destroy(gameObject);                    //Distrugge il proiettile
                     break;                                  // Ed esce dal foreach.
                 }
@@ -62,7 +63,7 @@ public class ExternalAgent : MonoBehaviour, IDamageable {
 
     #region Interface
 
-    public void Damage(float _damage, PlayerIndex _attacker)
+    public void Damage(float _damage, GameObject _attacker)
     {
         Life -= _damage;
         if(Life < 1)

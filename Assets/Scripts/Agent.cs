@@ -24,7 +24,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
     bool Killable = false;
     bool isAlive = true;                                                    // Indica se l'agente è vivo o morto.
 
-    List<IDamageable> Damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable
+    List<IDamageable> damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable
 
     MovementController movment;
     PlacePin pinPlacer;
@@ -104,7 +104,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
         foreach (var k in DamageablesPrefabs)
         {
             if (k.GetComponent<IDamageable>() != null)
-                Damageables.Add(k.GetComponent<IDamageable>());
+                damageables.Add(k.GetComponent<IDamageable>());
         }
     }
 
@@ -188,16 +188,16 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
     /// <returns></returns>
     public List<IDamageable> GetDamageable()
     {
-        return Damageables;
+        return damageables;
     }
 
     /// <summary>
     /// Ritorna il gameobject a cui è attaccato il component
     /// </summary>
     /// <returns></returns>
-    public PlayerIndex GetOwner()
+    public GameObject GetOwner()
     {
-        return playerIndex;
+        return gameObject;
     }
 
     #endregion
@@ -208,7 +208,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
     /// </summary>
     /// <param name="_damage">La quantità di danni che subisce</param>
     /// <returns></returns>
-    public void Damage(float _damage, PlayerIndex _attacker)
+    public void Damage(float _damage, GameObject _attacker)
     {
          Life -= _damage;
          //uiDisplay.SetSliderValue(Life);
@@ -216,8 +216,11 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
          
          if (Life < 1)
          {
-             gameManager.SetKillPoints(_attacker, playerIndex);
-             gameObject.SetActive(false);
+            if (_attacker.GetComponent<Agent>() != null)
+            {
+                gameManager.SetKillPoints(_attacker.GetComponent<Agent>().playerIndex, playerIndex);
+                gameObject.SetActive(false);
+            }
          }
     }     
 

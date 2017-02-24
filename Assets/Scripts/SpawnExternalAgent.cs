@@ -5,12 +5,11 @@ using UnityEngine;
 public class SpawnExternalAgent : MonoBehaviour {
 
     Transform target;
-    float startTime;
     float nextTime;
-    public float MinTime;
-    public float MaxTime;
-    public float AngularSpeed;
-    public float TransSpeed;
+    public float MinTime = 10;
+    public float MaxTime = 20;
+    public float AngularSpeed = 5000;
+    public float TransSpeed = 5000;
 
     List<IDamageable> Damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable
 
@@ -23,7 +22,7 @@ public class SpawnExternalAgent : MonoBehaviour {
 
 	void Update ()
     {
-         if(Time.time >= startTime + nextTime)
+         if(Time.time >= nextTime)
         {
             InstantiateExternalAgent();
             nextTime += Random.Range(MinTime, MaxTime);

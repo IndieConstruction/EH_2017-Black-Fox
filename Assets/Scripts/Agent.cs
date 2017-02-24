@@ -21,7 +21,6 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
 
     string Name;
     float life = 10;                                                         // Vita
-    bool Killable = false;
     bool isAlive = true;                                                    // Indica se l'agente è vivo o morto.
 
     List<IDamageable> damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable

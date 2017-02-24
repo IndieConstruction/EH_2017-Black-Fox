@@ -26,16 +26,12 @@ public class Projectile : MonoBehaviour {
     {
         //Se il gameobject con cui è entrato in collisione è diverso da quello che lo ha sparato, allora entra nell'if.
         if (other.gameObject.GetComponent<IShooter>() != null)
-            //TODO: Il Proiettile ignora tutti gli oggetti tranne coloro che hanno un IShooter.
             if (owner.GetOwner() == other.gameObject.GetComponent<IShooter>().GetOwner())
                 return;
-
-        // Controlla se l'oggetto con cui ha colliso ha l'interfaccia IDamageable e salva un riferimento di tale interfaccia
-            
+        // Controlla se l'oggetto con cui ha colliso ha l'interfaccia IDamageable e salva un riferimento di tale interfaccia           
         IDamageable damageables = other.gameObject.GetComponent<IDamageable>();                 
         if (damageables != null)                                                                
-        {
-                
+        {              
             //Controlla se all'interno della lista di oggetti Danneggiabili, contenuta da Owner (chi ha sparato il proiettile)
             foreach (IDamageable item in owner.GetDamageable())
             {
@@ -47,8 +43,7 @@ public class Projectile : MonoBehaviour {
                     break;                              // Ed esce dal foreach.
                 }
             }
-        }
-        
+        }      
     }
 
     //Setta chi è il proprietario del proiettile, cioé chi lo spara.

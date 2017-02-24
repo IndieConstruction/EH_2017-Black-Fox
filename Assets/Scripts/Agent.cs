@@ -210,17 +210,17 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
     public void Damage(float _damage, GameObject _attacker)
     {
          Life -= _damage;
-         //uiDisplay.SetSliderValue(Life);
-         GameManager.Instance.uiManager.SetSliderValue(playerIndex, Life);
+        //uiDisplay.SetSliderValue(Life);
+        gameManager.uiManager.SetSliderValue(playerIndex, Life);
          
          if (Life < 1)
          {
             if (_attacker.GetComponent<Agent>() != null)
             {
-                gameManager.SetKillPoints(_attacker.GetComponent<Agent>().playerIndex, playerIndex);
-                gameObject.SetActive(false);
+                gameManager.SetKillPoints(_attacker.GetComponent<Agent>().playerIndex, playerIndex); 
             }
-         }
+            gameObject.SetActive(false);
+        }
     }     
 
 

@@ -10,7 +10,7 @@ public class ExternalAgent : MonoBehaviour, IDamageable {
     public float velocity = 6000;
     public float damage = 1;
 
-    List<IDamageable> damageables;
+    List<IDamageable> damageablesList;
 
     public float Life
     {
@@ -31,7 +31,7 @@ public class ExternalAgent : MonoBehaviour, IDamageable {
     public void Initialize(Transform _target, List<IDamageable> _damageables)
     {
         target = _target;
-        damageables = _damageables;
+        damageablesList = _damageables;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -41,7 +41,7 @@ public class ExternalAgent : MonoBehaviour, IDamageable {
         if (damageable != null)
         {
             //Controlla se all'interno della lista di oggetti Danneggiabili, passata da SpawnExternalAgent
-            foreach (IDamageable item in damageables)
+            foreach (IDamageable item in damageablesList)
             {
                 // E' presente l'oggetto con cui l'agente esterno è entrato in collisione.
                 if (item.GetType() == damageable.GetType())
@@ -53,7 +53,7 @@ public class ExternalAgent : MonoBehaviour, IDamageable {
             }
         }
     }
-
+    
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Wall")

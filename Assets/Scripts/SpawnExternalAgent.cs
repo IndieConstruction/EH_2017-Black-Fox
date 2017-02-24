@@ -43,7 +43,7 @@ public class SpawnExternalAgent : MonoBehaviour {
         transform.Translate(TransSpeed * Time.deltaTime, 0, 0);
     }
 
-    public void InstantiateExternalAgent()
+    void InstantiateExternalAgent()
     {
         GameObject instantiateExternalAgent = Instantiate(LoadExternalAgentPrefab(), transform.position, transform.rotation);
         instantiateExternalAgent.GetComponent<ExternalAgent>().Initialize(target, Damageables);

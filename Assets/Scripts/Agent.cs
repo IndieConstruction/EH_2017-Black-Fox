@@ -61,6 +61,8 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
         pinPlacer = GetComponent<PlacePin>();
         shooter = GetComponent<Shooter>();
         LoadIDamageablePrefab();
+        gameManager.SetAgentSpawnPoint(playerIndex, transform);
+
         if (playerIndex == PlayerIndex.Three)
         {
             SwitchInput = KeyCode.F3;
@@ -68,7 +70,6 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
         {
             SwitchInput = KeyCode.F4;
         }
-
     }
 
     void Update()
@@ -219,7 +220,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
             {
                 gameManager.SetKillPoints(_attacker.GetComponent<Agent>().playerIndex, playerIndex); 
             }
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }     
 

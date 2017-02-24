@@ -28,7 +28,7 @@ public class ExternalAgent : MonoBehaviour, IDamageable {
         GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * velocity, ForceMode.Force);
     }
 
-    void Initialize(Transform _target, List<IDamageable> _damageables)
+    public void Initialize(Transform _target, List<IDamageable> _damageables)
     {
         target = _target;
         Damageables = _damageables;

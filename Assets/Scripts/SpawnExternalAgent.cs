@@ -9,8 +9,8 @@ public class SpawnExternalAgent : MonoBehaviour {
     float nextTime;
     public float MinTime;
     public float MaxTime;
-    public float angularSpeed;
-    public float transSpeed;
+    public float AngularSpeed;
+    public float TransSpeed;
 
     List<IDamageable> Damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable
 
@@ -39,8 +39,8 @@ public class SpawnExternalAgent : MonoBehaviour {
         
         Quaternion current = transform.localRotation;
 
-        transform.localRotation = Quaternion.Slerp(current, rotation, angularSpeed * Time.deltaTime);
-        transform.Translate(transSpeed * Time.deltaTime, 0, 0);
+        transform.localRotation = Quaternion.Slerp(current, rotation, AngularSpeed * Time.deltaTime);
+        transform.Translate(TransSpeed * Time.deltaTime, 0, 0);
     }
 
     public void InstantiateExternalAgent()

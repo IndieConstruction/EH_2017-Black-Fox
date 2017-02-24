@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour {
 
-    IShooter Owner;
+    IShooter owner;
     float startTime;
     float timeToCount = 5f;
-    float Damage = 1;
+    float damage = 1;
 
     void Start()
     {
@@ -27,7 +27,7 @@ public class Projectile : MonoBehaviour {
         //Se il gameobject con cui è entrato in collisione è diverso da quello che lo ha sparato, allora entra nell'if.
         if (other.gameObject.GetComponent<IShooter>() != null)
             //TODO: Il Proiettile ignora tutti gli oggetti tranne coloro che hanno un IShooter.
-            if (Owner.GetOwner() == other.gameObject.GetComponent<IShooter>().GetOwner())
+            if (owner.GetOwner() == other.gameObject.GetComponent<IShooter>().GetOwner())
                 return;
 
         // Controlla se l'oggetto con cui ha colliso ha l'interfaccia IDamageable e salva un riferimento di tale interfaccia
@@ -37,12 +37,12 @@ public class Projectile : MonoBehaviour {
         {
                 
             //Controlla se all'interno della lista di oggetti Danneggiabili, contenuta da Owner (chi ha sparato il proiettile)
-            foreach (IDamageable item in Owner.GetDamageable())
+            foreach (IDamageable item in owner.GetDamageable())
             {
                 // E' presente l'oggetto con cui il proiettile è entrato in collisione.
                 if (item.GetType() == damageables.GetType())
                 {  
-                    damageables.Damage(Damage, Owner.GetOwner());         // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia e se lo distrugge assegna i punti dell'uccisione all'agente che lo ha ucciso     
+                    damageables.Damage(damage, owner.GetOwner());         // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia e se lo distrugge assegna i punti dell'uccisione all'agente che lo ha ucciso     
                     Destroy(gameObject);                //Distrugge il proiettile
                     break;                              // Ed esce dal foreach.
                 }
@@ -54,6 +54,6 @@ public class Projectile : MonoBehaviour {
     //Setta chi è il proprietario del proiettile, cioé chi lo spara.
     public void SetOwner(IShooter _owner)
     {
-        Owner = _owner;
+        owner = _owner;
     }
 }

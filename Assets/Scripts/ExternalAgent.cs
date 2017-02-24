@@ -63,7 +63,7 @@ public class ExternalAgent : MonoBehaviour, IDamageable {
 
     #region Interface
 
-    public void Damage(float _damage, PlayerIndex _attacker)
+    void IDamageable.Damage(float _damage, PlayerIndex _attacker)
     {
         Life -= _damage;
         if (Life < 1)

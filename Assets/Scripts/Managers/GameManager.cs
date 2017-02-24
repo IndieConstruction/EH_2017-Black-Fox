@@ -70,20 +70,17 @@ public class GameManager : MonoBehaviour {
 
     public void SetAgentSpawnPoint(PlayerIndex _playerIndex, Transform _spawnpoint)
     {
-        Debug.Log("SetSpawn");
-        //respawnAgent.SetSpawnPoint(_playerIndex, _spawnpoint);
+        respawnAgent.SetSpawnPoint(_playerIndex, _spawnpoint);
     }
 
     public void SetKillPoints(PlayerIndex _killer, PlayerIndex _victim)
     {
-        Debug.Log("SetKill");
         pointsManager.UpdateKillPoints(_killer, _victim);           // setta i punti morte e uccisione
         StartCoroutine("WaitForRespawn", _victim);                  // repawn dell'agente ucciso
     }
 
     IEnumerator WaitForRespawn(PlayerIndex _victim)
     {
-        Debug.Log("Corutine");
         yield return new WaitForSeconds(AgentRespawnTime);   
         respawnAgent.Respawn(_victim);
     }

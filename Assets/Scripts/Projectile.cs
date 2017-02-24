@@ -5,22 +5,7 @@ using UnityEngine;
 public class Projectile : MonoBehaviour {
 
     IShooter owner;
-    float startTime;
-    float timeToCount = 5f;
     float damage = 1;
-
-    void Start()
-    {
-        startTime = Time.time;
-    }
-
-    void Update()
-    {
-        if (Time.time >= startTime + timeToCount)
-        {
-            Destroy(gameObject);
-        }
-    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -46,9 +31,13 @@ public class Projectile : MonoBehaviour {
         }      
     }
 
+    #region Interface
+
     //Setta chi è il proprietario del proiettile, cioé chi lo spara.
     public void SetOwner(IShooter _owner)
     {
         owner = _owner;
     }
+
+    #endregion
 }

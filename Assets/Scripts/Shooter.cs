@@ -5,8 +5,8 @@ using UnityEngine;
  public class Shooter : MonoBehaviour {
 
     public GameObject projectile;
-    public float LifeTime = 10;
-    public float bulletSpeed;
+    public float LifeTime = 10f;
+    public float bulletSpeed = 15000f;
     
 
     /// <summary>

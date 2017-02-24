@@ -6,9 +6,9 @@ using UnityEngine;
 public class ExternalAgent : MonoBehaviour, IDamageable {
 
     Transform target;
-    public float life;
-    public float velocity;
-    public float damage;
+    public float life = 10;
+    public float velocity = 6000;
+    public float damage = 1;
 
     List<IDamageable> damageables;
 
@@ -34,20 +34,20 @@ public class ExternalAgent : MonoBehaviour, IDamageable {
         damageables = _damageables;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
         // Controlla se l'oggetto con cui ha colliso ha l'interfaccia IDamageable e salva un riferimento di tale interfaccia
-        IDamageable damageable = other.gameObject.GetComponent<IDamageable>();
+        IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
         if (damageable != null)
         {
-            //Controlla se all'interno della lista di oggetti Danneggiabili, contenuta da Owner (chi ha sparato il proiettile)
+            //Controlla se all'interno della lista di oggetti Danneggiabili, passata da SpawnExternalAgent
             foreach (IDamageable item in damageables)
             {
-                // E' presente l'oggetto con cui il proiettile è entrato in collisione.
+                // E' presente l'oggetto con cui l'agente esterno è entrato in collisione.
                 if (item.GetType() == damageable.GetType())
                 {
-                    damageable.Damage(damage, null);        // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia e se lo distrugge assegna i punti dell'uccisione all'agente che lo ha ucciso     
-                    Destroy(gameObject);                    //Distrugge il proiettile
+                    damageable.Damage(damage, null);        // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia
+                    Destroy(gameObject);                    //Distrugge l'agente esterno
                     break;                                  // Ed esce dal foreach.
                 }
             }

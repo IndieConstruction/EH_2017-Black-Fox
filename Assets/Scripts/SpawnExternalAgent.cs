@@ -55,7 +55,7 @@ public class SpawnExternalAgent : MonoBehaviour {
     {
         //WARNING - se l'oggetto che che fa parte della lista di GameObject non ha l'interfaccia IDamageable non farà parte degli oggetti danneggiabili.
 
-        List<GameObject> DamageablesPrefabs = PrefabUtily.LoadAllPrefabsWithComponentOfType<IDamageable>("Prefabs", gameObject);
+        List<GameObject> DamageablesPrefabs = PrefabUtily.LoadAllPrefabsWithComponentOfType<IDamageable>("Prefabs", LoadExternalAgentPrefab());
 
         foreach (var k in DamageablesPrefabs)
         {

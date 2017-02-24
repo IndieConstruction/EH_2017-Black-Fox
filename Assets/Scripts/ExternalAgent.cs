@@ -9,16 +9,16 @@ public class ExternalAgent : MonoBehaviour, IDamageable {
     Transform target;
     public float life;
     public float velocity;
-    public float Damage;
 
-    List<IDamageable> Damageables;                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable
+    List<IDamageable> Damageables;
 
     public float Life
     {
         get { return life; }
         set { life = value; }
     }
-	void Update ()
+
+    private void Update()
     {
         MoveTowards();
     }
@@ -28,7 +28,7 @@ public class ExternalAgent : MonoBehaviour, IDamageable {
         GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * velocity, ForceMode.Force);
     }
 
-    public void Initialize(Transform _target, List<IDamageable> _damageables)
+    void Initialize(Transform _target, List<IDamageable> _damageables)
     {
         target = _target;
         Damageables = _damageables;
@@ -52,7 +52,6 @@ public class ExternalAgent : MonoBehaviour, IDamageable {
                 }
             }
         }
-
     }
 
     private void OnTriggerExit(Collider other)
@@ -63,10 +62,10 @@ public class ExternalAgent : MonoBehaviour, IDamageable {
 
     #region Interface
 
-    void IDamageable.Damage(float _damage, PlayerIndex _attacker)
+    public void Damage(float _damage, PlayerIndex _attacker)
     {
         Life -= _damage;
-        if (Life < 1)
+        if(Life < 1)
         {
             Destroy(gameObject);
         }
@@ -74,3 +73,4 @@ public class ExternalAgent : MonoBehaviour, IDamageable {
 
     #endregion
 }
+

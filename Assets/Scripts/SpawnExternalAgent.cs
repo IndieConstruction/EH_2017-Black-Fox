@@ -17,18 +17,17 @@ public class SpawnExternalAgent : MonoBehaviour {
     void Start ()
     {
         target = FindObjectOfType<Core>().transform;
+        startTime = Time.time;
         nextTime = Random.Range(MinTime, MaxTime);
     }
 	
-
 	void Update ()
     {
          if(Time.time >= startTime + nextTime)
         {
             InstantiateExternalAgent();
-            nextTime += Random.Range(MinTime, MaxTime);
+            startTime = nextTime + Random.Range(MinTime, MaxTime);
         }
-
         GravityAround();
     }
 

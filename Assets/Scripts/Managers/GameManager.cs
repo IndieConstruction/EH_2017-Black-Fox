@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour {
     public void SetAgentSpawnPoint(PlayerIndex _playerIndex, Transform _spawnpoint)
     {
         Debug.Log("SetSpawn");
-        respawnAgent.SetSpawnPoint(_playerIndex, _spawnpoint);
+        //respawnAgent.SetSpawnPoint(_playerIndex, _spawnpoint);
     }
 
     public void SetKillPoints(PlayerIndex _killer, PlayerIndex _victim)

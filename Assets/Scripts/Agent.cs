@@ -61,7 +61,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
         pinPlacer = GetComponent<PlacePin>();
         shooter = GetComponent<Shooter>();
         LoadIDamageablePrefab();
-       gameManager.SetAgentSpawnPoint(playerIndex, transform);
+        gameManager.SetAgentSpawnPoint(playerIndex, transform);
 
         if (playerIndex == PlayerIndex.Three)
         {
@@ -74,13 +74,11 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
     public void AddAmmo()
     {
         if(shooter.ammo <50)
-        shooter.ammo += 10;
+            shooter.ammo += 10;
         //ammo=ammo+10;
         if (shooter.ammo > 50)
             shooter.ammo = 50;
     }
-
-
 
     void Update()
     {

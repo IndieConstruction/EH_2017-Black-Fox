@@ -6,6 +6,8 @@ public class PlacePin : MonoBehaviour {
 
     public GameObject PinPrefab;
     public Transform PinSpanw;
+    public float CoolDownTime;
+
     Agent owner;
 
     bool isLeft = false;
@@ -27,13 +29,13 @@ public class PlacePin : MonoBehaviour {
     /// </summary>
     public void placeThePin(Agent _owner)
     {
-        if (Time.time >= prectime + 5.0f)
+        if (Time.time >= prectime + CoolDownTime)
         {
             Instantiate(PinPrefab, PinSpanw.position, PinSpanw.rotation);
             _owner.AddAmmo();
             prectime = Time.time;
         }
-        }
+    }
 
     /// <summary>
     /// Change the position of the PinSpawnPoint

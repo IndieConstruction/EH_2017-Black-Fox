@@ -22,5 +22,5 @@ using UnityEngine;
             Destroy(instantiatedProjectile, LifeTime);
             ammo--;//ammo =ammo -1
         }
-        }
+    }
 }

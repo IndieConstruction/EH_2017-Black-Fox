@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
@@ -15,6 +16,9 @@ public class PointsManager {
     List<PlayerPoints> pointsManager = new List<PlayerPoints>()
         { new PlayerPoints(PlayerIndex.One), new PlayerPoints(PlayerIndex.Two), new PlayerPoints(PlayerIndex.Three), new PlayerPoints(PlayerIndex.Four) };
 
+    
+   
+
     public PointsManager(int _killPoints, int _deathPoints, int _pointsToWin)
     {
         AddPoints = _killPoints;
@@ -29,9 +33,11 @@ public class PointsManager {
             if (item.PlayerIndex == _killer)
             {
                 item.KillPoints += AddPoints;
-                if(item.KillPoints == pointsToWin)
+                Debug.Log(item.KillPoints);
+
+                if (item.KillPoints == pointsToWin)
                 {
-                    WhoWin(_killer);
+                    DisplayTheWinner(_killer);
                 }
                 break;
             }
@@ -45,15 +51,18 @@ public class PointsManager {
                 break;
             }
         }
-        
+
+
     }
 
 
-    void WhoWin(PlayerIndex _killer)
+    void DisplayTheWinner(PlayerIndex _killer)
     {
-        GameManager.Instance.uiManager.WindDisplay.enabled = true;
-        GameManager.Instance.uiManager.TextWindDisplay.text = "Player" + _killer + "\n Ha vinto! "; 
+        GameManager.Instance.uiManager.WindDisplay.gameObject.SetActive(true);
+        GameManager.Instance.uiManager.TextWindDisplay.text = "Player" + _killer + " Ha vinto! ";
     }
+
+
 }
 
 /// <summary>

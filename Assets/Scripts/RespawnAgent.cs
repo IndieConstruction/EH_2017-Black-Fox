@@ -18,16 +18,9 @@ public class RespawnAgent : MonoBehaviour {
 
     public void Respawn(PlayerIndex _playerIndex)
     {
-        //TODO : non entra nell'if
-        Debug.Log("respawn");
         GameObject agent = SearchAgent(_playerIndex);
         Transform spawn = SearchSpawn(_playerIndex);
-        
-        if (agent != null && spawn != null)
-        {
-            Debug.Log(agent.name + " " + spawn.position + " " + spawn.rotation);
-            Instantiate(agent, spawn.position, spawn.rotation);
-        }
+        Instantiate(agent, spawn.position, spawn.rotation);
     }
 
     GameObject SearchAgent(PlayerIndex _playerIndex)
@@ -42,6 +35,7 @@ public class RespawnAgent : MonoBehaviour {
         return null;
     }
 
+
     Transform SearchSpawn(PlayerIndex _playerIndex)
     {
         foreach (AgentSpawn item in AgentsSpawn)
@@ -54,10 +48,12 @@ public class RespawnAgent : MonoBehaviour {
         return null;
     }
 
-
     public void SetSpawnPoint(PlayerIndex _playerIndex, Transform _spawnpoint)
     {
-        AgentsSpawn.Add(new AgentSpawn(_playerIndex, _spawnpoint));
+        GameObject SpawnPoint = new GameObject();
+        SpawnPoint.transform.position = _spawnpoint.position;
+        SpawnPoint.name = ("Spawnpoint" + _playerIndex);
+        AgentsSpawn.Add(new AgentSpawn(_playerIndex, SpawnPoint.transform));
     }
 }
 

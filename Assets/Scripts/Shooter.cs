@@ -7,16 +7,20 @@ using UnityEngine;
     public GameObject projectile;
     public float LifeTime = 10f;
     public float bulletSpeed = 15000f;
-    
+    public int ammo = 0;
 
     /// <summary>
     /// Spara un proiettile
     /// </summary>
     public void ShootBullet()
     {
-        GameObject instantiatedProjectile = Instantiate(projectile, transform.position, transform.rotation);
-        instantiatedProjectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * bulletSpeed, ForceMode.Impulse);
-        instantiatedProjectile.GetComponent<Projectile>().SetOwner(GetComponentInParent<IShooter>());
-        Destroy(instantiatedProjectile, LifeTime);
-    }
+        if (ammo > 0)
+        {
+            GameObject instantiatedProjectile = Instantiate(projectile, transform.position, transform.rotation);
+            instantiatedProjectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * bulletSpeed, ForceMode.Impulse);
+            instantiatedProjectile.GetComponent<Projectile>().SetOwner(GetComponentInParent<IShooter>());
+            Destroy(instantiatedProjectile, LifeTime);
+            ammo--;//ammo =ammo -1
+        }
+        }
 }

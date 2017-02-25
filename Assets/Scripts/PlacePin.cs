@@ -13,7 +13,7 @@ public class PlacePin : MonoBehaviour {
     float xPosValue;
     float xNegValue;
     float xValue;
-
+    float prectime =-5.0f;
     private void Start()
     {
         float pinXvalue = PinSpanw.localPosition.x;
@@ -27,8 +27,13 @@ public class PlacePin : MonoBehaviour {
     /// </summary>
     public void placeThePin(Agent _owner)
     {
-        Instantiate(PinPrefab, PinSpanw.position, PinSpanw.rotation);        
-    }
+        if (Time.time >= prectime + 5.0f)
+        {
+            Instantiate(PinPrefab, PinSpanw.position, PinSpanw.rotation);
+            _owner.AddAmmo();
+            prectime = Time.time;
+        }
+        }
 
     /// <summary>
     /// Change the position of the PinSpawnPoint

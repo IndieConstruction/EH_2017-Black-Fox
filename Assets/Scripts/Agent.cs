@@ -61,7 +61,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
         pinPlacer = GetComponent<PlacePin>();
         shooter = GetComponent<Shooter>();
         LoadIDamageablePrefab();
-        gameManager.SetAgentSpawnPoint(playerIndex, transform);
+       gameManager.SetAgentSpawnPoint(playerIndex, transform);
 
         if (playerIndex == PlayerIndex.Three)
         {
@@ -71,6 +71,16 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
             SwitchInput = KeyCode.F4;
         }
     }
+    public void AddAmmo()
+    {
+        if(shooter.ammo <50)
+        shooter.ammo += 10;
+        //ammo=ammo+10;
+        if (shooter.ammo > 50)
+            shooter.ammo = 50;
+    }
+
+
 
     void Update()
     {
@@ -123,13 +133,8 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
             pinPlacer.placeThePin(this);
         }
 
-        if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_Fire")))                            // shoot
-        {
-            nextFire = Time.time + fireRate;
-            shooter.ShootBullet();
-            nextFire = Time.time + fireRate;
-        }
-        else if (Input.GetButton(string.Concat("Key" + (int)playerIndex + "_Fire")) && Time.time > nextFire)       // shoot at certain rate
+        
+        if (Input.GetButton(string.Concat("Key" + (int)playerIndex + "_Fire")) && Time.time > nextFire)       // shoot at certain rate
         {
             nextFire = Time.time + fireRate;
             shooter.ShootBullet();

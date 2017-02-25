@@ -15,12 +15,13 @@ public class PlacePin : MonoBehaviour {
     float xPosValue;
     float xNegValue;
     float xValue;
-    float prectime =-5.0f;
+    float prectime;
     private void Start()
     {
         float pinXvalue = PinSpanw.localPosition.x;
         xPosValue = xValue = pinXvalue;
         xNegValue = -pinXvalue;
+        prectime = -CoolDownTime;
     }
 
 

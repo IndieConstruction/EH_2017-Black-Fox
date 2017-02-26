@@ -30,6 +30,7 @@ public class RopeManager : MonoBehaviour
     private JointProjectionMode projectionMode;
     private float projectionDistance;
     private float projectionAngle;
+    private bool enableCollision;
     private List<GameObject> joints = new List<GameObject>();       //Collection of Joints that describe the rope
     private LineRenderer lineRend;                                  //Reference to the LineRenderer
     private int totalJoints = 0;                                    //Total amount of Joints
@@ -76,6 +77,7 @@ public class RopeManager : MonoBehaviour
         projectionMode = cjOnMe.projectionMode;
         projectionDistance = cjOnMe.projectionDistance;
         projectionAngle = cjOnMe.projectionAngle;
+        enableCollision = cjOnMe.enableCollision;
 
         //RopeManager setup
         lineRend.widthMultiplier = RopeWidth;        
@@ -189,6 +191,7 @@ public class RopeManager : MonoBehaviour
         currentRigid.mass = mass;
         currentRigid.drag = drag;
         currentRigid.angularDrag = angularDrag;
+        currentRigid.constraints = constraints;
 
         if (_jointToSetup == Target.gameObject)
         {
@@ -209,6 +212,7 @@ public class RopeManager : MonoBehaviour
             currentCJ.projectionMode = projectionMode;
             currentCJ.projectionDistance = projectionDistance;
             currentCJ.projectionDistance = projectionAngle;
+            currentCJ.enableCollision = enableCollision;
         }
             
 
@@ -259,11 +263,13 @@ public class RopeManager : MonoBehaviour
         currentCJ.projectionMode = projectionMode;
         currentCJ.projectionDistance = projectionDistance;
         currentCJ.projectionDistance = projectionAngle;
+        currentCJ.enableCollision = enableCollision;
 
         //Setup of the Rigidbody
         currentRigid.mass = mass;
         currentRigid.drag = drag;
         currentRigid.angularDrag = angularDrag;
+        currentRigid.constraints = constraints;
 
         //Setup of the SphereCollider
         coll.radius = sphereColliderRadius;        

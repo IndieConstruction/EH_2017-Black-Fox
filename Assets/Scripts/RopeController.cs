@@ -12,15 +12,17 @@ public class RopeController : MonoBehaviour
 	List<GameObject> fragments = new List<GameObject>();
     LineRenderer lineRend;
 
-    float CurrentLength = 80;
+    float CurrentLength;
     Vector3 offSet;
 	
 	float fragmentDistance;
 	
 	void Start()
-	{
-        ExtendRope(gameObject);
+    {
         lineRend = GetComponent<LineRenderer>();
+
+        fragments.Add(gameObject);
+        ExtendRope(gameObject);
         lineRend.numPositions = (fragments.Count) + 1;
     }
 
@@ -39,7 +41,7 @@ public class RopeController : MonoBehaviour
         offSet = GetOffSet(_lastPiece.transform);
         int _lastFragment = fragments.LastIndexOf(_lastPiece);
 
-        for (int i = _lastFragment; i < MaxLength -1; i++)
+        for (int i = _lastFragment+1; i < MaxLength -1; i++)
         {
             //Add a new Fragment to the rope
             Vector3 position = fragments[i - 1].transform.position + offSet;

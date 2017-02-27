@@ -35,7 +35,10 @@ public class RopeController : MonoBehaviour
         lineRend.SetPosition(fragments.Count, AnchorPoint.position);
     }
 
-
+    /// <summary>
+    /// Extend the rope toward the AnchorPoint
+    /// </summary>
+    /// <param name="_lastPiece">Current end of the rope</param>
     void ExtendRope(GameObject _lastPiece)
     {
         offSet = GetOffSet(_lastPiece.transform);
@@ -49,21 +52,23 @@ public class RopeController : MonoBehaviour
             fragments.Add(newFragment);
             newFragment.transform.parent = transform;
 
+            ConfigurableJoint joint = newFragment.GetComponent<ConfigurableJoint>();
+            joint.connectedBody = fragments[i - 1].GetComponent<Rigidbody>();
+
             //Is the AnchroPoint closer than the offSet? If so stop building the rope
-            if (fragmentDistance <= offSet.magnitude)
+            if (Vector3.Distance(newFragment.transform.position, AnchorPoint.position) <= fragmentDistance)
             {
                 AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = newFragment.GetComponent<Rigidbody>();
                 break;
             }
-            //Connect the piece to the previus one 
-            if (i > 0)
-            {
-                ConfigurableJoint joint = newFragment.GetComponent<ConfigurableJoint>();
-                joint.connectedBody = fragments[i - 1].GetComponent<Rigidbody>();
-            }          
+                    
         }        
     }
-
+    /// <summary>
+    /// Get the offSet vector toward the AnchorPoint
+    /// </summary>
+    /// <param name="_origin">Starting position</param>
+    /// <returns>OffSet vector</returns>
     Vector3 GetOffSet(Transform _origin)
     {
         //GetDirection
@@ -72,8 +77,8 @@ public class RopeController : MonoBehaviour
 
         //Measure OffSet
         float desiredOffSet = Vector3.Distance(AnchorPoint.position, _origin.position)*Resolution;
-
         float ropeWidth = GetComponent<LineRenderer>().widthMultiplier;
+
         //Return the minimum OffSet
         if (desiredOffSet >= ropeWidth)
         {

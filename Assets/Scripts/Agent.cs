@@ -45,6 +45,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
         shooter = GetComponent<Shooter>();
         LoadIDamageablePrefab();
         gameManager.SetAgentSpawnPoint(playerIndex, transform);
+        gameManager.uiManager.SetSliderValue(playerIndex, Life);
 
         if (playerIndex == PlayerIndex.Three)
         {
@@ -201,11 +202,11 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
     /// <returns></returns>
     public void Damage(float _damage, GameObject _attacker)
     {
-         Life -= _damage;
+        Life -= _damage;
         gameManager.uiManager.SetSliderValue(playerIndex, Life);
          
-         if (Life < 1)
-         {
+        if (Life < 1)
+        {
             if (_attacker.GetComponent<Agent>() != null)
             {
                 gameManager.SetKillPoints(_attacker.GetComponent<Agent>().playerIndex, playerIndex); 

@@ -8,14 +8,13 @@ public class PlacePin : MonoBehaviour {
     public Transform PinSpanw;
     public float CoolDownTime;
 
-    Agent owner;
-
     bool isLeft = false;
     
     float xPosValue;
     float xNegValue;
     float xValue;
     float prectime;
+
     private void Start()
     {
         float pinXvalue = PinSpanw.localPosition.x;
@@ -23,7 +22,6 @@ public class PlacePin : MonoBehaviour {
         xNegValue = -pinXvalue;
         prectime = -CoolDownTime;
     }
-
 
     /// <summary>
     /// Instantiate the pin on the PinSpawn
@@ -33,7 +31,7 @@ public class PlacePin : MonoBehaviour {
         if (Time.time >= prectime + CoolDownTime)
         {
             Instantiate(PinPrefab, PinSpanw.position, PinSpanw.rotation);
-            _owner.AddAmmo();
+            _owner.AddShooterAmmo();
             prectime = Time.time;
         }
     }

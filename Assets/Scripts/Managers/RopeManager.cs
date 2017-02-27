@@ -11,26 +11,13 @@ public class RopeManager : MonoBehaviour
 {
 
     public Transform Target;                                        //Transform of the point to connect to this GameObject
+    public GameObject RopeElement;
     private Transform origin;                                       //Transform of the point of origin of the Rope (also set as last element of the Rope)
     private Rigidbody anchoredBody;                                 //The Rigidbody connected to the rope
     public float RopeMaxLength = 100000f;                           //Max length of the rope (in Unity's unity)
     public float FiniteElementDensity = 0.01f;                      //Density of Joints per unity (of Unity)
     public float RopeWidth = 100f;                                  //LineRenderer Width
     public int CollisionLayer = 9;
-    private float mass;                                             //Rigidbodies variables
-    private float drag;
-    private float angularDrag;
-    private RigidbodyConstraints constraints = new RigidbodyConstraints();
-    private Vector3 cjAnchor;                                       //Configurable Joint variables
-    private Vector3 cjAxis;
-    private Vector3 cjSecondaryAxis;
-    private ConfigurableJointMotion[] cjMotion = new ConfigurableJointMotion[6];
-    private JointDrive xDrive;
-    private JointDrive yzDrive;
-    private JointProjectionMode projectionMode;
-    private float projectionDistance;
-    private float projectionAngle;
-    private bool enableCollision;
     private List<GameObject> joints = new List<GameObject>();       //Collection of Joints that describe the rope
     private LineRenderer lineRend;                                  //Reference to the LineRenderer
     private int totalJoints = 0;                                    //Total amount of Joints
@@ -57,27 +44,8 @@ public class RopeManager : MonoBehaviour
         anchoredBody = GetComponent<ConfigurableJoint>().connectedBody;
         //Setup of the joints based onthe the current ConfigurableJoint and Rigidbody
         Rigidbody rigidOnMe = GetComponent<Rigidbody>();
-        mass = rigidOnMe.mass;
-        drag = rigidOnMe.drag;
-        angularDrag = rigidOnMe.angularDrag;
-        constraints = rigidOnMe.constraints;
 
         ConfigurableJoint cjOnMe = GetComponent<ConfigurableJoint>();
-        cjAnchor = cjOnMe.anchor;
-        cjAxis = cjOnMe.axis;
-        cjSecondaryAxis = cjOnMe.secondaryAxis;
-        cjMotion[0] = cjOnMe.xMotion;
-        cjMotion[1] = cjOnMe.yMotion;
-        cjMotion[2] = cjOnMe.zMotion;
-        cjMotion[3] = cjOnMe.angularXMotion;
-        cjMotion[4] = cjOnMe.angularYMotion;
-        cjMotion[5] = cjOnMe.angularZMotion;
-        xDrive = cjOnMe.xDrive;
-        yzDrive = cjOnMe.angularYZDrive;
-        projectionMode = cjOnMe.projectionMode;
-        projectionDistance = cjOnMe.projectionDistance;
-        projectionAngle = cjOnMe.projectionAngle;
-        enableCollision = cjOnMe.enableCollision;
 
         //RopeManager setup
         lineRend.widthMultiplier = RopeWidth;        
@@ -130,7 +98,10 @@ public class RopeManager : MonoBehaviour
 
         //Increase the length of the rope
         for (int i = oldJointsAmount; i < totalJoints - 2; i++)
-            joints.Add(new GameObject());
+        {
+            GameObject ropeElement = Instantiate(RopeElement);
+            joints.Add(ropeElement);
+        }          
 
         //Set the last of the list as the Target        
         joints.Add(Target.gameObject);
@@ -151,7 +122,7 @@ public class RopeManager : MonoBehaviour
         for (int i = joints.LastIndexOf(origin.gameObject) + 1; i < totalJoints - 2; i++)
         {
             //Create a new joint
-            joints[i].name = ("Joint " + i);
+            joints[i].name = (joints[i].name + i);
 
             pos = (separation * i) + origin.position;
             joints[i].transform.position = pos;
@@ -187,35 +158,12 @@ public class RopeManager : MonoBehaviour
         //Reference to Rigidbody (existence assured by the presence of the HingeJoint)
         currentRigid = _jointToSetup.GetComponent<Rigidbody>();
 
-        //Setup of the Rigidbody
-        currentRigid.mass = mass;
-        currentRigid.drag = drag;
-        currentRigid.angularDrag = angularDrag;
-        currentRigid.constraints = constraints;
-
         if (_jointToSetup == Target.gameObject)
         {
             //Configurable Joint Setup
             currentCJ.connectedBody = joints[joints.LastIndexOf(Target.gameObject) - 1].GetComponent<Rigidbody>();
-            
-            currentCJ.anchor = cjAnchor;
-            currentCJ.axis = cjAxis;
-            currentCJ.secondaryAxis = cjSecondaryAxis;
-            currentCJ.xMotion = cjMotion[0];
-            currentCJ.yMotion = cjMotion[1];
-            currentCJ.zMotion = cjMotion[2];
-            currentCJ.angularXMotion = cjMotion[3];
-            currentCJ.angularYMotion = cjMotion[4];
-            currentCJ.angularZMotion = cjMotion[5];
-            currentCJ.xDrive = xDrive;
-            currentCJ.yDrive = yzDrive;
-            currentCJ.projectionMode = projectionMode;
-            currentCJ.projectionDistance = projectionDistance;
-            currentCJ.projectionDistance = projectionAngle;
-            currentCJ.enableCollision = enableCollision;
         }
-            
-
+        
         //Set the proper layer ("Rope")
         _jointToSetup.layer = CollisionLayer;        
     }
@@ -249,28 +197,6 @@ public class RopeManager : MonoBehaviour
         //Configurable Joint Setup        
         currentCJ.connectedBody = _rbToConnect;
 
-        currentCJ.anchor = cjAnchor;
-        currentCJ.axis = cjAxis;
-        currentCJ.secondaryAxis = cjSecondaryAxis;
-        currentCJ.xMotion = cjMotion[0];
-        currentCJ.yMotion = cjMotion[1];
-        currentCJ.zMotion = cjMotion[2];
-        currentCJ.angularXMotion = cjMotion[3];
-        currentCJ.angularYMotion = cjMotion[4];
-        currentCJ.angularZMotion = cjMotion[5];
-        currentCJ.xDrive = xDrive;
-        currentCJ.yDrive = yzDrive;
-        currentCJ.projectionMode = projectionMode;
-        currentCJ.projectionDistance = projectionDistance;
-        currentCJ.projectionDistance = projectionAngle;
-        currentCJ.enableCollision = enableCollision;
-
-        //Setup of the Rigidbody
-        currentRigid.mass = mass;
-        currentRigid.drag = drag;
-        currentRigid.angularDrag = angularDrag;
-        currentRigid.constraints = constraints;
-
         //Setup of the SphereCollider
         coll.radius = sphereColliderRadius;        
         coll.isTrigger = false;
@@ -278,38 +204,5 @@ public class RopeManager : MonoBehaviour
         //Set the proper layer ("Rope")
         _jointToSetup.layer = CollisionLayer;
     }
-
-
-    #region To Move Into a Library
-    /// <summary>
-    /// Copy a Component into a GameObject
-    /// </summary>
-    /// <typeparam name="T">Type of Component to Copy</typeparam>
-    /// <param name="_original">Original from where copy to</param>
-    /// <param name="_destination">The GameObject that will recive the copy</param>
-    /// <returns></returns>
-    T CopyComponent<T>(T _original, GameObject _destination) where T : Component
-    {
-        System.Type type = _original.GetType();
-        //Check if the Component is already there or have to be instantiated
-        var dst = _destination.GetComponent(type) as T;
-        if (!dst) dst = _destination.AddComponent(type) as T;
-        //Actual copy of fields
-        var fields = type.GetFields();
-        foreach (var field in fields)
-        {
-            if (field.IsStatic) continue;
-            field.SetValue(dst, field.GetValue(_original));
-        }
-        var props = type.GetProperties();
-        foreach (var prop in props)
-        {
-            if (!prop.CanWrite || !prop.CanWrite || prop.Name == "name") continue;
-            prop.SetValue(dst, prop.GetValue(_original, null), null);
-        }
-        return dst as T;
-    }
-
-    #endregion
 }
 

@@ -7,7 +7,9 @@ using UnityEngine;
     public GameObject projectile;
     public float LifeTime = 10f;
     public float bulletSpeed = 15000f;
-    public int ammo = 0;
+    public int AddedAmmo = 10;
+    public int MaxAmmo = 50;
+    int ammo = 0;
 
     /// <summary>
     /// Spara un proiettile
@@ -22,5 +24,13 @@ using UnityEngine;
             Destroy(instantiatedProjectile, LifeTime);
             ammo--;//ammo =ammo -1
         }
+    }
+
+    public void AddAmmo()
+    {
+        if (ammo < MaxAmmo)
+            ammo += AddedAmmo;  //ammo=ammo+AddedAmmo; 
+        else if (ammo > MaxAmmo)
+            ammo = AddedAmmo;
     }
 }

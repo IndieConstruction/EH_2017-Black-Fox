@@ -6,22 +6,17 @@ using XInputDotNetPure;
 
 public class Agent : MonoBehaviour, IShooter, IDamageable {
 
-    public bool UseKeyboard;
-    public bool UseController;
+    string Name;
+    float life = 10;                                                         // Vita
 
-    bool IsControllerUsed;
-
-    // XInput Variables
+    // Variabili per il funzionamento dei controller e della tastiera
+    bool UseKeyboard;
+    bool UseController;
     GamePadState state;
     GamePadState prevState;
     public PlayerIndex playerIndex;
-    //####
-
     KeyCode SwitchInput;
-
-    string Name;
-    float life = 10;                                                         // Vita
-    bool isAlive = true;                                                    // Indica se l'agente è vivo o morto.
+    //####
 
     List<IDamageable> damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable
 
@@ -29,8 +24,6 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
     PlacePin pinPlacer;
     Shooter shooter;
     GameManager gameManager;
-
-    //UIManager uiDisplay;
 
     public float fireRate;                                                   // rateo di fuoco in secondi
     float nextFire;
@@ -44,18 +37,8 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
         set { life = value;}
     }
 
-    /// <summary>
-    /// Stato dell'avatar
-    /// </summary>
-    public bool IsAlive
-    {
-        get { return isAlive; }
-    }
-
     void Start ()
     {
-        //uiDisplay = GetComponent<UIDisplay>();
-
         gameManager = GameManager.Instance;
         movment = GetComponent<MovementController>();
         pinPlacer = GetComponent<PlacePin>();
@@ -70,14 +53,6 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
         {
             SwitchInput = KeyCode.F4;
         }
-    }
-    public void AddAmmo()
-    {
-        if(shooter.ammo <50)
-            shooter.ammo += 10;
-        //ammo=ammo+10;
-        if (shooter.ammo > 50)
-            shooter.ammo = 50;
     }
 
     void Update()
@@ -101,6 +76,14 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
     }
 
     /// <summary>
+    /// Chiama la funzione AddAmmo di shooter
+    /// </summary>
+    public void AddShooterAmmo()
+    {
+        shooter.AddAmmo();
+    }
+
+    /// <summary>
     /// Salva all'interno della lista di oggetti IDamageable, gli oggetti facenti parti della lista DamageablesPrefabs
     /// </summary>
     private void LoadIDamageablePrefab()
@@ -117,6 +100,9 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
     }
 
     #region KeyboardInput
+    /// <summary>
+    /// Controlla l'input da tastiera
+    /// </summary>
     void KeyboardReader()
     {
         if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_PlaceRight")))                       // place right pin
@@ -145,7 +131,9 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
     #endregion
 
     #region XInput
-
+    /// <summary>
+    /// Controlla l'input da controller
+    /// </summary>
     void XInputReader()
     {
         prevState = state;
@@ -214,7 +202,6 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
     public void Damage(float _damage, GameObject _attacker)
     {
          Life -= _damage;
-        //uiDisplay.SetSliderValue(Life);
         gameManager.uiManager.SetSliderValue(playerIndex, Life);
          
          if (Life < 1)

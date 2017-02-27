@@ -11,19 +11,25 @@ public class RopeController : MonoBehaviour
 
 	List<GameObject> fragments = new List<GameObject>();
     LineRenderer lineRend;
-
-    float CurrentLength;
+    Rigidbody rigidOnLast;
+    float ropeWidth;
     Vector3 offSet;
-	
+
 	float fragmentDistance;
 	
 	void Start()
     {
         lineRend = GetComponent<LineRenderer>();
-
+        ropeWidth = GetComponent<LineRenderer>().widthMultiplier;
         fragments.Add(gameObject);
         ExtendRope(gameObject);
-        lineRend.numPositions = (fragments.Count) + 1;
+    }
+
+    private void Update()
+    {
+        //Qui per debug. Cancellerare una volta funzionante
+        if (Input.GetKeyDown(KeyCode.Space))
+            ExtendRope();
     }
 
     private void LateUpdate()
@@ -44,6 +50,13 @@ public class RopeController : MonoBehaviour
         offSet = GetOffSet(_lastPiece.transform);
         int _lastFragment = fragments.LastIndexOf(_lastPiece);
 
+        //Prevent to extend the rope over the MaxLength
+        if (_lastFragment +1 >= MaxLength - 1)
+        {
+            return;
+        }
+
+        //Keep building the rope until the AnchorPoint ore the MaxLength are reached
         for (int i = _lastFragment+1; i < MaxLength -1; i++)
         {
             //Add a new Fragment to the rope
@@ -51,6 +64,9 @@ public class RopeController : MonoBehaviour
             GameObject newFragment = Instantiate(FragmentPrefab, position, Quaternion.identity);
             fragments.Add(newFragment);
             newFragment.transform.parent = transform;
+            newFragment.name = "Fragment_" + i;
+            SphereCollider collider = newFragment.GetComponent<SphereCollider>();
+            collider.radius = ropeWidth/2;
 
             ConfigurableJoint joint = newFragment.GetComponent<ConfigurableJoint>();
             joint.connectedBody = fragments[i - 1].GetComponent<Rigidbody>();
@@ -60,10 +76,17 @@ public class RopeController : MonoBehaviour
             {
                 AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = newFragment.GetComponent<Rigidbody>();
                 break;
-            }
-                    
-        }        
+            }                    
+        }
+
+        if(AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody == null)
+        {
+            AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = fragments[fragments.Count - 1].GetComponent<Rigidbody>();
+            Debug.Log("WARNING: MaxLength not enough to reach " + AnchorPoint.name);
+        }
+        lineRend.numPositions = (fragments.Count) + 1;
     }
+
     /// <summary>
     /// Get the offSet vector toward the AnchorPoint
     /// </summary>
@@ -77,7 +100,6 @@ public class RopeController : MonoBehaviour
 
         //Measure OffSet
         float desiredOffSet = Vector3.Distance(AnchorPoint.position, _origin.position)*Resolution;
-        float ropeWidth = GetComponent<LineRenderer>().widthMultiplier;
 
         //Return the minimum OffSet
         if (desiredOffSet >= ropeWidth)
@@ -91,4 +113,14 @@ public class RopeController : MonoBehaviour
             return dir * desiredOffSet;
         }
     }
+
+    #region API
+    /// <summary>
+    /// Extend the rope if possible
+    /// </summary>
+    public void ExtendRope()
+    {
+        ExtendRope(fragments[fragments.Count - 1]);
+    }
+    #endregion
 }

@@ -1,99 +1,87 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class RopeController : MonoBehaviour
 {
-	public GameObject fragmentPrefab;
+	public GameObject FragmentPrefab;
+    public Transform AnchorPoint;	
+	public int MaxLength = 80;
+    public float Resolution = 0.01f;
+
+	List<GameObject> fragments = new List<GameObject>();
+    LineRenderer lineRend;
+
+    float CurrentLength = 80;
+    Vector3 offSet;
 	
-	int fragmentNum = 80;
-	GameObject[] fragments;
-	
-	float activeFragmentNum = 80;
-	
-	Vector3 interval = new Vector3(0f, 0f, 0.25f);
-	
-	float[] xPositions;
-	float[] yPositions;
-	float[] zPositions;
-	
-	CatmullRomSpline splineX;
-	CatmullRomSpline splineY;
-	CatmullRomSpline splineZ;
-	
-	int splineFactor = 4;
+	float fragmentDistance;
 	
 	void Start()
 	{
-		fragments = new GameObject[fragmentNum];
-		
-		Vector3 position = Vector3.zero;
-		
-		for (int i = 0; i < fragmentNum; i++) {
-			fragments[i] = (GameObject) Instantiate(fragmentPrefab, position, Quaternion.identity);
-			fragments[i].transform.parent = transform;
-			
-			ConfigurableJoint joint = fragments[i].GetComponent<ConfigurableJoint>();
-			if (i > 0) {
-				joint.connectedBody = fragments[i - 1].GetComponent<Rigidbody>();
-			}
-			
-			position += interval;
-		}
-		
-		LineRenderer renderer = GetComponent<LineRenderer>();
-		renderer.numPositions = (fragmentNum - 1) * splineFactor + 1;
-		
-		xPositions = new float[fragmentNum];
-		yPositions = new float[fragmentNum];
-		zPositions = new float[fragmentNum];
-		
-		splineX = new CatmullRomSpline(xPositions);
-		splineY = new CatmullRomSpline(yPositions);
-		splineZ = new CatmullRomSpline(zPositions);
-	}
-	
-	void Update()
-	{
-		float vy = Input.GetAxisRaw("Vertical") * 20f * Time.deltaTime;
-		activeFragmentNum = Mathf.Clamp(activeFragmentNum + vy, 0, fragmentNum);
-		
-		for (int i = 0; i < fragmentNum; i++) {
-			if (i <= fragmentNum - activeFragmentNum) {
-				fragments[i].GetComponent<Rigidbody>().position = Vector3.zero;
-				fragments[i].GetComponent<Rigidbody>().isKinematic = true;
-			} else {
-				fragments[i].GetComponent<Rigidbody>().isKinematic = false;
-			}
-		}
-	}
-	
-	void LateUpdate()
-	{
-		// Copy rigidbody positions to the line renderer
-		LineRenderer renderer = GetComponent<LineRenderer>();
-		
-		// No interpolation
-        //		for (int i = 0; i < fragmentNum; i++) {
-        //			renderer.SetPosition(i, fragments[i].transform.position);
-        //		}
-		
-		for (int i = 0; i < fragmentNum; i++) {
-			Vector3 position = fragments[i].transform.position;
-			xPositions[i] = position.x;
-			yPositions[i] = position.y;
-			zPositions[i] = position.z;
-		}
-		
-		for (int i = 0; i < (fragmentNum - 1) * splineFactor + 1; i++) {
-			renderer.SetPosition(i, new Vector3(
-				splineX.GetValue(i / (float) splineFactor), 
-				splineY.GetValue(i / (float) splineFactor), 
-				splineZ.GetValue(i / (float) splineFactor)));
-		}
-	}
-	
-	void OnGUI()
-	{
-//		GUI.Label(new Rect(0, 0, 100, 100), "" + activeFragmentNum);
-	}
+        ExtendRope(gameObject);
+        lineRend = GetComponent<LineRenderer>();
+        lineRend.numPositions = (fragments.Count) + 1;
+    }
+
+    private void LateUpdate()
+    {
+        for (int i = 0; i < fragments.Count; i++)
+        {
+            lineRend.SetPosition(i, fragments[i].transform.position);
+        }
+        lineRend.SetPosition(fragments.Count, AnchorPoint.position);
+    }
+
+
+    void ExtendRope(GameObject _lastPiece)
+    {
+        offSet = GetOffSet(_lastPiece.transform);
+        int _lastFragment = fragments.LastIndexOf(_lastPiece);
+
+        for (int i = _lastFragment; i < MaxLength -1; i++)
+        {
+            //Add a new Fragment to the rope
+            Vector3 position = fragments[i - 1].transform.position + offSet;
+            GameObject newFragment = Instantiate(FragmentPrefab, position, Quaternion.identity);
+            fragments.Add(newFragment);
+            newFragment.transform.parent = transform;
+
+            //Is the AnchroPoint closer than the offSet? If so stop building the rope
+            if (fragmentDistance <= offSet.magnitude)
+            {
+                AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = newFragment.GetComponent<Rigidbody>();
+                break;
+            }
+            //Connect the piece to the previus one 
+            if (i > 0)
+            {
+                ConfigurableJoint joint = newFragment.GetComponent<ConfigurableJoint>();
+                joint.connectedBody = fragments[i - 1].GetComponent<Rigidbody>();
+            }          
+        }        
+    }
+
+    Vector3 GetOffSet(Transform _origin)
+    {
+        //GetDirection
+        Vector3 dir = AnchorPoint.position - _origin.position;
+        dir = dir.normalized;
+
+        //Measure OffSet
+        float desiredOffSet = Vector3.Distance(AnchorPoint.position, _origin.position)*Resolution;
+
+        float ropeWidth = GetComponent<LineRenderer>().widthMultiplier;
+        //Return the minimum OffSet
+        if (desiredOffSet >= ropeWidth)
+        {
+            fragmentDistance = ropeWidth;
+            return dir * ropeWidth;
+        }
+        else
+        {
+            fragmentDistance = desiredOffSet;
+            return dir * desiredOffSet;
+        }
+    }
 }

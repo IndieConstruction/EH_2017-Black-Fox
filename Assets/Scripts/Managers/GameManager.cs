@@ -68,6 +68,18 @@ public class GameManager : MonoBehaviour {
         }
     }
 
+    public void SliderValueUpdate(PlayerIndex _playerIndex, float _life)
+    {
+        uiManager.SetSliderValue(_playerIndex, _life);
+    }
+
+    public void ChangeScene()
+    {
+        sceneController.LoadScene(1);
+        uiManager.GameCanvasState(true);
+        uiManager.MenuCanvasState(false);
+    }
+
     public void SetAgentSpawnPoint(PlayerIndex _playerIndex, Transform _spawnpoint)
     {
         respawnAgent.SetSpawnPoint(_playerIndex, _spawnpoint);

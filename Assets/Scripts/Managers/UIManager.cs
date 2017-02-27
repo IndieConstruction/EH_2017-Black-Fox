@@ -13,7 +13,9 @@ public class UIManager : MonoBehaviour {
     public Slider CoreSlider;
     public Image WindDisplay;
     public Text TextWindDisplay;
-    
+    public Canvas CanvasMenu;
+    public Canvas CanvasGame;
+
     public void SetSliderValue(PlayerIndex _playerIndex, float _life)
     {
         // TODO: Se sono presenti due Canvas ci saranno dei conflitti
@@ -45,5 +47,15 @@ public class UIManager : MonoBehaviour {
     {
         if (FindObjectOfType<Canvas>() != null)
             CoreSlider.value = _life / 10;
+    }
+
+    public void MenuCanvasState(bool _value)
+    {
+        CanvasMenu.enabled = _value;
+    }
+
+    public void GameCanvasState(bool _value)
+    {
+        CanvasGame.enabled = _value;
     }
 }

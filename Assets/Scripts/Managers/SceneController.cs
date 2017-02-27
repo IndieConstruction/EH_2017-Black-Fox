@@ -19,10 +19,9 @@ public class SceneController : MonoBehaviour {
 
     }
 
-    public void OpenTestScene()
+    public void LoadScene(int _number)
     {
-        Debug.Log("openScene");
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(_number);
     }
 
     #endregion

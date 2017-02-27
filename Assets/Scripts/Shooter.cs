@@ -9,7 +9,7 @@ using UnityEngine;
     public float bulletSpeed = 15000f;
     public int AddedAmmo = 10;
     public int MaxAmmo = 50;
-    int ammo = 0;
+    public int ammo = 0;
 
     /// <summary>
     /// Spara un proiettile

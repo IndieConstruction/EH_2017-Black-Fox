@@ -5,38 +5,14 @@ using UnityEngine.UI;
 
 public class ReferencesToGM : MonoBehaviour {
 
-    List<Slider> SliderInChildren;
-    Image WindDislay;
-    Text textToWin;
-    UIManager uiManager;
+    Slider[] SliderInChildren;
 
-    public Slider SliderPlayer1;
-    public Slider SliderPlayer2;
-    public Slider SliderPlayer3;
-    public Slider SliderPlayer4;
-    public Slider CoreSlider;
-    public Image WindDisplay;
-    public Text TextWindDisplay;
-
-    // Use this for initialization
-    void Awake ()
+    private void Start()
     {
-        uiManager = GameManager.Instance.GetUIManager();
-        SetUIManager();
-    }
-	
-    public void SetUIManager()
-    {
-        uiManager.SliderPlayer1 = SliderPlayer1;
-        uiManager.SliderPlayer2 = SliderPlayer2;
-        uiManager.SliderPlayer3 = SliderPlayer3;
-        uiManager.SliderPlayer4 = SliderPlayer4;
-        uiManager.CoreSlider = CoreSlider;
-        uiManager.WindDisplay = WindDisplay;
-        uiManager.TextWindDisplay = TextWindDisplay;
+        FindComponentsInChildren();
     }
 
-    /*
+    
     void FindComponentsInChildren()
     {
         SliderInChildren = GetComponentsInChildren<Slider>();
@@ -44,47 +20,25 @@ public class ReferencesToGM : MonoBehaviour {
         {
             if (item.name == "SliderP1")
             {
-                uiManager.SliderPlayer1 = item;
+                GameManager.Instance.uiManager.SliderPlayer1 = item;
             }
             if (item.name == "SliderP2")
             {
-                uiManager.SliderPlayer2 = item;
+                GameManager.Instance.uiManager.SliderPlayer2 = item;
             }
             if (item.name == "SliderP3")
             {
-                uiManager.SliderPlayer3 = item;
+                GameManager.Instance.uiManager.SliderPlayer3 = item;
             }
             if (item.name == "SliderP4")
             {
-                uiManager.SliderPlayer4 = item;
+                GameManager.Instance.uiManager.SliderPlayer4 = item;
             }
             if (item.name == "SliderCore")
             {
-                uiManager.CoreSlider = item;
+                GameManager.Instance.uiManager.CoreSlider = item;
             }
         }
-
-        WindDislay = GetComponentsInChildren<Image>();
-
-        foreach (var item in WindDislay)
-        {
-            if (item.name == "WindDisplay")
-            {
-                uiManager.WindDisplay = item;
-            }
-        }
-
-        textToWin = GetComponentsInChildren<Text>();
-        foreach (var item in textToWin)
-        {
-            if (item.name == "TextToWin")
-            {
-                uiManager.TextWindDisplay = item;
-            }
-        }
-
     }
-
-    */
-
+    
 }

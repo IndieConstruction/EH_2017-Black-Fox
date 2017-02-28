@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour {
     SceneController sceneController;
     PointsManager pointsManager;
     RespawnAgent respawnAgent;
-    UIManager uiManager;
+    public UIManager uiManager;
 
     float coreLife;                 // vita del Core
 

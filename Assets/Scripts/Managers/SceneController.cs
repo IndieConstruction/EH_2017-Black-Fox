@@ -11,10 +11,8 @@ public class SceneController : MonoBehaviour {
 
     public void ReloadCurrentRound()
     {  
-        string SceneName = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(SceneName,LoadSceneMode.Single);
-
-        //Assegna agli Avatar la vita che avevano all'inizion del round che hanno appena perso.
+        int SceneNumber = SceneManager.GetActiveScene().buildIndex;
+        LoadScene(SceneNumber);
     }
 
     public void LoadScene(int _number)

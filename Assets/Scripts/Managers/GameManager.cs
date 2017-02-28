@@ -52,9 +52,9 @@ public class GameManager : MonoBehaviour {
         
     }
 
-    // Use this for initialization
-    void Start () {
-        //core = FindObjectOfType<Core>();
+
+    void Start ()
+    {
         uiManager = GetComponent<UIManager>();
         pointsManager = new PointsManager(KillPoint, DeathPoint, PointsToWin);
         respawnAgent = GetComponent<RespawnAgent>();

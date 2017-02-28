@@ -2,11 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using XInputDotNetPure;
 
 public class Core : MonoBehaviour, IDamageable {
 
-    //public float Life;
+    public float Life;
     
     #region Interfacce
 
@@ -24,7 +23,7 @@ public class Core : MonoBehaviour, IDamageable {
 
     
 
-    void PassoValoreVita()
+    void SetGameManagerCoreLife()
     {
         // Passo il valore della mia vita al GameManager
     }

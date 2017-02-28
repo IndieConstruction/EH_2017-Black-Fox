@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class _MovementForRopes : MovementController {
 
-    Rigidbody Rigid;
+    Rigidbody rigid;
 
     private void Start()
     {
-        Rigid = GetComponent<Rigidbody>();
+        rigid = GetComponent<Rigidbody>();
     }
     // Update is called once per frame
     void Update () {
-        Rigid.AddRelativeForce(Vector3.forward * Input.GetAxis("Vertical") * MovmentSpeed, ForceMode.Force);
-        Rigid.AddRelativeTorque(Vector3.up * RotationSpeed * Input.GetAxis("Horizontal") * Time.deltaTime, ForceMode.Acceleration);
+        rigid.AddRelativeForce(Vector3.forward * Input.GetAxis("Vertical") * MovmentSpeed, ForceMode.Force);
+        rigid.AddRelativeTorque(Vector3.up * RotationSpeed * Input.GetAxis("Horizontal") * Time.deltaTime, ForceMode.Acceleration);
     }
 }

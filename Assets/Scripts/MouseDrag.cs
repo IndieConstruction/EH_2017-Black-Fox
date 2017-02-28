@@ -28,7 +28,7 @@ public class MouseDrag : MonoBehaviour
 			Vector3 point = new Vector3(Input.mousePosition.x, Input.mousePosition.y, screenPoint.z);
 			Vector3 dest = Camera.main.ScreenToWorldPoint(point) + offset;
 			
-			GetComponent<Rigidbody>().AddForce((dest - GetComponent<Rigidbody>().position) * 50f);
+			GetComponent<Rigidbody>().AddForce((dest - GetComponent<Rigidbody>().position) * 50f, ForceMode.Force);
 			GetComponent<Rigidbody>().velocity *= 0.8f;
 		}
 	}

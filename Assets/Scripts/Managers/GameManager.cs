@@ -82,8 +82,6 @@ public class GameManager : MonoBehaviour {
     public void ChangeScene()
     {
         sceneController.LoadScene(1);
-        uiManager.GameCanvasState(true);
-        uiManager.MenuCanvasState(false);
     }
 
     public void ReloadScene()

@@ -11,7 +11,6 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
 
     // Variabili per il funzionamento dei controller e della tastiera
     bool UseKeyboard;
-    bool UseController;
     GamePadState state;
     GamePadState prevState;
     public PlayerIndex playerIndex;

@@ -5,25 +5,38 @@ using UnityEngine.UI;
 
 public class ReferencesToGM : MonoBehaviour {
 
-    Slider[] SliderInChildren;
-    Image[] WindDislay;
-    Text[] textToWin;
+    List<Slider> SliderInChildren;
+    Image WindDislay;
+    Text textToWin;
     UIManager uiManager;
 
+    public Slider SliderPlayer1;
+    public Slider SliderPlayer2;
+    public Slider SliderPlayer3;
+    public Slider SliderPlayer4;
+    public Slider CoreSlider;
+    public Image WindDisplay;
+    public Text TextWindDisplay;
+
     // Use this for initialization
-    void Start () {
+    void Awake ()
+    {
         uiManager = GameManager.Instance.GetUIManager();
-        FindComponentsInChildren();
+        SetUIManager();
     }
 	
-	// Update is called once per frame
-	void Update () {
-		if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Debug.Log(SliderInChildren.Length);
-        }
-	}
+    public void SetUIManager()
+    {
+        uiManager.SliderPlayer1 = SliderPlayer1;
+        uiManager.SliderPlayer2 = SliderPlayer2;
+        uiManager.SliderPlayer3 = SliderPlayer3;
+        uiManager.SliderPlayer4 = SliderPlayer4;
+        uiManager.CoreSlider = CoreSlider;
+        uiManager.WindDisplay = WindDisplay;
+        uiManager.TextWindDisplay = TextWindDisplay;
+    }
 
+    /*
     void FindComponentsInChildren()
     {
         SliderInChildren = GetComponentsInChildren<Slider>();
@@ -71,5 +84,7 @@ public class ReferencesToGM : MonoBehaviour {
         }
 
     }
+
+    */
 
 }

@@ -7,7 +7,8 @@ using XInputDotNetPure;
 public class Agent : MonoBehaviour, IShooter, IDamageable {
 
     string Name;
-    float life = 10;                                                         // Vita
+    float life = 10;                                // Vita
+    bool MustSetTheSlider = true;                   
 
     // Variabili per il funzionamento dei controller e della tastiera
     bool UseKeyboard;
@@ -44,7 +45,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
         shooter = GetComponent<Shooter>();
         LoadIDamageablePrefab();
         gameManager.SetAgentSpawnPoint(playerIndex, transform);
-        gameManager.SliderValueUpdate(playerIndex, Life);
+        //gameManager.SliderValueUpdate(playerIndex, Life);
 
         if (playerIndex == PlayerIndex.Three)
         {
@@ -58,6 +59,15 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
 
     void Update()
     {
+        ///Dato il problema che quando entra nello start, ancora non sono stati passati i riferimenti delle slider allo UIManager
+        /// questo fa guadangnare il tempo necessario perchè lo UIManager possa riempire i riferimenti così che Agent li possa usare
+        if (MustSetTheSlider == true)
+        {
+            gameManager.SliderValueUpdate(playerIndex, Life);
+            MustSetTheSlider = false;
+        }
+
+
         if (Input.GetKeyDown(SwitchInput))
         {
             if (UseKeyboard == true)

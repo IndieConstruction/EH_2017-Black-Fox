@@ -48,9 +48,9 @@ public class GameManager : MonoBehaviour {
 
     void Start ()
     {
-        uiManager = GetComponent<UIManager>();
         pointsManager = new PointsManager(KillPoint, DeathPoint, PointsToWin);
         respawnAgent = GetComponent<RespawnAgent>();
+        uiManager = GetComponent<UIManager>();
     }
 
     private void Update()

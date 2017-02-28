@@ -17,8 +17,6 @@ public class PointsManager {
         { new PlayerPoints(PlayerIndex.One), new PlayerPoints(PlayerIndex.Two), new PlayerPoints(PlayerIndex.Three), new PlayerPoints(PlayerIndex.Four) };
 
     
-   
-
     public PointsManager(int _killPoints, int _deathPoints, int _pointsToWin)
     {
         AddPoints = _killPoints;
@@ -51,18 +49,12 @@ public class PointsManager {
                 break;
             }
         }
-
-
     }
 
-
-    void DisplayTheWinner(PlayerIndex _killer)
+    void DisplayTheWinner(PlayerIndex _playerIndex)
     {
-        GameManager.Instance.uiManager.WindDisplay.gameObject.SetActive(true);
-        GameManager.Instance.uiManager.TextWindDisplay.text = "Player" + _killer + " Ha vinto! ";
+        GameManager.Instance.DisplayWinnerPlayer(_playerIndex);
     }
-
-
 }
 
 /// <summary>

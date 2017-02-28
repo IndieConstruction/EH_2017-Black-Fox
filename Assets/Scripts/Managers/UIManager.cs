@@ -43,7 +43,7 @@ public class UIManager : MonoBehaviour {
         }
     }
 
-    public void SetSliderValue(float _life)
+    public void SetCoreSliderValue(float _life)
     {
         if (FindObjectOfType<Canvas>() != null)
             CoreSlider.value = _life / 10;

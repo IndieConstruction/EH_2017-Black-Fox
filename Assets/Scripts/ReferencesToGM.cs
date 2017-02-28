@@ -6,9 +6,13 @@ using UnityEngine.UI;
 public class ReferencesToGM : MonoBehaviour {
 
     Slider[] SliderInChildren;
+    public Image windDisplay;
+    public Text textofWin;
+    UIManager uiManager;
 
     private void Start()
     {
+        uiManager = GameManager.Instance.GetUIManager();
         FindComponentsInChildren();
     }
 
@@ -20,25 +24,28 @@ public class ReferencesToGM : MonoBehaviour {
         {
             if (item.name == "SliderP1")
             {
-                GameManager.Instance.uiManager.SliderPlayer1 = item;
+                uiManager.SliderPlayer1 = item;
             }
             if (item.name == "SliderP2")
             {
-                GameManager.Instance.uiManager.SliderPlayer2 = item;
+                uiManager.SliderPlayer2 = item;
             }
             if (item.name == "SliderP3")
             {
-                GameManager.Instance.uiManager.SliderPlayer3 = item;
+                uiManager.SliderPlayer3 = item;
             }
             if (item.name == "SliderP4")
             {
-                GameManager.Instance.uiManager.SliderPlayer4 = item;
+                uiManager.SliderPlayer4 = item;
             }
             if (item.name == "SliderCore")
             {
-                GameManager.Instance.uiManager.CoreSlider = item;
+                uiManager.CoreSlider = item;
             }
         }
+
+        uiManager.WindDisplay = windDisplay;
+
+        uiManager.TextWindDisplay = textofWin;
     }
-    
 }

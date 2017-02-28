@@ -13,6 +13,11 @@ public class Projectile : MonoBehaviour {
         if (other.gameObject.GetComponent<IShooter>() != null)
             if (owner.GetOwner() == other.gameObject.GetComponent<IShooter>().GetOwner())
                 return;
+
+        //Se collide con un perno si distrugge
+        if (other.gameObject.layer == 8)
+            Destroy(gameObject);
+
         // Controlla se l'oggetto con cui ha colliso ha l'interfaccia IDamageable e salva un riferimento di tale interfaccia           
         IDamageable damageables = other.gameObject.GetComponent<IDamageable>();                 
         if (damageables != null)                                                                

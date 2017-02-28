@@ -57,7 +57,7 @@ public class RopeController : MonoBehaviour
         }
 
         //Keep building the rope until the AnchorPoint ore the MaxLength are reached
-        for (int i = _lastFragment+1; i < MaxLength -1; i++)
+        for (int i = _lastFragment+1; i <MaxLength -1; i++)
         {
             //Add a new Fragment to the rope
             Vector3 position = fragments[i - 1].transform.position + offSet;

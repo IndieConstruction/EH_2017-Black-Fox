@@ -50,7 +50,7 @@ public class RopeController : MonoBehaviour
         offSet = GetOffSet(_lastPiece.transform);
         int _lastFragment = fragments.LastIndexOf(_lastPiece);
 
-        //Prevent to extend the rope over the MaxLength
+        //Prevent to extend the rope over MaxLength
         if (_lastFragment +1 >= MaxLength - 1)
         {
             return;

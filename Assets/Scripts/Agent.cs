@@ -50,7 +50,8 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
         if (playerIndex == PlayerIndex.Three)
         {
             SwitchInput = KeyCode.F3;
-        } else if (playerIndex == PlayerIndex.Four)
+        }
+        else if (playerIndex == PlayerIndex.Four)
         {
             SwitchInput = KeyCode.F4;
         }

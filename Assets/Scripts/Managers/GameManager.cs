@@ -112,5 +112,14 @@ public class GameManager : MonoBehaviour {
         respawnAgent.Respawn(_victim);
     }
     #endregion
+
+    /// <summary>
+    /// permette ad un altra classe di salvarsi il riferimento allo UIManager tramite l'Instance del GameManager
+    /// </summary>
+    /// <returns></returns>
+    public UIManager GetUIManager()
+    {
+        return uiManager;
+    }
 }
 

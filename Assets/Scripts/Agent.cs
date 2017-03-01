@@ -66,10 +66,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
 
         if (Input.GetKeyDown(SwitchInput))
         {
-            if (UseKeyboard == true)
-                UseKeyboard = false;
-            else
-                UseKeyboard = true;
+            UseKeyboard = !UseKeyboard;
         } 
         
         if (UseKeyboard)

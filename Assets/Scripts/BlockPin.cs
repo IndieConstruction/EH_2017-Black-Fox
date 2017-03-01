@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow_BlockPin : MonoBehaviour {
+public class BlockPin : MonoBehaviour {
 
     private void OnTriggerStay(Collider other)
     {

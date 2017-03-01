@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour {
 
-    public float Force = 100000;
+    public float Force = 500000;
 
 
     private void OnTriggerStay(Collider other)

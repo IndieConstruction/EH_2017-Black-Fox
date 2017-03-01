@@ -8,6 +8,7 @@ public class PlacePin : MonoBehaviour {
     public Transform PinSpanw;
     public float CoolDownTime;
 
+    public bool CanPlace = true;
     bool isLeft = false;
     
     float xPosValue;
@@ -28,7 +29,7 @@ public class PlacePin : MonoBehaviour {
     /// </summary>
     public void placeThePin(Agent _owner)
     {
-        if (Time.time >= prectime + CoolDownTime)
+        if (Time.time >= prectime + CoolDownTime && CanPlace == true)
         {
             Instantiate(PinPrefab, PinSpanw.position, PinSpanw.rotation);
             _owner.AddShooterAmmo();

@@ -13,15 +13,7 @@ public class Arrow : MonoBehaviour {
         {
             Debug.Log("collisione");
             other.GetComponent<Rigidbody>().AddForce(transform.forward * Force, ForceMode.Impulse);
-            other.GetComponent<PlacePin>().enabled = false;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.GetComponent<Agent>() != null)
-        {
-            other.GetComponent<PlacePin>().enabled = true;
+            
         }
     }
 }

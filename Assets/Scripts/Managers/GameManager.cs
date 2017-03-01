@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour {
     SceneController sceneController;
     PointsManager pointsManager;
     RespawnAgent respawnAgent;
-    UIManager uiManager;
+    GameUIController gameUI;
 
     float coreLife;                 // vita del Core
 
@@ -42,15 +42,14 @@ public class GameManager : MonoBehaviour {
             Destroy(gameObject);
         }
         
-        sceneController = FindObjectOfType<SceneController>();     
+        sceneController = FindObjectOfType<SceneController>();
     }
-
 
     void Start ()
     {
         pointsManager = new PointsManager(KillPoint, DeathPoint, PointsToWin);
         respawnAgent = GetComponent<RespawnAgent>();
-        uiManager = GetComponent<UIManager>();
+        
     }
 
     private void Update()
@@ -60,28 +59,39 @@ public class GameManager : MonoBehaviour {
             Application.Quit();
         }
     }
-    #region UIManager
+    #region GameUIController
+    public void SetGameUIController(GameUIController _gameUI)
+    {
+        gameUI = _gameUI;
+    }
+
+    public GameUIController GetGameUIController()
+    {
+        return gameUI;
+    }
+
+
     public void SliderValueUpdate(PlayerIndex _playerIndex, float _life)
     {
-        uiManager.SetSliderValue(_playerIndex, _life);
+        gameUI.SetSliderValue(_playerIndex, _life);
     }
 
     public void CoreSliderValueUpdate(float _life)
     {
-        uiManager.SetCoreSliderValue(_life);
+        gameUI.SetCoreSliderValue(_life);
     }
 
     public void DisplayWinnerPlayer(PlayerIndex _playerIndex)
     {
-        uiManager.WindDisplay.gameObject.SetActive(true);
-        uiManager.TextWindDisplay.text = "Player" + _playerIndex + " Ha vinto! ";
+        gameUI.WindDisplay.gameObject.SetActive(true);
+        gameUI.TextWindDisplay.text = "Player" + _playerIndex + " Ha vinto! ";
     }
     #endregion
 
     #region SceneController
     public void ChangeScene()
     {
-        sceneController.LoadScene(1);
+        sceneController.LoadScene(1, false);
     }
 
     public void ReloadScene()
@@ -110,14 +120,5 @@ public class GameManager : MonoBehaviour {
         respawnAgent.Respawn(_victim);
     }
     #endregion
-
-    /// <summary>
-    /// permette ad un altra classe di salvarsi il riferimento allo UIManager tramite l'Instance del GameManager
-    /// </summary>
-    /// <returns></returns>
-    public UIManager GetUIManager()
-    {
-        return uiManager;
-    }
 }
 

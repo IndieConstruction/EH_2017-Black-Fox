@@ -8,11 +8,11 @@ public class ReferencesToGM : MonoBehaviour {
     Slider[] SliderInChildren;
     public Image windDisplay;
     public Text textofWin;
-    UIManager uiManager;
+    GameUIController uiManager;
 
     private void Start()
     {
-        uiManager = GameManager.Instance.GetUIManager();
+        //uiManager = GameManager.Instance.GetUIManager();
         FindComponentsInChildren();
     }
 

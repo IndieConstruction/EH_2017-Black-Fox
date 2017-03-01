@@ -20,6 +20,14 @@ public class SceneController : MonoBehaviour {
         StartCoroutine(ReStart(_number));
     }
 
+    public void LoadScene(int _number, bool _useTime)
+    {
+        if(_useTime)
+            StartCoroutine(ReStart(_number));
+        else
+            SceneManager.LoadScene(_number);
+    }
+
     IEnumerator ReStart(int _number)
     {
         yield return new WaitForSeconds(WaitForSeconds);

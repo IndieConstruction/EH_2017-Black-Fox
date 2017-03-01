@@ -7,7 +7,6 @@ public class Core : MonoBehaviour, IDamageable {
 
     float life;
     public float MaxLife = 10;              // La vita massima che può avere il Core e che viene impostata al riavvio di un round perso
-    bool MustSetTheSlider = true;
     GameManager gameManager;
 
     public float Life
@@ -23,15 +22,9 @@ public class Core : MonoBehaviour, IDamageable {
             life = MaxLife;
         else
             life = gameManager.CoreLife;
-        //gameManager.CoreSliderValueUpdate(life);
-    }
 
-    private void Update()
-    {
-        if (MustSetTheSlider)
-        {
+        if (gameManager.GetGameUIController() != null)
             gameManager.CoreSliderValueUpdate(life);
-        }
     }
 
     #region Interfacce

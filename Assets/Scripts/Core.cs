@@ -32,7 +32,8 @@ public class Core : MonoBehaviour, IDamageable {
     public void Damage(float _damage, GameObject _attacker)
     {
         life -= _damage;
-        gameManager.CoreSliderValueUpdate(life);
+        if (gameManager.GetGameUIController() != null)
+            gameManager.CoreSliderValueUpdate(life);
         if (life < 1)
         {
             GetComponent<MeshRenderer>().enabled = false;

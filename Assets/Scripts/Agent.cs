@@ -209,7 +209,8 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
     public void Damage(float _damage, GameObject _attacker)
     {
         Life -= _damage;
-        gameManager.SliderValueUpdate(playerIndex, Life);
+        if (gameManager.GetGameUIController() != null)
+            gameManager.SliderValueUpdate(playerIndex, Life);
 
         if (Life < 1)
         {

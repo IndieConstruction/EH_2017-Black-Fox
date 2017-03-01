@@ -83,8 +83,7 @@ public class GameManager : MonoBehaviour {
 
     public void DisplayWinnerPlayer(PlayerIndex _playerIndex)
     {
-        gameUI.WindDisplay.gameObject.SetActive(true);
-        gameUI.TextWindDisplay.text = "Player" + _playerIndex + " Ha vinto! ";
+        gameUI.ShowWinner(_playerIndex);
     }
     #endregion
 

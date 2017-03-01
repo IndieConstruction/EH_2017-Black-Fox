@@ -44,8 +44,13 @@ public class GameUIController : MonoBehaviour {
 
     public void SetCoreSliderValue(float _life)
     {
-        if (FindObjectOfType<Canvas>() != null)
-            CoreSlider.value = _life / 10;
+        CoreSlider.value = _life / 10;
+    }
+
+    public void ShowWinner(PlayerIndex _playerIndex)
+    {
+        WindDisplay.gameObject.SetActive(true);
+        TextWindDisplay.text = "Player" + _playerIndex + " Ha vinto! ";
     }
 
     public void CallReloadScene()

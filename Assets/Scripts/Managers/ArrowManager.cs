@@ -5,19 +5,29 @@ using UnityEngine;
 public class ArrowManager : MonoBehaviour {
 
     Arrow[] arrows;
-    public int RandomSetup;
+    public int RandomSetup = 1;
 
     private void Awake()
     {
-        RandomSetup = (int)Random.Range(1f, 4f);
         arrows = FindObjectsOfType<Arrow>();
-        ChoseWhoActive();
+        if (RandomSetup != 0)
+        {
+            RandomSetup = (int)Random.Range(1f, 4f);
+            ChoseWhoActive();
+        } else
+        {
+            foreach (var item in arrows)
+            {
+                item.gameObject.SetActive(false);
+            }
+        }
     }
 
     void ChoseWhoActive()
     {
         foreach (var item in arrows)
         {
+            
             if (item.IDArrow == 1 && RandomSetup == 1)
             {
                 item.gameObject.SetActive(true);

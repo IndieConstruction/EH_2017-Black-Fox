@@ -12,7 +12,7 @@ public class Arrow : MonoBehaviour {
         if (other.GetComponent<Agent>() != null)
         {
             Debug.Log("collisione");
-            other.GetComponent<Rigidbody>().AddForce(transform.forward * Force, ForceMode.Force);
+            other.GetComponent<Rigidbody>().AddForce(transform.forward * Force, ForceMode.Impulse);
             other.GetComponent<PlacePin>().enabled = false;
         }
     }

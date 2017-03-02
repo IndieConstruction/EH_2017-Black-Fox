@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XInputDotNetPure;
 
  public class Shooter : MonoBehaviour {
 
@@ -10,6 +11,7 @@ using UnityEngine;
     public int AddedAmmo = 10;
     public int MaxAmmo = 50;
     public int ammo = 0;
+    public PlayerIndex playerIndex;
 
     /// <summary>
     /// Spara un proiettile
@@ -23,6 +25,8 @@ using UnityEngine;
             instantiatedProjectile.GetComponent<Projectile>().SetOwner(GetComponentInParent<IShooter>());
             Destroy(instantiatedProjectile, LifeTime);
             ammo--;//ammo =ammo -1
+            if (GameManager.Instance.GetGameUIController() != null)
+                GameManager.Instance.BullletsValueUpdate(playerIndex, ammo);
         }
     }
 
@@ -32,5 +36,8 @@ using UnityEngine;
             ammo += AddedAmmo;  //ammo=ammo+AddedAmmo; 
         else if (ammo > MaxAmmo)
             ammo = AddedAmmo;
+
+        if (GameManager.Instance.GetGameUIController() != null)
+            GameManager.Instance.BullletsValueUpdate(playerIndex, ammo);
     }
 }

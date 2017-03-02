@@ -111,12 +111,12 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
     {
         if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_PlaceRight")))                       // place right pin
         {
-            pinPlacer.placeThePin(this, "Right");
+            pinPlacer.placeThePin(this);
         }
 
         if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_PlaceLeft")))                        // place left pin
         {
-            pinPlacer.placeThePin(this, "Left");
+            pinPlacer.placeThePin(this);
         }
 
         if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_Fire")))       // shoot 
@@ -151,12 +151,12 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
 
         if (prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed)
         {
-            pinPlacer.placeThePin(this, "Right");
+            pinPlacer.placeThePin(this);
         }
 
         if (prevState.Buttons.LeftShoulder == ButtonState.Released && state.Buttons.LeftShoulder == ButtonState.Pressed)
         {
-            pinPlacer.placeThePin(this, "Left");
+            pinPlacer.placeThePin(this);
         }
 
         if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)

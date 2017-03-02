@@ -143,6 +143,9 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
         prevState = state;
         state = GamePad.GetState(playerIndex);
 
+        movment.Movement(state.Triggers.Right);
+        movment.Rotation(state.ThumbSticks.Left.X);
+
         if (prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed)
         {
             pinPlacer.ChangePinSpawnPosition("Right");
@@ -167,9 +170,6 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
             shooter.ShootBullet();
             nextFire = Time.time + fireRate;
         }
-
-        movment.Rotation(state.ThumbSticks.Left.X);
-        movment.Movement(state.Triggers.Right);
     }
 
     #endregion

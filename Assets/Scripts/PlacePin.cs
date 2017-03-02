@@ -17,7 +17,6 @@ public class PlacePin : MonoBehaviour {
     private void Start()
     {
         xValue = PinSpanw.localPosition.x;
-        prectime = CoolDownTime;
     }
 
     private void Update()

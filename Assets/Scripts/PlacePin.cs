@@ -8,20 +8,21 @@ public class PlacePin : MonoBehaviour {
     public Transform PinSpanw;
     public float CoolDownTime;
 
-    public bool CanPlace = true;
+    public bool CanPlace = true;//TODO: rimpiazza questa variabile semplicemente facendo disabilitare il componente
     bool isLeft = false;
     
-    float xPosValue;
-    float xNegValue;
     float xValue;
     float prectime;
 
     private void Start()
     {
-        float pinXvalue = PinSpanw.localPosition.x;
-        xPosValue = xValue = pinXvalue;
-        xNegValue = -pinXvalue;
-        prectime = -CoolDownTime;
+        xValue = PinSpanw.localPosition.x;
+        prectime = CoolDownTime;
+    }
+
+    private void Update()
+    {
+        prectime -= Time.deltaTime;
     }
 
     /// <summary>
@@ -30,11 +31,11 @@ public class PlacePin : MonoBehaviour {
     public void placeThePin(Agent _owner, string _side)
     {
         ChangePinSpawnPosition(_side);
-        if (Time.time >= prectime + CoolDownTime && CanPlace == true)
+        if (prectime <= 0 && CanPlace == true)
         {
             Instantiate(PinPrefab, PinSpanw.position, PinSpanw.rotation);
             _owner.AddShooterAmmo();
-            prectime = Time.time;
+            prectime = CoolDownTime;
         }
     }
 
@@ -45,16 +46,11 @@ public class PlacePin : MonoBehaviour {
     void ChangePinSpawnPosition(string _side)
     {
         if (_side == "Left" && !isLeft)
-        {
-            xValue = xNegValue;
             isLeft = true;
-        }
         else if (_side == "Right" && isLeft)
-        {
-            xValue = xPosValue;
             isLeft = false;
-        }
 
+        xValue = -xValue;
         PinSpanw.localPosition = new Vector3(xValue, PinSpanw.localPosition.y, PinSpanw.localPosition.z);
     } 
 }

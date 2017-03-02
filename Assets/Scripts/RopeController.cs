@@ -22,13 +22,13 @@ public class RopeController : MonoBehaviour
         lineRend = GetComponent<LineRenderer>();
         ropeWidth = GetComponent<LineRenderer>().widthMultiplier;
         fragments.Add(gameObject);
-        ExtendRope(gameObject);
+        BuildRope(gameObject);
     }
 
     private void Update()
     {
         //Qui per debug. Cancellerare una volta funzionante
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && fragments.Count < MaxLength)
             ExtendRope();
     }
 
@@ -45,19 +45,25 @@ public class RopeController : MonoBehaviour
     /// Extend the rope toward the AnchorPoint
     /// </summary>
     /// <param name="_lastPiece">Current end of the rope</param>
-    void ExtendRope(GameObject _lastPiece)
+    void BuildRope(GameObject _lastPiece)
     {
-        offSet = GetOffSet(_lastPiece.transform);
-        int _lastFragment = fragments.LastIndexOf(_lastPiece);
-
-        //Prevent to extend the rope over MaxLength
-        if (_lastFragment +1 >= MaxLength - 1)
+        //Relative position of newPieces to previouses
+        if(_lastPiece = fragments[0])
+            offSet = GetOffSet(_lastPiece.transform);
+        else
         {
-            return;
+            float magnitude = offSet.magnitude;
+            offSet = GetOffSet(_lastPiece.transform).normalized * magnitude;
         }
 
+        int _lastFragment = fragments.Count;
+
+        //Prevent to extend the rope over MaxLength
+        if (_lastFragment > MaxLength-1)
+            return;
+        
         //Keep building the rope until the AnchorPoint ore the MaxLength are reached
-        for (int i = _lastFragment+1; i <MaxLength -1; i++)
+        for (int i = _lastFragment; i <MaxLength -1; i++)
         {
             //Add a new Fragment to the rope
             Vector3 position = fragments[i - 1].transform.position + offSet;
@@ -67,14 +73,17 @@ public class RopeController : MonoBehaviour
             newFragment.name = "Fragment_" + i;
             SphereCollider collider = newFragment.GetComponent<SphereCollider>();
             collider.radius = ropeWidth/2;
-
+            
             ConfigurableJoint joint = newFragment.GetComponent<ConfigurableJoint>();
             joint.connectedBody = fragments[i - 1].GetComponent<Rigidbody>();
-
+            joint.autoConfigureConnectedAnchor = false;
+            joint.connectedAnchor = offSet;
             //Is the AnchroPoint closer than the offSet? If so stop building the rope
             if (Vector3.Distance(newFragment.transform.position, AnchorPoint.position) <= fragmentDistance)
             {
                 AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = newFragment.GetComponent<Rigidbody>();
+                joint.autoConfigureConnectedAnchor = false;
+                joint.connectedAnchor = offSet;
                 break;
             }                    
         }
@@ -83,6 +92,8 @@ public class RopeController : MonoBehaviour
         {
             AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = fragments[fragments.Count - 1].GetComponent<Rigidbody>();
             Debug.Log("WARNING: MaxLength not enough to reach " + AnchorPoint.name);
+            int fragmentsNeeded = (int)(Vector3.Distance(AnchorPoint.transform.position, fragments[fragments.Count - 1].transform.position) / offSet.magnitude);
+            Debug.Log(fragmentsNeeded + MaxLength + " needed");
         }
         lineRend.numPositions = (fragments.Count) + 1;
     }
@@ -120,7 +131,8 @@ public class RopeController : MonoBehaviour
     /// </summary>
     public void ExtendRope()
     {
-        ExtendRope(fragments[fragments.Count - 1]);
+        AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = null;
+        BuildRope(fragments[fragments.Count-1]);
     }
     #endregion
 }

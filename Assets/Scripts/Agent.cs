@@ -59,7 +59,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         ///Dato il problema che quando entra nello start, ancora non sono stati passati i riferimenti delle slider allo UIManager
         /// questo fa guadangnare il tempo necessario perchè lo UIManager possa riempire i riferimenti così che Agent li possa usare
@@ -143,9 +143,6 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
         prevState = state;
         state = GamePad.GetState(playerIndex);
 
-        movment.Movement(state.Triggers.Right);
-        movment.Rotation(state.ThumbSticks.Left.X);
-
         if (prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed)
         {
             pinPlacer.ChangePinSpawnPosition("Right");
@@ -170,6 +167,9 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
             shooter.ShootBullet();
             nextFire = Time.time + fireRate;
         }
+
+        movment.Movement(state.Triggers.Right);
+        movment.Rotation(state.ThumbSticks.Left.X);
     }
 
     #endregion

@@ -27,8 +27,9 @@ public class PlacePin : MonoBehaviour {
     /// <summary>
     /// Instantiate the pin on the PinSpawn
     /// </summary>
-    public void placeThePin(Agent _owner)
+    public void placeThePin(Agent _owner, string _side)
     {
+        ChangePinSpawnPosition(_side);
         if (Time.time >= prectime + CoolDownTime && CanPlace == true)
         {
             Instantiate(PinPrefab, PinSpanw.position, PinSpanw.rotation);
@@ -41,7 +42,7 @@ public class PlacePin : MonoBehaviour {
     /// Change the position of the PinSpawnPoint
     /// </summary>
     /// <param name="_direction">Set the side of the PinSpawnPoint</param>
-    public void ChangePinSpawnPosition(string _side)
+    void ChangePinSpawnPosition(string _side)
     {
         if (_side == "Left" && !isLeft)
         {

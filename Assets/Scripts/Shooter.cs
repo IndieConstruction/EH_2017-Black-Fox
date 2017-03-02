@@ -25,7 +25,8 @@ using XInputDotNetPure;
             instantiatedProjectile.GetComponent<Projectile>().SetOwner(GetComponentInParent<IShooter>());
             Destroy(instantiatedProjectile, LifeTime);
             ammo--;//ammo =ammo -1
-            GameManager.Instance.BullletsValueUpdate(playerIndex, ammo);
+            if (GameManager.Instance.GetGameUIController() != null)
+                GameManager.Instance.BullletsValueUpdate(playerIndex, ammo);
         }
     }
 
@@ -36,6 +37,7 @@ using XInputDotNetPure;
         else if (ammo > MaxAmmo)
             ammo = AddedAmmo;
 
-        GameManager.Instance.BullletsValueUpdate(playerIndex, ammo);
+        if (GameManager.Instance.GetGameUIController() != null)
+            GameManager.Instance.BullletsValueUpdate(playerIndex, ammo);
     }
 }

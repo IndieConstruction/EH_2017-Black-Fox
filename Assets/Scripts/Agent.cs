@@ -111,17 +111,20 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
     {
         if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_PlaceRight")))                       // place right pin
         {
-            pinPlacer.ChangePinSpawnPosition("Right");
-            pinPlacer.placeThePin(this);
+            pinPlacer.placeThePin(this, "Right");
         }
 
         if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_PlaceLeft")))                        // place left pin
         {
-            pinPlacer.ChangePinSpawnPosition("Left");
-            pinPlacer.placeThePin(this);
+            pinPlacer.placeThePin(this, "Left");
         }
 
-        
+        if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_Fire")))       // shoot 
+        {
+            nextFire = Time.time + fireRate;
+            shooter.ShootBullet();
+        }
+
         if (Input.GetButton(string.Concat("Key" + (int)playerIndex + "_Fire")) && Time.time > nextFire)       // shoot at certain rate
         {
             nextFire = Time.time + fireRate;
@@ -143,33 +146,29 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
         prevState = state;
         state = GamePad.GetState(playerIndex);
 
+        movment.Movement(state.Triggers.Right);
+        movment.Rotation(state.ThumbSticks.Left.X);
+
         if (prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed)
         {
-            pinPlacer.ChangePinSpawnPosition("Right");
-            pinPlacer.placeThePin(this);
+            pinPlacer.placeThePin(this, "Right");
         }
 
         if (prevState.Buttons.LeftShoulder == ButtonState.Released && state.Buttons.LeftShoulder == ButtonState.Pressed)
         {
-            pinPlacer.ChangePinSpawnPosition("Left");
-            pinPlacer.placeThePin(this);
+            pinPlacer.placeThePin(this, "Left");
         }
 
         if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
         {
             nextFire = Time.time + fireRate;
             shooter.ShootBullet();
-            nextFire = Time.time + fireRate;
         }
         else if (prevState.Buttons.A == ButtonState.Pressed && state.Buttons.A == ButtonState.Pressed && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
             shooter.ShootBullet();
-            nextFire = Time.time + fireRate;
         }
-
-        movment.Movement(state.Triggers.Right);
-        movment.Rotation(state.ThumbSticks.Left.X);
     }
 
     #endregion

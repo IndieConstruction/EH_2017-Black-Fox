@@ -25,7 +25,7 @@ public class RopeController : MonoBehaviour
         BuildRope(gameObject);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         //Qui per debug. Cancellerare una volta funzionante
         if (Input.GetKeyDown(KeyCode.Space) && fragments.Count < MaxLength)
@@ -63,7 +63,7 @@ public class RopeController : MonoBehaviour
             return;
         
         //Keep building the rope until the AnchorPoint ore the MaxLength are reached
-        for (int i = _lastFragment; i <MaxLength -1; i++)
+        for (int i = _lastFragment; i <MaxLength; i++)
         {
             //Add a new Fragment to the rope
             Vector3 position = fragments[i - 1].transform.position + offSet;
@@ -91,8 +91,8 @@ public class RopeController : MonoBehaviour
         if(AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody == null)
         {
             AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = fragments[fragments.Count - 1].GetComponent<Rigidbody>();
-            Debug.Log("WARNING: MaxLength not enough to reach " + AnchorPoint.name);
-            int fragmentsNeeded = (int)(Vector3.Distance(AnchorPoint.transform.position, fragments[fragments.Count - 1].transform.position) / offSet.magnitude);
+            Debug.Log("WARNING: MaxLength not enough to reach " + AnchorPoint.name + " in " +AnchorPoint.position);
+            int fragmentsNeeded = (int)(Vector3.Distance(AnchorPoint.position, fragments[fragments.Count - 1].transform.position) / offSet.magnitude);
             Debug.Log(fragmentsNeeded + MaxLength + " needed");
         }
         lineRend.numPositions = (fragments.Count) + 1;
@@ -113,16 +113,8 @@ public class RopeController : MonoBehaviour
         float desiredOffSet = Vector3.Distance(AnchorPoint.position, _origin.position)*Resolution;
 
         //Return the minimum OffSet
-        if (desiredOffSet >= ropeWidth)
-        {
-            fragmentDistance = ropeWidth;
-            return dir * ropeWidth;
-        }
-        else
-        {
-            fragmentDistance = desiredOffSet;
-            return dir * desiredOffSet;
-        }
+        fragmentDistance = desiredOffSet;
+        return dir * desiredOffSet;
     }
 
     #region API

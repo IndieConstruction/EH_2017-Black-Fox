@@ -13,6 +13,6 @@ public class _MovementForRopes : MovementController {
     // Update is called once per frame
     void Update () {
         rigid.AddRelativeForce(Vector3.forward * Input.GetAxis("Vertical") * MovmentSpeed, ForceMode.Force);
-        rigid.AddRelativeTorque(Vector3.up * RotationSpeed * Input.GetAxis("Horizontal") * Time.deltaTime, ForceMode.Acceleration);
+        rigid.AddRelativeTorque(Vector3.up * RotationSpeed * Input.GetAxis("Horizontal") * Time.deltaTime, ForceMode.Force);
     }
 }

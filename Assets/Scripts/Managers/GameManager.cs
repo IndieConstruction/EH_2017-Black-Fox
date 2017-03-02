@@ -76,6 +76,11 @@ public class GameManager : MonoBehaviour {
         gameUI.SetSliderValue(_playerIndex, _life);
     }
 
+    public void BullletsValueUpdate(PlayerIndex _playerIndex, int _remainigAmmo)
+    {
+        gameUI.SetBulletsValue(_playerIndex, _remainigAmmo);
+    }
+
     public void CoreSliderValueUpdate(float _life)
     {
         gameUI.SetCoreSliderValue(_life);

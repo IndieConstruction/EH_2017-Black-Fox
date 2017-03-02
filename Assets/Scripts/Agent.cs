@@ -7,8 +7,7 @@ using XInputDotNetPure;
 public class Agent : MonoBehaviour, IShooter, IDamageable {
 
     string Name;
-    float life = 10;                                // Vita
-    bool MustSetTheSlider = true;                   
+    float life = 10;                                // Vita                
 
     // Variabili per il funzionamento dei controller e della tastiera
     bool UseKeyboard;
@@ -43,6 +42,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
         movment = GetComponent<MovementController>();
         pinPlacer = GetComponent<PlacePin>();
         shooter = GetComponent<Shooter>();
+        shooter.playerIndex = this.playerIndex;
         LoadIDamageablePrefab();
         gameManager.SetAgentSpawnPoint(playerIndex, transform);
 

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Wave : MonoBehaviour {
 
     public float velocity;
-
+    public float force;
 
     void Start ()
     {
@@ -23,12 +23,21 @@ public class Wave : MonoBehaviour {
         transform.Translate(Vector3.forward * velocity);
     }
 
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.GetComponent<Agent>() != null || other.GetComponent<ExternalAgent>() != null)
+        {
+            other.GetComponent<Rigidbody>().AddForce(transform.forward * force);
+        }
+
+    }
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Wall")
         {
             Debug.Log("kill");
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
             
     }

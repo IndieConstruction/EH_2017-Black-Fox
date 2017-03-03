@@ -10,7 +10,7 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
     float life = 10;                                // Vita                
 
     // Variabili per il funzionamento dei controller e della tastiera
-    bool UseKeyboard;
+    public bool UseKeyboard;
     GamePadState state;
     GamePadState prevState;
     public PlayerIndex playerIndex;

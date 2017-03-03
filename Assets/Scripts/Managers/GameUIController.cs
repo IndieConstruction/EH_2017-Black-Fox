@@ -18,7 +18,7 @@ public class GameUIController : MonoBehaviour {
     public Image WindDisplay;
     public Text TextWindDisplay;
 
-    private void Awake()
+    private void Start()
     {
         GameManager.Instance.SetGameUIController(this);
     }

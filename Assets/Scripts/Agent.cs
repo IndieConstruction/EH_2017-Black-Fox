@@ -44,9 +44,10 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
         shooter = GetComponent<Shooter>();
         shooter.playerIndex = this.playerIndex;
         LoadIDamageablePrefab();
+
         gameManager.SetAgentSpawnPoint(playerIndex, transform);
 
-        if(gameManager.GetGameUIController() != null)
+        if (gameManager.GetGameUIController() != null)
             gameManager.SliderValueUpdate(playerIndex, Life);
 
         if (playerIndex == PlayerIndex.Three)

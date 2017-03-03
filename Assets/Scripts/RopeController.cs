@@ -7,11 +7,10 @@ public class RopeController : MonoBehaviour
 	public GameObject FragmentPrefab;
     public Transform AnchorPoint;	
 	public int MaxLength = 80;
-    public float Resolution = 0.01f;
+    public float DensityOfFragments = 10f;
 
-	List<GameObject> fragments = new List<GameObject>();
+    List<GameObject> fragments = new List<GameObject>();
     LineRenderer lineRend;
-    Rigidbody rigidOnLast;
     float ropeWidth;
     Vector3 offSet;
 
@@ -28,8 +27,8 @@ public class RopeController : MonoBehaviour
     private void FixedUpdate()
     {
         //Qui per debug. Cancellerare una volta funzionante
-        if (Input.GetKeyDown(KeyCode.Space) && fragments.Count < MaxLength)
-            ExtendRope();
+        /*if (Input.GetKeyDown(KeyCode.Space) && fragments.Count < MaxLength)
+            ExtendRope();*/
     }
 
     private void LateUpdate()
@@ -110,7 +109,7 @@ public class RopeController : MonoBehaviour
         dir = dir.normalized;
 
         //Measure OffSet
-        float desiredOffSet = Vector3.Distance(AnchorPoint.position, _origin.position)*Resolution;
+        float desiredOffSet = Vector3.Distance(AnchorPoint.position, _origin.position)/DensityOfFragments;
 
         //Return the minimum OffSet
         fragmentDistance = desiredOffSet;

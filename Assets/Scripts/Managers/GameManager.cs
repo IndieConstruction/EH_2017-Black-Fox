@@ -81,9 +81,14 @@ public class GameManager : MonoBehaviour {
         gameUI.SetBulletsValue(_playerIndex, _remainigAmmo);
     }
 
-    public void CoreSliderValueUpdate(float _life)
+    public void CoreSliderValueUpdate(float _life, float _maxLife)
     {
-        gameUI.SetCoreSliderValue(_life);
+        gameUI.SetCoreSliderValue(_life, _maxLife);
+    }
+
+    public  void ElementZeroValueUpdate(float _life, float _maxLife)
+    {
+        gameUI.SetElementZeroSlider(_life, _maxLife);
     }
 
     public void DisplayWinnerPlayer(PlayerIndex _playerIndex)

@@ -24,7 +24,7 @@ public class Core : MonoBehaviour, IDamageable {
             life = gameManager.CoreLife;
 
         if (gameManager.GetGameUIController() != null)
-            gameManager.CoreSliderValueUpdate(life);
+            gameManager.CoreSliderValueUpdate(life, MaxLife);
     }
 
     #region Interfacce
@@ -33,7 +33,7 @@ public class Core : MonoBehaviour, IDamageable {
     {
         life -= _damage;
         if (gameManager.GetGameUIController() != null)
-            gameManager.CoreSliderValueUpdate(life);
+            gameManager.CoreSliderValueUpdate(life, MaxLife);
         if (life < 1)
         {
             GetComponent<MeshRenderer>().enabled = false;

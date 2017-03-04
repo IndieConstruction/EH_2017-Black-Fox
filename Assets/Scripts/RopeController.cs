@@ -62,15 +62,16 @@ public class RopeController : MonoBehaviour
         {
             //Add a new Fragment to the rope
             position = fragments[i - 1].transform.position + offSet;
-            GameObject newFragment = Instantiate(FragmentPrefab, position, fragments[i-1].transform.rotation);
+            GameObject newFragment = Instantiate(FragmentPrefab, position, Quaternion.LookRotation(position));
             fragments.Add(newFragment);
             newFragment.transform.parent = fragments[0].transform;
             newFragment.name = "Fragment_" + i;
             //Collider configuration
-            collider = newFragment.GetComponent<CapsuleCollider>();
+            collider = newFragment.GetComponentInChildren<CapsuleCollider>();
             collider.radius = ropeWidth/2;
-            collider.center = offSet/2;
-            collider.height = fragmentDistance;
+            collider.center = Vector3.forward * fragmentDistance/2;
+            collider.height = fragmentDistance + collider.radius;
+            collider.GetComponent<RopeForcedLook>().Target = fragments[i - 1];
             //Joint Configuration
             joint = newFragment.GetComponent<ConfigurableJoint>();
             joint.connectedBody = fragments[i - 1].GetComponent<Rigidbody>();

@@ -7,7 +7,7 @@ public class RopeController : MonoBehaviour
 	public GameObject FragmentPrefab;
     public Transform AnchorPoint;	
 	public int MaxLength = 80;
-    public float DensityOfFragments = 10f;
+    [Range(.0f,1f)]public float DensityOfFragments = .1f;
 
     List<GameObject> fragments = new List<GameObject>();
     LineRenderer lineRend;
@@ -47,7 +47,7 @@ public class RopeController : MonoBehaviour
     void BuildRope(GameObject _lastPiece)
     {
         Vector3 position;
-        SphereCollider collider;
+        CapsuleCollider collider;
         ConfigurableJoint joint;
 
         //Relative position of newPieces to previouses
@@ -67,8 +67,10 @@ public class RopeController : MonoBehaviour
             newFragment.transform.parent = fragments[0].transform;
             newFragment.name = "Fragment_" + i;
             //Collider configuration
-            collider = newFragment.GetComponent<SphereCollider>();
+            collider = newFragment.GetComponent<CapsuleCollider>();
             collider.radius = ropeWidth/2;
+            collider.center = offSet/2;
+            collider.height = fragmentDistance;
             //Joint Configuration
             joint = newFragment.GetComponent<ConfigurableJoint>();
             joint.connectedBody = fragments[i - 1].GetComponent<Rigidbody>();
@@ -109,7 +111,7 @@ public class RopeController : MonoBehaviour
         if(fragments.Count <= 1)
         {
             //Measure OffSet magnitude only if first time run of this method
-            fragmentDistance = Vector3.Distance(AnchorPoint.position, _origin.position) / DensityOfFragments;     
+            fragmentDistance = Vector3.Distance(AnchorPoint.position, _origin.position) / DensityOfFragments/100;     
         }
         return dir * fragmentDistance;
     }

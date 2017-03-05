@@ -15,7 +15,7 @@ public class ElementZero : MonoBehaviour, IDamageable {
     bool CanDamageCore;
     bool CanRegenerateLife;
     GameManager gameManager;
-
+    float RandomNum;
 
 
     // Use this for initialization
@@ -27,9 +27,15 @@ public class ElementZero : MonoBehaviour, IDamageable {
         TimeToRecharge = WhenDamage;
         CanDamageCore = false;
         CanRegenerateLife = true;
+        RandomNum = UnityEngine.Random.Range(0f, 1f);
 
         if (gameManager.GetGameUIController() != null)
             gameManager.ElementZeroValueUpdate(Life, MaxLife);
+
+        if (RandomNum < 0.5)
+        {
+            transform.position = new Vector3(transform.position.x * -1, transform.position.y, transform.position.z);
+        }
     }
 
     // Update is called once per frame

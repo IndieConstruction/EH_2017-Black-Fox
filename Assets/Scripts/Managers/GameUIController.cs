@@ -17,6 +17,7 @@ public class GameUIController : MonoBehaviour {
     public Slider CoreSlider;
     public Image WindDisplay;
     public Text TextWindDisplay;
+    public Slider ElementZeroSlider;
 
     private void Start()
     {
@@ -63,9 +64,14 @@ public class GameUIController : MonoBehaviour {
         }
     }
 
-    public void SetCoreSliderValue(float _life)
+    public void SetCoreSliderValue(float _life, float _maxLife)
     {
-        CoreSlider.value = _life / 10;
+        CoreSlider.value = _life / _maxLife;                  // Da rivedere se il valore della vita cambia
+    }
+
+    public void SetElementZeroSlider(float _life, float _maxLife)
+    {
+        ElementZeroSlider.value = _life / _maxLife;                  // Da rivedere se il valore della vita cambia
     }
 
     public void ShowWinner(PlayerIndex _playerIndex)

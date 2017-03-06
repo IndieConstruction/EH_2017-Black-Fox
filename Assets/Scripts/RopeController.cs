@@ -28,8 +28,10 @@ public class RopeController : MonoBehaviour
     private void FixedUpdate()
     {
         //Qui per debug. Cancellerare una volta funzionante
+        /*
         if (Input.GetKeyDown(KeyCode.Space) && fragments.Count < MaxLength)
             ExtendRope();
+            */
     }
 
     private void LateUpdate()

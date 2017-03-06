@@ -8,6 +8,12 @@ public class Core : MonoBehaviour, IDamageable {
     float life;
     public float MaxLife = 10;              // La vita massima che può avere il Core e che viene impostata al riavvio di un round perso
     GameManager gameManager;
+    GameObject Obstacle;
+    public Transform ObstacleSpawn1;
+    public Transform ObstacleSpawn2;
+    public Transform ObstacleSpawn3;
+    public Transform ObstacleSpawn4;
+    int RandomNum;
 
     public float Life
     {
@@ -17,6 +23,7 @@ public class Core : MonoBehaviour, IDamageable {
 
     private void Start()
     {
+        RandomNum = (int)UnityEngine.Random.Range(1f, 4f);
         gameManager = GameManager.Instance;
         if (gameManager.CoreLife == 0)
             life = MaxLife;
@@ -26,6 +33,11 @@ public class Core : MonoBehaviour, IDamageable {
         if (gameManager.GetGameUIController() != null)
             gameManager.CoreSliderValueUpdate(life, MaxLife);
     }
+
+    void instantiateObstacles() {
+        //Instantiate(Obstacle, )
+    }
+
 
     #region Interfacce
 

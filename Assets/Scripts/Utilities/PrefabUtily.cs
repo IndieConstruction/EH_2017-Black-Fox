@@ -53,9 +53,10 @@ public class PrefabUtily {
         //Potrebbe non funzionare -- da collaudare !
         List<GameObject> listGameObj = LoadAllPrefabsWithComponentOfType<T>(_path);
 
-        foreach (var itemToIgnore in _itemsToIgnore)
+        for (int i = 0, j = 0; i < listGameObj.Count; i++)
         {
-            RemoveItemFromList(listGameObj, itemToIgnore);
+            RemoveItemFromList(listGameObj, _itemsToIgnore[j]);
+            j++;
         }
 
         return listGameObj;

@@ -4,12 +4,23 @@ using UnityEngine;
 
 public class ArrowManager : MonoBehaviour {
 
+    //public bool 
     Arrow[] arrows;
     public int RandomSetup = 1;
+    int maxRandomSetup = 0;
 
     private void Awake()
     {
         arrows = FindObjectsOfType<Arrow>();
+
+        for (int i = 0; i < arrows.Length; i++)
+        {
+            if (maxRandomSetup < arrows[i].IDArrow)
+            {
+                maxRandomSetup = arrows[i].IDArrow;
+            }
+        }
+
         if (RandomSetup != 0)
         {
             RandomSetup = (int)Random.Range(1f, 4f);
@@ -25,7 +36,16 @@ public class ArrowManager : MonoBehaviour {
 
     void ChoseWhoActive()
     {
-        foreach (var item in arrows)
+
+        for (int i = 0; i < arrows.Length; i++)
+        {
+            if (arrows[i].IDArrow != RandomSetup)
+            {
+                arrows[i].gameObject.SetActive(false);
+            }
+        }
+
+        /*foreach (var item in arrows)
         {
             
             if (item.IDArrow == 1 && RandomSetup == 1)
@@ -50,6 +70,6 @@ public class ArrowManager : MonoBehaviour {
             {
                 item.gameObject.SetActive(false);
             }
-        }
+        }*/
     }
 }

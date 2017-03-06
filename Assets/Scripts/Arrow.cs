@@ -6,14 +6,15 @@ public class Arrow : MonoBehaviour {
 
     public float Force = 500000;
     public int IDArrow;
+    
+       
 
     private void OnTriggerStay(Collider other)
     {
         if (other.GetComponent<Agent>() != null)
         {
-            Debug.Log("collisione");
-            other.GetComponent<Rigidbody>().AddForce(transform.forward * Force, ForceMode.Impulse);
-            
+            other.GetComponent<Rigidbody>().AddForce(transform.forward * Force, ForceMode.Acceleration);
         }
     }
+    
 }

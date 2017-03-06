@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - TextofWin
   - WindDisplay
+  - TextofWin
+  - Wall
   layers:
   - Default
   - TransparentFX

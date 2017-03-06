@@ -6,13 +6,20 @@ public class ArrowManager : MonoBehaviour {
 
     Arrow[] arrows;
     public int RandomSetup = 1;
+    private int maxSetup = 0;
 
     private void Awake()
     {
         arrows = FindObjectsOfType<Arrow>();
+        for (int i = 0; i < arrows.Length; i++)
+        {
+            if (arrows[i].IDArrow > maxSetup)
+                maxSetup = arrows[i].IDArrow;
+        }
+
         if (RandomSetup != 0)
         {
-            RandomSetup = (int)Random.Range(1f, 4f);
+            RandomSetup = (int)Random.Range(1,maxSetup);
             ChoseWhoActive();
         } else
         {
@@ -25,31 +32,10 @@ public class ArrowManager : MonoBehaviour {
 
     void ChoseWhoActive()
     {
-        foreach (var item in arrows)
+        for (int i = 0; i < arrows.Length; i++)
         {
-            
-            if (item.IDArrow == 1 && RandomSetup == 1)
-            {
-                item.gameObject.SetActive(true);
-            } else if (item.IDArrow == 2 && RandomSetup == 2)
-            {
-                item.gameObject.SetActive(true);
-            } else if (item.IDArrow == 3 && RandomSetup == 3)
-            {
-                item.gameObject.SetActive(true);
-            }
-            else if (item.IDArrow == 4 && RandomSetup == 4)
-            {
-                item.gameObject.SetActive(true);
-            }
-            else if (item.IDArrow == 5 && RandomSetup == 5)
-            {
-                item.gameObject.SetActive(true);
-            }
-            else
-            {
-                item.gameObject.SetActive(false);
-            }
+            if (arrows[i].IDArrow != RandomSetup)
+                arrows[i].gameObject.SetActive(false);            
         }
     }
 }

@@ -6,7 +6,7 @@ public class ArrowManager : MonoBehaviour {
 
     //public bool 
     Arrow[] arrows;
-    public int RandomSetup = 1;
+    int RandomSetup = 1;
     int maxRandomSetup = 0;
 
     private void Awake()
@@ -20,18 +20,10 @@ public class ArrowManager : MonoBehaviour {
                 maxRandomSetup = arrows[i].IDArrow;
             }
         }
-
-        if (RandomSetup != 0)
-        {
-            RandomSetup = (int)Random.Range(1f, 4f);
-            ChoseWhoActive();
-        } else
-        {
-            foreach (var item in arrows)
-            {
-                item.gameObject.SetActive(false);
-            }
-        }
+        
+        RandomSetup = (int)Random.Range(1f, 4f);
+        ChoseWhoActive();
+        
     }
 
     void ChoseWhoActive()

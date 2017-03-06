@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class OstacoloMobile : MonoBehaviour {
 
+    public float Speed = 1;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -11,12 +13,12 @@ public class OstacoloMobile : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        MoveToWord();
 	}
 
     void MoveToWord()
     {
-        //GetComponent<Rigidbody>().AddRelativeForce(transform.forward)
+        GetComponent<Rigidbody>().AddForce(transform.forward * Speed, ForceMode.Force);
     }
 
 }

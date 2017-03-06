@@ -215,6 +215,10 @@ public class Agent : MonoBehaviour, IShooter, IDamageable {
             {
                 gameManager.SetKillPoints(_attacker.GetComponent<Agent>().playerIndex, playerIndex); 
             }
+            else
+            {
+                gameManager.SetKillPoints(playerIndex);
+            }
             Destroy(gameObject);
         }
     }     

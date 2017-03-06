@@ -115,6 +115,12 @@ public class GameManager : MonoBehaviour {
         pointsManager.UpdateKillPoints(_killer, _victim);           // setta i punti morte e uccisione
         StartCoroutine("WaitForRespawn", _victim);                  // repawn dell'agente ucciso
     }
+
+    public void SetKillPoints(PlayerIndex _victim)
+    {
+        pointsManager.UpdateKillPoints( _victim);           // setta i punti morte e uccisione
+        StartCoroutine("WaitForRespawn", _victim);                  // repawn dell'agente ucciso
+    }
     #endregion
 
     #region RespawnAgent

@@ -51,6 +51,18 @@ public class PointsManager {
         }
     }
 
+    public void UpdateKillPoints(PlayerIndex _victim)
+    {
+        foreach (var item in pointsManager)
+        {
+            if (item.PlayerIndex == _victim && item.KillPoints > 0)
+            {
+                item.KillPoints -= SubPoints;
+                break;
+            }
+        }
+    }
+
     void DisplayTheWinner(PlayerIndex _playerIndex)
     {
         GameManager.Instance.DisplayWinnerPlayer(_playerIndex);

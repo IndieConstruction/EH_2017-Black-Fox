@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4898894293875864}
   - component: {fileID: 54630249921437312}
   - component: {fileID: 64904040123712862}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: PinRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4318740944250204}
   - component: {fileID: 33541233110951626}
   - component: {fileID: 23038246193325994}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Box003
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -11,8 +11,8 @@ public class Core : MonoBehaviour, IDamageable {
     GameObject Obstacle;
     public Transform ObstacleSpawn1;
     public Transform ObstacleSpawn2;
-    public Transform ObstacleSpawn3;
-    public Transform ObstacleSpawn4;
+    public bool Level4 = false;
+    
     int RandomNum;
 
     public float Life
@@ -23,19 +23,37 @@ public class Core : MonoBehaviour, IDamageable {
 
     private void Start()
     {
-        RandomNum = (int)UnityEngine.Random.Range(1f, 4f);
+        Obstacle = Resources.Load<GameObject>("Prefabs/LevelElements/OstacoloMobile");
+        RandomNum = (int)UnityEngine.Random.Range(1f, 3f);
         gameManager = GameManager.Instance;
         if (gameManager.CoreLife == 0)
             life = MaxLife;
         else
             life = gameManager.CoreLife;
+        if (Level4 == true)
+        {
+            instantiateObstacles();
+        }
 
         if (gameManager.GetGameUIController() != null)
+        {
             gameManager.CoreSliderValueUpdate(life, MaxLife);
+        }
     }
 
     void instantiateObstacles() {
-        //Instantiate(Obstacle, )
+         switch (RandomNum)
+        {
+            case 1:
+                Instantiate(Obstacle, ObstacleSpawn1.position, ObstacleSpawn1.rotation);
+                break;
+            case 2:
+                Instantiate(Obstacle, ObstacleSpawn2.position, ObstacleSpawn2.rotation);
+                break;
+            default:
+                break;
+        }
+
     }
 
 

@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4266561471779126}
   - component: {fileID: 54922309811266140}
   - component: {fileID: 64500582491342626}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: PinPurple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4515841962183200}
   - component: {fileID: 33887942024173006}
   - component: {fileID: 23052711799592178}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Box002
   m_TagString: Untagged
   m_Icon: {fileID: 0}

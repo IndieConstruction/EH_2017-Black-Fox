@@ -16,7 +16,7 @@ public class ElementZero : MonoBehaviour, IDamageable {
     bool CanRegenerateLife;
     GameManager gameManager;
     float RandomNum;
-
+    public bool Round3 = false;
 
     // Use this for initialization
     void Start()
@@ -27,17 +27,21 @@ public class ElementZero : MonoBehaviour, IDamageable {
         TimeToRecharge = WhenDamage;
         CanDamageCore = false;
         CanRegenerateLife = true;
-        RandomNum = UnityEngine.Random.Range(0f, 1f);
 
+        if (Round3 == false)
+        {
+            RandomNum = UnityEngine.Random.Range(0f, 1f);
+            if (RandomNum < 0.5)
+            {
+                transform.position = new Vector3(transform.position.x * -1, transform.position.y, transform.position.z);
+            }
+        }
+        
         if (gameManager.GetGameUIController() != null)
             gameManager.ElementZeroValueUpdate(Life, MaxLife);
-
-        if (RandomNum < 0.5)
-        {
-            transform.position = new Vector3(transform.position.x * -1, transform.position.y, transform.position.z);
-        }
     }
 
+   
     // Update is called once per frame
     void Update()
     {
@@ -104,6 +108,18 @@ public class ElementZero : MonoBehaviour, IDamageable {
         }
     }
 
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<Agent>() != null)
+        {
+            Damage(DamageToCore * 2, gameObject);
+        }
+    }
+
+    #region Interfacce
+
+    #region IDamageable
     /// <summary>
     /// Procura danno all'elemento zero
     /// </summary>
@@ -131,5 +147,8 @@ public class ElementZero : MonoBehaviour, IDamageable {
         //blocca temporaneamente la rigenerazione della vita
         CanRegenerateLife = false;
     }
+    #endregion
+
+    #endregion
 
 }

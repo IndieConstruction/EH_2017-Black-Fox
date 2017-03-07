@@ -29,7 +29,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1701814188751108
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,6 +138,7 @@ MonoBehaviour:
   MaxLife: 15
   DamageToCore: 1
   WhenDamage: 3
+  Round3: 0
 --- !u!135 &135524931249972144
 SphereCollider:
   m_ObjectHideFlags: 1

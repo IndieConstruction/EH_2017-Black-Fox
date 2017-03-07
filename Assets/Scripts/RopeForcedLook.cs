@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RopeForcedLook : MonoBehaviour {
-
-    public GameObject Target;
-
-    private void FixedUpdate()
+namespace Rope
+{
+    public class RopeForcedLook : MonoBehaviour
     {
-        if(Target != null)
-        transform.LookAt(Target.transform);
+
+        public GameObject Target;
+
+        private void FixedUpdate()
+        {
+            if (Target != null)
+                transform.LookAt(Target.transform);
+        }
     }
 }

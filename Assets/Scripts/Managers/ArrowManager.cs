@@ -2,66 +2,70 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArrowManager : MonoBehaviour {
-
-    //public bool 
-    Arrow[] arrows;
-    int RandomSetup = 1;
-    int maxRandomSetup = 0;
-
-    private void Awake()
-    {
-        arrows = FindObjectsOfType<Arrow>();
-
-        for (int i = 0; i < arrows.Length; i++)
-        {
-            if (maxRandomSetup < arrows[i].IDArrow)
-            {
-                maxRandomSetup = arrows[i].IDArrow;
-            }
-        }
-        
-        RandomSetup = (int)Random.Range(1f, 4f);
-        ChoseWhoActive();
-        
-    }
-
-    void ChoseWhoActive()
+namespace BlackFox
+{
+    public class ArrowManager : MonoBehaviour
     {
 
-        for (int i = 0; i < arrows.Length; i++)
+        //public bool 
+        Arrow[] arrows;
+        int RandomSetup = 1;
+        int maxRandomSetup = 0;
+
+        private void Awake()
         {
-            if (arrows[i].IDArrow != RandomSetup)
+            arrows = FindObjectsOfType<Arrow>();
+
+            for (int i = 0; i < arrows.Length; i++)
             {
-                arrows[i].gameObject.SetActive(false);
+                if (maxRandomSetup < arrows[i].IDArrow)
+                {
+                    maxRandomSetup = arrows[i].IDArrow;
+                }
             }
+
+            RandomSetup = (int)Random.Range(1f, 4f);
+            ChoseWhoActive();
+
         }
 
-        /*foreach (var item in arrows)
+        void ChoseWhoActive()
         {
-            
-            if (item.IDArrow == 1 && RandomSetup == 1)
+
+            for (int i = 0; i < arrows.Length; i++)
             {
-                item.gameObject.SetActive(true);
-            } else if (item.IDArrow == 2 && RandomSetup == 2)
-            {
-                item.gameObject.SetActive(true);
-            } else if (item.IDArrow == 3 && RandomSetup == 3)
-            {
-                item.gameObject.SetActive(true);
+                if (arrows[i].IDArrow != RandomSetup)
+                {
+                    arrows[i].gameObject.SetActive(false);
+                }
             }
-            else if (item.IDArrow == 4 && RandomSetup == 4)
+
+            /*foreach (var item in arrows)
             {
-                item.gameObject.SetActive(true);
-            }
-            else if (item.IDArrow == 5 && RandomSetup == 5)
-            {
-                item.gameObject.SetActive(true);
-            }
-            else
-            {
-                item.gameObject.SetActive(false);
-            }
-        }*/
+
+                if (item.IDArrow == 1 && RandomSetup == 1)
+                {
+                    item.gameObject.SetActive(true);
+                } else if (item.IDArrow == 2 && RandomSetup == 2)
+                {
+                    item.gameObject.SetActive(true);
+                } else if (item.IDArrow == 3 && RandomSetup == 3)
+                {
+                    item.gameObject.SetActive(true);
+                }
+                else if (item.IDArrow == 4 && RandomSetup == 4)
+                {
+                    item.gameObject.SetActive(true);
+                }
+                else if (item.IDArrow == 5 && RandomSetup == 5)
+                {
+                    item.gameObject.SetActive(true);
+                }
+                else
+                {
+                    item.gameObject.SetActive(false);
+                }
+            }*/
+        }
     }
 }

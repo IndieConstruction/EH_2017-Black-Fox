@@ -2,12 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// Interfaccia per tutti coloro che hanno la capacità di sparare.
-/// </summary>
-public interface IShooter {
+namespace BlackFox
+{
+    /// <summary>
+    /// Interfaccia per tutti coloro che hanno la capacità di sparare.
+    /// </summary>
+    public interface IShooter
+    {
 
-    List<IDamageable> GetDamageable();
+        List<IDamageable> GetDamageable();
 
-    GameObject GetOwner();
+        GameObject GetOwner();
+    }
 }

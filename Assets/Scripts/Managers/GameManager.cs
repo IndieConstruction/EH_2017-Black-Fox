@@ -3,147 +3,151 @@ using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
 
-public class GameManager : MonoBehaviour {
-
-    public static GameManager Instance;
-
-    public int KillPoint;
-    public int DeathPoint;
-    public int PointsToWin;
-    public bool dontDestroyOnLoad;
-    public float AgentRespawnTime = 3f;
-
-    SceneController sceneController;
-    PointsManager pointsManager;
-    RespawnAgent respawnAgent;
-    GameUIController gameUI;
-
-    private State currentState;
-    public State CurrentState
+namespace BlackFox
+{
+    public class GameManager : MonoBehaviour
     {
-        get { return currentState; }
-        set { currentState = value; }
-    }
 
-    private float coreLife;
-    public float CoreLife
-    {
-        get { return coreLife; }
-        set { coreLife = value; }
-    }
+        public static GameManager Instance;
 
-    private void Awake()
-    {
-        //For actual debug pourpose
-        if (dontDestroyOnLoad)
-            DontDestroyOnLoad(gameObject);
-        //Singleton paradigm
-        if (Instance == null)
-            Instance = this;
-        else
-            Destroy(gameObject);
-        
-        sceneController = FindObjectOfType<SceneController>();
-    }
+        public int KillPoint;
+        public int DeathPoint;
+        public int PointsToWin;
+        public bool dontDestroyOnLoad;
+        public float AgentRespawnTime = 3f;
 
-    void Start ()
-    {
-        pointsManager = new PointsManager(KillPoint, DeathPoint, PointsToWin);
-        respawnAgent = GetComponent<RespawnAgent>();        
-    }
+        SceneController sceneController;
+        PointsManager pointsManager;
+        RespawnAgent respawnAgent;
+        GameUIController gameUI;
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        private State currentState;
+        public State CurrentState
         {
-            Application.Quit();
+            get { return currentState; }
+            set { currentState = value; }
         }
-    }
-    #region GameUIController
-    public void SetGameUIController(GameUIController _gameUI)
-    {
-        gameUI = _gameUI;
-    }
 
-    public GameUIController GetGameUIController()
-    {
-        return gameUI;
-    }
+        private float coreLife;
+        public float CoreLife
+        {
+            get { return coreLife; }
+            set { coreLife = value; }
+        }
+
+        private void Awake()
+        {
+            //For actual debug pourpose
+            if (dontDestroyOnLoad)
+                DontDestroyOnLoad(gameObject);
+            //Singleton paradigm
+            if (Instance == null)
+                Instance = this;
+            else
+                Destroy(gameObject);
+
+            sceneController = FindObjectOfType<SceneController>();
+        }
+
+        void Start()
+        {
+            pointsManager = new PointsManager(KillPoint, DeathPoint, PointsToWin);
+            respawnAgent = GetComponent<RespawnAgent>();
+        }
+
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                Application.Quit();
+            }
+        }
+        #region GameUIController
+        public void SetGameUIController(GameUIController _gameUI)
+        {
+            gameUI = _gameUI;
+        }
+
+        public GameUIController GetGameUIController()
+        {
+            return gameUI;
+        }
 
 
-    public void SliderValueUpdate(PlayerIndex _playerIndex, float _life)
-    {
-        gameUI.SetSliderValue(_playerIndex, _life);
-    }
+        public void SliderValueUpdate(PlayerIndex _playerIndex, float _life)
+        {
+            gameUI.SetSliderValue(_playerIndex, _life);
+        }
 
-    public void BullletsValueUpdate(PlayerIndex _playerIndex, int _remainigAmmo)
-    {
-        gameUI.SetBulletsValue(_playerIndex, _remainigAmmo);
-    }
+        public void BullletsValueUpdate(PlayerIndex _playerIndex, int _remainigAmmo)
+        {
+            gameUI.SetBulletsValue(_playerIndex, _remainigAmmo);
+        }
 
-    public void CoreSliderValueUpdate(float _life, float _maxLife)
-    {
-        gameUI.SetCoreSliderValue(_life, _maxLife);
-    }
+        public void CoreSliderValueUpdate(float _life, float _maxLife)
+        {
+            gameUI.SetCoreSliderValue(_life, _maxLife);
+        }
 
-    public  void ElementZeroValueUpdate(float _life, float _maxLife)
-    {
-        gameUI.SetElementZeroSlider(_life, _maxLife);
-    }
+        public void ElementZeroValueUpdate(float _life, float _maxLife)
+        {
+            gameUI.SetElementZeroSlider(_life, _maxLife);
+        }
 
-    public void DisplayWinnerPlayer(PlayerIndex _playerIndex)
-    {
-        gameUI.ShowWinner(_playerIndex);
-    }
-    #endregion
+        public void DisplayWinnerPlayer(PlayerIndex _playerIndex)
+        {
+            gameUI.ShowWinner(_playerIndex);
+        }
+        #endregion
 
-    #region SceneController
-    public void ChangeScene()
-    {
-        sceneController.LoadScene(1, false);
-    }
+        #region SceneController
+        public void ChangeScene()
+        {
+            sceneController.LoadScene(1, false);
+        }
 
-    public void ReloadScene()
-    {
-        sceneController.ReloadCurrentRound();
-    }
-    #endregion
+        public void ReloadScene()
+        {
+            sceneController.ReloadCurrentRound();
+        }
+        #endregion
 
-    #region PointsManager
-    public void SetKillPoints(PlayerIndex _killer, PlayerIndex _victim)
-    {
-        pointsManager.UpdateKillPoints(_killer, _victim);           // setta i punti morte e uccisione
-        StartCoroutine("WaitForRespawn", _victim);                  // repawn dell'agente ucciso
-    }
+        #region PointsManager
+        public void SetKillPoints(PlayerIndex _killer, PlayerIndex _victim)
+        {
+            pointsManager.UpdateKillPoints(_killer, _victim);           // setta i punti morte e uccisione
+            StartCoroutine("WaitForRespawn", _victim);                  // repawn dell'agente ucciso
+        }
 
-    public void SetKillPoints(PlayerIndex _victim)
-    {
-        pointsManager.UpdateKillPoints( _victim);           // setta i punti morte e uccisione
-        StartCoroutine("WaitForRespawn", _victim);                  // repawn dell'agente ucciso
-    }
-    #endregion
+        public void SetKillPoints(PlayerIndex _victim)
+        {
+            pointsManager.UpdateKillPoints(_victim);           // setta i punti morte e uccisione
+            StartCoroutine("WaitForRespawn", _victim);                  // repawn dell'agente ucciso
+        }
+        #endregion
 
-    #region RespawnAgent
-    public void SetAgentSpawnPoint(PlayerIndex _playerIndex, Transform _spawnpoint)
-    {
-        respawnAgent.SetSpawnPoint(_playerIndex, _spawnpoint);
-    }
+        #region RespawnAgent
+        public void SetAgentSpawnPoint(PlayerIndex _playerIndex, Transform _spawnpoint)
+        {
+            respawnAgent.SetSpawnPoint(_playerIndex, _spawnpoint);
+        }
 
-    IEnumerator WaitForRespawn(PlayerIndex _victim)
-    {
-        yield return new WaitForSeconds(AgentRespawnTime);   
-        respawnAgent.Respawn(_victim);
-    }
-    #endregion
+        IEnumerator WaitForRespawn(PlayerIndex _victim)
+        {
+            yield return new WaitForSeconds(AgentRespawnTime);
+            respawnAgent.Respawn(_victim);
+        }
+        #endregion
 
-    public enum State
-    {
-        InitializeRound,
-        StartCooldowwn,
-        GameStateUpdate,
-        Pause,
-        Resume,
-        Quit
+        public enum State
+        {
+            InitializeRound,
+            StartCooldowwn,
+            GameStateUpdate,
+            Pause,
+            Resume,
+            Quit
+        }
     }
 }
 

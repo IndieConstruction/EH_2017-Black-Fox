@@ -4,100 +4,103 @@ using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
 
+namespace BlackFox
+{
+    /// <summary>
+    /// Gestore dei punti del player
+    /// </summary>
+    public class PointsManager
+    {
 
-/// <summary>
-/// Gestore dei punti del player
-/// </summary>
-public class PointsManager {
-
-    int AddPoints;
-    int SubPoints;
-    int pointsToWin;
-    List<PlayerPoints> pointsManager = new List<PlayerPoints>()
+        int AddPoints;
+        int SubPoints;
+        int pointsToWin;
+        List<PlayerPoints> pointsManager = new List<PlayerPoints>()
         { new PlayerPoints(PlayerIndex.One), new PlayerPoints(PlayerIndex.Two), new PlayerPoints(PlayerIndex.Three), new PlayerPoints(PlayerIndex.Four) };
 
-    
-    public PointsManager(int _killPoints, int _deathPoints, int _pointsToWin)
-    {
-        AddPoints = _killPoints;
-        SubPoints = _deathPoints;
-        pointsToWin = _pointsToWin;
-    }
 
-    public void UpdateKillPoints(PlayerIndex _killer, PlayerIndex _victim)
-    {
-        foreach (var item in pointsManager)
+        public PointsManager(int _killPoints, int _deathPoints, int _pointsToWin)
         {
-            if (item.PlayerIndex == _killer)
-            {
-                item.KillPoints += AddPoints;
-                Debug.Log(item.KillPoints);
+            AddPoints = _killPoints;
+            SubPoints = _deathPoints;
+            pointsToWin = _pointsToWin;
+        }
 
-                if (item.KillPoints == pointsToWin)
+        public void UpdateKillPoints(PlayerIndex _killer, PlayerIndex _victim)
+        {
+            foreach (var item in pointsManager)
+            {
+                if (item.PlayerIndex == _killer)
                 {
-                    DisplayTheWinner(_killer);
+                    item.KillPoints += AddPoints;
+                    Debug.Log(item.KillPoints);
+
+                    if (item.KillPoints == pointsToWin)
+                    {
+                        DisplayTheWinner(_killer);
+                    }
+                    break;
                 }
-                break;
             }
-        }
 
-        foreach (var item in pointsManager)
-        {
-            if (item.PlayerIndex == _victim && item.KillPoints > 0)
+            foreach (var item in pointsManager)
             {
-                item.KillPoints -= SubPoints;
-                break;
+                if (item.PlayerIndex == _victim && item.KillPoints > 0)
+                {
+                    item.KillPoints -= SubPoints;
+                    break;
+                }
             }
         }
-    }
 
-    public void UpdateKillPoints(PlayerIndex _victim)
-    {
-        foreach (var item in pointsManager)
+        public void UpdateKillPoints(PlayerIndex _victim)
         {
-            if (item.PlayerIndex == _victim && item.KillPoints > 0)
+            foreach (var item in pointsManager)
             {
-                item.KillPoints -= SubPoints;
-                break;
+                if (item.PlayerIndex == _victim && item.KillPoints > 0)
+                {
+                    item.KillPoints -= SubPoints;
+                    break;
+                }
             }
+        }
+
+        void DisplayTheWinner(PlayerIndex _playerIndex)
+        {
+            GameManager.Instance.DisplayWinnerPlayer(_playerIndex);
         }
     }
 
-    void DisplayTheWinner(PlayerIndex _playerIndex)
+    /// <summary>
+    /// Contenitore dei punti del player
+    /// </summary>
+    public class PlayerPoints
     {
-        GameManager.Instance.DisplayWinnerPlayer(_playerIndex);
-    }
-}
 
-/// <summary>
-/// Contenitore dei punti del player
-/// </summary>
-public class PlayerPoints
-{
+        PlayerIndex playerIndex;
+        int powerPoints;
+        int killPoints;
 
-    PlayerIndex playerIndex;
-    int powerPoints;
-    int killPoints;
+        public PlayerIndex PlayerIndex
+        {
+            get { return playerIndex; }
+        }
 
-    public PlayerIndex PlayerIndex
-    {
-        get { return playerIndex; }
-    }
+        public int KillPoints
+        {
+            get { return killPoints; }
+            set { killPoints = value; }
+        }
 
-    public int KillPoints
-    {
-        get { return killPoints; }
-        set { killPoints = value; }
-    }
+        public int PowerPoints
+        {
+            get { return powerPoints; }
+            set { powerPoints = value; }
+        }
 
-    public int PowerPoints
-    {
-        get { return powerPoints; }
-        set { powerPoints = value; }
-    }
-
-    public PlayerPoints(PlayerIndex _playerIndex)
-    {
-        playerIndex = _playerIndex;
+        public PlayerPoints(PlayerIndex _playerIndex)
+        {
+            playerIndex = _playerIndex;
+        }
     }
 }

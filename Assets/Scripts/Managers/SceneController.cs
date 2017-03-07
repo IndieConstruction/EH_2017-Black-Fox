@@ -3,37 +3,40 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneController : MonoBehaviour {
-
-    public float WaitForSeconds = 3;                // Il tempo che aspetta prima di riavviare la scena
-
-    #region API
-
-    public void ReloadCurrentRound()
-    {  
-        int SceneNumber = SceneManager.GetActiveScene().buildIndex;
-        LoadScene(SceneNumber);
-    }
-
-    public void LoadScene(int _number)
+namespace BlackFox
+{
+    public class SceneController : MonoBehaviour
     {
-        StartCoroutine(ReStart(_number));
-    }
 
-    public void LoadScene(int _number, bool _useTime)
-    {
-        if(_useTime)
+        public float WaitForSeconds = 3;                // Il tempo che aspetta prima di riavviare la scena
+
+        #region API
+
+        public void ReloadCurrentRound()
+        {
+            int SceneNumber = SceneManager.GetActiveScene().buildIndex;
+            LoadScene(SceneNumber);
+        }
+
+        public void LoadScene(int _number)
+        {
             StartCoroutine(ReStart(_number));
-        else
+        }
+
+        public void LoadScene(int _number, bool _useTime)
+        {
+            if (_useTime)
+                StartCoroutine(ReStart(_number));
+            else
+                SceneManager.LoadScene(_number);
+        }
+
+        IEnumerator ReStart(int _number)
+        {
+            yield return new WaitForSeconds(WaitForSeconds);
             SceneManager.LoadScene(_number);
+        }
+
+        #endregion
     }
-
-    IEnumerator ReStart(int _number)
-    {
-        yield return new WaitForSeconds(WaitForSeconds);
-        SceneManager.LoadScene(_number);
-    }
-
-    #endregion
-
 }

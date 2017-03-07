@@ -2,43 +2,47 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Wave : MonoBehaviour {
-
-    public float velocity;
-    public float force;
-
-    void Start ()
+namespace BlackFox
+{
+    public class Wave : MonoBehaviour
     {
-		
-	}
-	
 
-	void FixedUpdate ()
-    {
-        MoveForward();
-    }
+        public float velocity;
+        public float force;
 
-    void MoveForward()
-    {
-        transform.Translate(Vector3.forward * velocity);
-    }
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.GetComponent<Agent>() != null || other.GetComponent<ExternalAgent>() != null)
+        void Start()
         {
-            other.GetComponent<Rigidbody>().AddForce(transform.forward * force);
+
         }
 
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Wall")
+
+        void FixedUpdate()
         {
-            Debug.Log("kill");
-            //Destroy(gameObject);
+            MoveForward();
         }
-            
+
+        void MoveForward()
+        {
+            transform.Translate(Vector3.forward * velocity);
+        }
+
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.GetComponent<Agent>() != null || other.GetComponent<ExternalAgent>() != null)
+            {
+                other.GetComponent<Rigidbody>().AddForce(transform.forward * force);
+            }
+
+        }
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.tag == "Wall")
+            {
+                Debug.Log("kill");
+                //Destroy(gameObject);
+            }
+
+        }
     }
 }

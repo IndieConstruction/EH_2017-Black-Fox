@@ -6,23 +6,27 @@ public abstract class StateMachineBase : MonoBehaviour {
 
     private StateBase _currenState;
 
-    public StateBase CurrentState {
+    public StateBase CurrentState
+    {
         get { return _currenState; }
         set {
-            if (_currenState != value) {
+            if (_currenState != value)
+            {
                 OnStateChange(value, _currenState);
             }
             _currenState = value; }
     }
 
 
-    void OnStateChange(StateBase _newState, StateBase _oldState) {
+    void OnStateChange(StateBase _newState, StateBase _oldState)
+    {
         if (_oldState != null)
             _oldState.OnEnd();
         _newState.OnStart();
     }
 
-    private void Update() {
+    private void Update()
+    {
         if (CurrentState != null)
             CurrentState.OnUpdate();
     }

@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : MonoBehaviour {
-
-    public float Force = 500000;
-    public int IDArrow;
-    
-       
-
-    private void OnTriggerStay(Collider other)
+namespace BlackFox {
+    public class Arrow : MonoBehaviour
     {
-        if (other.GetComponent<Agent>() != null)
+
+        public float Force = 500000;
+        public int IDArrow;
+
+
+
+        private void OnTriggerStay(Collider other)
         {
-            other.GetComponent<Rigidbody>().AddForce(transform.forward * Force, ForceMode.Acceleration);
+            if (other.GetComponent<Agent>() != null)
+            {
+                other.GetComponent<Rigidbody>().AddForce(transform.forward * Force, ForceMode.Acceleration);
+            }
         }
     }
-    
 }

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+<<<<<<< HEAD
 public class ElementZero : MonoBehaviour, IDamageable {
 
     public float Life = 5;
@@ -48,66 +49,123 @@ public class ElementZero : MonoBehaviour, IDamageable {
         //Aggiorna costantemente la sua slider
         if (gameManager.GetGameUIController() != null)
             gameManager.ElementZeroValueUpdate(Life, MaxLife);
+=======
+namespace BlackFox
+{
+    public class ElementZero : MonoBehaviour, IDamageable
+    {
 
-        // Se CanRegenerateLife è vera può ricaricarsi la vita
-        if (CanRegenerateLife == true)
+        public float Life = 5;
+        public float MaxLife = 15;
+        Core core;
+        public float DamageToCore = 1f;
+        public float WhenDamage = 3;
+        float TimeToWaitToDamage;
+        float TimeToRecharge;
+        bool CanDamageCore;
+        bool CanRegenerateLife;
+        GameManager gameManager;
+        float RandomNum;
+
+
+        // Use this for initialization
+        void Start()
         {
-            ChargeLife();
-        }
-        // altrimenti comincia un timer, allo scadere del tempo CanRegenerateLife ritorna vera permettendogli di rigenerarsi la vita (se la vita non è già al massimo)
-        else
-        {
-            if (Life < MaxLife)
+            gameManager = GameManager.Instance;
+            core = FindObjectOfType<Core>();
+            TimeToWaitToDamage = WhenDamage;
+            TimeToRecharge = WhenDamage;
+            CanDamageCore = false;
+            CanRegenerateLife = true;
+            RandomNum = UnityEngine.Random.Range(0f, 1f);
+
+            if (gameManager.GetGameUIController() != null)
+                gameManager.ElementZeroValueUpdate(Life, MaxLife);
+>>>>>>> 3132dfbeaae8b445c3e4a570fcc02e3d2c2af8e0
+
+            if (RandomNum < 0.5)
             {
-                TimeToRecharge -= Time.deltaTime;
-                if (TimeToRecharge <= 0)
-                {
-                    CanRegenerateLife = true;
-                    TimeToRecharge = WhenDamage;
-                }
+                transform.position = new Vector3(transform.position.x * -1, transform.position.y, transform.position.z);
             }
         }
 
-        // controlla se è il momento di danneggiare il core
-        if (CanDamageCore == true)
+        // Update is called once per frame
+        void Update()
         {
-            DamageCore();
+            //Aggiorna costantemente la sua slider
+            if (gameManager.GetGameUIController() != null)
+                gameManager.ElementZeroValueUpdate(Life, MaxLife);
+
+            // Se CanRegenerateLife è vera può ricaricarsi la vita
+            if (CanRegenerateLife == true)
+            {
+                ChargeLife();
+            }
+            // altrimenti comincia un timer, allo scadere del tempo CanRegenerateLife ritorna vera permettendogli di rigenerarsi la vita (se la vita non è già al massimo)
+            else
+            {
+                if (Life < MaxLife)
+                {
+                    TimeToRecharge -= Time.deltaTime;
+                    if (TimeToRecharge <= 0)
+                    {
+                        CanRegenerateLife = true;
+                        TimeToRecharge = WhenDamage;
+                    }
+                }
+            }
+
+            // controlla se è il momento di danneggiare il core
+            if (CanDamageCore == true)
+            {
+                DamageCore();
+            }
+
         }
 
-    }
-
-    /// <summary>
-    /// Funzione che rigenera la vita la vita dell'elemento zero nel tempo e quando arriva al massimo della vita infligge danno al core
-    /// </summary>
-    void ChargeLife()
-    {
-        Life = Life + 1 * Time.deltaTime * 0.3f;
-
-        //Quando la vita è al massimo infligge danno al core
-        if (Life >= MaxLife)
+        /// <summary>
+        /// Funzione che rigenera la vita la vita dell'elemento zero nel tempo e quando arriva al massimo della vita infligge danno al core
+        /// </summary>
+        void ChargeLife()
         {
-            CanDamageCore = true;
-            Life = MaxLife;
-            CanRegenerateLife = false;
-        } else
-        {
-            CanDamageCore = false;
+            Life = Life + 1 * Time.deltaTime * 0.3f;
+
+            //Quando la vita è al massimo infligge danno al core
+            if (Life >= MaxLife)
+            {
+                CanDamageCore = true;
+                Life = MaxLife;
+                CanRegenerateLife = false;
+            }
+            else
+            {
+                CanDamageCore = false;
+            }
         }
-    }
 
-    /// <summary>
-    /// Funzione che aspetta lo scadere di un timer per poi infliggere danno al core
-    /// </summary>
-    void DamageCore()
-    {
-        TimeToWaitToDamage -= Time.deltaTime;
-        if (TimeToWaitToDamage <= 0)
+        /// <summary>
+        /// Funzione che aspetta lo scadere di un timer per poi infliggere danno al core
+        /// </summary>
+        void DamageCore()
         {
-            core.Damage(DamageToCore, gameObject);
-            TimeToWaitToDamage = WhenDamage;
+            TimeToWaitToDamage -= Time.deltaTime;
+            if (TimeToWaitToDamage <= 0)
+            {
+                core.Damage(DamageToCore, gameObject);
+                TimeToWaitToDamage = WhenDamage;
+            }
         }
-    }
 
+        /// <summary>
+        /// Procura danno all'elemento zero
+        /// </summary>
+        /// <param name="_damage">Quanto danno deve subire</param>
+        /// <param name="_attacker">Chi glielo procura</param>
+        public void Damage(float _damage, GameObject _attacker)
+        {
+            Life -= _damage;
+
+<<<<<<< HEAD
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -128,27 +186,32 @@ public class ElementZero : MonoBehaviour, IDamageable {
     public void Damage(float _damage, GameObject _attacker)
     {
         Life -= _damage;
+=======
+            // Quando la vita arriva a 0 dannegga una prima volta il Core e setta la variabile CanDamageCore a true
+>>>>>>> 3132dfbeaae8b445c3e4a570fcc02e3d2c2af8e0
 
-        // Quando la vita arriva a 0 dannegga una prima volta il Core e setta la variabile CanDamageCore a true
-        
-        if (Life <= 0)
-        {
-            core.Damage(DamageToCore, gameObject);
-            CanDamageCore = true;
-            Life = 0;
+            if (Life <= 0)
+            {
+                core.Damage(DamageToCore, gameObject);
+                CanDamageCore = true;
+                Life = 0;
+            }
+            //altrimenti resetta i timer per danneggiare il core o ricaricarsi la vita
+            else
+            {
+                CanDamageCore = false;
+                TimeToWaitToDamage = WhenDamage;
+                TimeToRecharge = WhenDamage;
+            }
+            //blocca temporaneamente la rigenerazione della vita
+            CanRegenerateLife = false;
         }
-        //altrimenti resetta i timer per danneggiare il core o ricaricarsi la vita
-        else
-        {
-            CanDamageCore = false;
-            TimeToWaitToDamage = WhenDamage;
-            TimeToRecharge = WhenDamage;
-        }
-        //blocca temporaneamente la rigenerazione della vita
-        CanRegenerateLife = false;
     }
+<<<<<<< HEAD
     #endregion
 
     #endregion
 
+=======
+>>>>>>> 3132dfbeaae8b445c3e4a570fcc02e3d2c2af8e0
 }

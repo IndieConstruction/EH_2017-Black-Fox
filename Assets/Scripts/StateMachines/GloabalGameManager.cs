@@ -23,7 +23,7 @@ namespace BlackFox {
         void Start()
         {
             // stato iniziale di gioco
-            CurrentState = new MainMenuState();
+            //CurrentState = new MainMenuState();
         }
 
         void Update()
@@ -33,7 +33,7 @@ namespace BlackFox {
 
         public void ChangeScene(int _sceneNumber)
         {
-            CurrentState = new GameplayState();
+            //CurrentState = new GameplayState();
             sceneController.LoadScene(_sceneNumber);
         }
     }

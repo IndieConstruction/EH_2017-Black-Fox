@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace BlackFox
 {
-    public class LevelStateMachine : BaseStateMachine, IState
+    public class LevelStateMachine : IState
     {
 
         public void OnStart()

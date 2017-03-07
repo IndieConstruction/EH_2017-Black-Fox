@@ -2,45 +2,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OstacoloMobile : MonoBehaviour {
-    Rigidbody rigid;
-    public float InitialImpulse = 1;
-    public float SpeedRotation = 2;
-    public float damage = 1;
-    List<IDamageable> damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable
-    Core core;
-    
+namespace BlackFox
+{
 
-    // Use this for initialization
-    void Start () {
-        core = FindObjectOfType<Core>();
-        rigid = GetComponent<Rigidbody>();
-        rigid.AddForce(transform.forward * InitialImpulse, ForceMode.Acceleration);
-    }
-
-    private void Update()
+    public class OstacoloMobile : MonoBehaviour
     {
-        rigid.AddForce(transform.forward * InitialImpulse, ForceMode.Acceleration);
-    }
+        Rigidbody rigid;
+        public float InitialImpulse = 1;
+        public float SpeedRotation = 2;
+        public float damage = 1;
+        List<IDamageable> damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable
+        Core core;
 
 
-
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
-        if (Vector3.Cross(transform.position, collision.contacts[0].normal) == Vector3.zero)
+        // Use this for initialization
+        void Start()
         {
-            rigid.AddForce(-transform.position * rigid.mass, ForceMode.Impulse);
+            core = FindObjectOfType<Core>();
+            rigid = GetComponent<Rigidbody>();
+            rigid.AddForce(transform.forward * InitialImpulse, ForceMode.Acceleration);
         }
-        else
+
+        private void Update()
         {
-            rigid.AddForce(Vector3.Reflect(transform.position, collision.contacts[0].normal) * SpeedRotation, ForceMode.Acceleration);
+            rigid.AddForce(transform.forward * InitialImpulse, ForceMode.Acceleration);
         }
-        transform.rotation = Quaternion.LookRotation(rigid.velocity);
-        if (damageable != null && collision.gameObject.GetComponent<Core>() == null)
+
+
+
+
+        private void OnCollisionEnter(Collision collision)
         {
-            damageable.Damage(damage, gameObject);
+            IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
+            if (Vector3.Cross(transform.position, collision.contacts[0].normal) == Vector3.zero)
+            {
+                rigid.AddForce(-transform.position * rigid.mass, ForceMode.Impulse);
+            }
+            else
+            {
+                rigid.AddForce(Vector3.Reflect(transform.position, collision.contacts[0].normal) * SpeedRotation, ForceMode.Acceleration);
+            }
+            transform.rotation = Quaternion.LookRotation(rigid.velocity);
+            if (damageable != null && collision.gameObject.GetComponent<Core>() == null)
+            {
+                damageable.Damage(damage, gameObject);
+            }
         }
     }
 }

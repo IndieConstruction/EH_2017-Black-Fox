@@ -18,8 +18,14 @@ public class GameManager : MonoBehaviour {
     RespawnAgent respawnAgent;
     GameUIController gameUI;
 
-    float coreLife;                 // vita del Core
+    private State currentState;
+    public State CurrentState
+    {
+        get { return currentState; }
+        set { currentState = value; }
+    }
 
+    private float coreLife;
     public float CoreLife
     {
         get { return coreLife; }
@@ -28,19 +34,14 @@ public class GameManager : MonoBehaviour {
 
     private void Awake()
     {
+        //For actual debug pourpose
         if (dontDestroyOnLoad)
-        {
             DontDestroyOnLoad(gameObject);
-        }
-
+        //Singleton paradigm
         if (Instance == null)
-        {
             Instance = this;
-        }
         else
-        {
             Destroy(gameObject);
-        }
         
         sceneController = FindObjectOfType<SceneController>();
     }
@@ -48,8 +49,7 @@ public class GameManager : MonoBehaviour {
     void Start ()
     {
         pointsManager = new PointsManager(KillPoint, DeathPoint, PointsToWin);
-        respawnAgent = GetComponent<RespawnAgent>();
-        
+        respawnAgent = GetComponent<RespawnAgent>();        
     }
 
     private void Update()
@@ -135,5 +135,15 @@ public class GameManager : MonoBehaviour {
         respawnAgent.Respawn(_victim);
     }
     #endregion
+
+    public enum State
+    {
+        InitializeRound,
+        StartCooldowwn,
+        GameStateUpdate,
+        Pause,
+        Resume,
+        Quit
+    }
 }
 

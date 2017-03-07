@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlockPin : MonoBehaviour {
-
-    private void OnTriggerStay(Collider other)
+namespace BlackFox
+{
+    public class BlockPin : MonoBehaviour
     {
-        if (other.GetComponent<Agent>() != null)
-            other.GetComponent<PlacePin>().CanPlace = false;
-    }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.GetComponent<Agent>() != null)
-            other.GetComponent<PlacePin>().CanPlace = true;
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.GetComponent<Agent>() != null)
+                other.GetComponent<PlacePin>().CanPlace = false;
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.GetComponent<Agent>() != null)
+                other.GetComponent<PlacePin>().CanPlace = true;
+        }
     }
 }

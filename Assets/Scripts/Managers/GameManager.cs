@@ -103,7 +103,7 @@ namespace BlackFox
         #region SceneController
         public void ChangeScene()
         {
-            sceneController.LoadScene(1, false);
+            sceneController.LoadScene(1);
         }
 
         public void ReloadScene()

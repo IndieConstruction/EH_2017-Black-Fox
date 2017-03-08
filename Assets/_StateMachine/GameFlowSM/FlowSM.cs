@@ -8,13 +8,8 @@ public class FlowSM : StateMachineBase {
         CurrentState = new MainMenuState();
     }
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            CurrentState = new GameplayState();
-        }
-        if (Input.GetKeyDown(KeyCode.M)) {
-            CurrentState = new MainMenuState();
-        }
+    public void GoToGamePlay() {
+        CurrentState = new GameplayState();
     }
 
 }

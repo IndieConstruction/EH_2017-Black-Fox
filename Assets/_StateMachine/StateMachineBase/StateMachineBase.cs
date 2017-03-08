@@ -22,7 +22,7 @@ public abstract class StateMachineBase : MonoBehaviour {
     {
         if (_oldState != null)
             _oldState.OnEnd();
-        _newState.OnStart();
+        _newState.OnPreStart(this);
     }
 
     private void Update()

@@ -4,8 +4,15 @@ using UnityEngine;
 
 public abstract class StateBase {
 
-    public virtual void OnStart() {
+    protected StateMachineBase stateMachine;
 
+    public void OnPreStart(StateMachineBase _stateMachine) {
+        stateMachine = _stateMachine;
+        OnStart();
+    }
+
+    public virtual void OnStart() {
+        
     }
 
     public virtual void OnUpdate() {

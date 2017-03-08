@@ -21,6 +21,8 @@ namespace BlackFox
         RespawnAgent respawnAgent;
         GameUIController gameUI;
 
+        FlowSM flowSM;
+
         private State currentState;
         public State CurrentState
         {
@@ -37,14 +39,16 @@ namespace BlackFox
 
         private void Awake()
         {
-            //For actual debug pourpose
-            if (dontDestroyOnLoad)
-                DontDestroyOnLoad(gameObject);
+
             //Singleton paradigm
-            if (Instance == null)
+            if (Instance == null) { 
                 Instance = this;
-            else
-                Destroy(gameObject);
+                //For actual debug pourpose
+                if (dontDestroyOnLoad)
+                    DontDestroyOnLoad(gameObject);
+            } else { 
+                DestroyImmediate(gameObject);
+            }
 
             sceneController = FindObjectOfType<SceneController>();
         }
@@ -53,6 +57,7 @@ namespace BlackFox
         {
             pointsManager = new PointsManager(KillPoint, DeathPoint, PointsToWin);
             respawnAgent = GetComponent<RespawnAgent>();
+            flowSM = gameObject.AddComponent<FlowSM>();
         }
 
         private void Update()
@@ -127,9 +132,8 @@ namespace BlackFox
         #endregion
 
         #region RespawnAgent
-        public void SetAgentSpawnPoint(PlayerIndex _playerIndex, Transform _spawnpoint)
-        {
-            respawnAgent.SetSpawnPoint(_playerIndex, _spawnpoint);
+        public void SetAgentSpawnPoint(PlayerIndex _playerIndex, Transform _spawnpoint) {
+            //respawnAgent.SetSpawnPoint(_playerIndex, _spawnpoint);
         }
 
         IEnumerator WaitForRespawn(PlayerIndex _victim)

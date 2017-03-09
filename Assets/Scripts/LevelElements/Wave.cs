@@ -11,6 +11,11 @@ namespace BlackFox
         public float force;
         List<PlayerIndex> ListPlayer = new List<PlayerIndex>();
 
+        private void Start()
+        {
+            Destroy(gameObject, 7f);
+        }
+
         void FixedUpdate()
         {
             MoveForward();
@@ -30,21 +35,20 @@ namespace BlackFox
         {
             if (other.GetComponent<Agent>() != null && !ListPlayer.Contains(other.GetComponent<Agent>().playerIndex))
             {
-                ListPlayer.Add(other.GetComponent<Agent>().playerIndex);
                 Push(other.GetComponent<Rigidbody>());
+                ListPlayer.Add(other.GetComponent<Agent>().playerIndex);
             }
             else if (other.GetComponent<ExternalAgent>() != null)
             {
                 Push(other.GetComponent<Rigidbody>());
             }
-
         }
         private void OnTriggerExit(Collider other)
         {
             if (other.tag == "Wall")
             {
                 Debug.Log("kill");
-                //Destroy(gameObject);
+                //TODO : Destroy(gameObject);
             }
 
         }

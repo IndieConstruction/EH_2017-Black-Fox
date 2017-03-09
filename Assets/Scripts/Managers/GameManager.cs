@@ -23,13 +23,6 @@ namespace BlackFox
 
         FlowSM flowSM;
 
-        private State currentState;
-        public State CurrentState
-        {
-            get { return currentState; }
-            set { currentState = value; }
-        }
-
         private float coreLife;
         public float CoreLife
         {
@@ -142,16 +135,6 @@ namespace BlackFox
             respawnAgent.Respawn(_victim);
         }
         #endregion
-
-        public enum State
-        {
-            InitializeRound,
-            StartCooldowwn,
-            GameStateUpdate,
-            Pause,
-            Resume,
-            Quit
-        }
     }
 }
 

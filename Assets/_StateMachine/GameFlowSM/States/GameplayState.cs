@@ -10,5 +10,10 @@ public class GameplayState : StateBase {
     public override void OnStart() {
         SceneManager.LoadScene("PrototypeScene");
     }
-
+    public override void OnUpdate() {
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            if (OnStateEnd != null)
+                OnStateEnd("GameplayState");
+        }
+    }
 }

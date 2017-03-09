@@ -7,16 +7,15 @@ using UnityEngine.SceneManagement;
 public class MainMenuState : StateBase {
 
     public override void OnStart() {
-        //SceneManager.LoadScene("MainMenu");
-
+        SceneManager.LoadScene("MainMenu");
     }
 
     public override void OnUpdate() {
         if (Input.GetKeyDown(KeyCode.Space)) {
-            stateMachine.CurrentState = new GameplayState();
+            if(OnStateEnd != null)
+                OnStateEnd("MainMenuState");
         }
-        if (Input.GetKeyDown(KeyCode.M)) {
-            stateMachine.CurrentState = new MainMenuState();
-        }
-    }
+
+   }
+
 }

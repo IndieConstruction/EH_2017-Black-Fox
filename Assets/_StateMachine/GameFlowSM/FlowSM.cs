@@ -34,11 +34,11 @@ namespace BlackFox {
 
         #region Events
         private void OnEnable() {
-            MainMenuState.OnStateEnd += OnStateEnd;
+            StateBase.OnStateEnd += OnStateEnd;
             AddListenerToButton();
         }
         private void OnDisable() {
-            MainMenuState.OnStateEnd -= OnStateEnd;
+            StateBase.OnStateEnd -= OnStateEnd;
             if (GameManager.Instance.TestSceneButton)
                 GameManager.Instance.TestSceneButton.onClick.RemoveAllListeners();
         }

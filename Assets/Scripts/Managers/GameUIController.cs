@@ -24,7 +24,8 @@ namespace BlackFox
 
         private void Start()
         {
-            GameManager.Instance.SetGameUIController(this);
+            if (GameManager.Instance != null)
+                  GameManager.Instance.SetGameUIController(this);
         }
 
         public void SetSliderValue(PlayerIndex _playerIndex, float _life)

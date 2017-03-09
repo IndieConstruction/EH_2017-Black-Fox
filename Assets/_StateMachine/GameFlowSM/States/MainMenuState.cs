@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class MainMenuState : StateBase {
 
     public override void OnStart() {
-        SceneManager.LoadScene("MainMenu");
+        //SceneManager.LoadScene("MainMenu");
 
     }
 

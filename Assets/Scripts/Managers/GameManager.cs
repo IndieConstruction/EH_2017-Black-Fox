@@ -133,7 +133,8 @@ namespace BlackFox
 
         #region RespawnAgent
         public void SetAgentSpawnPoint(PlayerIndex _playerIndex, Transform _spawnpoint) {
-            //respawnAgent.SetSpawnPoint(_playerIndex, _spawnpoint);
+            if (respawnAgent != null)
+                respawnAgent.SetSpawnPoint(_playerIndex, _spawnpoint);
         }
 
         IEnumerator WaitForRespawn(PlayerIndex _victim)

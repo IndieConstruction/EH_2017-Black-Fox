@@ -10,11 +10,12 @@ public abstract class StateMachineBase : MonoBehaviour {
     {
         get { return _currenState; }
         set {
-            if (_currenState != value)
-            {
-                OnStateChange(value, _currenState);
+                if (_currenState != value)
+                {
+                    OnStateChange(value, _currenState);
+                }
+                _currenState = value;
             }
-            _currenState = value; }
     }
 
 

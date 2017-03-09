@@ -9,17 +9,19 @@ namespace BlackFox {
     /// </summary>
     public class FlowSM : StateMachineBase {
 
-
-        private void Start() {
+        private void Start()
+        {
             CurrentState = new MainMenuState();
         }
 
-        public void GoToNextFlow() {
+        public void GoToNextFlow()
+        {
 
             CurrentState = new GameplayState();
         }
 
-        void OnStateEnd(string _stateName) {
+        void OnStateEnd(string _stateName)
+        {
             switch (_stateName) {
                 case "MainMenuState":
                     CurrentState = new GameplayState();
@@ -33,22 +35,22 @@ namespace BlackFox {
         }
 
         #region Events
-        private void OnEnable() {
+        private void OnEnable()
+        {
             StateBase.OnStateEnd += OnStateEnd;
             AddListenerToButton();
         }
-        private void OnDisable() {
+        private void OnDisable()
+        {
             StateBase.OnStateEnd -= OnStateEnd;
             if (GameManager.Instance.TestSceneButton)
                 GameManager.Instance.TestSceneButton.onClick.RemoveAllListeners();
         }
 
-        private void OnLevelWasLoaded(int level) {
-            AddListenerToButton();
-        }
-
-        void AddListenerToButton() {
-            if (GameManager.Instance.TestSceneButton) {
+        void AddListenerToButton()
+        {
+            if (GameManager.Instance.TestSceneButton)
+            {
                 GameManager.Instance.TestSceneButton.onClick.RemoveAllListeners();
                 GameManager.Instance.TestSceneButton.onClick.AddListener(() => {
                     CurrentState = new GameplayState();

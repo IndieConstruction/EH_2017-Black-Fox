@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using XInputDotNetPure;
 namespace BlackFox
 {
     public class Wave : MonoBehaviour
@@ -9,12 +9,7 @@ namespace BlackFox
 
         public float velocity;
         public float force;
-
-        void Start()
-        {
-
-        }
-
+        List<PlayerIndex> ListPlayer = new List<PlayerIndex>();
 
         void FixedUpdate()
         {
@@ -26,12 +21,21 @@ namespace BlackFox
             transform.Translate(Vector3.forward * velocity);
         }
 
+        void Push(Rigidbody _rigid)
+        {
+            _rigid.AddForce(transform.forward * force);
+        }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponent<Agent>() != null || other.GetComponent<ExternalAgent>() != null)
+            if (other.GetComponent<Agent>() != null && !ListPlayer.Contains(other.GetComponent<Agent>().playerIndex))
             {
-                other.GetComponent<Rigidbody>().AddForce(transform.forward * force);
+                ListPlayer.Add(other.GetComponent<Agent>().playerIndex);
+                Push(other.GetComponent<Rigidbody>());
+            }
+            else if (other.GetComponent<ExternalAgent>() != null)
+            {
+                Push(other.GetComponent<Rigidbody>());
             }
 
         }

@@ -12,7 +12,7 @@ public class SpawnWave : MonoBehaviour {
     void Start ()
     {
         SetSpawnPoints();
-        nextTime += Random.Range(MinTime, MaxTime);
+        //nextTime += Random.Range(MinTime, MaxTime);
     }
 	
 

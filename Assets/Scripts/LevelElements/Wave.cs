@@ -9,11 +9,14 @@ namespace BlackFox
 
         public float velocity;
         public float force;
+        Vector3 initDist;
+        Vector3 deadlyDistance;
         List<PlayerIndex> ListPlayer = new List<PlayerIndex>();
 
         private void Start()
         {
-            Destroy(gameObject, 7f);
+            //Destroy(gameObject, 7f);
+            initDist = transform.position - FindObjectOfType<Core>().transform.position;
         }
 
         void FixedUpdate()
@@ -21,6 +24,15 @@ namespace BlackFox
             MoveForward();
         }
 
+        private void Update()
+        {
+            deadlyDistance = transform.position - FindObjectOfType<Core>().transform.position;
+            Debug.Log(initDist + "/" + deadlyDistance);
+            if(Vector3.Distance(initDist, deadlyDistance) <=0)
+            {
+                Destroy(gameObject);
+            }
+        }
         void MoveForward()
         {
             transform.Translate(Vector3.forward * velocity);
@@ -43,14 +55,7 @@ namespace BlackFox
                 Push(other.GetComponent<Rigidbody>());
             }
         }
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.tag == "Wall")
-            {
-                Debug.Log("kill");
-                //TODO : Destroy(gameObject);
-            }
 
-        }
+        
     }
 }

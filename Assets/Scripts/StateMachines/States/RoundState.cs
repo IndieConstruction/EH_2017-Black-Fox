@@ -14,7 +14,7 @@ namespace BlackFox
             RoundEnd,
         }
 
-        private RoundStates currentState;
+        private RoundStates currentState = RoundStates.Initialize;
         /// <summary>
         /// Stato attuale.
         /// </summary>
@@ -56,7 +56,6 @@ namespace BlackFox
         {
             Debug.Log("RoundState");
             IsRoundSMActive = true;
-            CurrentState = RoundStates.Initialize;
             Debug.Log("Initialize");
         }
 

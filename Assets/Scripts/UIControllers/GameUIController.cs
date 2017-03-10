@@ -87,10 +87,5 @@ namespace BlackFox
             WindDisplay.gameObject.SetActive(true);
             TextWindDisplay.text = "Player" + _playerIndex + " Ha vinto! ";
         }
-
-        public void CallReloadScene()
-        {
-            GameManager.Instance.ReloadScene();
-        }
     }
 }

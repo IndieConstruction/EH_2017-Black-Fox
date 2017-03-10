@@ -7,9 +7,11 @@ namespace BlackFox
 {
     public class MainMenuState : StateBase
     {
+        UnityEngine.Object canvasMenu;
 
         public override void OnStart()
         {
+            canvasMenu = GameObject.Instantiate(Resources.Load("Prefabs/Misc/CanvasMenu"));
             Debug.Log("MainMenu");
         }
 
@@ -21,6 +23,11 @@ namespace BlackFox
                     OnStateEnd("MainMenuState");
             }
 
+        }
+
+        public override void OnEnd()
+        {
+            GameObject.Destroy(canvasMenu);
         }
     }
 }

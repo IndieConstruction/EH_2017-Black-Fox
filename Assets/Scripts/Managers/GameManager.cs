@@ -69,18 +69,6 @@ namespace BlackFox
             return managerUI;
         }
 
-        #region SceneController
-        public void ChangeScene()
-        {
-            sceneController.LoadScene(1);
-        }
-
-        public void ReloadScene()
-        {
-            sceneController.ReloadCurrentRound();
-        }
-        #endregion
-
         #region PointsManager
         public void SetKillPoints(PlayerIndex _killer, PlayerIndex _victim)
         {

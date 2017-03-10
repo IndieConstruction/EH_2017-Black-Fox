@@ -73,7 +73,6 @@ namespace BlackFox
             {
                 GetComponent<MeshRenderer>().enabled = false;
                 GetComponent<Collider>().enabled = false;
-                gameManager.ReloadScene();
             }
         }
 

@@ -16,7 +16,8 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("Gameplay");
-            StartGameplaySM();
+            GameObject.Instantiate(Resources.Load("Prefabs/Misc/CanvasGame"));
+            StartGameplaySM();       
         }
 
         public override void OnUpdate()

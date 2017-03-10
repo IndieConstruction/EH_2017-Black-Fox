@@ -81,3 +81,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 737f7a95e9a1431469a972e3c9566a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  menuUIController: {fileID: 0}
+  gameUIController: {fileID: 0}

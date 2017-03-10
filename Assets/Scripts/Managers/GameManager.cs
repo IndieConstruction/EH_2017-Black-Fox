@@ -20,7 +20,7 @@ namespace BlackFox
         SceneController sceneController;
         PointsManager pointsManager;
         RespawnAgent respawnAgent;
-        GameUIController gameUI;
+        UIManager managerUI;
         public Button TestSceneButton;
         FlowSM flowSM;
 
@@ -50,6 +50,7 @@ namespace BlackFox
 
         void Start()
         {
+            managerUI = GetComponent<UIManager>();
             pointsManager = new PointsManager(KillPoint, DeathPoint, PointsToWin);
             respawnAgent = GetComponent<RespawnAgent>();
             flowSM = gameObject.AddComponent<FlowSM>();
@@ -62,43 +63,11 @@ namespace BlackFox
                 Application.Quit();
             }
         }
-        #region GameUIController
-        public void SetGameUIController(GameUIController _gameUI)
-        {
-            gameUI = _gameUI;
-        }
 
-        public GameUIController GetGameUIController()
+        public UIManager GetUIManager()
         {
-            return gameUI;
+            return managerUI;
         }
-
-
-        public void SliderValueUpdate(PlayerIndex _playerIndex, float _life)
-        {
-            gameUI.SetSliderValue(_playerIndex, _life);
-        }
-
-        public void BullletsValueUpdate(PlayerIndex _playerIndex, int _remainigAmmo)
-        {
-            gameUI.SetBulletsValue(_playerIndex, _remainigAmmo);
-        }
-
-        public void CoreSliderValueUpdate(float _life, float _maxLife)
-        {
-            gameUI.SetCoreSliderValue(_life, _maxLife);
-        }
-
-        public void ElementZeroValueUpdate(float _life, float _maxLife)
-        {
-            gameUI.SetElementZeroSlider(_life, _maxLife);
-        }
-
-        public void DisplayWinnerPlayer(PlayerIndex _playerIndex)
-        {
-            gameUI.ShowWinner(_playerIndex);
-        }
-        #endregion
 
         #region SceneController
         public void ChangeScene()

@@ -18,12 +18,11 @@ public abstract class StateMachineBase : MonoBehaviour {
             }
     }
 
-
     void OnStateChange(StateBase _newState, StateBase _oldState)
     {
         if (_oldState != null)
             _oldState.OnEnd();
-        _newState.OnPreStart(this);
+        _newState.OnStart();
     }
 
     private void Update()
@@ -32,4 +31,9 @@ public abstract class StateMachineBase : MonoBehaviour {
             CurrentState.OnUpdate();
     }
 
+    #region Events
+    public delegate void MachineEvent(string _machineName);
+
+    public static MachineEvent OnMachineEnd;
+    #endregion
 }

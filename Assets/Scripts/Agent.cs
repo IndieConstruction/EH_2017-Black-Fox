@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using System;
 using XInputDotNetPure;
 
 namespace BlackFox
@@ -50,8 +48,8 @@ namespace BlackFox
 
             gameManager.SetAgentSpawnPoint(playerIndex, transform);
 
-            if (gameManager.GetGameUIController() != null)
-                gameManager.SliderValueUpdate(playerIndex, Life);
+            //if (gameManager.GetGameUIController() != null)
+            //    gameManager.SliderValueUpdate(playerIndex, Life);
 
             if (playerIndex == PlayerIndex.Three)
             {
@@ -209,8 +207,8 @@ namespace BlackFox
         public void Damage(float _damage, GameObject _attacker)
         {
             Life -= _damage;
-            if (gameManager.GetGameUIController() != null)
-                gameManager.SliderValueUpdate(playerIndex, Life);
+            //if (gameManager.GetGameUIController() != null)
+            //    gameManager.SliderValueUpdate(playerIndex, Life);
 
             if (Life < 1)
             {

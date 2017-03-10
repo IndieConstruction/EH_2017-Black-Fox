@@ -39,10 +39,10 @@ namespace BlackFox
                 instantiateObstacles();
             }
 
-            if (gameManager.GetGameUIController() != null)
-            {
-                gameManager.CoreSliderValueUpdate(life, MaxLife);
-            }
+            //if (gameManager.GetGameUIController() != null)
+            //{
+            //    gameManager.CoreSliderValueUpdate(life, MaxLife);
+            //}
         }
 
         void instantiateObstacles()
@@ -67,8 +67,8 @@ namespace BlackFox
         public void Damage(float _damage, GameObject _attacker)
         {
             life -= _damage;
-            if (gameManager.GetGameUIController() != null)
-                gameManager.CoreSliderValueUpdate(life, MaxLife);
+            //if (gameManager.GetGameUIController() != null)
+            //    gameManager.CoreSliderValueUpdate(life, MaxLife);
             if (life < 1)
             {
                 GetComponent<MeshRenderer>().enabled = false;

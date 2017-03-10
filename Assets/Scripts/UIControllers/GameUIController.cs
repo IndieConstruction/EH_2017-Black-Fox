@@ -22,10 +22,14 @@ namespace BlackFox
         public Text TextWindDisplay;
         public Slider ElementZeroSlider;
 
+        UIManager managerUI;
+
         private void Start()
         {
             if (GameManager.Instance != null)
-                  GameManager.Instance.SetGameUIController(this);
+                managerUI = GameManager.Instance.GetUIManager();
+            if (managerUI != null)
+                managerUI.SetGameUIController(this);
         }
 
         public void SetSliderValue(PlayerIndex _playerIndex, float _life)

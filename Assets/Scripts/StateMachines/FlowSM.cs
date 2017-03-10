@@ -14,12 +14,6 @@ namespace BlackFox {
             CurrentState = new MainMenuState();
         }
 
-        public void GoToNextFlow()
-        {
-
-            CurrentState = new GameplayState();
-        }
-
         void OnStateEnd(string _stateName)
         {
             switch (_stateName) {
@@ -45,6 +39,13 @@ namespace BlackFox {
             StateBase.OnStateEnd -= OnStateEnd;
             if (GameManager.Instance.TestSceneButton)
                 GameManager.Instance.TestSceneButton.onClick.RemoveAllListeners();
+        }
+
+        // TODO : gli eventi non vengono richiamati al click del bottone
+
+        private void OnLevelWasLoaded(int level)
+        {
+            AddListenerToButton();
         }
 
         void AddListenerToButton()

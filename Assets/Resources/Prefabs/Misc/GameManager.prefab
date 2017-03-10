@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4732227275388010}
   - component: {fileID: 114687397847276430}
+  - component: {fileID: 114742682514710138}
   - component: {fileID: 114431221562126886}
   m_Layer: 0
   m_Name: GameManager
@@ -69,3 +70,14 @@ MonoBehaviour:
   dontDestroyOnLoad: 1
   AgentRespawnTime: 3
   TestSceneButton: {fileID: 0}
+--- !u!114 &114742682514710138
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1577717129805144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 737f7a95e9a1431469a972e3c9566a00, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

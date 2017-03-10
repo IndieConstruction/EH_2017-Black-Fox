@@ -67,7 +67,7 @@ namespace BlackFox
 
         void DisplayTheWinner(PlayerIndex _playerIndex)
         {
-            GameManager.Instance.DisplayWinnerPlayer(_playerIndex);
+            //GameManager.Instance.DisplayWinnerPlayer(_playerIndex);
         }
     }
 

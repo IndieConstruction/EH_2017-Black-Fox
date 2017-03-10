@@ -40,8 +40,8 @@ namespace BlackFox
                 }
             }
 
-            if (gameManager.GetGameUIController() != null)
-                gameManager.ElementZeroValueUpdate(Life, MaxLife);
+            //if (gameManager.GetGameUIController() != null)
+            //    gameManager.ElementZeroValueUpdate(Life, MaxLife);
         }
 
 
@@ -49,8 +49,8 @@ namespace BlackFox
         void Update()
         {
             //Aggiorna costantemente la sua slider
-            if (gameManager.GetGameUIController() != null)
-                gameManager.ElementZeroValueUpdate(Life, MaxLife);
+            //if (gameManager.GetGameUIController() != null)
+            //    gameManager.ElementZeroValueUpdate(Life, MaxLife);
 
             // Se CanRegenerateLife è vera può ricaricarsi la vita
             if (CanRegenerateLife == true)

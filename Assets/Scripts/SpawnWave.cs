@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpawnWave : MonoBehaviour {
 
     List<Transform> SpawnPoints = new List<Transform>();
+    GameObject wave;
     float nextTime;
     public float MinTime = 20;
     public float MaxTime = 50;
@@ -41,7 +42,14 @@ public class SpawnWave : MonoBehaviour {
 
     void InstantiateWave(Transform _spawn)
     {
-        GameObject wave = Instantiate(LoadExternalAgentPrefab(), _spawn.position, _spawn.rotation);
+        if (!wave)
+            wave = Instantiate(LoadExternalAgentPrefab(), _spawn.position, _spawn.rotation);
+        else
+        {
+            wave.transform.position = _spawn.position;
+            wave.transform.rotation = _spawn.rotation;
+        }
+            
     }
 
     private GameObject LoadExternalAgentPrefab()

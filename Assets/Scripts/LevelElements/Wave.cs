@@ -10,11 +10,6 @@ namespace BlackFox
         public float velocity;
         public float force;
 
-        void Start()
-        {
-
-        }
-
 
         void FixedUpdate()
         {
@@ -33,16 +28,6 @@ namespace BlackFox
             {
                 other.GetComponent<Rigidbody>().AddForce(transform.forward * force);
             }
-
-        }
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.tag == "Wall")
-            {
-                Debug.Log("kill");
-                //Destroy(gameObject);
-            }
-
         }
     }
 }

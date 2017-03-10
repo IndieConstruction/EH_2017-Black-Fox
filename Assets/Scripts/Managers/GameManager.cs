@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using XInputDotNetPure;
 
 namespace BlackFox
@@ -20,7 +21,7 @@ namespace BlackFox
         PointsManager pointsManager;
         RespawnAgent respawnAgent;
         GameUIController gameUI;
-
+        public Button TestSceneButton;
         FlowSM flowSM;
 
         private float coreLife;
@@ -43,6 +44,7 @@ namespace BlackFox
                 DestroyImmediate(gameObject);
             }
 
+            TestSceneButton = FindObjectOfType<Button>();
             sceneController = FindObjectOfType<SceneController>();
         }
 

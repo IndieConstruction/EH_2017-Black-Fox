@@ -22,5 +22,10 @@ public abstract class StateBase {
     public virtual void OnEnd() {
 
     }
+    #region Events
+    public delegate void StateEvent(string _string);
+
+    public static StateEvent OnStateEnd;
+    #endregion
 
 }

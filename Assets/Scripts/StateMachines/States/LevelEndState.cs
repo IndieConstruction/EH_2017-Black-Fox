@@ -12,7 +12,7 @@ namespace BlackFox
 
         public override void OnUpdate()
         {
-            if (Input.GetKeyDown(KeyCode.A))
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (OnStateEnd != null)
                     OnStateEnd("LevelEnd");

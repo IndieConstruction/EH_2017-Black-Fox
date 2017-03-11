@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,11 +13,12 @@ namespace BlackFox
     {
         GameplaySM gameplaySM;
         bool IsGameplaySMActive;
+        UnityEngine.Object canvasGame;
 
         public override void OnStart()
         {
             Debug.Log("Gameplay");
-            GameObject.Instantiate(Resources.Load("Prefabs/Misc/CanvasGame"));
+            canvasGame = GameObject.Instantiate(Resources.Load("Prefabs/Misc/CanvasGame"));
             StartGameplaySM();       
         }
 
@@ -32,6 +34,7 @@ namespace BlackFox
         public override void OnEnd()
         {
             StateMachineBase.OnMachineEnd -= OnMachineEnd;
+            GameObject.Destroy(canvasGame);
         }
 
         void StartGameplaySM()

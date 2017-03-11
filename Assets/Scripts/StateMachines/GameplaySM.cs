@@ -33,7 +33,7 @@ namespace BlackFox {
                         CurrentState = new LevelEndState();
                     }                      
                     break;
-                case "LevelEnd":
+                case "LevelEndState":
                     //EXIT POINT   
                     if (OnMachineEnd != null)
                         OnMachineEnd("GameplaySM");

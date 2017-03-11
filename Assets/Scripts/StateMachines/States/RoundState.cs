@@ -57,6 +57,7 @@ namespace BlackFox
             Debug.Log("RoundState");
             IsRoundSMActive = true;
             Debug.Log("Initialize");
+
         }
 
         public override void OnUpdate()
@@ -97,6 +98,7 @@ namespace BlackFox
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                
                 CurrentState = RoundStates.Play;
             }
         }
@@ -123,8 +125,7 @@ namespace BlackFox
 
         void RoundEnd()
         {
-            if (OnStateEnd != null)
-                OnStateEnd("RoundState");
+            IsRoundSMActive = false;
         }
     }
 }

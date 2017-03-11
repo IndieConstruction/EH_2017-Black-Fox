@@ -29,6 +29,9 @@ namespace BlackFox {
         }
 
         #region Events
+
+        // TODO : gli eventi non vengono richiamati al click del bottone
+
         private void OnEnable()
         {
             StateBase.OnStateEnd += OnStateEnd;
@@ -40,8 +43,6 @@ namespace BlackFox {
             if (GameManager.Instance.TestSceneButton)
                 GameManager.Instance.TestSceneButton.onClick.RemoveAllListeners();
         }
-
-        // TODO : gli eventi non vengono richiamati al click del bottone
 
         private void OnLevelWasLoaded(int level)
         {

@@ -12,7 +12,6 @@ namespace BlackFox
     public class GameplayState : StateBase
     {
         GameplaySM gameplaySM;
-        bool IsGameplaySMActive;
         UnityEngine.Object canvasGame;
 
         public override void OnStart()
@@ -20,15 +19,6 @@ namespace BlackFox
             Debug.Log("Gameplay");
             canvasGame = GameObject.Instantiate(Resources.Load("Prefabs/Misc/CanvasGame"));
             StartGameplaySM();       
-        }
-
-        public override void OnUpdate()
-        {
-            if (Input.GetKeyDown(KeyCode.Space) && !IsGameplaySMActive)
-            {
-                if (OnStateEnd != null)
-                    OnStateEnd("GameplayState");
-            }
         }
 
         public override void OnEnd()
@@ -41,7 +31,6 @@ namespace BlackFox
         {
             gameplaySM = new GameObject().AddComponent<GameplaySM>();
             gameplaySM.gameObject.name = "GameplayStateMachine";
-            IsGameplaySMActive = true;
             StateMachineBase.OnMachineEnd += OnMachineEnd;
         }
 
@@ -50,8 +39,9 @@ namespace BlackFox
             if(_machineName == "GameplaySM")
             {
                 Debug.Log("GameplaySM_Stop");
-                IsGameplaySMActive = false;
                 GameObject.Destroy(gameplaySM.gameObject);
+                if (OnStateEnd != null)
+                    OnStateEnd("GameplayState");
             }   
         }
     }

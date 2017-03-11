@@ -5,7 +5,6 @@ namespace BlackFox
 {
     public class RoundState : StateBase
     {
-        bool IsRoundSMActive;
         public enum RoundStates
         {
             Initialize,
@@ -14,7 +13,7 @@ namespace BlackFox
             RoundEnd,
         }
 
-        private RoundStates currentState = RoundStates.Initialize;
+        private RoundStates currentState;
         /// <summary>
         /// Stato attuale.
         /// </summary>
@@ -37,6 +36,7 @@ namespace BlackFox
             switch (_newState)
             {
                 case RoundStates.Initialize:
+                    Debug.Log("Initialize");
                     break;
                 case RoundStates.Play:
                     Debug.Log("Play");
@@ -55,19 +55,12 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("RoundState");
-            IsRoundSMActive = true;
-            Debug.Log("Initialize");
-
+            currentState = RoundStates.Initialize;
         }
 
         public override void OnUpdate()
         {
-            StateFlow();
-            if (Input.GetKeyDown(KeyCode.Space) && !IsRoundSMActive)
-            {
-                if (OnStateEnd != null)
-                    OnStateEnd("RoundState");
-            }
+            StateFlow();         
         }
 
         /// <summary>
@@ -97,8 +90,7 @@ namespace BlackFox
         void Initialize()
         {
             if (Input.GetKeyDown(KeyCode.Space))
-            {
-                
+            {               
                 CurrentState = RoundStates.Play;
             }
         }
@@ -125,7 +117,8 @@ namespace BlackFox
 
         void RoundEnd()
         {
-            IsRoundSMActive = false;
+            if (OnStateEnd != null)
+                OnStateEnd("RoundState");
         }
     }
 }

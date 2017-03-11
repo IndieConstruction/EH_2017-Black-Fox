@@ -17,15 +17,8 @@ namespace BlackFox
             LoadArena();
             LoadAgents();
             LoadGameElements();
-        }
-
-        public override void OnUpdate()
-        {
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                if (OnStateEnd != null)
-                    OnStateEnd("LevelStartState");
-            }
+            if (OnStateEnd != null)
+                OnStateEnd("LevelStartState");
         }
 
         /// <summary>

@@ -7,10 +7,11 @@ namespace BlackFox
 
     public class OstacoloMobile : MonoBehaviour
     {
-        Rigidbody rigid;
-        public float InitialImpulse = 1;
+        
+        public float ForceMultiplier = 1;
         public float SpeedRotation = 2;
         public float damage = 1;
+        Rigidbody rigid;
         List<IDamageable> damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable
         Core core;
 
@@ -20,12 +21,15 @@ namespace BlackFox
         {
             core = FindObjectOfType<Core>();
             rigid = GetComponent<Rigidbody>();
-            rigid.AddForce(transform.forward * InitialImpulse, ForceMode.Acceleration);
+            //Push the MobileObstacle outword from the Core
+            Vector3 initDir = transform.position - core.transform.position;
+            rigid.MoveRotation( Quaternion.LookRotation(initDir));
+            rigid.AddForce(initDir.normalized * ForceMultiplier, ForceMode.Impulse);
         }
 
         private void Update()
         {
-            rigid.AddForce(transform.forward * InitialImpulse, ForceMode.Acceleration);
+            rigid.AddForce(rigid.velocity.normalized * ForceMultiplier, ForceMode.Acceleration);
         }
 
 
@@ -34,15 +38,6 @@ namespace BlackFox
         private void OnCollisionEnter(Collision collision)
         {
             IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
-            if (Vector3.Cross(transform.position, collision.contacts[0].normal) == Vector3.zero)
-            {
-                rigid.AddForce(-transform.position * rigid.mass, ForceMode.Impulse);
-            }
-            else
-            {
-                rigid.AddForce(Vector3.Reflect(transform.position, collision.contacts[0].normal) * SpeedRotation, ForceMode.Acceleration);
-            }
-            transform.rotation = Quaternion.LookRotation(rigid.velocity);
             if (damageable != null && collision.gameObject.GetComponent<Core>() == null)
             {
                 damageable.Damage(damage, gameObject);

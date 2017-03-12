@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a9a86d159246c744adc7a49e42b7918, type: 3}
+  m_Name: Arena1
+  m_EditorClassIdentifier: 
+  Inerzia: 0
+  AreanaPrefab: {fileID: 1497125800361930, guid: 4f6de7ac56079224b9439734b42d94e4,
+    type: 2}

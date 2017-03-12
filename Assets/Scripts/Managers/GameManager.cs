@@ -53,7 +53,7 @@ namespace BlackFox
             managerUI = GetComponent<UIManager>();
             pointsManager = new PointsManager(KillPoint, DeathPoint, PointsToWin);
             respawnAgent = GetComponent<RespawnAgent>();
-            //flowSM = gameObject.AddComponent<FlowSM>();
+            flowSM = gameObject.AddComponent<FlowSM>();
         }
 
         private void Update()

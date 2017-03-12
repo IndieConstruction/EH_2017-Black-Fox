@@ -28,8 +28,8 @@ namespace BlackFox
                 instantiatedProjectile.GetComponent<Projectile>().SetOwner(GetComponentInParent<IShooter>());
                 Destroy(instantiatedProjectile, LifeTime);
                 ammo--;//ammo =ammo -1
-                if (GameManager.Instance.GetGameUIController() != null)
-                    GameManager.Instance.BullletsValueUpdate(playerIndex, ammo);
+                //if (GameManager.Instance.GetGameUIController() != null)
+                //    GameManager.Instance.BullletsValueUpdate(playerIndex, ammo);
             }
         }
 
@@ -40,8 +40,8 @@ namespace BlackFox
             else if (ammo > MaxAmmo)
                 ammo = AddedAmmo;
 
-            if (GameManager.Instance.GetGameUIController() != null)
-                GameManager.Instance.BullletsValueUpdate(playerIndex, ammo);
+            //if (GameManager.Instance.GetGameUIController() != null)
+            //    GameManager.Instance.BullletsValueUpdate(playerIndex, ammo);
         }
     }
 }

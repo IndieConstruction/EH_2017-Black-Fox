@@ -10,19 +10,17 @@ public abstract class StateMachineBase : MonoBehaviour {
     {
         get { return _currenState; }
         set {
-            if (_currenState != value)
-            {
-                OnStateChange(value, _currenState);
+                if (_currenState != value)
+                    OnStateChange(value, _currenState);
+                _currenState = value;
             }
-            _currenState = value; }
     }
-
 
     void OnStateChange(StateBase _newState, StateBase _oldState)
     {
         if (_oldState != null)
             _oldState.OnEnd();
-        _newState.OnPreStart(this);
+        _newState.OnStart();
     }
 
     private void Update()
@@ -31,4 +29,9 @@ public abstract class StateMachineBase : MonoBehaviour {
             CurrentState.OnUpdate();
     }
 
+    #region Events
+    public delegate void MachineEvent(string _machineName);
+
+    public static MachineEvent OnMachineEnd;
+    #endregion
 }

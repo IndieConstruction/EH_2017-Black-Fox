@@ -66,13 +66,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1315602228003896}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a850a72d3be2914898a51ce04e9bc3c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5383765d4d537ee45a406d9f0ddd5fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FragmentPrefab: {fileID: 100000, guid: b87b3248afa37b64b9a1e7a2ef4b0b03, type: 2}
+  FragmentPrefab: {fileID: 0}
   AnchorPoint: {fileID: 0}
-  MaxLength: 80000
-  DensityOfFragments: 80
+  MaxLength: 80
+  DensityOfFragments: 0.1
 --- !u!120 &120533019913996924
 LineRenderer:
   m_ObjectHideFlags: 1

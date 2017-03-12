@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4337563240713590}
   - component: {fileID: 54160836817358280}
   - component: {fileID: 64628781347943218}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PinGreen
   m_TagString: Pin
   m_Icon: {fileID: 0}

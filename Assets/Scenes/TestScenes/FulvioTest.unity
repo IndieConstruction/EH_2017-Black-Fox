@@ -131,8 +131,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 14
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114891628144852262, guid: a6e2d4e960e654241bf34051b58fcca5, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a6e2d4e960e654241bf34051b58fcca5, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &313710755
@@ -380,21 +379,6 @@ MonoBehaviour:
     type: 2}
   BlackHoleToSpawn: 5
   TimerToSpawn: 5
---- !u!114 &621020466
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 621020464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4978f530329d754479343bfbe3c114af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  RangeToDestroyAgents: 500
-  RangeToDestroyPins: 1500
-  Size: 1
-  Attraction: 15
 --- !u!1001 &713416735
 Prefab:
   m_ObjectHideFlags: 0

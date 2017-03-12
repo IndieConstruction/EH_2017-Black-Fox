@@ -463,10 +463,10 @@ PlayerSettings:
   vrEditorSettings: {}
   cloudServicesEnabled:
     Build: 0
-    Collab: 1
+    Collab: 0
     ErrorHub: 0
     Hub: 0
-    UNet: 1
+    UNet: 0
   cloudProjectId: 45436b09-dca4-4f3b-a866-837104244e12
   projectName: BlackFox
   organizationId: stropicciaricci

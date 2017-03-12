@@ -3,12 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace BlackFox {
-    public abstract class SpawnerBase
+    public abstract class SpawnerBase : MonoBehaviour
     {
+        protected SpawnerManager sManager;
+
+        #region Virtual Methods
+        /// <summary>
+        /// Method needed to initialize the Spawner
+        /// </summary>
+        /// <param name="_sManager"></param>
+        public virtual void Init(SpawnerManager _sManager)
+        {
+            sManager = _sManager;
+        }
+
         /// <summary>
         /// Runned as first
         /// </summary>
-        public virtual void OnActivation()
+        protected virtual void OnActivation()
         {
 
         }
@@ -16,7 +28,7 @@ namespace BlackFox {
         /// <summary>
         /// Runned on Unity Update
         /// </summary>
-        public virtual void OnRuntime()
+        protected virtual void OnRuntime()
         {
 
         }
@@ -24,23 +36,30 @@ namespace BlackFox {
         /// <summary>
         /// Runned as last
         /// </summary>
-        public virtual void OnDeactivation()
+        protected virtual void OnDeactivation()
         {
 
         }
+        #endregion
 
+        #region OnFlow
         /// <summary>
         /// Runned as first
         /// </summary>
-        public void OnFlowActivation()
+        private void Start()
         {
+            if(sManager == null)
+            {
+                Debug.Log(gameObject.name + "'s Spawner not initialized!");
+                return;
+            }
             OnActivation();
         }
 
         /// <summary>
         /// Runned on Unity Update
         /// </summary>
-        public void OnFlowRuntime()
+        private void Update()
         {
             OnRuntime();
         }
@@ -48,17 +67,23 @@ namespace BlackFox {
         /// <summary>
         /// Runned as last
         /// </summary>
-        public void OnFlowDeactivation()
+        private void OnDestroy()
         {
             OnDeactivation();
             if (OnFlowEnd != null)
                 OnFlowEnd(this);
         }
+        private void OnDisable()
+        {
+            OnDeactivation();
+            if (OnFlowEnd != null)
+                OnFlowEnd(this);
+        }
+        #endregion
 
         #region Events
         public delegate void SpawnerEvent(SpawnerBase _spawner);
 
-        public event SpawnerEvent OnFlowProgression;
         public event SpawnerEvent OnFlowEnd;
         #endregion
     }

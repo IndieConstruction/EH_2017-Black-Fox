@@ -11,15 +11,20 @@ namespace BlackFox
     {
         public int Level;
         public int Round;
-        [SerializeField]
-        public List<SpawnerBase> Spawners = new List<SpawnerBase>();
+        List<SpawnerBase> Spawners = new List<SpawnerBase>();
+        //TODO: find a better way to organize SpawnerReferences
+        private void Awake()
+        {
+            foreach (var spawner in GetComponentsInChildren<SpawnerBase>())
+                Spawners.Add(spawner);
+        }
 
         private void OnEnable()
         {   
             //Initialize each Spawner and subscribe their events
             foreach (var spawner in Spawners)
             {
-                spawner.Init(this);
+                spawner.Init(this, Level, Round);
                 spawner.OnFlowEnd += HandleOnFlowEnd;
             }
         }

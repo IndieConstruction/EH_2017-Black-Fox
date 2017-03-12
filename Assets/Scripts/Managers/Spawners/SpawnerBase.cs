@@ -6,15 +6,19 @@ namespace BlackFox {
     public abstract class SpawnerBase : MonoBehaviour
     {
         protected SpawnerManager sManager;
+        protected int level;
+        protected int round;
 
         #region Virtual Methods
         /// <summary>
         /// Method needed to initialize the Spawner
         /// </summary>
         /// <param name="_sManager"></param>
-        public virtual void Init(SpawnerManager _sManager)
+        public virtual void Init(SpawnerManager _sManager, int _level, int _round)
         {
             sManager = _sManager;
+            level = _level;
+            round = _round;
         }
 
         /// <summary>

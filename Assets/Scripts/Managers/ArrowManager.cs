@@ -6,8 +6,6 @@ namespace BlackFox
 {
     public class ArrowManager : MonoBehaviour
     {
-
-        //public bool 
         Arrow[] arrows;
         int RandomSetup = 1;
         int maxRandomSetup = 0;
@@ -18,9 +16,9 @@ namespace BlackFox
 
             for (int i = 0; i < arrows.Length; i++)
             {
-                if (maxRandomSetup < arrows[i].IDArrow)
+                if (maxRandomSetup < arrows[i].IDSetup)
                 {
-                    maxRandomSetup = arrows[i].IDArrow;
+                    maxRandomSetup = arrows[i].IDSetup;
                 }
             }
 
@@ -34,7 +32,7 @@ namespace BlackFox
 
             for (int i = 0; i < arrows.Length; i++)
             {
-                if (arrows[i].IDArrow != RandomSetup)
+                if (arrows[i].IDSetup != RandomSetup)
                 {
                     arrows[i].gameObject.SetActive(false);
                 }

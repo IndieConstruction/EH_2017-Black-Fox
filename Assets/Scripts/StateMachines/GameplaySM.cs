@@ -43,6 +43,12 @@ namespace BlackFox {
             }
         }
 
+        private void Update()
+        {
+            if (CurrentState != null)
+                CurrentState.OnUpdate();
+        }
+
         #region Events
         private void OnEnable()
         {

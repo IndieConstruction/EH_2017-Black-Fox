@@ -18,6 +18,12 @@ namespace BlackFox
                 OnStateEnd("LevelEndState");
         }
 
+        public override void OnUpdate()
+        {
+            if (OnStateEnd != null)
+                OnStateEnd("LevelStartState");
+        }
+
         void UnloadAgents()
         {
             GameObject.Destroy(GameObject.Find("AgentBlue(Clone)"));

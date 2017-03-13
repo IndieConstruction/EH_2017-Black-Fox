@@ -34,7 +34,7 @@ namespace BlackFox
             //Break all running Spawner
             foreach (var spawner in Spawners)
             {
-                spawner.OnFlowEnd -= HandleOnFlowEnd;
+                spawner.enabled = false;
             }
         }
 

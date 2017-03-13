@@ -89,6 +89,10 @@ namespace BlackFox
 
         void Initialize()
         {
+            // count down inzio round
+            // inizializzazione round controller
+            // inizializzazione spawn managers
+            // setup ui
             if (Input.GetKeyDown(KeyCode.Space))
             {               
                 CurrentState = RoundStates.Play;
@@ -97,6 +101,8 @@ namespace BlackFox
 
         void Play()
         {         
+            // controllo punteggio
+
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 CurrentState = RoundStates.Pause;
@@ -117,6 +123,7 @@ namespace BlackFox
 
         void RoundEnd()
         {
+            // passaggio informazioni essenziali al gestore del livello
             if (OnStateEnd != null)
                 OnStateEnd("RoundState");
         }

@@ -35,19 +35,19 @@ namespace BlackFox {
         private void OnEnable()
         {
             StateBase.OnStateEnd += OnStateEnd;
-            AddListenerToButton();
+            //AddListenerToButton();
         }
         private void OnDisable()
         {
             StateBase.OnStateEnd -= OnStateEnd;
-            if (GameManager.Instance.TestSceneButton)
-                GameManager.Instance.TestSceneButton.onClick.RemoveAllListeners();
+            //if (GameManager.Instance.TestSceneButton)
+            //    GameManager.Instance.TestSceneButton.onClick.RemoveAllListeners();
         }
 
-        private void OnLevelWasLoaded(int level)
-        {
-            AddListenerToButton();
-        }
+        //private void OnLevelWasLoaded(int level)
+        //{
+        //    AddListenerToButton();
+        //}
 
         void AddListenerToButton()
         {

@@ -17,6 +17,11 @@ namespace BlackFox
             LoadArena();
             LoadAgents();
             LoadGameElements();
+
+        }
+
+        public override void OnUpdate()
+        {
             if (OnStateEnd != null)
                 OnStateEnd("LevelStartState");
         }

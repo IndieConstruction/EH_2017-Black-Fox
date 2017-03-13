@@ -14,7 +14,7 @@ namespace BlackFox
         public float AngularSpeed = 5000;
         public float TransSpeed = 5000;
 
-        List<IDamageable> Damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable
+        List<IDamageable> Damageables = new List<IDamageable>();// Lista di Oggetti facenti parte dell'interfaccia IDamageable
 
         void Start()
         {
@@ -53,12 +53,11 @@ namespace BlackFox
         }
 
         /// <summary>
-        /// Salva all'interno della lista di oggetti IDamageable, gli oggetti facenti parti della lista DamageablesPrefabs
+        /// Load damageable items (classes with IDamageable) from prefabs
         /// </summary>
         private void LoadIDamageablePrefab()
         {
-            //WARNING - se l'oggetto che che fa parte della lista di GameObject non ha l'interfaccia IDamageable non farà parte degli oggetti danneggiabili.
-
+            //WARNING - If a GameObject in the list do not have the IDamageable interface, it will not be damaged
             List<GameObject> DamageablesPrefabs = PrefabUtily.LoadAllPrefabsWithComponentOfType<IDamageable>("Prefabs", LoadExternalAgentPrefab());
             foreach (var k in DamageablesPrefabs)
             {

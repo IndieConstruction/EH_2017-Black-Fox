@@ -7,7 +7,7 @@ namespace BlackFox {
     {
 
         public float Force = 500000;
-        public int IDArrow;
+        public int IDSetup;
 
 
 

@@ -16,11 +16,7 @@ namespace BlackFox
         void Start()
         {
             pointsManager = new PointsManager(KillPoint, DeathPoint, PointsToWin);
-        }
-
-        void Update()
-        {
-
+            PointsManager.OnPlayerWinnig += OnPlayerWinnig;
         }
 
         #region PointsManager
@@ -30,6 +26,11 @@ namespace BlackFox
                 pointsManager.UpdateKillPoints(_killer.playerIndex, _victim.playerIndex);           // setta i punti morte e uccisione
             else
                 pointsManager.UpdateKillPoints(_victim.playerIndex);
+        }
+
+        void OnPlayerWinnig(PlayerIndex _winner)
+        {
+            // TODO : aggiungere funzione in caso di vincita del player
         }
         #endregion
     }

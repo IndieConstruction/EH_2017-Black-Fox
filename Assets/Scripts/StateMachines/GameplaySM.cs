@@ -18,15 +18,15 @@ namespace BlackFox {
             switch (_stateName)
             {
                 case "LevelStartState":
-                    CurrentState = new RoundState();
                     roundNumber++;
+                    CurrentState = new RoundState(roundNumber);
                     break;
                 case "RoundState":
                     // TODO : aggiungere condizione di spareggio
                     if(roundNumber < 4)
                     {
-                        CurrentState = new RoundState();
                         roundNumber++;
+                        CurrentState = new RoundState(roundNumber);
                     }   
                     else
                     {

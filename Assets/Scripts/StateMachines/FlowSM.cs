@@ -49,16 +49,16 @@ namespace BlackFox {
         //    AddListenerToButton();
         //}
 
-        void AddListenerToButton()
-        {
-            if (GameManager.Instance.TestSceneButton)
-            {
-                GameManager.Instance.TestSceneButton.onClick.RemoveAllListeners();
-                GameManager.Instance.TestSceneButton.onClick.AddListener(() => {
-                    CurrentState = new GameplayState();
-                });
-            }
-        }
+        //void AddListenerToButton()
+        //{
+        //    if (GameManager.Instance.TestSceneButton)
+        //    {
+        //        GameManager.Instance.TestSceneButton.onClick.RemoveAllListeners();
+        //        GameManager.Instance.TestSceneButton.onClick.AddListener(() => {
+        //            CurrentState = new GameplayState();
+        //        });
+        //    }
+        //}
         #endregion
     }
 }

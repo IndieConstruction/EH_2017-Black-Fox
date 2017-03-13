@@ -22,7 +22,6 @@ namespace BlackFox
                 if (OnStateEnd != null)
                     OnStateEnd("MainMenuState");
             }
-
         }
 
         public override void OnEnd()

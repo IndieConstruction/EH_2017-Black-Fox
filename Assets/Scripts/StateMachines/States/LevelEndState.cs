@@ -45,6 +45,7 @@ namespace BlackFox
         void UnloadGameElements()
         {
             GameObject.Destroy(GameObject.Find("Core(Clone)"));
+            GameObject.Destroy(GameObject.Find("RoundController(Clone)"));
         }
     }
 }

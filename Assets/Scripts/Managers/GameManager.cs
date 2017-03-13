@@ -25,14 +25,16 @@ namespace BlackFox
 
         private void Awake()
         {
-
             //Singleton paradigm
-            if (Instance == null) { 
+            if (Instance == null)
+            { 
                 Instance = this;
                 //For actual debug pourpose
                 if (dontDestroyOnLoad)
                     DontDestroyOnLoad(gameObject);
-            } else { 
+            }
+            else
+            { 
                 DestroyImmediate(gameObject);
             }
         }

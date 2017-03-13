@@ -11,7 +11,6 @@ namespace BlackFox
     /// </summary>
     public class PointsManager
     {
-
         int AddPoints;
         int SubPoints;
         int pointsToWin;
@@ -37,7 +36,8 @@ namespace BlackFox
 
                     if (item.KillPoints == pointsToWin)
                     {
-                        DisplayTheWinner(_killer);
+                        if (OnPlayerWinnig != null)
+                            OnPlayerWinnig(_killer);
                     }
                     break;
                 }
@@ -65,10 +65,10 @@ namespace BlackFox
             }
         }
 
-        void DisplayTheWinner(PlayerIndex _playerIndex)
-        {
-            //GameManager.Instance.DisplayWinnerPlayer(_playerIndex);
-        }
+        #region Events
+        public delegate void PointsEvent(PlayerIndex _winner);
+        public static PointsEvent OnPlayerWinnig;
+        #endregion
     }
 
     /// <summary>
@@ -102,5 +102,6 @@ namespace BlackFox
         {
             playerIndex = _playerIndex;
         }
+
     }
 }

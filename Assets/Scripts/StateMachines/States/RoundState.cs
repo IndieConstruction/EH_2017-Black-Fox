@@ -1,16 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 namespace BlackFox
 {
     public class RoundState : StateBase
     {
+        RoundController roundController;
+        int roundNumber;
+
         public enum RoundStates
         {
             Initialize,
             Play,
             Pause,
-            RoundEnd,
+            RoundEnd
         }
 
         private RoundStates currentState;
@@ -28,6 +32,11 @@ namespace BlackFox
             }
         }
 
+        public RoundState(int _number)
+        {
+            roundNumber = _number;
+        }
+
         /// <summary>
         /// Accade ogni volta che cambia stato.
         /// </summary>
@@ -36,9 +45,9 @@ namespace BlackFox
             switch (_newState)
             {
                 case RoundStates.Initialize:
-                    Debug.Log("Initialize");
                     break;
                 case RoundStates.Play:
+                    // TODO : count down inzio round
                     Debug.Log("Play");
                     break;
                 case RoundStates.Pause:
@@ -89,24 +98,28 @@ namespace BlackFox
 
         void Initialize()
         {
-            // count down inzio round
-            // inizializzazione round controller
-            // inizializzazione spawn managers
-            // setup ui
-            if (Input.GetKeyDown(KeyCode.Space))
-            {               
-                CurrentState = RoundStates.Play;
+            if(roundNumber == 1)
+            {
+                roundController = new GameObject().AddComponent<RoundController>();
+                roundController.name = "RoundController";
+                roundController.gameObject.AddComponent<SpawnerManager>();
+                // setup UI
             }
+            else
+            {
+                // reset spawner manager, round controller e UI
+            }
+            
+            CurrentState = RoundStates.Play;
         }
 
         void Play()
-        {         
-            // controllo punteggio
-
+        {          
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 CurrentState = RoundStates.Pause;
             }
+
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 CurrentState = RoundStates.RoundEnd;
@@ -115,7 +128,7 @@ namespace BlackFox
 
         void Pause()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
                 CurrentState = RoundStates.Play;
             }

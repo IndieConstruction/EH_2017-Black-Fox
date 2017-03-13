@@ -46,11 +46,6 @@ namespace BlackFox
             shooter.playerIndex = this.playerIndex;
             LoadIDamageablePrefab();
 
-            gameManager.SetAgentSpawnPoint(playerIndex, transform);
-
-            //if (gameManager.GetGameUIController() != null)
-            //    gameManager.SliderValueUpdate(playerIndex, Life);
-
             if (playerIndex == PlayerIndex.Three)
             {
                 SwitchInput = KeyCode.F3;
@@ -207,25 +202,25 @@ namespace BlackFox
         public void Damage(float _damage, GameObject _attacker)
         {
             Life -= _damage;
-            //if (gameManager.GetGameUIController() != null)
-            //    gameManager.SliderValueUpdate(playerIndex, Life);
 
             if (Life < 1)
             {
-                if (_attacker.GetComponent<Agent>() != null)
-                {
-                    gameManager.SetKillPoints(_attacker.GetComponent<Agent>().playerIndex, playerIndex);
-                }
-                else
-                {
-                    gameManager.SetKillPoints(playerIndex);
-                }
+                if (AgentKilled != null)
+                    AgentKilled(_attacker.GetComponent<Agent>(), this);
                 Destroy(gameObject);
             }
         }
 
 
         #endregion
+
+        #endregion
+
+        #region Events
+
+        public delegate void AgentEvent(Agent _killer, Agent _victim);
+
+        public static AgentEvent AgentKilled;
 
         #endregion
     }

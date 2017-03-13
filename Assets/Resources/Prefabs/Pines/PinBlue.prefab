@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4462521840052846}
   - component: {fileID: 54879750468261318}
-  - component: {fileID: 64336063709540394}
+  - component: {fileID: 64130246727700412}
   m_Layer: 0
   m_Name: PinBlue
   m_TagString: Pin
@@ -28,23 +28,36 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1657814775285718
+--- !u!1 &1578162258877346
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4523990433495248}
-  - component: {fileID: 33687974832279436}
-  - component: {fileID: 23735388591494422}
-  m_Layer: 9
-  m_Name: Box007
+  - component: {fileID: 4203068518789670}
+  - component: {fileID: 33209181059027674}
+  - component: {fileID: 23931074065246510}
+  m_Layer: 0
+  m_Name: chiodo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4203068518789670
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1578162258877346}
+  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4462521840052846}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4462521840052846
 Transform:
   m_ObjectHideFlags: 1
@@ -52,32 +65,19 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1027880677088710}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1577, y: 0, z: 733}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalPosition: {x: 0, y: 6.77, z: -14.99}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4523990433495248}
+  - {fileID: 4203068518789670}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4523990433495248
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1657814775285718}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4462521840052846}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23735388591494422
+--- !u!23 &23931074065246510
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1657814775285718}
+  m_GameObject: {fileID: 1578162258877346}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -85,7 +85,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: 991889eb80a00064286f7ce8b9178fb8, type: 2}
+  - {fileID: 2100000, guid: aadd73c358cfaec49902cb0f6470917e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -103,13 +103,13 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &33687974832279436
+--- !u!33 &33209181059027674
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1657814775285718}
-  m_Mesh: {fileID: 4300000, guid: dd852f6c112a18248ac09e98063544c4, type: 3}
+  m_GameObject: {fileID: 1578162258877346}
+  m_Mesh: {fileID: 4300000, guid: 7c3c0e9e9b2564a469c9b7f8572a092c, type: 3}
 --- !u!54 &54879750468261318
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -125,7 +125,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
---- !u!64 &64336063709540394
+--- !u!64 &64130246727700412
 MeshCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -138,4 +138,4 @@ MeshCollider:
   m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: dd852f6c112a18248ac09e98063544c4, type: 3}
+  m_Mesh: {fileID: 4300000, guid: 7c3c0e9e9b2564a469c9b7f8572a092c, type: 3}

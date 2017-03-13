@@ -9,20 +9,20 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1315602228003896}
+  m_RootGameObject: {fileID: 1963273038909164}
   m_IsPrefabParent: 1
---- !u!1 &1315602228003896
+--- !u!1 &1963273038909164
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4881018389632992}
-  - component: {fileID: 114422816126602914}
-  - component: {fileID: 120533019913996924}
-  - component: {fileID: 54679786027877310}
-  - component: {fileID: 153476909336662524}
+  - component: {fileID: 4705789465713672}
+  - component: {fileID: 114930543711881094}
+  - component: {fileID: 120720166924984544}
+  - component: {fileID: 54070145256832732}
+  - component: {fileID: 153538259656778320}
   m_Layer: 0
   m_Name: RopeUnassigned
   m_TagString: Untagged
@@ -30,25 +30,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4881018389632992
+--- !u!4 &4705789465713672
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1315602228003896}
+  m_GameObject: {fileID: 1963273038909164}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3000, y: 0, z: 3000}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &54679786027877310
+--- !u!54 &54070145256832732
 Rigidbody:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1315602228003896}
+  m_GameObject: {fileID: 1963273038909164}
   serializedVersion: 2
   m_Mass: 1
   m_Drag: 0
@@ -58,27 +58,23 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 2
---- !u!114 &114422816126602914
+--- !u!114 &114930543711881094
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1315602228003896}
+  m_GameObject: {fileID: 1963273038909164}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a850a72d3be2914898a51ce04e9bc3c, type: 3}
+  m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  FragmentPrefab: {fileID: 100000, guid: b87b3248afa37b64b9a1e7a2ef4b0b03, type: 2}
-  AnchorPoint: {fileID: 0}
-  MaxLength: 80000
-  DensityOfFragments: 80
---- !u!120 &120533019913996924
+--- !u!120 &120720166924984544
 LineRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1315602228003896}
+  m_GameObject: {fileID: 1963273038909164}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -109,7 +105,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 50
+    widthMultiplier: 1
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -171,17 +167,17 @@ LineRenderer:
     alignment: 0
     textureMode: 0
   m_UseWorldSpace: 1
---- !u!153 &153476909336662524
+--- !u!153 &153538259656778320
 ConfigurableJoint:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1315602228003896}
+  m_GameObject: {fileID: 1963273038909164}
   m_ConnectedBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: -3000, y: 0, z: 3000}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0

@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 54838345569171830}
   - component: {fileID: 153685164979291310}
   m_Layer: 0
-  m_Name: RopePurple
+  m_Name: RopeFour
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,7 +129,7 @@ GameObject:
   - component: {fileID: 153803970551214024}
   - component: {fileID: 120964088186123962}
   m_Layer: 0
-  m_Name: RopeRed
+  m_Name: RopeTwo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 153021238707886416}
   - component: {fileID: 114898000564835198}
   m_Layer: 0
-  m_Name: RopeGreen
+  m_Name: RopeThree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -286,7 +286,7 @@ GameObject:
   - component: {fileID: 54247041075363008}
   - component: {fileID: 153532173653494810}
   m_Layer: 0
-  m_Name: RopeBlue
+  m_Name: RopeOne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

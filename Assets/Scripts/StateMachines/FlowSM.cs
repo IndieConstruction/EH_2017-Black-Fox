@@ -14,7 +14,7 @@ namespace BlackFox {
             CurrentState = new MainMenuState();
         }
 
-        void OnStateEnd(string _stateName)
+        void HandleOnStateEnd(string _stateName)
         {
             switch (_stateName) {
                 case "MainMenuState":
@@ -29,36 +29,14 @@ namespace BlackFox {
         }
 
         #region Events
-
-        // TODO : gli eventi non vengono richiamati al click del bottone
-
         private void OnEnable()
         {
-            StateBase.OnStateEnd += OnStateEnd;
-            //AddListenerToButton();
+            StateBase.OnStateEnd += HandleOnStateEnd;
         }
         private void OnDisable()
         {
-            StateBase.OnStateEnd -= OnStateEnd;
-            //if (GameManager.Instance.TestSceneButton)
-            //    GameManager.Instance.TestSceneButton.onClick.RemoveAllListeners();
+            StateBase.OnStateEnd -= HandleOnStateEnd;
         }
-
-        //private void OnLevelWasLoaded(int level)
-        //{
-        //    AddListenerToButton();
-        //}
-
-        //void AddListenerToButton()
-        //{
-        //    if (GameManager.Instance.TestSceneButton)
-        //    {
-        //        GameManager.Instance.TestSceneButton.onClick.RemoveAllListeners();
-        //        GameManager.Instance.TestSceneButton.onClick.AddListener(() => {
-        //            CurrentState = new GameplayState();
-        //        });
-        //    }
-        //}
         #endregion
     }
 }

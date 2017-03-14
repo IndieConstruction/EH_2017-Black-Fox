@@ -19,8 +19,7 @@ namespace BlackFox
             life -= _damage;
             if (life < 1)
             {
-                GetComponent<MeshRenderer>().enabled = false;
-                GetComponent<Collider>().enabled = false;
+                Destroy(gameObject);
             }
         }
 

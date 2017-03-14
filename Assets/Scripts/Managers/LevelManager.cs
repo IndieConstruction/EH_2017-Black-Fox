@@ -61,6 +61,14 @@ namespace BlackFox
             }
         }
 
+        public void HandleAgentKilled(Agent _killer, Agent _victim)
+        {
+            if (_killer != null)
+                UpdateKillPoints(_killer.playerIndex, _victim.playerIndex);           // setta i punti morte e uccisione
+            else
+                UpdateKillPoints(_victim.playerIndex);
+        }
+
         #region Events
         public delegate void PointsEvent(PlayerIndex _winner);
         public static PointsEvent OnPlayerWinnig;
@@ -73,14 +81,6 @@ namespace BlackFox
         private void OnDisable()
         {
             Agent.AgentKilled -= HandleAgentKilled;
-        }
-
-        public void HandleAgentKilled(Agent _killer, Agent _victim)
-        {
-            if (_killer != null)
-                UpdateKillPoints(_killer.playerIndex, _victim.playerIndex);           // setta i punti morte e uccisione
-            else
-                UpdateKillPoints(_victim.playerIndex);
         }
         #endregion
     }

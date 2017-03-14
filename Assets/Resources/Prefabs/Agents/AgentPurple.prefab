@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 114353393835022484}
   - component: {fileID: 114250359734641390}
   - component: {fileID: 114977479195355638}
-  - component: {fileID: 64899042379821438}
+  - component: {fileID: 136875382184472940}
   m_Layer: 0
   m_Name: AgentPurple
   m_TagString: Untagged
@@ -85,8 +85,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1964738197259928}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.03993988, y: 9.967869, z: -16.70449}
+  m_LocalRotation: {x: 0, y: -0.92387956, z: 0, w: 0.38268343}
+  m_LocalPosition: {x: -6.15, y: 8, z: -5.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4639426578632904}
@@ -94,7 +94,7 @@ Transform:
   - {fileID: 4553679016413368}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -135, z: 0}
 --- !u!4 &4553679016413368
 Transform:
   m_ObjectHideFlags: 1
@@ -187,20 +187,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
---- !u!64 &64899042379821438
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1964738197259928}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 1
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 752b85ce1808155409372857eabd2d99, type: 3}
 --- !u!114 &114250359734641390
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -261,3 +247,16 @@ MonoBehaviour:
   PinSpanw: {fileID: 4553679016413368}
   CoolDownTime: 5
   CanPlace: 1
+--- !u!136 &136875382184472940
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1964738197259928}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.3
+  m_Height: 4.8
+  m_Direction: 2
+  m_Center: {x: 0, y: 1, z: 0}

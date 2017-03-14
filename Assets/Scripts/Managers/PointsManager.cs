@@ -11,18 +11,24 @@ namespace BlackFox
     /// </summary>
     public class PointsManager
     {
-        int AddPoints;
-        int SubPoints;
-        int pointsToWin;
+        int AddPoints = 1;
+        int SubPoints = 1;
+        int pointsToWin = 5;
+
         List<PlayerPoints> pointsManager = new List<PlayerPoints>()
         { new PlayerPoints(PlayerIndex.One), new PlayerPoints(PlayerIndex.Two), new PlayerPoints(PlayerIndex.Three), new PlayerPoints(PlayerIndex.Four) };
-
 
         public PointsManager(int _killPoints, int _deathPoints, int _pointsToWin)
         {
             AddPoints = _killPoints;
             SubPoints = _deathPoints;
             pointsToWin = _pointsToWin;
+            Agent.AgentKilled += HandleAgentKilled;
+        }
+
+        public PointsManager()
+        {
+            Agent.AgentKilled += HandleAgentKilled;
         }
 
         public void UpdateKillPoints(PlayerIndex _killer, PlayerIndex _victim)
@@ -68,6 +74,14 @@ namespace BlackFox
         #region Events
         public delegate void PointsEvent(PlayerIndex _winner);
         public static PointsEvent OnPlayerWinnig;
+
+        public void HandleAgentKilled(Agent _killer, Agent _victim)
+        {
+            if (_killer != null)
+                UpdateKillPoints(_killer.playerIndex, _victim.playerIndex);           // setta i punti morte e uccisione
+            else
+                UpdateKillPoints(_victim.playerIndex);
+        }
         #endregion
     }
 

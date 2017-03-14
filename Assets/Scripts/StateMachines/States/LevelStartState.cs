@@ -31,7 +31,7 @@ namespace BlackFox
         /// </summary>
         void LoadArena()
         {
-            GameObject.Instantiate(Resources.Load("Prefabs/Misc/Walls"));         
+            GameObject.Instantiate(Resources.Load("Prefabs/Misc/Floor"));         
         }
 
         /// <summary>

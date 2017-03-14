@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XInputDotNetPure;
 
 namespace BlackFox
 {
     public class RoundState : StateBase
     {
-        RoundController roundController;
         int roundNumber;
 
         public enum RoundStates
@@ -100,10 +100,7 @@ namespace BlackFox
         {
             if(roundNumber == 1)
             {
-                roundController = new GameObject().AddComponent<RoundController>();
-                roundController.name = "RoundController";
-                roundController.gameObject.AddComponent<SpawnerManager>();
-                // setup UI
+                // inzzzzializzzzazzzzione spanwn manager e parametri round
             }
             else
             {
@@ -140,5 +137,11 @@ namespace BlackFox
             if (OnStateEnd != null)
                 OnStateEnd("RoundState");
         }
+        #region Events
+        void OnPlayerWinnig(PlayerIndex _winner)
+        {
+            // TODO : aggiungere funzione in caso di vincita del player
+        }
+        #endregion
     }
 }

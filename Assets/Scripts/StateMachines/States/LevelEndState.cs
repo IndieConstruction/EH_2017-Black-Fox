@@ -39,7 +39,7 @@ namespace BlackFox
 
         void UnloadArena()
         {
-            GameObject.Destroy(GameObject.Find("Walls(Clone)"));
+            GameObject.Destroy(GameObject.Find("Floor(Clone)"));
         }
 
         void UnloadGameElements()

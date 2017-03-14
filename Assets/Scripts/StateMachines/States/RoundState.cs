@@ -98,6 +98,9 @@ namespace BlackFox
 
         void Initialize()
         {
+            if (roundNumber == 0)
+                roundNumber = 1;
+
             if(roundNumber == 1)
             {
                 // inzzzzializzzzazzzzione spanwn manager e parametri round

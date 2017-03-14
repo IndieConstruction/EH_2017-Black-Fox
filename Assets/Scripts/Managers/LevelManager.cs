@@ -16,8 +16,8 @@ namespace BlackFox
         int SubPoints = 1;
         int pointsToWin = 5;
 
-        List<PlayerPoints> pointsManager = new List<PlayerPoints>()
-        { new PlayerPoints(PlayerIndex.One), new PlayerPoints(PlayerIndex.Two), new PlayerPoints(PlayerIndex.Three), new PlayerPoints(PlayerIndex.Four) };
+        List<PlayerStats> playerStats = new List<PlayerStats>()
+        { new PlayerStats(PlayerIndex.One), new PlayerStats(PlayerIndex.Two), new PlayerStats(PlayerIndex.Three), new PlayerStats(PlayerIndex.Four) };
 
         public void Init(int _killPoints, int _deathPoints, int _pointsToWin)
         {
@@ -28,39 +28,34 @@ namespace BlackFox
 
         public void UpdateKillPoints(PlayerIndex _killer, PlayerIndex _victim)
         {
-            foreach (var item in pointsManager)
+            foreach (PlayerStats player in playerStats)
             {
-                if (item.PlayerIndex == _killer)
+                if (player.PlayerIndex == _killer)
                 {
-                    item.KillPoints += AddPoints;
-                    Debug.Log(item.KillPoints);
+                    player.KillPoints += AddPoints;
 
-                    if (item.KillPoints == pointsToWin)
+                    if (player.KillPoints == pointsToWin)
                     {
                         if (OnPlayerWinnig != null)
+                        {
+                            player.Victories += 1;
                             OnPlayerWinnig(_killer);
+                        }                
                     }
                     break;
                 }
             }
 
-            foreach (var item in pointsManager)
-            {
-                if (item.PlayerIndex == _victim && item.KillPoints > 0)
-                {
-                    item.KillPoints -= SubPoints;
-                    break;
-                }
-            }
+            UpdateKillPoints(_victim);
         }
 
         public void UpdateKillPoints(PlayerIndex _victim)
         {
-            foreach (var item in pointsManager)
+            foreach (PlayerStats player in playerStats)
             {
-                if (item.PlayerIndex == _victim && item.KillPoints > 0)
+                if (player.PlayerIndex == _victim && player.KillPoints > 0)
                 {
-                    item.KillPoints -= SubPoints;
+                    player.KillPoints -= SubPoints;
                     break;
                 }
             }
@@ -93,12 +88,13 @@ namespace BlackFox
     /// <summary>
     /// Contenitore dei punti del player
     /// </summary>
-    public class PlayerPoints
+    public class PlayerStats
     {
 
         PlayerIndex playerIndex;
         int powerPoints;
         int killPoints;
+        int victories;
 
         public PlayerIndex PlayerIndex
         {
@@ -117,7 +113,13 @@ namespace BlackFox
             set { powerPoints = value; }
         }
 
-        public PlayerPoints(PlayerIndex _playerIndex)
+        public int Victories
+        {
+            get { return powerPoints; }
+            set { powerPoints = value; }
+        }
+
+        public PlayerStats(PlayerIndex _playerIndex)
         {
             playerIndex = _playerIndex;
         }

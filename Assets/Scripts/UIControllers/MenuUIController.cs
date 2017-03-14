@@ -12,7 +12,8 @@ namespace BlackFox
         public Text text3;
         public Text text4;
         public Text text5;
-        public Button button;
+        public Text text6;
+
 
         UIManager managerUI;
 

@@ -8,6 +8,7 @@ namespace BlackFox
     public class RoundState : StateBase
     {
         int roundNumber;
+        bool playerWinning;
 
         public enum RoundStates
         {
@@ -98,9 +99,6 @@ namespace BlackFox
 
         void Initialize()
         {
-            if (roundNumber == 0)
-                roundNumber = 1;
-
             if(roundNumber == 1)
             {
                 // inzzzzializzzzazzzzione spanwn manager e parametri round
@@ -114,13 +112,8 @@ namespace BlackFox
         }
 
         void Play()
-        {          
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                CurrentState = RoundStates.Pause;
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (playerWinning)
             {
                 CurrentState = RoundStates.RoundEnd;
             }
@@ -128,6 +121,7 @@ namespace BlackFox
 
         void Pause()
         {
+            // TODO : aggiungere collgamento alla pausa
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 CurrentState = RoundStates.Play;
@@ -144,7 +138,7 @@ namespace BlackFox
         #region Events
         void OnPlayerWinnig(PlayerIndex _winner)
         {
-            // TODO : aggiungere funzione in caso di vincita del player
+            playerWinning = true;
         }
         #endregion
     }

@@ -35,6 +35,7 @@ namespace BlackFox {
                     break;
                 case "LevelEndState":
                     //EXIT POINT   
+                    roundNumber = 0;
                     if (OnMachineEnd != null)
                         OnMachineEnd("GameplaySM");
                     break;

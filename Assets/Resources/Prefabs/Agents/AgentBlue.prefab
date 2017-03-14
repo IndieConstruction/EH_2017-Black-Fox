@@ -57,7 +57,6 @@ GameObject:
   - component: {fileID: 4147033840810518}
   - component: {fileID: 33331299290752710}
   - component: {fileID: 23467411243497518}
-  - component: {fileID: 114850395721961934}
   m_Layer: 0
   m_Name: astronave
   m_TagString: Untagged
@@ -100,7 +99,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1368280926101798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.73, y: 0, z: 0}
+  m_LocalPosition: {x: 8.060801, y: 7.5267773, z: -18.720562}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4147033840810518}
@@ -148,7 +147,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: cad48eb2e81d24c45a492cc7abb79294, type: 2}
+  - {fileID: 2100000, guid: b455c3223858069469d41b33d4033245, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -262,17 +261,3 @@ MonoBehaviour:
   MaxAmmo: 50
   ammo: 0
   playerIndex: 0
---- !u!114 &114850395721961934
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1764015735804546}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6116c7f43a8f3964db2240b1007b4dd7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UseKeyboard: 0
-  playerIndex: 0
-  fireRate: 3

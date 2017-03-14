@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4462521840052846}
   - component: {fileID: 54879750468261318}
   - component: {fileID: 64130246727700412}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PinBlue
   m_TagString: Pin
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4203068518789670}
   - component: {fileID: 33209181059027674}
   - component: {fileID: 23931074065246510}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: chiodo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: aadd73c358cfaec49902cb0f6470917e, type: 2}
+  - {fileID: 2100000, guid: b455c3223858069469d41b33d4033245, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

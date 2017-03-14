@@ -53,6 +53,7 @@ namespace BlackFox
         void LoadGameElements()
         {
             GameObject.Instantiate(Resources.Load("Prefabs/Misc/Core"));
+            GameObject.Instantiate(Resources.Load("Prefabs/Misc/LevelManager"));
         }
     }
 }

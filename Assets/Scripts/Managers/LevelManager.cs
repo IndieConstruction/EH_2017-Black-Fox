@@ -12,9 +12,9 @@ namespace BlackFox
     /// </summary>
     public class LevelManager : MonoBehaviour
     {
-        int AddPoints = 1;
-        int SubPoints = 1;
-        int pointsToWin = 5;
+        public int AddPoints = 1;
+        public int SubPoints = 1;
+        public int pointsToWin = 5;
 
         List<PlayerStats> playerStats = new List<PlayerStats>()
         { new PlayerStats(PlayerIndex.One), new PlayerStats(PlayerIndex.Two), new PlayerStats(PlayerIndex.Three), new PlayerStats(PlayerIndex.Four) };
@@ -39,7 +39,8 @@ namespace BlackFox
                         if (OnPlayerWinnig != null)
                         {
                             player.Victories += 1;
-                            OnPlayerWinnig(_killer);
+                            if(OnPlayerWinnig != null)
+                                OnPlayerWinnig(_killer);
                         }                
                     }
                     break;

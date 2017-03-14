@@ -12,6 +12,11 @@ namespace BlackFox
         public float MaxLife = 10;              // La vita massima che può avere il Core e che viene impostata al riavvio di un round perso
         GameManager gameManager;
 
+        private void Start()
+        {
+            life = MaxLife;
+        }
+
         #region Interfacce
 
         public void Damage(float _damage, GameObject _attacker)

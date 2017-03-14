@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
+using Rope;
 
 namespace BlackFox
 {
@@ -24,14 +25,17 @@ namespace BlackFox
         PlacePin pinPlacer;
         Shooter shooter;
         GameManager gameManager;
+        RopeController rope;
 
         public float fireRate;                                                   // rateo di fuoco in secondi
         float nextFire;
+        float ropeExtTimer;
 
         void Start()
         {
             gameManager = GameManager.Instance;
             movment = GetComponent<MovementController>();
+            rope = SearchRope();
             pinPlacer = GetComponent<PlacePin>();
             shooter = GetComponent<Shooter>();
             shooter.playerIndex = this.playerIndex;
@@ -65,6 +69,16 @@ namespace BlackFox
             {
                 XInputReader();
             }
+        }
+
+        RopeController SearchRope()
+        {
+            foreach (RopeController rope in FindObjectsOfType<RopeController>())
+            {
+                if (rope.name == "Rope" + playerIndex)
+                    return rope;
+            }
+            return null;
         }
 
         /// <summary>
@@ -136,6 +150,15 @@ namespace BlackFox
 
             movment.Movement(state.Triggers.Right);
             movment.Rotation(state.ThumbSticks.Left.X);
+
+            ropeExtTimer += Time.deltaTime;
+            if (state.Triggers.Right >= 0.9f && ropeExtTimer >= 0.1f)
+            {
+                rope.ExtendRope();
+                ropeExtTimer = 0;
+            }
+                
+
 
             if (prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed)
             {

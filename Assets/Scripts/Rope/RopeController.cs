@@ -4,10 +4,12 @@ using System.Collections.Generic;
 
 namespace Rope
 {
+    [RequireComponent (typeof(LineRenderer),(typeof(ConfigurableJoint)))]
     public class RopeController : MonoBehaviour
     {
         public GameObject FragmentPrefab;
-        public Transform AnchorPoint;
+        public Transform TailAnchorPoint;
+        public Transform HeadAnchorPoint;
         public int MaxLength = 80;
         [Range(.0f, 1f)]
         public float DensityOfFragments = .1f;
@@ -19,6 +21,11 @@ namespace Rope
 
         float fragmentDistance;
 
+        private void Awake()
+        {
+            transform.position = HeadAnchorPoint.position;
+            GetComponent<ConfigurableJoint>().connectedBody = HeadAnchorPoint.GetComponent<Rigidbody>();
+        }
         void Start()
         {
             lineRend = GetComponent<LineRenderer>();
@@ -42,7 +49,7 @@ namespace Rope
             {
                 lineRend.SetPosition(i, fragments[i].transform.position);
             }
-            lineRend.SetPosition(fragments.Count, AnchorPoint.position);
+            lineRend.SetPosition(fragments.Count, TailAnchorPoint.position);
         }
 
         /// <summary>
@@ -57,10 +64,6 @@ namespace Rope
 
             //Relative position of newPieces to previouses
             offSet = GetOffSet(_lastPiece.transform);
-
-            //Prevent to extend the rope over MaxLength
-            if (fragments.Count >= MaxLength)
-                return;
 
             //Keep building the rope until the AnchorPoint ore the MaxLength are reached
             for (int i = fragments.Count; i < MaxLength; i++)
@@ -83,9 +86,9 @@ namespace Rope
                 joint.autoConfigureConnectedAnchor = false;
                 joint.connectedAnchor = offSet;
                 //Is the AnchroPoint closer than the offSet? If so stop building the rope
-                if (Vector3.Distance(position, AnchorPoint.position) <= fragmentDistance)
+                if (Vector3.Distance(position, TailAnchorPoint.position) <= fragmentDistance)
                 {
-                    joint = AnchorPoint.GetComponent<ConfigurableJoint>();
+                    joint = TailAnchorPoint.GetComponent<ConfigurableJoint>();
                     joint.connectedBody = newFragment.GetComponent<Rigidbody>();
                     joint.autoConfigureConnectedAnchor = false;
                     joint.connectedAnchor = offSet;
@@ -93,11 +96,11 @@ namespace Rope
                 }
             }
 
-            if (AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody == null)
+            if (TailAnchorPoint.GetComponent<ConfigurableJoint>().connectedBody == null)
             {
-                AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = fragments[fragments.Count - 1].GetComponent<Rigidbody>();
-                Debug.Log("WARNING: MaxLength not enough to reach " + AnchorPoint.name + " in " + AnchorPoint.position);
-                int fragmentsNeeded = (int)(Vector3.Distance(AnchorPoint.position, fragments[fragments.Count - 1].transform.position) / offSet.magnitude);
+                TailAnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = fragments[fragments.Count - 1].GetComponent<Rigidbody>();
+                Debug.Log("WARNING: MaxLength not enough to reach " + TailAnchorPoint.name + " in " + TailAnchorPoint.position);
+                int fragmentsNeeded = (int)(Vector3.Distance(TailAnchorPoint.position, fragments[fragments.Count - 1].transform.position) / offSet.magnitude);
                 Debug.Log(fragmentsNeeded + MaxLength + " needed");
             }
             lineRend.numPositions = (fragments.Count) + 1;
@@ -111,13 +114,13 @@ namespace Rope
         Vector3 GetOffSet(Transform _origin)
         {
             //GetDirection
-            Vector3 dir = AnchorPoint.position - _origin.position;
+            Vector3 dir = TailAnchorPoint.position - _origin.position;
             dir = dir.normalized;
 
             if (fragments.Count <= 1)
             {
                 //Measure OffSet magnitude only if first time run of this method
-                fragmentDistance = Vector3.Distance(AnchorPoint.position, _origin.position) / DensityOfFragments / 100;
+                fragmentDistance = Vector3.Distance(TailAnchorPoint.position, _origin.position) / DensityOfFragments / 100;
             }
             return dir * fragmentDistance;
         }
@@ -128,7 +131,10 @@ namespace Rope
         /// </summary>
         public void ExtendRope()
         {
-            AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = null;
+            //Prevent to extend the rope over MaxLength
+            if (fragments.Count >= MaxLength)
+                return;
+            TailAnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = null;
             BuildRope(fragments[fragments.Count - 1]);
         }
         #endregion

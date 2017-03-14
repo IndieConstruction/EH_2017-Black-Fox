@@ -261,18 +261,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 4147033840810518, guid: c54f0bed46dd0984989a428a7a3dfdea, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4582607339982998, guid: c54f0bed46dd0984989a428a7a3dfdea, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4472083988743628, guid: c54f0bed46dd0984989a428a7a3dfdea, type: 2}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c54f0bed46dd0984989a428a7a3dfdea, type: 2}
   m_IsPrefabParent: 0
@@ -319,16 +307,6 @@ Prefab:
     - target: {fileID: 4744760855697940, guid: 73ee6949e446d0240acaf204a4d12842, type: 2}
       propertyPath: m_RootOrder
       value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 114824584066434744, guid: 73ee6949e446d0240acaf204a4d12842,
-        type: 2}
-      propertyPath: RotationSpeed
-      value: 5000
-      objectReference: {fileID: 0}
-    - target: {fileID: 114824584066434744, guid: 73ee6949e446d0240acaf204a4d12842,
-        type: 2}
-      propertyPath: MovmentSpeed
-      value: 500
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 73ee6949e446d0240acaf204a4d12842, type: 2}

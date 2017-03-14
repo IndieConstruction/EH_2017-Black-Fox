@@ -4,6 +4,7 @@ using XInputDotNetPure;
 
 namespace BlackFox
 {
+    [RequireComponent (typeof(MovementController), typeof(PlacePin), typeof(Shooter))]
     public class Agent : MonoBehaviour, IShooter, IDamageable
     {
 
@@ -16,7 +17,6 @@ namespace BlackFox
         GamePadState prevState;
         public PlayerIndex playerIndex;
         KeyCode SwitchInput;
-        //####
 
         List<IDamageable> damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable
 
@@ -27,15 +27,6 @@ namespace BlackFox
 
         public float fireRate;                                                   // rateo di fuoco in secondi
         float nextFire;
-
-        /// <summary>
-        /// La vita dell'avatar
-        /// </summary>
-        public float Life
-        {
-            get { return life; }
-            set { life = value; }
-        }
 
         void Start()
         {
@@ -201,12 +192,14 @@ namespace BlackFox
         /// <returns></returns>
         public void Damage(float _damage, GameObject _attacker)
         {
-            Life -= _damage;
+            life -= _damage;
 
-            if (Life < 1)
+            if (life < 1)
             {
                 if (AgentKilled != null)
                     AgentKilled(_attacker.GetComponent<Agent>(), this);
+                else
+                    AgentKilled(null, this);
                 Destroy(gameObject);
             }
         }

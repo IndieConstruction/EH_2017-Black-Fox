@@ -13,7 +13,7 @@ namespace BlackFox {
             CurrentState = new LevelStartState();
         }
 
-        void OnStateEnd(string _stateName)
+        void HandleOnStateEnd(string _stateName)
         {
             switch (_stateName)
             {
@@ -53,11 +53,11 @@ namespace BlackFox {
         #region Events
         private void OnEnable()
         {
-            StateBase.OnStateEnd += OnStateEnd;            
+            StateBase.OnStateEnd += HandleOnStateEnd;            
         }
         private void OnDisable()
         {
-            StateBase.OnStateEnd -= OnStateEnd;
+            StateBase.OnStateEnd -= HandleOnStateEnd;
         }
         #endregion
     }

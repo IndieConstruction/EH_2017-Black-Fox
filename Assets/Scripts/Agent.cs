@@ -220,9 +220,10 @@ namespace BlackFox
             if (life < 1)
             {
                 if (AgentKilled != null)
-                    AgentKilled(_attacker.GetComponent<Agent>(), this);
-                else
-                    AgentKilled(null, this);
+                    if (_attacker.GetComponent<Agent>() != null)
+                        AgentKilled(_attacker.GetComponent<Agent>(), this);
+                    else
+                        AgentKilled(null, this);
                 Destroy(gameObject);
             }
         }

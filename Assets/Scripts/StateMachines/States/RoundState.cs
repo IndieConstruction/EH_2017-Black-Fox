@@ -140,6 +140,7 @@ namespace BlackFox
             if (OnStateEnd != null)
                 OnStateEnd("RoundState");
         }
+
         #region Events
         void OnPlayerWinnig(PlayerIndex _winner)
         {

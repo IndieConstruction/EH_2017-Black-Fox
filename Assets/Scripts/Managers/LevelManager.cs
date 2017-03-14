@@ -7,9 +7,10 @@ using XInputDotNetPure;
 namespace BlackFox
 {
     /// <summary>
-    /// Gestore dei punti del player
+    /// Gestore del Livello
+    /// Condizione vittoria, numero round vinti, passare informazioni livello alla propria morte
     /// </summary>
-    public class PointsManager
+    public class LevelManager : MonoBehaviour
     {
         int AddPoints = 1;
         int SubPoints = 1;
@@ -18,17 +19,11 @@ namespace BlackFox
         List<PlayerPoints> pointsManager = new List<PlayerPoints>()
         { new PlayerPoints(PlayerIndex.One), new PlayerPoints(PlayerIndex.Two), new PlayerPoints(PlayerIndex.Three), new PlayerPoints(PlayerIndex.Four) };
 
-        public PointsManager(int _killPoints, int _deathPoints, int _pointsToWin)
+        public void Init(int _killPoints, int _deathPoints, int _pointsToWin)
         {
             AddPoints = _killPoints;
             SubPoints = _deathPoints;
             pointsToWin = _pointsToWin;
-            Agent.AgentKilled += HandleAgentKilled;
-        }
-
-        public PointsManager()
-        {
-            Agent.AgentKilled += HandleAgentKilled;
         }
 
         public void UpdateKillPoints(PlayerIndex _killer, PlayerIndex _victim)
@@ -74,6 +69,16 @@ namespace BlackFox
         #region Events
         public delegate void PointsEvent(PlayerIndex _winner);
         public static PointsEvent OnPlayerWinnig;
+
+        private void OnEnable()
+        {
+            Agent.AgentKilled += HandleAgentKilled;
+        }
+
+        private void OnDisable()
+        {
+            Agent.AgentKilled -= HandleAgentKilled;
+        }
 
         public void HandleAgentKilled(Agent _killer, Agent _victim)
         {

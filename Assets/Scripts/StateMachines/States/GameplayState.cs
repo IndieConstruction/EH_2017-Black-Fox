@@ -29,7 +29,7 @@ namespace BlackFox
 
         void StartGameplaySM()
         {
-            gameplaySM = new GameObject().AddComponent<GameplaySM>();
+            gameplaySM = new GameplaySM();
             gameplaySM.gameObject.name = "GameplayStateMachine";
             StateMachineBase.OnMachineEnd += OnMachineEnd;
         }

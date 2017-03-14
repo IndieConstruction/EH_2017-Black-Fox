@@ -58,13 +58,6 @@ namespace BlackFox
         {
             return managerUI;
         }
-
-        public void prova()
-        {
-
-            new PointsManager();
-            
-        }
     }
 }
 

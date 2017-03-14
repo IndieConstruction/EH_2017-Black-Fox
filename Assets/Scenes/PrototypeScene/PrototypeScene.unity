@@ -239,16 +239,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 114742682514710138, guid: c782f38c169ab5d41ab5babdc28ca1ce,
-        type: 2}
-      propertyPath: menuUIController
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114742682514710138, guid: c782f38c169ab5d41ab5babdc28ca1ce,
-        type: 2}
-      propertyPath: gameUIController
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c782f38c169ab5d41ab5babdc28ca1ce, type: 2}
   m_IsPrefabParent: 0

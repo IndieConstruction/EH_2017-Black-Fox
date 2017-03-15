@@ -495,16 +495,16 @@ Prefab:
       propertyPath: m_ConnectedBody
       value: 
       objectReference: {fileID: 2120538521}
-    - target: {fileID: 153021238707886416, guid: 4f6de7ac56079224b9439734b42d94e4,
-        type: 2}
-      propertyPath: m_ConnectedBody
-      value: 
-      objectReference: {fileID: 1170886683}
     - target: {fileID: 153803970551214024, guid: 4f6de7ac56079224b9439734b42d94e4,
         type: 2}
       propertyPath: m_ConnectedBody
       value: 
       objectReference: {fileID: 1756696925}
+    - target: {fileID: 153021238707886416, guid: 4f6de7ac56079224b9439734b42d94e4,
+        type: 2}
+      propertyPath: m_ConnectedBody
+      value: 
+      objectReference: {fileID: 1170886683}
     - target: {fileID: 153532173653494810, guid: 4f6de7ac56079224b9439734b42d94e4,
         type: 2}
       propertyPath: m_ConnectedBody

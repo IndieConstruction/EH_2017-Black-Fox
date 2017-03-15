@@ -29,8 +29,7 @@ namespace BlackFox
 
         void StartGameplaySM()
         {
-            gameplaySM = new GameObject().AddComponent<GameplaySM>();
-            gameplaySM.gameObject.name = "GameplayStateMachine";
+            gameplaySM = GameManager.Instance.gameObject.AddComponent<GameplaySM>();
             StateMachineBase.OnMachineEnd += OnMachineEnd;
         }
 
@@ -39,7 +38,7 @@ namespace BlackFox
             if(_machineName == "GameplaySM")
             {
                 Debug.Log("GameplaySM_Stop");
-                GameObject.Destroy(gameplaySM.gameObject);
+                GameObject.Destroy(gameplaySM);
                 if (OnStateEnd != null)
                     OnStateEnd();
             }   

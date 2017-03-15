@@ -41,7 +41,7 @@ namespace BlackFox
                 Debug.Log("GameplaySM_Stop");
                 GameObject.Destroy(gameplaySM.gameObject);
                 if (OnStateEnd != null)
-                    OnStateEnd("GameplayState");
+                    OnStateEnd();
             }   
         }
     }

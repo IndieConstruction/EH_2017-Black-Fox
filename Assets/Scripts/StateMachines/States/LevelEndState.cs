@@ -15,13 +15,13 @@ namespace BlackFox
             UnloadAgents();
             UnloadGameElements();
             if (OnStateEnd != null)
-                OnStateEnd("LevelEndState");
+                OnStateEnd();
         }
 
         public override void OnUpdate()
         {
             if (OnStateEnd != null)
-                OnStateEnd("LevelStartState");
+                OnStateEnd();
         }
 
         void UnloadAgents()

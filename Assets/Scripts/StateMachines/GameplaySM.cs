@@ -13,52 +13,27 @@ namespace BlackFox {
             CurrentState = new LevelStartState();
         }
 
-        void HandleOnStateEnd(string _stateName)
-        {
-            switch (_stateName)
-            {
-                case "LevelStartState":
+        protected override void OnCurrentStateEnded() {
+            if ("BlackFox.LevelStartState" == CurrentState.StateName) {
+                // LevelStartState
+                roundNumber++;
+                CurrentState = new RoundState(roundNumber);
+            } else if ("BlackFox.RoundState" == CurrentState.StateName) {
+                // RoundState
+                // TODO : aggiungere condizione di spareggio
+                if (roundNumber < 4) {
                     roundNumber++;
                     CurrentState = new RoundState(roundNumber);
-                    break;
-                case "RoundState":
-                    // TODO : aggiungere condizione di spareggio
-                    if(roundNumber < 4)
-                    {
-                        roundNumber++;
-                        CurrentState = new RoundState(roundNumber);
-                    }   
-                    else
-                    {
-                        CurrentState = new LevelEndState();
-                    }                      
-                    break;
-                case "LevelEndState":
-                    //EXIT POINT   
-                    roundNumber = 0;
-                    if (OnMachineEnd != null)
-                        OnMachineEnd("GameplaySM");
-                    break;
-                default:
-                    break;
+                } else {
+                    CurrentState = new LevelEndState();
+                }
+            } else if ("BlackFox.LevelEndState" == CurrentState.StateName) {
+                // LevelEndState
+                //EXIT POINT   
+                roundNumber = 0;
+                if (OnMachineEnd != null)
+                    OnMachineEnd("GameplaySM");
             }
         }
-
-        private void Update()
-        {
-            if (CurrentState != null)
-                CurrentState.OnUpdate();
-        }
-
-        #region Events
-        private void OnEnable()
-        {
-            StateBase.OnStateEnd += HandleOnStateEnd;            
-        }
-        private void OnDisable()
-        {
-            StateBase.OnStateEnd -= HandleOnStateEnd;
-        }
-        #endregion
     }
 }

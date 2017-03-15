@@ -18,9 +18,12 @@ public abstract class StateMachineBase : MonoBehaviour {
 
     void OnStateChange(StateBase _newState, StateBase _oldState)
     {
-        if (_oldState != null)
+        if (_oldState != null) { 
             _oldState.OnEnd();
-        _newState.OnStart();
+            _oldState.OnStateEnd -= OnCurrentStateEnded;
+        }
+        _newState.OnStateEnd += OnCurrentStateEnded;
+        _newState.OnPreStart(this);
     }
 
     private void Update()
@@ -33,5 +36,13 @@ public abstract class StateMachineBase : MonoBehaviour {
     public delegate void MachineEvent(string _machineName);
 
     public static MachineEvent OnMachineEnd;
+
+    #region Handlers
+    /// <summary>
+    /// Chiamata in automatico quando lo stato corrente si auto dichiara terminato.
+    /// </summary>
+    protected virtual void OnCurrentStateEnded() { }
+    #endregion
+
     #endregion
 }

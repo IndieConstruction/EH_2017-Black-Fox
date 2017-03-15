@@ -20,7 +20,7 @@ namespace BlackFox
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 if (OnStateEnd != null)
-                    OnStateEnd("MainMenuState");
+                    OnStateEnd();
             }
         }
 

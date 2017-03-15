@@ -14,29 +14,16 @@ namespace BlackFox {
             CurrentState = new MainMenuState();
         }
 
-        void HandleOnStateEnd(string _stateName)
+        protected override void OnCurrentStateEnded()  
         {
-            switch (_stateName) {
-                case "MainMenuState":
-                    CurrentState = new GameplayState();
-                    break;
-                case "GameplayState":
-                    CurrentState = new MainMenuState();
-                    break;
-                default:
-                    break;
+            if ("BlackFox.MainMenuState" == CurrentState.StateName) {
+                // MainMenuState
+                CurrentState = new GameplayState();
+            } else if ("BlackFox.GameplayState" == CurrentState.StateName) {
+                // GameplayState
+                CurrentState = new MainMenuState();
             }
-        }
 
-        #region Events
-        private void OnEnable()
-        {
-            StateBase.OnStateEnd += HandleOnStateEnd;
         }
-        private void OnDisable()
-        {
-            StateBase.OnStateEnd -= HandleOnStateEnd;
-        }
-        #endregion
     }
 }

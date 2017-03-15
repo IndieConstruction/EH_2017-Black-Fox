@@ -65,12 +65,12 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("RoundState");
-            currentState = RoundStates.Initialize;
         }
 
         public override void OnUpdate()
         {
-            StateFlow();         
+            Debug.Log("RoundState Update");
+            StateFlow();
         }
 
         /// <summary>
@@ -132,7 +132,7 @@ namespace BlackFox
         {
             // passaggio informazioni essenziali al gestore del livello
             if (OnStateEnd != null)
-                OnStateEnd("RoundState");
+                OnStateEnd();
         }
 
         #region Events

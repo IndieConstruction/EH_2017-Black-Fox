@@ -19,11 +19,12 @@ namespace BlackFox
             LoadGameElements();
 
         }
-
+        
         public override void OnUpdate()
         {
+            Debug.Log("LevelStart Update");
             if (OnStateEnd != null)
-                OnStateEnd("LevelStartState");
+                OnStateEnd();
         }
 
         /// <summary>

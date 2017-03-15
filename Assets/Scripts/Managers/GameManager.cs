@@ -43,7 +43,6 @@ namespace BlackFox
         {
             managerUI = GetComponent<UIManager>();
             flowSM = gameObject.AddComponent<FlowSM>();
-            FlowSM flowSM2 = flowSM;
         }
 
         private void Update()

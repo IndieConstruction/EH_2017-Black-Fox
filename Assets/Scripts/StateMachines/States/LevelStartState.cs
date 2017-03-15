@@ -22,7 +22,6 @@ namespace BlackFox
         
         public override void OnUpdate()
         {
-            Debug.Log("LevelStart Update");
             if (OnStateEnd != null)
                 OnStateEnd();
         }

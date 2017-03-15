@@ -24,7 +24,6 @@ namespace BlackFox
         MovementController movment;
         PlacePin pinPlacer;
         Shooter shooter;
-        GameManager gameManager;
         RopeController rope;
 
         public float fireRate;                                                   // rateo di fuoco in secondi
@@ -33,7 +32,6 @@ namespace BlackFox
 
         void Start()
         {
-            gameManager = GameManager.Instance;
             movment = GetComponent<MovementController>();
             rope = SearchRope();
             pinPlacer = GetComponent<PlacePin>();
@@ -93,9 +91,7 @@ namespace BlackFox
         /// Salva all'interno della lista di oggetti IDamageable, gli oggetti facenti parti della lista DamageablesPrefabs
         /// </summary>
         private void LoadIDamageablePrefab()
-        {
-            //WARNING - se l'oggetto che che fa parte della lista di GameObject non ha l'interfaccia IDamageable non farà parte degli oggetti danneggiabili.
-
+        { 
             List<GameObject> DamageablesPrefabs = PrefabUtily.LoadAllPrefabsWithComponentOfType<IDamageable>("Prefabs", gameObject);
 
             foreach (var k in DamageablesPrefabs)

@@ -32,9 +32,6 @@ namespace BlackFox
             rigid.AddForce(rigid.velocity.normalized * ForceMultiplier, ForceMode.Acceleration);
         }
 
-
-
-
         private void OnCollisionEnter(Collision collision)
         {
             IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();

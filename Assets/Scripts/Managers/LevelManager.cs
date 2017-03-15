@@ -12,9 +12,9 @@ namespace BlackFox
     /// </summary>
     public class LevelManager : MonoBehaviour
     {
-        public int AddPoints = 1;
-        public int SubPoints = 1;
-        public int pointsToWin = 5;
+        public int AddPoints;
+        public int SubPoints;
+        public int pointsToWin;
 
         List<PlayerStats> playerStats = new List<PlayerStats>()
         { new PlayerStats(PlayerIndex.One), new PlayerStats(PlayerIndex.Two), new PlayerStats(PlayerIndex.Three), new PlayerStats(PlayerIndex.Four) };
@@ -39,8 +39,9 @@ namespace BlackFox
                         if (OnPlayerWinnig != null)
                         {
                             player.Victories += 1;
-                            if(OnPlayerWinnig != null)
-                                OnPlayerWinnig(_killer);
+                            ClearKillPoints();
+                            if (OnPlayerWinnig != null)
+                                OnPlayerWinnig();
                         }                
                     }
                     break;
@@ -70,9 +71,17 @@ namespace BlackFox
                 UpdateKillPoints(_victim.playerIndex);
         }
 
+        void ClearKillPoints()
+        {
+            foreach (PlayerStats player in playerStats)
+            {
+                player.ResetKillPoints();
+            }
+        }
+
         #region Events
-        public delegate void PointsEvent(PlayerIndex _winner);
-        public static PointsEvent OnPlayerWinnig;
+        public delegate void LevelEvent();
+        public static LevelEvent OnPlayerWinnig;
 
         private void OnEnable()
         {
@@ -91,7 +100,6 @@ namespace BlackFox
     /// </summary>
     public class PlayerStats
     {
-
         PlayerIndex playerIndex;
         int powerPoints;
         int killPoints;
@@ -123,6 +131,11 @@ namespace BlackFox
         public PlayerStats(PlayerIndex _playerIndex)
         {
             playerIndex = _playerIndex;
+        }
+
+        public void ResetKillPoints()
+        {
+            killPoints = 0;
         }
 
     }

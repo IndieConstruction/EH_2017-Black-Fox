@@ -65,11 +65,11 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("RoundState");
+            LevelManager.OnPlayerWinnig += HandleOnPlayerWinnig;
         }
 
         public override void OnUpdate()
         {
-            Debug.Log("RoundState Update");
             StateFlow();
         }
 
@@ -105,7 +105,7 @@ namespace BlackFox
             }
             else
             {
-                // reset spawner manager, round controller e UI
+                // reset di tutti gli oggeti presenti nel round
             }
             
             CurrentState = RoundStates.Play;
@@ -115,6 +115,7 @@ namespace BlackFox
         {
             if (playerWinning)
             {
+                Debug.Log("Agent Wins");
                 CurrentState = RoundStates.RoundEnd;
             }
         }
@@ -131,12 +132,13 @@ namespace BlackFox
         void RoundEnd()
         {
             // passaggio informazioni essenziali al gestore del livello
+            LevelManager.OnPlayerWinnig -= HandleOnPlayerWinnig;
             if (OnStateEnd != null)
                 OnStateEnd();
         }
 
         #region Events
-        void OnPlayerWinnig(PlayerIndex _winner)
+        void HandleOnPlayerWinnig()
         {
             playerWinning = true;
         }

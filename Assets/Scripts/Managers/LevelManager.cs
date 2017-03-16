@@ -85,12 +85,12 @@ namespace BlackFox
 
         private void OnEnable()
         {
-            Agent.AgentKilled += HandleAgentKilled;
+            Agent.OnAgentKilled += HandleAgentKilled;
         }
 
         private void OnDisable()
         {
-            Agent.AgentKilled -= HandleAgentKilled;
+            Agent.OnAgentKilled -= HandleAgentKilled;
         }
         #endregion
     }

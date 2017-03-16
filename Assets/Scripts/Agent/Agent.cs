@@ -10,7 +10,16 @@ namespace BlackFox
     {
 
         string Name;
-        float life = 10;                                // Vita                
+        public float maxLife = 10;
+        private float _life = 10;
+
+        public float Life {
+            get { return _life; }
+            private set { _life = value;
+                if (OnDataChange != null)
+                    OnDataChange(this);
+            }
+        }
 
         // Variabili per il funzionamento dei controller e della tastiera
         public bool UseKeyboard;
@@ -203,15 +212,15 @@ namespace BlackFox
         /// <returns></returns>
         public void Damage(float _damage, GameObject _attacker)
         {
-            life -= _damage;
+            Life -= _damage;
 
-            if (life < 1)
+            if (Life < 1)
             {
-                if (AgentKilled != null)
+                if (OnAgentKilled != null)
                     if (_attacker.GetComponent<Agent>() != null)
-                        AgentKilled(_attacker.GetComponent<Agent>(), this);
+                        OnAgentKilled(_attacker.GetComponent<Agent>(), this);
                     else
-                        AgentKilled(null, this);
+                        OnAgentKilled(null, this);
                 Destroy(gameObject);
             }
         }
@@ -223,9 +232,14 @@ namespace BlackFox
 
         #region Events
 
-        public delegate void AgentEvent(Agent _killer, Agent _victim);
+        public delegate void AgentKilledEvent(Agent _killer, Agent _victim);
 
-        public static AgentEvent AgentKilled;
+        public static AgentKilledEvent OnAgentKilled;
+
+
+        public delegate void AgentDataChangedEvent(Agent _agent);
+
+        public AgentDataChangedEvent OnDataChange;
 
         #endregion
 

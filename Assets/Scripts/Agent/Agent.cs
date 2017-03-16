@@ -22,7 +22,6 @@ namespace BlackFox
         }
 
         // Variabili per il funzionamento dei controller e della tastiera
-        public bool UseKeyboard;
         GamePadState state;
         GamePadState prevState;
         public PlayerIndex playerIndex;
@@ -47,35 +46,12 @@ namespace BlackFox
             shooter = GetComponent<Shooter>();
             shooter.playerIndex = this.playerIndex;
             LoadIDamageablePrefab();
-
-            if (playerIndex == PlayerIndex.Three)
-            {
-                SwitchInput = KeyCode.F3;
-            }
-            else if (playerIndex == PlayerIndex.Four)
-            {
-                SwitchInput = KeyCode.F4;
-            }
         }
 
         void FixedUpdate()
         {
-            ///Dato il problema che quando entra nello start, ancora non sono stati passati i riferimenti delle slider allo UIManager
-            /// questo fa guadangnare il tempo necessario perchè lo UIManager possa riempire i riferimenti così che Agent li possa usare
-
-            if (Input.GetKeyDown(SwitchInput))
-            {
-                UseKeyboard = !UseKeyboard;
-            }
-
-            if (UseKeyboard)
-            {
-                KeyboardReader();
-            }
-            else
-            {
-                XInputReader();
-            }
+            KeyboardReader();
+            XInputReader();
         }
 
         RopeController SearchRope()

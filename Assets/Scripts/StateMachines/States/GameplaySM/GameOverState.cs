@@ -1,21 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace BlackFox
-{
-    public class LevelEndState : StateBase
-    {
-        // TODO : correggere il funzionamente della classe
-        // Funzioni scritte in modo orribile solo per test
+
+namespace BlackFox {
+
+    public class GameOverState : StateBase {
 
         public override void OnStart()
         {
-            Debug.Log("LevelEndState");
+            Debug.Log("GameOverState");
             UnloadArena();
             UnloadAgents();
             UnloadGameElements();
-            if (OnStateEnd != null)
-                OnStateEnd();
         }
 
         public override void OnUpdate()

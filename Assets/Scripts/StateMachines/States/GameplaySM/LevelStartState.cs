@@ -8,16 +8,12 @@ namespace BlackFox
     /// </summary>
     public class LevelStartState : StateBase
     {
-        // TODO : correggere il funzionamente della classe
-        // Funzioni scritte in modo orribile solo per test
-
         public override void OnStart()
         {
             Debug.Log("LevelStart");
             LoadArena();
             LoadAgents();
             LoadGameElements();
-
         }
         
         public override void OnUpdate()

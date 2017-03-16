@@ -109,29 +109,28 @@ namespace BlackFox
         {
             if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_PlaceRight")))                       // place right pin
             {
-                pinPlacer.placeThePin(this);
+                PlacePin();
             }
 
             if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_PlaceLeft")))                        // place left pin
             {
-                pinPlacer.placeThePin(this);
+                PlacePin();
             }
 
             if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_Fire")))       // shoot 
             {
                 nextFire = Time.time + fireRate;
-                shooter.ShootBullet();
+                Shoot();
             }
 
             if (Input.GetButton(string.Concat("Key" + (int)playerIndex + "_Fire")) && Time.time > nextFire)       // shoot at certain rate
             {
                 nextFire = Time.time + fireRate;
-                shooter.ShootBullet();
+                Shoot();
             }
 
-            float thrust = Input.GetAxis(string.Concat("Key" + (int)playerIndex + "_Forward"));              // Add thrust   
-            movment.Rotation(Input.GetAxis(string.Concat("Key" + (int)playerIndex + "_Horizonatal")));  // Ruota l'agente
-            movment.Movement(thrust);                                                                               // Muove l'agente                                                                                
+            Rotate(Input.GetAxis(string.Concat("Key" + (int)playerIndex + "_Horizonatal")));  // Ruota l'agente
+            GoForward(Input.GetAxis(string.Concat("Key" + (int)playerIndex + "_Forward")));                                                                               // Muove l'agente                                                                                
         }
         #endregion
 
@@ -144,37 +143,30 @@ namespace BlackFox
             prevState = state;
             state = GamePad.GetState(playerIndex);
 
-            movment.Movement(state.Triggers.Right);
-            movment.Rotation(state.ThumbSticks.Left.X);
+            GoForward(state.Triggers.Right);
+            Rotate(state.ThumbSticks.Left.X);
 
-            ropeExtTimer += Time.deltaTime;
-            if (state.Triggers.Right >= 0.9f && ropeExtTimer >= 0.1f)
-            {
-                rope.ExtendRope();
-                ropeExtTimer = 0;
-            }
-                
 
 
             if (prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed)
             {
-                pinPlacer.placeThePin(this);
+                PlacePin();
             }
 
             if (prevState.Buttons.LeftShoulder == ButtonState.Released && state.Buttons.LeftShoulder == ButtonState.Pressed)
             {
-                pinPlacer.placeThePin(this);
+                PlacePin();
             }
 
             if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
             {
                 nextFire = Time.time + fireRate;
-                shooter.ShootBullet();
+                Shoot();
             }
             else if (prevState.Buttons.A == ButtonState.Pressed && state.Buttons.A == ButtonState.Pressed && Time.time > nextFire)
             {
                 nextFire = Time.time + fireRate;
-                shooter.ShootBullet();
+                Shoot();
             }
         }
 
@@ -236,7 +228,34 @@ namespace BlackFox
         public static AgentEvent AgentKilled;
 
         #endregion
+
+        #region Player Abilities
+
+        void Shoot() {
+            shooter.ShootBullet();
+        }
+
+        void PlacePin() {
+            pinPlacer.placeThePin(this);
+        }
+
+        void GoForward(float _amount) {
+            movment.Movement(_amount);
+            ExtendRope(_amount);
+        }
+
+        void Rotate(float _amount) {
+            movment.Rotation(_amount);
+        }
+
+        void ExtendRope(float _amount) {
+            ropeExtTimer += Time.deltaTime;
+            if (_amount >= 0.9f && ropeExtTimer >= 0.1f) {
+                rope.ExtendRope();
+                ropeExtTimer = 0;
+            }
+        }
+
+        #endregion
     }
 }
-
-

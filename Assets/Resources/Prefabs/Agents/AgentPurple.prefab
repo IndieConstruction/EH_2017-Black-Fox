@@ -179,7 +179,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1964738197259928}
   serializedVersion: 2
-  m_Mass: 100
+  m_Mass: 10
   m_Drag: 0.8
   m_AngularDrag: 0.85
   m_UseGravity: 0
@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 1324583927385362, guid: 03a35e42f4b03124e9652a6ddf027306, type: 2}
-  LifeTime: 10
+  LifeTime: 0.5
   bulletSpeed: 150
   AddedAmmo: 10
   MaxAmmo: 50
@@ -229,7 +229,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6116c7f43a8f3964db2240b1007b4dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UseKeyboard: 0
   playerIndex: 3
   fireRate: 0.5
 --- !u!114 &114977479195355638

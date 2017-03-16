@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 1869845173433408, guid: 18b6dec44824144498cd510b22107227, type: 2}
-  LifeTime: 10
+  LifeTime: 0.5
   bulletSpeed: 150
   AddedAmmo: 10
   MaxAmmo: 50
@@ -231,7 +231,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6116c7f43a8f3964db2240b1007b4dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UseKeyboard: 0
   playerIndex: 2
   fireRate: 0.5
 --- !u!114 &114824584066434744

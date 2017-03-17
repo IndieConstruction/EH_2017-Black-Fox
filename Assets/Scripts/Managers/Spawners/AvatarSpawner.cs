@@ -49,7 +49,7 @@ namespace BlackFox
                 foreach (Agent agent in FindObjectsOfType<Agent>())
                 {
                     SpawnPoint newPos;
-                    newPos.SpawnPosition = agent.transform;
+                    newPos.SpawnPosition = Instantiate(new GameObject("SpawnPoint_"+ agent.name), agent.transform.position, agent.transform.rotation, this.transform).transform;
                     newPos.PlayerIndx = agent.playerIndex;
 
                     OriginalSpawns.Add(newPos);
@@ -95,7 +95,7 @@ namespace BlackFox
             
             //TODO: sostituire la lista SpawnPoint nel successivo foreach
             //con una lista che prevede il corretto criterio di selezione degli spawn points.
-            foreach (SpawnPoint spawn in SpawnPoints)
+            foreach (SpawnPoint spawn in OriginalSpawns)
             {
                 if (spawn.PlayerIndx == _playerIndx)
                 {

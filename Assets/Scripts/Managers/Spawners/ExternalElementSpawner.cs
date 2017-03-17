@@ -68,7 +68,7 @@ namespace BlackFox
         void InstantiateExternalAgent()
         {
             GameObject instantiateEA = Instantiate(ExternalAgent, transform.position, transform.rotation);
-            ExternalAgent eA = instantiateEA.AddComponent<ExternalAgent>();
+            ExternalAgent eA = instantiateEA.GetComponent<ExternalAgent>();
             eA.Initialize(target, Damageables);
         }
     }

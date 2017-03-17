@@ -36,13 +36,14 @@ namespace BlackFox
         }
         private GameObject[] agentsPrefb;
 
+        #region Spawner Life flow
         /// <summary>
         /// Save the desired SpawnPoints
         /// </summary>
         protected override void OnActivation()
         {
             agentsPrefb = Resources.LoadAll<GameObject>("Prefabs/Agents");
-           
+            Agent.OnAgentKilled += HandleOnAgentKilled;
             if(UseInitialPositionsAsSpawnPoints)
             {
                 foreach (Agent agent in FindObjectsOfType<Agent>())
@@ -61,6 +62,12 @@ namespace BlackFox
                     OriginalSpawns.Add(spwnPt);
                 }            
         }
+
+        protected override void OnDeactivation()
+        {
+            Agent.OnAgentKilled -= HandleOnAgentKilled;
+        }
+        #endregion
 
         #region API
         /// <summary>
@@ -112,8 +119,18 @@ namespace BlackFox
             StartCoroutine("RespawnCooldown",_playerIndx);            
         }
         #endregion
-  
-        
+
+        #region Event
+        /// <summary>
+        /// Respawn Agent on Death
+        /// </summary>
+        /// <param name="_killer"></param>
+        /// <param name="_victim"></param>
+        void HandleOnAgentKilled(Agent _killer, Agent _victim)
+        {
+            RespawnAvatar(_victim.playerIndex);
+        }
+        #endregion
 
         [System.Serializable]
         public struct SpawnPoint

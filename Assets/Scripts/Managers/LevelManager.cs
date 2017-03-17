@@ -19,12 +19,7 @@ namespace BlackFox
         List<PlayerStats> playerStats = new List<PlayerStats>()
         { new PlayerStats(PlayerIndex.One), new PlayerStats(PlayerIndex.Two), new PlayerStats(PlayerIndex.Three), new PlayerStats(PlayerIndex.Four) };
 
-        public void Init(int _killPoints, int _deathPoints, int _pointsToWin)
-        {
-            AddPoints = _killPoints;
-            SubPoints = _deathPoints;
-            pointsToWin = _pointsToWin;
-        }
+        public SpawnerManager spawnerMng;
 
         public void UpdateKillPoints(PlayerIndex _killer, PlayerIndex _victim)
         {

@@ -28,7 +28,7 @@ namespace BlackFox
 
         void MoveTowards()
         {
-            GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * velocity, ForceMode.Force);
+            GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * velocity, ForceMode.Acceleration);
         }
 
         public void Initialize(Transform _target, List<IDamageable> _damageables)

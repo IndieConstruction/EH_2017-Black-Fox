@@ -9,12 +9,17 @@ namespace BlackFox
     {
 
         float life;
-        public float MaxLife = 10;              // La vita massima che può avere il Core e che viene impostata al riavvio di un round perso
-        GameManager gameManager;
+        public float MaxLife = 10;      // La vita massima che può avere il Core e che viene impostata al riavvio di un round perso
 
         private void Start()
         {
             life = MaxLife;
+        }
+
+        public void Init(float _previousLife)
+        {
+            if (_previousLife != MaxLife)
+                life = _previousLife;
         }
 
         #region Interfacce
@@ -24,6 +29,7 @@ namespace BlackFox
             life -= _damage;
             if (life < 1)
             {
+                LevelManager.OnCoreDeath();
                 Destroy(gameObject);
             }
         }

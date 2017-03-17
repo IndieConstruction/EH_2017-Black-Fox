@@ -15,8 +15,12 @@ namespace BlackFox
 
         public override void OnStart()
         {
-            Debug.Log("RoundInit");
-            LoadAgents();
+            Debug.Log("RoundInitState");
+            if (roundNumber > 1)
+            {
+                ReloadAgents();
+                ReloadGameElements();
+            }
         }
 
         public override void OnUpdate()
@@ -25,7 +29,7 @@ namespace BlackFox
                 OnStateEnd();
         }
 
-        void LoadAgents()
+        void ReloadAgents()
         {
             GameObject[] agents = Resources.LoadAll<GameObject>("Prefabs/Agents");
 
@@ -33,6 +37,11 @@ namespace BlackFox
             {
                 GameObject.Instantiate(item);
             }
+        }
+
+        void ReloadGameElements()
+        {
+            GameObject.Instantiate(Resources.Load("Prefabs/Misc/Core"));
         }
     }
 }

@@ -10,7 +10,7 @@ namespace BlackFox
     {
         public override void OnStart()
         {
-            Debug.Log("LevelStart");
+            Debug.Log("LevelStartState");
             LoadArena();
             LoadAgents();
             LoadGameElements();

@@ -25,7 +25,7 @@ namespace BlackFox {
                 // RoundInitState
                 CurrentState = new PlayState(roundNumber);
             }
-            else if ("BlackFox.RoundState" == CurrentState.StateName)
+            else if ("BlackFox.PlayState" == CurrentState.StateName)
             {
                 // RoundState
                 CurrentState = new RoundEndState();

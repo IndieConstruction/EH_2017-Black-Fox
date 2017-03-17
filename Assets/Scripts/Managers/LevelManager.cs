@@ -82,6 +82,7 @@ namespace BlackFox
         #region Events
         public delegate void LevelEvent();
         public static LevelEvent OnPlayerWinnig;
+        public static LevelEvent OnCoreDeath;
 
         private void OnEnable()
         {

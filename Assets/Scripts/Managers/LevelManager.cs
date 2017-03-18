@@ -34,6 +34,7 @@ namespace BlackFox
                         if (OnPlayerWinnig != null)
                         {
                             player.Victories += 1;
+                            // TODO : AGGIUNGERE BLOCCO SPAWNER
                             ClearKillPoints();
                             if (OnPlayerWinnig != null)
                                 OnPlayerWinnig();

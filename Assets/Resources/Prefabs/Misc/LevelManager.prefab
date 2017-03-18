@@ -156,7 +156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AddPoints: 1
   SubPoints: 1
-  pointsToWin: 1
+  pointsToWin: 5
   spawnerMng: {fileID: 114136468076030542}
 --- !u!114 &114585974932933058
 MonoBehaviour:

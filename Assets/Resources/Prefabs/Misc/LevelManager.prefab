@@ -154,10 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4e526c674e183e4594ff10eed179dd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AddPoints: 1
-  SubPoints: 1
-  pointsToWin: 2
-  spawnerMng: {fileID: 114136468076030542}
 --- !u!114 &114585974932933058
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -186,6 +182,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e030002c36bddfd4c83e5489752b4176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RespawnTime: 0
+  RespawnTime: 3
   UseInitialPositionsAsSpawnPoints: 1
   SpawnPoints: []

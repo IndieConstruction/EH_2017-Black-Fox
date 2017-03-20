@@ -54,6 +54,13 @@ namespace BlackFox
             XInputReader();
         }
 
+        public void Init()
+        {
+            Life = maxLife;
+            shooter.ammo = 0;
+            GetComponentInChildren<MeshRenderer>().enabled = true;
+        }
+
         RopeController SearchRope()
         {
             foreach (RopeController rope in FindObjectsOfType<RopeController>())
@@ -88,7 +95,7 @@ namespace BlackFox
 
         #region API
 
-        public Shooter SendInformation()
+        public Shooter GetShooterReference()
         {
             return shooter;
         }
@@ -204,11 +211,16 @@ namespace BlackFox
             if (Life < 1)
             {
                 if (OnAgentKilled != null)
+                {
                     if (_attacker.GetComponent<Agent>() != null)
                         OnAgentKilled(_attacker.GetComponent<Agent>(), this);
-                    else
-                        OnAgentKilled(null, this);
-                Destroy(gameObject);
+                }
+                else
+                {
+                    OnAgentKilled(null, this);
+                }
+                GetComponentInChildren<MeshRenderer>().enabled = false;
+
             }
         }
 

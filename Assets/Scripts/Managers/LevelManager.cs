@@ -12,9 +12,9 @@ namespace BlackFox
     /// </summary>
     public class LevelManager : MonoBehaviour
     {
-        public static int AddPoints;
-        public static int SubPoints;
-        public static int pointsToWin;
+        public static int AddPoints = 1;
+        public static int SubPoints = 1;
+        public static int pointsToWin = 5;
 
         GameplaySM gameplaySM;
 
@@ -59,6 +59,7 @@ namespace BlackFox
                 if (player.PlayerIndex == _killer)
                 {
                     player.KillPoints += AddPoints;
+                    Debug.Log(player.PlayerIndex + "/" + player.KillPoints);
 
                     if (player.KillPoints == pointsToWin)
                     {
@@ -85,6 +86,7 @@ namespace BlackFox
                 if (player.PlayerIndex == _victim && player.KillPoints > 0)
                 {
                     player.KillPoints -= SubPoints;
+                    Debug.Log(player.PlayerIndex + "/" + player.KillPoints);
                     break;
                 }
             }

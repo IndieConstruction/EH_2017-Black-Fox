@@ -466,7 +466,7 @@ PlayerSettings:
     Collab: 1
     ErrorHub: 0
     Hub: 0
-    UNet: 0
+    UNet: 1
   cloudProjectId: 86c601a0-6a04-42c6-be3b-68b9e723fdc7
   projectName: BlackFox
   organizationId: stropicciaricci

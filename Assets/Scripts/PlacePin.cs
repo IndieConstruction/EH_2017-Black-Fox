@@ -30,11 +30,14 @@ namespace BlackFox
         /// <summary>
         /// Instantiate the pin on the PinSpawn
         /// </summary>
-        public void placeThePin(Agent _owner)
+        public void placeThePin(Agent _owner, bool _isRight)
         {
-            ChangePinSpawnPosition();
             if (prectime <= 0 && CanPlace == true)
             {
+
+                //ChangePinSpawnPosition();
+                SetPinSpawnPosition(_isRight);
+
                 Instantiate(PinPrefab, PinSpanw.position, PinSpanw.rotation);
                 _owner.AddShooterAmmo();
                 prectime = CoolDownTime;
@@ -60,5 +63,18 @@ namespace BlackFox
             }
             PinSpanw.localPosition = new Vector3(xValue, PinSpanw.localPosition.y, PinSpanw.localPosition.z);
         }
+
+        public void SetPinSpawnPosition(bool _isRight)
+        {
+            if (_isRight == false)
+            {
+                PinSpanw.localPosition = new Vector3(-xValue, PinSpanw.localPosition.y, PinSpanw.localPosition.z);
+            }
+            else
+            {
+                PinSpanw.localPosition = new Vector3(xValue, PinSpanw.localPosition.y, PinSpanw.localPosition.z);
+            }
+        }
+
     }
 }

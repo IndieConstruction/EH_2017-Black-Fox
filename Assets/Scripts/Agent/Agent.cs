@@ -94,12 +94,13 @@ namespace BlackFox
         {
             if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_PlaceRight")))                       // place right pin
             {
-                PlacePin();
+                PlacePin(true);
             }
 
             if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_PlaceLeft")))                        // place left pin
             {
-                PlacePin();
+                PlacePin(false);
+                
             }
 
             if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_Fire")))       // shoot 
@@ -135,12 +136,12 @@ namespace BlackFox
 
             if (prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed)
             {
-                PlacePin();
+                PlacePin(true);
             }
 
             if (prevState.Buttons.LeftShoulder == ButtonState.Released && state.Buttons.LeftShoulder == ButtonState.Pressed)
             {
-                PlacePin();
+                PlacePin(false);
             }
 
             if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
@@ -225,8 +226,8 @@ namespace BlackFox
             shooter.ShootBullet();
         }
 
-        void PlacePin() {
-            pinPlacer.placeThePin(this);
+        void PlacePin(bool _isRight) {
+            pinPlacer.placeThePin(this, _isRight);
         }
 
         void GoForward(float _amount) {

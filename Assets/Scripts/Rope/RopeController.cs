@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 namespace Rope
 {
-    [ExecuteInEditMode()]
     [RequireComponent (typeof(LineRenderer),(typeof(ConfigurableJoint)))]
     public class RopeController : MonoBehaviour
     {

@@ -25,7 +25,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100000}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 11.393385, y: 47.707504, z: -12.030232}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4584742720416878}
@@ -75,7 +75,7 @@ GameObject:
   - component: {fileID: 4584742720416878}
   - component: {fileID: 136708089352508152}
   - component: {fileID: 114443033131922352}
-  m_Layer: 9
+  m_Layer: 8
   m_Name: Collider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1
+  m_Height: 0
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!153 &153550304844470488

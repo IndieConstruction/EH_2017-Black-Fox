@@ -77,36 +77,31 @@ namespace BlackFox
         {
             for (int i = 0; i < agentsPrefb.Length; i++)
             {
-                RespawnImmediate(agentsPrefb[i].GetComponent<Agent>().playerIndex);
+                ///RespawnImmediate(agentsPrefb[i].GetComponent<Agent>().playerIndex);
             }
         }
         /// <summary>
         /// Respawn a Player without cooldown
         /// </summary>
         /// <param name="_playerIndx">Player to spawn</param>
-        public void RespawnImmediate(PlayerIndex _playerIndx)
+        public void RespawnImmediate(Agent _agent)
         {
             //Prevent double istance
-            foreach (Agent agnt in FindObjectsOfType<Agent>())
-            {
-                if (agnt.playerIndex == _playerIndx)
-                    Destroy(agnt);
-            }
+            //foreach (Agent agnt in FindObjectsOfType<Agent>())
+            //{
+            //    if (agnt.playerIndex == _playerIndx)
+            //        Destroy(agnt);
+            //}
             
             //TODO: sostituire la lista SpawnPoint nel successivo foreach
             //con una lista che prevede il corretto criterio di selezione degli spawn points.
             foreach (SpawnPoint spawn in OriginalSpawns)
             {
-                if (spawn.PlayerIndx == _playerIndx)
+                if (spawn.PlayerIndx == _agent.playerIndex)
                 {
-                    for (int i = 0; i < agentsPrefb.Length; i++)
-                    {
-                        if(agentsPrefb[i].GetComponent<Agent>().playerIndex == _playerIndx)
-                        {
-                            Instantiate(agentsPrefb[i], spawn.SpawnPosition.position, spawn.SpawnPosition.rotation);
-                            return;
-                        }
-                    }
+                    _agent.gameObject.transform.position = spawn.SpawnPosition.position;
+                    _agent.gameObject.transform.rotation = spawn.SpawnPosition.rotation;
+                    _agent.Init();
                 }
             }
         }
@@ -114,9 +109,9 @@ namespace BlackFox
         /// Respawn after a fixed amount of time
         /// </summary>
         /// <param name="_playerIndx">Player to spawn</param>
-        public void RespawnAvatar(PlayerIndex _playerIndx)
+        public void RespawnAvatar(Agent _agent)
         {
-            StartCoroutine("RespawnCooldown",_playerIndx);            
+            StartCoroutine("RespawnCooldown", _agent);            
         }
         #endregion
 
@@ -128,7 +123,7 @@ namespace BlackFox
         /// <param name="_victim"></param>
         void HandleOnAgentKilled(Agent _killer, Agent _victim)
         {
-            RespawnAvatar(_victim.playerIndex);
+            RespawnAvatar(_victim);
         }
         #endregion
 
@@ -139,10 +134,10 @@ namespace BlackFox
             public PlayerIndex PlayerIndx;
         }
 
-        IEnumerator RespawnCooldown(PlayerIndex _playerIndx)
+        IEnumerator RespawnCooldown(Agent _agent)
         {
             yield return new WaitForSeconds(RespawnTime);
-            RespawnImmediate(_playerIndx);
+            RespawnImmediate(_agent);
         }
     }
 }

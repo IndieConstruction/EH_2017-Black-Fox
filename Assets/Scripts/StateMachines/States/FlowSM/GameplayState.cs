@@ -12,6 +12,7 @@ namespace BlackFox
     public class GameplayState : StateBase
     { 
         UnityEngine.Object canvasGame;
+        int levelNumber = 1;
 
         public override void OnStart()
         {
@@ -25,6 +26,14 @@ namespace BlackFox
         {
             StateMachineBase.OnMachineEnd -= OnMachineEnd;
             GameObject.Destroy(canvasGame);
+        }
+
+        /// <summary>
+        /// Istanzia il Livello
+        /// </summary>
+        void LoadArena()
+        {
+            GameObject.Instantiate(Resources.Load("Prefabs/Levels/Level" + levelNumber));
         }
 
         void OnMachineEnd(string _machineName)

@@ -5,13 +5,11 @@ namespace BlackFox {
 
     public class GameplaySM : StateMachineBase
     {
-
-        int levelNumber = 1;
         int roundNumber;
 
         private void Start()
         {
-            CurrentState = new LevelStartState(levelNumber);
+            CurrentState = new LevelStartState();
         }
 
         protected override void OnCurrentStateEnded()

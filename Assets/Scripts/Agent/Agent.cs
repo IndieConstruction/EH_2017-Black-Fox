@@ -231,7 +231,7 @@ namespace BlackFox
 
         void GoForward(float _amount) {
             movment.Movement(_amount);
-            ExtendRope(_amount);
+            //ExtendRope(_amount);
         }
 
         void Rotate(float _amount) {

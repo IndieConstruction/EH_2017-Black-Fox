@@ -12,9 +12,9 @@ namespace BlackFox
     /// </summary>
     public class LevelManager : MonoBehaviour
     {
-        public static int AddPoints;
-        public static int SubPoints;
-        public static int pointsToWin;
+        public static int AddPoints = 1;
+        public static int SubPoints = 1;
+        public static int pointsToWin = 5;
 
         GameplaySM gameplaySM;
 

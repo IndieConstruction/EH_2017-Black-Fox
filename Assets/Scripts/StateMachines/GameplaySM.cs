@@ -6,7 +6,7 @@ namespace BlackFox {
     public class GameplaySM : StateMachineBase
     {
         int roundNumber;
-        int lelvelNumber;
+        int lelvelNumber = 1;
 
         private void Start()
         {
@@ -29,7 +29,7 @@ namespace BlackFox {
             else if ("BlackFox.RoundEndState" == CurrentState.StateName)
             {
                 // RoundEndState
-                if (roundNumber < 4)
+                if (roundNumber <= 4)
                 {
                     roundNumber++;
                     CurrentState = new UpgradeMenuState(roundNumber);

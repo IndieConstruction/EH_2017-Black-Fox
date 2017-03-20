@@ -30,8 +30,13 @@ namespace BlackFox
         {
             if (_killer != null)
                 UpdateKillPoints(_killer.playerIndex, _victim.playerIndex);           // setta i punti morte e uccisione
+                //Aggiorna i punti uccisione sulla UI
             else
                 UpdateKillPoints(_victim.playerIndex);
+            if (OnPointsUpdate != null)
+            {
+                OnPointsUpdate();
+            }
         }
 
         public static int GetPlayerKillPoints(PlayerIndex _playerIndex)
@@ -106,6 +111,7 @@ namespace BlackFox
         public delegate void LevelEvent();
         public static LevelEvent OnPlayerWinnig;
         public static LevelEvent OnCoreDeath;
+        public static LevelEvent OnPointsUpdate;
 
         private void OnEnable()
         {

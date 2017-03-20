@@ -180,8 +180,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ring: {fileID: 1908273728}
-  BulletCount: {fileID: 1484327189}
-  KillPoint: {fileID: 712631108}
+  BulletCount: {fileID: 0}
+  KillPoint: {fileID: 0}
 --- !u!114 &60436680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1334,8 +1334,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ring: {fileID: 1343745182}
-  BulletCount: {fileID: 1944890030}
-  KillPoint: {fileID: 2095191834}
+  BulletCount: {fileID: 0}
+  KillPoint: {fileID: 0}
 --- !u!114 &571289929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2887,8 +2887,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ring: {fileID: 1902730116}
-  BulletCount: {fileID: 1240243576}
-  KillPoint: {fileID: 1184850393}
+  BulletCount: {fileID: 0}
+  KillPoint: {fileID: 0}
 --- !u!114 &1097549299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4881,8 +4881,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ring: {fileID: 598911409}
-  BulletCount: {fileID: 702273806}
-  KillPoint: {fileID: 157247672}
+  BulletCount: {fileID: 0}
+  KillPoint: {fileID: 0}
 --- !u!114 &1826338176
 MonoBehaviour:
   m_ObjectHideFlags: 0

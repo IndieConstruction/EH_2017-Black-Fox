@@ -58,7 +58,13 @@ namespace BlackFox
         {
             Life = maxLife;
             shooter.ammo = 0;
-            GetComponentInChildren<MeshRenderer>().enabled = true;
+            EnableComponents(true);
+        }
+
+        void EnableComponents(bool _value)
+        {
+            GetComponentInChildren<MeshRenderer>().enabled = _value;
+            GetComponent<Collider>().enabled = _value;
         }
 
         RopeController SearchRope()
@@ -219,7 +225,7 @@ namespace BlackFox
                 {
                     OnAgentKilled(null, this);
                 }
-                GetComponentInChildren<MeshRenderer>().enabled = false;
+                EnableComponents(false);
 
             }
         }

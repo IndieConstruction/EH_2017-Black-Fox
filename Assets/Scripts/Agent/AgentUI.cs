@@ -20,7 +20,7 @@ namespace BlackFox {
 
         // Update is called once per frame
         void Update() {
-            BulletCount.text = agent.GetShooterReference().ammo.ToString();
+            UpdateAmmoUI();
         }
 
         private void OnEnable() {
@@ -28,6 +28,12 @@ namespace BlackFox {
             Agent.OnAgentKilled += SetKillPointUI;
 
 
+        }
+
+        void UpdateAmmoUI()
+        {
+            if (BulletCount != null)
+                BulletCount.text = agent.GetShooterReference().ammo.ToString();
         }
 
         void OnDataChange(Agent _agent) {
@@ -46,7 +52,8 @@ namespace BlackFox {
         void SetKillPointUI(Agent _killer, Agent _victim)
         {
                 //Aggiungi un punto alla UI.
-                KillPoint.text =  LevelManager.GetPlayerKillPoints(agent.playerIndex).ToString();
+                if (KillPoint != null)
+                    KillPoint.text =  (LevelManager.GetPlayerKillPoints(agent.playerIndex) + 1 ).ToString();
         }
 
         private void OnDisable() {

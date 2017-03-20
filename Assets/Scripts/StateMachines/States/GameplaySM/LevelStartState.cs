@@ -8,12 +8,17 @@ namespace BlackFox
     /// </summary>
     public class LevelStartState : StateBase
     {
+        int levelNumber;
+
+        public LevelStartState(int _levelNumber)
+        {
+            levelNumber = _levelNumber;
+        }
+
         public override void OnStart()
         {
             Debug.Log("LevelStartState");
             LoadArena();
-            LoadAgents();
-            LoadGameElements();
         }
         
         public override void OnUpdate()
@@ -27,29 +32,7 @@ namespace BlackFox
         /// </summary>
         void LoadArena()
         {
-            GameObject.Instantiate(Resources.Load("Prefabs/Misc/Floor"));         
-        }
-
-        /// <summary>
-        /// Istanzia Agenti
-        /// </summary>
-        void LoadAgents()
-        {
-            GameObject[] agents = Resources.LoadAll<GameObject>("Prefabs/Agents");
-
-            foreach (GameObject item in agents)
-            {
-                GameObject.Instantiate(item);
-            }
-        }
-
-        /// <summary>
-        /// Istanzia Elementi di gioco
-        /// </summary>
-        void LoadGameElements()
-        {
-            GameObject.Instantiate(Resources.Load("Prefabs/Misc/Core"));
-            GameObject.Instantiate(Resources.Load("Prefabs/Misc/LevelManager"));
+            GameObject.Instantiate(Resources.Load("Prefabs/Levels/Level" + levelNumber));         
         }
     }
 }

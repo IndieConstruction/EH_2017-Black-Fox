@@ -5,11 +5,13 @@ namespace BlackFox {
 
     public class GameplaySM : StateMachineBase
     {
+
+        int levelNumber = 1;
         int roundNumber;
 
         private void Start()
         {
-            CurrentState = new LevelStartState();
+            CurrentState = new LevelStartState(levelNumber);
         }
 
         protected override void OnCurrentStateEnded()
@@ -40,7 +42,7 @@ namespace BlackFox {
                 }
                 else
                 {
-                    CurrentState = new GameOverState();
+                    CurrentState = new GameOverState(levelNumber);
                 }
             }
             else if ("BlackFox.GameOverState" == CurrentState.StateName)

@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a435a47f34b1f734ea916cecc28a85d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationSpeed: 5000
+  RotationSpeed: 7000
   MovmentSpeed: 500
 --- !u!114 &114272692773564834
 MonoBehaviour:
@@ -276,7 +276,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLife: 10
-  UseKeyboard: 0
   playerIndex: 0
   fireRate: 0.5
 --- !u!114 &114537096427027322

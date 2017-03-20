@@ -50,7 +50,7 @@ namespace BlackFox
 
         void FixedUpdate()
         {
-            //KeyboardReader();
+            KeyboardReader();
             XInputReader();
         }
 

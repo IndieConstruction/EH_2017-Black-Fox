@@ -1,18 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace BlackFox
-{
-    /// <summary>
-    /// Costruisce la scena a runtime
-    /// </summary>
-    public class LevelStartState : StateBase
+
+namespace BlackFox {
+
+    public class UpgradeMenuState : StateBase
     {
+        int roundNumber;
+
+        public UpgradeMenuState(int _roundNumber)
+        {
+            roundNumber = _roundNumber;
+        }
+
         public override void OnStart()
         {
-            Debug.Log("LevelStartState");
+            Debug.Log("UpgradeMenuState");
         }
-        
+
         public override void OnUpdate()
         {
             if (OnStateEnd != null)

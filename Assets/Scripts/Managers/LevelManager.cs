@@ -12,25 +12,47 @@ namespace BlackFox
     /// </summary>
     public class LevelManager : MonoBehaviour
     {
-        public int AddPoints;
-        public int SubPoints;
-        public int pointsToWin;
+        public static int AddPoints;
+        public static int SubPoints;
+        public static int pointsToWin;
 
         GameplaySM gameplaySM;
+
+        public static SpawnerManager spawnerMng;
 
         void Start()
         {
             StartGameplaySM();
         }
 
+        #region API
+        public static void HandleAgentKilled(Agent _killer, Agent _victim)
+        {
+            if (_killer != null)
+                UpdateKillPoints(_killer.playerIndex, _victim.playerIndex);           // setta i punti morte e uccisione
+            else
+                UpdateKillPoints(_victim.playerIndex);
+        }
+
+        public static int GetPlayerKillPoints(PlayerIndex _playerIndex)
+        {
+            foreach (PlayerStats player in playerStats)
+            {
+                if (player.PlayerIndex == _playerIndex)
+                {
+                    return player.KillPoints;
+                }
+            }
+            return -1;
+        }
+        #endregion
+
         #region KillPoint Count
 
         List<PlayerStats> playerStats = new List<PlayerStats>()
         { new PlayerStats(PlayerIndex.One), new PlayerStats(PlayerIndex.Two), new PlayerStats(PlayerIndex.Three), new PlayerStats(PlayerIndex.Four) };
 
-        public SpawnerManager spawnerMng;
-
-        void UpdateKillPoints(PlayerIndex _killer, PlayerIndex _victim)
+        static void UpdateKillPoints(PlayerIndex _killer, PlayerIndex _victim)
         {
             foreach (PlayerStats player in playerStats)
             {
@@ -56,7 +78,7 @@ namespace BlackFox
             UpdateKillPoints(_victim);
         }
 
-        void UpdateKillPoints(PlayerIndex _victim)
+        static void UpdateKillPoints(PlayerIndex _victim)
         {
             foreach (PlayerStats player in playerStats)
             {
@@ -68,7 +90,7 @@ namespace BlackFox
             }
         }
 
-        void ClearKillPoints()
+        static void ClearKillPoints()
         {
             foreach (PlayerStats player in playerStats)
             {
@@ -76,25 +98,6 @@ namespace BlackFox
             }
         }
 
-        public void HandleAgentKilled(Agent _killer, Agent _victim)
-        {
-            if (_killer != null)
-                UpdateKillPoints(_killer.playerIndex, _victim.playerIndex);           // setta i punti morte e uccisione
-            else
-                UpdateKillPoints(_victim.playerIndex);
-        }
-
-        public int GetPlayerKillPoints(PlayerIndex _playerIndex)
-        {
-            foreach (PlayerStats player in playerStats)
-            {
-                if (player.PlayerIndex == _playerIndex)
-                {
-                    return player.KillPoints;
-                }
-            }
-            return -1;
-        }
         #endregion
 
         #region Events

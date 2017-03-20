@@ -4,8 +4,15 @@ using UnityEngine;
 
 namespace BlackFox {
 
-    public class LevelInit : StateBase
+    public class LevelInitState : StateBase
     {
+        int roundNumber;
+
+        public LevelInitState(int _roundNumber)
+        {
+            roundNumber = _roundNumber;
+        }
+
         public override void OnStart()
         {
             Debug.Log("LevelInitState");

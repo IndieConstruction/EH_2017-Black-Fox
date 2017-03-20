@@ -6,29 +6,25 @@ namespace BlackFox {
     public class GameplaySM : StateMachineBase
     {
         int roundNumber;
+        int lelvelNumber;
 
         private void Start()
         {
-            CurrentState = new LevelStartState();
+            CurrentState = new LevelInitState(roundNumber);
         }
 
         protected override void OnCurrentStateEnded()
         {
-            if ("BlackFox.LevelStartState" == CurrentState.StateName)
+            if ("BlackFox.LevelInitState" == CurrentState.StateName)
             {
-                // LevelStartState
+                // LevelInitState
                 roundNumber++;
-                CurrentState = new RoundInitState(roundNumber);
-            }
-            else if ("BlackFox.RoundInitState" == CurrentState.StateName)
-            {
-                // RoundInitState
                 CurrentState = new PlayState(roundNumber);
             }
             else if ("BlackFox.PlayState" == CurrentState.StateName)
             {
-                // RoundState
-                CurrentState = new RoundEndState();
+                // PlayState
+                CurrentState = new RoundEndState(roundNumber);
             }
             else if ("BlackFox.RoundEndState" == CurrentState.StateName)
             {
@@ -36,12 +32,17 @@ namespace BlackFox {
                 if (roundNumber < 4)
                 {
                     roundNumber++;
-                    CurrentState = new RoundInitState(roundNumber);
+                    CurrentState = new UpgradeMenuState(roundNumber);
                 }
                 else
                 {
-                    CurrentState = new GameOverState(levelNumber);
+                    CurrentState = new GameOverState(lelvelNumber);
                 }
+            }
+            else if ("BlackFox.UpgradeMenuState" == CurrentState.StateName)
+            {
+                // UpgradeMenuState
+                CurrentState = new LevelInitState(roundNumber);
             }
             else if ("BlackFox.GameOverState" == CurrentState.StateName)
             {

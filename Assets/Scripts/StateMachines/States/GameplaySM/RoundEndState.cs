@@ -5,6 +5,13 @@ namespace BlackFox
 {
     public class RoundEndState : StateBase
     {
+        int roundNumber;
+
+        public RoundEndState(int _roundNumber)
+        {
+            roundNumber = _roundNumber;
+        }
+
         public override void OnStart()
         {
             Debug.Log("RoundEndState");

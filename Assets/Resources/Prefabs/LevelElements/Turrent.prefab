@@ -54,6 +54,7 @@ GameObject:
   - component: {fileID: 114635010509396162}
   - component: {fileID: 54229286965269526}
   - component: {fileID: 64345220787032450}
+  - component: {fileID: 114259064839906558}
   m_Layer: 0
   m_Name: Turrent
   m_TagString: Untagged
@@ -81,7 +82,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1603904133494984}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.5, z: 0}
+  m_LocalPosition: {x: 71, y: 3.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4088255678213854}
@@ -169,6 +170,20 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 0a11789e536bd354884ad3d164f3a0f2, type: 3}
+--- !u!114 &114259064839906558
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1603904133494984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38ba7df871837704f9b44137810a9c81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 1501574659777150, guid: c24e5fd438cd1d64c8ae981b5a429fe1, type: 2}
+  LifeTime: 10
+  bulletSpeed: 150
 --- !u!114 &114635010509396162
 MonoBehaviour:
   m_ObjectHideFlags: 1

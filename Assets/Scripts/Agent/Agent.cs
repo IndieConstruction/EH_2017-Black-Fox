@@ -209,6 +209,7 @@ namespace BlackFox
                     else
                         OnAgentKilled(null, this);
                 Destroy(gameObject);
+                
             }
         }
 

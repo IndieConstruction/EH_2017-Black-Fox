@@ -21,6 +21,8 @@ namespace BlackFox {
         public float TimeShoot;
         float Timer;
         float TimerToInactivate = 5;
+       
+
 
         List<IDamageable> damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable
 
@@ -64,7 +66,7 @@ namespace BlackFox {
                 }
                 //Rimani fermo.
             }
-
+            
         }
 
 
@@ -143,5 +145,15 @@ namespace BlackFox {
         {
             return gameObject;
         }
+
+
+
+
+
     }
+
+
+
+
+
 }

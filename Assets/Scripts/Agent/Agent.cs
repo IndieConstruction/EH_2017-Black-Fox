@@ -86,6 +86,16 @@ namespace BlackFox
             }
         }
 
+        #region API
+
+        public Shooter SendInformation()
+        {
+            return shooter;
+        }
+
+        #endregion
+
+
         #region KeyboardInput
         /// <summary>
         /// Controlla l'input da tastiera

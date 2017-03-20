@@ -283,7 +283,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxLife: 10
-  UseKeyboard: 0
   playerIndex: 3
   fireRate: 0.5
 --- !u!114 &114671775246345152
@@ -346,6 +345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ring: {fileID: 114671775246345152}
+  BulletCount: {fileID: 0}
 --- !u!114 &114977479195355638
 MonoBehaviour:
   m_ObjectHideFlags: 1

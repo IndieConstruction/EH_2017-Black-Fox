@@ -13,7 +13,6 @@ namespace BlackFox
 
         public bool dontDestroyOnLoad;
 
-        UIManager managerUI;
         FlowSM flowSM;
 
         private float coreLife;
@@ -41,7 +40,6 @@ namespace BlackFox
 
         void Start()
         {
-            managerUI = GetComponent<UIManager>();
             flowSM = gameObject.AddComponent<FlowSM>();
         }
 
@@ -53,10 +51,6 @@ namespace BlackFox
             }
         }
 
-        public UIManager GetUIManager()
-        {
-            return managerUI;
-        }
     }
 }
 

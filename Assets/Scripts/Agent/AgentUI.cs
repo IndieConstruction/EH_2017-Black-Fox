@@ -9,6 +9,8 @@ namespace BlackFox {
 
         public Image Ring;
         Agent agent;
+        public Text BulletCount;
+        public Text KillPoint;
     
     // Use this for initialization
         void Awake() {
@@ -18,11 +20,14 @@ namespace BlackFox {
 
         // Update is called once per frame
         void Update() {
-
+            BulletCount.text = agent.SendInformation().ammo.ToString();
         }
 
         private void OnEnable() {
             agent.OnDataChange += OnDataChange;
+            Agent.OnAgentKilled += SetKillPointUI;
+
+
         }
 
         void OnDataChange(Agent _agent) {
@@ -38,8 +43,23 @@ namespace BlackFox {
                 
         }
 
+        void SetKillPointUI(Agent _killer, Agent _victim)
+        {
+            if (_killer == agent)
+            {
+                //Aggiungi un punto alla UI.
+                //KillPoint.text =
+            }
+
+            if (_victim == agent)
+            {
+                //Sottrai un punto alla UI.
+            }
+        }
+
         private void OnDisable() {
             agent.OnDataChange -= OnDataChange;
+            Agent.OnAgentKilled -= SetKillPointUI;
         }
     }
 }

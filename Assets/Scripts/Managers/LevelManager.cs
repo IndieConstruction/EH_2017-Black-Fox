@@ -30,7 +30,7 @@ namespace BlackFox
 
         public SpawnerManager spawnerMng;
 
-        public void UpdateKillPoints(PlayerIndex _killer, PlayerIndex _victim)
+        void UpdateKillPoints(PlayerIndex _killer, PlayerIndex _victim)
         {
             foreach (PlayerStats player in playerStats)
             {
@@ -56,7 +56,7 @@ namespace BlackFox
             UpdateKillPoints(_victim);
         }
 
-        public void UpdateKillPoints(PlayerIndex _victim)
+        void UpdateKillPoints(PlayerIndex _victim)
         {
             foreach (PlayerStats player in playerStats)
             {
@@ -82,6 +82,18 @@ namespace BlackFox
                 UpdateKillPoints(_killer.playerIndex, _victim.playerIndex);           // setta i punti morte e uccisione
             else
                 UpdateKillPoints(_victim.playerIndex);
+        }
+
+        public int GetPlayerKillPoints(PlayerIndex _playerIndex)
+        {
+            foreach (PlayerStats player in playerStats)
+            {
+                if (player.PlayerIndex == _playerIndex)
+                {
+                    return player.KillPoints;
+                }
+            }
+            return -1;
         }
         #endregion
 

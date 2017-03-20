@@ -19,7 +19,7 @@ namespace BlackFox
             Debug.Log("Gameplay");
             canvasGame = GameObject.Instantiate(Resources.Load("Prefabs/Misc/CanvasGame"));
             StateMachineBase.OnMachineEnd += OnMachineEnd;
-            GameObject.Instantiate(Resources.Load("Prefabs/Misc/LevelManager"));
+            LoadArena();
         }
 
         public override void OnEnd()

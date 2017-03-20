@@ -15,8 +15,6 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("RoundEndState");
-            UnloadAgents();
-            UnloadGameElements();
             ClearArena();
         }
 
@@ -26,26 +24,8 @@ namespace BlackFox
                 OnStateEnd();
         }
 
-        void UnloadAgents()
-        {
-            foreach (var agent in GameObject.FindObjectsOfType<Agent>())
-            {
-                GameObject.Destroy(agent);
-            }
-        }
-
-        void UnloadGameElements()
-        {
-            GameObject.Destroy(GameObject.FindObjectOfType<Core>());
-        }
-
         void ClearArena()
         {
-            GameObject.Destroy(GameObject.Find("SpawnpointOne"));
-            GameObject.Destroy(GameObject.Find("SpawnpointTwo"));
-            GameObject.Destroy(GameObject.Find("SpawnpointThree"));
-            GameObject.Destroy(GameObject.Find("SpawnpointFour"));
-
             GameObject[] pins = GameObject.FindGameObjectsWithTag("Pin");
 
             foreach (GameObject pin in pins)

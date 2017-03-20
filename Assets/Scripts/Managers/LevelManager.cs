@@ -49,7 +49,7 @@ namespace BlackFox
 
         #region KillPoint Count
 
-        List<PlayerStats> playerStats = new List<PlayerStats>()
+        static List<PlayerStats> playerStats = new List<PlayerStats>()
         { new PlayerStats(PlayerIndex.One), new PlayerStats(PlayerIndex.Two), new PlayerStats(PlayerIndex.Three), new PlayerStats(PlayerIndex.Four) };
 
         static void UpdateKillPoints(PlayerIndex _killer, PlayerIndex _victim)

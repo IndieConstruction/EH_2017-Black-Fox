@@ -17,7 +17,6 @@ namespace BlackFox {
         {
             Debug.Log("GameOverState");
             UnloadArena();
-            UnloadGameElements();
         }
 
         public override void OnUpdate()
@@ -29,11 +28,6 @@ namespace BlackFox {
         void UnloadArena()
         {
             GameObject.Destroy(GameObject.Find("Level" + levelNumber  + "(Clone)"));
-        }
-
-        void UnloadGameElements()
-        {
-            GameObject.Destroy(GameObject.Find("LevelManager(Clone)"));
         }
     }
 }

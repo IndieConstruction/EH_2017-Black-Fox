@@ -23,7 +23,6 @@ namespace BlackFox {
                 // GameplayState
                 CurrentState = new MainMenuState();
             }
-
         }
     }
 }

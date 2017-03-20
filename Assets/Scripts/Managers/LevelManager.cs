@@ -16,6 +16,15 @@ namespace BlackFox
         public int SubPoints;
         public int pointsToWin;
 
+        GameplaySM gameplaySM;
+
+        void Start()
+        {
+            StartGameplaySM();
+        }
+
+        #region KillPoint Count
+
         List<PlayerStats> playerStats = new List<PlayerStats>()
         { new PlayerStats(PlayerIndex.One), new PlayerStats(PlayerIndex.Two), new PlayerStats(PlayerIndex.Three), new PlayerStats(PlayerIndex.Four) };
 
@@ -59,14 +68,6 @@ namespace BlackFox
             }
         }
 
-        public void HandleAgentKilled(Agent _killer, Agent _victim)
-        {
-            if (_killer != null)
-                UpdateKillPoints(_killer.playerIndex, _victim.playerIndex);           // setta i punti morte e uccisione
-            else
-                UpdateKillPoints(_victim.playerIndex);
-        }
-
         void ClearKillPoints()
         {
             foreach (PlayerStats player in playerStats)
@@ -74,6 +75,15 @@ namespace BlackFox
                 player.ResetKillPoints();
             }
         }
+
+        public void HandleAgentKilled(Agent _killer, Agent _victim)
+        {
+            if (_killer != null)
+                UpdateKillPoints(_killer.playerIndex, _victim.playerIndex);           // setta i punti morte e uccisione
+            else
+                UpdateKillPoints(_victim.playerIndex);
+        }
+        #endregion
 
         #region Events
         public delegate void LevelEvent();
@@ -89,6 +99,15 @@ namespace BlackFox
         {
             Agent.OnAgentKilled -= HandleAgentKilled;
         }
+        #endregion
+
+        #region GameplaySM
+
+        void StartGameplaySM()
+        {
+            gameplaySM = gameObject.AddComponent<GameplaySM>();
+        }
+
         #endregion
     }
 

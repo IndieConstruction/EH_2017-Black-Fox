@@ -18,7 +18,7 @@ namespace BlackFox
 
         GameplaySM gameplaySM;
 
-        void Awake()
+        void Start()
         {
             StartGameplaySM();
         }

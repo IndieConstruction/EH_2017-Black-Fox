@@ -33,9 +33,9 @@ namespace BlackFox
                 //Aggiorna i punti uccisione sulla UI
             else
                 UpdateKillPoints(_victim.playerIndex);
-            if (OnPointsUpdate != null)
+            if (EventManager.OnPointsUpdate != null)
             {
-                OnPointsUpdate();
+                EventManager.OnPointsUpdate();
             }
         }
 
@@ -78,11 +78,8 @@ namespace BlackFox
 
                     if (player.KillPoints == pointsToWin)
                     {
-                        if (OnPlayerWinnig != null)
-                        {
-                            player.Victories += 1;
-                            OnPlayerVictory();
-                        }                
+                        player.Victories += 1;
+                        OnPlayerVictory();
                     }
                     break;
                 }
@@ -109,8 +106,8 @@ namespace BlackFox
             spawnerMng.enabled = false;
             Debug.Log(spawnerMng.enabled);
             ClearKillPoints();
-            if (OnPlayerWinnig != null)
-                OnPlayerWinnig();
+            if (EventManager.OnPlayerWinnig != null)
+                EventManager.OnPlayerWinnig();
         }
         void ClearKillPoints()
         {
@@ -123,20 +120,17 @@ namespace BlackFox
         #endregion
 
         #region Events
-        public delegate void LevelEvent();
-        public static LevelEvent OnPlayerWinnig;
-        public static LevelEvent OnCoreDeath;
-        public static LevelEvent OnPointsUpdate;
 
         private void OnEnable()
         {
-            Agent.OnAgentKilled += HandleAgentKilled;
+            EventManager.OnAgentKilled += HandleAgentKilled;
         }
 
         private void OnDisable()
         {
-            Agent.OnAgentKilled -= HandleAgentKilled;
+            EventManager.OnAgentKilled -= HandleAgentKilled;
         }
+
         #endregion
 
         #region GameplaySM

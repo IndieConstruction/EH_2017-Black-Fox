@@ -18,8 +18,8 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("PlayState");
-            LevelManager.OnPlayerWinnig += HandleOnPlayerWinnig;
-            LevelManager.OnCoreDeath += HandleOnCoreDeath;
+            EventManager.OnPlayerWinnig += HandleOnPlayerWinnig;
+            EventManager.OnCoreDeath += HandleOnCoreDeath;
         }
 
         public override void OnUpdate()
@@ -41,8 +41,8 @@ namespace BlackFox
         public override void OnEnd()
         {
             // passaggio informazioni essenziali al gestore del livello
-            LevelManager.OnPlayerWinnig -= HandleOnPlayerWinnig;
-            LevelManager.OnCoreDeath -= HandleOnCoreDeath;
+            EventManager.OnPlayerWinnig -= HandleOnPlayerWinnig;
+            EventManager.OnCoreDeath -= HandleOnCoreDeath;
         }
 
         #region Events

@@ -32,7 +32,7 @@ namespace BlackFox {
 
         private void OnEnable() {
             agent.OnDataChange += OnDataChange;
-            LevelManager.OnPointsUpdate += SetKillPointUI;
+            EventManager.OnPointsUpdate += SetKillPointUI;
         }
 
         void UpdateAmmoUI()
@@ -63,7 +63,7 @@ namespace BlackFox {
 
         private void OnDisable() {
             agent.OnDataChange -= OnDataChange;
-            LevelManager.OnPointsUpdate -= SetKillPointUI;
+            EventManager.OnPointsUpdate -= SetKillPointUI;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace BlackFox
         public override void OnStart()
         {
             canvasMenu = GameObject.Instantiate(Resources.Load("Prefabs/Misc/CanvasMenu"));
-            Debug.Log("MainMenu");
+            Debug.Log("MainMenuState");
         }
 
         public override void OnUpdate()

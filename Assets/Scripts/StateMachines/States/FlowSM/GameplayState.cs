@@ -15,7 +15,7 @@ namespace BlackFox
 
         public override void OnStart()
         {
-            Debug.Log("Gameplay");
+            Debug.Log("GameplayState");
             StateMachineBase.OnMachineEnd += OnMachineEnd;
             LoadArena();
         }

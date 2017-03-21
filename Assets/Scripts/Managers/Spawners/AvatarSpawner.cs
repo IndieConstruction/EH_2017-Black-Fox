@@ -50,7 +50,7 @@ namespace BlackFox
                 {
                     SpawnPoint newPos;
                     newPos.agent = agent;
-                    newPos.SpawnPosition = Instantiate(new GameObject("SpawnPoint_"+ agent.name), agent.transform.position, agent.transform.rotation, this.transform).transform;
+                    newPos.SpawnPosition = Instantiate(new GameObject("SpawnPoint_"+ agent.name), agent.transform.position, agent.transform.rotation, transform).transform;
 
                     OriginalSpawns.Add(newPos);
                 }

@@ -18,8 +18,14 @@ namespace BlackFox {
         {
             if ("BlackFox.MainMenuState" == CurrentState.StateName) {
                 // MainMenuState
+                CurrentState = new LevelSelectionState();
+            }
+            else if ("BlackFox.LevelSelectionState" == CurrentState.StateName)
+            {
+                // LevelSelectionState
                 CurrentState = new GameplayState();
-            } else if ("BlackFox.GameplayState" == CurrentState.StateName) {
+            }
+            else if ("BlackFox.GameplayState" == CurrentState.StateName) {
                 // GameplayState
                 CurrentState = new MainMenuState();
             }

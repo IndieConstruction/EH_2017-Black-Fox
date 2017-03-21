@@ -61,7 +61,10 @@ namespace BlackFox
         #region KillPoint Count
 
         List<PlayerStats> playerStats = new List<PlayerStats>()
-        { new PlayerStats(PlayerIndex.One), new PlayerStats(PlayerIndex.Two), new PlayerStats(PlayerIndex.Three), new PlayerStats(PlayerIndex.Four) };
+        {   new PlayerStats(PlayerIndex.One),
+            new PlayerStats(PlayerIndex.Two),
+            new PlayerStats(PlayerIndex.Three),
+            new PlayerStats(PlayerIndex.Four) };
 
         void UpdateKillPoints(PlayerIndex _killer, PlayerIndex _victim)
         {
@@ -70,7 +73,6 @@ namespace BlackFox
                 if (player.PlayerIndex == _killer)
                 {
                     player.KillPoints += AddPoints;
-                    Debug.Log(player.PlayerIndex + "/" + player.KillPoints);
 
                     if (player.KillPoints == pointsToWin)
                     {

@@ -15,6 +15,7 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("RoundEndState");
+            EventManager.OnLevelEnd();
             ClearArena();
         }
 

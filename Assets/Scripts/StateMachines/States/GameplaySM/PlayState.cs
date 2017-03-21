@@ -20,6 +20,7 @@ namespace BlackFox
             Debug.Log("PlayState");
             LevelManager.OnPlayerWinnig += HandleOnPlayerWinnig;
             LevelManager.OnCoreDeath += HandleOnCoreDeath;
+            EventManager.OnLevelPlay();
         }
 
         public override void OnUpdate()

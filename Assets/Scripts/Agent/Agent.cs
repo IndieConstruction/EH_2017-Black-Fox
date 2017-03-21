@@ -53,10 +53,42 @@ namespace BlackFox
             XInputReader();
         }
 
+        private void OnEnable()
+        {
+            EventManager.OnLevelInit += HandleOnLevelInit;
+            EventManager.OnLevelPlay += HandleOnLevelPlay;
+            EventManager.OnLevelEnd += HandleOnLevelEnd;
+        }
+
+        private void OnDisable()
+        {
+            EventManager.OnLevelInit -= HandleOnLevelInit;
+            EventManager.OnLevelPlay -= HandleOnLevelPlay;
+            EventManager.OnLevelEnd -= HandleOnLevelEnd;
+        }
+
+        #region Event Handler
+        void HandleOnLevelInit()
+        { 
+            Life = maxLife;
+            shooter.ammo = 0;
+            EnableComponents(true);   
+        }
+        void HandleOnLevelPlay() { }
+
+        void HandleOnLevelEnd()
+        {
+            EnableComponents(true);
+        }
+        #endregion
+
         void EnableComponents(bool _value)
         {
             GetComponentInChildren<MeshRenderer>().enabled = _value;
             GetComponent<Collider>().enabled = _value;
+            GetComponent<Shooter>().enabled = _value;
+            GetComponent<PlacePin>().enabled = _value;
+            GetComponent<MovementController>().enabled = _value;
         }
 
         RopeController SearchRope()
@@ -67,14 +99,6 @@ namespace BlackFox
                     return rope;
             }
             return null;
-        }
-
-        /// <summary>
-        /// Chiama la funzione AddAmmo di shooter
-        /// </summary>
-        public void AddShooterAmmo()
-        {
-            shooter.AddAmmo();
         }
 
         /// <summary>
@@ -92,19 +116,18 @@ namespace BlackFox
         }
 
         #region API
+        /// <summary>
+        /// Chiama la funzione AddAmmo di shooter
+        /// </summary>
+        public void AddShooterAmmo()
+        {
+            shooter.AddAmmo();
+        }
 
         public Shooter GetShooterReference()
         {
             return shooter;
         }
-
-        public void Init()
-        {
-            Life = maxLife;
-            shooter.ammo = 0;
-            EnableComponents(true);
-        }
-
         #endregion
         
         #region KeyboardInput

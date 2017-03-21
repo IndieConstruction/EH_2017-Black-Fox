@@ -16,13 +16,25 @@ namespace BlackFox
             life = MaxLife;
         }
 
-        public void Init()
+        private void OnEnable()
+        {
+            EventManager.OnLevelInit += HandleOnLevelInit;
+        }
+
+        private void OnDisable()
+        {
+            EventManager.OnLevelInit -= HandleOnLevelInit;
+        }
+
+        #region Event Handler
+        void HandleOnLevelInit()
         {
             if (life == 0)
                 life = MaxLife;
 
             EnableComponents(true);
         }
+        #endregion
 
         void EnableComponents(bool _value)
         {

@@ -45,7 +45,7 @@ namespace BlackFox
             EventManager.OnCoreDeath -= HandleOnCoreDeath;
         }
 
-        #region Events
+        #region Events Handler
         void HandleOnPlayerWinnig()
         {
             playerWinning = true;

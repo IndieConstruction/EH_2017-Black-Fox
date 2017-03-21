@@ -55,6 +55,8 @@ namespace BlackFox
         {
             if(spawnerMng.enabled == false)
                 spawnerMng.enabled = true;
+
+            Debug.Log(spawnerMng.enabled);
         }
         #endregion
 
@@ -105,6 +107,7 @@ namespace BlackFox
         void OnPlayerVictory()
         {
             spawnerMng.enabled = false;
+            Debug.Log(spawnerMng.enabled);
             ClearKillPoints();
             if (OnPlayerWinnig != null)
                 OnPlayerWinnig();

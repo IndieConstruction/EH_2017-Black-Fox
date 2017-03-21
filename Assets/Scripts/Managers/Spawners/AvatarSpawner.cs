@@ -67,6 +67,7 @@ namespace BlackFox
 
         protected override void OnDeactivation()
         {
+            StopCoroutine("RespawnCooldown");
             Agent.OnAgentKilled -= HandleOnAgentKilled;
             LevelManager.OnPlayerWinnig -= HandleRoundRestart;
             LevelManager.OnCoreDeath -= HandleRoundRestart;

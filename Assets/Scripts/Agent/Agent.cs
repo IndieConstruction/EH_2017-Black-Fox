@@ -25,7 +25,6 @@ namespace BlackFox
         GamePadState state;
         GamePadState prevState;
         public PlayerIndex playerIndex;
-        KeyCode SwitchInput;
 
         List<IDamageable> damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable
 
@@ -52,13 +51,6 @@ namespace BlackFox
         {
             KeyboardReader();
             XInputReader();
-        }
-
-        public void Init()
-        {
-            Life = maxLife;
-            shooter.ammo = 0;
-            EnableComponents(true);
         }
 
         void EnableComponents(bool _value)
@@ -106,9 +98,15 @@ namespace BlackFox
             return shooter;
         }
 
+        public void Init()
+        {
+            Life = maxLife;
+            shooter.ammo = 0;
+            EnableComponents(true);
+        }
+
         #endregion
-
-
+        
         #region KeyboardInput
         /// <summary>
         /// Controlla l'input da tastiera

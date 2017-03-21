@@ -13,13 +13,12 @@ namespace BlackFox {
         {
             roundNumber = _roundNumber;
             levelManager = GameObject.FindObjectOfType<LevelManager>();
-            if (roundNumber > 1)
-                levelManager.OnLevelStart();
         }
 
         public override void OnStart()
         {
             Debug.Log("LevelInitState");
+            levelManager.OnLevelStart();
         }
 
         public override void OnUpdate()

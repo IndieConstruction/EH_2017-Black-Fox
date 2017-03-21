@@ -16,10 +16,18 @@ namespace BlackFox
             life = MaxLife;
         }
 
-        public void Init(float _previousLife)
+        public void Init()
         {
-            if (_previousLife != MaxLife)
-                life = _previousLife;
+            if (life == 0)
+                life = MaxLife;
+
+            EnableComponents(true);
+        }
+
+        void EnableComponents(bool _value)
+        {
+            GetComponentInChildren<MeshRenderer>().enabled = _value;
+            GetComponent<Collider>().enabled = _value;
         }
 
         #region Interfacce
@@ -30,7 +38,7 @@ namespace BlackFox
             if (life < 1)
             {
                 LevelManager.OnCoreDeath();
-                Destroy(gameObject);
+                EnableComponents(false);
             }
         }
 

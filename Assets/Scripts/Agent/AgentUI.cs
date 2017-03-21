@@ -8,14 +8,21 @@ namespace BlackFox {
     public class AgentUI : MonoBehaviour {
 
         public Image Ring;
-        Agent agent;
         public Text BulletCount;
         public Text KillPoint;
-    
-    // Use this for initialization
+        
+        Agent agent;
+        LevelManager levelManager;
+
+        // Use this for initialization
         void Awake() {
             agent = GetComponentInParent<Agent>();
             Ring.color = Color.green;
+        }
+
+        private void Start()
+        {
+            levelManager = FindObjectOfType<LevelManager>();
         }
 
         // Update is called once per frame
@@ -26,8 +33,6 @@ namespace BlackFox {
         private void OnEnable() {
             agent.OnDataChange += OnDataChange;
             LevelManager.OnPointsUpdate += SetKillPointUI;
-
-
         }
 
         void UpdateAmmoUI()
@@ -53,7 +58,7 @@ namespace BlackFox {
         {
                 //Aggiungi un punto alla UI.
                 if (KillPoint != null)
-                    KillPoint.text = "Kill:" + (LevelManager.GetPlayerKillPoints(agent.playerIndex) ).ToString();
+                    KillPoint.text = "Kill:" + (levelManager.GetPlayerKillPoints(agent.playerIndex) ).ToString();
         }
 
         private void OnDisable() {

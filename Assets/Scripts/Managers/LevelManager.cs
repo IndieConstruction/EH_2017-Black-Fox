@@ -12,25 +12,21 @@ namespace BlackFox
     /// </summary>
     public class LevelManager : MonoBehaviour
     {
-        public static int AddPoints = 1;
-        public static int SubPoints = 1;
-        public static int pointsToWin = 5;
+        public int AddPoints = 1;
+        public int SubPoints = 1;
+        public int pointsToWin = 5;
 
-        static GameplaySM gameplaySM;
-        public static SpawnerManager spawnerMng;
-
-        private void Awake()
-        {
-            spawnerMng.GetComponentInChildren<SpawnerManager>();
-        }
+        GameplaySM gameplaySM;
+        SpawnerManager spawnerMng;
 
         void Start()
         {
+            spawnerMng = GetComponentInChildren<SpawnerManager>();
             StartGameplaySM(); 
         }
 
         #region API
-        public static void HandleAgentKilled(Agent _killer, Agent _victim)
+        public void HandleAgentKilled(Agent _killer, Agent _victim)
         {
             if (_killer != null)
                 UpdateKillPoints(_killer.playerIndex, _victim.playerIndex);           // setta i punti morte e uccisione
@@ -43,7 +39,7 @@ namespace BlackFox
             }
         }
 
-        public static int GetPlayerKillPoints(PlayerIndex _playerIndex)
+        public int GetPlayerKillPoints(PlayerIndex _playerIndex)
         {
             foreach (PlayerStats player in playerStats)
             {
@@ -55,7 +51,7 @@ namespace BlackFox
             return -1;
         }
 
-        public static void OnLevelStart()
+        public void OnLevelStart()
         {
             if(spawnerMng.enabled == false)
                 spawnerMng.enabled = true;
@@ -64,10 +60,10 @@ namespace BlackFox
 
         #region KillPoint Count
 
-        static List<PlayerStats> playerStats = new List<PlayerStats>()
+        List<PlayerStats> playerStats = new List<PlayerStats>()
         { new PlayerStats(PlayerIndex.One), new PlayerStats(PlayerIndex.Two), new PlayerStats(PlayerIndex.Three), new PlayerStats(PlayerIndex.Four) };
 
-        static void UpdateKillPoints(PlayerIndex _killer, PlayerIndex _victim)
+        void UpdateKillPoints(PlayerIndex _killer, PlayerIndex _victim)
         {
             foreach (PlayerStats player in playerStats)
             {
@@ -91,7 +87,7 @@ namespace BlackFox
             UpdateKillPoints(_victim);
         }
 
-        static void UpdateKillPoints(PlayerIndex _victim)
+        void UpdateKillPoints(PlayerIndex _victim)
         {
             foreach (PlayerStats player in playerStats)
             {
@@ -104,15 +100,14 @@ namespace BlackFox
             }
         }
 
-        static void OnPlayerVictory()
+        void OnPlayerVictory()
         {
             spawnerMng.enabled = false;
             ClearKillPoints();
             if (OnPlayerWinnig != null)
                 OnPlayerWinnig();
         }
-
-        static void ClearKillPoints()
+        void ClearKillPoints()
         {
             foreach (PlayerStats player in playerStats)
             {

@@ -69,10 +69,8 @@ namespace BlackFox
 
         #region Event Handler
         void HandleOnLevelInit()
-        { 
-            Life = maxLife;
-            shooter.ammo = 0;
-            EnableComponents(true);   
+        {
+            Init();
         }
         void HandleOnLevelPlay() { }
 
@@ -122,6 +120,13 @@ namespace BlackFox
         public void AddShooterAmmo()
         {
             shooter.AddAmmo();
+        }
+
+        public void Init()
+        {
+            Life = maxLife;
+            shooter.ammo = 0;
+            EnableComponents(true);
         }
 
         public Shooter GetShooterReference()

@@ -49,7 +49,7 @@ namespace BlackFox
             life -= _damage;
             if (life < 1)
             {
-                LevelManager.OnCoreDeath();
+                EventManager.OnCoreDeath();
                 EnableComponents(false);
             }
         }

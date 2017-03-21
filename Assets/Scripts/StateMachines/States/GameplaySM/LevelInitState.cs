@@ -18,6 +18,7 @@ namespace BlackFox {
         public override void OnStart()
         {
             Debug.Log("LevelInitState");
+            // TODO : sportare questa chiamata in un evento
             levelManager.OnLevelStart();
             EventManager.OnLevelInit();
         }

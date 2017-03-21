@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,11 +6,11 @@ namespace BlackFox
 {
     public class MainMenuState : StateBase
     {
-        UnityEngine.Object canvasMenu;
+        Object canvasMenu;
 
         public override void OnStart()
         {
-            canvasMenu = GameObject.Instantiate(Resources.Load("Prefabs/Misc/CanvasMenu"));
+            canvasMenu = GameObject.Instantiate(Resources.Load("Prefabs/UI/CanvasMenu"));
             Debug.Log("MainMenuState");
         }
 

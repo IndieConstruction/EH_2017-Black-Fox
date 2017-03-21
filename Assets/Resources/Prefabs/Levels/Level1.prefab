@@ -1025,7 +1025,7 @@ GameObject:
   - component: {fileID: 222277722102217024}
   - component: {fileID: 114524913069480936}
   m_Layer: 5
-  m_Name: KillPint
+  m_Name: KillPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1157,7 +1157,7 @@ GameObject:
   - component: {fileID: 222910148570132424}
   - component: {fileID: 114298184218165154}
   m_Layer: 5
-  m_Name: KillPint
+  m_Name: KillPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1397,7 +1397,7 @@ GameObject:
   - component: {fileID: 222835759385752726}
   - component: {fileID: 114351018030134098}
   m_Layer: 5
-  m_Name: KillPint
+  m_Name: KillPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1515,7 +1515,7 @@ GameObject:
   - component: {fileID: 222723900623130722}
   - component: {fileID: 114478450080983418}
   m_Layer: 5
-  m_Name: KillPint
+  m_Name: KillPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2813,8 +2813,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ring: {fileID: 114273421655400562}
-  BulletCount: {fileID: 0}
-  KillPoint: {fileID: 0}
+  BulletCount: {fileID: 114062104001200712}
+  KillPoint: {fileID: 114351018030134098}
 --- !u!114 &114094044897073048
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2958,8 +2958,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ring: {fileID: 114567886203661944}
-  BulletCount: {fileID: 0}
-  KillPoint: {fileID: 0}
+  BulletCount: {fileID: 114104353723670620}
+  KillPoint: {fileID: 114478450080983418}
 --- !u!114 &114165170169987470
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3126,8 +3126,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ring: {fileID: 114231368312889388}
-  BulletCount: {fileID: 0}
-  KillPoint: {fileID: 0}
+  BulletCount: {fileID: 114081078763872276}
+  KillPoint: {fileID: 114298184218165154}
 --- !u!114 &114264911303769388
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4488,8 +4488,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ring: {fileID: 114754074866707884}
-  BulletCount: {fileID: 0}
-  KillPoint: {fileID: 0}
+  BulletCount: {fileID: 114577063132740494}
+  KillPoint: {fileID: 114524913069480936}
 --- !u!114 &114968016988969534
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5789,7 +5789,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: -2, y: 0}
   m_SizeDelta: {x: 5, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

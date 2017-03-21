@@ -25,6 +25,20 @@ namespace BlackFox
             StartGameplaySM(); 
         }
 
+        #region Event Handler
+        void HandleOnLevelInit()
+        {
+            spawnerMng.enabled = true;
+        }
+
+        void HandleOnLevelPlay() { }
+
+        void HandleOnLevelEnd()
+        {
+            spawnerMng.enabled = false;
+        }
+        #endregion
+
         #region API
         public void HandleAgentKilled(Agent _killer, Agent _victim)
         {
@@ -49,14 +63,6 @@ namespace BlackFox
                 }
             }
             return -1;
-        }
-
-        public void OnLevelStart()
-        {
-            if(spawnerMng.enabled == false)
-                spawnerMng.enabled = true;
-
-            Debug.Log(spawnerMng.enabled);
         }
         #endregion
 
@@ -103,8 +109,6 @@ namespace BlackFox
 
         void OnPlayerVictory()
         {
-            spawnerMng.enabled = false;
-            Debug.Log(spawnerMng.enabled);
             ClearKillPoints();
             if (EventManager.OnPlayerWinnig != null)
                 EventManager.OnPlayerWinnig();
@@ -120,17 +124,21 @@ namespace BlackFox
         #endregion
 
         #region Events
-
         private void OnEnable()
         {
             EventManager.OnAgentKilled += HandleAgentKilled;
+            EventManager.OnLevelInit += HandleOnLevelInit;
+            EventManager.OnLevelPlay += HandleOnLevelPlay;
+            EventManager.OnLevelEnd += HandleOnLevelEnd;
         }
 
         private void OnDisable()
         {
             EventManager.OnAgentKilled -= HandleAgentKilled;
+            EventManager.OnLevelInit -= HandleOnLevelInit;
+            EventManager.OnLevelPlay -= HandleOnLevelPlay;
+            EventManager.OnLevelEnd -= HandleOnLevelEnd;
         }
-
         #endregion
 
         #region GameplaySM

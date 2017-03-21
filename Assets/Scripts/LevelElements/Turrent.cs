@@ -105,7 +105,8 @@ namespace BlackFox {
                 Timer -= Time.deltaTime;
                 if (Timer <= 0f)
                 {
-                    Shoot();
+                    GetComponent<ShooterBase>().ShootBullet();
+                    
                     Timer = TimeShoot;
                 }
 
@@ -116,14 +117,6 @@ namespace BlackFox {
 
             }
 
-
-        }
-
-        void Shoot()
-        {
-            Rigidbody go = Instantiate(Bullet, spawner.position, Quaternion.identity);
-            go.AddRelativeForce(spawner.forward * Force, ForceMode.Impulse);
-            Destroy(go.gameObject, 0.5f);
 
         }
 

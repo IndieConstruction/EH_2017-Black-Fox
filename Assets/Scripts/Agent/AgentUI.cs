@@ -25,7 +25,7 @@ namespace BlackFox {
 
         private void OnEnable() {
             agent.OnDataChange += OnDataChange;
-            Agent.OnAgentKilled += SetKillPointUI;
+            LevelManager.OnPointsUpdate += SetKillPointUI;
 
 
         }
@@ -49,16 +49,16 @@ namespace BlackFox {
                 
         }
 
-        void SetKillPointUI(Agent _killer, Agent _victim)
+         void SetKillPointUI()
         {
                 //Aggiungi un punto alla UI.
                 if (KillPoint != null)
-                    KillPoint.text =  (LevelManager.GetPlayerKillPoints(agent.playerIndex) + 1 ).ToString();
+                    KillPoint.text = "Kill:" + (LevelManager.GetPlayerKillPoints(agent.playerIndex) ).ToString();
         }
 
         private void OnDisable() {
             agent.OnDataChange -= OnDataChange;
-            Agent.OnAgentKilled -= SetKillPointUI;
+            LevelManager.OnPointsUpdate -= SetKillPointUI;
         }
     }
 }

@@ -8,6 +8,12 @@ namespace BlackFox
 {
     public class GameManager : MonoBehaviour
     {
+        int levelNumber;
+
+        public int LevelNumber {
+            get { return levelNumber; }
+            set { levelNumber = value; }
+        }
 
         public static GameManager Instance;
 

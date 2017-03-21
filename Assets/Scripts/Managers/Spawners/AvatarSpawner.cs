@@ -41,9 +41,9 @@ namespace BlackFox
         /// </summary>
         protected override void OnActivation()
         {
-            Agent.OnAgentKilled += HandleOnAgentKilled;
-            LevelManager.OnPlayerWinnig += HandleRoundRestart;
-            LevelManager.OnCoreDeath += HandleRoundRestart;
+            EventManager.OnAgentKilled += HandleOnAgentKilled;
+            EventManager.OnPlayerWinnig += HandleRoundRestart;
+            EventManager.OnCoreDeath += HandleRoundRestart;
             if (UseInitialPositionsAsSpawnPoints)
             {
                 foreach (Agent agent in FindObjectsOfType<Agent>())
@@ -68,9 +68,9 @@ namespace BlackFox
         protected override void OnDeactivation()
         {
             StopCoroutine("RespawnCooldown");
-            Agent.OnAgentKilled -= HandleOnAgentKilled;
-            LevelManager.OnPlayerWinnig -= HandleRoundRestart;
-            LevelManager.OnCoreDeath -= HandleRoundRestart;
+            EventManager.OnAgentKilled -= HandleOnAgentKilled;
+            EventManager.OnPlayerWinnig -= HandleRoundRestart;
+            EventManager.OnCoreDeath -= HandleRoundRestart;
         }
         #endregion
 

@@ -16,7 +16,7 @@ namespace BlackFox
         public float Life {
             get { return _life; }
             private set { _life = value;
-                if (OnDataChange != null)
+                if (OnDataChange != null)  
                     OnDataChange(this);
             }
         }
@@ -237,14 +237,14 @@ namespace BlackFox
 
             if (Life < 1)
             {
-                if (OnAgentKilled != null)
+                if (EventManager.OnAgentKilled != null)
                 {
                     if (_attacker.GetComponent<Agent>() != null)
-                        OnAgentKilled(_attacker.GetComponent<Agent>(), this);
+                        EventManager.OnAgentKilled(_attacker.GetComponent<Agent>(), this);
                 }
                 else
                 {
-                    OnAgentKilled(null, this);
+                    EventManager.OnAgentKilled(null, this);
                 }
                 EnableComponents(false);
 
@@ -257,11 +257,6 @@ namespace BlackFox
         #endregion
 
         #region Events
-
-        public delegate void AgentKilledEvent(Agent _killer, Agent _victim);
-
-        public static AgentKilledEvent OnAgentKilled;
-
 
         public delegate void AgentDataChangedEvent(Agent _agent);
 

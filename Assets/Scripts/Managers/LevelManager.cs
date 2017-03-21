@@ -16,13 +16,17 @@ namespace BlackFox
         public static int SubPoints = 1;
         public static int pointsToWin = 5;
 
-        GameplaySM gameplaySM;
-
+        static GameplaySM gameplaySM;
         public static SpawnerManager spawnerMng;
+
+        private void Awake()
+        {
+            spawnerMng.GetComponentInChildren<SpawnerManager>();
+        }
 
         void Start()
         {
-            StartGameplaySM();
+            StartGameplaySM(); 
         }
 
         #region API
@@ -45,6 +49,12 @@ namespace BlackFox
             }
             return -1;
         }
+
+        public static void OnLevelStart()
+        {
+            if(spawnerMng.enabled == false)
+                spawnerMng.enabled = true;
+        }
         #endregion
 
         #region KillPoint Count
@@ -66,10 +76,7 @@ namespace BlackFox
                         if (OnPlayerWinnig != null)
                         {
                             player.Victories += 1;
-                            // TODO : AGGIUNGERE BLOCCO SPAWNER
-                            ClearKillPoints();
-                            if (OnPlayerWinnig != null)
-                                OnPlayerWinnig();
+                            OnPlayerVictory();
                         }                
                     }
                     break;
@@ -90,6 +97,14 @@ namespace BlackFox
                     break;
                 }
             }
+        }
+
+        static void OnPlayerVictory()
+        {
+            spawnerMng.enabled = false;
+            ClearKillPoints();
+            if (OnPlayerWinnig != null)
+                OnPlayerWinnig();
         }
 
         static void ClearKillPoints()

@@ -10,14 +10,12 @@ namespace BlackFox
     /// Reppresenta lo stato di gameplay della flow state machine.
     /// </summary>
     public class GameplayState : StateBase
-    { 
-        UnityEngine.Object canvasGame;
+    {
         int levelNumber = 1;
 
         public override void OnStart()
         {
             Debug.Log("Gameplay");
-            canvasGame = GameObject.Instantiate(Resources.Load("Prefabs/Misc/CanvasGame"));
             StateMachineBase.OnMachineEnd += OnMachineEnd;
             LoadArena();
         }
@@ -25,7 +23,6 @@ namespace BlackFox
         public override void OnEnd()
         {
             StateMachineBase.OnMachineEnd -= OnMachineEnd;
-            GameObject.Destroy(canvasGame);
         }
 
         /// <summary>

@@ -11,6 +11,8 @@ namespace BlackFox {
         public LevelInitState(int _roundNumber)
         {
             roundNumber = _roundNumber;
+            if(roundNumber > 1)
+                LevelManager.OnLevelStart();
         }
 
         public override void OnStart()

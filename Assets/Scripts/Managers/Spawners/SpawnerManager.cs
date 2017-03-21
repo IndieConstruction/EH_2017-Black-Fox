@@ -29,7 +29,7 @@ namespace BlackFox
             }
         }
 
-        void OnDestroy()
+        private void OnDisable()
         {
             //Break all running Spawner
             foreach (var spawner in Spawners)

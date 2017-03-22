@@ -123,6 +123,14 @@ namespace BlackFox
             shooter.AddAmmo();
         }
 
+        /// <summary>
+        /// Richiamata quando questo player ha ucciso qualcuno.
+        /// </summary>
+        public void OnKillingSomeone()
+        {
+
+        }
+
         public void Init()
         {
             transform.DOScale(Vector3.one, 0.5f);
@@ -272,13 +280,6 @@ namespace BlackFox
         public delegate void AgentDataChangedEvent(Agent _agent);
 
         public AgentDataChangedEvent OnDataChange;
-
-        /// <summary>
-        /// Richiamata quando questo player ha ucciso qualcuno.
-        /// </summary>
-        public void OnKillingSomeone() {
-            transform.DOShakePosition(0.4f, 5,20);
-        }
 
         #endregion
 

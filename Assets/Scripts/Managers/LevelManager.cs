@@ -40,12 +40,18 @@ namespace BlackFox
         #endregion
 
         #region API
+        /// <summary>
+        /// Viene chiamata quando accade un'uccisione.
+        /// </summary>
+        /// <param name="_killer"></param>
+        /// <param name="_victim"></param>
         public void HandleAgentKilled(Agent _killer, Agent _victim)
         {
-            if (_killer != null)
+            if (_killer != null) { 
                 UpdateKillPoints(_killer.playerIndex, _victim.playerIndex);           // setta i punti morte e uccisione
                 //Aggiorna i punti uccisione sulla UI
-            else
+                _killer.OnKillingSomeone();
+            } else
                 UpdateKillPoints(_victim.playerIndex);
             if (EventManager.OnPointsUpdate != null)
             {

@@ -2,6 +2,7 @@
 using UnityEngine;
 using XInputDotNetPure;
 using Rope;
+using DG.Tweening;
 
 namespace BlackFox
 {
@@ -124,6 +125,7 @@ namespace BlackFox
 
         public void Init()
         {
+            transform.DOScale(Vector3.one, 0.5f);
             Life = maxLife;
             shooter.ammo = 0;
             EnableComponents(true);
@@ -251,9 +253,13 @@ namespace BlackFox
                 {
                     EventManager.OnAgentKilled(null, this);
                 }
-                EnableComponents(false);
-
+                
+                transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => {
+                    EnableComponents(false);
+                });
+                return;
             }
+            transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f);
         }
 
 
@@ -266,6 +272,13 @@ namespace BlackFox
         public delegate void AgentDataChangedEvent(Agent _agent);
 
         public AgentDataChangedEvent OnDataChange;
+
+        /// <summary>
+        /// Richiamata quando questo player ha ucciso qualcuno.
+        /// </summary>
+        public void OnKillingSomeone() {
+            transform.DOShakePosition(0.4f, 5,20);
+        }
 
         #endregion
 

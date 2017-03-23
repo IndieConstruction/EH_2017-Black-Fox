@@ -83,18 +83,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1666779078086790
+--- !u!1 &1792958582711734
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4334120912271848}
-  - component: {fileID: 33618861573653638}
-  - component: {fileID: 23911850739863878}
+  - component: {fileID: 4826788469564668}
+  - component: {fileID: 33031861498286494}
+  - component: {fileID: 23355949641213962}
   m_Layer: 0
-  m_Name: astronave
+  m_Name: Astronave_Gufo2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -115,19 +115,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4334120912271848
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1666779078086790}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4744760855697940}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4682675833394088
 Transform:
   m_ObjectHideFlags: 1
@@ -135,7 +122,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1969668977631946}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.8, y: 1, z: 0}
+  m_LocalPosition: {x: 3, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4744760855697940}
@@ -151,13 +138,26 @@ Transform:
   m_LocalPosition: {x: 6.15, y: 8, z: -5.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4334120912271848}
+  - {fileID: 4826788469564668}
   - {fileID: 4868836665757626}
   - {fileID: 4682675833394088}
   - {fileID: 224771988218829194}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 135, z: 0}
+--- !u!4 &4826788469564668
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1792958582711734}
+  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4744760855697940}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4868836665757626
 Transform:
   m_ObjectHideFlags: 1
@@ -171,12 +171,12 @@ Transform:
   m_Father: {fileID: 4744760855697940}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23911850739863878
+--- !u!23 &23355949641213962
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1666779078086790}
+  m_GameObject: {fileID: 1792958582711734}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -202,13 +202,13 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &33618861573653638
+--- !u!33 &33031861498286494
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1666779078086790}
-  m_Mesh: {fileID: 4300000, guid: 752b85ce1808155409372857eabd2d99, type: 3}
+  m_GameObject: {fileID: 1792958582711734}
+  m_Mesh: {fileID: 4300000, guid: b4dc3d8244a407e40b6261b67b0e08b9, type: 3}
 --- !u!54 &54938375295568778
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b029b59fa1671d47a31f1bef5e80299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PinPrefab: {fileID: 1248876106710976, guid: f6159f80e8e948749b7574fe51801899, type: 2}
+  PinPrefab: {fileID: 1923663633415268, guid: f6159f80e8e948749b7574fe51801899, type: 2}
   PinSpanw: {fileID: 4682675833394088}
   CoolDownTime: 5
   CanPlace: 1
@@ -371,10 +371,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.5
-  m_Height: 4.8
+  m_Radius: 3
+  m_Height: 4
   m_Direction: 2
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!222 &222812033813737104
 CanvasRenderer:
   m_ObjectHideFlags: 1

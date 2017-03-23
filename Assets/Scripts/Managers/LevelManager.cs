@@ -12,6 +12,10 @@ namespace BlackFox
     /// </summary>
     public class LevelManager : MonoBehaviour
     {
+        public int roundNumber = 1;
+        public int MaxRound = 4;
+        public int lelvelNumber;
+
         public int AddPoints = 1;
         public int SubPoints = 1;
         public int pointsToWin = 5;
@@ -28,14 +32,13 @@ namespace BlackFox
         #region Event Handler
         void HandleOnLevelInit()
         {
-            spawnerMng.enabled = true;
+            spawnerMng.ReInitLevel();
         }
 
         void HandleOnLevelPlay() { }
 
         void HandleOnLevelEnd()
         {
-            spawnerMng.enabled = false;
         }
         #endregion
 
@@ -115,10 +118,18 @@ namespace BlackFox
 
         void OnPlayerVictory()
         {
+            roundNumber++;
+            gameplaySM.SetRoundAndLevelNumber(lelvelNumber, roundNumber);
             ClearKillPoints();
-            if (EventManager.OnPlayerWinnig != null)
-                EventManager.OnPlayerWinnig();
+            EventManager.OnPlayerWinnig();
         }
+        
+        void HandleOnCoreDeath()
+        {
+            ClearKillPoints();
+            spawnerMng.ReInitLevel();
+        }
+
         void ClearKillPoints()
         {
             foreach (PlayerStats player in playerStats)
@@ -133,6 +144,8 @@ namespace BlackFox
         private void OnEnable()
         {
             EventManager.OnAgentKilled += HandleAgentKilled;
+            EventManager.OnCoreDeath += HandleOnCoreDeath;
+
             EventManager.OnLevelInit += HandleOnLevelInit;
             EventManager.OnLevelPlay += HandleOnLevelPlay;
             EventManager.OnLevelEnd += HandleOnLevelEnd;
@@ -141,9 +154,12 @@ namespace BlackFox
         private void OnDisable()
         {
             EventManager.OnAgentKilled -= HandleAgentKilled;
+            EventManager.OnCoreDeath -= HandleOnCoreDeath;
+
             EventManager.OnLevelInit -= HandleOnLevelInit;
             EventManager.OnLevelPlay -= HandleOnLevelPlay;
             EventManager.OnLevelEnd -= HandleOnLevelEnd;
+
         }
         #endregion
 
@@ -152,6 +168,8 @@ namespace BlackFox
         void StartGameplaySM()
         {
             gameplaySM = gameObject.AddComponent<GameplaySM>();
+            gameplaySM.MaxRound = this.MaxRound;
+            gameplaySM.SetRoundAndLevelNumber(lelvelNumber, roundNumber);
         }
 
         #endregion

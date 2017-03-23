@@ -5,13 +5,6 @@ namespace BlackFox
 {
     public class RoundEndState : StateBase
     {
-        int roundNumber;
-
-        public RoundEndState(int _roundNumber)
-        {
-            roundNumber = _roundNumber;
-        }
-
         public override void OnStart()
         {
             Debug.Log("RoundEndState");
@@ -25,8 +18,19 @@ namespace BlackFox
                 OnStateEnd();
         }
 
+        void ClearAgent()
+        {
+            Agent[] agents = GameObject.FindObjectsOfType<Agent>();
+
+            foreach (Agent agent in agents)
+            {
+                GameObject.Destroy(agent.gameObject);
+            }
+        }
+
         void ClearArena()
         {
+            ClearAgent();
             GameObject[] pins = GameObject.FindGameObjectsWithTag("Pin");
 
             foreach (GameObject pin in pins)

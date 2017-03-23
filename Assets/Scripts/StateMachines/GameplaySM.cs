@@ -6,11 +6,13 @@ namespace BlackFox {
     public class GameplaySM : StateMachineBase
     {
         int roundNumber;
-        int lelvelNumber = 1;
+        int lelvelNumber;
+        // TODO : creare set up parametri
+        public int MaxRound;
 
         private void Start()
         {
-            CurrentState = new LevelInitState(roundNumber);
+            CurrentState = new LevelInitState();
         }
 
         protected override void OnCurrentStateEnded()
@@ -18,21 +20,19 @@ namespace BlackFox {
             if ("BlackFox.LevelInitState" == CurrentState.StateName)
             {
                 // LevelInitState
-                roundNumber++;
-                CurrentState = new PlayState(roundNumber);
+                CurrentState = new PlayState();
             }
             else if ("BlackFox.PlayState" == CurrentState.StateName)
             {
                 // PlayState
-                CurrentState = new RoundEndState(roundNumber);
+                CurrentState = new RoundEndState();
             }
             else if ("BlackFox.RoundEndState" == CurrentState.StateName)
             {
                 // RoundEndState
-                if (roundNumber <= 4)
+                if (roundNumber <= MaxRound)
                 {
-                    roundNumber++;
-                    CurrentState = new UpgradeMenuState(roundNumber);
+                    CurrentState = new UpgradeMenuState();
                 }
                 else
                 {
@@ -42,15 +42,20 @@ namespace BlackFox {
             else if ("BlackFox.UpgradeMenuState" == CurrentState.StateName)
             {
                 // UpgradeMenuState
-                CurrentState = new LevelInitState(roundNumber);
+                CurrentState = new LevelInitState();
             }
             else if ("BlackFox.GameOverState" == CurrentState.StateName)
             {
                 // GameOverState - EXIT POINT
-                roundNumber = 0;
                 if (OnMachineEnd != null)
                     OnMachineEnd("GameplaySM");
             }
+        }
+
+        public void SetRoundAndLevelNumber(int _levelNumber, int _roundNumber)
+        {
+            roundNumber = _roundNumber;
+            lelvelNumber = _levelNumber;
         }
     }
 }

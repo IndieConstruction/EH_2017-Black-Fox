@@ -41,23 +41,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1484488629549470
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 4639426578632904}
-  - component: {fileID: 33363886662668996}
-  - component: {fileID: 23845876393540336}
-  m_Layer: 0
-  m_Name: astronave
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &1534889163630772
 GameObject:
   m_ObjectHideFlags: 1
@@ -94,6 +77,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1892580897733804
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4450477736162738}
+  - component: {fileID: 33937519570309876}
+  - component: {fileID: 23553138762761976}
+  m_Layer: 0
+  m_Name: Astronave_Gufo2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1964738197259928
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,13 +125,26 @@ Transform:
   m_LocalPosition: {x: -6.15, y: 8, z: -5.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 4639426578632904}
+  - {fileID: 4450477736162738}
   - {fileID: 4630154065351912}
   - {fileID: 4553679016413368}
   - {fileID: 224371466783024490}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -135, z: 0}
+--- !u!4 &4450477736162738
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1892580897733804}
+  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4200977435357478}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4553679016413368
 Transform:
   m_ObjectHideFlags: 1
@@ -139,7 +152,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1273552727498362}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.8, y: 1, z: 0}
+  m_LocalPosition: {x: 3, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4200977435357478}
@@ -158,25 +171,12 @@ Transform:
   m_Father: {fileID: 4200977435357478}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4639426578632904
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1484488629549470}
-  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4200977435357478}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!23 &23845876393540336
+--- !u!23 &23553138762761976
 MeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1484488629549470}
+  m_GameObject: {fileID: 1892580897733804}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -202,13 +202,13 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
---- !u!33 &33363886662668996
+--- !u!33 &33937519570309876
 MeshFilter:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1484488629549470}
-  m_Mesh: {fileID: 4300000, guid: 752b85ce1808155409372857eabd2d99, type: 3}
+  m_GameObject: {fileID: 1892580897733804}
+  m_Mesh: {fileID: 4300000, guid: b4dc3d8244a407e40b6261b67b0e08b9, type: 3}
 --- !u!54 &54578975757292204
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -358,7 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b029b59fa1671d47a31f1bef5e80299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PinPrefab: {fileID: 1168292131030178, guid: baccb8959d76334439938581d821f6b6, type: 2}
+  PinPrefab: {fileID: 1097988506308288, guid: baccb8959d76334439938581d821f6b6, type: 2}
   PinSpanw: {fileID: 4553679016413368}
   CoolDownTime: 5
   CanPlace: 1
@@ -371,10 +371,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.5
-  m_Height: 4.8
+  m_Radius: 3
+  m_Height: 4
   m_Direction: 2
-  m_Center: {x: 0, y: 1, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!222 &222911769524353412
 CanvasRenderer:
   m_ObjectHideFlags: 1

@@ -9,7 +9,7 @@ namespace BlackFox
     /// It menages the SpawnPoint position during the Level
     /// </summary>
     public class AvatarSpawner : SpawnerBase
-    {   
+    {
         /// <summary>
         /// Time between death and respawn
         /// </summary>
@@ -34,6 +34,7 @@ namespace BlackFox
             }
             set { _originalSpawns = value; }
         }
+        private GameObject[] agentsPrefb;
 
         #region Spawner Life flow
         /// <summary>
@@ -41,36 +42,35 @@ namespace BlackFox
         /// </summary>
         protected override void OnActivation()
         {
+            agentsPrefb = Resources.LoadAll<GameObject>("Prefabs/Agents");
             EventManager.OnAgentKilled += HandleOnAgentKilled;
-            EventManager.OnPlayerWinnig += HandleRoundRestart;
-            EventManager.OnCoreDeath += HandleRoundRestart;
             if (UseInitialPositionsAsSpawnPoints)
             {
                 foreach (Agent agent in FindObjectsOfType<Agent>())
                 {
                     SpawnPoint newPos;
-                    newPos.agent = agent;
-                    newPos.SpawnPosition = Instantiate(new GameObject("SpawnPoint_"+ agent.name), agent.transform.position, agent.transform.rotation, transform).transform;
+                    GameObject newSpawn = new GameObject("SpawnPoint_" + agent.name);
+                    newSpawn.transform.position = agent.transform.position;
+                    newSpawn.transform.rotation = agent.transform.rotation;
+                    newSpawn.transform.parent = transform;
+
+                    newPos.SpawnPosition = newSpawn.transform;
+                    newPos.PlayerIndx = agent.playerIndex;
 
                     OriginalSpawns.Add(newPos);
                 }
             }
 
-            if(SpawnPoints != null)
-            {
+            if (SpawnPoints != null)
                 foreach (SpawnPoint spwnPt in SpawnPoints)
                 {
                     OriginalSpawns.Add(spwnPt);
                 }
-            }           
         }
 
         protected override void OnDeactivation()
         {
-            StopCoroutine("RespawnCooldown");
             EventManager.OnAgentKilled -= HandleOnAgentKilled;
-            EventManager.OnPlayerWinnig -= HandleRoundRestart;
-            EventManager.OnCoreDeath -= HandleRoundRestart;
         }
         #endregion
 
@@ -80,37 +80,50 @@ namespace BlackFox
         /// </summary>
         public void RespawnAllImmediate()
         {
-            foreach (SpawnPoint agent in OriginalSpawns)
+            for (int i = 0; i < agentsPrefb.Length; i++)
             {
-                RespawnImmediate(agent.agent);
-            }    
+                RespawnImmediate(agentsPrefb[i].GetComponent<Agent>().playerIndex);
+            }
         }
 
         /// <summary>
         /// Respawn a Player without cooldown
         /// </summary>
         /// <param name="_playerIndx">Player to spawn</param>
-        public void RespawnImmediate(Agent _agent)
+        public void RespawnImmediate(PlayerIndex _playerIndx)
         {
+            //Prevent double istance
+            foreach (Agent agnt in FindObjectsOfType<Agent>())
+            {
+                if (agnt.playerIndex == _playerIndx)
+                    Destroy(agnt);
+            }
+
             //TODO: sostituire la lista SpawnPoint nel successivo foreach
             //con una lista che prevede il corretto criterio di selezione degli spawn points.
             foreach (SpawnPoint spawn in OriginalSpawns)
             {
-                if (spawn.agent.playerIndex == _agent.playerIndex)
+                if (spawn.PlayerIndx == _playerIndx)
                 {
-                    _agent.gameObject.transform.position = spawn.SpawnPosition.position;
-                    _agent.gameObject.transform.rotation = spawn.SpawnPosition.rotation;
-                    _agent.Init();
+                    for (int i = 0; i < agentsPrefb.Length; i++)
+                    {
+                        if (agentsPrefb[i].GetComponent<Agent>().playerIndex == _playerIndx)
+                        {
+                            Instantiate(agentsPrefb[i], spawn.SpawnPosition.position, spawn.SpawnPosition.rotation, transform);
+                            return;
+                        }
+                    }
                 }
             }
         }
+
         /// <summary>
         /// Respawn after a fixed amount of time
         /// </summary>
         /// <param name="_playerIndx">Player to spawn</param>
-        public void RespawnAvatar(Agent _agent)
+        public void RespawnAvatar(PlayerIndex _playerIndx)
         {
-            StartCoroutine("RespawnCooldown", _agent);            
+            StartCoroutine("RespawnCooldown", _playerIndx);
         }
         #endregion
 
@@ -122,26 +135,21 @@ namespace BlackFox
         /// <param name="_victim"></param>
         void HandleOnAgentKilled(Agent _killer, Agent _victim)
         {
-            RespawnAvatar(_victim);
-        }
-
-        void HandleRoundRestart()
-        {
-            RespawnAllImmediate();
+            RespawnAvatar(_victim.playerIndex);
         }
         #endregion
 
         [System.Serializable]
         public struct SpawnPoint
         {
-            public Agent agent;
             public Transform SpawnPosition;
+            public PlayerIndex PlayerIndx;
         }
 
-        IEnumerator RespawnCooldown(Agent _agent)
+        IEnumerator RespawnCooldown(PlayerIndex _playerIndx)
         {
             yield return new WaitForSeconds(RespawnTime);
-            RespawnImmediate(_agent);
+            RespawnImmediate(_playerIndx);
         }
     }
 }

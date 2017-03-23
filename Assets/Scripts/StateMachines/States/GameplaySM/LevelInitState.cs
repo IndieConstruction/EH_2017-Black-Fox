@@ -6,19 +6,15 @@ namespace BlackFox {
 
     public class LevelInitState : StateBase
     {
-        int roundNumber;
-        LevelManager levelManager;
-
-        public LevelInitState(int _roundNumber)
+        public LevelInitState()
         {
-            roundNumber = _roundNumber;
-            levelManager = GameObject.FindObjectOfType<LevelManager>();
         }
 
         public override void OnStart()
         {
             Debug.Log("LevelInitState");
             EventManager.OnLevelInit();
+            
         }
 
         public override void OnUpdate()

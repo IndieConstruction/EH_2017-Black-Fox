@@ -69,26 +69,10 @@ namespace BlackFox
         }
 
         #region Event Handler
-        void HandleOnLevelInit()
-        {
-            Init();
-        }
+        void HandleOnLevelInit() { }
         void HandleOnLevelPlay() { }
-
-        void HandleOnLevelEnd()
-        {
-            EnableComponents(true);
-        }
+        void HandleOnLevelEnd() { }
         #endregion
-
-        void EnableComponents(bool _value)
-        {
-            GetComponentInChildren<MeshRenderer>().enabled = _value;
-            GetComponent<Collider>().enabled = _value;
-            GetComponent<Shooter>().enabled = _value;
-            GetComponent<PlacePin>().enabled = _value;
-            GetComponent<MovementController>().enabled = _value;
-        }
 
         RopeController SearchRope()
         {
@@ -129,14 +113,6 @@ namespace BlackFox
         public void OnKillingSomeone()
         {
 
-        }
-
-        public void Init()
-        {
-            transform.DOScale(Vector3.one, 0.5f);
-            Life = maxLife;
-            shooter.ammo = 0;
-            EnableComponents(true);
         }
 
         public Shooter GetShooterReference()
@@ -262,9 +238,8 @@ namespace BlackFox
                     EventManager.OnAgentKilled(null, this);
                 }
                 
-                transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => {
-                    EnableComponents(false);
-                });
+                transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject); });
+                
                 return;
             }
             transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f);

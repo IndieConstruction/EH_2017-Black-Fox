@@ -38,6 +38,20 @@ namespace BlackFox
             }
         }
 
+        #region API
+        public void ReInitLevel()
+        {
+            foreach (var spawner in GetComponentsInChildren<SpawnerBase>())
+            {
+                if(spawner.GetType() == typeof(AvatarSpawner))
+                {
+                    AvatarSpawner spawnAvatar = spawner as AvatarSpawner;
+                    spawnAvatar.RespawnAllImmediate();
+                }
+            }
+        }
+        #endregion
+
         /// <summary>
         /// Manage the OnFlowEnd evennt, removing the Spawner from the list of the current active
         /// and unsubscribing this from that Spawner event OnFlowEnd

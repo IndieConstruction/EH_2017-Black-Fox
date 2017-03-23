@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 7c3c0e9e9b2564a469c9b7f8572a092c
-timeCreated: 1489422519
+guid: 81fcb9ef590aa694ca3d94db26ba9313
+timeCreated: 1490278251
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: chiodo
+    4300000: Oggetto_Estrerno001
   materials:
     importMaterials: 1
     materialName: 0

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 17cbe5fdac6dd6947ab4b603873244e7
-timeCreated: 1489422519
+guid: b4dc3d8244a407e40b6261b67b0e08b9
+timeCreated: 1490262451
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Box001
+    4300000: Astronave_Gufo
   materials:
     importMaterials: 1
     materialName: 0

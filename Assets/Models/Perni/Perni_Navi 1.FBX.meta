@@ -1,42 +1,22 @@
 fileFormatVersion: 2
-guid: aab70f54697a6324f871d19558586133
-timeCreated: 1489422519
+guid: e33a7691a62e34942992937dad0c7efe
+timeCreated: 1490268515
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
-    100000: //RootNode
-    100002: Object001
-    100004: Object002
-    100006: Object003
-    100008: Sphere001
-    100010: Sphere002
-    100012: Sphere003
-    400000: //RootNode
-    400002: Object001
-    400004: Object002
-    400006: Object003
-    400008: Sphere001
-    400010: Sphere002
-    400012: Sphere003
-    2300000: Object001
-    2300002: Object002
-    2300004: Object003
-    2300006: Sphere001
-    2300008: Sphere002
-    2300010: Sphere003
-    3300000: Object001
-    3300002: Object002
-    3300004: Object003
-    3300006: Sphere001
-    3300008: Sphere002
-    3300010: Sphere003
-    4300000: Sphere001
-    4300002: Object002
-    4300004: Object003
-    4300006: Sphere002
-    4300008: Sphere003
-    4300010: Object001
+    100000: Object078
+    100002: //RootNode
+    100004: Perni_Navi001
+    400000: Object078
+    400002: //RootNode
+    400004: Perni_Navi001
+    2300000: Object078
+    2300002: Perni_Navi001
+    3300000: Object078
+    3300002: Perni_Navi001
+    4300000: Perni_Navi001
+    4300002: Object078
     7400000: Take 001
     9500000: //RootNode
     11100000: //RootNode
@@ -65,7 +45,7 @@ ModelImporter:
       name: Take 001
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 100
+      lastFrame: 10
       wrapMode: 2
       orientationOffsetY: 0
       level: 0
@@ -88,17 +68,9 @@ ModelImporter:
       transformMask:
       - path: 
         weight: 1
-      - path: Object001
+      - path: Object078
         weight: 1
-      - path: Object002
-        weight: 1
-      - path: Object003
-        weight: 1
-      - path: Sphere001
-        weight: 1
-      - path: Sphere002
-        weight: 1
-      - path: Sphere003
+      - path: Perni_Navi001
         weight: 1
       maskType: 3
       maskSource: {instanceID: 0}

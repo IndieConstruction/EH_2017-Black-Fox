@@ -109,7 +109,7 @@ namespace BlackFox
                     {
                         if (agentsPrefb[i].GetComponent<Agent>().playerIndex == _playerIndx)
                         {
-                            Instantiate(agentsPrefb[i], spawn.SpawnPosition.position, spawn.SpawnPosition.rotation);
+                            Instantiate(agentsPrefb[i], spawn.SpawnPosition.position, spawn.SpawnPosition.rotation, transform);
                             return;
                         }
                     }

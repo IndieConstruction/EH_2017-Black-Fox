@@ -13,6 +13,7 @@ namespace BlackFox
     public class LevelManager : MonoBehaviour
     {
         public int roundNumber = 1;
+        public int MaxRound = 4;
         public int lelvelNumber;
 
         public int AddPoints = 1;
@@ -118,6 +119,7 @@ namespace BlackFox
         void OnPlayerVictory()
         {
             roundNumber++;
+            gameplaySM.SetRoundAndLevelNumber(lelvelNumber, roundNumber);
             ClearKillPoints();
             EventManager.OnPlayerWinnig();
         }
@@ -166,6 +168,7 @@ namespace BlackFox
         void StartGameplaySM()
         {
             gameplaySM = gameObject.AddComponent<GameplaySM>();
+            gameplaySM.MaxRound = this.MaxRound;
             gameplaySM.SetRoundAndLevelNumber(lelvelNumber, roundNumber);
         }
 

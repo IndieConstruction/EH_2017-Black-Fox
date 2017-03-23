@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 1adbf774d7a4e1d44ab49ec2d356debd
-timeCreated: 1450987494
+guid: 9ddf8fc9040e92c48bfda9aef65aacf8
+timeCreated: 1450988627
 licenseType: Store
 PluginImporter:
   serializedVersion: 1
@@ -19,7 +19,7 @@ PluginImporter:
     Editor:
       enabled: 1
       settings:
-        CPU: x86_64
+        CPU: x86
         DefaultValueInitialized: true
         OS: Windows
     Linux:

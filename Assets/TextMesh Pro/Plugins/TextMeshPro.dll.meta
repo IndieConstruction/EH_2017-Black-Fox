@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 1adbf774d7a4e1d44ab49ec2d356debd
-timeCreated: 1450987494
+guid: 89f0137620f6af44b9ba852b4190e64e
+timeCreated: 1488610019
 licenseType: Store
 PluginImporter:
   serializedVersion: 1
@@ -9,19 +9,15 @@ PluginImporter:
   isPreloaded: 0
   isOverridable: 0
   platformData:
-    Android:
-      enabled: 0
-      settings:
-        CPU: AnyCPU
     Any:
       enabled: 0
       settings: {}
     Editor:
       enabled: 1
       settings:
-        CPU: x86_64
+        CPU: AnyCPU
         DefaultValueInitialized: true
-        OS: Windows
+        OS: AnyOS
     Linux:
       enabled: 0
       settings:
@@ -50,10 +46,6 @@ PluginImporter:
       enabled: 0
       settings:
         CPU: AnyCPU
-        DontProcess: False
-        PlaceholderPath: 
-        SDK: AnySDK
-        ScriptingBackend: AnyScriptingBackend
   userData: 
   assetBundleName: 
   assetBundleVariant: 

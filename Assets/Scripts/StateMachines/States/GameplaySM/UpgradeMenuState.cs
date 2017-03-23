@@ -6,13 +6,6 @@ namespace BlackFox {
 
     public class UpgradeMenuState : StateBase
     {
-        int roundNumber;
-
-        public UpgradeMenuState(int _roundNumber)
-        {
-            roundNumber = _roundNumber;
-        }
-
         public override void OnStart()
         {
             Debug.Log("UpgradeMenuState");

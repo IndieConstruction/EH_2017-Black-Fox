@@ -5,7 +5,7 @@ using UnityEngine;
 namespace BlackFox
 {
 
-    public class EventManager : MonoBehaviour
+    public static class EventManager
     {
         #region GamePlayEvent
         public delegate void GamePlayEvent();

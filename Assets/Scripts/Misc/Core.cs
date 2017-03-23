@@ -31,16 +31,8 @@ namespace BlackFox
         {
             if (life == 0)
                 life = MaxLife;
-
-            EnableComponents(true);
         }
         #endregion
-
-        void EnableComponents(bool _value)
-        {
-            GetComponentInChildren<MeshRenderer>().enabled = _value;
-            GetComponent<Collider>().enabled = _value;
-        }
 
         #region Interfacce
 
@@ -50,7 +42,6 @@ namespace BlackFox
             if (life < 1)
             {
                 EventManager.OnCoreDeath();
-                EnableComponents(false);
             }
         }
 

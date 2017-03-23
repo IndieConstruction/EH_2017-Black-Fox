@@ -241,7 +241,7 @@ MonoBehaviour:
   AddedAmmo: 10
   MaxAmmo: 50
   ammo: 0
-  playerIndex: 0
+  playerIndex: 1
 --- !u!114 &114018910356729936
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -39,23 +39,26 @@ namespace BlackFox
         #region API
         public void SetBulletsValue(PlayerIndex _playerIndex, int _remainigAmmo)
         {
-            if (_playerIndex == PlayerIndex.One)
+            switch (_playerIndex)   
             {
-                Player1BulletCount.text = _remainigAmmo.ToString();
-            }
-            else if (_playerIndex == PlayerIndex.Two)
-            {
-                Player2BulletCount.text = _remainigAmmo.ToString();
-            }
-            else if (_playerIndex == PlayerIndex.Three)
-            {
-                Player3BulletCount.text = _remainigAmmo.ToString();
-            }
-            else if (_playerIndex == PlayerIndex.Four)
-            {
-                Player4BulletCount.text = _remainigAmmo.ToString();
+                case PlayerIndex.One:
+                    Player1BulletCount.text = _remainigAmmo.ToString();
+                    break;
+                case PlayerIndex.Two:
+                    Player2BulletCount.text = _remainigAmmo.ToString();
+                    break;
+                case PlayerIndex.Three:
+                    Player3BulletCount.text = _remainigAmmo.ToString();
+                    break;
+                case PlayerIndex.Four:
+                    Player4BulletCount.text = _remainigAmmo.ToString();
+                    break;
+                default:
+                    break;
             }
         }
+
+        
                    
 
         public void SetElementZeroSlider(float _life, float _maxLife)

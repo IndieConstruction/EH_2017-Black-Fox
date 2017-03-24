@@ -10,5 +10,13 @@ namespace Rope
 
         LineRenderer[] renderers;
 
+        //private void LateUpdate()
+        //{
+        //    for (int i = 0; i < fragments.Count; i++)
+        //    {
+        //        lineRend.SetPosition(i, fragments[i].transform.position);
+        //    }
+        //    lineRend.SetPosition(fragments.Count, TailAnchorPoint.position);
+        //}
     }
 }

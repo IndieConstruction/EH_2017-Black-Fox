@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Rope
 {
-    [RequireComponent (typeof(LineRenderer),(typeof(ConfigurableJoint)))]
+    [RequireComponent (typeof(ConfigurableJoint))]
     public class RopeController : MonoBehaviour
     {
         public GameObject FragmentPrefab;
@@ -15,7 +15,7 @@ namespace Rope
         public float DensityOfFragments = .1f;
 
         List<GameObject> fragments = new List<GameObject>();
-        LineRenderer lineRend;
+        List<Vector3> rendPosition = new List<Vector3>();
         float ropeWidth;
         Vector3 offSet;
 
@@ -28,29 +28,10 @@ namespace Rope
         }
         void Start()
         {
-            lineRend = GetComponent<LineRenderer>();
             ropeWidth = GetComponent<LineRenderer>().widthMultiplier;
             fragments.Add(gameObject);
             BuildRope(gameObject);
-        }
-
-        private void FixedUpdate()
-        {
-            //Qui per debug. Cancellerare una volta funzionante
-            /*
-            if (Input.GetKeyDown(KeyCode.Space) && fragments.Count < MaxLength)
-                ExtendRope();
-                */
-        }
-
-        private void LateUpdate()
-        {
-            for (int i = 0; i < fragments.Count; i++)
-            {
-                lineRend.SetPosition(i, fragments[i].transform.position);
-            }
-            lineRend.SetPosition(fragments.Count, TailAnchorPoint.position);
-        }
+        }       
 
         /// <summary>
         /// Extend the rope toward the AnchorPoint
@@ -103,7 +84,6 @@ namespace Rope
                 int fragmentsNeeded = (int)(Vector3.Distance(TailAnchorPoint.position, fragments[fragments.Count - 1].transform.position) / offSet.magnitude);
                 Debug.Log(fragmentsNeeded + MaxLength + " needed");
             }
-            lineRend.numPositions = (fragments.Count) + 1;
         }
 
         /// <summary>

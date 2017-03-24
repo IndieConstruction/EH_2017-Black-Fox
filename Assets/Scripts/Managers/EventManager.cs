@@ -11,8 +11,8 @@ namespace BlackFox
         public delegate void GamePlayEvent();
 
         public static GamePlayEvent OnLevelInit;
-        public static GamePlayEvent OnLevelPlay;
-        public static GamePlayEvent OnLevelEnd;
+        public static GamePlayEvent OnRoundPlay;
+        public static GamePlayEvent OnRoundEnd;
 
         #endregion
 

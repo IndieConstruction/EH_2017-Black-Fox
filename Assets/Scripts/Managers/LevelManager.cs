@@ -148,8 +148,8 @@ namespace BlackFox
             EventManager.OnCoreDeath += HandleOnCoreDeath;
 
             EventManager.OnLevelInit += HandleOnLevelInit;
-            EventManager.OnLevelPlay += HandleOnLevelPlay;
-            EventManager.OnLevelEnd += HandleOnLevelEnd;
+            EventManager.OnRoundPlay += HandleOnLevelPlay;
+            EventManager.OnRoundEnd += HandleOnLevelEnd;
         }
 
         private void OnDisable()
@@ -158,8 +158,8 @@ namespace BlackFox
             EventManager.OnCoreDeath -= HandleOnCoreDeath;
 
             EventManager.OnLevelInit -= HandleOnLevelInit;
-            EventManager.OnLevelPlay -= HandleOnLevelPlay;
-            EventManager.OnLevelEnd -= HandleOnLevelEnd;
+            EventManager.OnRoundPlay -= HandleOnLevelPlay;
+            EventManager.OnRoundEnd -= HandleOnLevelEnd;
 
         }
         #endregion

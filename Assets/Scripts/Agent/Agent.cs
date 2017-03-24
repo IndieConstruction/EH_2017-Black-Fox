@@ -59,15 +59,15 @@ namespace BlackFox
         void OnEnable()
         {
             EventManager.OnLevelInit += HandleOnLevelInit;
-            EventManager.OnLevelPlay += HandleOnLevelPlay;
-            EventManager.OnLevelEnd += HandleOnLevelEnd;
+            EventManager.OnRoundPlay += HandleOnLevelPlay;
+            EventManager.OnRoundEnd += HandleOnLevelEnd;
         }
 
         void OnDisable()
         {
             EventManager.OnLevelInit -= HandleOnLevelInit;
-            EventManager.OnLevelPlay -= HandleOnLevelPlay;
-            EventManager.OnLevelEnd -= HandleOnLevelEnd;
+            EventManager.OnRoundPlay -= HandleOnLevelPlay;
+            EventManager.OnRoundEnd -= HandleOnLevelEnd;
         }
 
         #region Event Handler

@@ -17,7 +17,6 @@ namespace Rope
         LineRenderer lineRend;
         float ropeWidth;
         Vector3 offSet;
-
         float fragmentDistance;
 
         void Start()

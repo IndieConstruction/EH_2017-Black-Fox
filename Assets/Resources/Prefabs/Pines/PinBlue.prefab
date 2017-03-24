@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4225975773721308}
   - component: {fileID: 54276768374953986}
-  - component: {fileID: 64780182759762436}
+  - component: {fileID: 136093699232135810}
   m_Layer: 9
   m_Name: PinBlue
   m_TagString: Pin
@@ -224,20 +224,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!64 &64780182759762436
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1042534840307456}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 1
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: e33a7691a62e34942992937dad0c7efe, type: 3}
 --- !u!111 &111224891968763316
 Animation:
   m_ObjectHideFlags: 1
@@ -253,3 +239,16 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!136 &136093699232135810
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1042534840307456}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1.2
+  m_Height: 6.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 2, z: 0}

@@ -18,6 +18,18 @@ namespace BlackFox
                 OnStateEnd();
         }
 
+        void ClearArena()
+        {
+            ClearAgent();
+            ClearExternalAgent();
+            GameObject[] pins = GameObject.FindGameObjectsWithTag("Pin");
+
+            foreach (GameObject pin in pins)
+            {
+                GameObject.Destroy(pin);
+            }
+        }
+
         void ClearAgent()
         {
             Agent[] agents = GameObject.FindObjectsOfType<Agent>();
@@ -28,14 +40,13 @@ namespace BlackFox
             }
         }
 
-        void ClearArena()
+        void ClearExternalAgent()
         {
-            ClearAgent();
-            GameObject[] pins = GameObject.FindGameObjectsWithTag("Pin");
+            ExternalAgent[] agents = GameObject.FindObjectsOfType<ExternalAgent>();
 
-            foreach (GameObject pin in pins)
+            foreach (ExternalAgent extAgent in agents)
             {
-                GameObject.Destroy(pin);
+                GameObject.Destroy(extAgent.gameObject);
             }
         }
     }

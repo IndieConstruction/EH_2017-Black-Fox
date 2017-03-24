@@ -80,6 +80,7 @@ namespace BlackFox
         /// </summary>
         public void RespawnAllImmediate()
         {
+            StopAllCoroutines();
             for (int i = 0; i < agentsPrefb.Length; i++)
             {
                 RespawnImmediate(agentsPrefb[i].GetComponent<Agent>().playerIndex);

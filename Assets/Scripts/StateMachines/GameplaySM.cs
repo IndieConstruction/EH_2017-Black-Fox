@@ -20,7 +20,7 @@ namespace BlackFox {
             if ("BlackFox.LevelInitState" == CurrentState.StateName)
             {
                 // LevelInitState
-                StartCoroutine(RoundInitCountDown(3));
+                CurrentState = new PlayState();
             }
             else if ("BlackFox.PlayState" == CurrentState.StateName)
             {
@@ -56,16 +56,6 @@ namespace BlackFox {
         {
             roundNumber = _roundNumber;
             lelvelNumber = _levelNumber;
-        }
-
-        IEnumerator RoundInitCountDown(int _time)
-        {
-            float StartTime = 0f;
-            while(StartTime + Time.deltaTime < _time)
-            {
-                yield return new WaitForEndOfFrame();
-            }
-            CurrentState = new PlayState();
         }
     }
 }

@@ -53,7 +53,7 @@ namespace BlackFox
             if (UseSpecifiedPrefabs)
                 agentsPrefb = AvatarPrefabs;
             else
-            agentsPrefb = Resources.LoadAll<GameObject>("Prefabs/Agents");
+                agentsPrefb = Resources.LoadAll<GameObject>("Prefabs/Agents");
 
             EventManager.OnAgentKilled += HandleOnAgentKilled;
             if (UseInitialPositionsAsSpawnPoints)

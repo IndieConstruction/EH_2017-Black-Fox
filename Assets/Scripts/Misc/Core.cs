@@ -53,7 +53,10 @@ namespace BlackFox
         void HandleOnLevelInit()
         {
             if (life == 0)
+            {
                 life = MaxLife;
+                OnDataChange();
+            }
         }
         #endregion
 

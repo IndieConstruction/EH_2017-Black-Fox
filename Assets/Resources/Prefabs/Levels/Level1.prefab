@@ -3676,7 +3676,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RespawnTime: 3
-  UseInitialPositionsAsSpawnPoints: 1
+  UseInitialPositionsAsSpawnPoints: 0
   SpawnPoints:
   - SpawnPosition: {fileID: 4133382324531126}
     PlayerIndx: 0

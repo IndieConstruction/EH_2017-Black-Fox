@@ -9,7 +9,20 @@ namespace BlackFox {
         public GameObject RopeOrigin;
         List<GameObject> ropes = new List<GameObject>();
 
-    #region API
+        private void HandleOnAgentSpawn(Agent _agent)
+        {
+            AttachNewRope(_agent.transform.parent.gameObject);
+        }
+
+        private void OnEnable()
+        {
+            EventManager.OnAgentSpawn += HandleOnAgentSpawn;
+        }
+        private void OnDisable()
+        {
+            EventManager.OnAgentSpawn -= HandleOnAgentSpawn;
+        }
+        #region API
         /// <summary>
         /// Create a new Rope and attach it to _target(parameter)
         /// </summary>

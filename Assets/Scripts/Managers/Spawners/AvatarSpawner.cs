@@ -95,7 +95,7 @@ namespace BlackFox
             StopAllCoroutines();
             for (int i = 0; i < agentsPrefb.Length; i++)
             {
-                RespawnImmediate(agentsPrefb[i].GetComponent<Agent>().playerIndex);
+                RespawnImmediate(agentsPrefb[i].GetComponentInChildren<Agent>().playerIndex);
             }
         }
 
@@ -123,6 +123,7 @@ namespace BlackFox
                         if (agentsPrefb[i].GetComponentInChildren<Agent>().playerIndex == _playerIndx)
                         {
                             Instantiate(agentsPrefb[i], spawn.SpawnPosition.position, spawn.SpawnPosition.rotation, transform);
+                            EventManager.OnAgentSpawn(agentsPrefb[i].GetComponentInChildren<Agent>());
                             return;
                         }
                     }

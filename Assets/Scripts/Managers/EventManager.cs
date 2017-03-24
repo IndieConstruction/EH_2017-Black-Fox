@@ -16,6 +16,12 @@ namespace BlackFox
 
         #endregion
 
+        #region AgentSpawn
+        public delegate void AgentSpawnEvent(Agent _agent);
+
+        public static AgentSpawnEvent OnAgentSpawn;
+        #endregion
+
         #region AgentKilledEvent
 
         public delegate void AgentKilledEvent(Agent _killer, Agent _victim);

@@ -17,11 +17,19 @@ namespace BlackFox
         /// <summary>
         /// Use the initial position as SpawnPoints
         /// </summary>
-        public bool UseInitialPositionsAsSpawnPoints = true;
+        public bool UseInitialPositionsAsSpawnPoints = false;
         /// <summary>
         /// Additional SpawnPoints
         /// </summary>
         public List<SpawnPoint> SpawnPoints;
+        /// <summary>
+        /// Use the Specifiied prefabas as player to respawn
+        /// </summary>
+        public bool UseSpecifiedPrefabs = false;
+        /// <summary>
+        /// Prefabs of Avatar to respawn
+        /// </summary>
+        public GameObject[] AvatarPrefabs = new GameObject[4];
 
         private List<SpawnPoint> _originalSpawns;
         public List<SpawnPoint> OriginalSpawns
@@ -42,7 +50,11 @@ namespace BlackFox
         /// </summary>
         protected override void OnActivation()
         {
+            if (UseSpecifiedPrefabs)
+                agentsPrefb = AvatarPrefabs;
+            else
             agentsPrefb = Resources.LoadAll<GameObject>("Prefabs/Agents");
+
             EventManager.OnAgentKilled += HandleOnAgentKilled;
             if (UseInitialPositionsAsSpawnPoints)
             {

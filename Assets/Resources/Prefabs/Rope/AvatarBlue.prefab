@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 4323551916750634}
   - component: {fileID: 54062685056094050}
   - component: {fileID: 153898631396503474}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RopeAnchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,7 +330,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ring: {fileID: 114993665184193168}
-  BulletCount: {fileID: 0}
   KillPoint: {fileID: 0}
 --- !u!114 &114039904183898956
 MonoBehaviour:

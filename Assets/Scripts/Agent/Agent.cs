@@ -54,14 +54,14 @@ namespace BlackFox
             XInputReader();
         }
 
-        private void OnEnable()
+        void OnEnable()
         {
             EventManager.OnLevelInit += HandleOnLevelInit;
             EventManager.OnLevelPlay += HandleOnLevelPlay;
             EventManager.OnLevelEnd += HandleOnLevelEnd;
         }
 
-        private void OnDisable()
+        void OnDisable()
         {
             EventManager.OnLevelInit -= HandleOnLevelInit;
             EventManager.OnLevelPlay -= HandleOnLevelPlay;
@@ -87,7 +87,7 @@ namespace BlackFox
         /// <summary>
         /// Salva all'interno della lista di oggetti IDamageable, gli oggetti facenti parti della lista DamageablesPrefabs
         /// </summary>
-        private void LoadIDamageablePrefab()
+        void LoadIDamageablePrefab()
         { 
             List<GameObject> DamageablesPrefabs = PrefabUtily.LoadAllPrefabsWithComponentOfType<IDamageable>("Prefabs", gameObject);
 
@@ -96,6 +96,14 @@ namespace BlackFox
                 if (k.GetComponent<IDamageable>() != null)
                     damageables.Add(k.GetComponent<IDamageable>());
             }
+        }
+
+        void EnableComponents(bool _value)
+        {
+            GetComponent<Collider>().enabled = _value;
+            GetComponent<Shooter>().enabled = _value;
+            GetComponent<PlacePin>().enabled = _value;
+            GetComponent<MovementController>().enabled = _value;
         }
 
         #region API
@@ -233,19 +241,15 @@ namespace BlackFox
                 {
                     if (_attacker.GetComponent<Agent>() != null)
                         EventManager.OnAgentKilled(_attacker.GetComponent<Agent>(), this);
+                    else
+                        EventManager.OnAgentKilled(null, this);
                 }
-                else
-                {
-                    EventManager.OnAgentKilled(null, this);
-                }
-                
+                EnableComponents(false);
                 transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject); });
                 
                 return;
             }
         }
-
-
         #endregion
 
         #endregion

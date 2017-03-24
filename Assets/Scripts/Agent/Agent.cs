@@ -225,7 +225,8 @@ namespace BlackFox
         public void Damage(float _damage, GameObject _attacker)
         {
             Life -= _damage;
-
+            transform.DOScale(Vector3.one, 0.25f);
+            transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f);
             if (Life < 1)
             {
                 if (EventManager.OnAgentKilled != null)
@@ -242,7 +243,6 @@ namespace BlackFox
                 
                 return;
             }
-            transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f).OnComplete(() => { transform.DOScale(Vector3.one, 0.1f); });
         }
 
 

@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a435a47f34b1f734ea916cecc28a85d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationSpeed: 5000
+  RotationSpeed: 250
   MovmentSpeed: 500
 --- !u!114 &114631551563313054
 MonoBehaviour:
@@ -345,7 +345,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ring: {fileID: 114671775246345152}
-  BulletCount: {fileID: 0}
   KillPoint: {fileID: 0}
 --- !u!114 &114977479195355638
 MonoBehaviour:

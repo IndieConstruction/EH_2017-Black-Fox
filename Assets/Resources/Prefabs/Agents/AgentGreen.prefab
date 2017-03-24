@@ -346,7 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a435a47f34b1f734ea916cecc28a85d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationSpeed: 5000
+  RotationSpeed: 250
   MovmentSpeed: 500
 --- !u!114 &114934259371014256
 MonoBehaviour:
@@ -360,7 +360,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ring: {fileID: 114306483284148052}
-  BulletCount: {fileID: 0}
   KillPoint: {fileID: 0}
 --- !u!136 &136923628969541432
 CapsuleCollider:

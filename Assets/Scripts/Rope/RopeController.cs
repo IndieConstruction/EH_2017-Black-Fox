@@ -66,14 +66,14 @@ namespace Rope
                 //Collider configuration
                 collider = newFragment.GetComponentInChildren<CapsuleCollider>();
                 collider.radius = ropeWidth / 2;
-                collider.center = Vector3.forward * fragmentDistance / 2;
                 collider.height = fragmentDistance + collider.radius;
+                collider.center = Vector3.forward * collider.height;
                 collider.GetComponent<RopeForcedLook>().Target = fragments[i - 1];
                 //Joint Configuration
                 joint = newFragment.GetComponent<ConfigurableJoint>();
                 joint.connectedBody = fragments[i - 1].GetComponent<Rigidbody>();
                 joint.autoConfigureConnectedAnchor = false;
-                joint.connectedAnchor = offSet;
+                joint.connectedAnchor = offSet * 0.9f;
                 //Is the AnchroPoint closer than the offSet? If so stop building the rope
                 if (Vector3.Distance(position, AnchorPoint.position) <= fragmentDistance)
                 {

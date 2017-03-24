@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using XInputDotNetPure;
+using TMPro;
 
 namespace BlackFox
 {
@@ -17,6 +18,17 @@ namespace BlackFox
         public Text TextWindDisplay;
         public Slider ElementZeroSlider;
 
+        public TMP_Text LevelText;
+        LevelManager levelMNG;
+
+
+        private void Start()
+        {
+            levelMNG = FindObjectOfType<LevelManager>();
+            LevelText.text = "Level: " + levelMNG.lelvelNumber + "/" + "Round: " + levelMNG.roundNumber;
+        }
+
+        #region API
         public void SetBulletsValue(PlayerIndex _playerIndex, int _remainigAmmo)
         {
             if (_playerIndex == PlayerIndex.One)
@@ -36,6 +48,7 @@ namespace BlackFox
                 Player4BulletCount.text = _remainigAmmo.ToString();
             }
         }
+                   
 
         public void SetElementZeroSlider(float _life, float _maxLife)
         {
@@ -47,5 +60,7 @@ namespace BlackFox
             WindDisplay.gameObject.SetActive(true);
             TextWindDisplay.text = "Player" + _playerIndex + " Ha vinto! ";
         }
+
+        #endregion 
     }
 }

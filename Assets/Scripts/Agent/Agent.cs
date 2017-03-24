@@ -33,6 +33,7 @@ namespace BlackFox
         PlacePin pinPlacer;
         Shooter shooter;
         RopeController rope;
+        GameUIController UIController;
 
         public float fireRate;                                                   // rateo di fuoco in secondi
         float nextFire;
@@ -44,6 +45,7 @@ namespace BlackFox
             rope = SearchRope();
             pinPlacer = GetComponent<PlacePin>();
             shooter = GetComponent<Shooter>();
+            UIController = FindObjectOfType<GameUIController>();
             shooter.playerIndex = this.playerIndex;
             LoadIDamageablePrefab();
         }
@@ -106,6 +108,15 @@ namespace BlackFox
             GetComponent<MovementController>().enabled = _value;
         }
 
+        /// <summary>
+        /// Aggiorna la quantità di proiettili disponibili nel CanvasGame
+        /// </summary>
+        void SetAmmoInTheUI()
+        {
+            if (UIController != null)
+                UIController.SetBulletsValue(playerIndex, shooter.ammo);
+        }
+
         #region API
         /// <summary>
         /// Chiama la funzione AddAmmo di shooter
@@ -113,6 +124,7 @@ namespace BlackFox
         public void AddShooterAmmo()
         {
             shooter.AddAmmo();
+            SetAmmoInTheUI();
         }
 
         /// <summary>
@@ -150,12 +162,14 @@ namespace BlackFox
             {
                 nextFire = Time.time + fireRate;
                 Shoot();
+                
             }
 
             if (Input.GetButton(string.Concat("Key" + (int)playerIndex + "_Fire")) && Time.time > nextFire)       // shoot at certain rate
             {
                 nextFire = Time.time + fireRate;
                 Shoot();
+                
             }
 
             Rotate(Input.GetAxis(string.Concat("Key" + (int)playerIndex + "_Horizonatal")));  // Ruota l'agente
@@ -266,6 +280,7 @@ namespace BlackFox
 
         void Shoot() {
             shooter.ShootBullet();
+            SetAmmoInTheUI();
         }
 
         void PlacePin(bool _isRight) {

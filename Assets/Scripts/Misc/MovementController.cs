@@ -30,7 +30,6 @@ namespace BlackFox
         public void Rotation(float _axisValue)
         {
             //rotazione in base all'agente
-            //Rigid.AddRelativeTorque(Vector3.up * RotationSpeed * _axisValue * Time.deltaTime, ForceMode.Force);
             Rigid.MoveRotation(Rigid.rotation * Quaternion.Euler(Vector3.up * RotationSpeed * _axisValue * Time.deltaTime));
         }
     }

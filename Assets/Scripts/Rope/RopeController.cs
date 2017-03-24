@@ -67,7 +67,7 @@ namespace Rope
                 collider = newFragment.GetComponentInChildren<CapsuleCollider>();
                 collider.radius = ropeWidth / 2;
                 collider.height = fragmentDistance + collider.radius;
-                collider.center = Vector3.forward * collider.height;
+                collider.center = Vector3.forward * collider.height/2;
                 collider.GetComponent<RopeForcedLook>().Target = fragments[i - 1];
                 //Joint Configuration
                 joint = newFragment.GetComponent<ConfigurableJoint>();

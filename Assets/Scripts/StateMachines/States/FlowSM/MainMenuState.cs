@@ -16,7 +16,7 @@ namespace BlackFox
 
         public override void OnUpdate()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Submit"))
             {
                 if (OnStateEnd != null)
                     OnStateEnd();

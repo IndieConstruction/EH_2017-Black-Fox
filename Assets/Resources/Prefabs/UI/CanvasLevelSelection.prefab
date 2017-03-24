@@ -174,7 +174,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Schiaccia Spazio daiiiiii!
+  m_Text: Schiaccia SPAZIO daiiiiii!
 --- !u!114 &114740003395784860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -324,7 +324,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 60, y: 0}
-  m_SizeDelta: {x: -522, y: -144}
+  m_SizeDelta: {x: -116.3, y: -144}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!224 &224224662267565496
 RectTransform:
@@ -380,5 +380,5 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -33.2}
-  m_SizeDelta: {x: 380.1, y: 96.4}
+  m_SizeDelta: {x: 731.6, y: 96.4}
   m_Pivot: {x: 0.5, y: 0.5}

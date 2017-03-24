@@ -21,10 +21,18 @@ namespace BlackFox
         public TMP_Text LevelText;
         LevelManager levelMNG;
 
+        private void OnEnable()
+        {
+            EventManager.OnLevelInit += UpdateLevelInformation;
+        }
 
         private void Start()
         {
             levelMNG = FindObjectOfType<LevelManager>();
+        }
+
+        void UpdateLevelInformation()
+        {
             LevelText.text = "Level: " + levelMNG.lelvelNumber + "/" + "Round: " + levelMNG.roundNumber;
         }
 

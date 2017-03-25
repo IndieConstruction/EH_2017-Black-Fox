@@ -34,7 +34,7 @@ namespace BlackFox {
             Transform anchorTransform = null;
             foreach (var item in _target.GetComponentsInChildren<ConfigurableJoint>())
             {
-                if (item.gameObject.layer == 8) //Search for the Rope (layer 8) AnchorPoint
+                if (item.connectedBody == null) //Search for the Rope
                 {
                     anchorTransform = item.transform;
                     break;

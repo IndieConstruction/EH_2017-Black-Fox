@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4491539703064590}
   - component: {fileID: 114827729656697368}
   m_Layer: 0
-  m_Name: RopeManager 1
+  m_Name: RopeManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

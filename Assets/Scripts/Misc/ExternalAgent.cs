@@ -7,10 +7,9 @@ namespace BlackFox
 {
     public class ExternalAgent : MonoBehaviour, IDamageable
     {
-
         Transform target;
         public float life = 10;
-        public float velocity = 6000;
+        public float velocity = 5;
         public float damage = 1;
 
         List<IDamageable> damageablesList;

@@ -33,6 +33,7 @@ namespace BlackFox
         PlacePin pinPlacer;
         Shooter shooter;
         RopeController rope;
+        GameUIController UIController;
 
         public float fireRate;                                                   // rateo di fuoco in secondi
         float nextFire;
@@ -44,6 +45,7 @@ namespace BlackFox
             rope = SearchRope();
             pinPlacer = GetComponent<PlacePin>();
             shooter = GetComponent<Shooter>();
+            UIController = FindObjectOfType<GameUIController>();
             shooter.playerIndex = this.playerIndex;
             LoadIDamageablePrefab();
         }
@@ -54,18 +56,18 @@ namespace BlackFox
             XInputReader();
         }
 
-        private void OnEnable()
+        void OnEnable()
         {
             EventManager.OnLevelInit += HandleOnLevelInit;
-            EventManager.OnLevelPlay += HandleOnLevelPlay;
-            EventManager.OnLevelEnd += HandleOnLevelEnd;
+            EventManager.OnRoundPlay += HandleOnLevelPlay;
+            EventManager.OnRoundEnd += HandleOnLevelEnd;
         }
 
-        private void OnDisable()
+        void OnDisable()
         {
             EventManager.OnLevelInit -= HandleOnLevelInit;
-            EventManager.OnLevelPlay -= HandleOnLevelPlay;
-            EventManager.OnLevelEnd -= HandleOnLevelEnd;
+            EventManager.OnRoundPlay -= HandleOnLevelPlay;
+            EventManager.OnRoundEnd -= HandleOnLevelEnd;
         }
 
         #region Event Handler
@@ -87,7 +89,7 @@ namespace BlackFox
         /// <summary>
         /// Salva all'interno della lista di oggetti IDamageable, gli oggetti facenti parti della lista DamageablesPrefabs
         /// </summary>
-        private void LoadIDamageablePrefab()
+        void LoadIDamageablePrefab()
         { 
             List<GameObject> DamageablesPrefabs = PrefabUtily.LoadAllPrefabsWithComponentOfType<IDamageable>("Prefabs", gameObject);
 
@@ -98,6 +100,23 @@ namespace BlackFox
             }
         }
 
+        void EnableComponents(bool _value)
+        {
+            GetComponent<Collider>().enabled = _value;
+            GetComponent<Shooter>().enabled = _value;
+            GetComponent<PlacePin>().enabled = _value;
+            GetComponent<MovementController>().enabled = _value;
+        }
+
+        /// <summary>
+        /// Aggiorna la quantità di proiettili disponibili nel CanvasGame
+        /// </summary>
+        void SetAmmoInTheUI()
+        {
+            if (UIController != null)
+                UIController.SetBulletsValue(playerIndex, shooter.ammo);
+        }
+
         #region API
         /// <summary>
         /// Chiama la funzione AddAmmo di shooter
@@ -105,6 +124,7 @@ namespace BlackFox
         public void AddShooterAmmo()
         {
             shooter.AddAmmo();
+            SetAmmoInTheUI();
         }
 
         /// <summary>
@@ -142,12 +162,14 @@ namespace BlackFox
             {
                 nextFire = Time.time + fireRate;
                 Shoot();
+                
             }
 
             if (Input.GetButton(string.Concat("Key" + (int)playerIndex + "_Fire")) && Time.time > nextFire)       // shoot at certain rate
             {
                 nextFire = Time.time + fireRate;
                 Shoot();
+                
             }
 
             Rotate(Input.GetAxis(string.Concat("Key" + (int)playerIndex + "_Horizonatal")));  // Ruota l'agente
@@ -225,27 +247,23 @@ namespace BlackFox
         public void Damage(float _damage, GameObject _attacker)
         {
             Life -= _damage;
-
+            transform.DOScale(Vector3.one, 0.25f);
+            transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f);
             if (Life < 1)
             {
                 if (EventManager.OnAgentKilled != null)
                 {
                     if (_attacker.GetComponent<Agent>() != null)
                         EventManager.OnAgentKilled(_attacker.GetComponent<Agent>(), this);
+                    else
+                        EventManager.OnAgentKilled(null, this);
                 }
-                else
-                {
-                    EventManager.OnAgentKilled(null, this);
-                }
-                
+                EnableComponents(false);
                 transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject); });
                 
                 return;
             }
-            transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f);
         }
-
-
         #endregion
 
         #endregion
@@ -262,6 +280,7 @@ namespace BlackFox
 
         void Shoot() {
             shooter.ShootBullet();
+            SetAmmoInTheUI();
         }
 
         void PlacePin(bool _isRight) {

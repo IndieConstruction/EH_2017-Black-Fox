@@ -6,7 +6,6 @@ namespace BlackFox
 {
     public class Projectile : MonoBehaviour
     {
-
         IShooter owner;
         float damage = 1;
 
@@ -17,8 +16,8 @@ namespace BlackFox
                 if (owner.GetOwner() == other.gameObject.GetComponent<IShooter>().GetOwner())
                     return;
 
-            //Se collide con un perno si distrugge
-            if (other.gameObject.layer == 8)
+            //Se collide con un perno o con i muri si distrugge
+            if (other.gameObject.tag == "Pin" || other.gameObject.tag == "Wall")
                 Destroy(gameObject);
 
             // Controlla se l'oggetto con cui ha colliso ha l'interfaccia IDamageable e salva un riferimento di tale interfaccia           

@@ -8,7 +8,7 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("RoundEndState");
-            EventManager.OnLevelEnd();
+            EventManager.OnRoundEnd();
             ClearArena();
         }
 
@@ -16,6 +16,18 @@ namespace BlackFox
         {
             if (OnStateEnd != null)
                 OnStateEnd();
+        }
+
+        void ClearArena()
+        {
+            ClearAgent();
+            ClearExternalAgent();
+            GameObject[] pins = GameObject.FindGameObjectsWithTag("Pin");
+
+            foreach (GameObject pin in pins)
+            {
+                GameObject.Destroy(pin);
+            }
         }
 
         void ClearAgent()
@@ -28,14 +40,13 @@ namespace BlackFox
             }
         }
 
-        void ClearArena()
+        void ClearExternalAgent()
         {
-            ClearAgent();
-            GameObject[] pins = GameObject.FindGameObjectsWithTag("Pin");
+            ExternalAgent[] agents = GameObject.FindObjectsOfType<ExternalAgent>();
 
-            foreach (GameObject pin in pins)
+            foreach (ExternalAgent extAgent in agents)
             {
-                GameObject.Destroy(pin);
+                GameObject.Destroy(extAgent.gameObject);
             }
         }
     }

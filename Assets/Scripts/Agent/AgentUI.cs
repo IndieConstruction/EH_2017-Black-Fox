@@ -8,7 +8,7 @@ namespace BlackFox {
     public class AgentUI : MonoBehaviour {
 
         public Image Ring;
-        public Text BulletCount;
+        //public Text BulletCount;
         public Text KillPoint;
         
         Agent agent;
@@ -27,7 +27,7 @@ namespace BlackFox {
 
         // Update is called once per frame
         void Update() {
-            UpdateAmmoUI();
+            //UpdateAmmoUI();
         }
 
         private void OnEnable() {
@@ -35,11 +35,11 @@ namespace BlackFox {
             EventManager.OnPointsUpdate += SetKillPointUI;
         }
 
-        void UpdateAmmoUI()
-        {
-            if (BulletCount != null)
-                BulletCount.text = agent.GetShooterReference().ammo.ToString();
-        }
+        //void UpdateAmmoUI()
+        //{
+        //    if (BulletCount != null)
+        //        BulletCount.text = agent.GetShooterReference().ammo.ToString();
+        //}
 
         void OnDataChange(Agent _agent) {
             // Aggiorno la UI

@@ -7,6 +7,8 @@ namespace BlackFox {
     {
         int roundNumber;
         int lelvelNumber;
+        // TODO : creare set up parametri
+        public int MaxRound;
 
         private void Start()
         {
@@ -28,7 +30,7 @@ namespace BlackFox {
             else if ("BlackFox.RoundEndState" == CurrentState.StateName)
             {
                 // RoundEndState
-                if (roundNumber <= 4)
+                if (roundNumber <= MaxRound)
                 {
                     CurrentState = new UpgradeMenuState();
                 }

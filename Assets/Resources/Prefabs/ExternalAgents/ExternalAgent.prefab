@@ -37,7 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4064894371449198}
   - component: {fileID: 54103902610368144}
-  - component: {fileID: 64311450676380666}
+  - component: {fileID: 136784866637393866}
   - component: {fileID: 114619042312067462}
   m_Layer: 0
   m_Name: ExternalAgent
@@ -118,7 +118,7 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1770622005852106}
   serializedVersion: 2
-  m_Mass: 1000
+  m_Mass: 10
   m_Drag: 0
   m_AngularDrag: 0
   m_UseGravity: 1
@@ -126,20 +126,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
---- !u!64 &64311450676380666
-MeshCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1770622005852106}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Convex: 1
-  m_InflateMesh: 0
-  m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: 81fcb9ef590aa694ca3d94db26ba9313, type: 3}
 --- !u!114 &114619042312067462
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -154,3 +140,16 @@ MonoBehaviour:
   life: 10
   velocity: 5
   damage: 1
+--- !u!136 &136784866637393866
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1770622005852106}
+  m_Material: {fileID: 13400000, guid: ae390597466269f43a45d1a38f8f55ba, type: 2}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 3
+  m_Height: 11
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -0.7}

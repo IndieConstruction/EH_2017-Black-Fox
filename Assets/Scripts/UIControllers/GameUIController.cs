@@ -3,71 +3,63 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using XInputDotNetPure;
+using TMPro;
 
 namespace BlackFox
 {
     public class GameUIController : MonoBehaviour
     {
 
-        public Slider SliderPlayer1;
         public Text Player1BulletCount;
-        public Slider SliderPlayer2;
         public Text Player2BulletCount;
-        public Slider SliderPlayer3;
         public Text Player3BulletCount;
-        public Slider SliderPlayer4;
         public Text Player4BulletCount;
-        public Slider CoreSlider;
         public Image WindDisplay;
         public Text TextWindDisplay;
         public Slider ElementZeroSlider;
 
+        public TMP_Text LevelText;
+        LevelManager levelMNG;
 
-
-        public void SetSliderValue(PlayerIndex _playerIndex, float _life)
+        private void OnEnable()
         {
-            if (_playerIndex == PlayerIndex.One)
-            {
-                SliderPlayer1.value = _life / 10;
-            }
-            else if (_playerIndex == PlayerIndex.Two)
-            {
-                SliderPlayer2.value = _life / 10;
-            }
-            else if (_playerIndex == PlayerIndex.Three)
-            {
-                SliderPlayer3.value = _life / 10;
-            }
-            else if (_playerIndex == PlayerIndex.Four)
-            {
-                SliderPlayer4.value = _life / 10;
-            }
+            EventManager.OnLevelInit += UpdateLevelInformation;
         }
 
+        private void Start()
+        {
+            levelMNG = FindObjectOfType<LevelManager>();
+        }
+
+        void UpdateLevelInformation()
+        {
+            LevelText.text = "Level: " + levelMNG.lelvelNumber + "/" + "Round: " + levelMNG.roundNumber;
+        }
+
+        #region API
         public void SetBulletsValue(PlayerIndex _playerIndex, int _remainigAmmo)
         {
-            if (_playerIndex == PlayerIndex.One)
+            switch (_playerIndex)   
             {
-                Player1BulletCount.text = _remainigAmmo.ToString();
-            }
-            else if (_playerIndex == PlayerIndex.Two)
-            {
-                Player2BulletCount.text = _remainigAmmo.ToString();
-            }
-            else if (_playerIndex == PlayerIndex.Three)
-            {
-                Player3BulletCount.text = _remainigAmmo.ToString();
-            }
-            else if (_playerIndex == PlayerIndex.Four)
-            {
-                Player4BulletCount.text = _remainigAmmo.ToString();
+                case PlayerIndex.One:
+                    Player1BulletCount.text = _remainigAmmo.ToString();
+                    break;
+                case PlayerIndex.Two:
+                    Player2BulletCount.text = _remainigAmmo.ToString();
+                    break;
+                case PlayerIndex.Three:
+                    Player3BulletCount.text = _remainigAmmo.ToString();
+                    break;
+                case PlayerIndex.Four:
+                    Player4BulletCount.text = _remainigAmmo.ToString();
+                    break;
+                default:
+                    break;
             }
         }
 
-        public void SetCoreSliderValue(float _life, float _maxLife)
-        {
-            CoreSlider.value = _life / _maxLife;                  // Da rivedere se il valore della vita cambia
-        }
+        
+                   
 
         public void SetElementZeroSlider(float _life, float _maxLife)
         {
@@ -79,5 +71,7 @@ namespace BlackFox
             WindDisplay.gameObject.SetActive(true);
             TextWindDisplay.text = "Player" + _playerIndex + " Ha vinto! ";
         }
+
+        #endregion 
     }
 }

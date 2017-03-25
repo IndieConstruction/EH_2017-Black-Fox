@@ -27,7 +27,7 @@ namespace BlackFox {
 
         void UnloadArena()
         {
-            GameObject.Destroy(GameObject.Find("Level" + levelNumber  + "(Clone)"));
+            GameObject.Destroy(GameObject.FindObjectOfType<LevelManager>().transform.parent.gameObject, 0.1f);
         }
     }
 }

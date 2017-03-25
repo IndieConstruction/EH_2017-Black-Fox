@@ -4,12 +4,11 @@ using System.Collections.Generic;
 
 namespace Rope
 {
-    [RequireComponent (typeof(LineRenderer),(typeof(ConfigurableJoint)))]
+    [RequireComponent (typeof(LineRenderer),typeof(ConfigurableJoint))]
     public class RopeController : MonoBehaviour
     {
         public GameObject FragmentPrefab;
-        public Transform TailAnchorPoint;
-        public Transform HeadAnchorPoint;
+        public Transform AnchorPoint;
         public int MaxLength = 80;
         [Range(.0f, 1f)]
         public float DensityOfFragments = .1f;
@@ -21,11 +20,6 @@ namespace Rope
 
         float fragmentDistance;
 
-        private void Awake()
-        {
-            transform.position = HeadAnchorPoint.position;
-            GetComponent<ConfigurableJoint>().connectedBody = HeadAnchorPoint.GetComponent<Rigidbody>();
-        }
         void Start()
         {
             lineRend = GetComponent<LineRenderer>();
@@ -34,22 +28,13 @@ namespace Rope
             BuildRope(gameObject);
         }
 
-        private void FixedUpdate()
-        {
-            //Qui per debug. Cancellerare una volta funzionante
-            /*
-            if (Input.GetKeyDown(KeyCode.Space) && fragments.Count < MaxLength)
-                ExtendRope();
-                */
-        }
-
         private void LateUpdate()
         {
             for (int i = 0; i < fragments.Count; i++)
             {
                 lineRend.SetPosition(i, fragments[i].transform.position);
             }
-            lineRend.SetPosition(fragments.Count, TailAnchorPoint.position);
+            lineRend.SetPosition(fragments.Count, AnchorPoint.position);
         }
 
         /// <summary>
@@ -65,6 +50,10 @@ namespace Rope
             //Relative position of newPieces to previouses
             offSet = GetOffSet(_lastPiece.transform);
 
+            //Prevent to extend the rope over MaxLength
+            if (fragments.Count >= MaxLength)
+                return;
+
             //Keep building the rope until the AnchorPoint ore the MaxLength are reached
             for (int i = fragments.Count; i < MaxLength; i++)
             {
@@ -77,18 +66,18 @@ namespace Rope
                 //Collider configuration
                 collider = newFragment.GetComponentInChildren<CapsuleCollider>();
                 collider.radius = ropeWidth / 2;
-                collider.center = Vector3.forward * fragmentDistance / 2;
                 collider.height = fragmentDistance + collider.radius;
+                collider.center = Vector3.forward * collider.height/2;
                 collider.GetComponent<RopeForcedLook>().Target = fragments[i - 1];
                 //Joint Configuration
                 joint = newFragment.GetComponent<ConfigurableJoint>();
                 joint.connectedBody = fragments[i - 1].GetComponent<Rigidbody>();
                 joint.autoConfigureConnectedAnchor = false;
-                joint.connectedAnchor = offSet;
+                joint.connectedAnchor = offSet * 0.9f;
                 //Is the AnchroPoint closer than the offSet? If so stop building the rope
-                if (Vector3.Distance(position, TailAnchorPoint.position) <= fragmentDistance)
+                if (Vector3.Distance(position, AnchorPoint.position) <= fragmentDistance)
                 {
-                    joint = TailAnchorPoint.GetComponent<ConfigurableJoint>();
+                    joint = AnchorPoint.GetComponent<ConfigurableJoint>();
                     joint.connectedBody = newFragment.GetComponent<Rigidbody>();
                     joint.autoConfigureConnectedAnchor = false;
                     joint.connectedAnchor = offSet;
@@ -96,11 +85,11 @@ namespace Rope
                 }
             }
 
-            if (TailAnchorPoint.GetComponent<ConfigurableJoint>().connectedBody == null)
+            if (AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody == null)
             {
-                TailAnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = fragments[fragments.Count - 1].GetComponent<Rigidbody>();
-                Debug.Log("WARNING: MaxLength not enough to reach " + TailAnchorPoint.name + " in " + TailAnchorPoint.position);
-                int fragmentsNeeded = (int)(Vector3.Distance(TailAnchorPoint.position, fragments[fragments.Count - 1].transform.position) / offSet.magnitude);
+                AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = fragments[fragments.Count - 1].GetComponent<Rigidbody>();
+                Debug.Log("WARNING: MaxLength not enough to reach " + AnchorPoint.name + " in " + AnchorPoint.position);
+                int fragmentsNeeded = (int)(Vector3.Distance(AnchorPoint.position, fragments[fragments.Count - 1].transform.position) / offSet.magnitude);
                 Debug.Log(fragmentsNeeded + MaxLength + " needed");
             }
             lineRend.numPositions = (fragments.Count) + 1;
@@ -114,13 +103,13 @@ namespace Rope
         Vector3 GetOffSet(Transform _origin)
         {
             //GetDirection
-            Vector3 dir = TailAnchorPoint.position - _origin.position;
+            Vector3 dir = AnchorPoint.position - _origin.position;
             dir = dir.normalized;
 
             if (fragments.Count <= 1)
             {
                 //Measure OffSet magnitude only if first time run of this method
-                fragmentDistance = Vector3.Distance(TailAnchorPoint.position, _origin.position) / DensityOfFragments / 100;
+                fragmentDistance = Vector3.Distance(AnchorPoint.position, _origin.position) / DensityOfFragments / 100;
             }
             return dir * fragmentDistance;
         }
@@ -131,10 +120,7 @@ namespace Rope
         /// </summary>
         public void ExtendRope()
         {
-            //Prevent to extend the rope over MaxLength
-            if (fragments.Count >= MaxLength)
-                return;
-            TailAnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = null;
+            AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = null;
             BuildRope(fragments[fragments.Count - 1]);
         }
         #endregion

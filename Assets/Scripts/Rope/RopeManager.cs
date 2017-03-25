@@ -11,7 +11,7 @@ namespace BlackFox {
 
         private void HandleOnAgentSpawn(Agent _agent)
         {
-            AttachNewRope(_agent.transform.parent.gameObject);
+            AttachNewRope(_agent);
         }
 
         private void OnEnable()
@@ -22,33 +22,23 @@ namespace BlackFox {
         {
             EventManager.OnAgentSpawn -= HandleOnAgentSpawn;
         }
-        #region API
+
+    #region API
         /// <summary>
         /// Create a new Rope and attach it to _target(parameter)
         /// </summary>
         /// <param name="_target"></param>
-        public void AttachNewRope(GameObject _target)
+        public void AttachNewRope(Agent _target)
         {
             GameObject newOrigin;
-            Agent trgAgent = _target.GetComponentInChildren<Agent>();
-            Transform anchorTransform = null;
-            foreach (var item in _target.GetComponentsInChildren<ConfigurableJoint>())
-            {
-                if (item.connectedBody == null) //Search for the Rope
-                {
-                    anchorTransform = item.transform;
-                    Debug.Log(item.name);
-                    break;
-                }
-            }
             
             newOrigin = Instantiate(RopeOrigin, transform);
-            newOrigin.name = trgAgent.playerIndex + "Rope";
+            newOrigin.name = _target.playerIndex + "Rope";
             //Set the AnchorPoint before the activation of the component
-            newOrigin.GetComponent<RopeController>().AnchorPoint = anchorTransform;
-            newOrigin.GetComponent<RopeController>().enabled = true;
+            newOrigin.GetComponent<RopeController>().AnchorPoint = _target.GetComponent<ConfigurableJoint>().connectedBody.transform;
+            newOrigin.GetComponent<RopeController>().InitRope();
 
-            ropes.Add(newOrigin);
+            ropes.Add(newOrigin);            
         }
         /// <summary>
         /// Find the Rope attached to _target and destroy it

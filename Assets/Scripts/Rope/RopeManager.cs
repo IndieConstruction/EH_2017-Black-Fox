@@ -37,6 +37,7 @@ namespace BlackFox {
                 if (item.connectedBody == null) //Search for the Rope
                 {
                     anchorTransform = item.transform;
+                    Debug.Log(item.name);
                     break;
                 }
             }

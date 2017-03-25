@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 54729885661318166}
   - component: {fileID: 153254480655928576}
   m_Layer: 8
-  m_Name: RopeAnchorPurple
+  m_Name: RopeAnchorRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

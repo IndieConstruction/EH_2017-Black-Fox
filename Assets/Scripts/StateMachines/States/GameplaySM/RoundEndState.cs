@@ -1,10 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+
 namespace BlackFox
 {
     public class RoundEndState : StateBase
     {
+
+        public EndLevelUI OnEndLevelUI;
+
+
         public override void OnStart()
         {
             Debug.Log("RoundEndState");
@@ -14,9 +20,10 @@ namespace BlackFox
 
         public override void OnUpdate()
         {
-            if (OnStateEnd != null)
-                OnStateEnd();
+            
         }
+
+
 
         void ClearArena()
         {

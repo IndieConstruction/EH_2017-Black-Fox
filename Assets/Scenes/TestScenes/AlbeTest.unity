@@ -134,6 +134,26 @@ Prefab:
       propertyPath: m_Name
       value: RopeManager
       objectReference: {fileID: 0}
+    - target: {fileID: 114827729656697368, guid: 0794285e6c4bb864fa11d1f9f452b63a,
+        type: 2}
+      propertyPath: RopeColors.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b455c3223858069469d41b33d4033245, type: 2}
+    - target: {fileID: 114827729656697368, guid: 0794285e6c4bb864fa11d1f9f452b63a,
+        type: 2}
+      propertyPath: RopeColors.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 29df54d6c83797d48a9192516c6f576b, type: 2}
+    - target: {fileID: 114827729656697368, guid: 0794285e6c4bb864fa11d1f9f452b63a,
+        type: 2}
+      propertyPath: RopeColors.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 6c2149cec69229845a1342714b62f467, type: 2}
+    - target: {fileID: 114827729656697368, guid: 0794285e6c4bb864fa11d1f9f452b63a,
+        type: 2}
+      propertyPath: RopeColors.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 78e14e1d14f1a444fb182ccbb0c979ad, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0794285e6c4bb864fa11d1f9f452b63a, type: 2}
   m_IsPrefabParent: 0

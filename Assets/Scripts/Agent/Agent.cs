@@ -14,15 +14,18 @@ namespace BlackFox
         public float maxLife = 10;
         private float _life = 10;
 
-        public float Life {
+        public float Life
+        {
             get { return _life; }
-            private set { _life = value;
+            private set
+            {
+                _life = value;
                 if (OnDataChange != null)  
                     OnDataChange(this);
             }
         }
 
-        // Variabili per il funzionamento dei controller e della tastiera
+        // Variabili per il funzionamento dei controller
         GamePadState state;
         GamePadState prevState;
         public PlayerIndex playerIndex;
@@ -259,8 +262,7 @@ namespace BlackFox
                         EventManager.OnAgentKilled(null, this);
                 }
                 EnableComponents(false);
-                transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject); });
-                
+                transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject); });              
                 return;
             }
         }

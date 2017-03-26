@@ -25,8 +25,7 @@ namespace BlackFox {
         /// <param name="_victim"></param>
         private void HandleOnAgentKilled(Agent _killer, Agent _victim)
         {
-            if(_killer != null)
-                DestroyRope(_victim);
+            DestroyRope(_victim);
         }
 
         /// <summary>

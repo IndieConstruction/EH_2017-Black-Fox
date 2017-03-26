@@ -123,7 +123,8 @@ namespace BlackFox
                         if (agentsPrefb[i].GetComponentInChildren<Agent>().playerIndex == _playerIndx)
                         {
                             GameObject newAgent = Instantiate(agentsPrefb[i], spawn.SpawnPosition.position, spawn.SpawnPosition.rotation);
-                            EventManager.OnAgentSpawn(newAgent.GetComponentInChildren<Agent>());
+                            if(EventManager.OnAgentSpawn != null)
+                                EventManager.OnAgentSpawn(newAgent.GetComponentInChildren<Agent>());
                             return;
                         }
                     }

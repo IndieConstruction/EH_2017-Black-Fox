@@ -25,16 +25,30 @@ namespace BlackFox {
         /// <param name="_victim"></param>
         private void HandleOnAgentKilled(Agent _killer, Agent _victim)
         {
-            DestroyRope(_victim);
+            if(_killer != null)
+                DestroyRope(_victim);
+        }
+
+        /// <summary>
+        /// React to OnCoreDeath by destroying the rope attached to every player
+        /// </summary>
+        private void HandleOnCoreDeath()
+        {
+            foreach (GameObject rope in ropes)
+            {
+                Destroy(rope);
+            }
         }
 
         private void OnEnable()
         {
+            EventManager.OnCoreDeath += HandleOnCoreDeath;
             EventManager.OnAgentSpawn += HandleOnAgentSpawn;
             EventManager.OnAgentKilled += HandleOnAgentKilled;
         }
         private void OnDisable()
         {
+            EventManager.OnCoreDeath -= HandleOnCoreDeath;
             EventManager.OnAgentSpawn -= HandleOnAgentSpawn;
             EventManager.OnAgentKilled -= HandleOnAgentKilled;
         }

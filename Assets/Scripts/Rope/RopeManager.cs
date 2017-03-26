@@ -14,13 +14,20 @@ namespace BlackFox {
             AttachNewRope(_agent);
         }
 
+        private void HandleOnAgentKilled(Agent _killer, Agent _victim)
+        {
+            DestroyRope(_victim);
+        }
+
         private void OnEnable()
         {
             EventManager.OnAgentSpawn += HandleOnAgentSpawn;
+            EventManager.OnAgentKilled += HandleOnAgentKilled;
         }
         private void OnDisable()
         {
             EventManager.OnAgentSpawn -= HandleOnAgentSpawn;
+            EventManager.OnAgentKilled -= HandleOnAgentKilled;
         }
 
     #region API
@@ -44,9 +51,9 @@ namespace BlackFox {
         /// Find the Rope attached to _target and destroy it
         /// </summary>
         /// <param name="_target"></param>
-        public void DestroyRope(GameObject _target)
+        public void DestroyRope(Agent _target)
         {
-            string nameOfRope = _target.GetComponentInChildren<Agent>().playerIndex + "Rope";
+            string nameOfRope = _target.playerIndex + "Rope";
             foreach (GameObject gObj in ropes)
             {
                 if (gObj.name == nameOfRope)

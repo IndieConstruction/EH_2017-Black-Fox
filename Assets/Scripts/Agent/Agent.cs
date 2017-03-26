@@ -83,7 +83,7 @@ namespace BlackFox
         {
             foreach (RopeController rope in FindObjectsOfType<RopeController>())
             {
-                if (rope.name == "Rope" + playerIndex)
+                if (rope.name == playerIndex + "Rope")
                     return rope;
             }
             return null;
@@ -278,7 +278,8 @@ namespace BlackFox
 
         void GoForward(float _amount) {
             movment.Movement(_amount);
-            //ExtendRope(_amount);
+            //if(rope != null)
+            //    ExtendRope(_amount);
         }
 
         void Rotate(float _amount) {
@@ -286,10 +287,9 @@ namespace BlackFox
         }
 
         void ExtendRope(float _amount) {
-            ropeExtTimer += Time.deltaTime;
-            if (_amount >= 0.9f && ropeExtTimer >= 0.1f) {
+            //Debug.Log(GetComponent<Rigidbody>().velocity.magnitude);
+            if (_amount >= 0.9f && GetComponent<Rigidbody>().velocity.sqrMagnitude >= 2500) {
                 rope.ExtendRope();
-                ropeExtTimer = 0;
             }
         }
 

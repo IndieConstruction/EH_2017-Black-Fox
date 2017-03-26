@@ -99,6 +99,7 @@ namespace BlackFox {
                 if (gObj.name == nameOfRope)
                 {
                     Destroy(gObj);
+                    ropes.Remove(gObj);
                     break;
                 }                    
             }

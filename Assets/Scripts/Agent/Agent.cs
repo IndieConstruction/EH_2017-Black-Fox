@@ -103,14 +103,6 @@ namespace BlackFox
             }
         }
 
-        void EnableComponents(bool _value)
-        {
-            GetComponent<Collider>().enabled = _value;
-            GetComponent<Shooter>().enabled = _value;
-            GetComponent<PlacePin>().enabled = _value;
-            GetComponent<MovementController>().enabled = _value;
-        }
-
         /// <summary>
         /// Aggiorna la quantità di proiettili disponibili nel CanvasGame
         /// </summary>
@@ -255,13 +247,8 @@ namespace BlackFox
             if (Life < 1)
             {
                 if (EventManager.OnAgentKilled != null)
-                {
-                    if (_attacker.GetComponent<Agent>() != null)
-                        EventManager.OnAgentKilled(_attacker.GetComponent<Agent>(), this);
-                    else
-                        EventManager.OnAgentKilled(null, this);
-                }
-                EnableComponents(false);
+                    EventManager.OnAgentKilled(_attacker.GetComponent<Agent>(), this);
+            
                 transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject); });              
                 return;
             }

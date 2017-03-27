@@ -2,29 +2,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpamTurrentRound : MonoBehaviour
-{
-
-
-
-
-
-    //public float TurrentSpam;
-    public GameObject turrent;
-
-    // Instantiate the prefab somewhere between -10.0 and 10.0 on the x-z plane 
-    void Start()
+namespace BlackFox {
+    public class SpamTurrentRound : SpawnerBase 
     {
-        Vector3 position = new Vector3(Random.Range(-70.0f, 100.0f), 0, Random.Range(-100.0f, 100.0f));
-        Instantiate(turrent, position, Quaternion.identity);
-       
+
+        public GameObject turrent;
+        public int MaxSpawnTurrent = 4;
+        public int Spawnedturrent = 0;
+        Vector3 randomPosition;
+
+
+        // instanzia il prefab fra  -10.0 and 10.0 sul piano x-z  
+        protected override void OnActivation()
+        {
+
+            Vector3 randomPosition= new Vector3(Random.Range(-70.0f, 100.0f), 0, Random.Range(-100.0f, 100.0f));
+            Instantiate(turrent, randomPosition, Quaternion.identity);
+
+          }
+
+        protected override void OnRuntime()
+        {
+            if(Time.time <=0 && Spawnedturrent <= MaxSpawnTurrent)
+            {
+
+                if (Spawnedturrent == MaxSpawnTurrent)
+                {
+                    turrent = null;
+                }
+                else
+                {
+                    Spawnedturrent++;
+                }
+
+
+            }
+
+            
+
+
+
+
+
+        }
+
 
 
     }
-
-
-    
-
-
-
 }

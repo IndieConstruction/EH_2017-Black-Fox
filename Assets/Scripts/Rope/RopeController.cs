@@ -17,15 +17,17 @@ namespace Rope
         LineRenderer lineRend;
         float ropeWidth;
         Vector3 offSet;
-
         float fragmentDistance;
 
         void Start()
         {
-            lineRend = GetComponent<LineRenderer>();
-            ropeWidth = GetComponent<LineRenderer>().widthMultiplier;
-            fragments.Add(gameObject);
-            BuildRope(gameObject);
+            if(fragments.Count == 0)
+            {
+                lineRend = GetComponent<LineRenderer>();
+                ropeWidth = GetComponent<LineRenderer>().widthMultiplier;
+                fragments.Add(gameObject);
+                BuildRope(gameObject);
+            }            
         }
 
         private void LateUpdate()
@@ -122,6 +124,16 @@ namespace Rope
         {
             AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = null;
             BuildRope(fragments[fragments.Count - 1]);
+        }
+        /// <summary>
+        /// Initialize the Rope as first launch, preventing missconnection
+        /// </summary>
+        public void InitRope()
+        {
+            lineRend = GetComponent<LineRenderer>();
+            ropeWidth = GetComponent<LineRenderer>().widthMultiplier;
+            fragments.Add(gameObject);
+            BuildRope(gameObject);
         }
         #endregion
     }

@@ -44,7 +44,7 @@ namespace BlackFox {
                     TimerToInactivate = 5;
                     Life = MaxLife;
                 }
-                //Rimani fermo.
+               
             }
             
         }
@@ -80,12 +80,12 @@ namespace BlackFox {
         {
             if(ItemInRange.Count == 1)
             {
-                //Se c'è un solo giocatore nella mia area gli sparo
+               
                 CallShooter();
               }
             else
             {
-                // se ci sono più giocatori nella mi area sparo al più vicino
+               
                 foreach (GameObject item in ItemInRange)
                 {
                 

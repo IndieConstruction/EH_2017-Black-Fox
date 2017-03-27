@@ -55,5 +55,6 @@ namespace BlackFox
             Instantiate(Turret, InstacePosition, Quaternion.identity);
             Debug.Log("Istanzio");
         }
+
     }
 }

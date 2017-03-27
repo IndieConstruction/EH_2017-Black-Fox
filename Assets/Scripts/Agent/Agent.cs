@@ -273,7 +273,7 @@ namespace BlackFox
         }
 
         void PlacePin(bool _isRight) {
-            pinPlacer.placeThePin(this, _isRight);
+            pinPlacer.placeThePin(this,_isRight);
         }
 
         void GoForward(float _amount) {

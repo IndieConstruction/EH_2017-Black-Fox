@@ -6,56 +6,36 @@ namespace BlackFox {
 
     public class Turrent : MonoBehaviour,IDamageable,IShooter {
 
-        private Transform target;
-
-        public Transform spawner;
-        //public Agent player1, player2, player3, player4;
-        Agent[] Agents;
-
-        public Rigidbody Bullet;
-        public float maxDistance = 100.000f;
-        public float Force;
         public float MaxLife = 5;
         public float Life;
-        bool IsInactive;
         public float TimeShoot;
+
+        bool IsInactive;
         float Timer;
         float TimerToInactivate = 5;
-       
 
+        ShooterBase shooter;
 
+        List<GameObject> ItemInRange = new List<GameObject>();
         List<IDamageable> damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable
 
 
-        // Use this for initialization
-        void Start() {
+        void Start()
+        {
             IsInactive = false;
-            target = null;
             Timer = TimeShoot;
             Life = MaxLife;
-            FindPlayersTransfo();
             LoadIDamageablePrefab();
-            
+            shooter = GetComponent<ShooterBase>();
         }
 
-
-        // Update is called once per frame
-        void Update() {
+        void Update()
+        {
             if (IsInactive == false)
             {
-                if (target == null)
-                {
-                    ChooseTarget(Agents[0].GetComponent<Transform>());
-                    ChooseTarget(Agents[1].GetComponent<Transform>());
-                    ChooseTarget(Agents[2].GetComponent<Transform>());
-                    ChooseTarget(Agents[3].GetComponent<Transform>());
-                }
-
-                else
-                {
-                    FollowTarget();
-                }
-            } else
+                FollowTarget();
+            }
+            else
             {
                 TimerToInactivate -= Time.deltaTime;
                 if (TimerToInactivate <= 0)
@@ -68,20 +48,20 @@ namespace BlackFox {
             }
             
         }
-
-
-        void FindPlayersTransfo()
+        private void OnTriggerEnter(Collider other)
         {
-            Agents = FindObjectsOfType<Agent>();
+            if (other.gameObject.GetComponent<Agent>() != null)
+                ItemInRange.Add(other.gameObject);
         }
 
-        void ChooseTarget(Transform _player)
+        private void OnTriggerExit(Collider other)
         {
-            if (Vector3.Distance(transform.position, _player.position) < maxDistance && target == null)
-                target = _player;
-
+            foreach (GameObject item in ItemInRange)
+            {
+                if (item == other.gameObject)
+                    ItemInRange.Remove(item);
+            }
         }
-
 
         private void LoadIDamageablePrefab()
         {
@@ -98,28 +78,36 @@ namespace BlackFox {
 
         void FollowTarget()
         {
-            if (Vector3.Distance(target.position, transform.position) < maxDistance)
+            if(ItemInRange.Count == 1)
             {
-                Vector3 _target = new Vector3(target.position.x, 0f, target.position.z);
-                transform.LookAt(_target);
-                Timer -= Time.deltaTime;
-                if (Timer <= 0f)
-                {
-                    GetComponent<ShooterBase>().ShootBullet();
-                    
-                    Timer = TimeShoot;
-                }
-
-            }
+                //Se c'è un solo giocatore nella mia area gli sparo
+                CallShooter();
+              }
             else
             {
-                target = null;
-
+                // se ci sono più giocatori nella mi area sparo al più vicino
+                foreach (GameObject item in ItemInRange)
+                {
+                
+                }
             }
-
 
         }
 
+        void CallShooter()
+        {
+            Vector3 _target = new Vector3(ItemInRange[0].transform.position.x, 0f, ItemInRange[0].transform.position.z);
+            transform.LookAt(_target);
+            Timer -= Time.deltaTime;
+            if (Timer <= 0f)
+            {
+                shooter.ShootBullet();
+                Timer = TimeShoot;
+            }
+        }
+
+        #region Interfaces
+        #region IDamageable
         public void Damage(float _damage, GameObject _attacker)
         {
             Life -= _damage;
@@ -128,25 +116,18 @@ namespace BlackFox {
                 IsInactive = true;
             }
         }
-
+        #endregion
+        #region IShooter
         public List<IDamageable> GetDamageable()
         {
             return damageables;
         }
-
+         
         public GameObject GetOwner()
         {
             return gameObject;
         }
-
-
-
-
-
+        #endregion
+        #endregion
     }
-
-
-
-
-
 }

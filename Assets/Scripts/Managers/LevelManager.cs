@@ -14,7 +14,7 @@ namespace BlackFox
     {
         public int roundNumber = 1;
         public int MaxRound = 4;
-        public int lelvelNumber;
+        public int levelNumber;
 
         public int AddPoints = 1;
         public int SubPoints = 1;
@@ -39,16 +39,17 @@ namespace BlackFox
         /// <summary>
         /// Instance a preloaded SpawnManager
         /// </summary>
-        public SpawnerManager InstantiateSpawnerManager()
+        public void InstantiateSpawnerManager()
         {
-            return spawnerMng = Instantiate(SpawnerMngPrefab).GetComponent<SpawnerManager>();            
+            spawnerMng = Instantiate(SpawnerMngPrefab, transform).GetComponent<SpawnerManager>();
+            spawnerMng.Init(levelNumber, roundNumber);
         }
         /// <summary>
         /// Instance a preloaded RopeManager
         /// </summary>
-        public RopeManager InstantiateRopeManager()
+        public void InstantiateRopeManager()
         {
-            return ropeMng = Instantiate(RopeMngPrefab).GetComponent<RopeManager>();
+            ropeMng = Instantiate(RopeMngPrefab, transform).GetComponent<RopeManager>();
         }
 
         public int GetPlayerKillPoints(PlayerIndex _playerIndex)
@@ -203,7 +204,7 @@ namespace BlackFox
         void StartGameplaySM()
         {
             gameplaySM = gameObject.AddComponent<GameplaySM>();
-            gameplaySM.SetLevelNumber(lelvelNumber);
+            gameplaySM.SetLevelNumber(levelNumber);
             gameplaySM.SetMaxRoundNumber(MaxRound);
             gameplaySM.SetRoundNumber(roundNumber);
         }

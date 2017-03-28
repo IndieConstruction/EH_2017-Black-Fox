@@ -58,7 +58,7 @@ namespace BlackFox
         {
             levelManager = Instantiate(LevelManagerPrefab).GetComponent<LevelManager>();
             // TODO : modificare assegnazione del level number
-            levelManager.lelvelNumber = 1;
+            levelManager.levelNumber = 1;
         }
         #endregion
     }

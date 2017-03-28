@@ -28,7 +28,7 @@ namespace BlackFox
 
         void UpdateLevelInformation()
         {
-            LevelText.text = "Level: " + levelMNG.lelvelNumber + "/" + "Round: " + levelMNG.roundNumber;
+            LevelText.text = "Level: " + levelMNG.levelNumber + "/" + "Round: " + levelMNG.roundNumber;
         }
 
         #region API

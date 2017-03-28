@@ -30,8 +30,7 @@ namespace BlackFox
 
         void LoadManager()
         {
-            SpawnerManager spawnerManager = GameManager.Instance.levelManager.InstantiateSpawnerManager();
-            spawnerManager.Init(levelNumber, roundNumber);
+            GameManager.Instance.levelManager.InstantiateSpawnerManager();
             GameManager.Instance.levelManager.InstantiateRopeManager();
         }
 

@@ -11,7 +11,8 @@ namespace BlackFox {
 
         private void Start()
         {
-            CurrentState = new PreInitState(levelNumber, roundNumber);
+            Debug.Log("Start_GamePlatSM");
+            CurrentState = new PreInitState();
         }
 
         protected override void OnCurrentStateEnded()
@@ -28,7 +29,7 @@ namespace BlackFox {
             }
             else if ("BlackFox.PreStartState" == CurrentState.StateName)
             {
-                // LevelInitState
+                // PreStartState
                 CurrentState = new PlayState();
             }
             else if ("BlackFox.PlayState" == CurrentState.StateName)

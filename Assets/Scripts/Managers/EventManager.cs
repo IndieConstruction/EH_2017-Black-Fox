@@ -13,6 +13,7 @@ namespace BlackFox
         public static GamePlayEvent OnLevelInit;
         public static GamePlayEvent OnRoundPlay;
         public static GamePlayEvent OnRoundEnd;
+        public static GamePlayEvent OnPreStart;
         #endregion
 
         #region AgentSpawn

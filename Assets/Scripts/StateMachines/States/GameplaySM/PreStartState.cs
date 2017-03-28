@@ -9,6 +9,9 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("PreStartState");
+            // TODO : togliere if e capire perchè la chiamata all'evento è nulla
+            if(EventManager.OnPreStart != null)
+                EventManager.OnPreStart();
         }
 
         public override void OnUpdate()

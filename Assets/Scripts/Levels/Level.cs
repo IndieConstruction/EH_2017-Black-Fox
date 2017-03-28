@@ -9,6 +9,6 @@ namespace BlackFox {
         public int Order;
         public string LevelName;
         public GameObject ArenaPrefab;
-        //public List<SpawnerBase> Spawners = new List<SpawnerBase>();
+        public List<GameObject> LevelSpawners = new List<GameObject>();
     } 
 }

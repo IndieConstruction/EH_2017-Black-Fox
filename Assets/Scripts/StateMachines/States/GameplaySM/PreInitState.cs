@@ -6,19 +6,11 @@ namespace BlackFox
 {
     public class PreInitState : StateBase
     {
-        int levelNumber;
-        int roundNumber;
-
-        public PreInitState(int _levelNumber, int _roundNumber)
-        {
-            levelNumber = _levelNumber;
-            roundNumber = _roundNumber;
-        }
-
         public override void OnStart()
         {
             Debug.Log("PreInitState");
             LoadArena();
+            LoadManager();
         }
 
         public override void OnUpdate()
@@ -28,12 +20,20 @@ namespace BlackFox
         }
 
         /// <summary>
-        /// Istanzia il prefab del livello
+        /// Chiama la funzione del level manager che istanzia i manager degli elementi principali del livello
+        /// </summary>
+        void LoadManager()
+        {
+            GameManager.Instance.levelManager.InstantiateSpawnerManager();
+            GameManager.Instance.levelManager.InstantiateRopeManager();
+        }
+
+        /// <summary>
+        /// Chiama la funzione del level manager che istanzia l'arena
         /// </summary>
         void LoadArena()
         {
-            //GameObject.Instantiate(Resources.Load("Prefabs/Levels/Level" + levelNumber));
-            GameObject.Instantiate(Resources.Load("Prefabs/Levels/Level1withRopes"), GameManager.Instance.levelManager.transform);
+            GameManager.Instance.levelManager.InstantiateLevel();
         }
     }
 }

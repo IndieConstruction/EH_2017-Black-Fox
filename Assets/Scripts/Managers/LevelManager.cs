@@ -34,10 +34,16 @@ namespace BlackFox
         }
 
         #region API
+        /// <summary>
+        /// Instance a preloaded SpawnManager
+        /// </summary>
         public void InstantiateSpawnerManager()
         {
             spawnerMng = Instantiate(SpawnerMngPrefab).GetComponent<SpawnerManager>();            
         }
+        /// <summary>
+        /// Instance a preloaded RopeManager
+        /// </summary>
         public void InstantiateRopeManager()
         {
             ropeMng = Instantiate(RopeMngPrefab).GetComponent<RopeManager>();
@@ -105,11 +111,7 @@ namespace BlackFox
             EventManager.OnPlayerWinnig();
         }
         
-        void HandleOnCoreDeath()
-        {
-            ClearKillPoints();
-            spawnerMng.ReInitLevel();
-        }
+        
 
         void ClearKillPoints()
         {
@@ -143,6 +145,16 @@ namespace BlackFox
             {
                 EventManager.OnPointsUpdate();
             }
+            //Reaction of the RopeManager to the OnAgentKilled event
+            ropeMng.ReactToOnAgentKilled(_victim);
+        }
+
+        void HandleOnCoreDeath()
+        {
+            ClearKillPoints();
+            spawnerMng.ReInitLevel();
+            //Reaction of the RopeManager to the OnCoreDeath event
+            ropeMng.ReactToOnCoreDeath();
         }
 
         void HandleOnLevelInit()

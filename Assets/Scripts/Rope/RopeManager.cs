@@ -14,7 +14,7 @@ namespace BlackFox {
         /// React to OnAgentSpawn by building and connectig to it a new rope
         /// </summary>
         /// <param name="_agent"></param>
-        private void HandleOnAgentSpawn(Agent _agent)
+        public void ReactToOnAgentSpawn(Agent _agent)
         {
             AttachNewRope(_agent);
         }
@@ -23,15 +23,14 @@ namespace BlackFox {
         /// </summary>
         /// <param name="_killer"></param>
         /// <param name="_victim"></param>
-        private void HandleOnAgentKilled(Agent _killer, Agent _victim)
+        public void ReactToOnAgentKilled(Agent _victim)
         {
             DestroyRope(_victim);
         }
-
         /// <summary>
         /// React to OnCoreDeath by destroying the rope attached to every player
         /// </summary>
-        private void HandleOnCoreDeath()
+        public void ReactToOnCoreDeath()
         {
             foreach (GameObject rope in ropes)
             {

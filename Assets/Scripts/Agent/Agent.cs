@@ -42,8 +42,13 @@ namespace BlackFox
         float nextFire;
         float ropeExtTimer;
 
+        //Variabili per gestire la fisca della corda
+        Rigidbody rigid;
+        Vector3 previousSpeed;
+
         void Start()
         {
+            rigid = GetComponent<Rigidbody>();
             movment = GetComponent<MovementController>();
             rope = SearchRope();
             pinPlacer = GetComponent<PlacePin>();
@@ -278,19 +283,19 @@ namespace BlackFox
 
         void GoForward(float _amount) {
             movment.Movement(_amount);
-            //if(rope != null)
-            //    ExtendRope(_amount);
+            if(rope != null)
+                ExtendRope(_amount);
         }
 
         void Rotate(float _amount) {
             movment.Rotation(_amount);
         }
 
-        void ExtendRope(float _amount) {
-            //Debug.Log(GetComponent<Rigidbody>().velocity.magnitude);
-            if (_amount >= 0.9f && GetComponent<Rigidbody>().velocity.sqrMagnitude >= 2500) {
+        void ExtendRope(float _amount) {;
+            if ( _amount >= .9f && previousSpeed.sqrMagnitude >= rigid.velocity.sqrMagnitude) {
                 rope.ExtendRope();
             }
+            previousSpeed = rigid.velocity;
         }
 
         #endregion

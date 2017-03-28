@@ -52,10 +52,6 @@ namespace Rope
             //Relative position of newPieces to previouses
             offSet = GetOffSet(_lastPiece.transform);
 
-            //Prevent to extend the rope over MaxLength
-            if (fragments.Count >= MaxLength)
-                return;
-
             //Keep building the rope until the AnchorPoint ore the MaxLength are reached
             for (int i = fragments.Count; i < MaxLength; i++)
             {
@@ -122,6 +118,11 @@ namespace Rope
         /// </summary>
         public void ExtendRope()
         {
+
+            //Prevent to extend the rope over MaxLength
+            if (fragments.Count >= MaxLength)
+                return;
+
             AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = null;
             BuildRope(fragments[fragments.Count - 1]);
         }

@@ -11,10 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd0ef9c4d75af4b4fb57fa39733f9fec, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  Order: 1
-  LevelName: Level1
+  Order: 0
+  LevelName: 
   ArenaPrefab: {fileID: 1590692792633676, guid: 7ea2bcd6e0fcc5341a5f7624e386a912,
     type: 2}
   LevelSpawners:
-  - {fileID: 114943939540291824, guid: 0ff4a992816176340b31bf27c66057d5, type: 2}
-  - {fileID: 114262236362026520, guid: 6389b3edb560e9741a9f9965a3fdc63f, type: 2}
+  - {fileID: 1908843494005796, guid: 0ff4a992816176340b31bf27c66057d5, type: 2}
+  - {fileID: 1637366666661558, guid: 6389b3edb560e9741a9f9965a3fdc63f, type: 2}

@@ -20,6 +20,9 @@ namespace BlackFox
         public int SubPoints = 1;
         public int pointsToWin = 5;
 
+        public GameObject SpawnerMngPrefab;
+        public GameObject RopeMngPrefab;
+
         GameplaySM gameplaySM;
         public SpawnerManager spawnerMng;
         public RopeManager ropeMng;
@@ -31,7 +34,14 @@ namespace BlackFox
         }
 
         #region API
-        
+        public void InstantiateSpawnerManager()
+        {
+            spawnerMng = Instantiate(SpawnerMngPrefab).GetComponent<SpawnerManager>();            
+        }
+        public void InstantiateRopeManager()
+        {
+            ropeMng = Instantiate(RopeMngPrefab).GetComponent<RopeManager>();
+        }
 
         public int GetPlayerKillPoints(PlayerIndex _playerIndex)
         {

@@ -9,8 +9,8 @@ namespace BlackFox
     /// </summary>
     public class SpawnerManager : MonoBehaviour
     {
-        public int Level;
-        public int Round;
+        int Level;
+        int Round;
         List<SpawnerBase> Spawners = new List<SpawnerBase>();
         //TODO: find a better way to organize SpawnerReferences
         private void Awake()
@@ -39,6 +39,11 @@ namespace BlackFox
         }
 
         #region API
+        public void Init(int _level, int _round)
+        {
+            Level = _level;
+            Round = _round;
+        }
         public void ReInitLevel()
         {
             foreach (var spawner in GetComponentsInChildren<SpawnerBase>())

@@ -25,9 +25,12 @@ namespace BlackFox {
                 OnStateEnd();
         }
 
+        /// <summary>
+        /// Distrugge il level manager che ha come figlo l'intero livello
+        /// </summary>
         void UnloadArena()
         {
-            GameObject.Destroy(GameObject.FindObjectOfType<LevelManager>().transform.parent.gameObject, 0.1f);
+            GameObject.Destroy(GameManager.Instance.levelManager.gameObject, 0.1f);
         }
     }
 }

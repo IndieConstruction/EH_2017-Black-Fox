@@ -6,18 +6,27 @@ namespace BlackFox {
     public class GameplaySM : StateMachineBase
     {
         int roundNumber;
-        int lelvelNumber;
-        // TODO : creare set up parametri
-        public int MaxRound;
+        int levelNumber;
+        int MaxRound;
 
         private void Start()
         {
-            CurrentState = new LevelInitState();
+            CurrentState = new PreInitState(levelNumber, roundNumber);
         }
 
         protected override void OnCurrentStateEnded()
         {
-            if ("BlackFox.LevelInitState" == CurrentState.StateName)
+            if ("BlackFox.PreInitState" == CurrentState.StateName)
+            {
+                // PreInitState
+                CurrentState = new LevelInitState();
+            }
+            else if ("BlackFox.LevelInitState" == CurrentState.StateName)
+            {
+                // LevelInitState
+                CurrentState = new PreStartState();
+            }
+            else if ("BlackFox.PreStartState" == CurrentState.StateName)
             {
                 // LevelInitState
                 CurrentState = new PlayState();
@@ -36,7 +45,7 @@ namespace BlackFox {
                 }
                 else
                 {
-                    CurrentState = new GameOverState(lelvelNumber);
+                    CurrentState = new GameOverState(levelNumber);
                 }
             }
             else if ("BlackFox.UpgradeMenuState" == CurrentState.StateName)
@@ -52,10 +61,21 @@ namespace BlackFox {
             }
         }
 
-        public void SetRoundAndLevelNumber(int _levelNumber, int _roundNumber)
+        #region API
+        public void SetRoundNumber(int _roundNumber)
         {
             roundNumber = _roundNumber;
-            lelvelNumber = _levelNumber;
         }
+
+        public void SetMaxRoundNumber(int _maxRoundNumber)
+        {
+            MaxRound = _maxRoundNumber;
+        }
+
+        public void SetLevelNumber(int _levelNumber)
+        {
+            levelNumber = _levelNumber;
+        }
+        #endregion
     }
 }

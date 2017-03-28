@@ -18,21 +18,11 @@ namespace BlackFox
             Debug.Log("GameplayState");
             StateMachineBase.OnMachineEnd += OnMachineEnd;
             GameManager.Instance.InstantiateLevelManager();
-            LoadArena();
         }
 
         public override void OnEnd()
         {
             StateMachineBase.OnMachineEnd -= OnMachineEnd;
-        }
-
-        /// <summary>
-        /// Istanzia il Livello
-        /// </summary>
-        void LoadArena()
-        {
-            //GameObject.Instantiate(Resources.Load("Prefabs/Levels/Level" + levelNumber));
-            GameObject.Instantiate(Resources.Load("Prefabs/Levels/Level1withRopes"));
         }
 
         void OnMachineEnd(string _machineName)

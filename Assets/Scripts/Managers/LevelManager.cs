@@ -59,7 +59,7 @@ namespace BlackFox
                 }
             }
             return -1;
-        }
+        }        
         #endregion
 
         #region KillPoint Count
@@ -106,7 +106,7 @@ namespace BlackFox
         void OnPlayerVictory()
         {
             roundNumber++;
-            gameplaySM.SetRoundAndLevelNumber(lelvelNumber, roundNumber);
+            gameplaySM.SetRoundNumber(roundNumber);
             ClearKillPoints();
             EventManager.OnPlayerWinnig();
         }
@@ -170,11 +170,25 @@ namespace BlackFox
         void StartGameplaySM()
         {
             gameplaySM = gameObject.AddComponent<GameplaySM>();
-            gameplaySM.MaxRound = this.MaxRound;
-            gameplaySM.SetRoundAndLevelNumber(lelvelNumber, roundNumber);
+            gameplaySM.SetLevelNumber(lelvelNumber);
+            gameplaySM.SetMaxRoundNumber(MaxRound);
+            gameplaySM.SetRoundNumber(roundNumber);
         }
 
         #endregion
+
+        /// <summary>
+        /// Pulisce l'arena dagli oggetti del round precedente
+        /// </summary>
+        void ClearArena()
+        {
+            GameObject[] pins = GameObject.FindGameObjectsWithTag("Pin");
+
+            foreach (GameObject pin in pins)
+            {
+                GameObject.Destroy(pin);
+            }
+        }
     }
 
     /// <summary>

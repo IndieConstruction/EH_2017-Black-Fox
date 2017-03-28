@@ -39,11 +39,19 @@ namespace BlackFox
         }
 
         #region API
+        /// <summary>
+        /// Init first time run
+        /// </summary>
+        /// <param name="_level"></param>
+        /// <param name="_round"></param>
         public void Init(int _level, int _round)
         {
             Level = _level;
             Round = _round;
         }
+        /// <summary>
+        /// ReInitialize at each round's restart
+        /// </summary>
         public void ReInitLevel()
         {
             foreach (var spawner in GetComponentsInChildren<SpawnerBase>())
@@ -54,6 +62,15 @@ namespace BlackFox
                     spawnAvatar.RespawnAllImmediate();
                 }
             }
+        }
+        /// <summary>
+        /// Respawn Agent on Death
+        /// </summary>
+        /// <param name="_killer"></param>
+        /// <param name="_victim"></param>
+        public void ReactToOnAgentKilled(Agent _killer, Agent _victim)
+        {
+
         }
         #endregion
 

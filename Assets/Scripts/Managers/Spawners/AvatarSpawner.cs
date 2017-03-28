@@ -54,8 +54,7 @@ namespace BlackFox
                 agentsPrefb = AvatarPrefabs;
             else
                 agentsPrefb = Resources.LoadAll<GameObject>("Prefabs/Agents");
-
-            EventManager.OnAgentKilled += HandleOnAgentKilled;
+            
             if (UseInitialPositionsAsSpawnPoints)
             {
                 foreach (Agent agent in FindObjectsOfType<Agent>())
@@ -78,11 +77,6 @@ namespace BlackFox
                 {
                     OriginalSpawns.Add(spwnPt);
                 }
-        }
-
-        protected override void OnDeactivation()
-        {
-            EventManager.OnAgentKilled -= HandleOnAgentKilled;
         }
         #endregion
 
@@ -133,24 +127,22 @@ namespace BlackFox
         }
 
         /// <summary>
+        /// Respawn Agent on Death
+        /// </summary>
+        /// <param name="_killer"></param>
+        /// <param name="_victim"></param>
+        public void ReactToOnAgentKilled(Agent _killer, Agent _victim)
+        {
+            RespawnAvatar(_victim.playerIndex);
+        }
+
+        /// <summary>
         /// Respawn after a fixed amount of time
         /// </summary>
         /// <param name="_playerIndx">Player to spawn</param>
         public void RespawnAvatar(PlayerIndex _playerIndx)
         {
             StartCoroutine("RespawnCooldown", _playerIndx);
-        }
-        #endregion
-
-        #region Event
-        /// <summary>
-        /// Respawn Agent on Death
-        /// </summary>
-        /// <param name="_killer"></param>
-        /// <param name="_victim"></param>
-        void HandleOnAgentKilled(Agent _killer, Agent _victim)
-        {
-            RespawnAvatar(_victim.playerIndex);
         }
         #endregion
 

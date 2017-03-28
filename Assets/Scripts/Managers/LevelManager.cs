@@ -68,7 +68,8 @@ namespace BlackFox
         {   new PlayerStats(PlayerIndex.One),
             new PlayerStats(PlayerIndex.Two),
             new PlayerStats(PlayerIndex.Three),
-            new PlayerStats(PlayerIndex.Four) };
+            new PlayerStats(PlayerIndex.Four)
+        };
 
         void UpdateKillPoints(PlayerIndex _killer, PlayerIndex _victim)
         {
@@ -81,7 +82,7 @@ namespace BlackFox
                     if (player.KillPoints == pointsToWin)
                     {
                         player.Victories += 1;
-                        OnPlayerVictory();
+                        PlayerWin();
                     }
                     break;
                 }
@@ -103,7 +104,7 @@ namespace BlackFox
             }
         }
 
-        void OnPlayerVictory()
+        void PlayerWin()
         {
             roundNumber++;
             gameplaySM.SetRoundNumber(roundNumber);
@@ -122,6 +123,26 @@ namespace BlackFox
         #endregion
 
         #region Events
+        private void OnEnable()
+        {
+            EventManager.OnAgentKilled += HandleOnAgentKilled;
+            EventManager.OnCoreDeath += HandleOnCoreDeath;
+            EventManager.OnAgentSpawn += HandleOnAgentSpawn;
+            EventManager.OnLevelInit += HandleOnLevelInit;
+            EventManager.OnRoundPlay += HandleOnLevelPlay;
+            EventManager.OnRoundEnd += HandleOnLevelEnd;
+        }
+
+        private void OnDisable()
+        {
+            EventManager.OnAgentKilled -= HandleOnAgentKilled;
+            EventManager.OnCoreDeath -= HandleOnCoreDeath;
+            EventManager.OnAgentSpawn -= HandleOnAgentSpawn;
+            EventManager.OnLevelInit -= HandleOnLevelInit;
+            EventManager.OnRoundPlay -= HandleOnLevelPlay;
+            EventManager.OnRoundEnd -= HandleOnLevelEnd;
+
+        }
 
         #region Event Handler
         /// <summary>
@@ -145,6 +166,8 @@ namespace BlackFox
             }
             //Reaction of the RopeManager to the OnAgentKilled event
             ropeMng.ReactToOnAgentKilled(_victim);
+
+            spawnerMng.
         }
 
         void HandleOnCoreDeath()
@@ -172,28 +195,7 @@ namespace BlackFox
         {
 
         }
-        #endregion
-
-        private void OnEnable()
-        {
-            EventManager.OnAgentKilled += HandleOnAgentKilled;
-            EventManager.OnCoreDeath += HandleOnCoreDeath;
-            EventManager.OnAgentSpawn += HandleOnAgentSpawn;
-            EventManager.OnLevelInit += HandleOnLevelInit;
-            EventManager.OnRoundPlay += HandleOnLevelPlay;
-            EventManager.OnRoundEnd += HandleOnLevelEnd;
-        }
-
-        private void OnDisable()
-        {
-            EventManager.OnAgentKilled -= HandleOnAgentKilled;
-            EventManager.OnCoreDeath -= HandleOnCoreDeath;
-            EventManager.OnAgentSpawn -= HandleOnAgentSpawn;
-            EventManager.OnLevelInit -= HandleOnLevelInit;
-            EventManager.OnRoundPlay -= HandleOnLevelPlay;
-            EventManager.OnRoundEnd -= HandleOnLevelEnd;
-
-        }
+        #endregion       
         #endregion
 
         #region GameplaySM

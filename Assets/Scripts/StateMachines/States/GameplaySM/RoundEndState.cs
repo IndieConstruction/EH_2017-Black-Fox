@@ -19,7 +19,6 @@ namespace BlackFox
             EndLevelCanvas = GameObject.FindObjectOfType<EndRoundlUI>();
             EndLevelCanvas.EndLevelPanel.SetActive(true);
             EndLevelCanvas.OnClickToChangeState += OnChangeState;
-
         }
 
         public override void OnUpdate()

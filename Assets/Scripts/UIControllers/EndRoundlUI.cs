@@ -9,6 +9,7 @@ namespace BlackFox
 {
     public class EndRoundlUI : MonoBehaviour
     {
+        UIManager uiManager;
 
         public TMP_Text Player1Points;
         public TMP_Text Player2Points;
@@ -32,6 +33,7 @@ namespace BlackFox
         {
             EndLevelPanel.SetActive(false);
             NextStateButton = GetComponentInChildren<Button>();
+            uiManager = GetComponentInParent<UIManager>();
         }
 
         // Update is called once per frame
@@ -45,10 +47,33 @@ namespace BlackFox
         /// </summary>
         public void ChangeStateOnClick()
         {
-            OnClickToChangeState();
+            uiManager.OnClickToChangeState();
         }
 
-        void AddKillPointToUI(Agent _attacker, Agent _victim)
+
+        void UpdateUIPoints()
+        {
+            Player1Points.text = P1Kill + " / " + P1Dead;
+            Player2Points.text = P2Kill + " / " + P2Dead;
+            Player3Points.text = P3Kill + " / " + P3Dead;
+            Player4Points.text = P4Kill + " / " + P4Dead;
+        }
+
+        #region API 
+
+        public void ClearTheUIPoints()
+        {
+            P1Kill = 0;
+            P2Kill = 0;
+            P3Kill = 0;
+            P4Kill = 0;
+            P1Dead = 0;
+            P2Dead = 0;
+            P3Dead = 0;
+            P4Dead = 0;
+        }
+
+        public void AddKillPointToUI(Agent _attacker, Agent _victim)
         {
             switch (_attacker.playerIndex)
             {
@@ -88,45 +113,8 @@ namespace BlackFox
             UpdateUIPoints();
         }
 
-        void UpdateUIPoints()
-        {
-            Player1Points.text = P1Kill + " / " + P1Dead;
-            Player2Points.text = P2Kill + " / " + P2Dead;
-            Player3Points.text = P3Kill + " / " + P3Dead;
-            Player4Points.text = P4Kill + " / " + P4Dead;
-        }
-
-        #region API 
-        public void ClearTheUIPoints()
-        {
-            P1Kill = 0;
-            P2Kill = 0;
-            P3Kill = 0;
-            P4Kill = 0;
-            P1Dead = 0;
-            P2Dead = 0;
-            P3Dead = 0;
-            P4Dead = 0;
-        }
-
         #endregion
 
-        #region Events
-
-        public delegate void ChangeStateEvent();
-
-        public ChangeStateEvent OnClickToChangeState;
-
-                
-        protected void OnEnable()
-        {
-            EventManager.OnAgentKilled += AddKillPointToUI;
-        }
-
-        protected void OnDisable()
-        {
-            EventManager.OnAgentKilled -= AddKillPointToUI;
-        }
-        #endregion
+        
     }
 }

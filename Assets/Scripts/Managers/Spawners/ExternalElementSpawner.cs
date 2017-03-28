@@ -18,6 +18,9 @@ namespace BlackFox
         #region SpawnerLifeFlow
         protected override void OnActivation()
         {
+            if(ExternalAgent == null)
+                ExternalAgent = (GameObject)Resources.Load("Prefabs/ExternalAgents/ExternalAgent1");
+
             target = FindObjectOfType<Core>().transform;
             nextTime = Random.Range(MinTime, MaxTime);
             LoadIDamageablePrefab();

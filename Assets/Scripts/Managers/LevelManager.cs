@@ -111,9 +111,7 @@ namespace BlackFox
             gameplaySM.SetRoundNumber(roundNumber);
             ClearKillPoints();
             EventManager.OnPlayerWinnig();
-        }
-        
-        
+        }       
 
         void ClearKillPoints()
         {
@@ -159,6 +157,12 @@ namespace BlackFox
             ropeMng.ReactToOnCoreDeath();
         }
 
+        void HandleOnAgentSpawn(Agent _agent)
+        {
+            //Reaction of the RopeManager to the OnAgentSpawn event
+            ropeMng.ReactToOnAgentSpawn(_agent);
+        }
+
         void HandleOnLevelInit()
         {
             
@@ -176,7 +180,7 @@ namespace BlackFox
         {
             EventManager.OnAgentKilled += HandleOnAgentKilled;
             EventManager.OnCoreDeath += HandleOnCoreDeath;
-
+            EventManager.OnAgentSpawn += HandleOnAgentSpawn;
             EventManager.OnLevelInit += HandleOnLevelInit;
             EventManager.OnRoundPlay += HandleOnLevelPlay;
             EventManager.OnRoundEnd += HandleOnLevelEnd;
@@ -186,7 +190,7 @@ namespace BlackFox
         {
             EventManager.OnAgentKilled -= HandleOnAgentKilled;
             EventManager.OnCoreDeath -= HandleOnCoreDeath;
-
+            EventManager.OnAgentSpawn -= HandleOnAgentSpawn;
             EventManager.OnLevelInit -= HandleOnLevelInit;
             EventManager.OnRoundPlay -= HandleOnLevelPlay;
             EventManager.OnRoundEnd -= HandleOnLevelEnd;

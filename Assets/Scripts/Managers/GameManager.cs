@@ -53,6 +53,7 @@ namespace BlackFox
         }
 
         #region API
+
         public void InstantiateLevelManager()
         {
             levelManager = Instantiate(LevelManagerPrefab).GetComponent<LevelManager>();

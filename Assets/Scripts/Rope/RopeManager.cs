@@ -37,20 +37,7 @@ namespace BlackFox {
             {
                 Destroy(rope);
             }
-        }
-
-        private void OnEnable()
-        {
-            EventManager.OnCoreDeath += HandleOnCoreDeath;
-            EventManager.OnAgentSpawn += HandleOnAgentSpawn;
-            EventManager.OnAgentKilled += HandleOnAgentKilled;
-        }
-        private void OnDisable()
-        {
-            EventManager.OnCoreDeath -= HandleOnCoreDeath;
-            EventManager.OnAgentSpawn -= HandleOnAgentSpawn;
-            EventManager.OnAgentKilled -= HandleOnAgentKilled;
-        }
+        }        
         #endregion
 
         #region API

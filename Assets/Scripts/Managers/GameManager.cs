@@ -1,32 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using XInputDotNetPure;
 
 namespace BlackFox
 {
     public class GameManager : MonoBehaviour
     {
         int levelNumber;
-
-        public int LevelNumber {
+        public int LevelNumber
+        {
             get { return levelNumber; }
             set { levelNumber = value; }
         }
 
         public static GameManager Instance;
-
         public bool dontDestroyOnLoad;
 
-        FlowSM flowSM;
+        public GameObject LevelManagerPrefab;
+        [HideInInspector]
+        public LevelManager levelManager;
 
-        private float coreLife;
-        public float CoreLife
-        {
-            get { return coreLife; }
-            set { coreLife = value; }
-        }
+        FlowSM flowSM;
 
         private void Awake()
         {
@@ -57,6 +51,12 @@ namespace BlackFox
             }
         }
 
+        #region API
+        public void InstantiateLevelManager()
+        {
+            levelManager = Instantiate(LevelManagerPrefab).GetComponent<LevelManager>();
+        }
+        #endregion
     }
 }
 

@@ -51,4 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c42beab6737414693040b1f0f6e0b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontDestroyOnLoad: 1
+  dontDestroyOnLoad: 0
+  LevelManagerPrefab: {fileID: 1348505320085036, guid: a170ad38250ff9e41b9a497f135f366d,
+    type: 2}
+  levelManager: {fileID: 114182705895524758, guid: a170ad38250ff9e41b9a497f135f366d,
+    type: 2}

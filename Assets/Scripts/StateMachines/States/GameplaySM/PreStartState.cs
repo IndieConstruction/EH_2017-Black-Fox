@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BlackFox {
-
-    public class LevelInitState : StateBase
+namespace BlackFox
+{
+    public class PreStartState : StateBase
     {
         public override void OnStart()
         {
-            Debug.Log("LevelInitState");
-            EventManager.OnLevelInit();         
+            Debug.Log("PreStartState");
+            EventManager.OnLevelInit();
         }
 
         public override void OnUpdate()

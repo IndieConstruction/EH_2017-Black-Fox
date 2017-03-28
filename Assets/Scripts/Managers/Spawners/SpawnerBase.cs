@@ -44,6 +44,8 @@ namespace BlackFox {
         {
 
         }
+
+        public virtual void ReactToOnAgentKilled(Agent _killer, Agent _victim) { }
         #endregion
 
         #region OnFlow

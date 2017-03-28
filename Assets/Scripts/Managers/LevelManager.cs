@@ -166,8 +166,8 @@ namespace BlackFox
             }
             //Reaction of the RopeManager to the OnAgentKilled event
             ropeMng.ReactToOnAgentKilled(_victim);
-
-            spawnerMng.
+            //Reaction of the SpawnerManager to the OnAgentKilled event
+            spawnerMng.ReactToOnAgentKilled(_killer, _victim);
         }
 
         void HandleOnCoreDeath()

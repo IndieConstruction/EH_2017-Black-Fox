@@ -70,7 +70,10 @@ namespace BlackFox
         /// <param name="_victim"></param>
         public void ReactToOnAgentKilled(Agent _killer, Agent _victim)
         {
-
+            foreach (var spawner in Spawners)
+            {
+                spawner.ReactToOnAgentKilled(_killer, _victim);
+            }
         }
         #endregion
 

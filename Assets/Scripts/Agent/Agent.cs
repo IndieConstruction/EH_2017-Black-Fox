@@ -78,6 +78,11 @@ namespace BlackFox
             EventManager.OnRoundEnd -= HandleOnLevelEnd;
         }
 
+        private void OnDestroy()
+        {
+            Destroy(transform.parent.gameObject);
+        }
+
         #region Event Handler
         void HandleOnLevelInit() { }
         void HandleOnLevelPlay() { }
@@ -259,7 +264,7 @@ namespace BlackFox
                         EventManager.OnAgentKilled(null, this);
                 }
                     
-                transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject.transform.parent.gameObject); });              
+                transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject); });              
                 return;
             }
         }

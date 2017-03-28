@@ -29,20 +29,6 @@ namespace BlackFox
             StartGameplaySM(); 
         }
 
-        #region Event Handler
-        void HandleOnLevelInit()
-        {
-            spawnerMng.ReInitLevel();
-        }
-
-        void HandleOnLevelPlay() { }
-
-        void HandleOnLevelEnd()
-        {
-
-        }
-        #endregion
-
         #region API
         /// <summary>
         /// Viene chiamata quando accade un'uccisione.
@@ -142,6 +128,21 @@ namespace BlackFox
         #endregion
 
         #region Events
+
+        #region Event Handler
+        void HandleOnLevelInit()
+        {
+            spawnerMng.ReInitLevel();
+        }
+
+        void HandleOnLevelPlay() { }
+
+        void HandleOnLevelEnd()
+        {
+
+        }
+        #endregion
+
         private void OnEnable()
         {
             EventManager.OnAgentKilled += HandleAgentKilled;

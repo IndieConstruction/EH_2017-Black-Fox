@@ -20,8 +20,12 @@ namespace BlackFox
         public int SubPoints = 1;
         public int pointsToWin = 5;
 
+        public GameObject SpawnerMngPrefab;
+        public GameObject RopeMngPrefab;
+
         GameplaySM gameplaySM;
-        SpawnerManager spawnerMng;
+        public SpawnerManager spawnerMng;
+        public RopeManager ropeMng;
 
         void Start()
         {
@@ -31,22 +35,18 @@ namespace BlackFox
 
         #region API
         /// <summary>
-        /// Viene chiamata quando accade un'uccisione.
+        /// Instance a preloaded SpawnManager
         /// </summary>
-        /// <param name="_killer"></param>
-        /// <param name="_victim"></param>
-        public void HandleAgentKilled(Agent _killer, Agent _victim)
+        public void InstantiateSpawnerManager()
         {
-            if (_killer != null) { 
-                UpdateKillPoints(_killer.playerIndex, _victim.playerIndex);           // setta i punti morte e uccisione
-                //Aggiorna i punti uccisione sulla UI
-                _killer.OnKillingSomeone();
-            } else
-                UpdateKillPoints(_victim.playerIndex);
-            if (EventManager.OnPointsUpdate != null)
-            {
-                EventManager.OnPointsUpdate();
-            }
+            spawnerMng = Instantiate(SpawnerMngPrefab).GetComponent<SpawnerManager>();            
+        }
+        /// <summary>
+        /// Instance a preloaded RopeManager
+        /// </summary>
+        public void InstantiateRopeManager()
+        {
+            ropeMng = Instantiate(RopeMngPrefab).GetComponent<RopeManager>();
         }
 
         public int GetPlayerKillPoints(PlayerIndex _playerIndex)
@@ -111,11 +111,7 @@ namespace BlackFox
             EventManager.OnPlayerWinnig();
         }
         
-        void HandleOnCoreDeath()
-        {
-            ClearKillPoints();
-            spawnerMng.ReInitLevel();
-        }
+        
 
         void ClearKillPoints()
         {
@@ -130,6 +126,37 @@ namespace BlackFox
         #region Events
 
         #region Event Handler
+        /// <summary>
+        /// Viene chiamata quando accade un'uccisione.
+        /// </summary>
+        /// <param name="_killer"></param>
+        /// <param name="_victim"></param>
+        void HandleOnAgentKilled(Agent _killer, Agent _victim)
+        {
+            if (_killer != null)
+            {
+                UpdateKillPoints(_killer.playerIndex, _victim.playerIndex);           // setta i punti morte e uccisione
+                //Aggiorna i punti uccisione sulla UI
+                _killer.OnKillingSomeone();
+            }
+            else
+                UpdateKillPoints(_victim.playerIndex);
+            if (EventManager.OnPointsUpdate != null)
+            {
+                EventManager.OnPointsUpdate();
+            }
+            //Reaction of the RopeManager to the OnAgentKilled event
+            ropeMng.ReactToOnAgentKilled(_victim);
+        }
+
+        void HandleOnCoreDeath()
+        {
+            ClearKillPoints();
+            spawnerMng.ReInitLevel();
+            //Reaction of the RopeManager to the OnCoreDeath event
+            ropeMng.ReactToOnCoreDeath();
+        }
+
         void HandleOnLevelInit()
         {
             spawnerMng.ReInitLevel();
@@ -145,7 +172,7 @@ namespace BlackFox
 
         private void OnEnable()
         {
-            EventManager.OnAgentKilled += HandleAgentKilled;
+            EventManager.OnAgentKilled += HandleOnAgentKilled;
             EventManager.OnCoreDeath += HandleOnCoreDeath;
 
             EventManager.OnLevelInit += HandleOnLevelInit;
@@ -155,7 +182,7 @@ namespace BlackFox
 
         private void OnDisable()
         {
-            EventManager.OnAgentKilled -= HandleAgentKilled;
+            EventManager.OnAgentKilled -= HandleOnAgentKilled;
             EventManager.OnCoreDeath -= HandleOnCoreDeath;
 
             EventManager.OnLevelInit -= HandleOnLevelInit;

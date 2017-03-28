@@ -17,6 +17,10 @@ namespace BlackFox
 
         public bool dontDestroyOnLoad;
 
+        public GameObject LevelManagerPrefab;
+        [HideInInspector]
+        public LevelManager levelManager;
+
         FlowSM flowSM;
 
         private void Awake()
@@ -48,6 +52,14 @@ namespace BlackFox
             }
         }
 
+        #region API
+        public void InstantiateLevelManager()
+        {
+            levelManager = Instantiate(LevelManagerPrefab).GetComponent<LevelManager>();
+            // TODO : modificare assegnazione del level number
+            levelManager.lelvelNumber = 1;
+        }
+        #endregion
     }
 }
 

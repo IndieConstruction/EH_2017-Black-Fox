@@ -17,6 +17,7 @@ namespace BlackFox
         {
             Debug.Log("GameplayState");
             StateMachineBase.OnMachineEnd += OnMachineEnd;
+            GameManager.Instance.InstantiateLevelManager();
             LoadArena();
         }
 

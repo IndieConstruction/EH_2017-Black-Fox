@@ -7,8 +7,8 @@ namespace BlackFox
     public class UIManager : MonoBehaviour
     {
 
-        EndRoundlUI endRoundUI;
-        GameUIController gameUIController;
+        public EndRoundlUI endRoundUI;
+        public GameUIController gameUIController;
 
         // Use this for initialization
         void Start()
@@ -16,13 +16,6 @@ namespace BlackFox
             endRoundUI = GetComponentInChildren<EndRoundlUI>();
             gameUIController = GetComponentInChildren<GameUIController>();
         }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-
 
         #region Events
 

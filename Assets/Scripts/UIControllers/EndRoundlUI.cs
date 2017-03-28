@@ -31,9 +31,9 @@ namespace BlackFox
         // Use this for initialization
         void Start()
         {
+            uiManager = GetComponentInParent<UIManager>();
             EndLevelPanel.SetActive(false);
             NextStateButton = GetComponentInChildren<Button>();
-            uiManager = GetComponentInParent<UIManager>();
         }
 
         // Update is called once per frame
@@ -48,29 +48,6 @@ namespace BlackFox
         public void ChangeStateOnClick()
         {
             uiManager.OnClickToChangeState();
-        }
-
-
-        void UpdateUIPoints()
-        {
-            Player1Points.text = P1Kill + " / " + P1Dead;
-            Player2Points.text = P2Kill + " / " + P2Dead;
-            Player3Points.text = P3Kill + " / " + P3Dead;
-            Player4Points.text = P4Kill + " / " + P4Dead;
-        }
-
-        #region API 
-
-        public void ClearTheUIPoints()
-        {
-            P1Kill = 0;
-            P2Kill = 0;
-            P3Kill = 0;
-            P4Kill = 0;
-            P1Dead = 0;
-            P2Dead = 0;
-            P3Dead = 0;
-            P4Dead = 0;
         }
 
         public void AddKillPointToUI(Agent _attacker, Agent _victim)
@@ -113,8 +90,29 @@ namespace BlackFox
             UpdateUIPoints();
         }
 
+        void UpdateUIPoints()
+        {
+            Player1Points.text = P1Kill + " / " + P1Dead;
+            Player2Points.text = P2Kill + " / " + P2Dead;
+            Player3Points.text = P3Kill + " / " + P3Dead;
+            Player4Points.text = P4Kill + " / " + P4Dead;
+        }
+
+        #region API 
+        public void ClearTheUIPoints()
+        {
+            P1Kill = 0;
+            P2Kill = 0;
+            P3Kill = 0;
+            P4Kill = 0;
+            P1Dead = 0;
+            P2Dead = 0;
+            P3Dead = 0;
+            P4Dead = 0;
+        }
+
         #endregion
 
-        
+       
     }
 }

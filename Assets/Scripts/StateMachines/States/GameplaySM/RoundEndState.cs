@@ -7,15 +7,16 @@ namespace BlackFox
 {
     public class RoundEndState : StateBase
     {
-        EndRoundlUI EndLevelCanvas;
+        UIManager uiManager;
 
         public override void OnStart()
         {
             Debug.Log("RoundEndState");
             EventManager.OnRoundEnd();
-            EndLevelCanvas = GameObject.FindObjectOfType<EndRoundlUI>();
-            EndLevelCanvas.EndLevelPanel.SetActive(true);
-            //EndLevelCanvas.OnClickToChangeState += OnChangeState;
+            ClearArena();
+            uiManager = GameObject.FindObjectOfType<UIManager>();
+            uiManager.endRoundUI.EndLevelPanel.SetActive(true);
+            uiManager.OnClickToChangeState += OnChangeState;
         }
 
         public override void OnUpdate()
@@ -25,9 +26,9 @@ namespace BlackFox
 
         public override void OnEnd()
         {
-            EndLevelCanvas.EndLevelPanel.SetActive(false);
-            EndLevelCanvas.ClearTheUIPoints();
-            //EndLevelCanvas.OnClickToChangeState -= OnChangeState;
+            uiManager.endRoundUI.EndLevelPanel.SetActive(false);
+            uiManager.endRoundUI.ClearTheUIPoints();
+            uiManager.OnClickToChangeState -= OnChangeState;
         }
 
         /// <summary>
@@ -40,5 +41,39 @@ namespace BlackFox
                 OnStateEnd(); 
             }
         }
+
+        void ClearArena()
+        {
+            ClearAgent();
+            ClearExternalAgent();
+            GameObject[] pins = GameObject.FindGameObjectsWithTag("Pin");
+
+            foreach (GameObject pin in pins)
+            {
+                GameObject.Destroy(pin);
+            }
+        }
+
+        void ClearAgent()
+        {
+            Agent[] agents = GameObject.FindObjectsOfType<Agent>();
+
+            foreach (Agent agent in agents)
+            {
+                GameObject.Destroy(agent.gameObject);
+            }
+        }
+
+        void ClearExternalAgent()
+        {
+            ExternalAgent[] agents = GameObject.FindObjectsOfType<ExternalAgent>();
+
+            foreach (ExternalAgent extAgent in agents)
+            {
+                GameObject.Destroy(extAgent.gameObject);
+            }
+        }
+
+
     }
 }

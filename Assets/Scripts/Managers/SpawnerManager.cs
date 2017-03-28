@@ -35,7 +35,7 @@ namespace BlackFox
         void InstantiateSpawners(List<SpawnerBase> _levelSpawners)
         {
             foreach (var spawner in _levelSpawners)
-                Spawner.Add(Instantiate(spawner, transform));
+                Spawners.Add(Instantiate(spawner, transform));
         }
 
         #region API

@@ -132,9 +132,10 @@ namespace BlackFox
             }
         }
 
+
         /// <summary>
         /// Funzione che contiene le azione da eseguire alla morte del player
-        /// </summary>        
+        /// </summary>
         void PlayerWin()
         {
             roundNumber++;
@@ -238,11 +239,12 @@ namespace BlackFox
         /// </summary>
         void HandleOnLevelPlay() { }
 
-        void HandleOnLevelEnd()
-        {
-
-        }
+        /// <summary>
+        /// Viene chiamata dallo stato RoundEnd
+        /// </summary>
+        void HandleOnLevelEnd() { }
         #endregion
+
         #endregion
 
         #region GameplaySM

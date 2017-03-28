@@ -10,7 +10,7 @@ namespace Rope
         public GameObject FragmentPrefab;
         public Transform AnchorPoint;
         public int MaxLength = 80;
-        [Range(.0f, 1f)]
+        [Range(.0f, 10f)]
         public float DensityOfFragments = .1f;
 
         List<GameObject> fragments = new List<GameObject>();

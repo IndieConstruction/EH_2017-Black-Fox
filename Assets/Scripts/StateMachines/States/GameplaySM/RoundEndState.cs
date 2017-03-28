@@ -7,9 +7,7 @@ namespace BlackFox
 {
     public class RoundEndState : StateBase
     {
-
-          EndRoundlUI EndLevelCanvas;
-
+        EndRoundlUI EndLevelCanvas;
 
         public override void OnStart()
         {
@@ -19,7 +17,6 @@ namespace BlackFox
             EndLevelCanvas = GameObject.FindObjectOfType<EndRoundlUI>();
             EndLevelCanvas.EndLevelPanel.SetActive(true);
             EndLevelCanvas.OnClickToChangeState += OnChangeState;
-
         }
 
         public override void OnUpdate()

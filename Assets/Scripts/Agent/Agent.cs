@@ -78,6 +78,11 @@ namespace BlackFox
             EventManager.OnRoundEnd -= HandleOnLevelEnd;
         }
 
+        private void OnDestroy()
+        {
+            Destroy(transform.parent.gameObject);
+        }
+
         #region Event Handler
         void HandleOnLevelInit() { }
         void HandleOnLevelPlay() { }
@@ -252,8 +257,13 @@ namespace BlackFox
             if (Life < 1)
             {
                 if (EventManager.OnAgentKilled != null)
-                    EventManager.OnAgentKilled(_attacker.GetComponent<Agent>(), this);
-            
+                {
+                    if (_attacker != null)
+                        EventManager.OnAgentKilled(_attacker.GetComponent<Agent>(), this);
+                    else
+                        EventManager.OnAgentKilled(null, this);
+                }
+                    
                 transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject); });              
                 return;
             }

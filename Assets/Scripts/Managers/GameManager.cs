@@ -7,18 +7,15 @@ namespace BlackFox
     public class GameManager : MonoBehaviour
     {
         int levelNumber;
-        public int LevelNumber
-        {
+
+        public int LevelNumber {
             get { return levelNumber; }
             set { levelNumber = value; }
         }
 
         public static GameManager Instance;
-        public bool dontDestroyOnLoad;
 
-        public GameObject LevelManagerPrefab;
-        [HideInInspector]
-        public LevelManager levelManager;
+        public bool dontDestroyOnLoad;
 
         FlowSM flowSM;
 
@@ -51,12 +48,6 @@ namespace BlackFox
             }
         }
 
-        #region API
-        public void InstantiateLevelManager()
-        {
-            levelManager = Instantiate(LevelManagerPrefab).GetComponent<LevelManager>();
-        }
-        #endregion
     }
 }
 

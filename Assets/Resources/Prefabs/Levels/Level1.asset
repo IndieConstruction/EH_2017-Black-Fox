@@ -15,3 +15,4 @@ MonoBehaviour:
   LevelName: Level1
   ArenaPrefab: {fileID: 1590692792633676, guid: 7ea2bcd6e0fcc5341a5f7624e386a912,
     type: 2}
+  LevelSpawners: []

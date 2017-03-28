@@ -91,58 +91,6 @@ NavMeshSettings:
     cellSize: 0.16666667
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &1334325982
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4680737972189672, guid: 7ea2bcd6e0fcc5341a5f7624e386a912, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4680737972189672, guid: 7ea2bcd6e0fcc5341a5f7624e386a912, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4680737972189672, guid: 7ea2bcd6e0fcc5341a5f7624e386a912, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4680737972189672, guid: 7ea2bcd6e0fcc5341a5f7624e386a912, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4680737972189672, guid: 7ea2bcd6e0fcc5341a5f7624e386a912, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4680737972189672, guid: 7ea2bcd6e0fcc5341a5f7624e386a912, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4680737972189672, guid: 7ea2bcd6e0fcc5341a5f7624e386a912, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4680737972189672, guid: 7ea2bcd6e0fcc5341a5f7624e386a912, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114345931902232122, guid: 7ea2bcd6e0fcc5341a5f7624e386a912,
-        type: 2}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114345931902232122, guid: 7ea2bcd6e0fcc5341a5f7624e386a912,
-        type: 2}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 7ea2bcd6e0fcc5341a5f7624e386a912, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1001 &1644762736
 Prefab:
   m_ObjectHideFlags: 0

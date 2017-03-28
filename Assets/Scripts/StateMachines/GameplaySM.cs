@@ -12,7 +12,7 @@ namespace BlackFox {
         private void Start()
         {
             Debug.Log("Start_GamePlatSM");
-            CurrentState = new PreInitState(levelNumber, roundNumber);
+            CurrentState = new PreInitState();
         }
 
         protected override void OnCurrentStateEnded()

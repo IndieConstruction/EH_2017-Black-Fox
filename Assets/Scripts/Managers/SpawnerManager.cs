@@ -13,11 +13,11 @@ namespace BlackFox
         int Round;
         List<SpawnerBase> Spawners = new List<SpawnerBase>();
         //TODO: find a better way to organize SpawnerReferences
-        private void Awake()
-        {
-            foreach (var spawner in GetComponentsInChildren<SpawnerBase>())
-                Spawners.Add(spawner);
-        }
+        //private void Awake()
+        //{
+        //    foreach (var spawner in GetComponentsInChildren<SpawnerBase>())
+        //        Spawners.Add(spawner);
+        //}
 
         private void OnEnable()
         {   
@@ -38,13 +38,22 @@ namespace BlackFox
             }
         }
 
+        void InstantiateSpawners(List<GameObject> _levelSpawners)
+        {
+            foreach (var spawner in _levelSpawners)
+                Instantiate(spawner, transform);
+
+        }
+
         #region API
-        public void Init(int _level, int _round)
+        public void Init(int _level, int _round, List<GameObject> _levelSpawners)
         {
             Level = _level;
             Round = _round;
+            InstantiateSpawners(_levelSpawners);
         }
-        public void ReInitLevel()
+
+        public void InitLevel()
         {
             foreach (var spawner in GetComponentsInChildren<SpawnerBase>())
             {

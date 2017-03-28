@@ -29,6 +29,7 @@ namespace BlackFox
         public RopeManager ropeMng;
 
         GameplaySM gameplaySM;
+        Level currentLevel;
 
         void Start()
         {
@@ -42,7 +43,7 @@ namespace BlackFox
         public void InstantiateSpawnerManager()
         {
             spawnerMng = Instantiate(SpawnerMngPrefab, transform).GetComponent<SpawnerManager>();
-            spawnerMng.Init(levelNumber, roundNumber);
+            spawnerMng.Init(levelNumber, roundNumber, currentLevel.LevelSpawners);
         }
         /// <summary>
         /// Instance a preloaded RopeManager
@@ -52,6 +53,21 @@ namespace BlackFox
             ropeMng = Instantiate(RopeMngPrefab, transform).GetComponent<RopeManager>();
         }
 
+        /// <summary>
+        /// Carica lo scriptable object del livello e istanzia il prefab del livello
+        /// </summary>
+        public void InstantiateLevel()
+        {
+            currentLevel = Instantiate(Resources.Load<Level>("Prefabs/Levels/Level" + levelNumber));
+            Instantiate(currentLevel.ArenaPrefab, transform);
+
+        }
+
+        /// <summary>
+        /// Ritorna i punti uccisione del player che chiama la funzione
+        /// </summary>
+        /// <param name="_playerIndex">Indice del Player</param>
+        /// <returns></returns>
         public int GetPlayerKillPoints(PlayerIndex _playerIndex)
         {
             foreach (PlayerStats player in playerStats)
@@ -62,7 +78,7 @@ namespace BlackFox
                 }
             }
             return -1;
-        }        
+        }
         #endregion
 
         #region KillPoint Count
@@ -73,6 +89,11 @@ namespace BlackFox
             new PlayerStats(PlayerIndex.Three),
             new PlayerStats(PlayerIndex.Four) };
 
+        /// <summary>
+        /// Aggiorna i punti uccsione del player che è stato ucciso e di quello che ha ucciso
+        /// </summary>
+        /// <param name="_killer"></param>
+        /// <param name="_victim"></param>
         void UpdateKillPoints(PlayerIndex _killer, PlayerIndex _victim)
         {
             foreach (PlayerStats player in playerStats)
@@ -93,6 +114,10 @@ namespace BlackFox
             UpdateKillPoints(_victim);
         }
 
+        /// <summary>
+        /// Aggiorna i punti uccisione del player che è morto
+        /// </summary>
+        /// <param name="_victim"></param>
         void UpdateKillPoints(PlayerIndex _victim)
         {
             foreach (PlayerStats player in playerStats)
@@ -106,6 +131,9 @@ namespace BlackFox
             }
         }
 
+        /// <summary>
+        /// Funzione che contiene le azione da eseguire alla morte del player
+        /// </summary>
         void OnPlayerVictory()
         {
             roundNumber++;
@@ -114,6 +142,9 @@ namespace BlackFox
             EventManager.OnPlayerWinnig();
         }       
 
+        /// <summary>
+        /// Azzera i punti uccisione di tutti i player
+        /// </summary>
         void ClearKillPoints()
         {
             foreach (PlayerStats player in playerStats)
@@ -150,31 +181,44 @@ namespace BlackFox
             ropeMng.ReactToOnAgentKilled(_victim);
         }
 
+        /// <summary>
+        /// Viene chiamata quando muore il core
+        /// </summary>
         void HandleOnCoreDeath()
         {
             ClearKillPoints();
-            spawnerMng.ReInitLevel();
+            spawnerMng.InitLevel();
             //Reaction of the RopeManager to the OnCoreDeath event
             ropeMng.ReactToOnCoreDeath();
         }
 
+        /// <summary>
+        /// Viene chiamamta alla morte di un agente
+        /// </summary>
+        /// <param name="_agent"></param>
         void HandleOnAgentSpawn(Agent _agent)
         {
             //Reaction of the RopeManager to the OnAgentSpawn event
             ropeMng.ReactToOnAgentSpawn(_agent);
         }
 
+        /// <summary>
+        /// Viene chiamata dallo stato LevelInit
+        /// </summary>
         void HandleOnLevelInit()
         {
-            
+            spawnerMng.InitLevel();
         }
 
+        /// <summary>
+        /// Viene chiamata dallo stato Play
+        /// </summary>
         void HandleOnLevelPlay() { }
 
-        void HandleOnLevelEnd()
-        {
-
-        }
+        /// <summary>
+        /// Viene chiamata dallo stato RoundEnd
+        /// </summary>
+        void HandleOnLevelEnd() { }
         #endregion
 
         private void OnEnable()
@@ -201,6 +245,9 @@ namespace BlackFox
 
         #region GameplaySM
 
+        /// <summary>
+        /// Istaniuzia la GameplaySM e passa i parametri di livello e round corretni e MaxRound alla state machine
+        /// </summary>
         void StartGameplaySM()
         {
             gameplaySM = gameObject.AddComponent<GameplaySM>();

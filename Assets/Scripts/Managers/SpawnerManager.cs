@@ -32,14 +32,14 @@ namespace BlackFox
             }
         }
 
-        void InstantiateSpawners(List<GameObject> _levelSpawners)
+        void InstantiateSpawners(List<SpawnerBase> _levelSpawners)
         {
             foreach (var spawner in _levelSpawners)
                 Spawner.Add(Instantiate(spawner, transform));
         }
 
         #region API
-        public void Init(int _level, int _round, List<GameObject> _levelSpawners)
+        public void Init(int _level, int _round, List<SpawnerBase> _levelSpawners)
         {
             Level = _level;
             Round = _round;

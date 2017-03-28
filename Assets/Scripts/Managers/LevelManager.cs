@@ -23,13 +23,15 @@ namespace BlackFox
         public GameObject SpawnerMngPrefab;
         public GameObject RopeMngPrefab;
 
-        GameplaySM gameplaySM;
+        [HideInInspector]
         public SpawnerManager spawnerMng;
+        [HideInInspector]
         public RopeManager ropeMng;
+
+        GameplaySM gameplaySM;
 
         void Start()
         {
-            spawnerMng = GetComponentInChildren<SpawnerManager>();
             StartGameplaySM(); 
         }
 
@@ -37,16 +39,16 @@ namespace BlackFox
         /// <summary>
         /// Instance a preloaded SpawnManager
         /// </summary>
-        public void InstantiateSpawnerManager()
+        public SpawnerManager InstantiateSpawnerManager()
         {
-            spawnerMng = Instantiate(SpawnerMngPrefab).GetComponent<SpawnerManager>();            
+            return spawnerMng = Instantiate(SpawnerMngPrefab).GetComponent<SpawnerManager>();            
         }
         /// <summary>
         /// Instance a preloaded RopeManager
         /// </summary>
-        public void InstantiateRopeManager()
+        public RopeManager InstantiateRopeManager()
         {
-            ropeMng = Instantiate(RopeMngPrefab).GetComponent<RopeManager>();
+            return ropeMng = Instantiate(RopeMngPrefab).GetComponent<RopeManager>();
         }
 
         public int GetPlayerKillPoints(PlayerIndex _playerIndex)
@@ -159,7 +161,7 @@ namespace BlackFox
 
         void HandleOnLevelInit()
         {
-            spawnerMng.ReInitLevel();
+            
         }
 
         void HandleOnLevelPlay() { }

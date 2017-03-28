@@ -19,12 +19,20 @@ namespace BlackFox
         {
             Debug.Log("PreInitState");
             LoadArena();
+            
         }
 
         public override void OnUpdate()
         {
             if (OnStateEnd != null)
                 OnStateEnd();
+        }
+
+        void LoadManager()
+        {
+            SpawnerManager spawnerManager = GameManager.Instance.levelManager.InstantiateSpawnerManager();
+            spawnerManager.Init(levelNumber, roundNumber);
+            GameManager.Instance.levelManager.InstantiateRopeManager();
         }
 
         /// <summary>

@@ -132,14 +132,11 @@ namespace BlackFox
             }
         }
 
-<<<<<<< HEAD
-        void PlayerWin()
-=======
+
         /// <summary>
         /// Funzione che contiene le azione da eseguire alla morte del player
         /// </summary>
-        void OnPlayerVictory()
->>>>>>> a6d089a4d60bcce9e2febb5515f9f0a84bc61211
+        void PlayerWin()
         {
             roundNumber++;
             gameplaySM.SetRoundNumber(roundNumber);
@@ -242,40 +239,12 @@ namespace BlackFox
         /// </summary>
         void HandleOnLevelPlay() { }
 
-<<<<<<< HEAD
-        void HandleOnLevelEnd()
-        {
-
-        }
-        #endregion       
-=======
         /// <summary>
         /// Viene chiamata dallo stato RoundEnd
         /// </summary>
         void HandleOnLevelEnd() { }
         #endregion
 
-        private void OnEnable()
-        {
-            EventManager.OnAgentKilled += HandleOnAgentKilled;
-            EventManager.OnCoreDeath += HandleOnCoreDeath;
-            EventManager.OnAgentSpawn += HandleOnAgentSpawn;
-            EventManager.OnLevelInit += HandleOnLevelInit;
-            EventManager.OnRoundPlay += HandleOnLevelPlay;
-            EventManager.OnRoundEnd += HandleOnLevelEnd;
-        }
-
-        private void OnDisable()
-        {
-            EventManager.OnAgentKilled -= HandleOnAgentKilled;
-            EventManager.OnCoreDeath -= HandleOnCoreDeath;
-            EventManager.OnAgentSpawn -= HandleOnAgentSpawn;
-            EventManager.OnLevelInit -= HandleOnLevelInit;
-            EventManager.OnRoundPlay -= HandleOnLevelPlay;
-            EventManager.OnRoundEnd -= HandleOnLevelEnd;
-
-        }
->>>>>>> a6d089a4d60bcce9e2febb5515f9f0a84bc61211
         #endregion
 
         #region GameplaySM

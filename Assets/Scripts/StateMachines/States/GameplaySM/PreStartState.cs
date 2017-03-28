@@ -9,7 +9,6 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("PreStartState");
-            EventManager.OnLevelInit();
         }
 
         public override void OnUpdate()

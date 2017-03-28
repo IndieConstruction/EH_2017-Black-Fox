@@ -13,7 +13,6 @@ namespace BlackFox
         {
             Debug.Log("RoundEndState");
             EventManager.OnRoundEnd();
-            ClearArena();
             EndLevelCanvas = GameObject.FindObjectOfType<EndRoundlUI>();
             EndLevelCanvas.EndLevelPanel.SetActive(true);
             EndLevelCanvas.OnClickToChangeState += OnChangeState;
@@ -41,39 +40,5 @@ namespace BlackFox
                 OnStateEnd(); 
             }
         }
-
-        void ClearArena()
-        {
-            ClearAgent();
-            ClearExternalAgent();
-            GameObject[] pins = GameObject.FindGameObjectsWithTag("Pin");
-
-            foreach (GameObject pin in pins)
-            {
-                GameObject.Destroy(pin);
-            }
-        }
-
-        void ClearAgent()
-        {
-            Agent[] agents = GameObject.FindObjectsOfType<Agent>();
-
-            foreach (Agent agent in agents)
-            {
-                GameObject.Destroy(agent.gameObject);
-            }
-        }
-
-        void ClearExternalAgent()
-        {
-            ExternalAgent[] agents = GameObject.FindObjectsOfType<ExternalAgent>();
-
-            foreach (ExternalAgent extAgent in agents)
-            {
-                GameObject.Destroy(extAgent.gameObject);
-            }
-        }
-
-
     }
 }

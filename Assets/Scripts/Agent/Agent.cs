@@ -252,9 +252,14 @@ namespace BlackFox
             if (Life < 1)
             {
                 if (EventManager.OnAgentKilled != null)
-                    EventManager.OnAgentKilled(_attacker.GetComponent<Agent>(), this);
-            
-                transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject); });              
+                {
+                    if (_attacker != null)
+                        EventManager.OnAgentKilled(_attacker.GetComponent<Agent>(), this);
+                    else
+                        EventManager.OnAgentKilled(null, this);
+                }
+                    
+                transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject.transform.parent.gameObject); });              
                 return;
             }
         }

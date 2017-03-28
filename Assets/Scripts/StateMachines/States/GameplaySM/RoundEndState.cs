@@ -7,9 +7,7 @@ namespace BlackFox
 {
     public class RoundEndState : StateBase
     {
-
-          EndRoundlUI EndLevelCanvas;
-
+        EndRoundlUI EndLevelCanvas;
 
         public override void OnStart()
         {

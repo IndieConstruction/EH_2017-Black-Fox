@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 54729885661318166}
   - component: {fileID: 153254480655928576}
   m_Layer: 8
-  m_Name: RopeAnchorPurple
+  m_Name: RopeAnchorRed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -552,7 +552,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0.5, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0.72150004, y: 0, z: 0.2605}
+  m_ConnectedAnchor: {x: -0.30983177, y: 0.19, z: 0.748}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0

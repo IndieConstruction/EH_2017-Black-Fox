@@ -95,7 +95,7 @@ namespace BlackFox
             StopAllCoroutines();
             for (int i = 0; i < agentsPrefb.Length; i++)
             {
-                RespawnImmediate(agentsPrefb[i].GetComponent<Agent>().playerIndex);
+                RespawnImmediate(agentsPrefb[i].GetComponentInChildren<Agent>().playerIndex);
             }
         }
 
@@ -120,9 +120,11 @@ namespace BlackFox
                 {
                     for (int i = 0; i < agentsPrefb.Length; i++)
                     {
-                        if (agentsPrefb[i].GetComponent<Agent>().playerIndex == _playerIndx)
+                        if (agentsPrefb[i].GetComponentInChildren<Agent>().playerIndex == _playerIndx)
                         {
-                            Instantiate(agentsPrefb[i], spawn.SpawnPosition.position, spawn.SpawnPosition.rotation, transform);
+                            GameObject newAgent = Instantiate(agentsPrefb[i], spawn.SpawnPosition.position, spawn.SpawnPosition.rotation);
+                            if(EventManager.OnAgentSpawn != null)
+                                EventManager.OnAgentSpawn(newAgent.GetComponentInChildren<Agent>());
                             return;
                         }
                     }

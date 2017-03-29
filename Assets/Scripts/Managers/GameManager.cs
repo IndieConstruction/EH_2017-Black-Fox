@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using XInputDotNetPure;
 
 namespace BlackFox
 {
@@ -20,13 +18,6 @@ namespace BlackFox
         public bool dontDestroyOnLoad;
 
         FlowSM flowSM;
-
-        private float coreLife;
-        public float CoreLife
-        {
-            get { return coreLife; }
-            set { coreLife = value; }
-        }
 
         private void Awake()
         {

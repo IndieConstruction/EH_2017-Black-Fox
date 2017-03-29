@@ -14,15 +14,18 @@ namespace BlackFox
         public float maxLife = 10;
         private float _life = 10;
 
-        public float Life {
+        public float Life
+        {
             get { return _life; }
-            private set { _life = value;
+            private set
+            {
+                _life = value;
                 if (OnDataChange != null)  
                     OnDataChange(this);
             }
         }
 
-        // Variabili per il funzionamento dei controller e della tastiera
+        // Variabili per il funzionamento dei controller
         GamePadState state;
         GamePadState prevState;
         public PlayerIndex playerIndex;
@@ -39,8 +42,13 @@ namespace BlackFox
         float nextFire;
         float ropeExtTimer;
 
+        //Variabili per gestire la fisca della corda
+        Rigidbody rigid;
+        Vector3 previousSpeed;
+
         void Start()
         {
+            rigid = GetComponent<Rigidbody>();
             movment = GetComponent<MovementController>();
             rope = SearchRope();
             pinPlacer = GetComponent<PlacePin>();
@@ -70,6 +78,11 @@ namespace BlackFox
             EventManager.OnRoundEnd -= HandleOnLevelEnd;
         }
 
+        private void OnDestroy()
+        {
+            Destroy(transform.parent.gameObject);
+        }
+
         #region Event Handler
         void HandleOnLevelInit() { }
         void HandleOnLevelPlay() { }
@@ -80,7 +93,7 @@ namespace BlackFox
         {
             foreach (RopeController rope in FindObjectsOfType<RopeController>())
             {
-                if (rope.name == "Rope" + playerIndex)
+                if (rope.name == playerIndex + "Rope")
                     return rope;
             }
             return null;
@@ -98,14 +111,6 @@ namespace BlackFox
                 if (k.GetComponent<IDamageable>() != null)
                     damageables.Add(k.GetComponent<IDamageable>());
             }
-        }
-
-        void EnableComponents(bool _value)
-        {
-            GetComponent<Collider>().enabled = _value;
-            GetComponent<Shooter>().enabled = _value;
-            GetComponent<PlacePin>().enabled = _value;
-            GetComponent<MovementController>().enabled = _value;
         }
 
         /// <summary>
@@ -253,14 +258,13 @@ namespace BlackFox
             {
                 if (EventManager.OnAgentKilled != null)
                 {
-                    if (_attacker.GetComponent<Agent>() != null)
+                    if (_attacker != null)
                         EventManager.OnAgentKilled(_attacker.GetComponent<Agent>(), this);
                     else
                         EventManager.OnAgentKilled(null, this);
                 }
-                EnableComponents(false);
-                transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject); });
-                
+                    
+                transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject); });              
                 return;
             }
         }
@@ -284,24 +288,24 @@ namespace BlackFox
         }
 
         void PlacePin(bool _isRight) {
-            pinPlacer.placeThePin(this, _isRight);
+            pinPlacer.placeThePin(this,_isRight);
         }
 
         void GoForward(float _amount) {
             movment.Movement(_amount);
-            //ExtendRope(_amount);
+            if(rope != null)
+                ExtendRope(_amount);
         }
 
         void Rotate(float _amount) {
             movment.Rotation(_amount);
         }
 
-        void ExtendRope(float _amount) {
-            ropeExtTimer += Time.deltaTime;
-            if (_amount >= 0.9f && ropeExtTimer >= 0.1f) {
+        void ExtendRope(float _amount) {;
+            if ( _amount >= .9f && previousSpeed.sqrMagnitude >= rigid.velocity.sqrMagnitude) {
                 rope.ExtendRope();
-                ropeExtTimer = 0;
             }
+            previousSpeed = rigid.velocity;
         }
 
         #endregion

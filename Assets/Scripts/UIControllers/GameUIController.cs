@@ -14,17 +14,12 @@ namespace BlackFox
         public Text Player2BulletCount;
         public Text Player3BulletCount;
         public Text Player4BulletCount;
-        public Image WindDisplay;
-        public Text TextWindDisplay;
         public Slider ElementZeroSlider;
 
         public TMP_Text LevelText;
         LevelManager levelMNG;
 
-        private void OnEnable()
-        {
-            EventManager.OnLevelInit += UpdateLevelInformation;
-        }
+        
 
         private void Start()
         {
@@ -58,20 +53,24 @@ namespace BlackFox
             }
         }
 
-        
-                   
-
         public void SetElementZeroSlider(float _life, float _maxLife)
         {
             ElementZeroSlider.value = _life / _maxLife;                  // Da rivedere se il valore della vita cambia
         }
 
-        public void ShowWinner(PlayerIndex _playerIndex)
+        #endregion
+
+        #region Events
+
+        private void OnEnable()
         {
-            WindDisplay.gameObject.SetActive(true);
-            TextWindDisplay.text = "Player" + _playerIndex + " Ha vinto! ";
+            EventManager.OnLevelInit += UpdateLevelInformation;
         }
 
-        #endregion 
+        private void OnDisable()
+        {
+            EventManager.OnLevelInit -= UpdateLevelInformation;
+        }
+        #endregion
     }
 }

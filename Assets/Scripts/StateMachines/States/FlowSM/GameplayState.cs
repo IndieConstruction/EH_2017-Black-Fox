@@ -30,7 +30,8 @@ namespace BlackFox
         /// </summary>
         void LoadArena()
         {
-            GameObject.Instantiate(Resources.Load("Prefabs/Levels/Level" + levelNumber));
+            //GameObject.Instantiate(Resources.Load("Prefabs/Levels/Level" + levelNumber));
+            GameObject.Instantiate(Resources.Load("Prefabs/Levels/Level1withRopes"));
         }
 
         void OnMachineEnd(string _machineName)

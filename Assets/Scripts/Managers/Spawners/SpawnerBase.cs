@@ -82,6 +82,7 @@ namespace BlackFox {
             OnDeactivation();
             if (OnFlowEnd != null)
                 OnFlowEnd(this);
+            EventManager.OnRoundPlay -= OnRoundPlay;
         }
         #endregion
 
@@ -89,6 +90,17 @@ namespace BlackFox {
         public delegate void SpawnerEvent(SpawnerBase _spawner);
 
         public event SpawnerEvent OnFlowEnd;
+
+        private void OnEnable()
+        {
+            EventManager.OnRoundPlay += OnRoundPlay;
+        }
+
+        /// <summary>
+        /// Questa funzione viene chiamata all'inizio di ogni round.
+        /// </summary>
+        protected virtual void OnRoundPlay() { }
+
         #endregion
     }
 }

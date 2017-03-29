@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace BlackFox
 {
@@ -10,7 +11,15 @@ namespace BlackFox
 
         public float RangeToDestroyAgents;
         public float RangeToDestroyPins;
-        public int Size = 1;
+        int Size = 1;
+        
+        /// <summary>
+        /// La scala a cui arriva una volta aumentata la taglia
+        /// </summary>
+        public int ScaleSize2 = 2;
+        public int ScaleSize3 = 4;
+
+
         float Timer = 5;
         States currentState;
         float CheckTimer = 1f;
@@ -61,7 +70,7 @@ namespace BlackFox
                     Timer -= Time.deltaTime;
                     if (Timer <= 0)
                     {
-                        //Cambiare le dimensioni del Buco Nero
+                        transform.DOScale(new Vector3(ScaleSize2, ScaleSize2, ScaleSize2), 0.5f);
                         Size = 2;
                         Timer = 5;
                     }
@@ -71,7 +80,7 @@ namespace BlackFox
                     Timer -= Time.deltaTime;
                     if (Timer <= 0)
                     {
-                        //Cambiare le dimensioni del Buco Nero
+                        transform.DOScale(new Vector3(ScaleSize3, ScaleSize3, ScaleSize3), 0.5f);
                         Size = 3;
                         Timer = 5;
                     }
@@ -81,7 +90,7 @@ namespace BlackFox
                     Timer -= Time.deltaTime;
                     if (Timer <= 0)
                     {
-                        Destroy(gameObject);
+                        transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject); });
                     }
                     break;
                 default:

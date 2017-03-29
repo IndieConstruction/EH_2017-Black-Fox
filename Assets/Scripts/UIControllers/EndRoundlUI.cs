@@ -30,18 +30,24 @@ namespace BlackFox
             EndLevelPanel.SetActive(false);
         }
 
-        // Update is called once per frame
-        void Update()
+
+        void UpdateUIPoints()
         {
-            
+            Player1Points.text = P1KillPoints + " / 5";
+            Player2Points.text = P2KillPoints + " / 5";
+            Player3Points.text = P3KillPoints + " / 5";
+            Player4Points.text = P4KillPoints + " / 5";
         }
+
+        #region API 
 
         /// <summary>
         /// Attaccato Ad un bottone scatena l'evento per avvisare il current state che deve terminare.
         /// </summary>
         public void ChangeStateOnClick()
         {
-            EventManager.OnClickToChangeState();
+            if (uiManager.OnClickToChangeState != null)
+                uiManager.OnClickToChangeState();
         }
 
         public void AddKillPointToUI(Agent _attacker, Agent _victim)
@@ -68,7 +74,7 @@ namespace BlackFox
             {
                 case PlayerIndex.One:
                     if (P1KillPoints != 0)
-                        P1KillPoints--; 
+                        P1KillPoints--;
                     break;
                 case PlayerIndex.Two:
                     if (P2KillPoints != 0)
@@ -88,15 +94,6 @@ namespace BlackFox
             UpdateUIPoints();
         }
 
-        void UpdateUIPoints()
-        {
-            Player1Points.text = P1KillPoints + " / 5";
-            Player2Points.text = P2KillPoints + " / 5";
-            Player3Points.text = P3KillPoints + " / 5";
-            Player4Points.text = P4KillPoints + " / 5";
-        }
-
-        #region API 
         public void ClearTheUIPoints()
         {
             P1KillPoints = 0;

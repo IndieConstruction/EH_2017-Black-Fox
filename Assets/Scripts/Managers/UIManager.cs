@@ -6,8 +6,9 @@ namespace BlackFox
 {
     public class UIManager : MonoBehaviour
     {
-
+        [HideInInspector]
         public EndRoundlUI endRoundUI;
+        [HideInInspector]
         public GameUIController gameUIController;
 
         // Use this for initialization

@@ -8,6 +8,8 @@ namespace BlackFox {
     [Serializable]
     public abstract class SpawnerBase : MonoBehaviour
     {
+        public SpawnerOptions Options;
+
         protected int level;
         protected int round;
 
@@ -22,7 +24,24 @@ namespace BlackFox {
             round = _round;
         }
 
+        public virtual SpawnerBase Init(SpawnerOptions options) {
+            Options = options;
+            return this;
+        }
+
         public virtual void ReactToOnAgentKilled(Agent _killer, Agent _victim) { }
         #endregion
+    }
+    
+    public class SpawnerOptions {
+        public GameObject SpawnerPrefab;
+
+        public void CreateInstance(SpawnerOptions _option, Transform _container) {
+            SpawnerBase spawner = null;
+            if (_option.SpawnerPrefab != null) { 
+                spawner = GameObject.Instantiate<GameObject>(SpawnerPrefab, _container).GetComponent<SpawnerBase>();
+                spawner.Init(this);
+            }
+        }
     }
 }

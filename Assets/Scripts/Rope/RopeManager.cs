@@ -51,7 +51,9 @@ namespace BlackFox {
             newOrigin = Instantiate(RopeOrigin, transform);
             newOrigin.name = _target.playerIndex + "Rope";
             //Set the AnchorPoint before the activation of the component
-            newOrigin.GetComponent<RopeController>().AnchorPoint = _target.GetComponent<ConfigurableJoint>().connectedBody.transform;
+            RopeController rc = newOrigin.GetComponent<RopeController>();
+            ConfigurableJoint cj = _target.GetComponent<ConfigurableJoint>();
+            rc.AnchorPoint = cj.connectedBody.transform;
             newOrigin.GetComponent<RopeController>().InitRope();
             switch (_target.playerIndex)
             {

@@ -28,8 +28,9 @@ namespace BlackFox
         [HideInInspector]
         public RopeManager ropeMng;
 
+        public Level currentLevel;
+
         GameplaySM gameplaySM;
-        Level currentLevel;
 
         void Start()
         {
@@ -44,7 +45,13 @@ namespace BlackFox
         public void InstantiateSpawnerManager()
         {
             spawnerMng = Instantiate(SpawnerMngPrefab, transform).GetComponent<SpawnerManager>();
-            spawnerMng.Init(levelNumber, roundNumber, currentLevel.LevelSpawners);
+            //spawnerMng.Init(levelNumber, roundNumber, currentLevel.LevelSpawners);
+            
+            currentLevel.ArrowsSpawner.CreateInstance(currentLevel.ArrowsSpawner, spawnerMng.transform);
+            currentLevel.AvatarSpawner.CreateInstance(currentLevel.AvatarSpawner, spawnerMng.transform);
+            currentLevel.BlackHoleSpawner.CreateInstance(currentLevel.BlackHoleSpawner, spawnerMng.transform);
+            currentLevel.ExternalElementSpawner.CreateInstance(currentLevel.ExternalElementSpawner, spawnerMng.transform);
+            currentLevel.WaveSpawner.CreateInstance(currentLevel.WaveSpawner, spawnerMng.transform);
         }
         /// <summary>
         /// Instance a preloaded RopeManager

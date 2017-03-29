@@ -9,6 +9,12 @@ namespace BlackFox {
         public int Order;
         public string LevelName;
         public GameObject ArenaPrefab;
-        public List<GameObject> LevelSpawners = new List<GameObject>();
+
+        [Header("Spawners")]
+        public WaveSpawnerOptions WaveSpawner;
+        public ExternalElementOptions ExternalElementSpawner;
+        public AvatarSpawnerOptions AvatarSpawner;
+        public ArrowsSpawerOptions ArrowsSpawner;
+        public BlackHoleSpawnerOptions BlackHoleSpawner;
     } 
 }

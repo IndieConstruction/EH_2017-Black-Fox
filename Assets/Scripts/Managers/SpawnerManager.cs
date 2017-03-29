@@ -15,25 +15,21 @@ namespace BlackFox
 
         private void Start()
         {   
-            //Initialize each Spawner and subscribe their events
-            foreach (var spawner in Spawners)
-            {
-                spawner.Init(Level, Round);
-            }
+            ////Initialize each Spawner and subscribe their events
+            //foreach (var spawner in Spawners)
+            //{
+            //     spawner.Init(Level, Round);
+            //}
         }
         
-        void InstantiateSpawners(List<GameObject> _levelSpawners)
-        {
-            foreach (var spawner in _levelSpawners)
-                Spawners.Add(Instantiate(spawner, transform).GetComponent<SpawnerBase>());
-        }
-
+        
         #region API
-        public void Init(int _level, int _round, List<GameObject> _levelSpawners)
+
+
+        public void Init(int _level, int _round, List<SpawnerOptions> _levelSpawners)
         {
             Level = _level;
             Round = _round;
-            InstantiateSpawners(_levelSpawners);
         }
 
         /// <summary>

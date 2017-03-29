@@ -6,17 +6,11 @@ namespace BlackFox
 {
     public class BlackHoleSpawner : SpawnerBase
     {
-
-        public float minRandomX;
-        public float maxRandomX;
-        public float minRandomZ;
-        public float maxRandomZ;
-        public GameObject BlackHolePrefab;
         Vector3 randomPos;
-        public int BlackHoleToSpawn = 3;
         int BlackHoleSpawned = 0;
 
-        public float TimerToSpawn = 10;
+        new public BlackHoleSpawnerOptions Options;
+
         float Timer;
         State _currentState;
 
@@ -37,9 +31,15 @@ namespace BlackFox
         }
         void Start()
         {
-            Timer = TimerToSpawn;
+            Timer = Options.TimerToSpawn;
             CurrentState = State.Timer;
         }
+
+        public override SpawnerBase Init(SpawnerOptions options) {
+            Options = options as BlackHoleSpawnerOptions;
+            return this;
+        }
+
 
         void Update()
         {
@@ -47,9 +47,9 @@ namespace BlackFox
             {
                 case State.Timer:
                     Timer -= Time.deltaTime;
-                    if (Timer <= 0 && BlackHoleSpawned <= BlackHoleToSpawn)
+                    if (Timer <= 0 && BlackHoleSpawned <= Options.BlackHoleToSpawn)
                     {
-                        if (BlackHoleSpawned == BlackHoleToSpawn)
+                        if (BlackHoleSpawned == Options.BlackHoleToSpawn)
                         {
                             CurrentState = State.Stop;
                         }
@@ -65,7 +65,7 @@ namespace BlackFox
 
                     SpawnBlackHole();
                     BlackHoleSpawned++;
-                    Timer = TimerToSpawn;
+                    Timer = Options.TimerToSpawn;
                     CurrentState = State.Timer;
 
                     break;
@@ -85,9 +85,21 @@ namespace BlackFox
         /// </summary>
         void SpawnBlackHole()
         {
-            randomPos = new Vector3(Random.Range(minRandomX, maxRandomX), 0, Random.Range(minRandomZ, maxRandomZ));
-            Instantiate(BlackHolePrefab, randomPos, Quaternion.identity);
+            randomPos = new Vector3(Random.Range(Options.minRandomX, Options.maxRandomX), 0, Random.Range(Options.minRandomZ, Options.maxRandomZ));
+            Instantiate(Options.BlackHolePrefab, randomPos, Quaternion.identity);
 
         }
+    }
+
+    [System.Serializable]
+    public class BlackHoleSpawnerOptions : SpawnerOptions {
+
+        public float minRandomX;
+        public float maxRandomX;
+        public float minRandomZ;
+        public float maxRandomZ;
+        public GameObject BlackHolePrefab;
+        public int BlackHoleToSpawn = 3;
+        public float TimerToSpawn = 10;
     }
 }

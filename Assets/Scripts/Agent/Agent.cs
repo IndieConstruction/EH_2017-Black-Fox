@@ -64,29 +64,13 @@ namespace BlackFox
             XInputReader();
         }
 
-        void OnEnable()
-        {
-            EventManager.OnLevelInit += HandleOnLevelInit;
-            EventManager.OnRoundPlay += HandleOnLevelPlay;
-            EventManager.OnRoundEnd += HandleOnLevelEnd;
-        }
-
-        void OnDisable()
-        {
-            EventManager.OnLevelInit -= HandleOnLevelInit;
-            EventManager.OnRoundPlay -= HandleOnLevelPlay;
-            EventManager.OnRoundEnd -= HandleOnLevelEnd;
-        }
-
         private void OnDestroy()
         {
             Destroy(transform.parent.gameObject);
         }
 
         #region Event Handler
-        void HandleOnLevelInit() { }
-        void HandleOnLevelPlay() { }
-        void HandleOnLevelEnd() { }
+
         #endregion
 
         RopeController SearchRope()

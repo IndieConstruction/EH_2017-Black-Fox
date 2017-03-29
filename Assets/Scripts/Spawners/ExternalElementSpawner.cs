@@ -6,11 +6,7 @@ namespace BlackFox
 {
     public class ExternalElementSpawner : SpawnerBase
     {
-        public GameObject ExternalAgent;                        //Prefab of the ExternalAgent to instantiate         
-        public float MinTime = 10;                              //Min time between Spawns
-        public float MaxTime = 20;                              //Max time between Spawns
-        public float AngularSpeed = 1;                          //Rotation speed
-        public float TransSpeed = 1;                            //Precession speed
+        new public ExternalElementOptions Options;
         Transform target;                                       //Target of the ExternalElements
         float nextTime;                                         //Timer
         List<IDamageable> Damageables = new List<IDamageable>();//Lista di oggetti danneggiabili
@@ -18,12 +14,17 @@ namespace BlackFox
         #region SpawnerLifeFlow
         void Start()
         {
-            if(ExternalAgent == null)
-                ExternalAgent = (GameObject)Resources.Load("Prefabs/ExternalAgents/ExternalAgent1");
+            if(Options.ExternalAgent == null)
+                Options.ExternalAgent = (GameObject)Resources.Load("Prefabs/ExternalAgents/ExternalAgent1");
 
             target = FindObjectOfType<Core>().transform;
-            nextTime = Random.Range(MinTime, MaxTime);
+            nextTime = Random.Range(Options.MinTime, Options.MaxTime);
             LoadIDamageablePrefab();
+        }
+
+        public override SpawnerBase Init(SpawnerOptions options) {
+            Options = options as ExternalElementOptions;
+            return this;
         }
 
         void Update()
@@ -31,7 +32,7 @@ namespace BlackFox
             if (Time.time >= nextTime)
             {
                 InstantiateExternalAgent();
-                nextTime += Random.Range(MinTime, MaxTime);
+                nextTime += Random.Range(Options.MinTime, Options.MaxTime);
             }
             GravityAround();
         }
@@ -47,8 +48,8 @@ namespace BlackFox
 
             Quaternion current = transform.localRotation;
 
-            transform.localRotation = Quaternion.Slerp(current, rotation, AngularSpeed * Time.deltaTime);
-            transform.Translate(TransSpeed * Time.deltaTime, 0, 0);
+            transform.localRotation = Quaternion.Slerp(current, rotation, Options.AngularSpeed * Time.deltaTime);
+            transform.Translate(Options.TransSpeed * Time.deltaTime, 0, 0);
         }
 
         /// <summary>
@@ -57,7 +58,7 @@ namespace BlackFox
         void LoadIDamageablePrefab()
         {
             //WARNING - If a GameObject in the list do not have the IDamageable interface, it will not be damaged
-            List<GameObject> DamageablesPrefabs = PrefabUtily.LoadAllPrefabsWithComponentOfType<IDamageable>("Prefabs", ExternalAgent);
+            List<GameObject> DamageablesPrefabs = PrefabUtily.LoadAllPrefabsWithComponentOfType<IDamageable>("Prefabs", Options.ExternalAgent);
             foreach (var k in DamageablesPrefabs)
             {
                 if (k.GetComponent<IDamageable>() != null)
@@ -70,9 +71,18 @@ namespace BlackFox
         /// </summary>
         void InstantiateExternalAgent()
         {
-            GameObject instantiateEA = Instantiate(ExternalAgent, transform.position, transform.rotation);
+            GameObject instantiateEA = Instantiate(Options.ExternalAgent, transform.position, transform.rotation);
             ExternalAgent eA = instantiateEA.GetComponent<ExternalAgent>();
             eA.Initialize(target, Damageables);
         }
+    }
+
+    [System.Serializable]
+    public class ExternalElementOptions : SpawnerOptions {
+        public GameObject ExternalAgent;                        //Prefab of the ExternalAgent to instantiate         
+        public float MinTime = 10;                              //Min time between Spawns
+        public float MaxTime = 20;                              //Max time between Spawns
+        public float AngularSpeed = 1;                          //Rotation speed
+        public float TransSpeed = 1;                            //Precession speed
     }
 }

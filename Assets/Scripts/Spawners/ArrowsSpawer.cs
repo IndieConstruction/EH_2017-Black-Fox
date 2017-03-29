@@ -9,6 +9,7 @@ namespace BlackFox
     /// </summary>
     public class ArrowsSpawer : SpawnerBase
     {
+        new public ArrowsSpawerOptions Options;
         Arrow[] arrows;
         int maxRandSetup = 0;
         int randomSetup = 1;
@@ -39,5 +40,10 @@ namespace BlackFox
                 if (arr.IDSetup != randomSetup)
                     arr.gameObject.SetActive(true);
         }
+    }
+
+    [System.Serializable]
+    public class ArrowsSpawerOptions : SpawnerOptions {
+        // TODO : da creare
     }
 }

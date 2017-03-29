@@ -11,26 +11,7 @@ namespace BlackFox
     /// </summary>
     public class AvatarSpawner : SpawnerBase
     {
-        /// <summary>
-        /// Time between death and respawn
-        /// </summary>
-        public float RespawnTime = 0;
-        /// <summary>
-        /// Use the initial position as SpawnPoints
-        /// </summary>
-        public bool UseInitialPositionsAsSpawnPoints = false;
-        /// <summary>
-        /// Additional SpawnPoints
-        /// </summary>
-        public List<SpawnPoint> SpawnPoints;
-        /// <summary>
-        /// Use the Specifiied prefabas as player to respawn
-        /// </summary>
-        public bool UseSpecifiedPrefabs = false;
-        /// <summary>
-        /// Prefabs of Avatar to respawn
-        /// </summary>
-        public GameObject[] AvatarPrefabs = new GameObject[4];
+        new public AvatarSpawnerOptions Options;
 
         private List<SpawnPoint> _originalSpawns;
         public List<SpawnPoint> OriginalSpawns
@@ -43,6 +24,10 @@ namespace BlackFox
             }
             set { _originalSpawns = value; }
         }
+        /// <summary>
+        /// Additional SpawnPoints
+        /// </summary>
+        public List<AvatarSpawner.SpawnPoint> SpawnPoints;
         private GameObject[] agentsPrefb;
         
         /// <summary>
@@ -50,12 +35,12 @@ namespace BlackFox
         /// </summary>
         void Start()
         {
-            if (UseSpecifiedPrefabs)
-                agentsPrefb = AvatarPrefabs;
+            if (Options.UseSpecifiedPrefabs)
+                agentsPrefb = Options.AvatarPrefabs;
             else
                 agentsPrefb = Resources.LoadAll<GameObject>("Prefabs/Agents");
             
-            if (UseInitialPositionsAsSpawnPoints)
+            if (Options.UseInitialPositionsAsSpawnPoints)
             {
                 foreach (Agent agent in FindObjectsOfType<Agent>())
                 {
@@ -78,7 +63,12 @@ namespace BlackFox
                     OriginalSpawns.Add(spwnPt);
                 }
         }
-        
+
+        public override SpawnerBase Init(SpawnerOptions options) {
+            Options = options as AvatarSpawnerOptions;
+            return this;
+        }
+
         #region API
         /// <summary>
         /// Respawn all Players
@@ -154,8 +144,29 @@ namespace BlackFox
 
         IEnumerator RespawnCooldown(PlayerIndex _playerIndx)
         {
-            yield return new WaitForSeconds(RespawnTime);
+            yield return new WaitForSeconds(Options.RespawnTime);
             RespawnImmediate(_playerIndx);
         }
+    }
+
+    [System.Serializable]
+    public class AvatarSpawnerOptions : SpawnerOptions {
+        /// <summary>
+        /// Time between death and respawn
+        /// </summary>
+        public float RespawnTime = 0;
+        /// <summary>
+        /// Use the initial position as SpawnPoints
+        /// </summary>
+        public bool UseInitialPositionsAsSpawnPoints = false;
+
+        /// <summary>
+        /// Use the Specifiied prefabas as player to respawn
+        /// </summary>
+        public bool UseSpecifiedPrefabs = false;
+        /// <summary>
+        /// Prefabs of Avatar to respawn
+        /// </summary>
+        public GameObject[] AvatarPrefabs = new GameObject[4];
     }
 }

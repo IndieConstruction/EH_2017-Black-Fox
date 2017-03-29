@@ -19,11 +19,7 @@ namespace BlackFox
 
         #region Events
 
-        public delegate void ChangeStateEvent();
-
-        public ChangeStateEvent OnClickToChangeState;
-
-
+        
         protected void OnEnable()
         {
             EventManager.OnAgentKilled += endRoundUI.AddKillPointToUI;

@@ -16,7 +16,6 @@ namespace BlackFox
         public TMP_Text Player3Points;
         public TMP_Text Player4Points;
         public GameObject EndLevelPanel;
-        Button NextStateButton;
 
         int P1KillPoints;
         int P2KillPoints;
@@ -29,21 +28,26 @@ namespace BlackFox
         {
             uiManager = GetComponentInParent<UIManager>();
             EndLevelPanel.SetActive(false);
-            NextStateButton = GetComponentInChildren<Button>();
         }
 
-        // Update is called once per frame
-        void Update()
+
+        void UpdateUIPoints()
         {
-            
+            Player1Points.text = P1KillPoints + " / 5";
+            Player2Points.text = P2KillPoints + " / 5";
+            Player3Points.text = P3KillPoints + " / 5";
+            Player4Points.text = P4KillPoints + " / 5";
         }
+
+        #region API 
 
         /// <summary>
         /// Attaccato Ad un bottone scatena l'evento per avvisare il current state che deve terminare.
         /// </summary>
         public void ChangeStateOnClick()
         {
-            uiManager.OnClickToChangeState();
+            if (uiManager.OnClickToChangeState != null)
+                uiManager.OnClickToChangeState();
         }
 
         public void AddKillPointToUI(Agent _attacker, Agent _victim)
@@ -70,7 +74,7 @@ namespace BlackFox
             {
                 case PlayerIndex.One:
                     if (P1KillPoints != 0)
-                        P1KillPoints--; 
+                        P1KillPoints--;
                     break;
                 case PlayerIndex.Two:
                     if (P2KillPoints != 0)
@@ -90,15 +94,6 @@ namespace BlackFox
             UpdateUIPoints();
         }
 
-        void UpdateUIPoints()
-        {
-            Player1Points.text = P1KillPoints + " / 5";
-            Player2Points.text = P2KillPoints + " / 5";
-            Player3Points.text = P3KillPoints + " / 5";
-            Player4Points.text = P4KillPoints + " / 5";
-        }
-
-        #region API 
         public void ClearTheUIPoints()
         {
             P1KillPoints = 0;

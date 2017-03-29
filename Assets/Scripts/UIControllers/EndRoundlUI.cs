@@ -16,7 +16,6 @@ namespace BlackFox
         public TMP_Text Player3Points;
         public TMP_Text Player4Points;
         public GameObject EndLevelPanel;
-        Button NextStateButton;
 
         int P1KillPoints;
         int P2KillPoints;
@@ -29,7 +28,6 @@ namespace BlackFox
         {
             uiManager = GetComponentInParent<UIManager>();
             EndLevelPanel.SetActive(false);
-            NextStateButton = GetComponentInChildren<Button>();
         }
 
         // Update is called once per frame
@@ -43,7 +41,7 @@ namespace BlackFox
         /// </summary>
         public void ChangeStateOnClick()
         {
-            uiManager.OnClickToChangeState();
+            EventManager.OnClickToChangeState();
         }
 
         public void AddKillPointToUI(Agent _attacker, Agent _victim)

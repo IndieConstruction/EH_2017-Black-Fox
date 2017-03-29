@@ -15,14 +15,14 @@ namespace BlackFox
             EventManager.OnRoundEnd();
             uiManager = GameObject.FindObjectOfType<UIManager>();
             uiManager.endRoundUI.EndLevelPanel.SetActive(true);
-            uiManager.OnClickToChangeState += OnChangeState;
+            EventManager.OnClickToChangeState += OnChangeState;
         }
 
         public override void OnEnd()
         {
             uiManager.endRoundUI.EndLevelPanel.SetActive(false);
             uiManager.endRoundUI.ClearTheUIPoints();
-            uiManager.OnClickToChangeState -= OnChangeState;
+            EventManager.OnClickToChangeState -= OnChangeState;
         }
 
         /// <summary>

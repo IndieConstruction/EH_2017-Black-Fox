@@ -16,7 +16,7 @@ namespace BlackFox
         List<IDamageable> Damageables = new List<IDamageable>();//Lista di oggetti danneggiabili
 
         #region SpawnerLifeFlow
-        protected override void OnActivation()
+        void Start()
         {
             if(ExternalAgent == null)
                 ExternalAgent = (GameObject)Resources.Load("Prefabs/ExternalAgents/ExternalAgent1");
@@ -26,7 +26,7 @@ namespace BlackFox
             LoadIDamageablePrefab();
         }
 
-        protected override void OnRuntime()
+        void Update()
         {
             if (Time.time >= nextTime)
             {

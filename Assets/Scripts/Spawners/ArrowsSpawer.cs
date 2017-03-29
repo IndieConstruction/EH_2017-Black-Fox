@@ -13,7 +13,7 @@ namespace BlackFox
         int maxRandSetup = 0;
         int randomSetup = 1;
 
-        protected override void OnActivation()
+        void Start()
         {            
             if (arrows.Length == 0)
             {
@@ -32,7 +32,7 @@ namespace BlackFox
                     arr.gameObject.SetActive(false);
         }
 
-        protected override void OnDeactivation()
+        void OnDisable()
         {   
             //Reactivate the deactivated Setups
             foreach (Arrow arr in arrows)

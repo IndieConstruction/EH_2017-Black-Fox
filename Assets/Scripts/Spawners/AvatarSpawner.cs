@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
@@ -43,12 +44,11 @@ namespace BlackFox
             set { _originalSpawns = value; }
         }
         private GameObject[] agentsPrefb;
-
-        #region Spawner Life flow
+        
         /// <summary>
         /// Save the desired SpawnPoints
         /// </summary>
-        protected override void OnActivation()
+        void Start()
         {
             if (UseSpecifiedPrefabs)
                 agentsPrefb = AvatarPrefabs;
@@ -78,8 +78,7 @@ namespace BlackFox
                     OriginalSpawns.Add(spwnPt);
                 }
         }
-        #endregion
-
+        
         #region API
         /// <summary>
         /// Respawn all Players
@@ -146,7 +145,7 @@ namespace BlackFox
         }
         #endregion
 
-        [System.Serializable]
+        [Serializable]
         public struct SpawnPoint
         {
             public Transform SpawnPosition;

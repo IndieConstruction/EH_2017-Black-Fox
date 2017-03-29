@@ -33,6 +33,7 @@ namespace BlackFox
 
         void Start()
         {
+            currentLevel = Instantiate(Resources.Load<Level>("Prefabs/Levels/Level" + levelNumber));
             StartGameplaySM(); 
         }
 
@@ -56,9 +57,8 @@ namespace BlackFox
         /// <summary>
         /// Carica lo scriptable object del livello e istanzia il prefab del livello
         /// </summary>
-        public void InstantiateLevel()
+        public void InstantiateArena()
         {
-            currentLevel = Instantiate(Resources.Load<Level>("Prefabs/Levels/Level" + levelNumber));
             Instantiate(currentLevel.ArenaPrefab, transform);
 
         }

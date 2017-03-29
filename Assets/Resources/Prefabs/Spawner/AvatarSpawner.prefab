@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e030002c36bddfd4c83e5489752b4176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RespawnTime: 0
+  RespawnTime: 3
   UseInitialPositionsAsSpawnPoints: 0
   SpawnPoints:
   - SpawnPosition: {fileID: 4606161214009046}

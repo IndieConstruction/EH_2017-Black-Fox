@@ -9,31 +9,15 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("PreInitState");
-            LoadArena();
-            LoadManager();
+            GameManager.Instance.levelManager.InstantiateArena();
+            GameManager.Instance.levelManager.InstantiateRopeManager();
+            GameManager.Instance.levelManager.InstantiateSpawnerManager();
         }
 
         public override void OnUpdate()
         {
             if (OnStateEnd != null)
                 OnStateEnd();
-        }
-
-        /// <summary>
-        /// Chiama la funzione del level manager che istanzia i manager degli elementi principali del livello
-        /// </summary>
-        void LoadManager()
-        {
-            GameManager.Instance.levelManager.InstantiateSpawnerManager();
-            GameManager.Instance.levelManager.InstantiateRopeManager();
-        }
-
-        /// <summary>
-        /// Chiama la funzione del level manager che istanzia l'arena
-        /// </summary>
-        void LoadArena()
-        {
-            GameManager.Instance.levelManager.InstantiateLevel();
         }
     }
 }

@@ -35,16 +35,13 @@ namespace BlackFox
             Spawn,
             Stop,
         }
-
-        // Like the Start
-        protected override void OnActivation()
+        void Start()
         {
             Timer = TimerToSpawn;
             CurrentState = State.Timer;
         }
 
-        // Like the Update
-        protected override void OnRuntime()
+        void Update()
         {
             switch (CurrentState)
             {

@@ -16,7 +16,7 @@ namespace BlackFox
         public float MinTime = 20;
         public float MaxTime = 50;
 
-        protected override void OnRuntime()
+        void Update()
         {
             if (Time.time >= nextTime)
             {
@@ -26,7 +26,7 @@ namespace BlackFox
             }
         }
 
-        protected override void OnDeactivation()
+        void OnDisable()
         {
             Destroy(wave);
         }

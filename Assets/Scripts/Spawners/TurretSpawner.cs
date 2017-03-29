@@ -4,10 +4,8 @@ using UnityEngine;
 
 namespace BlackFox
 {
-
     public class TurretSpawner : SpawnerBase
     {
-
         float NordWall = 59.67f;
         float EstWall = 89.51f;
         public float Width = 20f;
@@ -16,8 +14,7 @@ namespace BlackFox
         Vector3 InstacePosition;
         public GameObject Turret;
 
-        //Like Start()
-        protected override void OnActivation()
+        void Start()
         {
             RandX = Random.Range(-Width, Width);
             RandZ = Random.Range(-Width, Width);
@@ -41,8 +38,7 @@ namespace BlackFox
             Debug.Log(InstacePosition);
         }
 
-        //Like Update()
-        protected override void OnRuntime()
+        void Update()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {

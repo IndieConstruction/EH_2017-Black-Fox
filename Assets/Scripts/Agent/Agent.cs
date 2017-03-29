@@ -42,8 +42,13 @@ namespace BlackFox
         float nextFire;
         float ropeExtTimer;
 
+        //Variabili per gestire la fisca della corda
+        Rigidbody rigid;
+        Vector3 previousSpeed;
+
         void Start()
         {
+            rigid = GetComponent<Rigidbody>();
             movment = GetComponent<MovementController>();
             rope = SearchRope();
             pinPlacer = GetComponent<PlacePin>();
@@ -71,6 +76,11 @@ namespace BlackFox
             EventManager.OnLevelInit -= HandleOnLevelInit;
             EventManager.OnRoundPlay -= HandleOnLevelPlay;
             EventManager.OnRoundEnd -= HandleOnLevelEnd;
+        }
+
+        private void OnDestroy()
+        {
+            Destroy(transform.parent.gameObject);
         }
 
         #region Event Handler
@@ -247,8 +257,13 @@ namespace BlackFox
             if (Life < 1)
             {
                 if (EventManager.OnAgentKilled != null)
-                    EventManager.OnAgentKilled(_attacker.GetComponent<Agent>(), this);
-            
+                {
+                    if (_attacker != null)
+                        EventManager.OnAgentKilled(_attacker.GetComponent<Agent>(), this);
+                    else
+                        EventManager.OnAgentKilled(null, this);
+                }
+                    
                 transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject); });              
                 return;
             }
@@ -273,24 +288,24 @@ namespace BlackFox
         }
 
         void PlacePin(bool _isRight) {
-            pinPlacer.placeThePin(this, _isRight);
+            pinPlacer.placeThePin(this,_isRight);
         }
 
         void GoForward(float _amount) {
             movment.Movement(_amount);
-            //if(rope != null)
-            //    ExtendRope(_amount);
+            if(rope != null)
+                ExtendRope(_amount);
         }
 
         void Rotate(float _amount) {
             movment.Rotation(_amount);
         }
 
-        void ExtendRope(float _amount) {
-            //Debug.Log(GetComponent<Rigidbody>().velocity.magnitude);
-            if (_amount >= 0.9f && GetComponent<Rigidbody>().velocity.sqrMagnitude >= 2500) {
+        void ExtendRope(float _amount) {;
+            if ( _amount >= .9f && previousSpeed.sqrMagnitude >= rigid.velocity.sqrMagnitude) {
                 rope.ExtendRope();
             }
+            previousSpeed = rigid.velocity;
         }
 
         #endregion

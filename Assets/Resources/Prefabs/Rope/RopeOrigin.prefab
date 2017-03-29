@@ -71,7 +71,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   FragmentPrefab: {fileID: 100000, guid: 4674fc95f73a4f046b8e3c7cf656be6f, type: 2}
   AnchorPoint: {fileID: 0}
-  MaxLength: 100
+  MaxLength: 300
   DensityOfFragments: 0.5
 --- !u!120 &120073920322594396
 LineRenderer:

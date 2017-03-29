@@ -9,6 +9,7 @@ namespace BlackFox
 {
     public class EndRoundlUI : MonoBehaviour
     {
+        UIManager uiManager;
 
         public TMP_Text Player1Points;
         public TMP_Text Player2Points;
@@ -26,6 +27,7 @@ namespace BlackFox
         // Use this for initialization
         void Start()
         {
+            uiManager = GetComponentInParent<UIManager>();
             EndLevelPanel.SetActive(false);
             NextStateButton = GetComponentInChildren<Button>();
         }
@@ -41,10 +43,10 @@ namespace BlackFox
         /// </summary>
         public void ChangeStateOnClick()
         {
-            OnClickToChangeState();
+            uiManager.OnClickToChangeState();
         }
 
-        void AddKillPointToUI(Agent _attacker, Agent _victim)
+        public void AddKillPointToUI(Agent _attacker, Agent _victim)
         {
             switch (_attacker.playerIndex)
             {
@@ -107,22 +109,6 @@ namespace BlackFox
 
         #endregion
 
-        #region Events
-
-        public delegate void ChangeStateEvent();
-
-        public ChangeStateEvent OnClickToChangeState;
-
-                
-        protected void OnEnable()
-        {
-            EventManager.OnAgentKilled += AddKillPointToUI;
-        }
-
-        protected void OnDisable()
-        {
-            EventManager.OnAgentKilled -= AddKillPointToUI;
-        }
-        #endregion
+       
     }
 }

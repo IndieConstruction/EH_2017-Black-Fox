@@ -13,13 +13,13 @@ namespace BlackFox
     {
         new public AvatarSpawnerOptions Options;
 
-        private List<SpawnPoint> _originalSpawns;
-        public List<SpawnPoint> OriginalSpawns
+        private List<AvatarSpawnPoint> _originalSpawns;
+        public List<AvatarSpawnPoint> OriginalSpawns
         {
             get
             {
                 if (_originalSpawns == null)
-                    _originalSpawns = new List<SpawnPoint>();
+                    _originalSpawns = new List<AvatarSpawnPoint>();
                 return _originalSpawns;
             }
             set { _originalSpawns = value; }
@@ -27,7 +27,7 @@ namespace BlackFox
         /// <summary>
         /// Additional SpawnPoints
         /// </summary>
-        public List<AvatarSpawner.SpawnPoint> SpawnPoints;
+        public List<AvatarSpawnPoint> SpawnPoints;
         private GameObject[] agentsPrefb;
         
         /// <summary>
@@ -39,29 +39,45 @@ namespace BlackFox
                 agentsPrefb = Options.AvatarPrefabs;
             else
                 agentsPrefb = Resources.LoadAll<GameObject>("Prefabs/Agents");
-            
-            if (Options.UseInitialPositionsAsSpawnPoints)
-            {
-                foreach (Agent agent in FindObjectsOfType<Agent>())
-                {
-                    SpawnPoint newPos;
-                    GameObject newSpawn = new GameObject("SpawnPoint_" + agent.name);
-                    newSpawn.transform.position = agent.transform.position;
-                    newSpawn.transform.rotation = agent.transform.rotation;
-                    newSpawn.transform.parent = transform;
-
-                    newPos.SpawnPosition = newSpawn.transform;
-                    newPos.PlayerIndx = agent.playerIndex;
-
-                    OriginalSpawns.Add(newPos);
-                }
-            }
-
+           
             if (SpawnPoints != null)
-                foreach (SpawnPoint spwnPt in SpawnPoints)
+                foreach (AvatarSpawnPoint spwnPt in SpawnPoints)
                 {
                     OriginalSpawns.Add(spwnPt);
                 }
+
+            foreach (SpawnPoint spawn in FindObjectsOfType<SpawnPoint>())
+            {
+                AvatarSpawnPoint spwnPt;
+                switch (spawn.SpawnAvatar)
+                {
+                    case SpawnPoint.AvatarSpawnType.None:
+                        break;
+                    case SpawnPoint.AvatarSpawnType.Blue:
+                        spwnPt.SpawnPosition = spawn.transform;
+                        spwnPt.PlayerIndx = PlayerIndex.One;
+                        OriginalSpawns.Add(spwnPt);
+                        break;
+                    case SpawnPoint.AvatarSpawnType.Red:
+                        spwnPt.SpawnPosition = spawn.transform;
+                        spwnPt.PlayerIndx = PlayerIndex.Two;
+                        OriginalSpawns.Add(spwnPt);
+                        break;
+                    case SpawnPoint.AvatarSpawnType.Green:
+                        spwnPt.SpawnPosition = spawn.transform;
+                        spwnPt.PlayerIndx = PlayerIndex.Three;
+                        OriginalSpawns.Add(spwnPt);
+                        break;
+                    case SpawnPoint.AvatarSpawnType.Purple:
+                        spwnPt.SpawnPosition = spawn.transform;
+                        spwnPt.PlayerIndx = PlayerIndex.Four;
+                        OriginalSpawns.Add(spwnPt);
+                        break;
+                    default:
+                        break;
+                }
+
+            }
         }
 
         public override SpawnerBase Init(SpawnerOptions options) {
@@ -97,7 +113,7 @@ namespace BlackFox
 
             //TODO: sostituire la lista SpawnPoint nel successivo foreach
             //con una lista che prevede il corretto criterio di selezione degli spawn points.
-            foreach (SpawnPoint spawn in OriginalSpawns)
+            foreach (AvatarSpawnPoint spawn in OriginalSpawns)
             {
                 if (spawn.PlayerIndx == _playerIndx)
                 {
@@ -136,7 +152,7 @@ namespace BlackFox
         #endregion
 
         [Serializable]
-        public struct SpawnPoint
+        public struct AvatarSpawnPoint
         {
             public Transform SpawnPosition;
             public PlayerIndex PlayerIndx;
@@ -155,10 +171,6 @@ namespace BlackFox
         /// Time between death and respawn
         /// </summary>
         public float RespawnTime = 0;
-        /// <summary>
-        /// Use the initial position as SpawnPoints
-        /// </summary>
-        public bool UseInitialPositionsAsSpawnPoints = false;
 
         /// <summary>
         /// Use the Specifiied prefabas as player to respawn

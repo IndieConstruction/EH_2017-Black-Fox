@@ -18,15 +18,11 @@ namespace BlackFox
         public GameObject EndLevelPanel;
         Button NextStateButton;
 
-        int P1Kill;
-        int P2Kill;
-        int P3Kill;
-        int P4Kill;
-
-        int P1Dead;
-        int P2Dead;
-        int P3Dead;
-        int P4Dead;
+        int P1KillPoints;
+        int P2KillPoints;
+        int P3KillPoints;
+        int P4KillPoints;
+        
 
         // Use this for initialization
         void Start()
@@ -55,16 +51,16 @@ namespace BlackFox
             switch (_attacker.playerIndex)
             {
                 case PlayerIndex.One:
-                    P1Kill++;
+                    P1KillPoints++;
                     break;
                 case PlayerIndex.Two:
-                    P2Kill++;
+                    P2KillPoints++;
                     break;
                 case PlayerIndex.Three:
-                    P3Kill++;
+                    P3KillPoints++;
                     break;
                 case PlayerIndex.Four:
-                    P4Kill++;
+                    P4KillPoints++;
                     break;
                 default:
                     break;
@@ -73,16 +69,20 @@ namespace BlackFox
             switch (_victim.playerIndex)
             {
                 case PlayerIndex.One:
-                    P1Dead++;
+                    if (P1KillPoints != 0)
+                        P1KillPoints--; 
                     break;
                 case PlayerIndex.Two:
-                    P2Dead++;
+                    if (P2KillPoints != 0)
+                        P2KillPoints--;
                     break;
                 case PlayerIndex.Three:
-                    P3Dead++;
+                    if (P3KillPoints != 0)
+                        P3KillPoints--;
                     break;
                 case PlayerIndex.Four:
-                    P4Dead++;
+                    if (P4KillPoints != 0)
+                        P4KillPoints--;
                     break;
                 default:
                     break;
@@ -92,23 +92,19 @@ namespace BlackFox
 
         void UpdateUIPoints()
         {
-            Player1Points.text = P1Kill + " / " + P1Dead;
-            Player2Points.text = P2Kill + " / " + P2Dead;
-            Player3Points.text = P3Kill + " / " + P3Dead;
-            Player4Points.text = P4Kill + " / " + P4Dead;
+            Player1Points.text = P1KillPoints + " / 5";
+            Player2Points.text = P2KillPoints + " / 5";
+            Player3Points.text = P3KillPoints + " / 5";
+            Player4Points.text = P4KillPoints + " / 5";
         }
 
         #region API 
         public void ClearTheUIPoints()
         {
-            P1Kill = 0;
-            P2Kill = 0;
-            P3Kill = 0;
-            P4Kill = 0;
-            P1Dead = 0;
-            P2Dead = 0;
-            P3Dead = 0;
-            P4Dead = 0;
+            P1KillPoints = 0;
+            P2KillPoints = 0;
+            P3KillPoints = 0;
+            P4KillPoints = 0;
         }
 
         #endregion

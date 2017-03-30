@@ -52,3 +52,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   RopeOrigin: {fileID: 1744296215973444, guid: d2e20a51cf6ffb1419dbbaf80d2bdf23, type: 2}
+  RopeColors:
+  - {fileID: 2100000, guid: b455c3223858069469d41b33d4033245, type: 2}
+  - {fileID: 2100000, guid: 29df54d6c83797d48a9192516c6f576b, type: 2}
+  - {fileID: 2100000, guid: 6c2149cec69229845a1342714b62f467, type: 2}
+  - {fileID: 2100000, guid: 78e14e1d14f1a444fb182ccbb0c979ad, type: 2}

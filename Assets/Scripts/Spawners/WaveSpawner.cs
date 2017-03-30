@@ -7,7 +7,7 @@ namespace BlackFox {
     /// Spawn a Wave on a random SpawnPoint between the min/max given time
     /// </summary>
     public class WaveSpawner : SpawnerBase {
-        public List<Transform> SpawnPoints = new List<Transform>();
+        List<Transform> SpawnPoints = new List<Transform>();
         GameObject wave;
         float nextTime;
         new public WaveSpawnerOptions Options;
@@ -15,6 +15,14 @@ namespace BlackFox {
         public override SpawnerBase Init(SpawnerOptions options) {
             Options = options as WaveSpawnerOptions;
             return this;
+        }
+
+        private void Start()
+        {
+            foreach (var item in FindObjectsOfType<SpawnPoint>())
+            {
+                SpawnPoints.Add(item.transform);
+            }           
         }
 
         void Update() {

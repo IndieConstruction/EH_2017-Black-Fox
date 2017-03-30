@@ -53,6 +53,7 @@ namespace BlackFox
             CurrentLevel.AvatarSpawner.CreateInstance(CurrentLevel.AvatarSpawner, SpawnerMng.transform);
             CurrentLevel.BlackHoleSpawner.CreateInstance(CurrentLevel.BlackHoleSpawner, SpawnerMng.transform);
             CurrentLevel.ExternalElementSpawner.CreateInstance(CurrentLevel.ExternalElementSpawner, SpawnerMng.transform);
+            CurrentLevel.TurretSpawner.CreateInstance(CurrentLevel.TurretSpawner, SpawnerMng.transform);
             CurrentLevel.WaveSpawner.CreateInstance(CurrentLevel.WaveSpawner, SpawnerMng.transform);
         }
         /// <summary>

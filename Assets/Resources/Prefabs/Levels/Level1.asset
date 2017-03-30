@@ -16,14 +16,12 @@ MonoBehaviour:
   ArenaPrefab: {fileID: 1590692792633676, guid: 7ea2bcd6e0fcc5341a5f7624e386a912,
     type: 2}
   ArrowsSpawner:
-    SpawnerPrefab: {fileID: 1070215902948220, guid: 535a45a942dca274391779a06eec67e7,
-      type: 2}
-    ArrowPrefab: {fileID: 1944947905095504, guid: ac54f9ea34182f9488875829559e3a2b,
-      type: 2}
+    SpawnerPrefab: {fileID: 0}
+    ArrowPrefab: {fileID: 0}
   AvatarSpawner:
     SpawnerPrefab: {fileID: 1908843494005796, guid: 0ff4a992816176340b31bf27c66057d5,
       type: 2}
-    RespawnTime: 1
+    RespawnTime: 3
     UseSpecifiedPrefabs: 1
     AvatarPrefabs:
     - {fileID: 1305829202965250, guid: a214aefd3bf69464c9b46124238781de, type: 2}
@@ -40,21 +38,21 @@ MonoBehaviour:
     BlackHoleToSpawn: 3
     TimerToSpawn: 10
   ExternalElementSpawner:
-    SpawnerPrefab: {fileID: 0}
-    ExternalAgent: {fileID: 0}
+    SpawnerPrefab: {fileID: 1637366666661558, guid: 6389b3edb560e9741a9f9965a3fdc63f,
+      type: 2}
+    ExternalAgent: {fileID: 1842433816405484, guid: 7c88d28d0bb7bed4da4b6aee0e1a6320,
+      type: 2}
     MinTime: 10
     MaxTime: 20
     AngularSpeed: 1
     TransSpeed: 1
   TurretSpawner:
-    SpawnerPrefab: {fileID: 0}
-    Turrent: {fileID: 0}
-    MaxSpawnTurrent: 4
-    Spawnedturrent: 0
+    SpawnerPrefab: {fileID: 1877385561551694, guid: 5e01cb793b77acc4bbd565e41c66d706,
+      type: 2}
+    Turrent: {fileID: 1603904133494984, guid: a6adf95da4e7bfa43b8c60b3fa4a8be0, type: 2}
+    MaxSpawnTurrent: 5
   WaveSpawner:
-    SpawnerPrefab: {fileID: 1616782133673990, guid: a2e1ab7b507da4d46811404306d9869f,
-      type: 2}
-    WavePrefab: {fileID: 1482104890441414, guid: d5cc454859774504ea0d220a2f7f146b,
-      type: 2}
-    MinTime: 5
-    MaxTime: 20
+    SpawnerPrefab: {fileID: 0}
+    WavePrefab: {fileID: 0}
+    MinTime: 20
+    MaxTime: 50

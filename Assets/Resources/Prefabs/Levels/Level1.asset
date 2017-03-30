@@ -16,7 +16,10 @@ MonoBehaviour:
   ArenaPrefab: {fileID: 1590692792633676, guid: 7ea2bcd6e0fcc5341a5f7624e386a912,
     type: 2}
   ArrowsSpawner:
-    SpawnerPrefab: {fileID: 0}
+    SpawnerPrefab: {fileID: 1070215902948220, guid: 535a45a942dca274391779a06eec67e7,
+      type: 2}
+    ArrowPrefab: {fileID: 1944947905095504, guid: ac54f9ea34182f9488875829559e3a2b,
+      type: 2}
   AvatarSpawner:
     SpawnerPrefab: {fileID: 1908843494005796, guid: 0ff4a992816176340b31bf27c66057d5,
       type: 2}

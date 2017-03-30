@@ -149,6 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a99e84e00f0cf41a7a9894ee172317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IDSetup: 0
   ValidAs: 0000000001000000
   SpawnAvatar: 0
 --- !u!1001 &1858468228

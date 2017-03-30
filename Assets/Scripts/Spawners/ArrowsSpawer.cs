@@ -15,11 +15,17 @@ namespace BlackFox
         int maxRandSetup = 0;
         int randomSetup = 1;
 
+        public override SpawnerBase Init(SpawnerOptions options)
+        {
+            Options = options as ArrowsSpawerOptions;
+            return this;
+        }
+
         void Start()
         {
             foreach (var spawn in FindObjectsOfType<SpawnPoint>())
                 foreach (var item in spawn.ValidAs)
-                    if (item == SpawnPoint.SpawnType.WaveSpawn)
+                    if (item == SpawnPoint.SpawnType.ArrowSpawner)
                     {
                         Arrow newArrow;
                         newArrow.transf = spawn.transform;
@@ -34,7 +40,7 @@ namespace BlackFox
                     maxRandSetup = arr.IDsetup;
             //Pick a random Setup
             randomSetup = Random.Range(1, maxRandSetup);
-            //Deactivate all the inactive Setups
+            //Instanciate arrows at selected spawnpoint
             foreach (Arrow arr in arrows)
                 if (arr.IDsetup == randomSetup)
                     InstanciateNewArrow(arr.transf);
@@ -44,7 +50,12 @@ namespace BlackFox
         {   
             //Destroy all arrow in Scene
             foreach (GameObject arr in activeArrows)
+            {
+                activeArrows.Remove(arr);
                 Destroy(arr);
+            }
+                
+
         }
 
         /// <summary>

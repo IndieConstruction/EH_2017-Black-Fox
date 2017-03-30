@@ -211,6 +211,7 @@ namespace BlackFox
                 UpdateKillPoints(_killer.playerIndex, _victim.playerIndex);           // setta i punti morte e uccisione
                 _killer.UpdateKillPointsInUI(_killer.playerIndex, GetPlayerKillPoints(_killer.playerIndex));
                 _victim.UpdateKillPointsInUI(_victim.playerIndex, GetPlayerKillPoints(_victim.playerIndex));
+                GameManager.Instance.uiManager.endRoundUI.AddKillPointToUI(_killer, _victim);
             }
             else
                 UpdateKillPoints(_victim.playerIndex);

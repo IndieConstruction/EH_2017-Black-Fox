@@ -10,40 +10,61 @@ namespace BlackFox
     public class ArrowsSpawer : SpawnerBase
     {
         new public ArrowsSpawerOptions Options;
-        Arrow[] arrows;
+        List<Arrow> arrows = new List<Arrow>();
+        List<GameObject> activeArrows = new List<GameObject>();
         int maxRandSetup = 0;
         int randomSetup = 1;
 
         void Start()
-        {            
-            if (arrows.Length == 0)
-            {
-                //Get reference first time
-                arrows = FindObjectsOfType<Arrow>();
-                //Find the higher IDSetup value
-                foreach (Arrow arr in arrows)
-                    if (maxRandSetup < arr.IDSetup)
-                        maxRandSetup = arr.IDSetup;
-            }
+        {
+            foreach (var spawn in FindObjectsOfType<SpawnPoint>())
+                foreach (var item in spawn.ValidAs)
+                    if (item == SpawnPoint.SpawnType.WaveSpawn)
+                    {
+                        Arrow newArrow;
+                        newArrow.transf = spawn.transform;
+                        newArrow.IDsetup = spawn.IDSetup;
+                        arrows.Add(newArrow);
+                    }
+
+            
+            //Find the higher IDSetup value
+            foreach (Arrow arr in arrows)
+                if (maxRandSetup < arr.IDsetup)
+                    maxRandSetup = arr.IDsetup;
             //Pick a random Setup
             randomSetup = Random.Range(1, maxRandSetup);
             //Deactivate all the inactive Setups
             foreach (Arrow arr in arrows)
-                if (arr.IDSetup != randomSetup)
-                    arr.gameObject.SetActive(false);
+                if (arr.IDsetup == randomSetup)
+                    InstanciateNewArrow(arr.transf);
         }
 
         void OnDisable()
         {   
-            //Reactivate the deactivated Setups
-            foreach (Arrow arr in arrows)
-                if (arr.IDSetup != randomSetup)
-                    arr.gameObject.SetActive(true);
+            //Destroy all arrow in Scene
+            foreach (GameObject arr in activeArrows)
+                Destroy(arr);
+        }
+
+        /// <summary>
+        /// Instanciate a new Arrow in _transform and set it as child of thi GameObj
+        /// </summary>
+        /// <param name="_transf"></param>
+        void InstanciateNewArrow(Transform _transf)
+        {
+            activeArrows.Add(Instantiate(Options.ArrowPrefab, _transf.position, _transf.rotation, transform));
+        }
+
+        struct Arrow
+        {
+            public Transform transf;
+            public int IDsetup;
         }
     }
 
     [System.Serializable]
     public class ArrowsSpawerOptions : SpawnerOptions {
-        // TODO : da creare
+        public GameObject ArrowPrefab;
     }
 }

@@ -19,10 +19,10 @@ namespace BlackFox {
 
         private void Start()
         {
-            foreach (var item in FindObjectsOfType<SpawnPoint>())
-            {
-                SpawnPoints.Add(item.transform);
-            }           
+            foreach (var spawn in FindObjectsOfType<SpawnPoint>())
+                foreach (var item in spawn.ValidAs)
+                    if (item == SpawnPoint.SpawnType.WaveSpawn)
+                        SpawnPoints.Add(spawn.transform);       
         }
 
         void Update() {

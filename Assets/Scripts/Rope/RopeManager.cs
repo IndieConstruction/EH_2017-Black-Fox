@@ -84,11 +84,13 @@ namespace BlackFox {
             string nameOfRope = _target.playerIndex + "Rope";
             foreach (GameObject gObj in ropes)
             {
-                if (gObj.name == nameOfRope)
-                {
-                    Destroy(gObj);
-                    ropes.Remove(gObj);
-                    break;
+                //TODO : risolvere sta cagata
+                if (gObj != null) {
+                    if (gObj.name == nameOfRope) {
+                        Destroy(gObj);
+                        ropes.Remove(gObj);
+                        break;
+                    } 
                 }                    
             }
         }

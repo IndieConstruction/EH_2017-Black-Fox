@@ -38,7 +38,7 @@ namespace BlackFox
             if (Options.UseSpecifiedPrefabs)
                 agentsPrefb = Options.AvatarPrefabs;
             else
-                agentsPrefb = Resources.LoadAll<GameObject>("Prefabs/Agents");
+                agentsPrefb = Resources.LoadAll<GameObject>("Prefabs/Avatar");
            
             if (SpawnPoints != null)
                 foreach (AvatarSpawnPoint spwnPt in SpawnPoints)
@@ -132,23 +132,23 @@ namespace BlackFox
         }
 
         /// <summary>
-        /// Respawn Agent on Death
-        /// </summary>
-        /// <param name="_killer"></param>
-        /// <param name="_victim"></param>
-        public void ReactToOnAgentKilled(Agent _victim)
-        {
-            RespawnAvatar(_victim.playerIndex);
-        }
-
-        /// <summary>
         /// Respawn after a fixed amount of time
         /// </summary>
         /// <param name="_playerIndx">Player to spawn</param>
-        public void RespawnAvatar(PlayerIndex _playerIndx)
+        public void RespawnAvatar(Agent _victim)
         {
-            StartCoroutine("RespawnCooldown", _playerIndx);
+            StartCoroutine("RespawnCooldown", _victim.playerIndex);
         }
+
+        #region Destroy Agents
+        public void DestroyAgents() {
+            // TODO : da correggere
+            foreach (Agent agent in FindObjectsOfType<Agent>()) {
+                Destroy(agent.gameObject);
+            }
+        }
+        #endregion
+
         #endregion
 
         [Serializable]

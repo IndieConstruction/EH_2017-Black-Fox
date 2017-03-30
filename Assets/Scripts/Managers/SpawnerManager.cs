@@ -53,7 +53,11 @@ namespace BlackFox
         /// <param name="_victim"></param>
         public void ReactToOnAgentKilled(Agent _victim)
         {
-            GetComponentInChildren<AvatarSpawner>().ReactToOnAgentKilled(_victim);
+            GetComponentInChildren<AvatarSpawner>().RespawnAvatar(_victim);
+        }
+
+        public void CallDestroyAgents(){
+            GetComponentInChildren<AvatarSpawner>().DestroyAgents();
         }
         #endregion
     }

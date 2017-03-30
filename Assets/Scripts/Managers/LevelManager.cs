@@ -190,6 +190,7 @@ namespace BlackFox
         #region Events
         private void OnEnable()
         {
+            // TODO : mettere questi eventi nella macchina a stati e chiamamre le funzione del level manager
             EventManager.OnAgentKilled += HandleOnAgentKilled;
             EventManager.OnCoreDeath += HandleOnCoreDeath;
             EventManager.OnAgentSpawn += HandleOnAgentSpawn;
@@ -197,6 +198,7 @@ namespace BlackFox
 
         private void OnDisable()
         {
+            // TODO : mettere questi eventi nella macchina a stati e chiamamre le funzione del level manager
             EventManager.OnAgentKilled -= HandleOnAgentKilled;
             EventManager.OnCoreDeath -= HandleOnCoreDeath;
             EventManager.OnAgentSpawn -= HandleOnAgentSpawn;

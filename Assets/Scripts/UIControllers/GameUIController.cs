@@ -15,26 +15,18 @@ namespace BlackFox
         public Text Player3BulletCount;
         public Text Player4BulletCount;
 
-        public TMP_Text Player1KillPoints;
-        public TMP_Text Player2KillPoints;
-        public TMP_Text Player3KillPoints;
-        public TMP_Text Player4KillPoints;
+        public Text Player1KillPoints;
+        public Text Player2KillPoints;
+        public Text Player3KillPoints;
+        public Text Player4KillPoints;
 
         public Slider ElementZeroSlider;
 
-        public TMP_Text LevelIndicationText;
-        LevelManager levelMNG;
-
-        
-
-        private void Start()
-        {
-            levelMNG = FindObjectOfType<LevelManager>();
-        }
+        public TMP_Text LevelIndicationText;       
 
         void UpdateLevelInformation()
         {
-            LevelIndicationText.text = "Level: " + levelMNG.lelvelNumber + "/" + "Round: " + levelMNG.roundNumber;
+            LevelIndicationText.text = "Level: " + GameManager.Instance.levelManager.levelNumber + "/" + "Round: " + GameManager.Instance.levelManager.roundNumber;
         }
 
         #region API
@@ -96,19 +88,6 @@ namespace BlackFox
             ElementZeroSlider.value = _life / _maxLife;                  // Da rivedere se il valore della vita cambia
         }
 
-        #endregion
-
-        #region Events
-
-        private void OnEnable()
-        {
-            EventManager.OnLevelInit += UpdateLevelInformation;
-        }
-
-        private void OnDisable()
-        {
-            EventManager.OnLevelInit -= UpdateLevelInformation;
-        }
         #endregion
     }
 }

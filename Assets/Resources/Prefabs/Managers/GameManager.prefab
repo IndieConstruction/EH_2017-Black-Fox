@@ -56,6 +56,5 @@ MonoBehaviour:
     type: 2}
   UIManagerPrefab: {fileID: 1053757500129678, guid: 9109566b394cf20479ee9cacfc58010e,
     type: 2}
-  levelManager: {fileID: 114182705895524758, guid: a170ad38250ff9e41b9a497f135f366d,
-    type: 2}
+  levelManager: {fileID: 0}
   uiManager: {fileID: 0}

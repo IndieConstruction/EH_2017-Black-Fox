@@ -1884,8 +1884,6 @@ MonoBehaviour:
   Player2BulletCount: {fileID: 114153429491477384}
   Player3BulletCount: {fileID: 114544142275073344}
   Player4BulletCount: {fileID: 114250723514393790}
-  WindDisplay: {fileID: 114007954006027598}
-  TextWindDisplay: {fileID: 114706801765787512}
   ElementZeroSlider: {fileID: 114684469282124090}
   LevelText: {fileID: 114420826267039968}
 --- !u!114 &114410938512008580

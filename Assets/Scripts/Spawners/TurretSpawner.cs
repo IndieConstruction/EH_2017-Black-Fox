@@ -6,51 +6,37 @@ namespace BlackFox
 {
     public class TurretSpawner : SpawnerBase
     {
-        float NordWall = 59.67f;
-        float EstWall = 89.51f;
-        public float Width = 20f;
-        float RandX;
-        float RandZ;
-        Vector3 InstacePosition;
-        public GameObject Turret;
-
-        void Start()
-        {
-            RandX = Random.Range(-Width, Width);
-            RandZ = Random.Range(-Width, Width);
-            if (RandX > 0)
-            {
-                RandX = EstWall - RandX;
-            }
-            else
-            {
-                RandX = - RandX - EstWall;
-            }
-            if (RandZ > 0) {
-                RandZ = NordWall - RandZ;
-            }
-            else
-            {
-                RandZ = - RandZ - NordWall;
-            }
-
-            InstacePosition = new Vector3(RandX, 0, RandZ);
-            Debug.Log(InstacePosition);
-        }
+        new public TurretSpawnerOptions Options;
+        Vector3 randomPosition;
 
         void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Time.time <= 0 && Options.Spawnedturrent <= Options.MaxSpawnTurrent)
             {
-                GenerateTurret();
+
+                if (Options.Spawnedturrent == Options.MaxSpawnTurrent)
+                {
+                    Options.Turrent = null;
+                }
+                else
+                {
+                    Options.Spawnedturrent++;
+                }
             }
         }
 
-        void GenerateTurret()
+        void OnRoundPlay()
         {
-            Instantiate(Turret, InstacePosition, Quaternion.identity);
-            Debug.Log("Istanzio");
+            Vector3 randomPosition = new Vector3(Random.Range(-70.0f, 100.0f), 0, Random.Range(-100.0f, 100.0f));
+            Instantiate(Options.Turrent, randomPosition, Quaternion.identity);
         }
+    }
 
+    [System.Serializable]
+    public class TurretSpawnerOptions : SpawnerOptions
+    {
+        public GameObject Turrent;
+        public int MaxSpawnTurrent = 4;
+        public int Spawnedturrent = 0;
     }
 }

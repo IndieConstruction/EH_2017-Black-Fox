@@ -11,10 +11,11 @@ namespace BlackFox {
         public GameObject ArenaPrefab;
 
         [Header("Spawners")]
-        public WaveSpawnerOptions WaveSpawner;
-        public ExternalElementOptions ExternalElementSpawner;
-        public AvatarSpawnerOptions AvatarSpawner;
         public ArrowsSpawerOptions ArrowsSpawner;
+        public AvatarSpawnerOptions AvatarSpawner;
         public BlackHoleSpawnerOptions BlackHoleSpawner;
+        public ExternalElementOptions ExternalElementSpawner;
+        public TurretSpawnerOptions TurretSpawner;
+        public WaveSpawnerOptions WaveSpawner;
     } 
 }

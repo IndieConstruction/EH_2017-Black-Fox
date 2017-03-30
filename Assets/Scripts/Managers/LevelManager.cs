@@ -31,8 +31,12 @@ namespace BlackFox
         public Level CurrentLevel;
 
         public Core Core;
-
+        public GameObject Arena;
         GameplaySM gameplaySM;
+
+        #region Containers
+        public Transform PinsContainer;
+        #endregion
 
         void Start()
         {
@@ -63,15 +67,14 @@ namespace BlackFox
         {
             RopeMng = Instantiate(RopeMngPrefab, transform).GetComponent<RopeManager>();
         }
-
         /// <summary>
         /// Carica lo scriptable object del livello e istanzia il prefab del livello
         /// </summary>
         public void InstantiateArena()
         {
-            Instantiate(CurrentLevel.ArenaPrefab, transform);
+            Arena = Instantiate(CurrentLevel.ArenaPrefab, transform);
+            ResetPinsContainer(Arena.transform);
         }
-
         /// <summary>
         /// Inizializza lo spawner manager
         /// </summary>
@@ -79,7 +82,6 @@ namespace BlackFox
         {
             SpawnerMng.InitLevel();
         }
-
         /// <summary>
         /// Inizializza il core
         /// </summary>
@@ -105,6 +107,8 @@ namespace BlackFox
             }
             return -1;
         }
+
+        
         #endregion
 
         #region KillPoint Count
@@ -251,7 +255,6 @@ namespace BlackFox
         #endregion
 
         #region GameplaySM
-
         /// <summary>
         /// Istaniuzia la GameplaySM e passa i parametri di livello e round corretni e MaxRound alla state machine
         /// </summary>
@@ -262,21 +265,25 @@ namespace BlackFox
             gameplaySM.SetMaxRoundNumber(MaxRound);
             gameplaySM.SetRoundNumber(roundNumber);
         }
-
         #endregion
 
+        #region Pins
         /// <summary>
-        /// Pulisce l'arena dagli oggetti del round precedente
+        /// Destroy and Initialize a new PinsContainer
         /// </summary>
-        void ClearArena()
-        {
-            GameObject[] pins = GameObject.FindGameObjectsWithTag("Pin");
-
-            foreach (GameObject pin in pins)
-            {
-                GameObject.Destroy(pin);
-            }
+        void ResetPinsContainer(Transform _parent) {
+            if (PinsContainer)
+                Destroy(PinsContainer.gameObject);
+            PinsContainer = new GameObject("PinsContainer").transform;
+            PinsContainer.transform.parent = _parent;
         }
+        /// <summary>
+        /// Remove all Pins in Scene
+        /// </summary>
+        public void CleanPins() {
+            ResetPinsContainer(Arena.transform);
+        }
+        #endregion
     }
 
     /// <summary>

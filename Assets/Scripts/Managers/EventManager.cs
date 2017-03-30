@@ -7,13 +7,7 @@ namespace BlackFox
 
     public static class EventManager
     {
-        #region Event For StateMachine
-
-        public delegate void ChangeStateEvent();
-
-        public static ChangeStateEvent OnClickToChangeState;
-
-        #endregion
+        
 
         #region AgentSpawn
         public delegate void AgentSpawnEvent(Agent _agent);

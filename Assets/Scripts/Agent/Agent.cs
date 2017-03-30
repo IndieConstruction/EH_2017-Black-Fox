@@ -233,6 +233,7 @@ namespace BlackFox
         #endregion
 
         #region IDamageable
+        Tweener damageTween;
         /// <summary>
         /// Danneggia la vita dell'agente a cui è attaccato e ritorna i punti da assegnare all'agente che lo ha copito
         /// </summary>
@@ -240,9 +241,11 @@ namespace BlackFox
         /// <returns></returns>
         public void Damage(float _damage, GameObject _attacker)
         {
-            Life -= _damage;
-            transform.DOScale(Vector3.one, 0.25f);
-            transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f);
+            if(damageTween != null)
+                damageTween.Complete();
+
+            Life -= _damage;            
+            damageTween =  transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f);
             if (Life < 1)
             {
                 if (EventManager.OnAgentKilled != null)

@@ -41,15 +41,6 @@ namespace BlackFox
 
         #region API 
 
-        /// <summary>
-        /// Attaccato Ad un bottone scatena l'evento per avvisare il current state che deve terminare.
-        /// </summary>
-        public void ChangeStateOnClick()
-        {
-            if (EventManager.OnClickToChangeState != null)
-                EventManager.OnClickToChangeState();
-        }
-
         public void AddKillPointToUI(Agent _attacker, Agent _victim)
         {
             switch (_attacker.playerIndex)

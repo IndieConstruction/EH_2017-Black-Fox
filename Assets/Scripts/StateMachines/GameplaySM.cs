@@ -35,6 +35,9 @@ namespace BlackFox {
             else if ("BlackFox.PlayState" == CurrentState.StateName)
             {
                 // PlayState
+                CurrentState = new CleanSceneState();
+            }else if("BlackFox.CleanSceneState" == CurrentState.StateName) {
+                // CleanSceneState
                 CurrentState = new RoundEndState();
             }
             else if ("BlackFox.RoundEndState" == CurrentState.StateName)

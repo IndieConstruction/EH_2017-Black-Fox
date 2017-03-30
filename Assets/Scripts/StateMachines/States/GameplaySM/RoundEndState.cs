@@ -11,23 +11,19 @@ namespace BlackFox
         {
             Debug.Log("RoundEndState");
             GameManager.Instance.uiManager.endRoundUI.EndLevelPanel.SetActive(true);
-            EventManager.OnClickToChangeState += OnChangeState;
+        }
+
+        public override void OnUpdate() {
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Submit")) {
+                if (OnStateEnd != null)
+                    OnStateEnd();
+            }
         }
 
         public override void OnEnd()
         {
             GameManager.Instance.uiManager.endRoundUI.EndLevelPanel.SetActive(false);
             GameManager.Instance.uiManager.endRoundUI.ClearTheUIPoints();
-            EventManager.OnClickToChangeState -= OnChangeState;
-        }
-
-        /// <summary>
-        /// Richiama l'evento di fine stato per passare al successivo
-        /// </summary>
-        void OnChangeState()
-        {
-            if (OnStateEnd != null)
-                OnStateEnd();
         }
     }
 }

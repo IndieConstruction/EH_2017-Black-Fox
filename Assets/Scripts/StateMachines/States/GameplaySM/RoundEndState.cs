@@ -7,20 +7,17 @@ namespace BlackFox
 {
     public class RoundEndState : StateBase
     {
-        UIManager uiManager;
-
         public override void OnStart()
         {
             Debug.Log("RoundEndState");
-            uiManager = GameObject.FindObjectOfType<UIManager>();
-            uiManager.endRoundUI.EndLevelPanel.SetActive(true);
+            GameManager.Instance.uiManager.endRoundUI.EndLevelPanel.SetActive(true);
             EventManager.OnClickToChangeState += OnChangeState;
         }
 
         public override void OnEnd()
         {
-            uiManager.endRoundUI.EndLevelPanel.SetActive(false);
-            uiManager.endRoundUI.ClearTheUIPoints();
+            GameManager.Instance.uiManager.endRoundUI.EndLevelPanel.SetActive(false);
+            GameManager.Instance.uiManager.endRoundUI.ClearTheUIPoints();
             EventManager.OnClickToChangeState -= OnChangeState;
         }
 

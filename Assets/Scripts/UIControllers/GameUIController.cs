@@ -24,10 +24,7 @@ namespace BlackFox
 
         public TMP_Text LevelIndicationText;       
 
-        void UpdateLevelInformation()
-        {
-            LevelIndicationText.text = "Level: " + GameManager.Instance.levelManager.levelNumber + "/" + "Round: " + GameManager.Instance.levelManager.roundNumber;
-        }
+        
 
         #region API
 
@@ -86,6 +83,11 @@ namespace BlackFox
         public void SetElementZeroSlider(float _life, float _maxLife)
         {
             ElementZeroSlider.value = _life / _maxLife;                  // Da rivedere se il valore della vita cambia
+        }
+
+        public void UpdateLevelInformation()
+        {
+            LevelIndicationText.text = "Level: " + GameManager.Instance.levelManager.levelNumber + "/" + "Round: " + GameManager.Instance.levelManager.roundNumber;
         }
 
         #endregion

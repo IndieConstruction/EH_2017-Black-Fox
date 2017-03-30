@@ -67,7 +67,6 @@ namespace BlackFox
         public void InstantiateArena()
         {
             Instantiate(currentLevel.ArenaPrefab, transform);
-
         }
 
         /// <summary>
@@ -75,7 +74,6 @@ namespace BlackFox
         /// </summary>
         public void InitSpawnerManager()
         {
-            // TODO : chiamare funzione dalla state machine
             spawnerMng.InitLevel();
         }
 

@@ -11,7 +11,7 @@ namespace BlackFox {
 
         private void Start()
         {
-            Debug.Log("Start_GamePlatSM");
+            Debug.Log("Start_GamePlaySM");
             CurrentState = new PreInitState();
         }
 

@@ -5,12 +5,10 @@ namespace BlackFox
 {
     public class LevelSelectionState : StateBase
     {
-        Object canvasLevelSelection;
-
         public override void OnStart()
         {
             Debug.Log("LevelSelectionState");
-            canvasLevelSelection = GameObject.Instantiate(Resources.Load("Prefabs/UI/CanvasLevelSelection"));
+            GameManager.Instance.uiManager.CreateLevelSelectionMenu();
         }
 
         public override void OnUpdate()
@@ -24,7 +22,7 @@ namespace BlackFox
 
         public override void OnEnd()
         {
-            GameObject.Destroy(canvasLevelSelection);
+            GameManager.Instance.uiManager.DestroyLevelSelectionMenu();
         }
     }
 }

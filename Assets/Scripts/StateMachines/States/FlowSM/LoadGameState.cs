@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BlackFox {
-
-    public class LevelInitState : StateBase
+namespace BlackFox
+{
+    public class LoadGameState : StateBase
     {
         public override void OnStart()
         {
-            Debug.Log("LevelInitState");
-            GameManager.Instance.levelManager.InitSpawnerManager();
+            Debug.Log("LoadGameState");
+            GameManager.Instance.InstantiateUIManager();
         }
 
         public override void OnUpdate()

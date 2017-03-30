@@ -18,8 +18,12 @@ namespace BlackFox
         public bool dontDestroyOnLoad;
 
         public GameObject LevelManagerPrefab;
+        public GameObject UIManagerPrefab;
+
         [HideInInspector]
         public LevelManager levelManager;
+        [HideInInspector]
+        public UIManager uiManager;
 
         FlowSM flowSM;
 
@@ -56,9 +60,13 @@ namespace BlackFox
 
         public void InstantiateLevelManager()
         {
-            levelManager = Instantiate(LevelManagerPrefab).GetComponent<LevelManager>();
+            levelManager = Instantiate(LevelManagerPrefab, transform).GetComponent<LevelManager>();
             // TODO : modificare assegnazione del level number
             levelManager.levelNumber = 1;
+        }
+        public void InstantiateUIManager()
+        {
+            uiManager = Instantiate(UIManagerPrefab, transform).GetComponent<UIManager>();
         }
         #endregion
     }

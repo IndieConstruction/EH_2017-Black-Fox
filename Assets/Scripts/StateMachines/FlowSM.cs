@@ -11,12 +11,17 @@ namespace BlackFox {
 
         private void Start()
         {
-            CurrentState = new MainMenuState();
+            CurrentState = new LoadGameState();
         }
 
         protected override void OnCurrentStateEnded()  
         {
-            if ("BlackFox.MainMenuState" == CurrentState.StateName) {
+            if ("BlackFox.LoadGameState" == CurrentState.StateName) {
+                // LoadGameState
+                CurrentState = new MainMenuState();
+            }
+            else if ("BlackFox.MainMenuState" == CurrentState.StateName)
+            {
                 // MainMenuState
                 CurrentState = new LevelSelectionState();
             }

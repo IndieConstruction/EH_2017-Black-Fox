@@ -17,11 +17,13 @@ namespace BlackFox
         {
             Debug.Log("GameplayState");
             StateMachineBase.OnMachineEnd += OnMachineEnd;
+            GameManager.Instance.uiManager.CreateGameMenu();
             GameManager.Instance.InstantiateLevelManager();
         }
 
         public override void OnEnd()
         {
+            GameManager.Instance.uiManager.DestroyGameMenu();
             StateMachineBase.OnMachineEnd -= OnMachineEnd;
         }
 

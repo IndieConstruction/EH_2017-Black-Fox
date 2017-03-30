@@ -46,7 +46,7 @@ namespace BlackFox {
                 }
                 else
                 {
-                    CurrentState = new GameOverState(levelNumber);
+                    CurrentState = new GameOverState();
                 }
             }
             else if ("BlackFox.UpgradeMenuState" == CurrentState.StateName)

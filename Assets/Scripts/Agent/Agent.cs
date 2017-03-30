@@ -68,6 +68,7 @@ namespace BlackFox
         {
             if(transform.parent != null)
                 Destroy(transform.parent.gameObject);
+            GameManager.Instance.levelManager.RopeMng.DestroyRope(this);
         }
 
         #region Event Handler

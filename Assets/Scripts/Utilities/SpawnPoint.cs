@@ -7,6 +7,10 @@ namespace BlackFox
     public class SpawnPoint : MonoBehaviour
     {
         /// <summary>
+        /// serve a dire a quale setup partiene la freccia
+        /// </summary>
+        public int IDSetup;        
+        /// <summary>
         /// To be filled in Editor by Designer to set the trasform  as a SpawnPoint
         /// </summary>
         public List<SpawnType> ValidAs = new List<SpawnPoint.SpawnType>();

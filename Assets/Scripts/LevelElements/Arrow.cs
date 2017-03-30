@@ -5,11 +5,7 @@ using UnityEngine;
 namespace BlackFox {
     public class Arrow : MonoBehaviour
     {
-
-        public float Force = 500000;
-        public int IDSetup;
-
-
+        public float Force = 1000;
 
         private void OnTriggerStay(Collider other)
         {

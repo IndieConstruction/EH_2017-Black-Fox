@@ -43,22 +43,26 @@ namespace BlackFox
 
         public void AddKillPointToUI(Agent _attacker, Agent _victim)
         {
-            switch (_attacker.playerIndex)
+
+            if (_attacker != null)
             {
-                case PlayerIndex.One:
-                    P1KillPoints++;
-                    break;
-                case PlayerIndex.Two:
-                    P2KillPoints++;
-                    break;
-                case PlayerIndex.Three:
-                    P3KillPoints++;
-                    break;
-                case PlayerIndex.Four:
-                    P4KillPoints++;
-                    break;
-                default:
-                    break;
+                switch (_attacker.playerIndex)
+                {
+                    case PlayerIndex.One:
+                        P1KillPoints++;
+                        break;
+                    case PlayerIndex.Two:
+                        P2KillPoints++;
+                        break;
+                    case PlayerIndex.Three:
+                        P3KillPoints++;
+                        break;
+                    case PlayerIndex.Four:
+                        P4KillPoints++;
+                        break;
+                    default:
+                        break;
+                } 
             }
 
             switch (_victim.playerIndex)

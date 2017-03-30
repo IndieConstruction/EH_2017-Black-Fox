@@ -219,7 +219,11 @@ namespace BlackFox
                 GameManager.Instance.uiManager.endRoundUI.AddKillPointToUI(_killer, _victim);
             }
             else
+            {
                 UpdateKillPoints(_victim.playerIndex);
+                _victim.UpdateKillPointsInUI(_victim.playerIndex, GetPlayerKillPoints(_victim.playerIndex));
+                GameManager.Instance.uiManager.endRoundUI.AddKillPointToUI(_killer, _victim);
+            }
             if (EventManager.OnPointsUpdate != null)
             {
                 EventManager.OnPointsUpdate();

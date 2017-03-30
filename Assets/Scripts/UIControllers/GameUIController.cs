@@ -67,16 +67,16 @@ namespace BlackFox
             switch (_playerIndex)
             {
                 case PlayerIndex.One:
-                    Player1KillPoints.text = "Kill Points = " + _playerPoints;
+                    Player1KillPoints.text = "Kill: " + _playerPoints;
                     break;
                 case PlayerIndex.Two:
-                    Player2KillPoints.text = "Kill Points = " + _playerPoints;
+                    Player2KillPoints.text = "Kill: " + _playerPoints;
                     break;
                 case PlayerIndex.Three:
-                    Player3KillPoints.text = "Kill Points = " + _playerPoints;
+                    Player3KillPoints.text = "Kill: " + _playerPoints;
                     break;
                 case PlayerIndex.Four:
-                    Player4KillPoints.text = "Kill Points = " + _playerPoints;
+                    Player4KillPoints.text = "Kill: " + _playerPoints;
                     break;
                 default:
                     break;

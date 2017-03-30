@@ -21,16 +21,6 @@ namespace BlackFox
             OnDataChange();
         }
 
-        private void OnEnable()
-        {
-            EventManager.OnLevelInit += HandleOnLevelInit;
-        }
-
-        private void OnDisable()
-        {
-            EventManager.OnLevelInit -= HandleOnLevelInit;
-        }
-
         void OnDataChange()
         {
             Ring.fillAmount = life / MaxLife;
@@ -49,9 +39,10 @@ namespace BlackFox
             }
         }
 
-        #region Event Handler
-        void HandleOnLevelInit()
+        #region API
+        void Init()
         {
+            // TODO : chiamamre funzione dalla macchina a stati
             if (life == 0)
             {
                 life = MaxLife;

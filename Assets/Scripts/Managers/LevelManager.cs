@@ -71,6 +71,15 @@ namespace BlackFox
         }
 
         /// <summary>
+        /// Inizializza lo spawner manager
+        /// </summary>
+        public void InitSpawnerManager()
+        {
+            // TODO : chiamare funzione dalla state machine
+            spawnerMng.InitLevel();
+        }
+
+        /// <summary>
         /// Ritorna i punti uccisione del player che chiama la funzione
         /// </summary>
         /// <param name="_playerIndex">Indice del Player</param>
@@ -170,9 +179,6 @@ namespace BlackFox
             EventManager.OnAgentKilled += HandleOnAgentKilled;
             EventManager.OnCoreDeath += HandleOnCoreDeath;
             EventManager.OnAgentSpawn += HandleOnAgentSpawn;
-            EventManager.OnLevelInit += HandleOnLevelInit;
-            EventManager.OnRoundPlay += HandleOnLevelPlay;
-            EventManager.OnRoundEnd += HandleOnLevelEnd;
         }
 
         private void OnDisable()
@@ -180,9 +186,6 @@ namespace BlackFox
             EventManager.OnAgentKilled -= HandleOnAgentKilled;
             EventManager.OnCoreDeath -= HandleOnCoreDeath;
             EventManager.OnAgentSpawn -= HandleOnAgentSpawn;
-            EventManager.OnLevelInit -= HandleOnLevelInit;
-            EventManager.OnRoundPlay -= HandleOnLevelPlay;
-            EventManager.OnRoundEnd -= HandleOnLevelEnd;
 
         }
 
@@ -232,24 +235,6 @@ namespace BlackFox
             //Reaction of the RopeManager to the OnAgentSpawn event
             ropeMng.ReactToOnAgentSpawn(_agent);
         }
-
-        /// <summary>
-        /// Viene chiamata dallo stato LevelInit
-        /// </summary>
-        void HandleOnLevelInit()
-        {
-            spawnerMng.InitLevel();
-        }
-
-        /// <summary>
-        /// Viene chiamata dallo stato Play
-        /// </summary>
-        void HandleOnLevelPlay() { }
-
-        /// <summary>
-        /// Viene chiamata dallo stato RoundEnd
-        /// </summary>
-        void HandleOnLevelEnd() { }
         #endregion
 
         #endregion

@@ -26,11 +26,6 @@ namespace BlackFox
             levelMNG = FindObjectOfType<LevelManager>();
         }
 
-        void UpdateLevelInformation()
-        {
-            LevelText.text = "Level: " + levelMNG.levelNumber + "/" + "Round: " + levelMNG.roundNumber;
-        }
-
         #region API
         public void SetBulletsValue(PlayerIndex _playerIndex, int _remainigAmmo)
         {
@@ -53,24 +48,17 @@ namespace BlackFox
             }
         }
 
+        public void UpdateLevelInformation()
+        {
+            // TODO : chimamre la funzione dalla macchina a stati (levelInit)
+            LevelText.text = "Level: " + levelMNG.levelNumber + "/" + "Round: " + levelMNG.roundNumber;
+        }
+
         public void SetElementZeroSlider(float _life, float _maxLife)
         {
             ElementZeroSlider.value = _life / _maxLife;                  // Da rivedere se il valore della vita cambia
         }
 
-        #endregion
-
-        #region Events
-
-        private void OnEnable()
-        {
-            EventManager.OnLevelInit += UpdateLevelInformation;
-        }
-
-        private void OnDisable()
-        {
-            EventManager.OnLevelInit -= UpdateLevelInformation;
-        }
         #endregion
     }
 }

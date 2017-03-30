@@ -7,15 +7,6 @@ namespace BlackFox
 
     public static class EventManager
     {
-        #region GamePlayEvent
-        public delegate void GamePlayEvent();
-
-        public static GamePlayEvent OnLevelInit;
-        public static GamePlayEvent OnRoundPlay;
-        public static GamePlayEvent OnRoundEnd;
-        public static GamePlayEvent OnPreStart;
-        #endregion
-
         #region Event For StateMachine
 
         public delegate void ChangeStateEvent();

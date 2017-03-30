@@ -12,7 +12,6 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("RoundEndState");
-            EventManager.OnRoundEnd();
             uiManager = GameObject.FindObjectOfType<UIManager>();
             uiManager.endRoundUI.EndLevelPanel.SetActive(true);
             EventManager.OnClickToChangeState += OnChangeState;
@@ -31,9 +30,7 @@ namespace BlackFox
         void OnChangeState()
         {
             if (OnStateEnd != null)
-            {
                 OnStateEnd();
-            }
         }
     }
 }

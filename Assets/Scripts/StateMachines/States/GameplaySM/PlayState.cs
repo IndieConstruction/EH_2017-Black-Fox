@@ -11,7 +11,6 @@ namespace BlackFox
             Debug.Log("PlayState");
             EventManager.OnPlayerWinnig += HandleOnPlayerWinnig;
             EventManager.OnCoreDeath += HandleOnCoreDeath;
-            EventManager.OnRoundPlay();
         }
 
         public override void OnEnd()

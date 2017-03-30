@@ -15,7 +15,7 @@ namespace BlackFox {
         public AvatarSpawnerOptions AvatarSpawner;
         public BlackHoleSpawnerOptions BlackHoleSpawner;
         public ExternalElementOptions ExternalElementSpawner;
-        public TurretSpawnerOptions Turret;
+        public TurretSpawnerOptions TurretSpawner;
         public WaveSpawnerOptions WaveSpawner;
     } 
 }

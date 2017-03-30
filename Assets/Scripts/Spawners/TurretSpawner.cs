@@ -32,6 +32,7 @@ namespace BlackFox
         }
     }
 
+    [System.Serializable]
     public class TurretSpawnerOptions : SpawnerOptions
     {
         public GameObject Turrent;

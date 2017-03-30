@@ -46,7 +46,7 @@ namespace Rope
         void BuildRope(GameObject _lastPiece)
         {
             Vector3 position;
-            CapsuleCollider collider;
+            SphereCollider collider;
             ConfigurableJoint joint;
 
             //Relative position of newPieces to previouses
@@ -62,11 +62,7 @@ namespace Rope
                 newFragment.transform.parent = fragments[0].transform;
                 newFragment.name = "Fragment_" + i;
                 //Collider configuration
-                collider = newFragment.GetComponentInChildren<CapsuleCollider>();
-                collider.radius = ropeWidth / 2;
-                collider.height = fragmentDistance + collider.radius;
-                collider.center = Vector3.forward * collider.height/2;
-                collider.GetComponent<RopeForcedLook>().Target = fragments[i - 1];
+                collider = newFragment.GetComponent<SphereCollider>();
                 //Joint Configuration
                 joint = newFragment.GetComponent<ConfigurableJoint>();
                 joint.connectedBody = fragments[i - 1].GetComponent<Rigidbody>();

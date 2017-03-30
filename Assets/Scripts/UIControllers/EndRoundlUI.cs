@@ -46,8 +46,8 @@ namespace BlackFox
         /// </summary>
         public void ChangeStateOnClick()
         {
-            //if (uiManager.OnClickToChangeState != null)
-            //    uiManager.OnClickToChangeState();
+            if (EventManager.OnClickToChangeState != null)
+                EventManager.OnClickToChangeState();
         }
 
         public void AddKillPointToUI(Agent _attacker, Agent _victim)

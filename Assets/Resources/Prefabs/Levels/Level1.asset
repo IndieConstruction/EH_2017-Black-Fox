@@ -15,33 +15,18 @@ MonoBehaviour:
   LevelName: Arena1
   ArenaPrefab: {fileID: 1590692792633676, guid: 7ea2bcd6e0fcc5341a5f7624e386a912,
     type: 2}
-  WaveSpawner:
-    SpawnerPrefab: {fileID: 1616782133673990, guid: a2e1ab7b507da4d46811404306d9869f,
-      type: 2}
-    WavePrefab: {fileID: 1603904133494984, guid: a6adf95da4e7bfa43b8c60b3fa4a8be0,
-      type: 2}
-    MinTime: 20
-    MaxTime: 50
-  ExternalElementSpawner:
+  ArrowsSpawner:
     SpawnerPrefab: {fileID: 0}
-    ExternalAgent: {fileID: 0}
-    MinTime: 10
-    MaxTime: 20
-    AngularSpeed: 1
-    TransSpeed: 1
   AvatarSpawner:
     SpawnerPrefab: {fileID: 1908843494005796, guid: 0ff4a992816176340b31bf27c66057d5,
       type: 2}
     RespawnTime: 1
-    UseInitialPositionsAsSpawnPoints: 0
     UseSpecifiedPrefabs: 1
     AvatarPrefabs:
     - {fileID: 1305829202965250, guid: a214aefd3bf69464c9b46124238781de, type: 2}
     - {fileID: 1652347477880556, guid: c812bd5f837cf484791231f668cf3978, type: 2}
     - {fileID: 1405396506357818, guid: 78f34d051af73b344a32930fefc2c297, type: 2}
     - {fileID: 1851850003459776, guid: db452c6aca4d15c4aadf8031e2d9ac14, type: 2}
-  ArrowsSpawner:
-    SpawnerPrefab: {fileID: 0}
   BlackHoleSpawner:
     SpawnerPrefab: {fileID: 0}
     minRandomX: 0
@@ -51,3 +36,22 @@ MonoBehaviour:
     BlackHolePrefab: {fileID: 0}
     BlackHoleToSpawn: 3
     TimerToSpawn: 10
+  ExternalElementSpawner:
+    SpawnerPrefab: {fileID: 0}
+    ExternalAgent: {fileID: 0}
+    MinTime: 10
+    MaxTime: 20
+    AngularSpeed: 1
+    TransSpeed: 1
+  TurretSpawner:
+    SpawnerPrefab: {fileID: 0}
+    Turrent: {fileID: 0}
+    MaxSpawnTurrent: 4
+    Spawnedturrent: 0
+  WaveSpawner:
+    SpawnerPrefab: {fileID: 1616782133673990, guid: a2e1ab7b507da4d46811404306d9869f,
+      type: 2}
+    WavePrefab: {fileID: 1482104890441414, guid: d5cc454859774504ea0d220a2f7f146b,
+      type: 2}
+    MinTime: 5
+    MaxTime: 20

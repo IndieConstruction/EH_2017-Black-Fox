@@ -28,8 +28,6 @@ namespace BlackFox {
             Options = options;
             return this;
         }
-
-        public virtual void ReactToOnAgentKilled(Agent _killer, Agent _victim) { }
         #endregion
     }
     

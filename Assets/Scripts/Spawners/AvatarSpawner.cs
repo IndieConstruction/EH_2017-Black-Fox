@@ -136,7 +136,7 @@ namespace BlackFox
         /// </summary>
         /// <param name="_killer"></param>
         /// <param name="_victim"></param>
-        public override void ReactToOnAgentKilled(Agent _killer, Agent _victim)
+        public void ReactToOnAgentKilled(Agent _victim)
         {
             RespawnAvatar(_victim.playerIndex);
         }

@@ -134,11 +134,14 @@ namespace BlackFox
         }
 
         /// <summary>
-        /// Richiamata quando questo player ha ucciso qualcuno.
+        /// Richiamata dal LevelManager per impostare i punti uccisione nella UI
         /// </summary>
-        public void OnKillingSomeone()
+        /// <param name="_playerIndex">L'agente a cui aggiornare la UI</param>
+        /// <param name="_playerPoints">I punti che ha l'agente</param>
+        public void UpdateKillPointsInUI(PlayerIndex _playerIndex, int _playerPoints)
         {
-
+            // richiama la funzione in UIControlle per aggiornare i punti sulla propria UI
+            UIController.SetKillPointsUI(_playerIndex, _playerPoints);
         }
 
         public Shooter GetShooterReference()

@@ -39,9 +39,10 @@ namespace BlackFox
         {
             if (_killer != null) { 
                 UpdateKillPoints(_killer.playerIndex, _victim.playerIndex);           // setta i punti morte e uccisione
-                //Aggiorna i punti uccisione sulla UI
-                _killer.OnKillingSomeone();
-            } else
+                _killer.UpdateKillPointsInUI(_killer.playerIndex, GetPlayerKillPoints(_killer.playerIndex));
+                _victim.UpdateKillPointsInUI(_victim.playerIndex, GetPlayerKillPoints(_victim.playerIndex));
+            }
+            else
                 UpdateKillPoints(_victim.playerIndex);
             if (EventManager.OnPointsUpdate != null)
             {
@@ -49,6 +50,11 @@ namespace BlackFox
             }
         }
 
+        /// <summary>
+        /// Ritorna i KillPoints di un agente
+        /// </summary>
+        /// <param name="_playerIndex">L'agente di cui deve tornare i punti</param>
+        /// <returns></returns>
         public int GetPlayerKillPoints(PlayerIndex _playerIndex)
         {
             foreach (PlayerStats player in playerStats)

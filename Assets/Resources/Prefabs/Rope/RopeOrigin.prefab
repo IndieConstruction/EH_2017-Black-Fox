@@ -72,8 +72,8 @@ MonoBehaviour:
   FragmentPrefab: {fileID: 1083337657188362, guid: 2ee1f5e884c0e404ba1990bc9d106140,
     type: 2}
   AnchorPoint: {fileID: 0}
-  MaxLength: 100
-  DensityOfFragments: 0.1
+  MaxLength: 200
+  DensityOfFragments: 0.2
 --- !u!120 &120073920322594396
 LineRenderer:
   m_ObjectHideFlags: 1

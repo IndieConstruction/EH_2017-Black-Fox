@@ -80,7 +80,10 @@ namespace BlackFox
         /// </summary>
         public void InitSpawnerManager()
         {
+            ClearKillPoints();
             SpawnerMng.InitLevel();
+            //Reaction of the RopeManager to the OnCoreDeath event
+            //RopeMng.ReactToOnCoreDeath();
         }
         /// <summary>
         /// Inizializza il core
@@ -192,7 +195,7 @@ namespace BlackFox
         {
             // TODO : mettere questi eventi nella macchina a stati e chiamamre le funzione del level manager
             EventManager.OnAgentKilled += HandleOnAgentKilled;
-            EventManager.OnCoreDeath += HandleOnCoreDeath;
+            //EventManager.OnCoreDeath += HandleOnCoreDeath;
             EventManager.OnAgentSpawn += HandleOnAgentSpawn;
         }
 
@@ -200,7 +203,7 @@ namespace BlackFox
         {
             // TODO : mettere questi eventi nella macchina a stati e chiamamre le funzione del level manager
             EventManager.OnAgentKilled -= HandleOnAgentKilled;
-            EventManager.OnCoreDeath -= HandleOnCoreDeath;
+            //EventManager.OnCoreDeath -= HandleOnCoreDeath;
             EventManager.OnAgentSpawn -= HandleOnAgentSpawn;
 
         }
@@ -234,17 +237,6 @@ namespace BlackFox
             RopeMng.ReactToOnAgentKilled(_victim);
             //Reaction of the SpawnerManager to the OnAgentKilled event
             SpawnerMng.ReactToOnAgentKilled(_victim);
-        }
-
-        /// <summary>
-        /// Viene chiamata quando muore il core
-        /// </summary>
-        void HandleOnCoreDeath()
-        {
-            ClearKillPoints();
-            SpawnerMng.InitLevel();
-            //Reaction of the RopeManager to the OnCoreDeath event
-            RopeMng.ReactToOnCoreDeath();
         }
 
         /// <summary>

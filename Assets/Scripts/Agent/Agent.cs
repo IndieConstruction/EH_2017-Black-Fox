@@ -286,8 +286,8 @@ namespace BlackFox
         }
 
         void ExtendRope(float _amount) {;
-            if ( _amount >= .9f && previousSpeed.sqrMagnitude >= rigid.velocity.sqrMagnitude) {
-                rope.ExtendRope();
+            if ( _amount >= .95f) {
+                rope.ExtendRope(1);
             }
             previousSpeed = rigid.velocity;
         }

@@ -63,6 +63,7 @@ namespace Rope
                 newFragment.name = "Fragment_" + i;
                 //Collider configuration
                 collider = newFragment.GetComponent<SphereCollider>();
+                collider.radius = ropeWidth / 2;
                 //Joint Configuration
                 joint = newFragment.GetComponent<ConfigurableJoint>();
                 joint.connectedBody = fragments[i - 1].GetComponent<Rigidbody>();
@@ -114,13 +115,55 @@ namespace Rope
         /// </summary>
         public void ExtendRope()
         {
-
             //Prevent to extend the rope over MaxLength
             if (fragments.Count >= MaxLength)
                 return;
 
             AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = null;
             BuildRope(fragments[fragments.Count - 1]);
+        }
+        /// <summary>
+        /// Extend the rope by required amount
+        /// </summary>
+        /// <param name="_extensionAmount">number of fragments to add to the rope</param>
+        public void ExtendRope(int _extensionAmount)
+        {
+            //Prevent to extend the rope over MaxLength
+            if (fragments.Count >= MaxLength)
+                return;
+            //Disconnect the AnchorPoint to fit new rope fragments
+            AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = null;
+
+            Vector3 position;
+            SphereCollider collider;
+            ConfigurableJoint joint;
+            int currAmt = fragments.Count;
+            //Relative position of newPieces to previouses
+            offSet = GetOffSet(fragments[currAmt -1].transform);
+
+            //Keep building the rope until the AnchorPoint ore the MaxLength are reached
+            for (int i = 0; i < _extensionAmount; i++)
+            {
+                //Add a new Fragment to the rope
+                position = fragments[currAmt + i - 1].transform.position + offSet;
+                GameObject newFragment = Instantiate(FragmentPrefab, position, Quaternion.LookRotation(position));
+                fragments.Add(newFragment);
+                newFragment.transform.parent = fragments[0].transform;
+                newFragment.name = "Fragment_" + (currAmt +i);
+                //Collider configuration
+                collider = newFragment.GetComponent<SphereCollider>();
+                collider.radius = ropeWidth / 2;
+                //Joint Configuration
+                joint = newFragment.GetComponent<ConfigurableJoint>();
+                joint.connectedBody = fragments[currAmt + i - 1].GetComponent<Rigidbody>();
+                joint.autoConfigureConnectedAnchor = false;
+                joint.connectedAnchor = offSet * 0.9f;                
+            }
+            //Reconnect the AnchorPoint
+            AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = fragments[fragments.Count - 1].GetComponent<Rigidbody>();
+            
+            lineRend.numPositions = (fragments.Count) + 1;
+
         }
         /// <summary>
         /// Initialize the Rope as first launch, preventing missconnection

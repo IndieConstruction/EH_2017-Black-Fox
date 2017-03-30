@@ -80,7 +80,8 @@ namespace BlackFox
 
         private void OnDestroy()
         {
-            Destroy(transform.parent.gameObject);
+            if(transform.parent != null)
+                Destroy(transform.parent.gameObject);
         }
 
         #region Event Handler

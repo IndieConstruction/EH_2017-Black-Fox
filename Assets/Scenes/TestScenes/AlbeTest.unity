@@ -151,52 +151,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ValidAs: 0000000001000000
   SpawnAvatar: 0
---- !u!1001 &952133839
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4080173078889442, guid: 2ee1f5e884c0e404ba1990bc9d106140, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4080173078889442, guid: 2ee1f5e884c0e404ba1990bc9d106140, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4080173078889442, guid: 2ee1f5e884c0e404ba1990bc9d106140, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4080173078889442, guid: 2ee1f5e884c0e404ba1990bc9d106140, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4080173078889442, guid: 2ee1f5e884c0e404ba1990bc9d106140, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4080173078889442, guid: 2ee1f5e884c0e404ba1990bc9d106140, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4080173078889442, guid: 2ee1f5e884c0e404ba1990bc9d106140, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4080173078889442, guid: 2ee1f5e884c0e404ba1990bc9d106140, type: 2}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1083337657188362, guid: 2ee1f5e884c0e404ba1990bc9d106140, type: 2}
-      propertyPath: m_Name
-      value: RopeFragment
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 2ee1f5e884c0e404ba1990bc9d106140, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1001 &1858468228
 Prefab:
   m_ObjectHideFlags: 0

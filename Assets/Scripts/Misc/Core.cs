@@ -16,6 +16,7 @@ namespace BlackFox
 
         private void Start()
         {
+            GameManager.Instance.levelManager.Core = this;
             Ring = GetComponentInChildren<Image>();
             life = MaxLife;
             OnDataChange();
@@ -40,9 +41,8 @@ namespace BlackFox
         }
 
         #region API
-        void Init()
+        public void Init()
         {
-            // TODO : chiamamre funzione dalla macchina a stati
             if (life == 0)
             {
                 life = MaxLife;

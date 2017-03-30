@@ -24,17 +24,19 @@ namespace BlackFox
         public GameObject RopeMngPrefab;
 
         [HideInInspector]
-        public SpawnerManager spawnerMng;
+        public SpawnerManager SpawnerMng;
         [HideInInspector]
-        public RopeManager ropeMng;
+        public RopeManager RopeMng;
 
-        public Level currentLevel;
+        public Level CurrentLevel;
+
+        public Core Core;
 
         GameplaySM gameplaySM;
 
         void Start()
         {
-            currentLevel = Instantiate(Resources.Load<Level>("Prefabs/Levels/Level" + levelNumber));
+            CurrentLevel = Instantiate(Resources.Load<Level>("Prefabs/Levels/Level" + levelNumber));
             StartGameplaySM();
         }
 
@@ -44,21 +46,21 @@ namespace BlackFox
         /// </summary>
         public void InstantiateSpawnerManager()
         {
-            spawnerMng = Instantiate(SpawnerMngPrefab, transform).GetComponent<SpawnerManager>();
+            SpawnerMng = Instantiate(SpawnerMngPrefab, transform).GetComponent<SpawnerManager>();
             //spawnerMng.Init(levelNumber, roundNumber, currentLevel.LevelSpawners);
 
-            currentLevel.ArrowsSpawner.CreateInstance(currentLevel.ArrowsSpawner, spawnerMng.transform);
-            currentLevel.AvatarSpawner.CreateInstance(currentLevel.AvatarSpawner, spawnerMng.transform);
-            currentLevel.BlackHoleSpawner.CreateInstance(currentLevel.BlackHoleSpawner, spawnerMng.transform);
-            currentLevel.ExternalElementSpawner.CreateInstance(currentLevel.ExternalElementSpawner, spawnerMng.transform);
-            currentLevel.WaveSpawner.CreateInstance(currentLevel.WaveSpawner, spawnerMng.transform);
+            CurrentLevel.ArrowsSpawner.CreateInstance(CurrentLevel.ArrowsSpawner, SpawnerMng.transform);
+            CurrentLevel.AvatarSpawner.CreateInstance(CurrentLevel.AvatarSpawner, SpawnerMng.transform);
+            CurrentLevel.BlackHoleSpawner.CreateInstance(CurrentLevel.BlackHoleSpawner, SpawnerMng.transform);
+            CurrentLevel.ExternalElementSpawner.CreateInstance(CurrentLevel.ExternalElementSpawner, SpawnerMng.transform);
+            CurrentLevel.WaveSpawner.CreateInstance(CurrentLevel.WaveSpawner, SpawnerMng.transform);
         }
         /// <summary>
         /// Instance a preloaded RopeManager
         /// </summary>
         public void InstantiateRopeManager()
         {
-            ropeMng = Instantiate(RopeMngPrefab, transform).GetComponent<RopeManager>();
+            RopeMng = Instantiate(RopeMngPrefab, transform).GetComponent<RopeManager>();
         }
 
         /// <summary>
@@ -66,7 +68,7 @@ namespace BlackFox
         /// </summary>
         public void InstantiateArena()
         {
-            Instantiate(currentLevel.ArenaPrefab, transform);
+            Instantiate(CurrentLevel.ArenaPrefab, transform);
         }
 
         /// <summary>
@@ -74,7 +76,16 @@ namespace BlackFox
         /// </summary>
         public void InitSpawnerManager()
         {
-            spawnerMng.InitLevel();
+            SpawnerMng.InitLevel();
+        }
+
+        /// <summary>
+        /// Inizializza il core
+        /// </summary>
+        public void InitCore()
+        {
+            if (Core != null)
+                Core.Init();
         }
 
         /// <summary>
@@ -208,9 +219,9 @@ namespace BlackFox
                 EventManager.OnPointsUpdate();
             }
             //Reaction of the RopeManager to the OnAgentKilled event
-            ropeMng.ReactToOnAgentKilled(_victim);
+            RopeMng.ReactToOnAgentKilled(_victim);
             //Reaction of the SpawnerManager to the OnAgentKilled event
-            spawnerMng.ReactToOnAgentKilled(_killer, _victim);
+            SpawnerMng.ReactToOnAgentKilled(_killer, _victim);
         }
 
         /// <summary>
@@ -219,9 +230,9 @@ namespace BlackFox
         void HandleOnCoreDeath()
         {
             ClearKillPoints();
-            spawnerMng.InitLevel();
+            SpawnerMng.InitLevel();
             //Reaction of the RopeManager to the OnCoreDeath event
-            ropeMng.ReactToOnCoreDeath();
+            RopeMng.ReactToOnCoreDeath();
         }
 
         /// <summary>
@@ -231,7 +242,7 @@ namespace BlackFox
         void HandleOnAgentSpawn(Agent _agent)
         {
             //Reaction of the RopeManager to the OnAgentSpawn event
-            ropeMng.ReactToOnAgentSpawn(_agent);
+            RopeMng.ReactToOnAgentSpawn(_agent);
         }
         #endregion
 

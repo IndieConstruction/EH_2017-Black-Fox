@@ -17,13 +17,15 @@ namespace BlackFox
         [HideInInspector]
         public Object canvasGameMenu;
 
-        void Start()
-        {
-            endRoundUI = GetComponentInChildren<EndRoundlUI>();
-            gameUIController = GetComponentInChildren<GameUIController>();
-        }
 
         #region API
+
+        public void UpdateLevelInformation()
+        {
+            gameUIController.UpdateLevelInformation();
+        }
+
+
         #region Main Menu
         public void CreateMainMenu()
         {
@@ -35,6 +37,7 @@ namespace BlackFox
             Destroy(canvasMenu);
         }
         #endregion
+
         #region LevelSelection Menu
         public void CreateLevelSelectionMenu()
         {
@@ -46,10 +49,13 @@ namespace BlackFox
             Destroy(canvasLevelSelection);
         }
         #endregion
+
         #region Game Menu
         public void CreateGameMenu()
         {
             canvasGameMenu = GameObject.Instantiate(Resources.Load("Prefabs/UI/Canvas"), transform);
+            endRoundUI = GetComponentInChildren<EndRoundlUI>();
+            gameUIController = GetComponentInChildren<GameUIController>();
         }
 
         public void DestroyGameMenu()
@@ -57,31 +63,9 @@ namespace BlackFox
             Destroy(canvasGameMenu);
         }
         #endregion
-        #endregion
 
-        #region Events
+        #endregion
 
         
-        protected void OnEnable()
-        {
-            EventManager.OnAgentKilled += CallAddKillPoinToUI;
-        }
-
-        protected void OnDisable()
-        {
-            EventManager.OnAgentKilled -= CallAddKillPoinToUI;
-        }
-
-        #endregion
-
-        /// <summary>
-        /// Richiama la funzione AddKillPointToUI presente nell'EndRoundUI
-        /// </summary>
-        /// <param name="_attacker"></param>
-        /// <param name="_victim"></param>
-        void CallAddKillPoinToUI(Agent _attacker, Agent _victim)
-        {
-            endRoundUI.AddKillPointToUI(_attacker, _victim);
-        }
     }
 }

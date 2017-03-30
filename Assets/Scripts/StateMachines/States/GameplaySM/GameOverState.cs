@@ -6,13 +6,6 @@ namespace BlackFox {
 
     public class GameOverState : StateBase {
 
-        int levelNumber;
-
-        public GameOverState(int _levelNumber)
-        {
-            levelNumber = _levelNumber;
-        }
-
         public override void OnStart()
         {
             Debug.Log("GameOverState");

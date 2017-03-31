@@ -114,7 +114,7 @@ namespace BlackFox
         }
 
         /// <summary>
-        /// Funzione che contiene le azione da eseguire alla morte del player
+        /// Funzione che contiene le azioni da eseguire alla vittoria del player
         /// </summary>
         public void PlayerWin()
         {
@@ -124,31 +124,12 @@ namespace BlackFox
             EventManager.TriggerPlayStateEnd();
         }
 
-        #endregion
-
-        #region Events
-        private void OnEnable()
-        {
-            // TODO : mettere questi eventi nella macchina a stati e chiamamre le funzione del level manager
-            EventManager.OnAgentKilled += HandleOnAgentKilled;
-            EventManager.OnAgentSpawn += HandleOnAgentSpawn;
-        }
-
-        private void OnDisable()
-        {
-            // TODO : mettere questi eventi nella macchina a stati e chiamamre le funzione del level manager
-            EventManager.OnAgentKilled -= HandleOnAgentKilled;
-            EventManager.OnAgentSpawn -= HandleOnAgentSpawn;
-
-        }
-
-        #region Event Handler
         /// <summary>
-        /// Viene chiamata quando accade un'uccisione.
+        /// Funzione che contiene le azioni da eseguire alla morte di un player
         /// </summary>
         /// <param name="_killer"></param>
         /// <param name="_victim"></param>
-        void HandleOnAgentKilled(Agent _killer, Agent _victim)
+        public void AgentKilled(Agent _killer, Agent _victim)
         {
             if (_killer != null)
             {
@@ -174,15 +155,14 @@ namespace BlackFox
         }
 
         /// <summary>
-        /// Viene chiamamta alla morte di un agente
+        /// Funzione che contiene le azioni da eseguire al resapwn di un player
         /// </summary>
         /// <param name="_agent"></param>
-        void HandleOnAgentSpawn(Agent _agent)
+        public void AgentSpawn(Agent _agent)
         {
             //Reaction of the RopeManager to the OnAgentSpawn event
             RopeMng.ReactToOnAgentSpawn(_agent);
         }
-        #endregion
 
         #endregion
 

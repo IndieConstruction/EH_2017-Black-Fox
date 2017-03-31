@@ -10,6 +10,7 @@ namespace BlackFox {
         List<Transform> SpawnPoints = new List<Transform>();
         GameObject wave;
         float nextTime;
+        bool active;
         new public WaveSpawnerOptions Options;
 
         public override SpawnerBase Init(SpawnerOptions options) {
@@ -19,6 +20,7 @@ namespace BlackFox {
 
         private void Start()
         {
+            nextTime += Random.Range(Options.MinTime, Options.MaxTime);
             foreach (var spawn in FindObjectsOfType<SpawnPoint>())
                 foreach (var item in spawn.ValidAs)
                     if (item == SpawnPoint.SpawnType.WaveSpawn)
@@ -26,17 +28,23 @@ namespace BlackFox {
         }
 
         void Update() {
-            if (Time.time >= nextTime) {
+            if(active)
+                Wave();            
+        }
+        
+        void Wave()
+        {
+            if (Time.time >= nextTime)
+            {
                 int spawn = Random.Range(0, SpawnPoints.Count);
                 InstantiateWave(SpawnPoints[spawn]);
                 nextTime += Random.Range(Options.MinTime, Options.MaxTime);
             }
         }
-
-        void OnDisable() {
-            Destroy(wave);
-        }
-
+        /// <summary>
+        /// Place a new wave in Scene or move the current one onto a different spawnpoit
+        /// </summary>
+        /// <param name="_spawn"></param>
         void InstantiateWave(Transform _spawn) {
             if (!wave)
                 wave = Instantiate(Options.WavePrefab, _spawn.position, _spawn.rotation);
@@ -45,6 +53,28 @@ namespace BlackFox {
                 wave.transform.rotation = _spawn.rotation;
             }
         }
+
+        #region API
+        public override void Toggle()
+        {
+            active = !active;
+        }
+        public override void Restart()
+        {
+            CleanSpawned();
+
+            int spawn = Random.Range(0, SpawnPoints.Count);
+            InstantiateWave(SpawnPoints[spawn]);
+            nextTime += Random.Range(Options.MinTime, Options.MaxTime);
+
+            Toggle();
+        }
+        public override void CleanSpawned()
+        {
+            if (wave)
+                Destroy(wave);
+        }
+        #endregion
     }
 
     [System.Serializable]

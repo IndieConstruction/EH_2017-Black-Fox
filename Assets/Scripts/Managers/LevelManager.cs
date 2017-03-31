@@ -144,10 +144,7 @@ namespace BlackFox
                 _victim.UpdateKillPointsInUI(_victim.playerIndex, levelPointsCounter.GetPlayerKillPoints(_victim.playerIndex));
                 GameManager.Instance.uiManager.endRoundUI.AddKillPointToUI(_killer, _victim);
             }
-            if (EventManager.OnPointsUpdate != null)
-            {
-                EventManager.OnPointsUpdate();
-            }
+            EventManager.OnPointsUpdate();
             //Reaction of the RopeManager to the OnAgentKilled event
             RopeMng.ReactToOnAgentKilled(_victim);
             //Reaction of the SpawnerManager to the OnAgentKilled event

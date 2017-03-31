@@ -47,9 +47,8 @@ MonoBehaviour:
     AngularSpeed: 1
     TransSpeed: 1
   TurretSpawner:
-    SpawnerPrefab: {fileID: 1877385561551694, guid: 5e01cb793b77acc4bbd565e41c66d706,
-      type: 2}
-    Turrent: {fileID: 1603904133494984, guid: a6adf95da4e7bfa43b8c60b3fa4a8be0, type: 2}
+    SpawnerPrefab: {fileID: 0}
+    Turrent: {fileID: 0}
     MaxSpawnTurrent: 5
   WaveSpawner:
     SpawnerPrefab: {fileID: 0}

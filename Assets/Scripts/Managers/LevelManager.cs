@@ -27,10 +27,11 @@ namespace BlackFox
         public SpawnerManager SpawnerMng;
         [HideInInspector]
         public RopeManager RopeMng;
-
+        [HideInInspector]
         public Level CurrentLevel;
-
+        [HideInInspector]
         public Core Core;
+        [HideInInspector]
         public GameObject Arena;
         GameplaySM gameplaySM;
 
@@ -174,7 +175,7 @@ namespace BlackFox
             roundNumber++;
             gameplaySM.SetRoundNumber(roundNumber);
             ClearKillPoints();
-            EventManager.OnPlayerWinnig();
+            EventManager.TriggerPlayStateEnd();
         }
 
         /// <summary>
@@ -195,7 +196,6 @@ namespace BlackFox
         {
             // TODO : mettere questi eventi nella macchina a stati e chiamamre le funzione del level manager
             EventManager.OnAgentKilled += HandleOnAgentKilled;
-            //EventManager.OnCoreDeath += HandleOnCoreDeath;
             EventManager.OnAgentSpawn += HandleOnAgentSpawn;
         }
 
@@ -203,7 +203,6 @@ namespace BlackFox
         {
             // TODO : mettere questi eventi nella macchina a stati e chiamamre le funzione del level manager
             EventManager.OnAgentKilled -= HandleOnAgentKilled;
-            //EventManager.OnCoreDeath -= HandleOnCoreDeath;
             EventManager.OnAgentSpawn -= HandleOnAgentSpawn;
 
         }

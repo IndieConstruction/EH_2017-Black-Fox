@@ -87,10 +87,7 @@ namespace BlackFox
         /// </summary>
         public void InitSpawnerManager()
         {
-            levelPointsCounter.ClearAllKillPoints();
             SpawnerMng.InitLevel();
-            //Reaction of the RopeManager to the OnCoreDeath event
-            //RopeMng.ReactToOnCoreDeath();
         }
         /// <summary>
         /// Inizializza il core

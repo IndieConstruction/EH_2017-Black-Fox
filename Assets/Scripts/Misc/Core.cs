@@ -59,8 +59,7 @@ namespace BlackFox
             OnDataChange();
             if (life < 1)
             {
-                // TODO : sostituire evento con chiamata a funzione del level manager
-                EventManager.TriggerPlayStateEnd();
+                GameManager.Instance.levelManager.CoreDeath();
             }
         }
 

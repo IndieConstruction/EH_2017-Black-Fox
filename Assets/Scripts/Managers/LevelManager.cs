@@ -40,7 +40,7 @@ namespace BlackFox
 
         void Start()
         {
-            CurrentLevel = Instantiate(Resources.Load<Level>("Prefabs/Levels/Level" + levelNumber));
+            CurrentLevel = Instantiate(Resources.Load<Level>("Levels/Level" + levelNumber));
             StartGameplaySM();
         }
 

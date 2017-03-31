@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 153994335014179218}
   - component: {fileID: 120326932445056700}
   m_Layer: 8
-  m_Name: CubeVerde
+  m_Name: InizioCordaPrototipo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

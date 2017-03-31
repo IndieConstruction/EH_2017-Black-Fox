@@ -59,7 +59,7 @@ namespace BlackFox
             OnDataChange();
             if (life < 1)
             {
-                EventManager.OnCoreDeath();
+                GameManager.Instance.levelManager.CoreDeath();
             }
         }
 

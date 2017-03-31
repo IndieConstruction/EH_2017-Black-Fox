@@ -58,7 +58,7 @@ namespace BlackFox {
         {
                 //Aggiungi un punto alla UI.
                 if (KillPoint != null)
-                    KillPoint.text = "Kill:" + (levelManager.GetPlayerKillPoints(agent.playerIndex) ).ToString();
+                    KillPoint.text = "Kill:" + (levelManager.GetPlayerKillPoints(agent.playerIndex)).ToString();
         }
 
         private void OnDisable() {

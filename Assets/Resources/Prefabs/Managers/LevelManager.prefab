@@ -56,7 +56,7 @@ MonoBehaviour:
   levelNumber: 1
   AddPoints: 1
   SubPoints: 1
-  pointsToWin: 5
+  pointsToWin: 1
   SpawnerMngPrefab: {fileID: 1426782863579316, guid: 6a5555b5239d1fd42ab0baa8e7b1f9ff,
     type: 2}
   RopeMngPrefab: {fileID: 1445940252311144, guid: 0794285e6c4bb864fa11d1f9f452b63a,

@@ -9,31 +9,46 @@ namespace BlackFox {
     /// </summary>
     public class FlowSM : StateMachineBase {
 
+        FlowSMStates NextState;
+        
         private void Start()
         {
             CurrentState = new LoadGameState();
+            NextState = FlowSMStates.MainMenuState;
         }
 
-        protected override void OnCurrentStateEnded()  
+        protected override void OnCurrentStateEnded()
         {
-            if ("BlackFox.LoadGameState" == CurrentState.StateName) {
-                // LoadGameState
-                CurrentState = new MainMenuState();
-            }
-            else if ("BlackFox.MainMenuState" == CurrentState.StateName)
+            switch (NextState)
             {
-                // MainMenuState
-                CurrentState = new LevelSelectionState();
-            }
-            else if ("BlackFox.LevelSelectionState" == CurrentState.StateName)
-            {
-                // LevelSelectionState
-                CurrentState = new GameplayState();
-            }
-            else if ("BlackFox.GameplayState" == CurrentState.StateName) {
-                // GameplayState
-                CurrentState = new MainMenuState();
-            }
+                case FlowSMStates.MainMenuState:
+                    CurrentState = new MainMenuState();
+                    NextState = FlowSMStates.LevelSelectionState;
+                    break;
+                case FlowSMStates.LevelSelectionState:
+                    CurrentState = new LevelSelectionState();
+                    NextState = FlowSMStates.GameplayState;
+                    break;
+                case FlowSMStates.GameplayState:
+                    CurrentState = new GameplayState();
+                    NextState = FlowSMStates.MainMenuState;
+                    break;
+            }            
         }
+
+        #region API
+        public void GoToState(FlowSMStates _nextState)
+        {
+            NextState = _nextState;
+        }
+        #endregion
+    }
+
+    public enum FlowSMStates
+    {
+        LoadGameState,
+        MainMenuState,
+        LevelSelectionState,
+        GameplayState
     }
 }

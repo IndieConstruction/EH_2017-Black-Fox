@@ -333,7 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6116c7f43a8f3964db2240b1007b4dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 10
+  maxLife: 15
   playerIndex: 2
   fireRate: 0.5
 --- !u!114 &114222318360634828

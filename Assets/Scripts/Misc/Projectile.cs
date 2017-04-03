@@ -7,7 +7,7 @@ namespace BlackFox
     public class Projectile : MonoBehaviour
     {
         IShooter owner;
-        float damage = 1;
+        public float damage = 1;
 
         private void OnTriggerEnter(Collider other)
         {

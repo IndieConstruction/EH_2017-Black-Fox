@@ -333,7 +333,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6116c7f43a8f3964db2240b1007b4dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 10
+  maxLife: 15
   playerIndex: 2
   fireRate: 0.5
 --- !u!114 &114222318360634828
@@ -347,7 +347,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a435a47f34b1f734ea916cecc28a85d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationSpeed: 250
+  RotationSpeed: 300
   MovmentSpeed: 500
 --- !u!114 &114400692205247344
 MonoBehaviour:
@@ -407,7 +407,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PinPrefab: {fileID: 1923663633415268, guid: f6159f80e8e948749b7574fe51801899, type: 2}
   PinSpanw: {fileID: 4562078946550920}
-  CoolDownTime: 5
+  CoolDownTime: 3
   CanPlace: 1
 --- !u!114 &114637767091424010
 MonoBehaviour:

@@ -21,13 +21,13 @@ namespace Rope
 
         void Start()
         {
-            if(fragments.Count == 0)
+            if (fragments.Count == 0)
             {
                 lineRend = GetComponent<LineRenderer>();
                 ropeWidth = GetComponent<LineRenderer>().widthMultiplier;
                 fragments.Add(gameObject);
                 BuildRope(gameObject);
-            }            
+            }
         }
 
         private void LateUpdate()

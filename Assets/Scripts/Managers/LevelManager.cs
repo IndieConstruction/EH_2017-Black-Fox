@@ -33,10 +33,11 @@ namespace BlackFox
         public Core Core;
         [HideInInspector]
         public GameObject Arena;
-
-
+        
         GameplaySM gameplaySM;
         LevelPointsCounter levelPointsCounter;
+
+        AvatarSpawner AvatarSpwn;
 
         #region Containers
         public Transform PinsContainer;
@@ -50,6 +51,7 @@ namespace BlackFox
         }
 
         #region API
+
         #region Instantiation
         /// <summary>
         /// Instance a preloaded SpawnManager
@@ -58,12 +60,7 @@ namespace BlackFox
         {
             SpawnerMng = Instantiate(SpawnerMngPrefab, transform).GetComponent<SpawnerManager>();
 
-            CurrentLevel.ArrowsSpawner.CreateInstance(CurrentLevel.ArrowsSpawner, SpawnerMng.transform);
-            CurrentLevel.AvatarSpawner.CreateInstance(CurrentLevel.AvatarSpawner, SpawnerMng.transform);
-            CurrentLevel.BlackHoleSpawner.CreateInstance(CurrentLevel.BlackHoleSpawner, SpawnerMng.transform);
-            CurrentLevel.ExternalElementSpawner.CreateInstance(CurrentLevel.ExternalElementSpawner, SpawnerMng.transform);
-            CurrentLevel.TurretSpawner.CreateInstance(CurrentLevel.TurretSpawner, SpawnerMng.transform);
-            CurrentLevel.WaveSpawner.CreateInstance(CurrentLevel.WaveSpawner, SpawnerMng.transform);
+            SpawnerMng.InstanciateNewSpawners(CurrentLevel);
         }
         /// <summary>
         /// Instance a preloaded RopeManager
@@ -81,13 +78,33 @@ namespace BlackFox
             ResetPinsContainer(Arena.transform);
         }
         #endregion
+
         #region Initialization
         /// <summary>
         /// Inizializza lo spawner manager
         /// </summary>
-        public void InitSpawnerManager()
+        public void CallSpawnAgent()
         {
-            SpawnerMng.InitLevel();
+            Agent[] tempAgents = null;
+            SpawnerMng.SpawnAgent();
+            foreach (SpawnerBase spawner in SpawnerMng.Spawners)
+            {
+
+                if (spawner != null)
+                {
+                    if (spawner.GetType() == typeof(AvatarSpawner))
+                    {
+                        AvatarSpawner temp = spawner as AvatarSpawner;
+                        tempAgents = temp.GetAllPlayer();
+                        break;
+                    } 
+                }
+            }
+            foreach (Agent agent in tempAgents)
+            {
+                RopeMng.AttachNewRope(agent);
+            }
+            
         }
         /// <summary>
         /// Inizializza il core

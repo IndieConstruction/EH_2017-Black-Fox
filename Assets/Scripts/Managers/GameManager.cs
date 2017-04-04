@@ -25,7 +25,7 @@ namespace BlackFox
         [HideInInspector]
         public UIManager uiManager;
 
-        FlowSM flowSM;
+        public FlowSM flowSM;
 
         private void Awake()
         {
@@ -57,6 +57,11 @@ namespace BlackFox
         }
 
         #region API
+
+        //public FlowSM ReturnFlowSM()
+        //{
+        //    return flowSM;
+        //}
 
         public void InstantiateLevelManager()
         {

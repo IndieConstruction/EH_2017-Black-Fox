@@ -40,6 +40,8 @@ namespace BlackFox {
         public void GoToState(FlowSMStates _nextState)
         {
             NextState = _nextState;
+            if (CurrentState.OnStateEnd != null)
+                CurrentState.OnStateEnd();
         }
         #endregion
     }

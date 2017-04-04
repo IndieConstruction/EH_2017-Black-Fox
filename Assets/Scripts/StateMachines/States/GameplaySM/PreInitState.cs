@@ -11,9 +11,9 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("PreInitState");
-            GameManager.Instance.levelManager.InstantiateArena();
-            GameManager.Instance.levelManager.InstantiateRopeManager();
-            GameManager.Instance.levelManager.InstantiateSpawnerManager();
+            GameManager.Instance.LevelMng.InstantiateArena();
+            GameManager.Instance.LevelMng.InstantiateRopeManager();
+            GameManager.Instance.LevelMng.InstantiateSpawnerManager();
         }
 
         public override void OnUpdate()

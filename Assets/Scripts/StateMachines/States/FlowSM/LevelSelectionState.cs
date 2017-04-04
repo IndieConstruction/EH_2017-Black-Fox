@@ -8,7 +8,7 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("LevelSelectionState");
-            GameManager.Instance.uiManager.CreateLevelSelectionMenu();
+            GameManager.Instance.UiMng.CreateLevelSelectionMenu();
         }
 
         public override void OnUpdate()
@@ -22,7 +22,7 @@ namespace BlackFox
 
         public override void OnEnd()
         {
-            GameManager.Instance.uiManager.DestroyLevelSelectionMenu();
+            GameManager.Instance.UiMng.DestroyLevelSelectionMenu();
         }
     }
 }

@@ -10,7 +10,8 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("MainMenuState");
-            GameManager.Instance.uiManager.CreateMainMenu();
+            GameManager.Instance.UiMng.CreateMainMenu();
+            GameManager.Instance.AvatarMng.ChangeAgentSMState(AgentSMStates.MenuInputState);
         }
 
         public override void OnUpdate()
@@ -24,7 +25,7 @@ namespace BlackFox
 
         public override void OnEnd()
         {
-            GameManager.Instance.uiManager.DestroyMainMenu();
+            GameManager.Instance.UiMng.DestroyMainMenu();
         }
     }
 }

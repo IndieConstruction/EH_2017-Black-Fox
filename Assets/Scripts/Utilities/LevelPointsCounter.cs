@@ -68,7 +68,7 @@ namespace BlackFox
         /// </summary>
         void PlayerWin()
         {
-            GameManager.Instance.levelManager.PlayerWin();
+            GameManager.Instance.LevelMng.PlayerWin();
         }
 
         #region API

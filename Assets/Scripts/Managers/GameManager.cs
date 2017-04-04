@@ -19,11 +19,14 @@ namespace BlackFox
 
         public GameObject LevelManagerPrefab;
         public GameObject UIManagerPrefab;
+        public GameObject AvatarManagerPrefab;
 
         [HideInInspector]
-        public LevelManager levelManager;
+        public LevelManager LevelMng;
         [HideInInspector]
-        public UIManager uiManager;
+        public UIManager UiMng;
+        [HideInInspector]
+        public AvatarManager AvatarMng;
 
         FlowSM flowSM;
 
@@ -60,13 +63,19 @@ namespace BlackFox
 
         public void InstantiateLevelManager()
         {
-            levelManager = Instantiate(LevelManagerPrefab, transform).GetComponent<LevelManager>();
+            LevelMng = Instantiate(LevelManagerPrefab, transform).GetComponent<LevelManager>();
             // TODO : modificare assegnazione del level number
-            levelManager.levelNumber = 1;
+            LevelMng.levelNumber = 1;
         }
+
         public void InstantiateUIManager()
         {
-            uiManager = Instantiate(UIManagerPrefab, transform).GetComponent<UIManager>();
+            UiMng = Instantiate(UIManagerPrefab, transform).GetComponent<UIManager>();
+        }
+        
+        public void InstantiateAvatarManager()
+        {
+            AvatarMng = Instantiate(AvatarManagerPrefab, transform).GetComponent<AvatarManager>();
         }
         #endregion
     }

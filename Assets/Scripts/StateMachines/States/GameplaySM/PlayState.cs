@@ -30,12 +30,12 @@ namespace BlackFox
 
         void HandleOnAgentKilled(Agent _killer, Agent _victim)
         {
-            GameManager.Instance.levelManager.AgentKilled(_killer, _victim);
+            GameManager.Instance.LevelMng.AgentKilled(_killer, _victim);
         }
 
         void HandleOnAgentSpawn(Agent _agent)
         {
-            GameManager.Instance.levelManager.AgentSpawn(_agent);
+            GameManager.Instance.LevelMng.AgentSpawn(_agent);
         }
         #endregion
     }

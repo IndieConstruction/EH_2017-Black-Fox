@@ -12,9 +12,9 @@ namespace BlackFox {
         public override void OnStart()
         {
             Debug.Log("LevelInitState");
-            GameManager.Instance.uiManager.UpdateLevelInformation();
-            GameManager.Instance.levelManager.InitCore();
-            GameManager.Instance.levelManager.CallSpawnAgent();
+            GameManager.Instance.UiMng.UpdateLevelInformation();
+            GameManager.Instance.LevelMng.InitCore();
+            GameManager.Instance.LevelMng.CallSpawnAgent();
 
         }
 

@@ -51,7 +51,7 @@ namespace BlackFox
         void Start()
         {
             UpdateGraphic();
-            GameManager.Instance.uiManager.CurrentMenu = this;
+            GameManager.Instance.UiMng.CurrentMenu = this;
         }
 
         /// <summary>

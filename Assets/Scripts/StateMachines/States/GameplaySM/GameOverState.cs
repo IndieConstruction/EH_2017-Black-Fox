@@ -23,7 +23,7 @@ namespace BlackFox {
         /// </summary>
         void UnloadArena()
         {
-            GameObject.Destroy(GameManager.Instance.levelManager.gameObject, 0.1f);
+            GameObject.Destroy(GameManager.Instance.LevelMng.gameObject, 0.1f);
         }
     }
 }

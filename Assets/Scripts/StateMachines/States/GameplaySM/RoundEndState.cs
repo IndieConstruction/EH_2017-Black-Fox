@@ -10,7 +10,7 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("RoundEndState");
-            GameManager.Instance.uiManager.endRoundUI.EndLevelPanel.SetActive(true);
+            GameManager.Instance.UiMng.endRoundUI.EndLevelPanel.SetActive(true);
         }
 
         public override void OnUpdate() {
@@ -22,8 +22,8 @@ namespace BlackFox
 
         public override void OnEnd()
         {
-            GameManager.Instance.uiManager.endRoundUI.EndLevelPanel.SetActive(false);
-            GameManager.Instance.uiManager.endRoundUI.ClearTheUIPoints();
+            GameManager.Instance.UiMng.endRoundUI.EndLevelPanel.SetActive(false);
+            GameManager.Instance.UiMng.endRoundUI.ClearTheUIPoints();
         }
     }
 }

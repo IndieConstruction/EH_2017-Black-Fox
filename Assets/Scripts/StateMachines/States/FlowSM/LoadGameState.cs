@@ -9,6 +9,7 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("LoadGameState");
+            GameManager.Instance.InstantiateAvatarManager();
             GameManager.Instance.InstantiateUIManager();
         }
 

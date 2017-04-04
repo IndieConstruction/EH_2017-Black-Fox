@@ -16,7 +16,7 @@ namespace BlackFox
 
         private void Start()
         {
-            GameManager.Instance.levelManager.Core = this;
+            GameManager.Instance.LevelMng.Core = this;
             Ring = GetComponentInChildren<Image>();
             life = MaxLife;
             OnDataChange();
@@ -59,7 +59,7 @@ namespace BlackFox
             OnDataChange();
             if (life < 1)
             {
-                GameManager.Instance.levelManager.CoreDeath();
+                GameManager.Instance.LevelMng.CoreDeath();
             }
         }
 

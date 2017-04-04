@@ -28,7 +28,7 @@ namespace BlackFox
         [HideInInspector]
         public PlayerManager AvatarMng;
 
-        FlowSM flowSM;
+        public FlowSM flowSM;
 
         private void Awake()
         {
@@ -60,6 +60,11 @@ namespace BlackFox
         }
 
         #region API
+
+        //public FlowSM ReturnFlowSM()
+        //{
+        //    return flowSM;
+        //}
 
         public void InstantiateLevelManager()
         {

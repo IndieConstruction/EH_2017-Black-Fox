@@ -17,6 +17,27 @@ namespace BlackFox
         [HideInInspector]
         public Object canvasGameMenu;
 
+        public IMenu CurrentMenu;
+
+        /// <summary>
+        /// Input Provvisori per i menu
+        /// </summary>
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                GoUpInMenu();
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                GoDownInMenu();
+            }
+
+            if (Input.GetKeyDown(KeyCode.RightControl))
+            {
+                Select();
+            }
+        }
 
         #region API
 
@@ -27,6 +48,25 @@ namespace BlackFox
         {
             gameUIController.UpdateLevelInformation();
         }
+
+        #region Menu Controller
+
+        public void GoUpInMenu()
+        {
+            CurrentMenu.GoUpInMenu();
+        }
+
+        public void GoDownInMenu()
+        {
+            CurrentMenu.GoDownInMenu();
+        }
+
+        public void Select()
+        {
+            CurrentMenu.Selection();
+        }
+
+        #endregion
 
 
         #region Main Menu

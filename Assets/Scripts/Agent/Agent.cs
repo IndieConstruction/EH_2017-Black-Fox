@@ -9,8 +9,8 @@ namespace BlackFox
     [RequireComponent (typeof(MovementController), typeof(PlacePin), typeof(Shooter))]
     public class Agent : MonoBehaviour, IShooter, IDamageable
     {
+        public PlayerIndex playerIndex;
 
-        string Name;
         public float maxLife = 10;
         private float _life = 10;
 
@@ -25,12 +25,7 @@ namespace BlackFox
             }
         }
 
-        // Variabili per il funzionamento dei controller
-        GamePadState state;
-        GamePadState prevState;
-        public PlayerIndex playerIndex;
-
-        List<IDamageable> damageables = new List<IDamageable>();                        // Lista di Oggetti facenti parte dell'interfaccia IDamageable
+        List<IDamageable> damageables = new List<IDamageable>();                        
 
         MovementController movment;
         PlacePin pinPlacer;
@@ -38,8 +33,7 @@ namespace BlackFox
         RopeController rope;
         GameUIController UIController;
 
-        public float fireRate;                                                   // rateo di fuoco in secondi
-        float nextFire;
+        public float fireRate;                                                   
         float ropeExtTimer;
 
         //Variabili per gestire la fisca della corda
@@ -58,12 +52,6 @@ namespace BlackFox
             LoadIDamageablePrefab();
         }
 
-        void FixedUpdate()
-        {
-            KeyboardReader();
-            XInputReader();
-        }
-
         private void OnDestroy()
         {
             if(transform.parent != null)
@@ -71,6 +59,10 @@ namespace BlackFox
             GameManager.Instance.LevelMng.RopeMng.DestroyRope(this);
         }
 
+        /// <summary>
+        /// Cerca il rope controller associato all'agente
+        /// </summary>
+        /// <returns></returns>
         RopeController SearchRope()
         {
             foreach (RopeController rope in FindObjectsOfType<RopeController>())
@@ -130,77 +122,40 @@ namespace BlackFox
             return shooter;
         }
         #endregion
-        
-        #region KeyboardInput
-        /// <summary>
-        /// Controlla l'input da tastiera
-        /// </summary>
-        void KeyboardReader()
+
+        #region Player Abilities
+
+        public void Shoot()
         {
-            if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_PlaceRight")))                       // place right pin
-            {
-                PlacePin(true);
-            }
-
-            if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_PlaceLeft")))                        // place left pin
-            {
-                PlacePin(false);
-                
-            }
-
-            if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_Fire")))       // shoot 
-            {
-                nextFire = Time.time + fireRate;
-                Shoot();
-                
-            }
-
-            if (Input.GetButton(string.Concat("Key" + (int)playerIndex + "_Fire")) && Time.time > nextFire)       // shoot at certain rate
-            {
-                nextFire = Time.time + fireRate;
-                Shoot();
-                
-            }
-
-            Rotate(Input.GetAxis(string.Concat("Key" + (int)playerIndex + "_Horizonatal")));  // Ruota l'agente
-            GoForward(Input.GetAxis(string.Concat("Key" + (int)playerIndex + "_Forward")));                                                                               // Muove l'agente                                                                                
+            shooter.ShootBullet();
+            SetAmmoInTheUI();
         }
-        #endregion
 
-        #region XInput
-        /// <summary>
-        /// Controlla l'input da controller
-        /// </summary>
-        void XInputReader()
+        public void PlacePin(bool _isRight)
         {
-            prevState = state;
-            state = GamePad.GetState(playerIndex);
+            pinPlacer.placeThePin(this, _isRight);
+        }
 
-            GoForward(state.Triggers.Right);
-            Rotate(state.ThumbSticks.Left.X);
+        public void GoForward(float _amount)
+        {
+            movment.Movement(_amount);
+            if (rope != null)
+                ExtendRope(_amount);
+        }
 
+        public void Rotate(float _amount)
+        {
+            movment.Rotation(_amount);
+        }
 
-
-            if (prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed)
+        public void ExtendRope(float _amount)
+        {
+            ;
+            if (_amount >= .95f)
             {
-                PlacePin(true);
+                rope.ExtendRope(1);
             }
-
-            if (prevState.Buttons.LeftShoulder == ButtonState.Released && state.Buttons.LeftShoulder == ButtonState.Pressed)
-            {
-                PlacePin(false);
-            }
-
-            if (prevState.Buttons.A == ButtonState.Released && state.Buttons.A == ButtonState.Pressed)
-            {
-                nextFire = Time.time + fireRate;
-                Shoot();
-            }
-            else if (prevState.Buttons.A == ButtonState.Pressed && state.Buttons.A == ButtonState.Pressed && Time.time > nextFire)
-            {
-                nextFire = Time.time + fireRate;
-                Shoot();
-            }
+            previousSpeed = rigid.velocity;
         }
 
         #endregion
@@ -268,34 +223,5 @@ namespace BlackFox
 
         #endregion
 
-        #region Player Abilities
-
-        void Shoot() {
-            shooter.ShootBullet();
-            SetAmmoInTheUI();
-        }
-
-        void PlacePin(bool _isRight) {
-            pinPlacer.placeThePin(this,_isRight);
-        }
-
-        void GoForward(float _amount) {
-            movment.Movement(_amount);
-            if(rope != null)
-                ExtendRope(_amount);
-        }
-
-        void Rotate(float _amount) {
-            movment.Rotation(_amount);
-        }
-
-        void ExtendRope(float _amount) {;
-            if ( _amount >= .95f) {
-                rope.ExtendRope(1);
-            }
-            previousSpeed = rigid.velocity;
-        }
-
-        #endregion
     }
 }

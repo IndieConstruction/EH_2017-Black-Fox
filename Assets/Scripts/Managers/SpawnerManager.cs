@@ -14,7 +14,7 @@ namespace BlackFox
         public List<SpawnerBase> Spawners = new List<SpawnerBase>();
         
         #region API
-        public void InstanciateNewSpawners(Level _currentLevel)
+        public void InstantiateNewSpawners(Level _currentLevel)
         {
             Spawners.Add(_currentLevel.ArrowsSpawner.CreateInstance(_currentLevel.ArrowsSpawner, transform));
             Spawners.Add( _currentLevel.BlackHoleSpawner.CreateInstance(_currentLevel.BlackHoleSpawner, transform));

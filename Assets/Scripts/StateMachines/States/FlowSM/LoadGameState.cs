@@ -10,6 +10,7 @@ namespace BlackFox
         {
             Debug.Log("LoadGameState");
             GameManager.Instance.InstantiateAvatarManager();
+            GameManager.Instance.AvatarMng.InstantiatePlayers();
             GameManager.Instance.InstantiateUIManager();
         }
 

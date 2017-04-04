@@ -1,15 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 namespace BlackFox
 {
-    public class AgentSM : StateMachineBase
+    public class PlayerSM : StateMachineBase
     {
         AgentSMStates NextState;
 
         private void Start()
         {
-            Debug.Log("Start_AgentSM");
+            Debug.Log("Start_PlayerSM");
             CurrentState = new MenuInputState();
         }
 

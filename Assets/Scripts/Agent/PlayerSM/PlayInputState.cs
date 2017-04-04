@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BlackFox { 
+namespace BlackFox {
 
-    public class MenuInputState : StateBase {
+    public class PlayInputState : StateBase {
 
         public override void OnStart()
         {
-            Debug.Log("MenuInputState");
+            Debug.Log("PlayerSM_PlayInputState");
         }
+        
     }
 }

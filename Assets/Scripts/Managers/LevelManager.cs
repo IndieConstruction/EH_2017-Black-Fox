@@ -60,7 +60,7 @@ namespace BlackFox
         {
             SpawnerMng = Instantiate(SpawnerMngPrefab, transform).GetComponent<SpawnerManager>();
 
-            SpawnerMng.InstanciateNewSpawners(CurrentLevel);
+            SpawnerMng.InstantiateNewSpawners(CurrentLevel);
         }
         /// <summary>
         /// Instance a preloaded RopeManager

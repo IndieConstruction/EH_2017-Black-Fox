@@ -26,7 +26,7 @@ namespace BlackFox
         [HideInInspector]
         public UIManager UiMng;
         [HideInInspector]
-        public AvatarManager AvatarMng;
+        public PlayerManager AvatarMng;
 
         FlowSM flowSM;
 
@@ -75,7 +75,7 @@ namespace BlackFox
         
         public void InstantiateAvatarManager()
         {
-            AvatarMng = Instantiate(AvatarManagerPrefab, transform).GetComponent<AvatarManager>();
+            AvatarMng = Instantiate(AvatarManagerPrefab, transform).GetComponent<PlayerManager>();
         }
         #endregion
     }

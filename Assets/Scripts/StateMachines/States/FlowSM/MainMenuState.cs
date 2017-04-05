@@ -14,15 +14,6 @@ namespace BlackFox
             GameManager.Instance.AvatarMng.ChangeAgentSMState(AgentSMStates.MenuInputState);
         }
 
-        public override void OnUpdate()
-        {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Submit"))
-            {
-                if (OnStateEnd != null)
-                    OnStateEnd();
-            }
-        }
-
         public override void OnEnd()
         {
             GameManager.Instance.UiMng.DestroyMainMenu();

@@ -5,7 +5,8 @@ using UnityEngine;
 namespace BlackFox {
     public class CleanSceneState : StateBase {
 
-        public override void OnStart() {
+        public override void OnStart()
+        {
             Debug.Log("CleanSceneState");
 
             GameManager.Instance.levelManager.CleanPins();

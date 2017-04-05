@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
-using TMPro;
+
 using UnityEngine.UI;
 
 namespace BlackFox
@@ -11,10 +11,10 @@ namespace BlackFox
     {
         UIManager uiManager;
 
-        public TMP_Text Player1Points;
-        public TMP_Text Player2Points;
-        public TMP_Text Player3Points;
-        public TMP_Text Player4Points;
+        public Text Player1Points;
+        public Text Player2Points;
+        public Text Player3Points;
+        public Text Player4Points;
         public GameObject EndLevelPanel;
 
         int P1KillPoints;

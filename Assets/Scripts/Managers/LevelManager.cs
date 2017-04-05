@@ -33,10 +33,11 @@ namespace BlackFox
         public Core Core;
         [HideInInspector]
         public GameObject Arena;
-
-
+        
         GameplaySM gameplaySM;
         LevelPointsCounter levelPointsCounter;
+
+        AvatarSpawner AvatarSpwn;
 
         #region Containers
         public Transform PinsContainer;
@@ -50,6 +51,7 @@ namespace BlackFox
         }
 
         #region API
+
         #region Instantiation
         /// <summary>
         /// Instance a preloaded SpawnManager
@@ -58,12 +60,7 @@ namespace BlackFox
         {
             SpawnerMng = Instantiate(SpawnerMngPrefab, transform).GetComponent<SpawnerManager>();
 
-            CurrentLevel.ArrowsSpawner.CreateInstance(CurrentLevel.ArrowsSpawner, SpawnerMng.transform);
-            CurrentLevel.AvatarSpawner.CreateInstance(CurrentLevel.AvatarSpawner, SpawnerMng.transform);
-            CurrentLevel.BlackHoleSpawner.CreateInstance(CurrentLevel.BlackHoleSpawner, SpawnerMng.transform);
-            CurrentLevel.ExternalElementSpawner.CreateInstance(CurrentLevel.ExternalElementSpawner, SpawnerMng.transform);
-            CurrentLevel.TurretSpawner.CreateInstance(CurrentLevel.TurretSpawner, SpawnerMng.transform);
-            CurrentLevel.WaveSpawner.CreateInstance(CurrentLevel.WaveSpawner, SpawnerMng.transform);
+            SpawnerMng.InstanciateNewSpawners(CurrentLevel);
         }
         /// <summary>
         /// Instance a preloaded RopeManager
@@ -81,13 +78,33 @@ namespace BlackFox
             ResetPinsContainer(Arena.transform);
         }
         #endregion
+
         #region Initialization
         /// <summary>
         /// Inizializza lo spawner manager
         /// </summary>
-        public void InitSpawnerManager()
+        public void CallSpawnAgent()
         {
-            SpawnerMng.InitLevel();
+            Agent[] tempAgents = null;
+            SpawnerMng.SpawnAgent();
+            foreach (SpawnerBase spawner in SpawnerMng.Spawners)
+            {
+
+                if (spawner != null)
+                {
+                    if (spawner.GetType() == typeof(AvatarSpawner))
+                    {
+                        AvatarSpawner temp = spawner as AvatarSpawner;
+                        tempAgents = temp.GetAllPlayer();
+                        break;
+                    } 
+                }
+            }
+            foreach (Agent agent in tempAgents)
+            {
+                RopeMng.AttachNewRope(agent);
+            }
+            
         }
         /// <summary>
         /// Inizializza il core
@@ -114,7 +131,7 @@ namespace BlackFox
         }
 
         /// <summary>
-        /// Funzione che contiene le azione da eseguire alla morte del player
+        /// Funzione che contiene le azioni da eseguire alla vittoria del player
         /// </summary>
         public void PlayerWin()
         {
@@ -124,31 +141,12 @@ namespace BlackFox
             EventManager.TriggerPlayStateEnd();
         }
 
-        #endregion
-
-        #region Events
-        private void OnEnable()
-        {
-            // TODO : mettere questi eventi nella macchina a stati e chiamamre le funzione del level manager
-            EventManager.OnAgentKilled += HandleOnAgentKilled;
-            EventManager.OnAgentSpawn += HandleOnAgentSpawn;
-        }
-
-        private void OnDisable()
-        {
-            // TODO : mettere questi eventi nella macchina a stati e chiamamre le funzione del level manager
-            EventManager.OnAgentKilled -= HandleOnAgentKilled;
-            EventManager.OnAgentSpawn -= HandleOnAgentSpawn;
-
-        }
-
-        #region Event Handler
         /// <summary>
-        /// Viene chiamata quando accade un'uccisione.
+        /// Funzione che contiene le azioni da eseguire alla morte di un player
         /// </summary>
         /// <param name="_killer"></param>
         /// <param name="_victim"></param>
-        void HandleOnAgentKilled(Agent _killer, Agent _victim)
+        public void AgentKilled(Agent _killer, Agent _victim)
         {
             if (_killer != null)
             {
@@ -163,10 +161,7 @@ namespace BlackFox
                 _victim.UpdateKillPointsInUI(_victim.playerIndex, levelPointsCounter.GetPlayerKillPoints(_victim.playerIndex));
                 GameManager.Instance.uiManager.endRoundUI.AddKillPointToUI(_killer, _victim);
             }
-            if (EventManager.OnPointsUpdate != null)
-            {
-                EventManager.OnPointsUpdate();
-            }
+            EventManager.OnPointsUpdate();
             //Reaction of the RopeManager to the OnAgentKilled event
             RopeMng.ReactToOnAgentKilled(_victim);
             //Reaction of the SpawnerManager to the OnAgentKilled event
@@ -174,15 +169,14 @@ namespace BlackFox
         }
 
         /// <summary>
-        /// Viene chiamamta alla morte di un agente
+        /// Funzione che contiene le azioni da eseguire al resapwn di un player
         /// </summary>
         /// <param name="_agent"></param>
-        void HandleOnAgentSpawn(Agent _agent)
+        public void AgentSpawn(Agent _agent)
         {
             //Reaction of the RopeManager to the OnAgentSpawn event
             RopeMng.ReactToOnAgentSpawn(_agent);
         }
-        #endregion
 
         #endregion
 

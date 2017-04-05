@@ -139,7 +139,7 @@ MeshCollider:
   m_Convex: 1
   m_InflateMesh: 0
   m_SkinWidth: 0.01
-  m_Mesh: {fileID: 4300000, guid: ca30f5a4fdd654e4cab3db9ad1da19b1, type: 3}
+  m_Mesh: {fileID: 4300000, guid: bf5b1286f9919ff46a1719874ebd5857, type: 3}
 --- !u!114 &114990409162336224
 MonoBehaviour:
   m_ObjectHideFlags: 1

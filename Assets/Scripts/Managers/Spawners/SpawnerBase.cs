@@ -50,12 +50,13 @@ namespace BlackFox {
     public class SpawnerOptions {
         public GameObject SpawnerPrefab;
 
-        public void CreateInstance(SpawnerOptions _option, Transform _container) {
+        public SpawnerBase CreateInstance(SpawnerOptions _option, Transform _container) {
             SpawnerBase spawner = null;
             if (_option.SpawnerPrefab != null) { 
                 spawner = GameObject.Instantiate<GameObject>(SpawnerPrefab, _container).GetComponent<SpawnerBase>();
                 spawner.Init(this);
             }
+            return spawner;
         }
     }
 }

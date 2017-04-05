@@ -43,7 +43,7 @@ namespace BlackFox
         #region API
         public void Init()
         {
-            if (life == 0)
+            if (life <= 0)
             {
                 life = MaxLife;
                 OnDataChange();

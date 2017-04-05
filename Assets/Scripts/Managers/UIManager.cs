@@ -22,22 +22,22 @@ namespace BlackFox
         /// <summary>
         /// Input Provvisori per i menu
         /// </summary>
-        //private void Update()
-        //{
-        //    if (Input.GetKeyDown(KeyCode.UpArrow))
-        //    {
-        //        GoUpInMenu();
-        //    }
-        //    if (Input.GetKeyDown(KeyCode.DownArrow))
-        //    {
-        //        GoDownInMenu();
-        //    }
+        private void Update()
+        { // TODO : da togliere
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                GoUpInMenu();
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                GoDownInMenu();
+            }
 
-        //    if (Input.GetKeyDown(KeyCode.Space))
-        //    {
-        //        Select();
-        //    }
-        //}
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                Select();
+            }
+        }
 
         #region API
 

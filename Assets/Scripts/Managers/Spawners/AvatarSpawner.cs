@@ -86,6 +86,12 @@ namespace BlackFox
         }
 
         #region API
+        public Agent[] GetAllPlayer()
+        {
+            // TODO : tenere riferimenti fissi
+            return FindObjectsOfType<Agent>();
+        }
+
         /// <summary>
         /// Respawn all Players
         /// </summary>

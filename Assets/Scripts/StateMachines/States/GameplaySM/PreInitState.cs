@@ -6,6 +6,8 @@ namespace BlackFox
 {
     public class PreInitState : StateBase
     {
+        // TODO : fare in modo che lo stato non finisca prima di aver caricato tutto quello che c'è in scena
+
         public override void OnStart()
         {
             Debug.Log("PreInitState");

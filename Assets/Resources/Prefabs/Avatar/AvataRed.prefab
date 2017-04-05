@@ -180,15 +180,15 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1652347477880556}
-  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 37.4, y: 9.5, z: 37.4}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4751554720248770}
   - {fileID: 4381008892504918}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4696566161750028
 Transform:
   m_ObjectHideFlags: 1
@@ -262,6 +262,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33376728623459924
 MeshFilter:
@@ -340,7 +341,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a435a47f34b1f734ea916cecc28a85d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationSpeed: 250
+  RotationSpeed: 300
   MovmentSpeed: 500
 --- !u!114 &114689641314393832
 MonoBehaviour:
@@ -354,7 +355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 1131201313437334, guid: 649e5dfaf7a6ea7428244aeea4e37d62, type: 2}
-  LifeTime: 10
+  LifeTime: 0.5
   bulletSpeed: 150
   AddedAmmo: 10
   MaxAmmo: 50
@@ -400,7 +401,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PinPrefab: {fileID: 1796246005193180, guid: 721b067c7305e4d42969a4668cadf4ef, type: 2}
   PinSpanw: {fileID: 4859884335389224}
-  CoolDownTime: 5
+  CoolDownTime: 3
   CanPlace: 1
 --- !u!114 &114954500704964902
 MonoBehaviour:
@@ -434,7 +435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6116c7f43a8f3964db2240b1007b4dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 10
+  maxLife: 15
   playerIndex: 1
   fireRate: 0.5
 --- !u!136 &136908197667893530
@@ -647,7 +648,7 @@ Canvas:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1918152363903958}
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
@@ -656,6 +657,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0

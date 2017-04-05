@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using XInputDotNetPure;
-using TMPro;
 
 namespace BlackFox
 {
@@ -22,7 +21,7 @@ namespace BlackFox
 
         public Slider ElementZeroSlider;
 
-        public TMP_Text LevelIndicationText;       
+        public Text LevelIndicationText;       
 
         
 

@@ -43,7 +43,7 @@ namespace BlackFox
         #region API
         public void Init()
         {
-            if (life == 0)
+            if (life <= 0)
             {
                 life = MaxLife;
                 OnDataChange();
@@ -59,7 +59,7 @@ namespace BlackFox
             OnDataChange();
             if (life < 1)
             {
-                EventManager.OnCoreDeath();
+                GameManager.Instance.levelManager.CoreDeath();
             }
         }
 

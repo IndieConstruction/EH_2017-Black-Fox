@@ -11,20 +11,18 @@ namespace BlackFox
     {
         int Level;
         int Round;
-        List<SpawnerBase> Spawners = new List<SpawnerBase>();
-
-        private void Start()
-        {   
-            ////Initialize each Spawner and subscribe their events
-            //foreach (var spawner in Spawners)
-            //{
-            //     spawner.Init(Level, Round);
-            //}
-        }
-        
+        public List<SpawnerBase> Spawners = new List<SpawnerBase>();
         
         #region API
-
+        public void InstanciateNewSpawners(Level _currentLevel)
+        {
+            Spawners.Add(_currentLevel.ArrowsSpawner.CreateInstance(_currentLevel.ArrowsSpawner, transform));
+            Spawners.Add( _currentLevel.BlackHoleSpawner.CreateInstance(_currentLevel.BlackHoleSpawner, transform));
+            Spawners.Add( _currentLevel.ExternalElementSpawner.CreateInstance(_currentLevel.ExternalElementSpawner, transform));
+            Spawners.Add(_currentLevel.AvatarSpawner.CreateInstance(_currentLevel.AvatarSpawner, transform));
+            Spawners.Add( _currentLevel.TurretSpawner.CreateInstance(_currentLevel.TurretSpawner, transform));
+            Spawners.Add(_currentLevel.WaveSpawner.CreateInstance(_currentLevel.WaveSpawner, transform));
+        }
 
         public void Init(int _level, int _round, List<SpawnerOptions> _levelSpawners)
         {
@@ -35,7 +33,7 @@ namespace BlackFox
         /// <summary>
         /// Initialize at each round's restart
         /// </summary>
-        public void InitLevel()
+        public void SpawnAgent()
         {
             foreach (var spawner in GetComponentsInChildren<SpawnerBase>())
             {

@@ -21,13 +21,13 @@ namespace Rope
 
         void Start()
         {
-            if(fragments.Count == 0)
+            if (fragments.Count == 0)
             {
                 lineRend = GetComponent<LineRenderer>();
                 ropeWidth = GetComponent<LineRenderer>().widthMultiplier;
                 fragments.Add(gameObject);
                 BuildRope(gameObject);
-            }            
+            }
         }
 
         private void LateUpdate()
@@ -87,7 +87,7 @@ namespace Rope
                 int fragmentsNeeded = (int)(Vector3.Distance(AnchorPoint.position, fragments[fragments.Count - 1].transform.position) / offSet.magnitude);
                 Debug.Log(fragmentsNeeded + MaxLength + " needed");
             }
-            lineRend.numPositions = (fragments.Count) + 1;
+            lineRend.positionCount = (fragments.Count) + 1;
         }
 
         /// <summary>
@@ -162,7 +162,7 @@ namespace Rope
             //Reconnect the AnchorPoint
             AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = fragments[fragments.Count - 1].GetComponent<Rigidbody>();
             
-            lineRend.numPositions = (fragments.Count) + 1;
+            lineRend.positionCount = (fragments.Count) + 1;
 
         }
         /// <summary>

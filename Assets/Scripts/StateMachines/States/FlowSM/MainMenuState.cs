@@ -6,12 +6,11 @@ namespace BlackFox
 {
     public class MainMenuState : StateBase
     {
-
         public override void OnStart()
         {
             Debug.Log("MainMenuState");
             GameManager.Instance.UiMng.CreateMainMenu();
-            GameManager.Instance.AvatarMng.ChangeAgentSMState(AgentSMStates.MenuInputState);
+            GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.MenuInputState);
         }
 
         public override void OnEnd()

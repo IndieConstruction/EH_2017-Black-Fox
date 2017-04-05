@@ -5,22 +5,22 @@ using XInputDotNetPure;
 
 namespace BlackFox
 {
-    public class Player : MonoBehaviour
+    public class Player
     {
         public PlayerIndex playerIndex;
-
         public string Name;
-
         public InputStatus inputStatus;
+        public PlayerState PlayerCurrentState;
 
         PlayerInput playerInput;
 
-        private void Start()
+        public Player(PlayerIndex _playerIndex)
         {
+            playerIndex = _playerIndex;
             playerInput = new PlayerInput(playerIndex);
         }
 
-        private void Update()
+        public void OnUpdate()
         {
             inputStatus = playerInput.GetPlayerInputStatus();
         }

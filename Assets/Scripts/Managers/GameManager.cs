@@ -19,15 +19,15 @@ namespace BlackFox
 
         public GameObject LevelManagerPrefab;
         public GameObject UIManagerPrefab;
-        public GameObject AvatarManagerPrefab;
+        public GameObject PlayerManagerPrefab;
 
         [HideInInspector]
         public LevelManager LevelMng;
         [HideInInspector]
         public UIManager UiMng;
         [HideInInspector]
-        public PlayerManager AvatarMng;
-
+        public PlayerManager PlayerMng;
+        [HideInInspector]
         public FlowSM flowSM;
 
         private void Awake()
@@ -80,7 +80,7 @@ namespace BlackFox
         
         public void InstantiateAvatarManager()
         {
-            AvatarMng = Instantiate(AvatarManagerPrefab, transform).GetComponent<PlayerManager>();
+            PlayerMng = Instantiate(PlayerManagerPrefab, transform).GetComponent<PlayerManager>();
         }
         #endregion
     }

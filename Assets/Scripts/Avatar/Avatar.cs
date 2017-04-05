@@ -45,13 +45,13 @@ namespace BlackFox
 
         void Start()
         {
+            player = GameManager.Instance.PlayerMng.GetPlayer(playerIndex);
             rigid = GetComponent<Rigidbody>();
             movment = GetComponent<MovementController>();
             rope = SearchRope();
             pinPlacer = GetComponent<PlacePin>();
             shooter = GetComponent<Shooter>();
             UIController = FindObjectOfType<GameUIController>();
-            player = GetComponentInParent<Player>();
             shooter.playerIndex = this.playerIndex;
             LoadIDamageablePrefab();
         }

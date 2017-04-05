@@ -36,6 +36,9 @@ namespace BlackFox
         {
             InputStatus inputStatus = new InputStatus();
 
+            prevState = state;
+            state = GamePad.GetState(playerIndex);
+
             if (!state.IsConnected)
             {
                 inputStatus.IsConnected = state.IsConnected;
@@ -43,9 +46,6 @@ namespace BlackFox
             }
             else
                 inputStatus.IsConnected = state.IsConnected;
-
-            prevState = state;
-            state = GamePad.GetState(playerIndex);
 
             inputStatus.RightTriggerAxis = state.Triggers.Right;
             inputStatus.LeftThumbSticksAxisX = state.ThumbSticks.Left.X;

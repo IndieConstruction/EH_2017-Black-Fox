@@ -6,7 +6,7 @@ using UnityEngine.UI;
 namespace BlackFox {
 
     public class AgentUI : MonoBehaviour {
-
+        public Image KillToview;
         public Image Ring;
         //public Text BulletCount;
         public Text KillPoint;
@@ -65,5 +65,13 @@ namespace BlackFox {
             agent.OnDataChange -= OnDataChange;
             EventManager.OnPointsUpdate -= SetKillPointUI;
         }
+        public void Killview()
+        {
+            if(KillPoint != null)
+                KillPoint.text="+1"+ (levelManager.GetPlayerKillPoints(agent.playerIndex)).ToString();
+         
+        }
+
+
     }
 }

@@ -271,7 +271,7 @@ namespace BlackFox
                     else
                         EventManager.OnAgentKilled(null, this);
                 }
-                    
+                GetComponent<CapsuleCollider>().enabled = false;    
                 transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject); });              
                 return;
             }

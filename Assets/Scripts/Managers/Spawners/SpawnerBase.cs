@@ -23,11 +23,27 @@ namespace BlackFox {
             level = _level;
             round = _round;
         }
-
+        /// <summary>
+        /// Initialize the option of the Spawner
+        /// </summary>
+        /// <param name="options"></param>
+        /// <returns></returns>
         public virtual SpawnerBase Init(SpawnerOptions options) {
             Options = options;
             return this;
         }
+        /// <summary>
+        /// Activate/Deactivate the Spawner
+        /// </summary>
+        public virtual void Toggle() { }
+        /// <summary>
+        /// Run it as beginning of round
+        /// </summary>
+        public virtual void Restart() { }
+        /// <summary>
+        /// Destroy all the Spawned gameobject from scene
+        /// </summary>
+        public virtual void CleanSpawned() { }
         #endregion
     }
     

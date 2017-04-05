@@ -28,12 +28,12 @@ namespace BlackFox
             OnStateEnd();
         }
 
-        void HandleOnAgentKilled(Agent _killer, Agent _victim)
+        void HandleOnAgentKilled(Avatar _killer, Avatar _victim)
         {
             GameManager.Instance.LevelMng.AgentKilled(_killer, _victim);
         }
 
-        void HandleOnAgentSpawn(Agent _agent)
+        void HandleOnAgentSpawn(Avatar _agent)
         {
             GameManager.Instance.LevelMng.AgentSpawn(_agent);
         }

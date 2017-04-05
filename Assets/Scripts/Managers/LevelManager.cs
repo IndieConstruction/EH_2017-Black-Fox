@@ -85,7 +85,7 @@ namespace BlackFox
         /// </summary>
         public void CallSpawnAgent()
         {
-            Agent[] tempAgents = null;
+            Avatar[] tempAgents = null;
             SpawnerMng.SpawnAgent();
             foreach (SpawnerBase spawner in SpawnerMng.Spawners)
             {
@@ -100,7 +100,7 @@ namespace BlackFox
                     } 
                 }
             }
-            foreach (Agent agent in tempAgents)
+            foreach (Avatar agent in tempAgents)
             {
                 RopeMng.AttachNewRope(agent);
             }
@@ -146,7 +146,7 @@ namespace BlackFox
         /// </summary>
         /// <param name="_killer"></param>
         /// <param name="_victim"></param>
-        public void AgentKilled(Agent _killer, Agent _victim)
+        public void AgentKilled(Avatar _killer, Avatar _victim)
         {
             if (_killer != null)
             {
@@ -172,7 +172,7 @@ namespace BlackFox
         /// Funzione che contiene le azioni da eseguire al resapwn di un player
         /// </summary>
         /// <param name="_agent"></param>
-        public void AgentSpawn(Agent _agent)
+        public void AgentSpawn(Avatar _agent)
         {
             //Reaction of the RopeManager to the OnAgentSpawn event
             RopeMng.ReactToOnAgentSpawn(_agent);

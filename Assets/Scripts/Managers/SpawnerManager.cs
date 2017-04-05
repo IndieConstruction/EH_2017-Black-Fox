@@ -49,7 +49,7 @@ namespace BlackFox
         /// </summary>
         /// <param name="_killer"></param>
         /// <param name="_victim"></param>
-        public void ReactToOnAgentKilled(Agent _victim)
+        public void ReactToOnAgentKilled(Avatar _victim)
         {
             GetComponentInChildren<AvatarSpawner>().RespawnAvatar(_victim);
         }

@@ -111,7 +111,7 @@ namespace BlackFox
                 }
             }
 
-            if (tempObj.GetComponent<Agent>() != null)
+            if (tempObj.GetComponent<Avatar>() != null)
             {
                 tempObj.transform.position = Vector3.MoveTowards(tempObj.transform.position, transform.localPosition, Attraction);
                 if (Vector3.Distance(tempObj.transform.position, transform.position) <= RangeToDestroyAgents)

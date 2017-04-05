@@ -7,7 +7,7 @@ namespace BlackFox
     public static class EventManager
     {
         #region AgentSpawn
-        public delegate void AgentSpawnEvent(Agent _agent);
+        public delegate void AgentSpawnEvent(Avatar _agent);
         /// <summary>
         /// Evento chiamato al respawn di un agente
         /// </summary>
@@ -15,7 +15,7 @@ namespace BlackFox
         #endregion
 
         #region AgentKilledEvent
-        public delegate void AgentKilledEvent(Agent _killer, Agent _victim);
+        public delegate void AgentKilledEvent(Avatar _killer, Avatar _victim);
         /// <summary>
         /// Evento chiamato alla morte di un agente
         /// </summary>

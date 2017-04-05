@@ -50,7 +50,7 @@ namespace BlackFox {
         }
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.GetComponent<Agent>() != null)
+            if (other.gameObject.GetComponent<Avatar>() != null)
                 ItemInRange.Add(other.gameObject);
         }
 

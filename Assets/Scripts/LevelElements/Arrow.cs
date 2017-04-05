@@ -9,7 +9,7 @@ namespace BlackFox {
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.GetComponent<Agent>() != null)
+            if (other.GetComponent<Avatar>() != null)
             {
                 other.GetComponent<Rigidbody>().AddForce(transform.forward * Force, ForceMode.Acceleration);
             }

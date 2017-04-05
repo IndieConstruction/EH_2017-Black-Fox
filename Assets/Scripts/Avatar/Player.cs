@@ -11,12 +11,18 @@ namespace BlackFox
 
         public string Name;
 
-        InputController inputCtrl;
+        public InputStatus inputStatus;
+
+        PlayerInput playerInput;
 
         private void Start()
         {
-            inputCtrl = GetComponent<InputController>();
-            inputCtrl.SetPlayerIndex(playerIndex);
+            playerInput = new PlayerInput(playerIndex);
+        }
+
+        private void Update()
+        {
+            inputStatus = playerInput.GetPlayerInputStatus();
         }
 
     }

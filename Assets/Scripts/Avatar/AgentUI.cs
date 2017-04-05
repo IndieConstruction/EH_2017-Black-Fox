@@ -11,12 +11,12 @@ namespace BlackFox {
         //public Text BulletCount;
         public Text KillPoint;
         
-        Agent agent;
+        Avatar agent;
         LevelManager levelManager;
 
         // Use this for initialization
         void Awake() {
-            agent = GetComponentInParent<Agent>();
+            agent = GetComponentInParent<Avatar>();
             Ring.color = Color.green;
         }
 
@@ -41,7 +41,7 @@ namespace BlackFox {
         //        BulletCount.text = agent.GetShooterReference().ammo.ToString();
         //}
 
-        void OnDataChange(Agent _agent) {
+        void OnDataChange(Avatar _agent) {
             // Aggiorno la UI
             Ring.fillAmount =  _agent.Life / _agent.maxLife;
             if (Ring.fillAmount < 0.3f) {

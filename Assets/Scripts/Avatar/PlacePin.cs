@@ -30,7 +30,7 @@ namespace BlackFox
         /// <summary>
         /// Instantiate the pin on the PinSpawn
         /// </summary>
-        public void placeThePin(Agent _owner, bool _isRight)
+        public void placeThePin(Avatar _owner, bool _isRight)
         {
             if (prectime <= 0 && CanPlace == true)
             {

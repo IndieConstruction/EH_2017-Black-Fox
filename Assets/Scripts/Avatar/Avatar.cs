@@ -7,7 +7,7 @@ using DG.Tweening;
 namespace BlackFox
 {
     [RequireComponent (typeof(MovementController), typeof(PlacePin), typeof(Shooter))]
-    public class Agent : MonoBehaviour, IShooter, IDamageable
+    public class Avatar : MonoBehaviour, IShooter, IDamageable
     {
         public PlayerIndex playerIndex;
 
@@ -25,7 +25,9 @@ namespace BlackFox
             }
         }
 
-        List<IDamageable> damageables = new List<IDamageable>();                        
+        List<IDamageable> damageables = new List<IDamageable>();
+
+        Player player;
 
         MovementController movment;
         PlacePin pinPlacer;
@@ -33,7 +35,8 @@ namespace BlackFox
         RopeController rope;
         GameUIController UIController;
 
-        public float fireRate;                                                   
+        public float fireRate;
+        float nextFire;
         float ropeExtTimer;
 
         //Variabili per gestire la fisca della corda
@@ -48,8 +51,14 @@ namespace BlackFox
             pinPlacer = GetComponent<PlacePin>();
             shooter = GetComponent<Shooter>();
             UIController = FindObjectOfType<GameUIController>();
+            player = GetComponentInParent<Player>();
             shooter.playerIndex = this.playerIndex;
             LoadIDamageablePrefab();
+        }
+
+        private void Update()
+        {
+            CheckinputStatus(player.inputStatus);
         }
 
         private void OnDestroy()
@@ -57,6 +66,33 @@ namespace BlackFox
             if(transform.parent != null)
                 Destroy(transform.parent.gameObject);
             GameManager.Instance.LevelMng.RopeMng.DestroyRope(this);
+        }
+
+        void CheckinputStatus(InputStatus _inputStatus)
+        {
+            GoForward(_inputStatus.RightTriggerAxis);
+            Rotate(_inputStatus.LeftThumbSticksAxisX);
+
+            if (_inputStatus.RightShoulder == ButtonState.Pressed)
+            {
+                PlacePin(true);
+            }
+
+            if (_inputStatus.LeftShoulder == ButtonState.Pressed)
+            {
+                PlacePin(false);
+            }
+
+            if (_inputStatus.A == ButtonState.Pressed)
+            {
+                nextFire = Time.time + fireRate;
+                Shoot();
+            }
+            else if (_inputStatus.A == ButtonState.Held && Time.time > nextFire)
+            {
+                nextFire = Time.time + fireRate;
+                Shoot();
+            }
         }
 
         /// <summary>
@@ -125,30 +161,30 @@ namespace BlackFox
 
         #region Player Abilities
 
-        public void Shoot()
+        void Shoot()
         {
             shooter.ShootBullet();
             SetAmmoInTheUI();
         }
 
-        public void PlacePin(bool _isRight)
+        void PlacePin(bool _isRight)
         {
             pinPlacer.placeThePin(this, _isRight);
         }
 
-        public void GoForward(float _amount)
+        void GoForward(float _amount)
         {
             movment.Movement(_amount);
             if (rope != null)
                 ExtendRope(_amount);
         }
 
-        public void Rotate(float _amount)
+        void Rotate(float _amount)
         {
             movment.Rotation(_amount);
         }
 
-        public void ExtendRope(float _amount)
+        void ExtendRope(float _amount)
         {
             ;
             if (_amount >= .95f)
@@ -202,7 +238,7 @@ namespace BlackFox
                 if (EventManager.OnAgentKilled != null)
                 {
                     if (_attacker != null)
-                        EventManager.OnAgentKilled(_attacker.GetComponent<Agent>(), this);
+                        EventManager.OnAgentKilled(_attacker.GetComponent<Avatar>(), this);
                     else
                         EventManager.OnAgentKilled(null, this);
                 }
@@ -217,7 +253,7 @@ namespace BlackFox
 
         #region Events
 
-        public delegate void AgentDataChangedEvent(Agent _agent);
+        public delegate void AgentDataChangedEvent(Avatar _agent);
 
         public AgentDataChangedEvent OnDataChange;
 

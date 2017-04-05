@@ -9,13 +9,13 @@ namespace BlackFox
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.GetComponent<Agent>() != null)
+            if (other.GetComponent<Avatar>() != null)
                 other.GetComponent<PlacePin>().CanPlace = false;
         }
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.GetComponent<Agent>() != null)
+            if (other.GetComponent<Avatar>() != null)
                 other.GetComponent<PlacePin>().CanPlace = true;
         }
     }

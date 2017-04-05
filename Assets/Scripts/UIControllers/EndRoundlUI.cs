@@ -41,7 +41,7 @@ namespace BlackFox
 
         #region API 
 
-        public void AddKillPointToUI(Agent _attacker, Agent _victim)
+        public void AddKillPointToUI(Avatar _attacker, Avatar _victim)
         {
 
             if (_attacker != null)

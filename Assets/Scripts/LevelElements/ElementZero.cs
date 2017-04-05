@@ -115,7 +115,7 @@ namespace BlackFox
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.GetComponent<Agent>() != null)
+            if (collision.gameObject.GetComponent<Avatar>() != null)
             {
                 Damage(DamageToCore * 2, gameObject);
             }

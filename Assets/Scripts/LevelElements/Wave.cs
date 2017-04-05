@@ -24,7 +24,7 @@ namespace BlackFox
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponent<Agent>() != null || other.GetComponent<ExternalAgent>() != null)
+            if (other.GetComponent<Avatar>() != null || other.GetComponent<ExternalAgent>() != null)
             {
                 other.GetComponent<Rigidbody>().AddForce(transform.forward * force);
             }

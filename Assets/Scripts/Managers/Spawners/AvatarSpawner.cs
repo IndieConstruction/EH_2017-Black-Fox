@@ -86,10 +86,10 @@ namespace BlackFox
         }
 
         #region API
-        public Agent[] GetAllPlayer()
+        public Avatar[] GetAllPlayer()
         {
             // TODO : tenere riferimenti fissi
-            return FindObjectsOfType<Agent>();
+            return FindObjectsOfType<Avatar>();
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace BlackFox
             StopAllCoroutines();
             for (int i = 0; i < agentsPrefb.Length; i++)
             {
-                RespawnImmediate(agentsPrefb[i].GetComponentInChildren<Agent>().playerIndex);
+                RespawnImmediate(agentsPrefb[i].GetComponentInChildren<Avatar>().playerIndex);
             }
         }
 
@@ -111,7 +111,7 @@ namespace BlackFox
         public void RespawnImmediate(PlayerIndex _playerIndx)
         {
             //Prevent double istance
-            foreach (Agent agnt in FindObjectsOfType<Agent>())
+            foreach (Avatar agnt in FindObjectsOfType<Avatar>())
             {
                 if (agnt.playerIndex == _playerIndx)
                     Destroy(agnt);
@@ -125,11 +125,11 @@ namespace BlackFox
                 {
                     for (int i = 0; i < agentsPrefb.Length; i++)
                     {
-                        if (agentsPrefb[i].GetComponentInChildren<Agent>().playerIndex == _playerIndx)
+                        if (agentsPrefb[i].GetComponentInChildren<Avatar>().playerIndex == _playerIndx)
                         {
                             GameObject newAgent = Instantiate(agentsPrefb[i], spawn.SpawnPosition.position, spawn.SpawnPosition.rotation);
                             if(EventManager.OnAgentSpawn != null)
-                                EventManager.OnAgentSpawn(newAgent.GetComponentInChildren<Agent>());
+                                EventManager.OnAgentSpawn(newAgent.GetComponentInChildren<Avatar>());
                             return;
                         }
                     }
@@ -141,7 +141,7 @@ namespace BlackFox
         /// Respawn after a fixed amount of time
         /// </summary>
         /// <param name="_playerIndx">Player to spawn</param>
-        public void RespawnAvatar(Agent _victim)
+        public void RespawnAvatar(Avatar _victim)
         {
             StartCoroutine("RespawnCooldown", _victim.playerIndex);
         }
@@ -149,7 +149,7 @@ namespace BlackFox
         #region Destroy Agents
         public void DestroyAgents() {
             // TODO : da correggere
-            foreach (Agent agent in FindObjectsOfType<Agent>()) {
+            foreach (Avatar agent in FindObjectsOfType<Avatar>()) {
                 Destroy(agent.gameObject);
             }
         }

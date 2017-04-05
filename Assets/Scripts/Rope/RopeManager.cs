@@ -14,7 +14,7 @@ namespace BlackFox {
         /// React to OnAgentSpawn by building and connectig to it a new rope
         /// </summary>
         /// <param name="_agent"></param>
-        public void ReactToOnAgentSpawn(Agent _agent)
+        public void ReactToOnAgentSpawn(Avatar _agent)
         {
             AttachNewRope(_agent);
         }
@@ -23,7 +23,7 @@ namespace BlackFox {
         /// </summary>
         /// <param name="_killer"></param>
         /// <param name="_victim"></param>
-        public void ReactToOnAgentKilled(Agent _victim)
+        public void ReactToOnAgentKilled(Avatar _victim)
         {
             DestroyRope(_victim);
         }
@@ -44,7 +44,7 @@ namespace BlackFox {
         /// Create a new Rope and attach it to _target(parameter)
         /// </summary>
         /// <param name="_target"></param>
-        public void AttachNewRope(Agent _target)
+        public void AttachNewRope(Avatar _target)
         {
             GameObject newOrigin;
             
@@ -79,7 +79,7 @@ namespace BlackFox {
         /// Find the Rope attached to _target and destroy it
         /// </summary>
         /// <param name="_target"></param>
-        public void DestroyRope(Agent _target)
+        public void DestroyRope(Avatar _target)
         {
             string nameOfRope = _target.playerIndex + "Rope";
             foreach (GameObject gObj in ropes)

@@ -60,8 +60,13 @@ namespace BlackFox
 
         void FixedUpdate()
         {
-            KeyboardReader();
-            XInputReader();
+            KeyboardMovementReader();
+            XInputMovementReader();
+        }
+
+        private void Update()
+        {
+            KeyboardInputReader();
         }
 
         private void OnDestroy()
@@ -133,10 +138,19 @@ namespace BlackFox
         
         #region KeyboardInput
         /// <summary>
-        /// Controlla l'input da tastiera
+        /// Controlla l'input da tastiera relativo al movimento
         /// </summary>
-        void KeyboardReader()
+        void KeyboardMovementReader()
         {
+            Rotate(Input.GetAxis(string.Concat("Key" + (int)playerIndex + "_Horizonatal")));  // Ruota l'agente
+            GoForward(Input.GetAxis(string.Concat("Key" + (int)playerIndex + "_Forward")));                                                                               // Muove l'agente                                                                                
+        }
+
+        /// <summary>
+        /// Controlla l'input da tastiera relativo ai pin e lo sparo
+        /// </summary>
+        void KeyboardInputReader() {
+
             if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_PlaceRight")))                       // place right pin
             {
                 PlacePin(true);
@@ -145,41 +159,46 @@ namespace BlackFox
             if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_PlaceLeft")))                        // place left pin
             {
                 PlacePin(false);
-                
+
             }
 
             if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_Fire")))       // shoot 
             {
                 nextFire = Time.time + fireRate;
                 Shoot();
-                
+
             }
 
             if (Input.GetButton(string.Concat("Key" + (int)playerIndex + "_Fire")) && Time.time > nextFire)       // shoot at certain rate
             {
                 nextFire = Time.time + fireRate;
                 Shoot();
-                
-            }
 
-            Rotate(Input.GetAxis(string.Concat("Key" + (int)playerIndex + "_Horizonatal")));  // Ruota l'agente
-            GoForward(Input.GetAxis(string.Concat("Key" + (int)playerIndex + "_Forward")));                                                                               // Muove l'agente                                                                                
+            }
         }
+
         #endregion
 
         #region XInput
         /// <summary>
-        /// Controlla l'input da controller
+        /// Controlla l'input da controller relativo al movimento
         /// </summary>
-        void XInputReader()
+        void XInputMovementReader()
         {
             prevState = state;
             state = GamePad.GetState(playerIndex);
 
             GoForward(state.Triggers.Right);
             Rotate(state.ThumbSticks.Left.X);
+        }
 
-
+        /// <summary>
+        /// Controlla l'input da controller relativo ai pin e lo sparo
+        /// </summary>
+        void XInputReader()
+        {
+            prevState = state;
+            state = GamePad.GetState(playerIndex);
 
             if (prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed)
             {
@@ -196,7 +215,7 @@ namespace BlackFox
                 nextFire = Time.time + fireRate;
                 Shoot();
             }
-            else if (prevState.Buttons.A == ButtonState.Pressed && state.Buttons.A == ButtonState.Pressed && Time.time > nextFire)
+            if (prevState.Buttons.A == ButtonState.Pressed && state.Buttons.A == ButtonState.Pressed && Time.time > nextFire)
             {
                 nextFire = Time.time + fireRate;
                 Shoot();

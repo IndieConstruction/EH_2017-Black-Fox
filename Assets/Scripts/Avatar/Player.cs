@@ -20,9 +20,47 @@ namespace BlackFox
             playerInput = new PlayerInput(playerIndex);
         }
 
+        /// <summary>
+        /// Funzione sostitutiva all'update
+        /// </summary>
         public void OnUpdate()
         {
-            inputStatus = playerInput.GetPlayerInputStatus();
+            switch (PlayerCurrentState)
+            {
+                case PlayerState.Blocked:
+                    // Stato in cui i comandi del player sono ingorati
+                    break;
+                case PlayerState.MenuInputState:
+                    CheckMenuInputStatus(playerInput.GetPlayerInputStatus());
+                    break;
+                case PlayerState.PlayInputState:
+                    inputStatus = playerInput.GetPlayerInputStatus();
+                    break;
+            }
+        }
+
+        /// <summary>
+        /// Controlla l'inpunt da passare al menù corrente 
+        /// </summary>
+        /// <param name="_inputStatus"></param>
+        void CheckMenuInputStatus(InputStatus _inputStatus)
+        {
+            // TODO : probabilmente da spostare in una classe
+            if (_inputStatus.DPadUp == ButtonState.Pressed)
+            {
+                GameManager.Instance.UiMng.GoUpInMenu();
+            }
+
+            if (_inputStatus.DPadDown == ButtonState.Pressed)
+            {
+                GameManager.Instance.UiMng.GoDownInMenu();
+            }
+
+            if (_inputStatus.A == ButtonState.Pressed)
+            {
+                GameManager.Instance.UiMng.Select();
+            }
+
         }
 
     }

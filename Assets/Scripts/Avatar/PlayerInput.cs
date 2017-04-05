@@ -28,7 +28,7 @@ namespace BlackFox
         }
         #endregion
 
-        #region XInput
+        #region ControllerInput
         /// <summary>
         /// Controlla l'input da controller (usando il plugin XInputDotNetPure)
         /// </summary>

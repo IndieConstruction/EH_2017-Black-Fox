@@ -22,22 +22,22 @@ namespace BlackFox
         /// <summary>
         /// Input Provvisori per i menu
         /// </summary>
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                GoUpInMenu();
-            }
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                GoDownInMenu();
-            }
+        //private void Update()
+        //{
+        //    if (Input.GetKeyDown(KeyCode.UpArrow))
+        //    {
+        //        GoUpInMenu();
+        //    }
+        //    if (Input.GetKeyDown(KeyCode.DownArrow))
+        //    {
+        //        GoDownInMenu();
+        //    }
 
-            if (Input.GetKeyDown(KeyCode.RightControl))
-            {
-                Select();
-            }
-        }
+        //    if (Input.GetKeyDown(KeyCode.Space))
+        //    {
+        //        Select();
+        //    }
+        //}
 
         #region API
 
@@ -67,7 +67,6 @@ namespace BlackFox
         }
 
         #endregion
-
 
         #region Main Menu
         /// <summary>
@@ -126,8 +125,6 @@ namespace BlackFox
         }
         #endregion
 
-        #endregion
-
-        
+        #endregion     
     }
 }

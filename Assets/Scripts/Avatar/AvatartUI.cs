@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace BlackFox {
 
-    public class AgentUI : MonoBehaviour {
+    public class AvatarUI : MonoBehaviour {
         public Image KillToview;
         public Image Ring;
         //public Text BulletCount;
@@ -43,7 +43,7 @@ namespace BlackFox {
 
         void OnDataChange(Avatar _agent) {
             // Aggiorno la UI
-            Ring.fillAmount =  _agent.Life / _agent.maxLife;
+            Ring.fillAmount =  _agent.Life / _agent.MaxLife;
             if (Ring.fillAmount < 0.3f) {
                 Ring.color = Color.red;
             } else if (Ring.fillAmount > 0.7f) {

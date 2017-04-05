@@ -11,7 +11,7 @@ namespace BlackFox
     {
         public PlayerIndex playerIndex;
 
-        public float maxLife = 10;
+        public float MaxLife = 10;
         private float _life = 10;
 
         public float Life
@@ -45,6 +45,7 @@ namespace BlackFox
 
         void Start()
         {
+            Life = MaxLife;
             player = GameManager.Instance.PlayerMng.GetPlayer(playerIndex);
             rigid = GetComponent<Rigidbody>();
             movment = GetComponent<MovementController>();
@@ -58,7 +59,7 @@ namespace BlackFox
 
         private void Update()
         {
-            CheckinputStatus(player.inputStatus);
+            CheckInputStatus(player.inputStatus);
         }
 
         private void OnDestroy()
@@ -68,7 +69,7 @@ namespace BlackFox
             GameManager.Instance.LevelMng.RopeMng.DestroyRope(this);
         }
 
-        void CheckinputStatus(InputStatus _inputStatus)
+        void CheckInputStatus(InputStatus _inputStatus)
         {
             GoForward(_inputStatus.RightTriggerAxis);
             Rotate(_inputStatus.LeftThumbSticksAxisX);

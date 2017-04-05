@@ -413,6 +413,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44fa6584f3505ba49b8ecac0518f61c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  KillToview: {fileID: 0}
   Ring: {fileID: 0}
   KillPoint: {fileID: 0}
 --- !u!114 &114039904183898956
@@ -607,8 +608,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6116c7f43a8f3964db2240b1007b4dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 10
   playerIndex: 0
+  MaxLife: 15
   fireRate: 0.5
 --- !u!114 &114900860761116194
 MonoBehaviour:

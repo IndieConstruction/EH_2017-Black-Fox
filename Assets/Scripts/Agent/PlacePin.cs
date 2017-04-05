@@ -38,7 +38,7 @@ namespace BlackFox
                 //ChangePinSpawnPosition();
                 SetPinSpawnPosition(_isRight);
 
-                Instantiate(PinPrefab, PinSpanw.position, PinSpanw.rotation);
+                Instantiate(PinPrefab, PinSpanw.position, PinSpanw.rotation, GameManager.Instance.LevelMng.PinsContainer);
                 _owner.AddShooterAmmo();
                 prectime = CoolDownTime;
             }

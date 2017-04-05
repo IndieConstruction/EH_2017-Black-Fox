@@ -6,12 +6,14 @@ namespace BlackFox
 {
     public class PreInitState : StateBase
     {
+        // TODO : fare in modo che lo stato non finisca prima di aver caricato tutto quello che c'è in scena
+
         public override void OnStart()
         {
             Debug.Log("PreInitState");
-            GameManager.Instance.levelManager.InstantiateArena();
-            GameManager.Instance.levelManager.InstantiateRopeManager();
-            GameManager.Instance.levelManager.InstantiateSpawnerManager();
+            GameManager.Instance.LevelMng.InstantiateArena();
+            GameManager.Instance.LevelMng.InstantiateRopeManager();
+            GameManager.Instance.LevelMng.InstantiateSpawnerManager();
         }
 
         public override void OnUpdate()

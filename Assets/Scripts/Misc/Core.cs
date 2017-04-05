@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace BlackFox
 {
@@ -16,7 +17,7 @@ namespace BlackFox
 
         private void Start()
         {
-            GameManager.Instance.levelManager.Core = this;
+            GameManager.Instance.LevelMng.Core = this;
             Ring = GetComponentInChildren<Image>();
             life = MaxLife;
             OnDataChange();
@@ -43,7 +44,7 @@ namespace BlackFox
         #region API
         public void Init()
         {
-            if (life == 0)
+            if (life <= 0)
             {
                 life = MaxLife;
                 OnDataChange();
@@ -57,9 +58,10 @@ namespace BlackFox
         {
             life -= _damage;
             OnDataChange();
+            transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0.1f), 0.5f);
             if (life < 1)
             {
-                EventManager.OnCoreDeath();
+                transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { GameManager.Instance.LevelMng.CoreDeath(); });
             }
         }
 

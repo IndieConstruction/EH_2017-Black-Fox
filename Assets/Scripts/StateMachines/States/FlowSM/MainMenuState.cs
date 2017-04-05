@@ -10,21 +10,13 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("MainMenuState");
-            GameManager.Instance.uiManager.CreateMainMenu();
-        }
-
-        public override void OnUpdate()
-        {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Submit"))
-            {
-                if (OnStateEnd != null)
-                    OnStateEnd();
-            }
+            GameManager.Instance.UiMng.CreateMainMenu();
+            GameManager.Instance.AvatarMng.ChangeAgentSMState(AgentSMStates.MenuInputState);
         }
 
         public override void OnEnd()
         {
-            GameManager.Instance.uiManager.DestroyMainMenu();
+            GameManager.Instance.UiMng.DestroyMainMenu();
         }
     }
 }

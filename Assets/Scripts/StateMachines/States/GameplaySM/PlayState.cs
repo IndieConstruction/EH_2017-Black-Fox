@@ -9,28 +9,33 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("PlayState");
-            EventManager.OnPlayerWinnig += HandleOnPlayerWinnig;
-            EventManager.OnCoreDeath += HandleOnCoreDeath;
+            EventManager.TriggerPlayStateEnd += HandleTriggerPlayStateEnd;
+            EventManager.OnAgentKilled += HandleOnAgentKilled;
+            EventManager.OnAgentSpawn += HandleOnAgentSpawn;
         }
 
         public override void OnEnd()
         {
             // passaggio informazioni essenziali al gestore del livello
-            EventManager.OnPlayerWinnig -= HandleOnPlayerWinnig;
-            EventManager.OnCoreDeath -= HandleOnCoreDeath;
+            EventManager.TriggerPlayStateEnd -= HandleTriggerPlayStateEnd;
+            EventManager.OnAgentKilled -= HandleOnAgentKilled;
+            EventManager.OnAgentSpawn -= HandleOnAgentSpawn;
         }
 
         #region Events Handler
-        void HandleOnPlayerWinnig()
+        void HandleTriggerPlayStateEnd()
         {
-            Debug.Log("Agent Wins");
             OnStateEnd();
         }
 
-        void HandleOnCoreDeath()
+        void HandleOnAgentKilled(Agent _killer, Agent _victim)
         {
-            Debug.Log("Core Dead");
-            OnStateEnd();
+            GameManager.Instance.LevelMng.AgentKilled(_killer, _victim);
+        }
+
+        void HandleOnAgentSpawn(Agent _agent)
+        {
+            GameManager.Instance.LevelMng.AgentSpawn(_agent);
         }
         #endregion
     }

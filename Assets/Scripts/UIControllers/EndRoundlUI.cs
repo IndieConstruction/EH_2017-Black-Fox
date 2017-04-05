@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
-using TMPro;
+
 using UnityEngine.UI;
 
 namespace BlackFox
@@ -11,10 +11,10 @@ namespace BlackFox
     {
         UIManager uiManager;
 
-        public TMP_Text Player1Points;
-        public TMP_Text Player2Points;
-        public TMP_Text Player3Points;
-        public TMP_Text Player4Points;
+        public Text Player1Points;
+        public Text Player2Points;
+        public Text Player3Points;
+        public Text Player4Points;
         public GameObject EndLevelPanel;
 
         int P1KillPoints;
@@ -41,33 +41,28 @@ namespace BlackFox
 
         #region API 
 
-        /// <summary>
-        /// Attaccato Ad un bottone scatena l'evento per avvisare il current state che deve terminare.
-        /// </summary>
-        public void ChangeStateOnClick()
-        {
-            if (EventManager.OnClickToChangeState != null)
-                EventManager.OnClickToChangeState();
-        }
-
         public void AddKillPointToUI(Agent _attacker, Agent _victim)
         {
-            switch (_attacker.playerIndex)
+
+            if (_attacker != null)
             {
-                case PlayerIndex.One:
-                    P1KillPoints++;
-                    break;
-                case PlayerIndex.Two:
-                    P2KillPoints++;
-                    break;
-                case PlayerIndex.Three:
-                    P3KillPoints++;
-                    break;
-                case PlayerIndex.Four:
-                    P4KillPoints++;
-                    break;
-                default:
-                    break;
+                switch (_attacker.playerIndex)
+                {
+                    case PlayerIndex.One:
+                        P1KillPoints++;
+                        break;
+                    case PlayerIndex.Two:
+                        P2KillPoints++;
+                        break;
+                    case PlayerIndex.Three:
+                        P3KillPoints++;
+                        break;
+                    case PlayerIndex.Four:
+                        P4KillPoints++;
+                        break;
+                    default:
+                        break;
+                } 
             }
 
             switch (_victim.playerIndex)

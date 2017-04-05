@@ -198,14 +198,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Options:
     SpawnerPrefab: {fileID: 0}
-    RespawnTime: 0
-    UseInitialPositionsAsSpawnPoints: 0
-    UseSpecifiedPrefabs: 0
+    RespawnTime: 3
+    UseSpecifiedPrefabs: 1
     AvatarPrefabs:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    - {fileID: 1305829202965250, guid: a214aefd3bf69464c9b46124238781de, type: 2}
+    - {fileID: 1652347477880556, guid: c812bd5f837cf484791231f668cf3978, type: 2}
+    - {fileID: 1405396506357818, guid: 78f34d051af73b344a32930fefc2c297, type: 2}
+    - {fileID: 1851850003459776, guid: db452c6aca4d15c4aadf8031e2d9ac14, type: 2}
   SpawnPoints:
   - SpawnPosition: {fileID: 4606161214009046}
     PlayerIndx: 0

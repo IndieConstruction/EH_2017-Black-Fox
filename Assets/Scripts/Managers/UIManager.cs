@@ -17,21 +17,70 @@ namespace BlackFox
         [HideInInspector]
         public Object canvasGameMenu;
 
+        public IMenu CurrentMenu;
+
+        /// <summary>
+        /// Input Provvisori per i menu
+        /// </summary>
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                GoUpInMenu();
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                GoDownInMenu();
+            }
+
+            if (Input.GetKeyDown(KeyCode.RightControl))
+            {
+                Select();
+            }
+        }
 
         #region API
 
+        /// <summary>
+        /// Richiama la funzione per visualizzare il numero del livello e del round 
+        /// </summary>
         public void UpdateLevelInformation()
         {
             gameUIController.UpdateLevelInformation();
         }
 
+        #region Menu Controller
+
+        public void GoUpInMenu()
+        {
+            CurrentMenu.GoUpInMenu();
+        }
+
+        public void GoDownInMenu()
+        {
+            CurrentMenu.GoDownInMenu();
+        }
+
+        public void Select()
+        {
+            CurrentMenu.Selection();
+        }
+
+        #endregion
+
 
         #region Main Menu
+        /// <summary>
+        /// Crea il CanvasMenu non appena subentra il MainMenuState
+        /// </summary>
         public void CreateMainMenu()
         {
             canvasMenu = GameObject.Instantiate(Resources.Load("Prefabs/UI/CanvasMenu"), transform);
         }
 
+        /// <summary>
+        /// Distrugge il CanvasMenu non appena subentra il MainMenuState
+        /// </summary>
         public void DestroyMainMenu()
         {
             Destroy(canvasMenu);
@@ -39,11 +88,17 @@ namespace BlackFox
         #endregion
 
         #region LevelSelection Menu
+        /// <summary>
+        /// Crea il CanvasLevelSelection non appena subentra il MainMenuState
+        /// </summary>
         public void CreateLevelSelectionMenu()
         {
             canvasLevelSelection = GameObject.Instantiate(Resources.Load("Prefabs/UI/CanvasLevelSelection"), transform);
         }
 
+        /// <summary>
+        /// Distrugge il CanvasLevelSelection non appena subentra il MainMenuState
+        /// </summary>
         public void DestroyLevelSelectionMenu()
         {
             Destroy(canvasLevelSelection);
@@ -51,6 +106,10 @@ namespace BlackFox
         #endregion
 
         #region Game Menu
+
+        /// <summary>
+        /// Crea il Canvas contenente il GameUIController e l'EndRoundUI
+        /// </summary>
         public void CreateGameMenu()
         {
             canvasGameMenu = GameObject.Instantiate(Resources.Load("Prefabs/UI/Canvas"), transform);
@@ -58,6 +117,9 @@ namespace BlackFox
             gameUIController = GetComponentInChildren<GameUIController>();
         }
 
+        /// <summary>
+        /// Distrugge il Canvas contenente il GameUIController e l'EndRoundUI
+        /// </summary>
         public void DestroyGameMenu()
         {
             Destroy(canvasGameMenu);

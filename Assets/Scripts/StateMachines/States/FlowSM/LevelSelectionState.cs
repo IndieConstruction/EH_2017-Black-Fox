@@ -8,21 +8,12 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("LevelSelectionState");
-            GameManager.Instance.uiManager.CreateLevelSelectionMenu();
-        }
-
-        public override void OnUpdate()
-        {
-            if (Input.GetKeyDown(KeyCode.Space) || Input.GetButtonDown("Submit"))
-            {
-                if (OnStateEnd != null)
-                    OnStateEnd();
-            }
+            GameManager.Instance.UiMng.CreateLevelSelectionMenu();
         }
 
         public override void OnEnd()
         {
-            GameManager.Instance.uiManager.DestroyLevelSelectionMenu();
+            GameManager.Instance.UiMng.DestroyLevelSelectionMenu();
         }
     }
 }

@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
+
 namespace BlackFox {
 
     public class Turrent : MonoBehaviour,IDamageable,IShooter {
@@ -97,7 +99,7 @@ namespace BlackFox {
         void CallShooter()
         {
             Vector3 _target = new Vector3(ItemInRange[0].transform.position.x, 0f, ItemInRange[0].transform.position.z);
-            transform.LookAt(_target);
+            transform.DOLookAt(_target, 0.5f);
             Timer -= Time.deltaTime;
             if (Timer <= 0f)
             {

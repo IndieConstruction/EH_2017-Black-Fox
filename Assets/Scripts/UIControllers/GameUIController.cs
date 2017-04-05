@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using XInputDotNetPure;
-using TMPro;
 
 namespace BlackFox
 {
@@ -22,7 +21,7 @@ namespace BlackFox
 
         public Slider ElementZeroSlider;
 
-        public TMP_Text LevelIndicationText;       
+        public Text LevelIndicationText;       
 
         
 
@@ -85,9 +84,12 @@ namespace BlackFox
             ElementZeroSlider.value = _life / _maxLife;                  // Da rivedere se il valore della vita cambia
         }
 
+        /// <summary>
+        /// Aggiorna il numero del livello e del round visualizzati durante il round
+        /// </summary>
         public void UpdateLevelInformation()
         {
-            LevelIndicationText.text = "Level: " + GameManager.Instance.levelManager.levelNumber + "/" + "Round: " + GameManager.Instance.levelManager.roundNumber;
+            LevelIndicationText.text = "Level: " + GameManager.Instance.LevelMng.levelNumber + "/" + "Round: " + GameManager.Instance.LevelMng.roundNumber;
         }
 
         #endregion

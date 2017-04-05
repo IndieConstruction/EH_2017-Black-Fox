@@ -71,6 +71,7 @@ GameObject:
   - component: {fileID: 4747917551864218}
   - component: {fileID: 135147378564748032}
   - component: {fileID: 114405658635631890}
+  - component: {fileID: 122636814181097016}
   m_Layer: 0
   m_Name: PinBlocker
   m_TagString: Untagged
@@ -141,7 +142,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1923663633415268}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -9.11, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4747917551864218}
@@ -194,6 +195,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!23 &23159010089728498
 MeshRenderer:
@@ -225,6 +227,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33478983689582070
 MeshFilter:
@@ -281,6 +284,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59c29e9d98208d84f91ff03387995a8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!122 &122636814181097016
+Halo:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1339113892836710}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4281622304
+  m_Size: 5
 --- !u!135 &135147378564748032
 SphereCollider:
   m_ObjectHideFlags: 1

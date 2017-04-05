@@ -12,7 +12,7 @@ namespace BlackFox
 
         string Name;
         public float maxLife = 10;
-        private float _life = 10;
+        private float _life;
 
         public float Life
         {
@@ -48,6 +48,7 @@ namespace BlackFox
 
         void Start()
         {
+            _life = maxLife;
             rigid = GetComponent<Rigidbody>();
             movment = GetComponent<MovementController>();
             rope = SearchRope();
@@ -60,20 +61,21 @@ namespace BlackFox
 
         void FixedUpdate()
         {
-            KeyboardReader();
-            XInputReader();
+            KeyboardMovementReader();
+            XInputMovementReader();
+        }
+
+        private void Update()
+        {
+            KeyboardInputReader();
         }
 
         private void OnDestroy()
         {
             if(transform.parent != null)
                 Destroy(transform.parent.gameObject);
-            GameManager.Instance.levelManager.RopeMng.DestroyRope(this);
+            GameManager.Instance.LevelMng.RopeMng.DestroyRope(this);
         }
-
-        #region Event Handler
-
-        #endregion
 
         RopeController SearchRope()
         {
@@ -137,10 +139,19 @@ namespace BlackFox
         
         #region KeyboardInput
         /// <summary>
-        /// Controlla l'input da tastiera
+        /// Controlla l'input da tastiera relativo al movimento
         /// </summary>
-        void KeyboardReader()
+        void KeyboardMovementReader()
         {
+            Rotate(Input.GetAxis(string.Concat("Key" + (int)playerIndex + "_Horizonatal")));  // Ruota l'agente
+            GoForward(Input.GetAxis(string.Concat("Key" + (int)playerIndex + "_Forward")));                                                                               // Muove l'agente                                                                                
+        }
+
+        /// <summary>
+        /// Controlla l'input da tastiera relativo ai pin e lo sparo
+        /// </summary>
+        void KeyboardInputReader() {
+
             if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_PlaceRight")))                       // place right pin
             {
                 PlacePin(true);
@@ -149,41 +160,46 @@ namespace BlackFox
             if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_PlaceLeft")))                        // place left pin
             {
                 PlacePin(false);
-                
+
             }
 
             if (Input.GetButtonDown(string.Concat("Key" + (int)playerIndex + "_Fire")))       // shoot 
             {
                 nextFire = Time.time + fireRate;
                 Shoot();
-                
+
             }
 
             if (Input.GetButton(string.Concat("Key" + (int)playerIndex + "_Fire")) && Time.time > nextFire)       // shoot at certain rate
             {
                 nextFire = Time.time + fireRate;
                 Shoot();
-                
-            }
 
-            Rotate(Input.GetAxis(string.Concat("Key" + (int)playerIndex + "_Horizonatal")));  // Ruota l'agente
-            GoForward(Input.GetAxis(string.Concat("Key" + (int)playerIndex + "_Forward")));                                                                               // Muove l'agente                                                                                
+            }
         }
+
         #endregion
 
         #region XInput
         /// <summary>
-        /// Controlla l'input da controller
+        /// Controlla l'input da controller relativo al movimento
         /// </summary>
-        void XInputReader()
+        void XInputMovementReader()
         {
             prevState = state;
             state = GamePad.GetState(playerIndex);
 
             GoForward(state.Triggers.Right);
             Rotate(state.ThumbSticks.Left.X);
+        }
 
-
+        /// <summary>
+        /// Controlla l'input da controller relativo ai pin e lo sparo
+        /// </summary>
+        void XInputReader()
+        {
+            prevState = state;
+            state = GamePad.GetState(playerIndex);
 
             if (prevState.Buttons.RightShoulder == ButtonState.Released && state.Buttons.RightShoulder == ButtonState.Pressed)
             {
@@ -200,7 +216,7 @@ namespace BlackFox
                 nextFire = Time.time + fireRate;
                 Shoot();
             }
-            else if (prevState.Buttons.A == ButtonState.Pressed && state.Buttons.A == ButtonState.Pressed && Time.time > nextFire)
+            if (prevState.Buttons.A == ButtonState.Pressed && state.Buttons.A == ButtonState.Pressed && Time.time > nextFire)
             {
                 nextFire = Time.time + fireRate;
                 Shoot();
@@ -233,6 +249,7 @@ namespace BlackFox
         #endregion
 
         #region IDamageable
+        Tweener damageTween;
         /// <summary>
         /// Danneggia la vita dell'agente a cui è attaccato e ritorna i punti da assegnare all'agente che lo ha copito
         /// </summary>
@@ -240,9 +257,11 @@ namespace BlackFox
         /// <returns></returns>
         public void Damage(float _damage, GameObject _attacker)
         {
-            Life -= _damage;
-            transform.DOScale(Vector3.one, 0.25f);
-            transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f);
+            if(damageTween != null)
+                damageTween.Complete();
+
+            Life -= _damage;            
+            damageTween =  transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f);
             if (Life < 1)
             {
                 if (EventManager.OnAgentKilled != null)

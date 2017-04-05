@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace BlackFox
 {
@@ -57,9 +58,10 @@ namespace BlackFox
         {
             life -= _damage;
             OnDataChange();
+            transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0.1f), 0.5f);
             if (life < 1)
             {
-                GameManager.Instance.LevelMng.CoreDeath();
+                transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { GameManager.Instance.LevelMng.CoreDeath(); });
             }
         }
 

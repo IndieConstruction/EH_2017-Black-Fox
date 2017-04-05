@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace BlackFox
 {
@@ -67,9 +68,10 @@ namespace BlackFox
         public void Damage(float _damage, GameObject _attacker)
         {
             Life -= _damage;
+            transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f);
             if (Life < 1)
             {
-                Destroy(gameObject);
+                transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject); });
             }
         }
 

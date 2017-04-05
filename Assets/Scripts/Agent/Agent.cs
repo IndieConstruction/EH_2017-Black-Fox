@@ -12,7 +12,7 @@ namespace BlackFox
 
         string Name;
         public float maxLife = 10;
-        private float _life = 10;
+        private float _life;
 
         public float Life
         {
@@ -48,6 +48,7 @@ namespace BlackFox
 
         void Start()
         {
+            _life = maxLife;
             rigid = GetComponent<Rigidbody>();
             movment = GetComponent<MovementController>();
             rope = SearchRope();

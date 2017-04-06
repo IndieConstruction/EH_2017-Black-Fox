@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
+
 namespace BlackFox
 {
     public class PlayerInput
@@ -18,6 +19,10 @@ namespace BlackFox
         }
 
         #region API
+        /// <summary>
+        /// Ritorna l'input del player nella forma di struttura
+        /// </summary>
+        /// <returns></returns>
         public InputStatus GetPlayerInputStatus()
         {
             InputStatus inputStatus = ControllerInput();
@@ -97,7 +102,7 @@ namespace BlackFox
 
         #region KeyboardInput
         /// <summary>
-        /// Controlla l'input da tastiera
+        /// Controlla l'input da tastiera (la tastiera non funziona se è collegato il controller dello stesso player Index)
         /// </summary>
         InputStatus KeyboardInput()
         {
@@ -125,24 +130,29 @@ namespace BlackFox
                 inputStatus.A = ButtonState.Held;
             }
 
-            if (Input.GetButton("DPadUp"))
+            if (Input.GetButtonDown("DPadUp"))
             {
                 inputStatus.DPadUp = ButtonState.Pressed;
             }
 
-            if (Input.GetButton("DPadLeft"))
+            if (Input.GetButtonDown("DPadLeft"))
             {
                 inputStatus.DPadLeft = ButtonState.Pressed;
             }
 
-            if (Input.GetButton("DPadDown"))
+            if (Input.GetButtonDown("DPadDown"))
             {
                 inputStatus.DPadDown = ButtonState.Pressed;
             }
 
-            if (Input.GetButton("DPadRight"))
+            if (Input.GetButtonDown("DPadRight"))
             {
                 inputStatus.DPadRight = ButtonState.Pressed;
+            }
+
+            if (Input.GetButtonDown("Submit"))
+            {
+                inputStatus.A = ButtonState.Pressed;
             }
 
             return inputStatus;

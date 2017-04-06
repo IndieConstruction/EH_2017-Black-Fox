@@ -71,22 +71,22 @@ namespace BlackFox
                 inputStatus.A = ButtonState.Held;
             }
 
-            if (prevState.DPad.Up == XInputDotNetPure.ButtonState.Released && prevState.DPad.Up == XInputDotNetPure.ButtonState.Pressed)
+            if (prevState.DPad.Up == XInputDotNetPure.ButtonState.Released && state.DPad.Up == XInputDotNetPure.ButtonState.Pressed)
             {
                 inputStatus.DPadUp = ButtonState.Pressed;
             }
 
-            if (prevState.DPad.Left == XInputDotNetPure.ButtonState.Released && prevState.DPad.Left == XInputDotNetPure.ButtonState.Pressed)
+            if (prevState.DPad.Left == XInputDotNetPure.ButtonState.Released && state.DPad.Left == XInputDotNetPure.ButtonState.Pressed)
             {
                 inputStatus.DPadLeft = ButtonState.Pressed;
             }
 
-            if (prevState.DPad.Down == XInputDotNetPure.ButtonState.Released && prevState.DPad.Down == XInputDotNetPure.ButtonState.Pressed)
+            if (prevState.DPad.Down == XInputDotNetPure.ButtonState.Released && state.DPad.Down == XInputDotNetPure.ButtonState.Pressed)
             {
                 inputStatus.DPadDown = ButtonState.Pressed;
             }
 
-            if (prevState.DPad.Right == XInputDotNetPure.ButtonState.Released && prevState.DPad.Right == XInputDotNetPure.ButtonState.Pressed)
+            if (prevState.DPad.Right == XInputDotNetPure.ButtonState.Released && state.DPad.Right == XInputDotNetPure.ButtonState.Pressed)
             {
                 inputStatus.DPadRight = ButtonState.Pressed;
             }

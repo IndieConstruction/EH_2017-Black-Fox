@@ -60,8 +60,6 @@ namespace BlackFox
             {
                 GameManager.Instance.UiMng.SelectInMenu();
             }
-
         }
-
     }
 }

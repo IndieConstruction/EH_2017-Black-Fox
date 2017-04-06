@@ -19,26 +19,6 @@ namespace BlackFox
 
         public IMenu CurrentMenu;
 
-        /// <summary>
-        /// Input Provvisori per i menu
-        /// </summary>
-        private void Update()
-        { // TODO : da togliere
-            if (Input.GetKeyDown(KeyCode.UpArrow))
-            {
-                GoUpInMenu();
-            }
-            if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                GoDownInMenu();
-            }
-
-            if (Input.GetKeyDown(KeyCode.Space))
-            {
-                SelectInMenu();
-            }
-        }
-
         #region API
 
         /// <summary>

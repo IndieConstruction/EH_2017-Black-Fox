@@ -21,12 +21,15 @@ namespace BlackFox
         public int PointsToWin = 5;
 
         public GameObject SpawnerMngPrefab;
+        public GameObject AvatarSpwnPrefab;
         public GameObject RopeMngPrefab;
 
         [HideInInspector]
         public SpawnerManager SpawnerMng;
         [HideInInspector]
         public RopeManager RopeMng;
+        [HideInInspector]
+        public AvatarSpawner AvatarSpwn;
         [HideInInspector]
         public Level CurrentLevel;
         [HideInInspector]
@@ -37,7 +40,7 @@ namespace BlackFox
         GameplaySM gameplaySM;
         LevelPointsCounter levelPointsCounter;
 
-        AvatarSpawner AvatarSpwn;
+        
 
         #region Containers
         public Transform PinsContainer;
@@ -70,6 +73,13 @@ namespace BlackFox
             RopeMng = Instantiate(RopeMngPrefab, transform).GetComponent<RopeManager>();
         }
         /// <summary>
+        /// Istance a new AvatarSpawner
+        /// </summary>
+        public void InstantiateAvatarSpawner()
+        {
+            AvatarSpwn = Instantiate(AvatarSpwnPrefab, transform).GetComponent<AvatarSpawner>();
+        }
+        /// <summary>
         /// Carica lo scriptable object del livello e istanzia il prefab del livello
         /// </summary>
         public void InstantiateArena()
@@ -78,69 +88,7 @@ namespace BlackFox
             ResetPinsContainer(Arena.transform);
         }
         #endregion
-
-        #region Initialization
-        /// <summary>
-        /// Inizializza lo spawner manager
-        /// </summary>
-        public void CallSpawnAgent()
-        {
-            Avatar[] tempAgents = null;
-            SpawnerMng.SpawnAgent();
-            foreach (SpawnerBase spawner in SpawnerMng.Spawners)
-            {
-
-                if (spawner != null)
-                {
-                    if (spawner.GetType() == typeof(AvatarSpawner))
-                    {
-                        AvatarSpawner temp = spawner as AvatarSpawner;
-                        tempAgents = temp.GetAllPlayer();
-                        break;
-                    } 
-                }
-            }
-            foreach (Avatar agent in tempAgents)
-            {
-                RopeMng.AttachNewRope(agent);
-            }
-            
-        }
-        /// <summary>
-        /// Inizializza il core
-        /// </summary>
-        public void InitCore()
-        {
-            if (Core != null)
-                Core.Init();
-        }
-        #endregion
-
-        public int GetPlayerKillPoints(PlayerIndex _playerIndex)
-        {
-            return levelPointsCounter.GetPlayerKillPoints(_playerIndex);
-        }
-
-        /// <summary>
-        /// Funzione da eseguire alla morte del core
-        /// </summary>
-        public void CoreDeath()
-        {
-            levelPointsCounter.ClearAllKillPoints();
-            EventManager.TriggerPlayStateEnd();
-        }
-
-        /// <summary>
-        /// Funzione che contiene le azioni da eseguire alla vittoria del player
-        /// </summary>
-        public void PlayerWin()
-        {
-            roundNumber++;
-            gameplaySM.SetRoundNumber(roundNumber);
-            levelPointsCounter.ClearAllKillPoints();
-            EventManager.TriggerPlayStateEnd();
-        }
-
+        #region Avatar
         /// <summary>
         /// Funzione che contiene le azioni da eseguire alla morte di un player
         /// </summary>
@@ -161,12 +109,55 @@ namespace BlackFox
                 _victim.UpdateKillPointsInUI(_victim.playerIndex, levelPointsCounter.GetPlayerKillPoints(_victim.playerIndex));
                 GameManager.Instance.UiMng.endRoundUI.AddKillPointToUI(_killer, _victim);
             }
-            EventManager.OnPointsUpdate();
+            if(EventManager.OnPointsUpdate != null)
+                EventManager.OnPointsUpdate();
             //Reaction of the RopeManager to the OnAgentKilled event
             RopeMng.ReactToOnAgentKilled(_victim);
-            //Reaction of the SpawnerManager to the OnAgentKilled event
-            SpawnerMng.ReactToOnAgentKilled(_victim);
+            //Reaction of the AvatarSpawner to the OnAgentKilled event
+            AvatarSpwn.RespawnAvatar(_victim);
         }
+                /// <summary>
+        /// Return the current points (due to kills) of the Player
+        /// </summary>
+        /// <param name="_playerIndex"></param>
+        /// <returns></returns>
+        public int GetPlayerKillPoints(PlayerIndex _playerIndex)
+        {
+            return levelPointsCounter.GetPlayerKillPoints(_playerIndex);
+        }
+        #endregion
+
+        #region Initialization
+        /// <summary>
+        /// Inizializza il core
+        /// </summary>
+        public void InitCore()
+        {
+            if (Core != null)
+                Core.Init();
+        }
+        #endregion
+        /// <summary>
+        /// Funzione da eseguire alla morte del core
+        /// </summary>
+        public void CoreDeath()
+        {
+            levelPointsCounter.ClearAllKillPoints();
+            EventManager.TriggerPlayStateEnd();
+        }
+
+        /// <summary>
+        /// Funzione che contiene le azioni da eseguire alla vittoria del player
+        /// </summary>
+        public void PlayerWin()
+        {
+            roundNumber++;
+            gameplaySM.SetRoundNumber(roundNumber);
+            levelPointsCounter.ClearAllKillPoints();
+            EventManager.TriggerPlayStateEnd();
+        }
+
+        
 
         /// <summary>
         /// Funzione che contiene le azioni da eseguire al resapwn di un player

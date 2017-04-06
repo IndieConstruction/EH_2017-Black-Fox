@@ -12,7 +12,6 @@ namespace BlackFox {
 
         [Header("Spawners")]
         public ArrowsSpawerOptions ArrowsSpawner;
-        public AvatarSpawnerOptions AvatarSpawner;
         public BlackHoleSpawnerOptions BlackHoleSpawner;
         public ExternalElementOptions ExternalElementSpawner;
         public TurretSpawnerOptions TurretSpawner;

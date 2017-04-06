@@ -22,7 +22,7 @@ namespace BlackFox {
 
         private void Start()
         {
-            levelManager = FindObjectOfType<LevelManager>();
+            levelManager = GameManager.Instance.LevelMng;
         }
 
         // Update is called once per frame

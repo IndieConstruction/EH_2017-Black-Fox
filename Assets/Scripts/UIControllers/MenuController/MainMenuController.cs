@@ -82,7 +82,7 @@ namespace BlackFox
         /// </summary>
         void UpdateGraphic()
         {
-            switch (currentInexSelection)
+            switch (CurrentInexSelection)
             {
                 case 1:
                     PlayText.color = Color.red;

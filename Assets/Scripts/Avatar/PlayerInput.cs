@@ -102,7 +102,7 @@ namespace BlackFox
 
         #region KeyboardInput
         /// <summary>
-        /// Controlla l'input da tastiera
+        /// Controlla l'input da tastiera (la tastiera non funziona se è collegato il controller dello stesso player Index)
         /// </summary>
         InputStatus KeyboardInput()
         {

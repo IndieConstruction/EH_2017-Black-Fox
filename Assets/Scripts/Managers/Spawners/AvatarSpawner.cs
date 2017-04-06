@@ -15,7 +15,6 @@ namespace BlackFox
         /// Time between death and respawn
         /// </summary>
         public float RespawnTime = 0;
-
         /// <summary>
         /// Use the Specifiied prefabas as player to respawn
         /// </summary>
@@ -24,7 +23,7 @@ namespace BlackFox
         /// Prefabs of Avatar to respawn
         /// </summary>
         public GameObject[] AvatarPrefabs = new GameObject[4];
-
+        private GameObject avatarContainer;
         private List<AvatarSpawnPoint> _originalSpawns;
         public List<AvatarSpawnPoint> OriginalSpawns
         {
@@ -88,8 +87,10 @@ namespace BlackFox
                     default:
                         break;
                 }
-
             }
+
+            avatarContainer = new GameObject("AvatarContainer");
+            avatarContainer.transform.parent = GameManager.Instance.LevelMng.transform;
         }
 
         #region API
@@ -135,8 +136,11 @@ namespace BlackFox
                         if (agentsPrefb[i].GetComponentInChildren<Avatar>().playerIndex == _playerIndx)
                         {
                             GameObject newAgent = Instantiate(agentsPrefb[i], spawn.SpawnPosition.position, spawn.SpawnPosition.rotation);
+                            newAgent.transform.parent = avatarContainer.transform;
+
                             if (GameManager.Instance.LevelMng.RopeMng != null)
                                 GameManager.Instance.LevelMng.RopeMng.AttachNewRope(newAgent.GetComponentInChildren<Avatar>());
+
                             if(EventManager.OnAgentSpawn != null)
                                 EventManager.OnAgentSpawn(newAgent.GetComponentInChildren<Avatar>());
                             return;

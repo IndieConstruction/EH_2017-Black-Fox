@@ -14,8 +14,7 @@ namespace BlackFox {
             Debug.Log("LevelInitState");
             GameManager.Instance.UiMng.UpdateLevelInformation();
             GameManager.Instance.LevelMng.InitCore();
-            GameManager.Instance.LevelMng.CallSpawnAgent();
-
+            GameManager.Instance.LevelMng.AvatarSpwn.RespawnAllImmediate();
         }
 
         public override void OnUpdate()

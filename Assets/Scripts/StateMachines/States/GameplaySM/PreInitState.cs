@@ -12,6 +12,7 @@ namespace BlackFox
         {
             Debug.Log("PreInitState");
             GameManager.Instance.LevelMng.InstantiateArena();
+            GameManager.Instance.LevelMng.InstantiateAvatarSpawner();
             GameManager.Instance.LevelMng.InstantiateRopeManager();
             GameManager.Instance.LevelMng.InstantiateSpawnerManager();
         }

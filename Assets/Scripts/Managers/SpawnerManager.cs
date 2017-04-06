@@ -19,7 +19,6 @@ namespace BlackFox
             Spawners.Add(_currentLevel.ArrowsSpawner.CreateInstance(_currentLevel.ArrowsSpawner, transform));
             Spawners.Add( _currentLevel.BlackHoleSpawner.CreateInstance(_currentLevel.BlackHoleSpawner, transform));
             Spawners.Add( _currentLevel.ExternalElementSpawner.CreateInstance(_currentLevel.ExternalElementSpawner, transform));
-            Spawners.Add(_currentLevel.AvatarSpawner.CreateInstance(_currentLevel.AvatarSpawner, transform));
             Spawners.Add( _currentLevel.TurretSpawner.CreateInstance(_currentLevel.TurretSpawner, transform));
             Spawners.Add(_currentLevel.WaveSpawner.CreateInstance(_currentLevel.WaveSpawner, transform));
         }
@@ -28,35 +27,7 @@ namespace BlackFox
         {
             Level = _level;
             Round = _round;
-        }
-
-        /// <summary>
-        /// Initialize at each round's restart
-        /// </summary>
-        public void SpawnAgent()
-        {
-            foreach (var spawner in GetComponentsInChildren<SpawnerBase>())
-            {
-                if(spawner.GetType() == typeof(AvatarSpawner))
-                {
-                    AvatarSpawner spawnAvatar = spawner as AvatarSpawner;
-                    spawnAvatar.RespawnAllImmediate();
-                }
-            }
-        }
-        /// <summary>
-        /// Respawn Agent on Death
-        /// </summary>
-        /// <param name="_killer"></param>
-        /// <param name="_victim"></param>
-        public void ReactToOnAgentKilled(Avatar _victim)
-        {
-            GetComponentInChildren<AvatarSpawner>().RespawnAvatar(_victim);
-        }
-
-        public void CallDestroyAgents(){
-            GetComponentInChildren<AvatarSpawner>().DestroyAgents();
-        }
+        }        
         #endregion
     }
 }

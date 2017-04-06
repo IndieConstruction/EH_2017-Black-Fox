@@ -9,9 +9,21 @@ namespace BlackFox
     /// <summary>
     /// It menages the SpawnPoint position during the Level
     /// </summary>
-    public class AvatarSpawner : SpawnerBase
+    public class AvatarSpawner : MonoBehaviour
     {
-        new public AvatarSpawnerOptions Options;
+        /// <summary>
+        /// Time between death and respawn
+        /// </summary>
+        public float RespawnTime = 0;
+
+        /// <summary>
+        /// Use the Specifiied prefabas as player to respawn
+        /// </summary>
+        public bool UseSpecifiedPrefabs = false;
+        /// <summary>
+        /// Prefabs of Avatar to respawn
+        /// </summary>
+        public GameObject[] AvatarPrefabs = new GameObject[4];
 
         private List<AvatarSpawnPoint> _originalSpawns;
         public List<AvatarSpawnPoint> OriginalSpawns
@@ -35,8 +47,8 @@ namespace BlackFox
         /// </summary>
         void Start()
         {
-            if (Options.UseSpecifiedPrefabs)
-                agentsPrefb = Options.AvatarPrefabs;
+            if (UseSpecifiedPrefabs)
+                agentsPrefb = AvatarPrefabs;
             else
                 agentsPrefb = Resources.LoadAll<GameObject>("Prefabs/Avatar");
            
@@ -78,11 +90,6 @@ namespace BlackFox
                 }
 
             }
-        }
-
-        public override SpawnerBase Init(SpawnerOptions options) {
-            Options = options as AvatarSpawnerOptions;
-            return this;
         }
 
         #region API
@@ -128,6 +135,8 @@ namespace BlackFox
                         if (agentsPrefb[i].GetComponentInChildren<Avatar>().playerIndex == _playerIndx)
                         {
                             GameObject newAgent = Instantiate(agentsPrefb[i], spawn.SpawnPosition.position, spawn.SpawnPosition.rotation);
+                            if (GameManager.Instance.LevelMng.RopeMng != null)
+                                GameManager.Instance.LevelMng.RopeMng.AttachNewRope(newAgent.GetComponentInChildren<Avatar>());
                             if(EventManager.OnAgentSpawn != null)
                                 EventManager.OnAgentSpawn(newAgent.GetComponentInChildren<Avatar>());
                             return;
@@ -166,25 +175,8 @@ namespace BlackFox
 
         IEnumerator RespawnCooldown(PlayerIndex _playerIndx)
         {
-            yield return new WaitForSeconds(Options.RespawnTime);
+            yield return new WaitForSeconds(RespawnTime);
             RespawnImmediate(_playerIndx);
         }
-    }
-
-    [System.Serializable]
-    public class AvatarSpawnerOptions : SpawnerOptions {
-        /// <summary>
-        /// Time between death and respawn
-        /// </summary>
-        public float RespawnTime = 0;
-
-        /// <summary>
-        /// Use the Specifiied prefabas as player to respawn
-        /// </summary>
-        public bool UseSpecifiedPrefabs = false;
-        /// <summary>
-        /// Prefabs of Avatar to respawn
-        /// </summary>
-        public GameObject[] AvatarPrefabs = new GameObject[4];
     }
 }

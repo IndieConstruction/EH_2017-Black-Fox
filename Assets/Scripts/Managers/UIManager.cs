@@ -35,7 +35,7 @@ namespace BlackFox
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                Select();
+                SelectInMenu();
             }
         }
 
@@ -61,7 +61,7 @@ namespace BlackFox
             CurrentMenu.GoDownInMenu();
         }
 
-        public void Select()
+        public void SelectInMenu()
         {
             CurrentMenu.Selection();
         }

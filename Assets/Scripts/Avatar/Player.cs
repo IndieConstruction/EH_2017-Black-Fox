@@ -58,7 +58,7 @@ namespace BlackFox
 
             if (_inputStatus.A == ButtonState.Pressed)
             {
-                GameManager.Instance.UiMng.Select();
+                GameManager.Instance.UiMng.SelectInMenu();
             }
 
         }

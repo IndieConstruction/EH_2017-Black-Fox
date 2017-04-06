@@ -66,7 +66,6 @@ namespace BlackFox
         {
             if(transform.parent != null)
                 Destroy(transform.parent.gameObject);
-            GameManager.Instance.LevelMng.RopeMng.DestroyRope(this);
         }
 
         void CheckInputStatus(InputStatus _inputStatus)
@@ -102,11 +101,8 @@ namespace BlackFox
         /// <returns></returns>
         RopeController SearchRope()
         {
-            foreach (RopeController rope in FindObjectsOfType<RopeController>())
-            {
-                if (rope.name == playerIndex + "Rope")
-                    return rope;
-            }
+            if (transform.parent.GetComponentInChildren<RopeController>() != null)
+                return transform.parent.GetComponentInChildren<RopeController>();
             return null;
         }
 

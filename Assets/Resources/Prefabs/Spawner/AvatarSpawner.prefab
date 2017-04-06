@@ -109,7 +109,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1008310856104696}
   m_LocalRotation: {x: 0, y: -0.38268343, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: -5, y: 8, z: 5}
+  m_LocalPosition: {x: -5.3, y: 8, z: 5.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4759616889593108}
@@ -122,7 +122,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1354628447058332}
   m_LocalRotation: {x: 0, y: 0.92387956, z: 0, w: 0.38268343}
-  m_LocalPosition: {x: 5.3, y: 8, z: -4.9}
+  m_LocalPosition: {x: 6, y: 8, z: -5.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4759616889593108}
@@ -149,7 +149,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1567870973430648}
   m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 5.3, y: 8, z: 5.3}
+  m_LocalPosition: {x: 5.8, y: 8, z: 5.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4759616889593108}
@@ -162,7 +162,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1763009789841668}
   m_LocalRotation: {x: 0, y: -0.92387956, z: 0, w: 0.38268343}
-  m_LocalPosition: {x: -5.1, y: 8, z: -4.9}
+  m_LocalPosition: {x: -5.3, y: 8, z: -5.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4759616889593108}
@@ -196,15 +196,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e030002c36bddfd4c83e5489752b4176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Options:
-    SpawnerPrefab: {fileID: 0}
-    RespawnTime: 3
-    UseSpecifiedPrefabs: 1
-    AvatarPrefabs:
-    - {fileID: 1305829202965250, guid: a214aefd3bf69464c9b46124238781de, type: 2}
-    - {fileID: 1652347477880556, guid: c812bd5f837cf484791231f668cf3978, type: 2}
-    - {fileID: 1405396506357818, guid: 78f34d051af73b344a32930fefc2c297, type: 2}
-    - {fileID: 1851850003459776, guid: db452c6aca4d15c4aadf8031e2d9ac14, type: 2}
+  RespawnTime: 0
+  UseSpecifiedPrefabs: 1
+  AvatarPrefabs:
+  - {fileID: 1122415209586136, guid: d220b767b13bbfe47b1166d2d0fbba2c, type: 2}
+  - {fileID: 1697866795585950, guid: 6fe7607a9addc77429fe2ad46d7c3c9e, type: 2}
+  - {fileID: 1853124661884862, guid: 9c5e3f3ad77dcd440b0db299eabe3261, type: 2}
+  - {fileID: 1037375232453998, guid: cbf4e630317b8954aada17fc53c1d3ad, type: 2}
   SpawnPoints:
   - SpawnPosition: {fileID: 4606161214009046}
     PlayerIndx: 0

@@ -96,8 +96,7 @@ namespace BlackFox
         #region API
         public Avatar[] GetAllPlayer()
         {
-            // TODO : tenere riferimenti fissi
-            return FindObjectsOfType<Avatar>();
+            return avatarContainer.GetComponentsInChildren<Avatar>();            
         }
 
         /// <summary>
@@ -139,10 +138,7 @@ namespace BlackFox
                             newAgent.transform.parent = avatarContainer.transform;
 
                             if (GameManager.Instance.LevelMng.RopeMng != null)
-                                GameManager.Instance.LevelMng.RopeMng.AttachNewRope(newAgent.GetComponentInChildren<Avatar>());
-
-                            if(EventManager.OnAgentSpawn != null)
-                                EventManager.OnAgentSpawn(newAgent.GetComponentInChildren<Avatar>());
+                                GameManager.Instance.LevelMng.RopeMng.AttachNewRope(newAgent.GetComponentInChildren<Avatar>());                            
                             return;
                         }
                     }
@@ -160,14 +156,15 @@ namespace BlackFox
         }
 
         #region Destroy Agents
-        public void DestroyAgents() {
-            // TODO : da correggere
-            foreach (Avatar agent in FindObjectsOfType<Avatar>()) {
-                Destroy(agent.gameObject);
-            }
+        /// <summary>
+        /// Remove the Avatar Container and all the Avatar inside it
+        /// </summary>
+        public void DestroyAllAgents() {
+            Destroy(avatarContainer);
+            avatarContainer = new GameObject("AvatarContainer");
+            avatarContainer.transform.parent = GameManager.Instance.LevelMng.transform;
         }
         #endregion
-
         #endregion
 
         [Serializable]

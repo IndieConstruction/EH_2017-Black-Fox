@@ -111,8 +111,7 @@ namespace BlackFox
             }
             if(EventManager.OnPointsUpdate != null)
                 EventManager.OnPointsUpdate();
-            //Reaction of the RopeManager to the OnAgentKilled event
-            RopeMng.ReactToOnAgentKilled(_victim);
+            
             //Reaction of the AvatarSpawner to the OnAgentKilled event
             AvatarSpwn.RespawnAvatar(_victim);
         }
@@ -156,19 +155,6 @@ namespace BlackFox
             levelPointsCounter.ClearAllKillPoints();
             EventManager.TriggerPlayStateEnd();
         }
-
-        
-
-        /// <summary>
-        /// Funzione che contiene le azioni da eseguire al resapwn di un player
-        /// </summary>
-        /// <param name="_agent"></param>
-        public void AgentSpawn(Avatar _agent)
-        {
-            //Reaction of the RopeManager to the OnAgentSpawn event
-            RopeMng.ReactToOnAgentSpawn(_agent);
-        }
-
         #endregion
 
         #region GameplaySM

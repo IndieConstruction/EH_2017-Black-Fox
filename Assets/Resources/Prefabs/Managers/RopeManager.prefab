@@ -51,7 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7b318b43f5ab18489902aee601fa4ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RopeOrigin: {fileID: 1744296215973444, guid: d2e20a51cf6ffb1419dbbaf80d2bdf23, type: 2}
+  RopeAnchorPrefab: {fileID: 1256926486912150, guid: cf33d9a79fe4b47439e2b3d3e61e49b5,
+    type: 2}
   RopeColors:
   - {fileID: 2100000, guid: b455c3223858069469d41b33d4033245, type: 2}
   - {fileID: 2100000, guid: 29df54d6c83797d48a9192516c6f576b, type: 2}

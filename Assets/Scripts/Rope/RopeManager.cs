@@ -32,6 +32,7 @@ namespace BlackFox {
         {
             //SetA new AnchorPoint
             Transform anchor = Instantiate(RopeAnchorPrefab, core).transform;
+            anchor.name = _target.playerIndex + "Anchor";
             //Get the Rope of an Agent
             RopeController rc = _target.transform.parent.GetComponentInChildren<RopeController>();
             //Set the rope

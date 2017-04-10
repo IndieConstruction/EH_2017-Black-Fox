@@ -10,7 +10,7 @@ namespace BlackFox
         public GameObject PinPrefab;
         public Transform PinSpanw;
         public float CoolDownTime;
-
+        [HideInInspector]
         public bool CanPlace = true;//TODO: rimpiazza questa variabile semplicemente facendo disabilitare il componente
         bool isLeft = false;
 

@@ -81,15 +81,15 @@ namespace BlackFox
             {
                 case 1:
                     PlayText.color = Color.red;
-                    MainMenuText.color = Color.black;
+                    MainMenuText.color = Color.white;
                     break;
                 case 2:
-                    PlayText.color = Color.black;
+                    PlayText.color = Color.white;
                     MainMenuText.color = Color.red;
                     break;
                 default:
-                    PlayText.color = Color.black;
-                    MainMenuText.color = Color.black;
+                    PlayText.color = Color.white;
+                    MainMenuText.color = Color.white;
                     break;
             }
         }

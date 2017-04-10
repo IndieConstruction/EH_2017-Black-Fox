@@ -86,17 +86,17 @@ namespace BlackFox
             {
                 case 1:
                     PlayText.color = Color.red;
-                    CreditsText.color = Color.black;
-                    ExitText.color = Color.black;
+                    CreditsText.color = Color.white;
+                    ExitText.color = Color.white;
                     break;
                 case 2:
-                    PlayText.color = Color.black;
+                    PlayText.color = Color.white;
                     CreditsText.color = Color.red;
-                    ExitText.color = Color.black;
+                    ExitText.color = Color.white;
                     break;
                 case 3:
-                    PlayText.color = Color.black;
-                    CreditsText.color = Color.black;
+                    PlayText.color = Color.white;
+                    CreditsText.color = Color.white;
                     ExitText.color = Color.red;
                     break;
                 default:

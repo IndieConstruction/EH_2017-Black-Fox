@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
+
 
 namespace BlackFox {
 
@@ -22,8 +24,16 @@ namespace BlackFox {
         {
             levelManager = GameManager.Instance.LevelMng;
             Ring.value = 0.5f;
+            
         }
 
+        private void Update()
+        {
+            if (Input.GetKey(KeyCode.O))
+            {
+                KillView();
+            }
+        }
         /// <summary>
         /// Setta il valore della slider che mostra la vita
         /// </summary>
@@ -55,12 +65,17 @@ namespace BlackFox {
         }
         #endregion
 
-        //public void Killview()
-        //{
-        //    if(KillPoint != null)
-        //        KillPoint.text="+1"+ (levelManager.GetPlayerKillPoints(agent.playerIndex)).ToString();
+        public void KillView() {
 
-        //}
+            
+            KillToview.transform.DOScale(new Vector3(1f, 1f, 1f), 1f).OnComplete(() => {
+                KillToview.transform.localScale = Vector3.zero;
+            }).SetEase(Ease.OutBounce);
+            
+        }
+       
+         
+        
 
 
     }

@@ -629,7 +629,7 @@ MonoBehaviour:
   projectile: {fileID: 1324583927385362, guid: 03a35e42f4b03124e9652a6ddf027306, type: 2}
   LifeTime: 0.5
   bulletSpeed: 150
-  AddedAmmo: 10
+  AddedAmmo: 15
   MaxAmmo: 50
   ammo: 0
   playerIndex: 0

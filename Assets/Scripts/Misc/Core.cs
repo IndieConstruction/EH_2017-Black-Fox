@@ -44,6 +44,7 @@ namespace BlackFox
         #region API
         public void Init()
         {
+            transform.DOScale(Vector3.one, 0.1f);
             if (life <= 0)
             {
                 life = MaxLife;

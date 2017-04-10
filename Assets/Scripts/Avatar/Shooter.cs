@@ -10,6 +10,7 @@ namespace BlackFox
         public int AddedAmmo = 10;
         public int MaxAmmo = 50;
         public int ammo = 0;
+        [HideInInspector]
         public PlayerIndex playerIndex;
 
         /// <summary>

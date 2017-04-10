@@ -63,16 +63,16 @@ namespace BlackFox
             switch (_playerIndex)
             {
                 case PlayerIndex.One:
-                    Player1KillPoints.text = "Kill: " + _playerPoints;
-                    break;
-                case PlayerIndex.Two:
-                    Player2KillPoints.text = "Kill: " + _playerPoints;
-                    break;
-                case PlayerIndex.Three:
-                    Player3KillPoints.text = "Kill: " + _playerPoints;
-                    break;
-                case PlayerIndex.Four:
-                    Player4KillPoints.text = "Kill: " + _playerPoints;
+                    Player1KillPoints.text = _playerPoints.ToString();
+                    break;                   
+                case PlayerIndex.Two:        
+                    Player2KillPoints.text = _playerPoints.ToString();
+                    break;                   
+                case PlayerIndex.Three:      
+                    Player3KillPoints.text = _playerPoints.ToString();
+                    break;                   
+                case PlayerIndex.Four:       
+                    Player4KillPoints.text = _playerPoints.ToString();
                     break;
                 default:
                     break;

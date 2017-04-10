@@ -23,7 +23,7 @@ namespace BlackFox
         }
 
         #region Events Handler
-        void HandleTriggerPlayStateEnd(string _eventName)
+        void HandleTriggerPlayStateEnd()
         {
             OnStateEnd();
         }

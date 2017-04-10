@@ -4,30 +4,45 @@ using UnityEngine;
 using XInputDotNetPure;
 
 using UnityEngine.UI;
+using System;
 
 namespace BlackFox
 {
-    public class EndRoundlUI : MonoBehaviour
+    public class EndRoundlUI : MonoBehaviour, IMenu
     {
-        UIManager uiManager;
 
         public Text Player1Points;
         public Text Player2Points;
         public Text Player3Points;
         public Text Player4Points;
+        public Text EventName;
         public GameObject EndLevelPanel;
 
         int P1KillPoints;
         int P2KillPoints;
         int P3KillPoints;
         int P4KillPoints;
-        
+
+        int totalIndexSelection = 1;
+        int currentInexSelection = 1;
+
+        public int CurrentInexSelection
+        {
+            get { return 1; }
+            set { currentInexSelection = value; }
+        }
+
+        public int TotalIndexSelection {
+            get { return 1; }
+            set { totalIndexSelection = value; }
+            }
+
 
         // Use this for initialization
         void Start()
         {
-            uiManager = GetComponentInParent<UIManager>();
             EndLevelPanel.SetActive(false);
+            GameManager.Instance.UiMng.CurrentMenu = this;
         }
 
 
@@ -87,6 +102,7 @@ namespace BlackFox
                     break;
             }
             UpdateUIPoints();
+            EventName.text = GameManager.Instance.LevelMng.EndLevelPanelLable;
         }
 
         public void ClearTheUIPoints()
@@ -97,8 +113,13 @@ namespace BlackFox
             P4KillPoints = 0;
         }
 
+        public void Selection()
+        {
+            GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
+        }
+
         #endregion
 
-        
+
     }
 }

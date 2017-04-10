@@ -37,9 +37,11 @@ namespace BlackFox
         [HideInInspector]
         public GameObject Arena;
         
-        GameplaySM gameplaySM;
+        [HideInInspector]
+        public GameplaySM gameplaySM;
         LevelPointsCounter levelPointsCounter;
 
+        public string EndLevelPanelLable;
         
 
         #region Containers
@@ -143,18 +145,20 @@ namespace BlackFox
         public void CoreDeath()
         {
             levelPointsCounter.ClearAllKillPoints();
-            EventManager.TriggerPlayStateEnd("Core Is Dead !");
+            EndLevelPanelLable = "Core Has Been Destroyed";
+            EventManager.TriggerPlayStateEnd();
         }
 
         /// <summary>
         /// Funzione che contiene le azioni da eseguire alla vittoria del player
         /// </summary>
-        public void PlayerWin()
+        public void PlayerWin(string _winner)
         {
             roundNumber++;
             gameplaySM.SetRoundNumber(roundNumber);
             levelPointsCounter.ClearAllKillPoints();
-            EventManager.TriggerPlayStateEnd("Player Has Won !");
+            EndLevelPanelLable = "Player " + _winner + " Has Won";
+            EventManager.TriggerPlayStateEnd();
         }
 
         

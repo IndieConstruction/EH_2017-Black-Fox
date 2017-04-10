@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using XInputDotNetPure;
 
 namespace BlackFox
 {
@@ -10,12 +11,20 @@ namespace BlackFox
         {
             Debug.Log("MainMenuState");
             GameManager.Instance.UiMng.CreateMainMenu();
-            GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.MenuInputState);
+            SetPlayersState();
         }
 
         public override void OnEnd()
         {
             GameManager.Instance.UiMng.DestroyMainMenu();
+        }
+
+        void SetPlayersState()
+        {
+            GameManager.Instance.PlayerMng.ChangePlayerState(PlayerState.MenuInputState, PlayerIndex.One);
+            GameManager.Instance.PlayerMng.ChangePlayerState(PlayerState.Blocked, PlayerIndex.Two);
+            GameManager.Instance.PlayerMng.ChangePlayerState(PlayerState.Blocked, PlayerIndex.Three);
+            GameManager.Instance.PlayerMng.ChangePlayerState(PlayerState.Blocked, PlayerIndex.Four);
         }
     }
 }

@@ -15,6 +15,7 @@ namespace BlackFox
             GameManager.Instance.LevelMng.InstantiateAvatarSpawner();
             GameManager.Instance.LevelMng.InstantiateRopeManager();
             GameManager.Instance.LevelMng.InstantiateSpawnerManager();
+            GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.Blocked);
         }
 
         public override void OnUpdate()

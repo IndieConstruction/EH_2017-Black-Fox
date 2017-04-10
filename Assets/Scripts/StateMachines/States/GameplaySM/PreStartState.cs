@@ -18,12 +18,14 @@ namespace BlackFox
         /// </summary>
         void CounterEnded() {
             if (OnStateEnd != null)
+            {
+                GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.PlayInputState);
                 OnStateEnd();
+            }
         }
 
         public override void OnEnd()
         {
-            base.OnEnd();
             Counter.OnCounterEnded -= CounterEnded;
         }
     }

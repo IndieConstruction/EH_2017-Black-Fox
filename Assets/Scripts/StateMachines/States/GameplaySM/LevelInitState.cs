@@ -15,7 +15,7 @@ namespace BlackFox {
             GameManager.Instance.UiMng.UpdateLevelInformation();
             GameManager.Instance.LevelMng.InitCore();
             GameManager.Instance.LevelMng.AvatarSpwn.RespawnAllImmediate();
-            GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.PlayInputState);
+            GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.Blocked);
         }
 
         public override void OnUpdate()

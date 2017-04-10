@@ -73,7 +73,7 @@ MonoBehaviour:
     type: 2}
   AnchorPoint: {fileID: 0}
   MaxLength: 400
-  DensityOfFragments: 0.2
+  DensityOfFragments: 0.15
 --- !u!120 &120073920322594396
 LineRenderer:
   m_ObjectHideFlags: 1

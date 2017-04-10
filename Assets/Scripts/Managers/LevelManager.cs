@@ -143,7 +143,7 @@ namespace BlackFox
         public void CoreDeath()
         {
             levelPointsCounter.ClearAllKillPoints();
-            EventManager.TriggerPlayStateEnd();
+            EventManager.TriggerPlayStateEnd("Core Is Dead !");
         }
 
         /// <summary>
@@ -154,7 +154,7 @@ namespace BlackFox
             roundNumber++;
             gameplaySM.SetRoundNumber(roundNumber);
             levelPointsCounter.ClearAllKillPoints();
-            EventManager.TriggerPlayStateEnd();
+            EventManager.TriggerPlayStateEnd("Player Has Won !");
         }
 
         

@@ -23,7 +23,7 @@ namespace BlackFox
         #endregion
 
         #region LevelEvent
-        public delegate void LevelEvent();
+        public delegate void LevelEvent(string _eventName);
 
         /// <summary>
         /// Evento chiamato alla morte del core o alla vittoria dell'agente che innesca il cambio di stato della GameplaySM

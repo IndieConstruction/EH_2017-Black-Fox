@@ -396,9 +396,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectile: {fileID: 1386073752442296, guid: 53344d3132e689f469424f16a3f35137, type: 2}
-  LifeTime: 10
+  LifeTime: 0.5
   bulletSpeed: 150
-  AddedAmmo: 10
+  AddedAmmo: 15
   MaxAmmo: 50
   ammo: 0
   playerIndex: 0
@@ -428,7 +428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PinPrefab: {fileID: 1042534840307456, guid: 71d597fd215eedd48b33febe6e5bcb08, type: 2}
   PinSpanw: {fileID: 4391224405396034}
-  CoolDownTime: 5
+  CoolDownTime: 3
   CanPlace: 1
 --- !u!114 &114053603787240672
 MonoBehaviour:
@@ -621,8 +621,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a435a47f34b1f734ea916cecc28a85d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationSpeed: 100
-  MovmentSpeed: 100
+  RotationSpeed: 300
+  MovmentSpeed: 500
 --- !u!114 &114923901838764740
 MonoBehaviour:
   m_ObjectHideFlags: 1

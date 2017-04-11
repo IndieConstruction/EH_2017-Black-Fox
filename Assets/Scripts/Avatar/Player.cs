@@ -13,6 +13,8 @@ namespace BlackFox
         public PlayerState PlayerCurrentState;
 
         PlayerInput playerInput;
+        bool isReleased = true;
+
 
         public Player(PlayerIndex _playerIndex)
         {
@@ -39,20 +41,25 @@ namespace BlackFox
             }
         }
 
+
         /// <summary>
         /// Controlla l'inpunt da passare al menù corrente 
         /// </summary>
         /// <param name="_inputStatus"></param>
         void CheckMenuInputStatus(InputStatus _inputStatus)
         {
-            // TODO : probabilmente da spostare in una classe
-            if (_inputStatus.DPadUp == ButtonState.Pressed)
+            if (_inputStatus.LeftThumbSticksAxisY == 0)
+                isReleased = true;
+
+            if ((_inputStatus.DPadUp == ButtonState.Pressed || _inputStatus.LeftThumbSticksAxisY == 1) && isReleased)
             {
+                isReleased = false;
                 GameManager.Instance.UiMng.GoUpInMenu();
             }
 
-            if (_inputStatus.DPadDown == ButtonState.Pressed)
+            if ((_inputStatus.DPadDown == ButtonState.Pressed || _inputStatus.LeftThumbSticksAxisY == -1) && isReleased)
             {
+                isReleased = false;
                 GameManager.Instance.UiMng.GoDownInMenu();
             }
 

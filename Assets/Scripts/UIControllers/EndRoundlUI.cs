@@ -119,7 +119,5 @@ namespace BlackFox
         }
 
         #endregion
-
-
     }
 }

@@ -8,8 +8,8 @@ namespace BlackFox
     {
         public override void OnStart()
         {
-            GameObject.FindObjectOfType<Counter>().DoCountDown();
             Debug.Log("PreStartState");
+            GameObject.FindObjectOfType<Counter>().DoCountDown();
             Counter.OnCounterEnded += CounterEnded;
         }
 

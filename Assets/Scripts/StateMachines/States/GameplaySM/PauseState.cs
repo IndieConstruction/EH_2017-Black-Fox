@@ -6,6 +6,7 @@ namespace BlackFox
 {
     public class PauseState : StateBase
     {
+        // TODO : uso di time scale corretto 
         public override void OnStart()
         {
             Debug.Log("PauseState");

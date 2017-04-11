@@ -24,12 +24,12 @@ namespace BlackFox
         int P4KillPoints;
 
         int totalIndexSelection = 1;
-        int currentInexSelection = 1;
+        int currentIndexSelection = 1;
 
-        public int CurrentInexSelection
+        public int CurrentIndexSelection
         {
             get { return 1; }
-            set { currentInexSelection = value; }
+            set { currentIndexSelection = value; }
         }
 
         public int TotalIndexSelection {

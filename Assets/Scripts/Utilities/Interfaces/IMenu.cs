@@ -8,7 +8,7 @@ namespace BlackFox
     public interface IMenu
     {
 
-        int CurrentInexSelection { get; set; }
+        int CurrentIndexSelection { get; set; }
 
         int TotalIndexSelection { get; set; }
         
@@ -27,9 +27,9 @@ namespace BlackFox
         /// <param name="_this"></param>
         public static void GoDownInMenu(this IMenu _this)
         {
-            _this.CurrentInexSelection++;
-            if (_this.CurrentInexSelection > _this.TotalIndexSelection)
-                _this.CurrentInexSelection = 1;
+            _this.CurrentIndexSelection++;
+            if (_this.CurrentIndexSelection > _this.TotalIndexSelection)
+                _this.CurrentIndexSelection = 1;
         }
 
         /// <summary>
@@ -38,9 +38,9 @@ namespace BlackFox
         /// <param name="_this"></param>
         public static void GoUpInMenu(this IMenu _this)
         {
-            _this.CurrentInexSelection--;
-            if (_this.CurrentInexSelection < 1)
-                _this.CurrentInexSelection = _this.TotalIndexSelection;
+            _this.CurrentIndexSelection--;
+            if (_this.CurrentIndexSelection < 1)
+                _this.CurrentIndexSelection = _this.TotalIndexSelection;
         }
 
     }

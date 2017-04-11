@@ -22,7 +22,7 @@ namespace BlackFox
         /// </summary>
         int totalIndexSelection = 3;
 
-        public int CurrentInexSelection
+        public int CurrentIndexSelection
         {
             get
             {
@@ -60,7 +60,7 @@ namespace BlackFox
         /// </summary>
         public void Selection()
         {
-            switch (CurrentInexSelection)
+            switch (CurrentIndexSelection)
             {
                 case 1:
                     // Cambia stato in level selection
@@ -82,7 +82,7 @@ namespace BlackFox
         /// </summary>
         void UpdateGraphic()
         {
-            switch (CurrentInexSelection)
+            switch (CurrentIndexSelection)
             {
                 case 1:
                     PlayText.color = Color.red;

@@ -21,7 +21,7 @@ namespace BlackFox
         /// </summary>
         int totalIndexSelection = 2;
 
-        public int CurrentInexSelection
+        public int CurrentIndexSelection
         {
             get
             {
@@ -59,7 +59,7 @@ namespace BlackFox
         /// </summary>
         public void Selection()
         {
-            switch (CurrentInexSelection)
+            switch (CurrentIndexSelection)
             {
                 case 1:
                     GameManager.Instance.flowSM.GoToState(FlowSMStates.GameplayState);

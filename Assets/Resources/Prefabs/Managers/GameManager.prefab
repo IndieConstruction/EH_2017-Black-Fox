@@ -58,10 +58,13 @@ MonoBehaviour:
     type: 2}
   PlayerManagerPrefab: {fileID: 1830081445071182, guid: b88450fc45a57d04a9bccb066aed1150,
     type: 2}
+  CoinManagerPrefab: {fileID: 1893460981883836, guid: 0183752bf96b90348b85aec2bf82f2e3,
+    type: 2}
   AudioManagerPrefab: {fileID: 1430661436070886, guid: 056d6142f48afb74e97dcdb173de4e80,
     type: 2}
   LevelMng: {fileID: 0}
   UiMng: {fileID: 0}
   PlayerMng: {fileID: 0}
-  AudioMng: {fileID: 0}
+  CoinMng: {fileID: 0}
+  AudioMng: {fileID: 114780806946937844, guid: 056d6142f48afb74e97dcdb173de4e80, type: 2}
   flowSM: {fileID: 0}

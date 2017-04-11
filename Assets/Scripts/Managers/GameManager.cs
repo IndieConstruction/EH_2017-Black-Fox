@@ -31,6 +31,7 @@ namespace BlackFox
         public PlayerManager PlayerMng;
         [HideInInspector]
         public CoinManager CoinMng;
+        [HideInInspector]
         public AudioManager AudioMng;
         [HideInInspector]
         public FlowSM flowSM;

@@ -70,7 +70,7 @@ namespace BlackFox
                     // Apre i credits
                     break;
                 case 3:
-                    Application.Quit();
+                    GameManager.Instance.QuitApplication();
                     break;
                 default:
                     break;

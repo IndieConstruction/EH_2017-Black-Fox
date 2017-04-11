@@ -20,6 +20,7 @@ namespace BlackFox
         public GameObject LevelManagerPrefab;
         public GameObject UIManagerPrefab;
         public GameObject PlayerManagerPrefab;
+        public GameObject AudioManagerPrefab;
 
         [HideInInspector]
         public LevelManager LevelMng;
@@ -27,6 +28,8 @@ namespace BlackFox
         public UIManager UiMng;
         [HideInInspector]
         public PlayerManager PlayerMng;
+        [HideInInspector]
+        public AudioManager AudioMng;
         [HideInInspector]
         public FlowSM flowSM;
 
@@ -53,19 +56,20 @@ namespace BlackFox
 
         private void Update()
         {
+            // TODO : togliere
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Application.Quit();
+                QuitApplication();
             }
         }
 
         #region API
+        public void QuitApplication()
+        {
+            Application.Quit();
+        }
 
-        //public FlowSM ReturnFlowSM()
-        //{
-        //    return flowSM;
-        //}
-
+        #region Instantiate Managers
         public void InstantiateLevelManager()
         {
             LevelMng = Instantiate(LevelManagerPrefab, transform).GetComponent<LevelManager>();
@@ -82,6 +86,12 @@ namespace BlackFox
         {
             PlayerMng = Instantiate(PlayerManagerPrefab, transform).GetComponent<PlayerManager>();
         }
+
+        public void InstantiateAudioManager()
+        {
+            AudioMng = Instantiate(AudioManagerPrefab, transform).GetComponent<AudioManager>();
+        }
+        #endregion
         #endregion
     }
 }

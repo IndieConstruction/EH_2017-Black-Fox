@@ -33,16 +33,22 @@ namespace BlackFox
 
         public void GoUpInMenu()
         {
+            if(GameManager.Instance.AudioMng != null)
+                GameManager.Instance.AudioMng.PlayMenuMovmentAudio();
             CurrentMenu.GoUpInMenu();
         }
 
         public void GoDownInMenu()
         {
+            if (GameManager.Instance.AudioMng != null)
+                GameManager.Instance.AudioMng.PlayMenuMovmentAudio();
             CurrentMenu.GoDownInMenu();
         }
 
         public void SelectInMenu()
         {
+            if (GameManager.Instance.AudioMng != null)
+                GameManager.Instance.AudioMng.PlayMenuSelectionAudio();
             CurrentMenu.Selection();
         }
 

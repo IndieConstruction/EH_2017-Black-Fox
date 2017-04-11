@@ -8,31 +8,47 @@ namespace BlackFox
 {
     public class MainMenuController : MonoBehaviour, IMenu
     {
-        /// <summary>
-        /// Il "bottone" selezionato
-        /// </summary>
-        int currentInexSelection = 1;
+        
 
-        public Text PlayText;
-        public Text CreditsText;
-        public Text ExitText;
+        List<ISelectable> selectableButton = new List<ISelectable>();
 
+        public List<ISelectable> SelectableButtons
+        {
+            get
+            {
+                return selectableButton;
+            }
+
+            set
+            {
+                selectableButton = value;
+            }
+        }
+
+        
         /// <summary>
         /// Il totale delle possibile scenlte
         /// </summary>
         int totalIndexSelection = 3;
 
+        /// <summary>
+        /// Il "bottone" selezionato
+        /// </summary>
+        int currentIndexSelection = 0;
+
         public int CurrentIndexSelection
         {
             get
             {
-                return currentInexSelection;
+                return currentIndexSelection;
             }
             set
             {
-                /// Modifiche grafiche per cambiare colore alla nuova selezione e far tornare la vecchia selezione al colore precedente.
-                currentInexSelection = value;
-                UpdateGraphic();
+                // Modifiche grafiche per cambiare colore alla nuova selezione e far tornare la vecchia selezione al colore precedente.
+                //TODO: Rivedere perchè esce fuori dal range.
+                selectableButton[currentIndexSelection].IsSelected = false;
+                currentIndexSelection = value;
+                selectableButton[currentIndexSelection].IsSelected = true;
             }
         }
         
@@ -48,11 +64,32 @@ namespace BlackFox
             }
         }
 
+        
+
         // Use this for initialization
         void Start()
         {
-            UpdateGraphic();
+            OnActivation();
             GameManager.Instance.UiMng.CurrentMenu = this;
+        }
+
+
+        /// <summary>
+        /// Salva all'interno della lista SelectableButton tutti i bottoni con attaccato ISelectable, gli assegna un index e chiama la funzioen che indica cosa scrivergli
+        /// </summary>
+        public void OnActivation()
+        {
+            foreach (ISelectable item in GetComponentsInChildren<ISelectable>())
+            {
+                SelectableButtons.Add(item);
+            }
+
+            for (int i = 0; i < selectableButton.Count; i++)
+            {
+                selectableButton[i].SetIndex(i);
+            }
+
+            selectableButton[0].IsSelected = true;
         }
 
         /// <summary>
@@ -76,33 +113,5 @@ namespace BlackFox
                     break;
             }
         }
-
-        /// <summary>
-        /// Aggiorna la grafica dei bottoni
-        /// </summary>
-        void UpdateGraphic()
-        {
-            switch (CurrentIndexSelection)
-            {
-                case 1:
-                    PlayText.color = Color.red;
-                    CreditsText.color = Color.white;
-                    ExitText.color = Color.white;
-                    break;
-                case 2:
-                    PlayText.color = Color.white;
-                    CreditsText.color = Color.red;
-                    ExitText.color = Color.white;
-                    break;
-                case 3:
-                    PlayText.color = Color.white;
-                    CreditsText.color = Color.white;
-                    ExitText.color = Color.red;
-                    break;
-                default:
-                    break;
-            }
-        }
-
     }
 }

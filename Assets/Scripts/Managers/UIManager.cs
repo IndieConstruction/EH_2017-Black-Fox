@@ -16,6 +16,8 @@ namespace BlackFox
         public Object canvasLevelSelection;
         [HideInInspector]
         public Object canvasGameMenu;
+        [HideInInspector]
+        public PauseMenuController pauseMenuController;
 
         public IMenu CurrentMenu;
 
@@ -99,6 +101,7 @@ namespace BlackFox
         {
             canvasGameMenu = GameObject.Instantiate(Resources.Load("Prefabs/UI/Canvas"), transform);
             endRoundUI = GetComponentInChildren<EndRoundlUI>();
+            pauseMenuController = GetComponentInChildren<PauseMenuController>();
             gameUIController = GetComponentInChildren<GameUIController>();
         }
 

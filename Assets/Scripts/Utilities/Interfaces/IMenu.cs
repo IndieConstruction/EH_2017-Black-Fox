@@ -10,8 +10,8 @@ namespace BlackFox
 
         int CurrentIndexSelection { get; set; }
 
-        int TotalIndexSelection { get; set; }
-        
+        List<ISelectable> SelectableButtons { get; set; }
+
         /// <summary>
         /// Chiama la funzione per cambiare lo stato della StateMachine
         /// </summary>
@@ -21,6 +21,9 @@ namespace BlackFox
 
     public static class IMenuExtension
     {
+
+
+
         /// <summary>
         /// Sposta l'indice della selezione in avanti
         /// </summary>
@@ -28,8 +31,8 @@ namespace BlackFox
         public static void GoDownInMenu(this IMenu _this)
         {
             _this.CurrentIndexSelection++;
-            if (_this.CurrentIndexSelection > _this.TotalIndexSelection)
-                _this.CurrentIndexSelection = 1;
+            if (_this.CurrentIndexSelection > _this.SelectableButtons.Count)
+                _this.CurrentIndexSelection = 0;
         }
 
         /// <summary>
@@ -39,9 +42,21 @@ namespace BlackFox
         public static void GoUpInMenu(this IMenu _this)
         {
             _this.CurrentIndexSelection--;
-            if (_this.CurrentIndexSelection < 1)
-                _this.CurrentIndexSelection = _this.TotalIndexSelection;
+            if (_this.CurrentIndexSelection < 0)
+                _this.CurrentIndexSelection = _this.SelectableButtons.Count - 1;
         }
 
+    }
+
+
+    /// <summary>
+    /// Interfaccia per tutti gli oggetti selezionabili.
+    /// </summary>
+    public interface ISelectable
+    {
+        int Index{ get; set; }
+        bool IsSelected { get; set; }
+        void SetIndex(int _index);
+        void CheckIsSelected(bool _isSelected);
     }
 }

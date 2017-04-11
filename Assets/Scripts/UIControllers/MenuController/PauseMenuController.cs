@@ -1,27 +1,20 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 namespace BlackFox
 {
-    public class LevelSelectionController : MonoBehaviour//, IMenu
-    {
-        
 
-        public Text PlayText;
+    public class PauseMenuController : MonoBehaviour, IMenu
+    {
+
+        public Text ResumeText;
         public Text MainMenuText;
 
-        /// <summary>
-        /// Il totale delle possibile scenlte
-        /// </summary>
-        int totalIndexSelection = 2;
+        public GameObject ChildrenPanel;
 
-
-        /// <summary>
-        /// Il "bottone" selezionato
-        /// </summary>
         int currentInexSelection = 1;
 
         public int CurrentIndexSelection
@@ -37,38 +30,40 @@ namespace BlackFox
                 UpdateGraphic();
             }
         }
+        List<ISelectable> selectableButton = new List<ISelectable>();
 
-        public int TotalIndexSelection
+        public List<ISelectable> SelectableButtons
         {
             get
             {
-                return totalIndexSelection;
+                return selectableButton;
             }
+
             set
             {
-                totalIndexSelection = value;
+                selectableButton = value;
             }
         }
 
-        // Use this for initialization
-        void Start()
+
+        private void Start()
         {
-            UpdateGraphic();
-            //GameManager.Instance.UiMng.CurrentMenu = this;
+            ChildrenPanel.SetActive(false);
         }
 
-        /// <summary>
-        /// Chiama la funzione per cambiare lo stato della StateMachine
-        /// </summary>
+
+
         public void Selection()
         {
             switch (CurrentIndexSelection)
             {
                 case 1:
-                    GameManager.Instance.flowSM.GoToState(FlowSMStates.GameplayState);
+                    // Cambia stato in level selection
+                    GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
                     break;
                 case 2:
-                    GameManager.Instance.flowSM.GoToState(FlowSMStates.MainMenuState);
+                    //TODO: scommentare in seguito
+                    //GameManager.Instance.LevelMng.gameplaySM.GoToState(GamePlaySMStates.GameOverState);
                     break;
                 default:
                     break;
@@ -83,18 +78,19 @@ namespace BlackFox
             switch (currentInexSelection)
             {
                 case 1:
-                    PlayText.color = Color.red;
+                    ResumeText.color = Color.red;
                     MainMenuText.color = Color.white;
                     break;
                 case 2:
-                    PlayText.color = Color.white;
+                    ResumeText.color = Color.white;
                     MainMenuText.color = Color.red;
                     break;
                 default:
-                    PlayText.color = Color.white;
+                    ResumeText.color = Color.white;
                     MainMenuText.color = Color.white;
                     break;
             }
         }
+        
     }
 }

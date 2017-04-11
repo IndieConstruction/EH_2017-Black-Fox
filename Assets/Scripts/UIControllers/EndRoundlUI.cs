@@ -8,7 +8,7 @@ using System;
 
 namespace BlackFox
 {
-    public class EndRoundlUI : MonoBehaviour, IMenu
+    public class EndRoundlUI : MonoBehaviour//, IMenu
     {
 
         public Text Player1Points;
@@ -42,7 +42,7 @@ namespace BlackFox
         void Start()
         {
             EndLevelPanel.SetActive(false);
-            GameManager.Instance.UiMng.CurrentMenu = this;
+            //GameManager.Instance.UiMng.CurrentMenu = this;
         }
 
 

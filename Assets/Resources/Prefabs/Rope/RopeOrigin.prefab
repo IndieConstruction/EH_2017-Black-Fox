@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5383765d4d537ee45a406d9f0ddd5fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FragmentPrefab: {fileID: 1083337657188362, guid: 2ee1f5e884c0e404ba1990bc9d106140,
+  FragmentPrefab: {fileID: 1083337657188362, guid: 4674fc95f73a4f046b8e3c7cf656be6f,
     type: 2}
   AnchorPoint: {fileID: 0}
   MaxLength: 500

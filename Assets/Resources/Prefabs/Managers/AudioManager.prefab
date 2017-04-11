@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4536399006536868}
   - component: {fileID: 82344256189295916}
   m_Layer: 0
-  m_Name: MenuSounds
+  m_Name: MenuSelectionSounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

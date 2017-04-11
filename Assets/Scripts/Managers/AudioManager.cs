@@ -12,14 +12,12 @@ namespace BlackFox
 
         public void PlayMenuMovmentAudio()
         {
-            MenuAudioSurce.Stop();
             MenuAudioSurce.clip = MenuMovementAudioClip;
             MenuAudioSurce.Play();
         }
 
         public void PlayMenuSelectionAudio()
         {
-            MenuAudioSurce.Stop();
             MenuAudioSurce.clip = MenuSelectionAudioClip;
             MenuAudioSurce.Play();
         }

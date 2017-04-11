@@ -94,6 +94,11 @@ namespace BlackFox
                 nextFire = Time.time + fireRate;
                 Shoot();
             }
+
+            if (_inputStatus.Start == ButtonState.Pressed)
+            {
+                GameManager.Instance.LevelMng.PauseGame(playerIndex);
+            }
         }
 
         /// <summary>

@@ -155,6 +155,11 @@ namespace BlackFox
                 inputStatus.A = ButtonState.Pressed;
             }
 
+            if (Input.GetButtonDown("Pause"))
+            {
+                inputStatus.Start = ButtonState.Pressed;
+            }
+
             return inputStatus;
         }
         #endregion

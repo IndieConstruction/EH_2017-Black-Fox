@@ -171,8 +171,9 @@ namespace BlackFox
             RopeMng.ReactToOnAgentSpawn(_agent);
         }
 
-        public void PuaseGame()
+        public void PauseGame(PlayerIndex _playerIndex)
         {
+            GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInputState, _playerIndex, PlayerState.Blocked);
             gameplaySM.GoToState(GamePlaySMStates.PauseState);
         }
         #endregion

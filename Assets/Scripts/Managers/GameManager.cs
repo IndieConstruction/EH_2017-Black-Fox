@@ -20,6 +20,7 @@ namespace BlackFox
         public GameObject LevelManagerPrefab;
         public GameObject UIManagerPrefab;
         public GameObject PlayerManagerPrefab;
+        public GameObject CoinManagerPrefab;
 
         [HideInInspector]
         public LevelManager LevelMng;
@@ -27,6 +28,8 @@ namespace BlackFox
         public UIManager UiMng;
         [HideInInspector]
         public PlayerManager PlayerMng;
+        [HideInInspector]
+        public CoinManager CoinMng;
         [HideInInspector]
         public FlowSM flowSM;
 
@@ -72,7 +75,10 @@ namespace BlackFox
             // TODO : modificare assegnazione del level number
             LevelMng.levelNumber = 1;
         }
-
+        public void InstantiateCoinManager()
+        {
+            CoinMng = Instantiate(CoinManagerPrefab, transform).GetComponent<CoinManager>();
+        }
         public void InstantiateUIManager()
         {
             UiMng = Instantiate(UIManagerPrefab, transform).GetComponent<UIManager>();

@@ -58,6 +58,17 @@ namespace BlackFox
             }
         }
 
+        public void ChangeAllPlayersStateExceptOne(PlayerState _playerState, PlayerIndex _playerIndex, PlayerState _otherPlayersState)
+        {
+            foreach (Player player in Players)
+            {
+                if (player.playerIndex == _playerIndex)
+                    player.PlayerCurrentState = _playerState;
+                else
+                    player.PlayerCurrentState = _otherPlayersState;
+            }
+        }
+
         /// <summary>
         /// Ritorna il riferimento del player corrispondente all'indice passato
         /// </summary>

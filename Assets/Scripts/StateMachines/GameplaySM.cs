@@ -9,63 +9,70 @@ namespace BlackFox {
         int levelNumber;
         int MaxRound;
 
+        GamePlaySMStates NextState;        
+
         private void Start()
         {
             Debug.Log("Start_GamePlaySM");
             CurrentState = new PreInitState();
+            NextState = GamePlaySMStates.PreInitState;
         }
 
         protected override void OnCurrentStateEnded()
         {
-            if ("BlackFox.PreInitState" == CurrentState.StateName)
+            switch (NextState)
             {
-                // PreInitState
-                CurrentState = new LevelInitState();
-            }
-            else if ("BlackFox.LevelInitState" == CurrentState.StateName)
-            {
-                // LevelInitState
-                CurrentState = new PreStartState();
-            }
-            else if ("BlackFox.PreStartState" == CurrentState.StateName)
-            {
-                // PreStartState
-                CurrentState = new PlayState();
-            }
-            else if ("BlackFox.PlayState" == CurrentState.StateName)
-            {
-                // PlayState
-                CurrentState = new CleanSceneState();
-            }else if("BlackFox.CleanSceneState" == CurrentState.StateName) {
-                // CleanSceneState
-                CurrentState = new RoundEndState();
-            }
-            else if ("BlackFox.RoundEndState" == CurrentState.StateName)
-            {
-                // RoundEndState
-                if (roundNumber <= MaxRound)
-                {
+                case GamePlaySMStates.PreInitState:
+                    CurrentState = new PreInitState();
+                    NextState = GamePlaySMStates.LevelInitState;
+                    break;
+                case GamePlaySMStates.LevelInitState:
+                    CurrentState = new LevelInitState();
+                    NextState = GamePlaySMStates.PreStartState;
+                    break;
+                case GamePlaySMStates.PreStartState:
+                    CurrentState = new PreStartState();
+                    NextState = GamePlaySMStates.PlayState;
+                    break;
+                case GamePlaySMStates.PlayState:
+                    CurrentState = new PlayState();
+                    NextState = GamePlaySMStates.CleanSceneState;
+                    break;
+                case GamePlaySMStates.PauseState:
+                    CurrentState = new PauseState();
+                    NextState = GamePlaySMStates.PlayState;
+                    break;
+                case GamePlaySMStates.CleanSceneState:
+                    CurrentState = new CleanSceneState();
+                    NextState = GamePlaySMStates.RoundEndState;
+                    break;
+                case GamePlaySMStates.RoundEndState:
+                    CurrentState = new RoundEndState();
+                    if(roundNumber < MaxRound)
+                        NextState = GamePlaySMStates.UpgradeMenuState;
+                    else
+                        NextState = GamePlaySMStates.GameOverState;
+                    break;
+                case GamePlaySMStates.UpgradeMenuState:
                     CurrentState = new UpgradeMenuState();
-                }
-                else
-                {
+                    NextState = GamePlaySMStates.LevelInitState;
+                    break;
+                case GamePlaySMStates.GameOverState:
                     CurrentState = new GameOverState();
-                }
-            }
-            else if ("BlackFox.UpgradeMenuState" == CurrentState.StateName)
-            {
-                // UpgradeMenuState
-                CurrentState = new LevelInitState();
-            }
-            else if ("BlackFox.GameOverState" == CurrentState.StateName)
-            {
-                // GameOverState - EXIT POINT
-                if (OnMachineEnd != null)
-                    OnMachineEnd("GameplaySM");
+                    if (OnMachineEnd != null)
+                        OnMachineEnd("GameplaySM");
+                    break;
             }
         }
 
         #region API
+        public void GoToState(GamePlaySMStates _nextState)
+        {
+            NextState = _nextState;
+            if (CurrentState.OnStateEnd != null)
+                CurrentState.OnStateEnd();
+        }
+
         public void SetRoundNumber(int _roundNumber)
         {
             roundNumber = _roundNumber;
@@ -81,5 +88,18 @@ namespace BlackFox {
             levelNumber = _levelNumber;
         }
         #endregion
+    }
+
+    public enum GamePlaySMStates
+    {
+        PreInitState,
+        LevelInitState,
+        PreStartState,
+        PlayState,
+        PauseState,
+        CleanSceneState,
+        RoundEndState,
+        UpgradeMenuState,
+        GameOverState
     }
 }

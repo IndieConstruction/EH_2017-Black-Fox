@@ -39,10 +39,10 @@ namespace BlackFox
         
         [HideInInspector]
         public GameplaySM gameplaySM;
-        LevelPointsCounter levelPointsCounter;
-
+        [HideInInspector]
         public string EndLevelPanelLable;
         
+        LevelPointsCounter levelPointsCounter;
 
         #region Containers
         public Transform PinsContainer;
@@ -159,9 +159,7 @@ namespace BlackFox
             levelPointsCounter.ClearAllKillPoints();
             EndLevelPanelLable = "Player " + _winner + " Has Won";
             EventManager.TriggerPlayStateEnd();
-        }
-
-        
+        }    
 
         /// <summary>
         /// Funzione che contiene le azioni da eseguire al resapwn di un player
@@ -173,6 +171,11 @@ namespace BlackFox
             RopeMng.ReactToOnAgentSpawn(_agent);
         }
 
+        public void PauseGame(PlayerIndex _playerIndex)
+        {
+            GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInputState, _playerIndex, PlayerState.Blocked);
+            gameplaySM.GoToState(GamePlaySMStates.PauseState);
+        }
         #endregion
 
         #region GameplaySM

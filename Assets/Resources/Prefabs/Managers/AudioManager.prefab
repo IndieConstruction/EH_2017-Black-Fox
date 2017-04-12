@@ -37,7 +37,7 @@ GameObject:
   - component: {fileID: 4536399006536868}
   - component: {fileID: 82344256189295916}
   m_Layer: 0
-  m_Name: MenuSounds
+  m_Name: MenuSelectionSounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c479c710a4f8634fb582730b648e98b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MenuMovementAudioClip: {fileID: 8300000, guid: cc04d609784781f4480374d59e45d469,
+  MenuMovementAudioClip: {fileID: 8300000, guid: f7ba576619dfec445b99e9bdeb18aa1f,
     type: 3}
   MenuSelectionAudioClip: {fileID: 8300000, guid: 235c61b01072c6a48a34dea4c7ca850b,
     type: 3}

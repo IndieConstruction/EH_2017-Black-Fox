@@ -58,14 +58,10 @@ namespace BlackFox
             switch (CurrentIndexSelection)
             {
                 case 1:
-                    // Cambia stato in level selection
                     GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
                     break;
                 case 2:
-                    //TODO: scommentare in seguito
-                    //GameManager.Instance.LevelMng.gameplaySM.GoToState(GamePlaySMStates.GameOverState);
-                    break;
-                default:
+                    GameManager.Instance.LevelMng.gameplaySM.GoToState(GamePlaySMStates.GameOverState);
                     break;
             }
         }

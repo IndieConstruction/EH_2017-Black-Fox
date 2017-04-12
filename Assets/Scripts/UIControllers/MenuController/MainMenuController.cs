@@ -25,11 +25,6 @@ namespace BlackFox
             }
         }
 
-        
-        /// <summary>
-        /// Il totale delle possibile scenlte
-        /// </summary>
-        int totalIndexSelection = 3;
 
         /// <summary>
         /// Il "bottone" selezionato
@@ -45,13 +40,23 @@ namespace BlackFox
             set
             {
                 // Modifiche grafiche per cambiare colore alla nuova selezione e far tornare la vecchia selezione al colore precedente.
-                //TODO: Rivedere perchè esce fuori dal range.
-                selectableButton[currentIndexSelection].IsSelected = false;
                 currentIndexSelection = value;
-                selectableButton[currentIndexSelection].IsSelected = true;
+                for (int i = 0; i < selectableButton.Count; i++)
+                {
+                    if(selectableButton[i].Index == value)
+                    {
+                        selectableButton[i].IsSelected = true;
+                    }
+                    else { selectableButton[i].IsSelected = false; }
+                }
             }
         }
-        
+
+        /// <summary>
+        /// Il totale delle possibile scenlte
+        /// </summary>
+        int totalIndexSelection = 3;
+
         public int TotalIndexSelection
         {
             get
@@ -99,14 +104,14 @@ namespace BlackFox
         {
             switch (CurrentIndexSelection)
             {
-                case 1:
+                case 0:
                     // Cambia stato in level selection
                     GameManager.Instance.flowSM.GoToState(FlowSMStates.LevelSelectionState);
                     break;
-                case 2:
+                case 1:
                     // Apre i credits
                     break;
-                case 3:
+                case 2:
                     GameManager.Instance.QuitApplication();
                     break;
                 default:

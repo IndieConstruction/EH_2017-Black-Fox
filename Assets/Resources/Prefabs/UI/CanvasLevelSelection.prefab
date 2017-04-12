@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 224354091002031610}
   - component: {fileID: 222413150909035270}
   - component: {fileID: 114192918598914392}
+  - component: {fileID: 114538105346028022}
   m_Layer: 5
   m_Name: MainMenuButton
   m_TagString: Untagged
@@ -107,6 +108,7 @@ GameObject:
   - component: {fileID: 224264733138634056}
   - component: {fileID: 222061427931720926}
   - component: {fileID: 114816368269222500}
+  - component: {fileID: 114760450694450506}
   m_Layer: 5
   m_Name: PlayButton
   m_TagString: Untagged
@@ -239,6 +241,17 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &114538105346028022
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1667093087911848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7d948247fc215949abddf6147a6ddfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114608278523588198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -299,6 +312,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114760450694450506
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1915725435097456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7d948247fc215949abddf6147a6ddfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114816368269222500
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -337,8 +361,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7803305a6161bfc49bfc9e2f09d59d65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayText: {fileID: 114608278523588198}
-  MainMenuText: {fileID: 114018076088761260}
 --- !u!222 &222061427931720926
 CanvasRenderer:
   m_ObjectHideFlags: 1

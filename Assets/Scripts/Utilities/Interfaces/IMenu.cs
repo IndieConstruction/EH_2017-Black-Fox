@@ -10,6 +10,7 @@ namespace BlackFox
 
         int CurrentIndexSelection { get; set; }
 
+        
         List<ISelectable> SelectableButtons { get; set; }
 
         /// <summary>
@@ -31,7 +32,7 @@ namespace BlackFox
         public static void GoDownInMenu(this IMenu _this)
         {
             _this.CurrentIndexSelection++;
-            if (_this.CurrentIndexSelection > _this.SelectableButtons.Count)
+            if (_this.CurrentIndexSelection > _this.SelectableButtons.Count -1)
                 _this.CurrentIndexSelection = 0;
         }
 

@@ -25,7 +25,7 @@ namespace BlackFox
                     {
                         transform.localScale = Vector3.zero;
                         CounterLable.text = "GO!!!";
-                        transform.DOScale(new Vector3(1f, 1f, 1f), 1f).OnComplete(() =>
+                        transform.DOScale(new Vector3(1f, 1f, 1f), 0.6f).OnComplete(() =>
                         {
                             GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.PlayInputState);
                             transform.DOScale(new Vector3(0f, 0f, 0f), 0.5f).OnComplete(() =>

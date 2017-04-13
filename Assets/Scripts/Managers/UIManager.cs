@@ -17,8 +17,8 @@ namespace BlackFox
         public Object canvasLevelSelection;
         [HideInInspector]
         public Object canvasGameMenu;
-        ///TODO: collegare il menu di pause allo stato corrispondente della state machine per impostarlo come stato corrente
-        ///Idem per l'endRoundUI deve passare sestesso come menu corrente allo UI manager tramite lo stato corrispondente.
+        [HideInInspector]
+        public Counter Counter;
         [HideInInspector]
         public PauseMenuController pauseMenuController;
 
@@ -111,6 +111,7 @@ namespace BlackFox
             endRoundUI = GetComponentInChildren<EndRoundlUI>();
             pauseMenuController = GetComponentInChildren<PauseMenuController>();
             gameUIController = GetComponentInChildren<GameUIController>();
+            Counter = GetComponentInChildren<Counter>();
         }
 
         /// <summary>

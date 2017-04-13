@@ -9,7 +9,7 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("PreStartState");
-            GameObject.FindObjectOfType<Counter>().DoCountDown();
+            GameManager.Instance.UiMng.Counter.DoCountDown();
             Counter.OnCounterEnded += CounterEnded;
         }
 
@@ -18,10 +18,7 @@ namespace BlackFox
         /// </summary>
         void CounterEnded() {
             if (OnStateEnd != null)
-            {
-                GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.PlayInputState);
                 OnStateEnd();
-            }
         }
 
         public override void OnEnd()

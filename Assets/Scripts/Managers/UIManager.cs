@@ -70,7 +70,7 @@ namespace BlackFox
         /// </summary>
         public void CreateMainMenu()
         {
-            canvasMenu = GameObject.Instantiate(Resources.Load("Prefabs/UI/CanvasMenu"), transform);
+            canvasMenu = Instantiate(Resources.Load("Prefabs/UI/CanvasMenu"), transform);
         }
 
         /// <summary>
@@ -88,7 +88,7 @@ namespace BlackFox
         /// </summary>
         public void CreateLevelSelectionMenu()
         {
-            canvasLevelSelection = GameObject.Instantiate(Resources.Load("Prefabs/UI/CanvasLevelSelection"), transform);
+            canvasLevelSelection = Instantiate(Resources.Load("Prefabs/UI/CanvasLevelSelection"), transform);
         }
 
         /// <summary>
@@ -107,7 +107,7 @@ namespace BlackFox
         /// </summary>
         public void CreateGameMenu()
         {
-            canvasGameMenu = GameObject.Instantiate(Resources.Load("Prefabs/UI/CanvasGame"), transform);
+            canvasGameMenu = Instantiate(Resources.Load("Prefabs/UI/CanvasGame"), transform);
             endRoundUI = GetComponentInChildren<EndRoundlUI>();
             pauseMenuController = GetComponentInChildren<PauseMenuController>();
             gameUIController = GetComponentInChildren<GameUIController>();

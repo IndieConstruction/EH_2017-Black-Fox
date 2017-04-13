@@ -28,10 +28,9 @@ namespace BlackFox
                         transform.DOScale(new Vector3(1f, 1f, 1f), 0.6f).OnComplete(() =>
                         {
                             GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.PlayInputState);
+                            GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
                             transform.DOScale(new Vector3(0f, 0f, 0f), 0.5f).OnComplete(() =>
                             {
-                                if (OnCounterEnded != null)
-                                    OnCounterEnded();
                             }).SetEase(Ease.InExpo);
                         }).SetEase(Ease.OutBounce);
                     }).SetEase(Ease.OutBounce);
@@ -39,14 +38,5 @@ namespace BlackFox
             }).SetEase(Ease.OutBounce);
 
         }
-
-        #region LevelEvent
-        public delegate void CounterEvent();
-
-        /// <summary>
-        /// Evento chiamato alla fine di un counter.
-        /// </summary>
-        public static CounterEvent OnCounterEnded;
-        #endregion
     }
 }

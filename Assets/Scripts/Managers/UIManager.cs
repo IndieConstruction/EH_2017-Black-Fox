@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace BlackFox
 {
+    // TODO : creare un controller separato per il canvas game invece di delegare la funzione allo ui manager
     public class UIManager : MonoBehaviour
     {
         [HideInInspector]
@@ -106,7 +107,7 @@ namespace BlackFox
         /// </summary>
         public void CreateGameMenu()
         {
-            canvasGameMenu = GameObject.Instantiate(Resources.Load("Prefabs/UI/Canvas"), transform);
+            canvasGameMenu = GameObject.Instantiate(Resources.Load("Prefabs/UI/CanvasGame"), transform);
             endRoundUI = GetComponentInChildren<EndRoundlUI>();
             pauseMenuController = GetComponentInChildren<PauseMenuController>();
             gameUIController = GetComponentInChildren<GameUIController>();

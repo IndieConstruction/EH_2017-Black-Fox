@@ -96,6 +96,11 @@ namespace BlackFox
                 inputStatus.DPadRight = ButtonState.Pressed;
             }
 
+            if (prevState.Buttons.Start == XInputDotNetPure.ButtonState.Released && state.Buttons.Start == XInputDotNetPure.ButtonState.Pressed)
+            {
+                inputStatus.Start = ButtonState.Pressed;
+            }
+
             return inputStatus;
         }
         #endregion

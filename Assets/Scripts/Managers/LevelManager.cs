@@ -39,6 +39,7 @@ namespace BlackFox
         
         [HideInInspector]
         public GameplaySM gameplaySM;
+
         [HideInInspector]
         public string EndLevelPanelLable;
         
@@ -90,6 +91,7 @@ namespace BlackFox
             ResetPinsContainer(Arena.transform);
         }
         #endregion
+
         #region Avatar
         /// <summary>
         /// Funzione che contiene le azioni da eseguire alla morte di un player
@@ -139,6 +141,7 @@ namespace BlackFox
                 Core.Init();
         }
         #endregion
+
         /// <summary>
         /// Funzione da eseguire alla morte del core
         /// </summary>
@@ -171,6 +174,11 @@ namespace BlackFox
             RopeMng.ReactToOnAgentSpawn(_agent);
         }
 
+        /// <summary>
+        /// Attiva lo stato di pausa della GameplaySM e imposta a menu input i comandi del player che ha chiamato la fuznione
+        /// mentre l'input degli altri player viene disabilitato
+        /// </summary>
+        /// <param name="_playerIndex"></param>
         public void PauseGame(PlayerIndex _playerIndex)
         {
             GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInputState, _playerIndex, PlayerState.Blocked);

@@ -357,9 +357,8 @@ GameObject:
   - component: {fileID: 223133049465465774}
   - component: {fileID: 114309573975230014}
   - component: {fileID: 114451250389712066}
-  - component: {fileID: 114870185932790464}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: CanvasGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1733,8 +1732,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb5d3d71b54cb354ab4f952ebf380866, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ResumeText: {fileID: 114790293360195720}
-  MainMenuText: {fileID: 114629174181074040}
   ChildrenPanel: {fileID: 1826507708732472}
 --- !u!114 &114493013942438832
 MonoBehaviour:
@@ -2328,23 +2325,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114870185932790464
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1345720058335310}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e29967a51552c7245ab2cf367eabd491, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  endRoundUI: {fileID: 0}
-  gameUIController: {fileID: 0}
-  canvasMenu: {fileID: 0}
-  canvasLevelSelection: {fileID: 0}
-  canvasGameMenu: {fileID: 0}
-  pauseMenuController: {fileID: 0}
 --- !u!114 &114960204226501602
 MonoBehaviour:
   m_ObjectHideFlags: 1

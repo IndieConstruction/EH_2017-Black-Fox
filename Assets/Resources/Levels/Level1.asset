@@ -18,16 +18,6 @@ MonoBehaviour:
   ArrowsSpawner:
     SpawnerPrefab: {fileID: 0}
     ArrowPrefab: {fileID: 0}
-  AvatarSpawner:
-    SpawnerPrefab: {fileID: 1908843494005796, guid: 0ff4a992816176340b31bf27c66057d5,
-      type: 2}
-    RespawnTime: 3
-    UseSpecifiedPrefabs: 1
-    AvatarPrefabs:
-    - {fileID: 1305829202965250, guid: a214aefd3bf69464c9b46124238781de, type: 2}
-    - {fileID: 1652347477880556, guid: c812bd5f837cf484791231f668cf3978, type: 2}
-    - {fileID: 1405396506357818, guid: 78f34d051af73b344a32930fefc2c297, type: 2}
-    - {fileID: 1851850003459776, guid: db452c6aca4d15c4aadf8031e2d9ac14, type: 2}
   BlackHoleSpawner:
     SpawnerPrefab: {fileID: 0}
     minRandomX: 0
@@ -44,8 +34,8 @@ MonoBehaviour:
       type: 2}
     MinTime: 10
     MaxTime: 20
-    AngularSpeed: 1
-    TransSpeed: 1
+    AngularSpeed: 10
+    TransSpeed: 10
   TurretSpawner:
     SpawnerPrefab: {fileID: 0}
     Turrent: {fileID: 0}

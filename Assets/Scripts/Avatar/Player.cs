@@ -10,7 +10,39 @@ namespace BlackFox
         public PlayerIndex playerIndex;
         public string Name;
         public InputStatus inputStatus;
-        public PlayerState PlayerCurrentState;
+
+        PlayerState playerCurrentState;
+        /// <summary>
+        /// Stato attuale.
+        /// </summary>
+        public PlayerState PlayerCurrentState
+        {
+            get { return playerCurrentState; }
+            set
+            {
+                if (playerCurrentState != value)
+                    onStateChanged(playerCurrentState, value);
+                playerCurrentState = value;
+            }
+        }
+
+        /// <summary>
+        /// Accade ogni volta che cambia stato.
+        /// </summary>
+        void onStateChanged(PlayerState _oldState, PlayerState _newState)
+        {
+            switch (_newState)
+            {
+                case PlayerState.Blocked:
+                    inputStatus = new InputStatus();
+                    break;
+                case PlayerState.MenuInputState:
+                    inputStatus = new InputStatus();
+                    break;
+                case PlayerState.PlayInputState:
+                    break;
+            }
+        }
 
         PlayerInput playerInput;
         bool isReleased = true;

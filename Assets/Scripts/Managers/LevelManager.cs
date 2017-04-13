@@ -183,6 +183,7 @@ namespace BlackFox
         /// <param name="_playerIndex"></param>
         public void PauseGame(PlayerIndex _playerIndex)
         {
+            // TODO : controllare uso corretto di if
             if (!IsGamePaused)
             {
                 IsGamePaused = true;

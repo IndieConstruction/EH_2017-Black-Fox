@@ -62,6 +62,7 @@ MonoBehaviour:
     type: 2}
   AudioManagerPrefab: {fileID: 1430661436070886, guid: 056d6142f48afb74e97dcdb173de4e80,
     type: 2}
+  LevelScriptableObj: {fileID: 11400000, guid: 8f955d3e75a08d34292082349f1986e7, type: 2}
   LevelMng: {fileID: 0}
   UiMng: {fileID: 0}
   PlayerMng: {fileID: 0}

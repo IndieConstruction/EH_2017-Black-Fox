@@ -23,6 +23,8 @@ namespace BlackFox
         public GameObject CoinManagerPrefab;
         public GameObject AudioManagerPrefab;
 
+        public Level LevelScriptableObj;
+
         [HideInInspector]
         public LevelManager LevelMng;
         [HideInInspector]

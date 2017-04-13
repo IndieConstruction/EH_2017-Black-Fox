@@ -53,7 +53,7 @@ namespace BlackFox
 
         void Start()
         {
-            CurrentLevel = Instantiate(Resources.Load<Level>("Levels/Level" + levelNumber));
+            CurrentLevel = Instantiate(InstantiateLevel());
             StartGameplaySM();
             levelPointsCounter = new LevelPointsCounter(AddPoints, SubPoints, PointsToWin);
         }
@@ -61,6 +61,19 @@ namespace BlackFox
         #region API
 
         #region Instantiation
+        /// <summary>
+        /// Funzione che ritorna lo scriptable del livello da caricare
+        /// </summary>
+        /// <returns></returns>
+        public Level InstantiateLevel()
+        {
+            if (GameManager.Instance.LevelScriptableObj != null)
+                return GameManager.Instance.LevelScriptableObj;
+            else
+                return Resources.Load<Level>("Levels/Level" + levelNumber);
+        }
+
+
         /// <summary>
         /// Instance a preloaded SpawnManager
         /// </summary>

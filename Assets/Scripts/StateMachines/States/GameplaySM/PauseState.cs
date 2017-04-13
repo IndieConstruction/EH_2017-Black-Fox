@@ -18,6 +18,7 @@ namespace BlackFox
         {
             Time.timeScale = 1;
             GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.PlayInputState);
+            GameManager.Instance.LevelMng.IsGamePaused = false;
             GameManager.Instance.UiMng.pauseMenuController.ChildrenPanel.SetActive(false);
         }
     }

@@ -2,29 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BlackFox
-{
-
+namespace BlackFox {
     public interface IMenu
     {
-
         int CurrentIndexSelection { get; set; }
-
-        
+       
         List<ISelectable> SelectableButtons { get; set; }
 
         /// <summary>
         /// Chiama la funzione per cambiare lo stato della StateMachine
         /// </summary>
         void Selection();
-
     }
 
     public static class IMenuExtension
     {
-
-
-
         /// <summary>
         /// Sposta l'indice della selezione in avanti
         /// </summary>
@@ -46,9 +38,7 @@ namespace BlackFox
             if (_this.CurrentIndexSelection < 0)
                 _this.CurrentIndexSelection = _this.SelectableButtons.Count - 1;
         }
-
     }
-
 
     /// <summary>
     /// Interfaccia per tutti gli oggetti selezionabili.

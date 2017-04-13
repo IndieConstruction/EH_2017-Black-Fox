@@ -45,6 +45,8 @@ namespace BlackFox
         
         LevelPointsCounter levelPointsCounter;
 
+        public bool IsGamePaused;
+
         #region Containers
         public Transform PinsContainer;
         #endregion
@@ -181,8 +183,12 @@ namespace BlackFox
         /// <param name="_playerIndex"></param>
         public void PauseGame(PlayerIndex _playerIndex)
         {
-            GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInputState, _playerIndex, PlayerState.Blocked);
-            gameplaySM.GoToState(GamePlaySMStates.PauseState);
+            if (!IsGamePaused)
+            {
+                IsGamePaused = true;
+                GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInputState, _playerIndex, PlayerState.Blocked);
+                gameplaySM.GoToState(GamePlaySMStates.PauseState);
+            }            
         }
         #endregion
 

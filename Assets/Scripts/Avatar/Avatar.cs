@@ -25,9 +25,10 @@ namespace BlackFox
             }
         }
 
+        public Player player;
+
         List<IDamageable> damageables = new List<IDamageable>();
 
-        Player player;
 
         MovementController movment;
         PlacePin pinPlacer;
@@ -51,6 +52,7 @@ namespace BlackFox
             movment = GetComponent<MovementController>();
             rope = SearchRope();
             pinPlacer = GetComponent<PlacePin>();
+            pinPlacer.SetOwner(this);
             shooter = GetComponent<Shooter>();
             UIController = FindObjectOfType<GameUIController>();
             shooter.playerIndex = this.playerIndex;
@@ -174,7 +176,7 @@ namespace BlackFox
 
         void PlacePin(bool _isRight)
         {
-            pinPlacer.placeThePin(this, _isRight);
+            pinPlacer.placeThePin(_isRight);
         }
 
         void GoForward(float _amount)

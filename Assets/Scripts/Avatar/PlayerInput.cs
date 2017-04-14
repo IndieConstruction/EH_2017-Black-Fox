@@ -31,6 +31,11 @@ namespace BlackFox
 
             return inputStatus;
         }
+
+        public void SetControllerVibration(PlayerIndex _playerIndex, float _leftMotor, float _rightMotor)
+        {
+            GamePad.SetVibration(_playerIndex, _leftMotor, _rightMotor);
+        }
         #endregion
 
         #region ControllerInput

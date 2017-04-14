@@ -12,6 +12,8 @@ namespace BlackFox
         [HideInInspector]
         public bool CanPlace = true;
 
+        Avatar owner;
+
         float xValue;
         float prectime;
 
@@ -23,27 +25,46 @@ namespace BlackFox
         private void Update()
         {
             prectime -= Time.deltaTime;
+            if (prectime <= 0)
+                StartCoroutine(Vibrate(0.2f));
         }
 
+        #region API
+        public void SetOwner(Avatar _owner)
+        {
+            owner = _owner;
+        }
+        
         /// <summary>
         /// Instantiate the pin on the PinSpawn
         /// </summary>
-        public void placeThePin(Avatar _owner, bool _isRight)
+        public void placeThePin(bool _isRight)
         {
             if (prectime <= 0 && CanPlace == true)
             {
                 SetPinSpawnPosition(_isRight);
                 Instantiate(PinPrefab, PinSpanw.position, PinSpanw.rotation, GameManager.Instance.LevelMng.PinsContainer);
-                _owner.AddShooterAmmo();
+                owner.AddShooterAmmo();
                 prectime = CoolDownTime;
             }
+        }
+        #endregion
+
+        IEnumerator Vibrate(float _rumbleTime)
+        {
+            // TODO : togliere la vibrazione durante il count down (da fare nel refactoring dell'avatar)
+            if(!GameManager.Instance.LevelMng.IsGamePaused)
+                owner.player.ControllerVibration(owner.playerIndex, 0.5f, 0.5f);
+
+            yield return new WaitForSeconds(_rumbleTime);
+            owner.player.ControllerVibration(owner.playerIndex, 0f, 0f);
         }
 
         /// <summary>
         /// Change the position of the PinSpawnPoint
         /// </summary>
         /// <param name="_isRight"></param>
-        public void SetPinSpawnPosition(bool _isRight)
+        void SetPinSpawnPosition(bool _isRight)
         {
             if (!_isRight)
             {

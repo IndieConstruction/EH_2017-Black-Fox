@@ -73,6 +73,12 @@ namespace BlackFox
             }
         }
 
+        #region API
+        public void ControllerVibration(PlayerIndex _playerIndex, float _leftMotor, float _rightMotor)
+        {
+            playerInput.SetControllerVibration(_playerIndex, _leftMotor, _rightMotor);
+        }
+        #endregion
 
         /// <summary>
         /// Controlla l'inpunt da passare al menù corrente 

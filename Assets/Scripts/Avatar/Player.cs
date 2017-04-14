@@ -10,7 +10,39 @@ namespace BlackFox
         public PlayerIndex playerIndex;
         public string Name;
         public InputStatus inputStatus;
-        public PlayerState PlayerCurrentState;
+
+        PlayerState playerCurrentState;
+        /// <summary>
+        /// Stato attuale.
+        /// </summary>
+        public PlayerState PlayerCurrentState
+        {
+            get { return playerCurrentState; }
+            set
+            {
+                if (playerCurrentState != value)
+                    onStateChanged(playerCurrentState, value);
+                playerCurrentState = value;
+            }
+        }
+
+        /// <summary>
+        /// Accade ogni volta che cambia stato.
+        /// </summary>
+        void onStateChanged(PlayerState _oldState, PlayerState _newState)
+        {
+            switch (_newState)
+            {
+                case PlayerState.Blocked:
+                    inputStatus = new InputStatus();
+                    break;
+                case PlayerState.MenuInputState:
+                    inputStatus = new InputStatus();
+                    break;
+                case PlayerState.PlayInputState:
+                    break;
+            }
+        }
 
         PlayerInput playerInput;
         bool isReleased = true;
@@ -41,6 +73,12 @@ namespace BlackFox
             }
         }
 
+        #region API
+        public void ControllerVibration(PlayerIndex _playerIndex, float _leftMotor, float _rightMotor)
+        {
+            playerInput.SetControllerVibration(_playerIndex, _leftMotor, _rightMotor);
+        }
+        #endregion
 
         /// <summary>
         /// Controlla l'inpunt da passare al menù corrente 
@@ -48,16 +86,16 @@ namespace BlackFox
         /// <param name="_inputStatus"></param>
         void CheckMenuInputStatus(InputStatus _inputStatus)
         {
-            if (_inputStatus.LeftThumbSticksAxisY == 0)
+            if (_inputStatus.LeftThumbSticksAxisY <= 0.2 && _inputStatus.LeftThumbSticksAxisY >= -0.2)
                 isReleased = true;
 
-            if ((_inputStatus.DPadUp == ButtonState.Pressed || _inputStatus.LeftThumbSticksAxisY == 1) && isReleased)
+            if ((_inputStatus.DPadUp == ButtonState.Pressed || _inputStatus.LeftThumbSticksAxisY >= 0.5) && isReleased)
             {
                 isReleased = false;
                 GameManager.Instance.UiMng.GoUpInMenu();
             }
 
-            if ((_inputStatus.DPadDown == ButtonState.Pressed || _inputStatus.LeftThumbSticksAxisY == -1) && isReleased)
+            if ((_inputStatus.DPadDown == ButtonState.Pressed || _inputStatus.LeftThumbSticksAxisY <= -0.5) && isReleased)
             {
                 isReleased = false;
                 GameManager.Instance.UiMng.GoDownInMenu();
@@ -66,6 +104,11 @@ namespace BlackFox
             if (_inputStatus.A == ButtonState.Pressed)
             {
                 GameManager.Instance.UiMng.SelectInMenu();
+            }
+
+            if (_inputStatus.B == ButtonState.Pressed)
+            {
+                // TODO : call go back in menù
             }
         }
     }

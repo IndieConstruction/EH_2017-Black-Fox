@@ -31,6 +31,11 @@ namespace BlackFox
 
             return inputStatus;
         }
+
+        public void SetControllerVibration(PlayerIndex _playerIndex, float _leftMotor, float _rightMotor)
+        {
+            GamePad.SetVibration(_playerIndex, _leftMotor, _rightMotor);
+        }
         #endregion
 
         #region ControllerInput
@@ -94,6 +99,11 @@ namespace BlackFox
             if (prevState.DPad.Right == XInputDotNetPure.ButtonState.Released && state.DPad.Right == XInputDotNetPure.ButtonState.Pressed)
             {
                 inputStatus.DPadRight = ButtonState.Pressed;
+            }
+
+            if (prevState.Buttons.Start == XInputDotNetPure.ButtonState.Released && state.Buttons.Start == XInputDotNetPure.ButtonState.Pressed)
+            {
+                inputStatus.Start = ButtonState.Pressed;
             }
 
             return inputStatus;

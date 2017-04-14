@@ -25,9 +25,10 @@ namespace BlackFox
             }
         }
 
+        public Player player;
+
         List<IDamageable> damageables = new List<IDamageable>();
 
-        Player player;
 
         MovementController movment;
         PlacePin pinPlacer;
@@ -51,6 +52,7 @@ namespace BlackFox
             movment = GetComponent<MovementController>();
             rope = SearchRope();
             pinPlacer = GetComponent<PlacePin>();
+            pinPlacer.SetOwner(this);
             shooter = GetComponent<Shooter>();
             UIController = FindObjectOfType<GameUIController>();
             shooter.playerIndex = this.playerIndex;
@@ -166,7 +168,6 @@ namespace BlackFox
         #endregion
 
         #region Player Abilities
-
         void Shoot()
         {
             shooter.ShootBullet();
@@ -175,7 +176,7 @@ namespace BlackFox
 
         void PlacePin(bool _isRight)
         {
-            pinPlacer.placeThePin(this, _isRight);
+            pinPlacer.placeThePin(_isRight);
         }
 
         void GoForward(float _amount)
@@ -192,18 +193,15 @@ namespace BlackFox
 
         void ExtendRope(float _amount)
         {
-            ;
             if (_amount >= .95f)
             {
                 rope.ExtendRope(1);
             }
             previousSpeed = rigid.velocity;
         }
-
         #endregion
 
         #region Interfaces
-
         #region IShooter
         /// <summary>
         /// Ritorna la lista degli oggetti danneggiabili
@@ -254,16 +252,12 @@ namespace BlackFox
             }
         }
         #endregion
-
         #endregion
 
         #region Events
-
         public delegate void AgentDataChangedEvent(Avatar _agent);
 
         public AgentDataChangedEvent OnDataChange;
-
         #endregion
-
     }
 }

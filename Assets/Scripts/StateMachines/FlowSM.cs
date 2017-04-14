@@ -21,6 +21,11 @@ namespace BlackFox {
         {
             switch (NextState)
             {
+                case FlowSMStates.LoadGameState:
+                    // caso attualmente non utilizzato
+                    CurrentState = new LoadGameState();
+                    NextState = FlowSMStates.MainMenuState;
+                    break;
                 case FlowSMStates.MainMenuState:
                     CurrentState = new MainMenuState();
                     NextState = FlowSMStates.LevelSelectionState;

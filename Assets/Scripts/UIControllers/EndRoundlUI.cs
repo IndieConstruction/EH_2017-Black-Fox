@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using XInputDotNetPure;
-
 using UnityEngine.UI;
-using System;
+
 
 namespace BlackFox
 {
@@ -23,8 +22,7 @@ namespace BlackFox
         int P3KillPoints;
         int P4KillPoints;
 
-        int totalIndexSelection = 1;
-        int currentIndexSelection = 1;
+        int currentIndexSelection = 0;
 
         public int CurrentIndexSelection
         {
@@ -32,19 +30,18 @@ namespace BlackFox
             set { currentIndexSelection = value; }
         }
 
-        public int TotalIndexSelection {
-            get { return 1; }
-            set { totalIndexSelection = value; }
-            }
+        List<ISelectable> selectableButton = new List<ISelectable>();
 
+        public List<ISelectable> SelectableButtons
+        {
+            get { return selectableButton; }
+            set { selectableButton = value; }
+        }
 
-        // Use this for initialization
         void Start()
         {
             EndLevelPanel.SetActive(false);
-            GameManager.Instance.UiMng.CurrentMenu = this;
         }
-
 
         void UpdateUIPoints()
         {
@@ -101,8 +98,10 @@ namespace BlackFox
                 default:
                     break;
             }
-            UpdateUIPoints();
+
             EventName.text = GameManager.Instance.LevelMng.EndLevelPanelLable;
+
+            UpdateUIPoints();
         }
 
         public void ClearTheUIPoints()

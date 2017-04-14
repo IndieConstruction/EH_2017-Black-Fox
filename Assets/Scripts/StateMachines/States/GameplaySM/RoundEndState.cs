@@ -11,8 +11,9 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("RoundEndState");
+            GameManager.Instance.UiMng.CurrentMenu = GameManager.Instance.UiMng.endRoundUI;
             GameManager.Instance.UiMng.endRoundUI.EndLevelPanel.SetActive(true);
-            SetPlayersState();
+            GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInputState, PlayerIndex.One, PlayerState.Blocked);
         }
 
         
@@ -20,14 +21,6 @@ namespace BlackFox
         {
             GameManager.Instance.UiMng.endRoundUI.EndLevelPanel.SetActive(false);
             GameManager.Instance.UiMng.endRoundUI.ClearTheUIPoints();
-        }
-
-        void SetPlayersState()
-        {
-            GameManager.Instance.PlayerMng.ChangePlayerState(PlayerState.MenuInputState, PlayerIndex.One);
-            GameManager.Instance.PlayerMng.ChangePlayerState(PlayerState.Blocked, PlayerIndex.Two);
-            GameManager.Instance.PlayerMng.ChangePlayerState(PlayerState.Blocked, PlayerIndex.Three);
-            GameManager.Instance.PlayerMng.ChangePlayerState(PlayerState.Blocked, PlayerIndex.Four);
         }
     }
 }

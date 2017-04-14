@@ -15,7 +15,7 @@ namespace BlackFox {
         {
             Debug.Log("Start_GamePlaySM");
             CurrentState = new PreInitState();
-            NextState = GamePlaySMStates.PreInitState;
+            NextState = GamePlaySMStates.LevelInitState;
         }
 
         protected override void OnCurrentStateEnded()
@@ -23,6 +23,7 @@ namespace BlackFox {
             switch (NextState)
             {
                 case GamePlaySMStates.PreInitState:
+                    // caso attualmente non utilizzato
                     CurrentState = new PreInitState();
                     NextState = GamePlaySMStates.LevelInitState;
                     break;

@@ -11,20 +11,12 @@ namespace BlackFox
         {
             Debug.Log("MainMenuState");
             GameManager.Instance.UiMng.CreateMainMenu();
-            SetPlayersState();
+            GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInputState, PlayerIndex.One, PlayerState.Blocked);
         }
 
         public override void OnEnd()
         {
             GameManager.Instance.UiMng.DestroyMainMenu();
-        }
-
-        void SetPlayersState()
-        {
-            GameManager.Instance.PlayerMng.ChangePlayerState(PlayerState.MenuInputState, PlayerIndex.One);
-            GameManager.Instance.PlayerMng.ChangePlayerState(PlayerState.Blocked, PlayerIndex.Two);
-            GameManager.Instance.PlayerMng.ChangePlayerState(PlayerState.Blocked, PlayerIndex.Three);
-            GameManager.Instance.PlayerMng.ChangePlayerState(PlayerState.Blocked, PlayerIndex.Four);
         }
     }
 }

@@ -39,10 +39,13 @@ namespace BlackFox
         
         [HideInInspector]
         public GameplaySM gameplaySM;
+
         [HideInInspector]
         public string EndLevelPanelLable;
         
         LevelPointsCounter levelPointsCounter;
+
+        public bool IsGamePaused;
 
         #region Containers
         public Transform PinsContainer;
@@ -50,7 +53,7 @@ namespace BlackFox
 
         void Start()
         {
-            CurrentLevel = Instantiate(Resources.Load<Level>("Levels/Level" + levelNumber));
+            CurrentLevel = Instantiate(InstantiateLevel());
             StartGameplaySM();
             levelPointsCounter = new LevelPointsCounter(AddPoints, SubPoints, PointsToWin);
         }
@@ -58,6 +61,19 @@ namespace BlackFox
         #region API
 
         #region Instantiation
+        /// <summary>
+        /// Funzione che ritorna lo scriptable del livello da caricare
+        /// </summary>
+        /// <returns></returns>
+        public Level InstantiateLevel()
+        {
+            if (GameManager.Instance.LevelScriptableObj != null)
+                return GameManager.Instance.LevelScriptableObj;
+            else
+                return Resources.Load<Level>("Levels/Level" + levelNumber);
+        }
+
+
         /// <summary>
         /// Instance a preloaded SpawnManager
         /// </summary>
@@ -90,6 +106,7 @@ namespace BlackFox
             ResetPinsContainer(Arena.transform);
         }
         #endregion
+
         #region Avatar
         /// <summary>
         /// Funzione che contiene le azioni da eseguire alla morte di un player
@@ -139,6 +156,7 @@ namespace BlackFox
                 Core.Init();
         }
         #endregion
+
         /// <summary>
         /// Funzione da eseguire alla morte del core
         /// </summary>
@@ -173,10 +191,20 @@ namespace BlackFox
             RopeMng.ReactToOnAgentSpawn(_agent);
         }
 
+        /// <summary>
+        /// Attiva lo stato di pausa della GameplaySM e imposta a menu input i comandi del player che ha chiamato la fuznione
+        /// mentre l'input degli altri player viene disabilitato
+        /// </summary>
+        /// <param name="_playerIndex"></param>
         public void PauseGame(PlayerIndex _playerIndex)
         {
-            GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInputState, _playerIndex, PlayerState.Blocked);
-            gameplaySM.GoToState(GamePlaySMStates.PauseState);
+            // TODO : controllare uso corretto di if
+            if (!IsGamePaused)
+            {
+                IsGamePaused = true;
+                GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInputState, _playerIndex, PlayerState.Blocked);
+                gameplaySM.GoToState(GamePlaySMStates.PauseState);
+            }            
         }
         #endregion
 

@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace BlackFox
 {
+    // TODO : creare un controller separato per il canvas game invece di delegare la funzione allo ui manager
     public class UIManager : MonoBehaviour
     {
         [HideInInspector]
@@ -16,6 +17,10 @@ namespace BlackFox
         public Object canvasLevelSelection;
         [HideInInspector]
         public Object canvasGameMenu;
+        [HideInInspector]
+        public Counter Counter;
+        [HideInInspector]
+        public PauseMenuController pauseMenuController;
 
         public IMenu CurrentMenu;
 
@@ -45,6 +50,11 @@ namespace BlackFox
             CurrentMenu.GoDownInMenu();
         }
 
+        public void GoBackInMenu()
+        {
+            // TODO : implementare
+        }
+
         public void SelectInMenu()
         {
             if (GameManager.Instance.AudioMng != null)
@@ -60,7 +70,7 @@ namespace BlackFox
         /// </summary>
         public void CreateMainMenu()
         {
-            canvasMenu = GameObject.Instantiate(Resources.Load("Prefabs/UI/CanvasMenu"), transform);
+            canvasMenu = Instantiate(Resources.Load("Prefabs/UI/CanvasMenu"), transform);
         }
 
         /// <summary>
@@ -78,7 +88,7 @@ namespace BlackFox
         /// </summary>
         public void CreateLevelSelectionMenu()
         {
-            canvasLevelSelection = GameObject.Instantiate(Resources.Load("Prefabs/UI/CanvasLevelSelection"), transform);
+            canvasLevelSelection = Instantiate(Resources.Load("Prefabs/UI/CanvasLevelSelection"), transform);
         }
 
         /// <summary>
@@ -97,9 +107,11 @@ namespace BlackFox
         /// </summary>
         public void CreateGameMenu()
         {
-            canvasGameMenu = GameObject.Instantiate(Resources.Load("Prefabs/UI/Canvas"), transform);
+            canvasGameMenu = Instantiate(Resources.Load("Prefabs/UI/CanvasGame"), transform);
             endRoundUI = GetComponentInChildren<EndRoundlUI>();
+            pauseMenuController = GetComponentInChildren<PauseMenuController>();
             gameUIController = GetComponentInChildren<GameUIController>();
+            Counter = GetComponentInChildren<Counter>();
         }
 
         /// <summary>

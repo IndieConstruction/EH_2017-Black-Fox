@@ -6,13 +6,11 @@ namespace BlackFox
 {
     public class PlacePin : MonoBehaviour
     {
-
         public GameObject PinPrefab;
         public Transform PinSpanw;
         public float CoolDownTime;
         [HideInInspector]
-        public bool CanPlace = true;//TODO: rimpiazza questa variabile semplicemente facendo disabilitare il componente
-        bool isLeft = false;
+        public bool CanPlace = true;
 
         float xValue;
         float prectime;
@@ -34,10 +32,7 @@ namespace BlackFox
         {
             if (prectime <= 0 && CanPlace == true)
             {
-
-                //ChangePinSpawnPosition();
                 SetPinSpawnPosition(_isRight);
-
                 Instantiate(PinPrefab, PinSpanw.position, PinSpanw.rotation, GameManager.Instance.LevelMng.PinsContainer);
                 _owner.AddShooterAmmo();
                 prectime = CoolDownTime;
@@ -47,26 +42,10 @@ namespace BlackFox
         /// <summary>
         /// Change the position of the PinSpawnPoint
         /// </summary>
-        /// <param name="_direction">Set the side of the PinSpawnPoint</param>
-        void ChangePinSpawnPosition()
-        {
-            if (!isLeft)
-            {
-                isLeft = true;
-                xValue = -xValue;
-            }
-
-            else if (isLeft)
-            {
-                isLeft = false;
-                xValue = -xValue;
-            }
-            PinSpanw.localPosition = new Vector3(xValue, PinSpanw.localPosition.y, PinSpanw.localPosition.z);
-        }
-
+        /// <param name="_isRight"></param>
         public void SetPinSpawnPosition(bool _isRight)
         {
-            if (_isRight == false)
+            if (!_isRight)
             {
                 PinSpanw.localPosition = new Vector3(-xValue, PinSpanw.localPosition.y, PinSpanw.localPosition.z);
             }

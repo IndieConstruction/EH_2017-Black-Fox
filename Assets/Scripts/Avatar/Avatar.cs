@@ -166,7 +166,6 @@ namespace BlackFox
         #endregion
 
         #region Player Abilities
-
         void Shoot()
         {
             shooter.ShootBullet();
@@ -192,18 +191,15 @@ namespace BlackFox
 
         void ExtendRope(float _amount)
         {
-            ;
             if (_amount >= .95f)
             {
                 rope.ExtendRope(1);
             }
             previousSpeed = rigid.velocity;
         }
-
         #endregion
 
         #region Interfaces
-
         #region IShooter
         /// <summary>
         /// Ritorna la lista degli oggetti danneggiabili
@@ -254,16 +250,12 @@ namespace BlackFox
             }
         }
         #endregion
-
         #endregion
 
         #region Events
-
         public delegate void AgentDataChangedEvent(Avatar _agent);
 
         public AgentDataChangedEvent OnDataChange;
-
         #endregion
-
     }
 }

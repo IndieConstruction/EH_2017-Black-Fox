@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 114305192752446980}
   - component: {fileID: 114057077893864034}
   - component: {fileID: 136923628969541432}
+  - component: {fileID: 114273546356286944}
   m_Layer: 0
   m_Name: AgentGreen
   m_TagString: Untagged
@@ -201,6 +202,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33031861498286494
 MeshFilter:
@@ -255,6 +257,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114273546356286944
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1179094106077742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505be4d042dacf6449aea3571377234b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114305192752446980
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -311,8 +324,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6116c7f43a8f3964db2240b1007b4dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 10
   playerIndex: 2
+  MaxLife: 10
   fireRate: 0.5
 --- !u!114 &114768271656028606
 MonoBehaviour:
@@ -359,8 +372,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44fa6584f3505ba49b8ecac0518f61c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ring: {fileID: 114306483284148052}
-  KillPoint: {fileID: 0}
+  KillToview: {fileID: 0}
+  Ring: {fileID: 0}
 --- !u!136 &136923628969541432
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -387,7 +400,7 @@ Canvas:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1057600686017108}
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
@@ -396,6 +409,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0

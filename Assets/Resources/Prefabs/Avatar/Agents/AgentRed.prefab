@@ -25,6 +25,7 @@ GameObject:
   - component: {fileID: 114009093956238694}
   - component: {fileID: 114430695800517240}
   - component: {fileID: 136279394459955658}
+  - component: {fileID: 114515995861800998}
   m_Layer: 0
   m_Name: AgentRed
   m_TagString: Untagged
@@ -201,6 +202,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33031442449449756
 MeshFilter:
@@ -253,8 +255,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6116c7f43a8f3964db2240b1007b4dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 10
   playerIndex: 1
+  MaxLife: 10
   fireRate: 0.5
 --- !u!114 &114159641960224764
 MonoBehaviour:
@@ -348,6 +350,17 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &114515995861800998
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118355528579306}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505be4d042dacf6449aea3571377234b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114607981903037720
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -359,8 +372,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44fa6584f3505ba49b8ecac0518f61c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ring: {fileID: 114183627431841500}
-  KillPoint: {fileID: 0}
+  KillToview: {fileID: 0}
+  Ring: {fileID: 0}
 --- !u!136 &136279394459955658
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -387,7 +400,7 @@ Canvas:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1205196305209334}
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
@@ -396,6 +409,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0

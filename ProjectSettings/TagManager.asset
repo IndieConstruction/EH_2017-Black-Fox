@@ -10,6 +10,7 @@ TagManager:
   - Pin
   - Core
   - BlackHole
+  - Coin
   layers:
   - Default
   - TransparentFX

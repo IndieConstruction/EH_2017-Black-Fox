@@ -23,7 +23,7 @@ namespace BlackFox
         public GameObject SpawnerMngPrefab;
         public GameObject AvatarSpwnPrefab;
         public GameObject RopeMngPrefab;
-
+        public GameManager gameMngr;
         [HideInInspector]
         public SpawnerManager SpawnerMng;
         [HideInInspector]
@@ -159,6 +159,8 @@ namespace BlackFox
             levelPointsCounter.ClearAllKillPoints();
             EndLevelPanelLable = "Player " + _winner + " Has Won";
             EventManager.TriggerPlayStateEnd();
+            CoinManager.Coins +=4;
+            gameMngr.AddCoins();
         }    
 
         /// <summary>

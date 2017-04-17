@@ -21,15 +21,9 @@ namespace BlackFox
 
         public int Index
         {
-            get
-            {
-                return index;
-            }
+            get { return index;}
 
-            set
-            {
-                index = value;
-            }
+            set { index = value; }
         }
 
         Text LabelText;

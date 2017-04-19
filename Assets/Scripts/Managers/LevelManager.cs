@@ -129,12 +129,11 @@ namespace BlackFox
             }
             if(EventManager.OnPointsUpdate != null)
                 EventManager.OnPointsUpdate();
-            //Reaction of the RopeManager to the OnAgentKilled event
-            RopeMng.ReactToOnAgentKilled(_victim);
+            
             //Reaction of the AvatarSpawner to the OnAgentKilled event
-            AvatarSpwn.RespawnAvatar(_victim);
+            AvatarSpwn.RespawnAvatar(_victim.Player, _victim.Player.SpawnTime);
         }
-                /// <summary>
+        /// <summary>
         /// Return the current points (due to kills) of the Player
         /// </summary>
         /// <param name="_playerID"></param>
@@ -142,6 +141,12 @@ namespace BlackFox
         public int GetPlayerKillPoints(PlayerLabel _playerID)
         {
             return levelPointsCounter.GetPlayerKillPoints(_playerID);
+        }
+
+        public void SpawnAllAvatar(float _spawnTime) {
+            foreach (Player player in GameManager.Instance.PlayerMng.Players) {
+                AvatarSpwn.RespawnAvatar(player, _spawnTime);
+            }
         }
         #endregion
 
@@ -178,16 +183,6 @@ namespace BlackFox
             EventManager.TriggerPlayStateEnd();
             CoinManager.Coins +=4;
             gameMngr.AddCoins();
-        }    
-
-        /// <summary>
-        /// Funzione che contiene le azioni da eseguire al resapwn di un player
-        /// </summary>
-        /// <param name="_agent"></param>
-        public void AgentSpawn(Avatar _agent)
-        {
-            //Reaction of the RopeManager to the OnAgentSpawn event
-            RopeMng.ReactToOnAgentSpawn(_agent);
         }
 
         /// <summary>

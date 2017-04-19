@@ -32,7 +32,7 @@ namespace BlackFox
         {
             foreach (Player player in Players)
             {
-                if (player.PlayerID == _playerID)
+                if (player.ID == _playerID)
                     player.PlayerCurrentState = _playerState;
             }
         }
@@ -53,7 +53,7 @@ namespace BlackFox
         {
             foreach (Player player in Players)
             {
-                if (player.PlayerID == _playerID)
+                if (player.ID == _playerID)
                     player.PlayerCurrentState = _playerState;
                 else
                     player.PlayerCurrentState = _otherPlayersState;
@@ -69,7 +69,7 @@ namespace BlackFox
         {
             foreach (Player player in Players)
             {
-                if (player.PlayerID == _playerIndex)
+                if (player.ID == _playerIndex)
                     return player;
             }
             return null;

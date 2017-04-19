@@ -4,11 +4,9 @@ using XInputDotNetPure;
 using Rope;
 using DG.Tweening;
 
-namespace BlackFox
-{
-    [RequireComponent (typeof(MovementController), typeof(PlacePin), typeof(Shooter))]
-    public class Avatar : MonoBehaviour, IShooter, IDamageable
-    {
+namespace BlackFox {
+    [RequireComponent(typeof(MovementController), typeof(PlacePin), typeof(Shooter))]
+    public class Avatar : MonoBehaviour, IShooter, IDamageable {
         /// <summary>
         /// Player who control this avatar
         /// </summary>
@@ -16,31 +14,43 @@ namespace BlackFox
         /// <summary>
         /// Index of th e player
         /// </summary>
-        private PlayerLabel _playerId;
-        public PlayerLabel PlayerId
-        {
-            get { return _playerId; }
-            protected set { _playerId = value; }
+        public PlayerLabel PlayerId {
+            get {
+                if (Player == null)
+                    return PlayerLabel.None;
+                return Player.ID;
+            }
         }
+
+        public Material ColorMaterial { get { return Model.material; } }
         /// <summary>
         /// Reference of the model to visualize
         /// </summary>
         private ShipModel _model;
-        public ShipModel Model
-        {
+        public ShipModel Model {
             get { return _model; }
             set { _model = value; }
         }
+
+        private AvatarState _state;
+        public AvatarState State {
+            get { return _state; }
+            set {
+                if (Player != null) {
+                    OnStateChange(value, _state);
+                    _state = value;
+                }
+            }
+        }
+
         //Life fields
         public float MaxLife = 10;
         private float _life = 10;
-        public float Life
-        {
+        public float Life {
             get { return _life; }
-            private set
-            {
+            private set {
                 _life = value;
-                if (OnDataChange != null)  
+                if (OnDataChange != null)
                     OnDataChange(this);
             }
         }
@@ -55,14 +65,13 @@ namespace BlackFox
         MovementController movment;
         PlacePin pinPlacer;
         Shooter shooter;
-        RopeController rope;
+        public RopeController rope;
         GameUIController UIController;
         //Variabili per gestire la fisca della corda
         Rigidbody rigid;
         Vector3 previousSpeed;
 
-        void Start()
-        {
+        void Start() {
             UIController = FindObjectOfType<GameUIController>();
             rigid = GetComponent<Rigidbody>();
             shooter = GetComponent<Shooter>();
@@ -70,76 +79,81 @@ namespace BlackFox
             pinPlacer = GetComponent<PlacePin>();
 
             LoadIDamageablePrefab();
-            rope = SearchRope();
         }
 
-        private void Update()
-        {
-            CheckInputStatus(Player.inputStatus);
+        private void Update() {
+            if (State == AvatarState.Enabled) {
+                CheckInputStatus(Player.inputStatus); 
+            }
         }
 
-        private void OnDestroy()
-        {
-            if(transform.parent != null)
-                Destroy(transform.parent.gameObject);
-            GameManager.Instance.LevelMng.RopeMng.DestroyRope(this);
+        private void OnDestroy() {
+            if (transform.parent != null)
+                State = AvatarState.Disabled;
+            
+        }
+        /// <summary>
+        /// Menage the state switches
+        /// </summary>
+        /// <param name="_newState"></param>
+        /// <param name="_oldState"></param>
+        void OnStateChange(AvatarState _newState, AvatarState _oldState) {
+            switch (_newState) {
+                case AvatarState.Disabled:
+                    ToggleAbilities(false);
+                break;
+                case AvatarState.Ready:
+                    Init();
+                break;
+                case AvatarState.Enabled:
+                    ToggleAbilities(true);
+                break;
+                default:
+                break;
+            }
+        }
+        /// <summary>
+        /// Initialize initial values of Avatar
+        /// </summary>
+        private void Init() {
+            Life = MaxLife;
+
+            if (GameManager.Instance.LevelMng.RopeMng != null && rope == null)
+                GameManager.Instance.LevelMng.RopeMng.AttachNewRope(this);
         }
 
-        void CheckInputStatus(InputStatus _inputStatus)
-        {
+        void CheckInputStatus(InputStatus _inputStatus) {
             GoForward(_inputStatus.RightTriggerAxis);
             Rotate(_inputStatus.LeftThumbSticksAxisX);
 
-            if (_inputStatus.RightShoulder == ButtonState.Pressed)
-            {
+            if (_inputStatus.RightShoulder == ButtonState.Pressed) {
                 PlacePin(true);
             }
 
-            if (_inputStatus.LeftShoulder == ButtonState.Pressed)
-            {
+            if (_inputStatus.LeftShoulder == ButtonState.Pressed) {
                 PlacePin(false);
             }
 
-            if (_inputStatus.A == ButtonState.Pressed)
-            {
+            if (_inputStatus.A == ButtonState.Pressed) {
+                nextFire = Time.time + fireRate;
+                Shoot();
+            } else if (_inputStatus.A == ButtonState.Held && Time.time > nextFire) {
                 nextFire = Time.time + fireRate;
                 Shoot();
             }
-            else if (_inputStatus.A == ButtonState.Held && Time.time > nextFire)
-            {
-                nextFire = Time.time + fireRate;
-                Shoot();
-            }
 
-            if (_inputStatus.Start == ButtonState.Pressed)
-            {
-                GameManager.Instance.LevelMng.PauseGame(Player.PlayerID);
+            if (_inputStatus.Start == ButtonState.Pressed) {
+                GameManager.Instance.LevelMng.PauseGame(Player.ID);
             }
         }
-
-        /// <summary>
-        /// Cerca il rope controller associato all'agente
-        /// </summary>
-        /// <returns></returns>
-        RopeController SearchRope()
-        {
-            foreach (RopeController rope in FindObjectsOfType<RopeController>())
-            {
-                if (rope.name == PlayerId + "Rope")
-                    return rope;
-            }
-            return null;
-        }
-
+        
         /// <summary>
         /// Salva all'interno della lista di oggetti IDamageable, gli oggetti facenti parti della lista DamageablesPrefabs
         /// </summary>
-        void LoadIDamageablePrefab()
-        { 
+        void LoadIDamageablePrefab() {
             List<GameObject> DamageablesPrefabs = PrefabUtily.LoadAllPrefabsWithComponentOfType<IDamageable>("Prefabs", gameObject);
 
-            foreach (var k in DamageablesPrefabs)
-            {
+            foreach (var k in DamageablesPrefabs) {
                 if (k.GetComponent<IDamageable>() != null)
                     damageables.Add(k.GetComponent<IDamageable>());
             }
@@ -148,29 +162,25 @@ namespace BlackFox
         /// <summary>
         /// Aggiorna la quantità di proiettili disponibili nel CanvasGame
         /// </summary>
-        void SetAmmoInTheUI()
-        {
+        void SetAmmoInTheUI() {
             if (UIController != null)
-                UIController.SetBulletsValue(Player.PlayerID, shooter.ammo);
+                UIController.SetBulletsValue(Player.ID, shooter.ammo);
         }
 
         #region API
         /// <summary>
         /// Required to setup the player (also launched on Start of this class)
         /// </summary>
-        public void Setup(Player _player)
-        {
+        public void Setup(Player _player) {
             Player = _player;
-            PlayerId = _player.PlayerID;
             pinPlacer.SetOwner(this);
-            Life = MaxLife;
+            State = AvatarState.Ready;
         }
 
         /// <summary>
         /// Chiama la funzione AddAmmo di shooter
         /// </summary>
-        public void AddShooterAmmo()
-        {
+        public void AddShooterAmmo() {
             shooter.AddAmmo();
             SetAmmoInTheUI();
         }
@@ -180,46 +190,49 @@ namespace BlackFox
         /// </summary>
         /// <param name="_playerID">L'agente a cui aggiornare la UI</param>
         /// <param name="_playerPoints">I punti che ha l'agente</param>
-        public void UpdateKillPointsInUI(PlayerLabel _playerID, int _playerPoints)
-        {
+        public void UpdateKillPointsInUI(PlayerLabel _playerID, int _playerPoints) {
             // richiama la funzione in UIControlle per aggiornare i punti sulla propria UI
             UIController.SetKillPointsUI(_playerID, _playerPoints);
         }
 
-        public Shooter GetShooterReference()
-        {
+        public Shooter GetShooterReference() {
             return shooter;
         }
         #endregion
 
         #region Player Abilities
-        void Shoot()
-        {
+        /// <summary>
+        /// Set all the Player abilities as active/inactive
+        /// </summary>
+        /// <param name="_active"></param>
+        void ToggleAbilities(bool _active = true) {
+            
+            pinPlacer.enabled = _active;
+            shooter.enabled = _active;
+            movment.enabled = _active;
+        }
+
+        void Shoot() {
             shooter.ShootBullet();
             SetAmmoInTheUI();
         }
 
-        void PlacePin(bool _isRight)
-        {
+        void PlacePin(bool _isRight) {
             pinPlacer.placeThePin(_isRight);
         }
 
-        void GoForward(float _amount)
-        {
+        void GoForward(float _amount) {
             movment.Movement(_amount);
             if (rope != null)
                 ExtendRope(_amount);
         }
 
-        void Rotate(float _amount)
-        {
+        void Rotate(float _amount) {
             movment.Rotation(_amount);
         }
 
-        void ExtendRope(float _amount)
-        {
-            if (_amount >= .95f)
-            {
+        void ExtendRope(float _amount) {
+            if (_amount >= .95f) {
                 rope.ExtendRope(1);
             }
             previousSpeed = rigid.velocity;
@@ -232,8 +245,7 @@ namespace BlackFox
         /// Ritorna la lista degli oggetti danneggiabili
         /// </summary>
         /// <returns></returns>
-        public List<IDamageable> GetDamageable()
-        {
+        public List<IDamageable> GetDamageable() {
             return damageables;
         }
 
@@ -241,8 +253,7 @@ namespace BlackFox
         /// Ritorna il gameobject a cui è attaccato il component
         /// </summary>
         /// <returns></returns>
-        public GameObject GetOwner()
-        {
+        public GameObject GetOwner() {
             return gameObject;
         }
 
@@ -255,24 +266,21 @@ namespace BlackFox
         /// </summary>
         /// <param name="_damage">La quantità di danni che subisce</param>
         /// <returns></returns>
-        public void Damage(float _damage, GameObject _attacker)
-        {
-            if(damageTween != null)
+        public void Damage(float _damage, GameObject _attacker) {
+            if (damageTween != null)
                 damageTween.Complete();
 
-            Life -= _damage;            
-            damageTween =  transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f);
-            if (Life < 1)
-            {
-                if (EventManager.OnAgentKilled != null)
-                {
+            Life -= _damage;
+            damageTween = transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f);
+            if (Life < 1) {
+                if (EventManager.OnAgentKilled != null) {
                     if (_attacker != null)
                         EventManager.OnAgentKilled(_attacker.GetComponent<Avatar>(), this);
                     else
                         EventManager.OnAgentKilled(null, this);
                 }
-                GetComponent<CapsuleCollider>().enabled = false;    
-                transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject); });              
+                GetComponent<CapsuleCollider>().enabled = false;
+                transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject); });
                 return;
             }
         }
@@ -284,5 +292,11 @@ namespace BlackFox
 
         public AgentDataChangedEvent OnDataChange;
         #endregion
+    }
+
+    public enum AvatarState {
+        Disabled = 0,
+        Ready = 1,
+        Enabled = 2
     }
 }

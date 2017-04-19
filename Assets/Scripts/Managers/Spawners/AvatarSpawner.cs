@@ -11,20 +11,12 @@ namespace BlackFox
     /// </summary>
     public class AvatarSpawner : MonoBehaviour
     {
-        /// <summary>
-        /// Time between death and respawn
-        /// </summary>
-        public float RespawnTime = 0;
-        /// <summary>
-        /// Use the Specifiied prefabas as player to respawn
-        /// </summary>
-        public bool UseSpecifiedPrefabs = false;
-        /// <summary>
-        /// Prefabs of Avatar to respawn
-        /// </summary>
-        public GameObject[] AvatarPrefabs = new GameObject[4];
         private GameObject avatarContainer;
+        
         private List<AvatarSpawnPoint> _originalSpawns;
+        /// <summary>
+        /// Rende delle transform specifiche utilizzabili come spawn point per player specifico
+        /// </summary>
         public List<AvatarSpawnPoint> OriginalSpawns
         {
             get
@@ -39,18 +31,12 @@ namespace BlackFox
         /// Additional SpawnPoints
         /// </summary>
         public List<AvatarSpawnPoint> SpawnPoints;
-        private GameObject[] agentsPrefb;
         
         /// <summary>
         /// Save the desired SpawnPoints
         /// </summary>
         void Start()
-        {
-            if (UseSpecifiedPrefabs)
-                agentsPrefb = AvatarPrefabs;
-            else
-                agentsPrefb = Resources.LoadAll<GameObject>("Prefabs/Avatar");
-           
+        {           
             if (SpawnPoints != null)
                 foreach (AvatarSpawnPoint spwnPt in SpawnPoints)
                 {
@@ -66,22 +52,22 @@ namespace BlackFox
                         break;
                     case SpawnPoint.AvatarSpawnType.Blue:
                         spwnPt.SpawnPosition = spawn.transform;
-                        spwnPt.PlayerIndx = PlayerIndex.One;
+                        spwnPt.PlayerID = PlayerLabel.One;
                         OriginalSpawns.Add(spwnPt);
                         break;
                     case SpawnPoint.AvatarSpawnType.Red:
                         spwnPt.SpawnPosition = spawn.transform;
-                        spwnPt.PlayerIndx = PlayerIndex.Two;
+                        spwnPt.PlayerID = PlayerLabel.Two;
                         OriginalSpawns.Add(spwnPt);
                         break;
                     case SpawnPoint.AvatarSpawnType.Green:
                         spwnPt.SpawnPosition = spawn.transform;
-                        spwnPt.PlayerIndx = PlayerIndex.Three;
+                        spwnPt.PlayerID = PlayerLabel.Three;
                         OriginalSpawns.Add(spwnPt);
                         break;
                     case SpawnPoint.AvatarSpawnType.Purple:
                         spwnPt.SpawnPosition = spawn.transform;
-                        spwnPt.PlayerIndx = PlayerIndex.Four;
+                        spwnPt.PlayerID = PlayerLabel.Four;
                         OriginalSpawns.Add(spwnPt);
                         break;
                     default:
@@ -94,58 +80,26 @@ namespace BlackFox
         }
 
         #region API
-        public Avatar[] GetAllPlayer()
-        {
-            // TODO : tenere riferimenti fissi
-            return FindObjectsOfType<Avatar>();
-        }
-
-        /// <summary>
-        /// Respawn all Players
-        /// </summary>
-        public void RespawnAllImmediate()
-        {
-            StopAllCoroutines();
-            for (int i = 0; i < agentsPrefb.Length; i++)
-            {
-                RespawnImmediate(agentsPrefb[i].GetComponentInChildren<Avatar>().PlayerId);
-            }
-        }
-
         /// <summary>
         /// Respawn a Player without cooldown
         /// </summary>
-        /// <param name="_playerIndx">Player to spawn</param>
-        public void RespawnImmediate(PlayerIndex _playerIndx)
+        /// <param name="_player">Player to spawn</param>
+        void Spawn(Player _player)
         {
-            //Prevent double istance
-            foreach (Avatar agnt in FindObjectsOfType<Avatar>())
-            {
-                if (agnt.PlayerId == _playerIndx)
-                    Destroy(agnt);
-            }
-
-            //TODO: sostituire la lista SpawnPoint nel successivo foreach
             //con una lista che prevede il corretto criterio di selezione degli spawn points.
             foreach (AvatarSpawnPoint spawn in OriginalSpawns)
             {
-                if (spawn.PlayerIndx == _playerIndx)
+                if (spawn.PlayerID == _player.ID)
                 {
-                    for (int i = 0; i < agentsPrefb.Length; i++)
-                    {
-                        if (agentsPrefb[i].GetComponentInChildren<Avatar>().PlayerId == _playerIndx)
-                        {
-                            GameObject newAgent = Instantiate(agentsPrefb[i], spawn.SpawnPosition.position, spawn.SpawnPosition.rotation);
-                            newAgent.transform.parent = avatarContainer.transform;
+                    Avatar newAgent = _player.Avatar;
+                    newAgent.State = AvatarState.Enabled;
+                    newAgent.transform.position = spawn.SpawnPosition.position;
+                    newAgent.transform.rotation = spawn.SpawnPosition.rotation;
+                    newAgent.transform.parent = avatarContainer.transform;
 
-                            if (GameManager.Instance.LevelMng.RopeMng != null)
-                                GameManager.Instance.LevelMng.RopeMng.AttachNewRope(newAgent.GetComponentInChildren<Avatar>());
-
-                            if(EventManager.OnAgentSpawn != null)
-                                EventManager.OnAgentSpawn(newAgent.GetComponentInChildren<Avatar>());
-                            return;
-                        }
-                    }
+                    if(EventManager.OnAgentSpawn != null)
+                        EventManager.OnAgentSpawn(newAgent.GetComponentInChildren<Avatar>());
+                    return;                    
                 }
             }
         }
@@ -154,9 +108,10 @@ namespace BlackFox
         /// Respawn after a fixed amount of time
         /// </summary>
         /// <param name="_playerIndx">Player to spawn</param>
-        public void RespawnAvatar(Avatar _victim)
+        public void RespawnAvatar(Player _player, float _spawnTime)
         {
-            StartCoroutine("RespawnCooldown", _victim.PlayerId);
+            _player.Avatar.State = AvatarState.Ready;
+            StartCoroutine(RespawnCooldown(_player,_spawnTime));
         }
 
         #region Destroy Agents
@@ -174,13 +129,13 @@ namespace BlackFox
         public struct AvatarSpawnPoint
         {
             public Transform SpawnPosition;
-            public PlayerIndex PlayerIndx;
+            public PlayerLabel PlayerID;
         }
 
-        IEnumerator RespawnCooldown(PlayerIndex _playerIndx)
+        IEnumerator RespawnCooldown(Player _playerID, float _spawnTime)
         {
-            yield return new WaitForSeconds(RespawnTime);
-            RespawnImmediate(_playerIndx);
+            yield return new WaitForSeconds(_spawnTime);
+            Spawn(_playerID);
         }
     }
 }

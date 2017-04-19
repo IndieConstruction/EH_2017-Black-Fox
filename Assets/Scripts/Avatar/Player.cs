@@ -6,14 +6,16 @@ namespace BlackFox
 {
     public class Player : MonoBehaviour
     {
-        protected PlayerLabel _playerID;
-        public PlayerLabel PlayerID
+        protected PlayerLabel _ID;
+        public PlayerLabel ID
         {
-            get { return _playerID; }
-            set { _playerID = value; }
+            get { return _ID; }
+            set { _ID = value; }
         }
-
-        protected GameObject ship;
+        /// <summary>
+        /// Scheletro su cui costruire/setuppare l'Avatar
+        /// </summary>
+        protected GameObject shipPlaceHolder;
 
         private Avatar _avatar;
         public Avatar Avatar
@@ -21,8 +23,8 @@ namespace BlackFox
             get {
                 if (_avatar == null)
                 {
-                    ship = Resources.Load("/Prefabs/Avatar/ShipBase", typeof (GameObject)) as GameObject;
-                    _avatar = Instantiate(ship).GetComponent<Avatar>();
+                    shipPlaceHolder = Resources.Load<GameObject>("Prefabs/Avatar/ShipBase");
+                    _avatar = Instantiate(shipPlaceHolder).GetComponent<Avatar>();
                 }
                 return _avatar; }
             protected set { _avatar = value; }
@@ -35,6 +37,7 @@ namespace BlackFox
             set { _model = value; }
         }
 
+        public float SpawnTime = 0;
 
         protected void Update()
         {
@@ -59,14 +62,15 @@ namespace BlackFox
         /// <param name="_playerIndex"></param>
         public void Setup(PlayerLabel _playerID)
         {
-            PlayerID = _playerID;
+            ID = _playerID;
             playerInput = new PlayerInput(_playerID);
         }
+
         /// <summary>
         /// Setup the istance of the Avatar or instaciate a new one
         /// </summary>
         public void AvatarSetup() {
-            if (PlayerID == PlayerLabel.None)
+            if (ID == PlayerLabel.None)
                 return;
 
             Avatar.Setup(this);

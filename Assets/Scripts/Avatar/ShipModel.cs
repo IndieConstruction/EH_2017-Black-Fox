@@ -5,6 +5,6 @@ using UnityEngine;
 public class ShipModel : ScriptableObject {
 
     public Mesh mesh;
-    public Shader shader;
+    public Material material;
 
 }

@@ -11,7 +11,6 @@ namespace BlackFox
             Debug.Log("PlayState");
             EventManager.TriggerPlayStateEnd += HandleTriggerPlayStateEnd;
             EventManager.OnAgentKilled += HandleOnAgentKilled;
-            EventManager.OnAgentSpawn += HandleOnAgentSpawn;
         }
 
         public override void OnEnd()
@@ -19,7 +18,6 @@ namespace BlackFox
             // passaggio informazioni essenziali al gestore del livello
             EventManager.TriggerPlayStateEnd -= HandleTriggerPlayStateEnd;
             EventManager.OnAgentKilled -= HandleOnAgentKilled;
-            EventManager.OnAgentSpawn -= HandleOnAgentSpawn;
         }
 
         #region Events Handler
@@ -31,11 +29,6 @@ namespace BlackFox
         void HandleOnAgentKilled(Avatar _killer, Avatar _victim)
         {
             GameManager.Instance.LevelMng.AgentKilled(_killer, _victim);
-        }
-
-        void HandleOnAgentSpawn(Avatar _agent)
-        {
-            GameManager.Instance.LevelMng.AgentSpawn(_agent);
         }
         #endregion
     }

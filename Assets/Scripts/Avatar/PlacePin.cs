@@ -25,8 +25,8 @@ namespace BlackFox
         private void Update()
         {
             prectime -= Time.deltaTime;
-            if (prectime <= 0)
-                StartCoroutine(Vibrate(0.2f));
+            //if (prectime <= 0)
+            //    StartCoroutine(Vibrate(0.2f));
         }
 
         #region API
@@ -54,10 +54,10 @@ namespace BlackFox
         {
             // TODO : togliere la vibrazione durante il count down (da fare nel refactoring dell'avatar)
             if(!GameManager.Instance.LevelMng.IsGamePaused)
-                owner.player.ControllerVibration(owner.playerIndex, 0.5f, 0.5f);
+                owner.player.ControllerVibration(owner.PlayerIndex, 0.5f, 0.5f);
 
             yield return new WaitForSeconds(_rumbleTime);
-            owner.player.ControllerVibration(owner.playerIndex, 0f, 0f);
+            owner.player.ControllerVibration(owner.PlayerIndex, 0f, 0f);
         }
 
         /// <summary>

@@ -11,7 +11,6 @@ namespace BlackFox
     /// </summary>
     public class GameplayState : StateBase
     {
-        int levelNumber = 1;
 
         public override void OnStart()
         {

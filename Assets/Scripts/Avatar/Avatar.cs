@@ -9,7 +9,12 @@ namespace BlackFox
     [RequireComponent (typeof(MovementController), typeof(PlacePin), typeof(Shooter))]
     public class Avatar : MonoBehaviour, IShooter, IDamageable
     {
-        public PlayerIndex playerIndex;
+        private PlayerIndex _playerIndex;
+        public PlayerIndex PlayerIndex
+        {
+            get { return _playerIndex; }
+            protected set { _playerIndex = value; }
+        }  
 
         public float MaxLife = 10;
         private float _life = 10;
@@ -38,7 +43,6 @@ namespace BlackFox
 
         public float fireRate;
         float nextFire;
-        float ropeExtTimer;
 
         //Variabili per gestire la fisca della corda
         Rigidbody rigid;
@@ -46,17 +50,14 @@ namespace BlackFox
 
         void Start()
         {
-            Life = MaxLife;
-            player = GameManager.Instance.PlayerMng.GetPlayer(playerIndex);
-            rigid = GetComponent<Rigidbody>();
-            movment = GetComponent<MovementController>();
-            rope = SearchRope();
-            pinPlacer = GetComponent<PlacePin>();
-            pinPlacer.SetOwner(this);
-            shooter = GetComponent<Shooter>();
             UIController = FindObjectOfType<GameUIController>();
-            shooter.playerIndex = this.playerIndex;
+            rigid = GetComponent<Rigidbody>();
+            shooter = GetComponent<Shooter>();
+            movment = GetComponent<MovementController>();
+            pinPlacer = GetComponent<PlacePin>();
+
             LoadIDamageablePrefab();
+            rope = SearchRope();
         }
 
         private void Update()
@@ -99,7 +100,7 @@ namespace BlackFox
 
             if (_inputStatus.Start == ButtonState.Pressed)
             {
-                GameManager.Instance.LevelMng.PauseGame(playerIndex);
+                GameManager.Instance.LevelMng.PauseGame(PlayerIndex);
             }
         }
 
@@ -111,7 +112,7 @@ namespace BlackFox
         {
             foreach (RopeController rope in FindObjectsOfType<RopeController>())
             {
-                if (rope.name == playerIndex + "Rope")
+                if (rope.name == PlayerIndex + "Rope")
                     return rope;
             }
             return null;
@@ -137,10 +138,22 @@ namespace BlackFox
         void SetAmmoInTheUI()
         {
             if (UIController != null)
-                UIController.SetBulletsValue(playerIndex, shooter.ammo);
+                UIController.SetBulletsValue(PlayerIndex, shooter.ammo);
         }
 
         #region API
+        /// <summary>
+        /// Required to setup the player (also launched on Start of this class)
+        /// </summary>
+        public void Setup(Player _player)
+        {
+            player = _player;
+            PlayerIndex = _player.PlayerIndex;
+            pinPlacer.SetOwner(this);
+            shooter.playerIndex = PlayerIndex;
+            Life = MaxLife;
+        }
+
         /// <summary>
         /// Chiama la funzione AddAmmo di shooter
         /// </summary>

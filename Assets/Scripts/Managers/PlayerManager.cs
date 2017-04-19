@@ -9,27 +9,19 @@ namespace BlackFox
     {
         public List<Player> Players = new List<Player>();
 
-        private void Update()
-        {
-            UpdatePlayers();
-        }
-
-        void UpdatePlayers()
-        {
-            foreach (Player player in Players)
-            {
-                player.OnUpdate();
-            }
-        }
-        
         #region API
         /// <summary>
         /// Instanzia i player
         /// </summary>
         public void InstantiatePlayers()
         {
-            for(int i = 0; i < 4; i++)
-                Players.Add(new Player((PlayerIndex)i));
+            for(int i = 1; i <= 4; i++)
+            {
+                Player newPlayer = gameObject.AddComponent<Player>();
+                newPlayer.Setup((PlayerLabel)i);
+                Players.Add(newPlayer);
+            }
+                
         }
 
         /// <summary>
@@ -41,7 +33,7 @@ namespace BlackFox
         {
             foreach (Player player in Players)
             {
-                if (player.playerIndex == _playerIndex)
+                if (player.PlayerIndex == _playerIndex)
                     player.PlayerCurrentState = _playerState;
             }
         }
@@ -62,7 +54,7 @@ namespace BlackFox
         {
             foreach (Player player in Players)
             {
-                if (player.playerIndex == _playerIndex)
+                if (player.PlayerIndex == _playerIndex)
                     player.PlayerCurrentState = _playerState;
                 else
                     player.PlayerCurrentState = _otherPlayersState;
@@ -78,7 +70,7 @@ namespace BlackFox
         {
             foreach (Player player in Players)
             {
-                if (player.playerIndex == _playerIndex)
+                if (player.PlayerIndex == _playerIndex)
                     return player;
             }
             return null;

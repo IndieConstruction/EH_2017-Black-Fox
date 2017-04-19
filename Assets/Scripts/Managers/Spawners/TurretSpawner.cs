@@ -8,7 +8,6 @@ namespace BlackFox
     {
         new public TurretSpawnerOptions Options;
         public int Spawnedturrent = 0;
-        Vector3 randomPosition;
 
         void Update()
         {

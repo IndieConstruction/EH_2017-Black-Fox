@@ -49,13 +49,13 @@ namespace BlackFox {
             GameObject newOrigin;
             
             newOrigin = Instantiate(RopeOrigin, transform);
-            newOrigin.name = _target.PlayerIndex + "Rope";
+            newOrigin.name = _target.PlayerId + "Rope";
             //Set the AnchorPoint before the activation of the component
             RopeController rc = newOrigin.GetComponent<RopeController>();
             ConfigurableJoint cj = _target.GetComponent<ConfigurableJoint>();
             rc.AnchorPoint = cj.connectedBody.transform;
             newOrigin.GetComponent<RopeController>().InitRope();
-            switch (_target.PlayerIndex)
+            switch (_target.PlayerId)
             {
                 case XInputDotNetPure.PlayerIndex.One:
                     newOrigin.GetComponent<LineRenderer>().material = RopeColors[0];
@@ -81,7 +81,7 @@ namespace BlackFox {
         /// <param name="_target"></param>
         public void DestroyRope(Avatar _target)
         {
-            string nameOfRope = _target.PlayerIndex + "Rope";
+            string nameOfRope = _target.PlayerId + "Rope";
             foreach (GameObject gObj in ropes)
             {
                 //TODO : risolvere sta cagata

@@ -58,7 +58,7 @@ namespace BlackFox
 
             if (_attacker != null)
             {
-                switch (_attacker.PlayerIndex)
+                switch (_attacker.PlayerId)
                 {
                     case PlayerIndex.One:
                         P1KillPoints++;
@@ -77,7 +77,7 @@ namespace BlackFox
                 } 
             }
 
-            switch (_victim.PlayerIndex)
+            switch (_victim.PlayerId)
             {
                 case PlayerIndex.One:
                     if (P1KillPoints != 0)

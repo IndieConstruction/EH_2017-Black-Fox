@@ -9,7 +9,6 @@ public class ShooterBase : MonoBehaviour {
     public float LifeTime = 10f;
     public float bulletSpeed = 150f;
 
-
     /// <summary>
     /// Spara un proiettile
     /// </summary>

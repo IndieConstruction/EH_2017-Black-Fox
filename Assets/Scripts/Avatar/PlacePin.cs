@@ -54,10 +54,10 @@ namespace BlackFox
         {
             // TODO : togliere la vibrazione durante il count down (da fare nel refactoring dell'avatar)
             if(!GameManager.Instance.LevelMng.IsGamePaused)
-                owner.player.ControllerVibration(owner.PlayerIndex, 0.5f, 0.5f);
+                owner.Player.ControllerVibration(0.5f, 0.5f);
 
             yield return new WaitForSeconds(_rumbleTime);
-            owner.player.ControllerVibration(owner.PlayerIndex, 0f, 0f);
+            owner.Player.ControllerVibration(0f, 0f);
         }
 
         /// <summary>

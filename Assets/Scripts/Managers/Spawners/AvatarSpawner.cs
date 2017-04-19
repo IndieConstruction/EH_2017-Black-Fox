@@ -108,7 +108,7 @@ namespace BlackFox
             StopAllCoroutines();
             for (int i = 0; i < agentsPrefb.Length; i++)
             {
-                RespawnImmediate(agentsPrefb[i].GetComponentInChildren<Avatar>().PlayerIndex);
+                RespawnImmediate(agentsPrefb[i].GetComponentInChildren<Avatar>().PlayerId);
             }
         }
 
@@ -121,7 +121,7 @@ namespace BlackFox
             //Prevent double istance
             foreach (Avatar agnt in FindObjectsOfType<Avatar>())
             {
-                if (agnt.PlayerIndex == _playerIndx)
+                if (agnt.PlayerId == _playerIndx)
                     Destroy(agnt);
             }
 
@@ -133,7 +133,7 @@ namespace BlackFox
                 {
                     for (int i = 0; i < agentsPrefb.Length; i++)
                     {
-                        if (agentsPrefb[i].GetComponentInChildren<Avatar>().PlayerIndex == _playerIndx)
+                        if (agentsPrefb[i].GetComponentInChildren<Avatar>().PlayerId == _playerIndx)
                         {
                             GameObject newAgent = Instantiate(agentsPrefb[i], spawn.SpawnPosition.position, spawn.SpawnPosition.rotation);
                             newAgent.transform.parent = avatarContainer.transform;
@@ -156,7 +156,7 @@ namespace BlackFox
         /// <param name="_playerIndx">Player to spawn</param>
         public void RespawnAvatar(Avatar _victim)
         {
-            StartCoroutine("RespawnCooldown", _victim.PlayerIndex);
+            StartCoroutine("RespawnCooldown", _victim.PlayerId);
         }
 
         #region Destroy Agents

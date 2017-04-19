@@ -20,14 +20,16 @@ namespace BlackFox
             protected set { _playerIndex = value; }
         }
 
+        protected GameObject ship;
+
         private Avatar _avatar;
         public Avatar Avatar
         {
             get {
                 if (_avatar == null)
                 {
-                    GameObject modelToLoad = Resources.Load("/Prefabs/Avatar/ShipBase", typeof (GameObject)) as GameObject;
-                    _avatar = Instantiate(modelToLoad).GetComponent<Avatar>();
+                    ship = Resources.Load("/Prefabs/Avatar/ShipBase", typeof (GameObject)) as GameObject;
+                    _avatar = Instantiate(ship).GetComponent<Avatar>();
                 }
                 return _avatar; }
             protected set { _avatar = value; }
@@ -172,9 +174,9 @@ namespace BlackFox
             }
         }
 
-        public void ControllerVibration(PlayerIndex _playerIndex, float _leftMotor, float _rightMotor)
+        public void ControllerVibration(float _leftMotor, float _rightMotor)
         {
-            playerInput.SetControllerVibration(_playerIndex, _leftMotor, _rightMotor);
+            playerInput.SetControllerVibration(PlayerIndex, _leftMotor, _rightMotor);
         }
         #endregion
 

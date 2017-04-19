@@ -9,16 +9,31 @@ namespace BlackFox
     [RequireComponent (typeof(MovementController), typeof(PlacePin), typeof(Shooter))]
     public class Avatar : MonoBehaviour, IShooter, IDamageable
     {
-        private PlayerIndex _playerIndex;
-        public PlayerIndex PlayerIndex
+        /// <summary>
+        /// Player who control this avatar
+        /// </summary>
+        public Player Player;
+        /// <summary>
+        /// Index of th e player
+        /// </summary>
+        private PlayerLabel _playerId;
+        public PlayerLabel PlayerId
         {
-            get { return _playerIndex; }
-            protected set { _playerIndex = value; }
-        }  
-
+            get { return _playerId; }
+            protected set { _playerId = value; }
+        }
+        /// <summary>
+        /// Reference of the model to visualize
+        /// </summary>
+        private ShipModel _model;
+        public ShipModel Model
+        {
+            get { return _model; }
+            set { _model = value; }
+        }
+        //Life fields
         public float MaxLife = 10;
         private float _life = 10;
-
         public float Life
         {
             get { return _life; }
@@ -29,21 +44,19 @@ namespace BlackFox
                     OnDataChange(this);
             }
         }
-
-        public Player player;
-
+        //Shooting fields
+        public float fireRate;
+        float nextFire;
+        /// <summary>
+        /// List of element damageable by this player
+        /// </summary>
         List<IDamageable> damageables = new List<IDamageable>();
-
 
         MovementController movment;
         PlacePin pinPlacer;
         Shooter shooter;
         RopeController rope;
         GameUIController UIController;
-
-        public float fireRate;
-        float nextFire;
-
         //Variabili per gestire la fisca della corda
         Rigidbody rigid;
         Vector3 previousSpeed;
@@ -62,7 +75,7 @@ namespace BlackFox
 
         private void Update()
         {
-            CheckInputStatus(player.inputStatus);
+            CheckInputStatus(Player.inputStatus);
         }
 
         private void OnDestroy()
@@ -100,7 +113,7 @@ namespace BlackFox
 
             if (_inputStatus.Start == ButtonState.Pressed)
             {
-                GameManager.Instance.LevelMng.PauseGame(PlayerIndex);
+                GameManager.Instance.LevelMng.PauseGame(Player.PlayerIndex);
             }
         }
 
@@ -112,7 +125,7 @@ namespace BlackFox
         {
             foreach (RopeController rope in FindObjectsOfType<RopeController>())
             {
-                if (rope.name == PlayerIndex + "Rope")
+                if (rope.name == PlayerId + "Rope")
                     return rope;
             }
             return null;
@@ -138,7 +151,7 @@ namespace BlackFox
         void SetAmmoInTheUI()
         {
             if (UIController != null)
-                UIController.SetBulletsValue(PlayerIndex, shooter.ammo);
+                UIController.SetBulletsValue(Player.PlayerIndex, shooter.ammo);
         }
 
         #region API
@@ -147,10 +160,9 @@ namespace BlackFox
         /// </summary>
         public void Setup(Player _player)
         {
-            player = _player;
-            PlayerIndex = _player.PlayerIndex;
+            Player = _player;
+            PlayerId = _player.PlayerID;
             pinPlacer.SetOwner(this);
-            shooter.playerIndex = PlayerIndex;
             Life = MaxLife;
         }
 

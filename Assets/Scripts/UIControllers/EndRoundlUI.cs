@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using XInputDotNetPure;
 using UnityEngine.UI;
 
 
@@ -60,16 +59,16 @@ namespace BlackFox
             {
                 switch (_attacker.PlayerId)
                 {
-                    case PlayerIndex.One:
+                    case PlayerLabel.One:
                         P1KillPoints++;
                         break;
-                    case PlayerIndex.Two:
+                    case PlayerLabel.Two:
                         P2KillPoints++;
                         break;
-                    case PlayerIndex.Three:
+                    case PlayerLabel.Three:
                         P3KillPoints++;
                         break;
-                    case PlayerIndex.Four:
+                    case PlayerLabel.Four:
                         P4KillPoints++;
                         break;
                     default:
@@ -79,19 +78,19 @@ namespace BlackFox
 
             switch (_victim.PlayerId)
             {
-                case PlayerIndex.One:
+                case PlayerLabel.One:
                     if (P1KillPoints != 0)
                         P1KillPoints--;
                     break;
-                case PlayerIndex.Two:
+                case PlayerLabel.Two:
                     if (P2KillPoints != 0)
                         P2KillPoints--;
                     break;
-                case PlayerIndex.Three:
+                case PlayerLabel.Three:
                     if (P3KillPoints != 0)
                         P3KillPoints--;
                     break;
-                case PlayerIndex.Four:
+                case PlayerLabel.Four:
                     if (P4KillPoints != 0)
                         P4KillPoints--;
                     break;

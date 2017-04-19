@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using XInputDotNetPure;
 
 namespace BlackFox
 {
@@ -11,13 +10,7 @@ namespace BlackFox
         public PlayerLabel PlayerID
         {
             get { return _playerID; }
-            protected set { _playerID = value; }
-        }
-
-        protected PlayerIndex _playerIndex;
-        public PlayerIndex PlayerIndex {
-            get { return _playerIndex; }
-            protected set { _playerIndex = value; }
+            set { _playerID = value; }
         }
 
         protected GameObject ship;
@@ -67,28 +60,7 @@ namespace BlackFox
         public void Setup(PlayerLabel _playerID)
         {
             PlayerID = _playerID;
-            switch (_playerID)
-            {
-                case PlayerLabel.None:
-                    break;
-                case PlayerLabel.One:
-                    PlayerIndex = PlayerIndex.One;
-                    break;
-                case PlayerLabel.Two:
-                    PlayerIndex = PlayerIndex.Two;
-                    break;
-                case PlayerLabel.Three:
-                    PlayerIndex = PlayerIndex.Three;
-                    break;
-                case PlayerLabel.Four:
-                    PlayerIndex = PlayerIndex.Four;
-                    break;
-                case PlayerLabel.Different:
-                    break;
-                default:
-                    break;
-            }
-            playerInput = new PlayerInput(PlayerIndex);
+            playerInput = new PlayerInput(_playerID);
         }
         /// <summary>
         /// Setup the istance of the Avatar or instaciate a new one
@@ -176,7 +148,7 @@ namespace BlackFox
 
         public void ControllerVibration(float _leftMotor, float _rightMotor)
         {
-            playerInput.SetControllerVibration(PlayerIndex, _leftMotor, _rightMotor);
+            playerInput.SetControllerVibration(_leftMotor, _rightMotor);
         }
         #endregion
 

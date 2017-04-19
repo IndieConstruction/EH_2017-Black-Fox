@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using XInputDotNetPure;
 
 namespace BlackFox
 {
@@ -138,11 +137,11 @@ namespace BlackFox
                 /// <summary>
         /// Return the current points (due to kills) of the Player
         /// </summary>
-        /// <param name="_playerIndex"></param>
+        /// <param name="_playerID"></param>
         /// <returns></returns>
-        public int GetPlayerKillPoints(PlayerIndex _playerIndex)
+        public int GetPlayerKillPoints(PlayerLabel _playerID)
         {
-            return levelPointsCounter.GetPlayerKillPoints(_playerIndex);
+            return levelPointsCounter.GetPlayerKillPoints(_playerID);
         }
         #endregion
 
@@ -195,14 +194,14 @@ namespace BlackFox
         /// Attiva lo stato di pausa della GameplaySM e imposta a menu input i comandi del player che ha chiamato la fuznione
         /// mentre l'input degli altri player viene disabilitato
         /// </summary>
-        /// <param name="_playerIndex"></param>
-        public void PauseGame(PlayerIndex _playerIndex)
+        /// <param name="_playerID"></param>
+        public void PauseGame(PlayerLabel _playerID)
         {
             // TODO : controllare uso corretto di if
             if (!IsGamePaused)
             {
                 IsGamePaused = true;
-                GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInputState, _playerIndex, PlayerState.Blocked);
+                GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInputState, _playerID, PlayerState.Blocked);
                 gameplaySM.GoToState(GamePlaySMStates.PauseState);
             }            
         }

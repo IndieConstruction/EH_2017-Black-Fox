@@ -20,20 +20,19 @@ namespace BlackFox
                 Player newPlayer = gameObject.AddComponent<Player>();
                 newPlayer.Setup((PlayerLabel)i);
                 Players.Add(newPlayer);
-            }
-                
+            }      
         }
 
         /// <summary>
         /// Cambia lo stato del player specificato
         /// </summary>
         /// <param name="_playerState"></param>
-        /// <param name="_playerIndex"></param>
-        public void ChangePlayerState(PlayerState _playerState, PlayerIndex _playerIndex)
+        /// <param name="_playerID"></param>
+        public void ChangePlayerState(PlayerState _playerState, PlayerLabel _playerID)
         {
             foreach (Player player in Players)
             {
-                if (player.PlayerIndex == _playerIndex)
+                if (player.PlayerID == _playerID)
                     player.PlayerCurrentState = _playerState;
             }
         }
@@ -50,11 +49,11 @@ namespace BlackFox
             }
         }
 
-        public void ChangeAllPlayersStateExceptOne(PlayerState _playerState, PlayerIndex _playerIndex, PlayerState _otherPlayersState)
+        public void ChangeAllPlayersStateExceptOne(PlayerState _playerState, PlayerLabel _playerID, PlayerState _otherPlayersState)
         {
             foreach (Player player in Players)
             {
-                if (player.PlayerIndex == _playerIndex)
+                if (player.PlayerID == _playerID)
                     player.PlayerCurrentState = _playerState;
                 else
                     player.PlayerCurrentState = _otherPlayersState;
@@ -66,11 +65,11 @@ namespace BlackFox
         /// </summary>
         /// <param name="_playerIndex"></param>
         /// <returns></returns>
-        public Player GetPlayer(PlayerIndex _playerIndex)
+        public Player GetPlayer(PlayerLabel _playerIndex)
         {
             foreach (Player player in Players)
             {
-                if (player.PlayerIndex == _playerIndex)
+                if (player.PlayerID == _playerIndex)
                     return player;
             }
             return null;

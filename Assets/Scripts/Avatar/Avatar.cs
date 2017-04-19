@@ -113,7 +113,7 @@ namespace BlackFox
 
             if (_inputStatus.Start == ButtonState.Pressed)
             {
-                GameManager.Instance.LevelMng.PauseGame(Player.PlayerIndex);
+                GameManager.Instance.LevelMng.PauseGame(Player.PlayerID);
             }
         }
 
@@ -151,7 +151,7 @@ namespace BlackFox
         void SetAmmoInTheUI()
         {
             if (UIController != null)
-                UIController.SetBulletsValue(Player.PlayerIndex, shooter.ammo);
+                UIController.SetBulletsValue(Player.PlayerID, shooter.ammo);
         }
 
         #region API
@@ -178,12 +178,12 @@ namespace BlackFox
         /// <summary>
         /// Richiamata dal LevelManager per impostare i punti uccisione nella UI
         /// </summary>
-        /// <param name="_playerIndex">L'agente a cui aggiornare la UI</param>
+        /// <param name="_playerID">L'agente a cui aggiornare la UI</param>
         /// <param name="_playerPoints">I punti che ha l'agente</param>
-        public void UpdateKillPointsInUI(PlayerIndex _playerIndex, int _playerPoints)
+        public void UpdateKillPointsInUI(PlayerLabel _playerID, int _playerPoints)
         {
             // richiama la funzione in UIControlle per aggiornare i punti sulla propria UI
-            UIController.SetKillPointsUI(_playerIndex, _playerPoints);
+            UIController.SetKillPointsUI(_playerID, _playerPoints);
         }
 
         public Shooter GetShooterReference()

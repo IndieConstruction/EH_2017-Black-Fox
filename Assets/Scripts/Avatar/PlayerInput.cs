@@ -13,9 +13,27 @@ namespace BlackFox
         GamePadState state;
         GamePadState prevState;
     
-        public PlayerInput(PlayerIndex _playerIndex)
+        public PlayerInput(PlayerLabel _playerID)
         {
-            playerIndex = _playerIndex;
+            switch (_playerID)
+            {
+                case PlayerLabel.None:
+                    break;
+                case PlayerLabel.One:
+                    playerIndex = PlayerIndex.One;
+                    break;
+                case PlayerLabel.Two:
+                    playerIndex = PlayerIndex.Two;
+                    break;
+                case PlayerLabel.Three:
+                    playerIndex = PlayerIndex.Three;
+                    break;
+                case PlayerLabel.Four:
+                    playerIndex = PlayerIndex.Four;
+                    break;
+                case PlayerLabel.Different:
+                    break;
+            }
         }
 
         #region API
@@ -32,9 +50,9 @@ namespace BlackFox
             return inputStatus;
         }
 
-        public void SetControllerVibration(PlayerIndex _playerIndex, float _leftMotor, float _rightMotor)
+        public void SetControllerVibration(float _leftMotor, float _rightMotor)
         {
-            GamePad.SetVibration(_playerIndex, _leftMotor, _rightMotor);
+            GamePad.SetVibration(playerIndex, _leftMotor, _rightMotor);
         }
         #endregion
 

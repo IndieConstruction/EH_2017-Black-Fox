@@ -197,10 +197,7 @@ namespace BlackFox {
             // richiama la funzione in UIControlle per aggiornare i punti sulla propria UI
             UIController.SetKillPointsUI(_playerID, _playerPoints);
         }
-
-        public Shooter GetShooterReference() {
-            return shooter;
-        }
+        
         #endregion
 
         #region Player Abilities

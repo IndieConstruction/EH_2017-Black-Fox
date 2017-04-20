@@ -12,28 +12,24 @@ namespace BlackFox
             get { return _ID; }
             set { _ID = value; }
         }
-        /// <summary>
-        /// Scheletro su cui costruire/setuppare l'Avatar
-        /// </summary>
-        protected GameObject shipPlaceHolder;
 
         private Avatar _avatar;
         public Avatar Avatar
         {
-            get {
-                if (_avatar == null)
-                {
-                    shipPlaceHolder = Resources.Load<GameObject>("Prefabs/Avatar/ShipBase");
-                    _avatar = Instantiate(shipPlaceHolder).GetComponent<Avatar>();
-                }
-                return _avatar; }
+            get { return _avatar; }
             protected set { _avatar = value; }
         }
 
-        private ShipModel _model;
-        public ShipModel Model
+        private AvatarData _model;
+        public AvatarData Model
         {
-            get { return _model; }
+            get {
+                if (_model == null) {
+                    _model = Instantiate(Resources.Load("Prefabs/ShipModels/Owl") as AvatarData);// TODO : controllare riempimento avatar
+                    Avatar = Instantiate(_model.shipConfig.Prefab);
+                }
+
+                return _model; }
             set { _model = value; }
         }
 
@@ -74,7 +70,6 @@ namespace BlackFox
         public void AvatarSetup() {
             if (ID == PlayerLabel.None)
                 return;
-
             Avatar.Setup(this);
         }
 

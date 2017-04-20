@@ -12,7 +12,7 @@ namespace BlackFox
         [HideInInspector]
         public bool CanPlace = true;
 
-        Avatar owner;
+        Ship owner;
 
         float xValue;
         float prectime;
@@ -30,7 +30,7 @@ namespace BlackFox
         }
 
         #region API
-        public void SetOwner(Avatar _owner)
+        public void SetOwner(Ship _owner)
         {
             owner = _owner;
         }
@@ -54,10 +54,10 @@ namespace BlackFox
         {
             // TODO : togliere la vibrazione durante il count down (da fare nel refactoring dell'avatar)
             if(!GameManager.Instance.LevelMng.IsGamePaused)
-                owner.Player.ControllerVibration(0.5f, 0.5f);
+               owner.avatar.Player.ControllerVibration(0.5f, 0.5f);
 
             yield return new WaitForSeconds(_rumbleTime);
-            owner.Player.ControllerVibration(0f, 0f);
+            owner.avatar.Player.ControllerVibration(0f, 0f);
         }
 
         /// <summary>

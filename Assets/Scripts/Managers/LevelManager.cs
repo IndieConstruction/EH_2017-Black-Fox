@@ -117,14 +117,11 @@ namespace BlackFox
             if (_killer != null)
             {
                 levelPointsCounter.UpdateKillPoints(_killer.PlayerId, _victim.PlayerId);           // setta i punti morte e uccisione
-                _killer.UpdateKillPointsInUI(_killer.PlayerId, levelPointsCounter.GetPlayerKillPoints(_killer.PlayerId));
-                _victim.UpdateKillPointsInUI(_victim.PlayerId, levelPointsCounter.GetPlayerKillPoints(_victim.PlayerId));
                 GameManager.Instance.UiMng.endRoundUI.AddKillPointToUI(_killer, _victim);
             }
             else
             {
                 levelPointsCounter.UpdateKillPoints(_victim.PlayerId);
-                _victim.UpdateKillPointsInUI(_victim.PlayerId, levelPointsCounter.GetPlayerKillPoints(_victim.PlayerId));
                 GameManager.Instance.UiMng.endRoundUI.AddKillPointToUI(_killer, _victim);
             }
             if(EventManager.OnPointsUpdate != null)

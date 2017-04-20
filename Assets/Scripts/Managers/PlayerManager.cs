@@ -23,6 +23,11 @@ namespace BlackFox
             }      
         }
 
+        public void SetupAvatars() {
+            foreach (Player player in Players)
+                player.AvatarSetup();
+        }
+
         /// <summary>
         /// Cambia lo stato del player specificato
         /// </summary>

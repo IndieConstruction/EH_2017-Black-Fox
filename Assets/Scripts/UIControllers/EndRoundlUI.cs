@@ -16,11 +16,6 @@ namespace BlackFox
         public Text EventName;
         public GameObject EndLevelPanel;
 
-        int P1KillPoints;
-        int P2KillPoints;
-        int P3KillPoints;
-        int P4KillPoints;
-
         int currentIndexSelection = 0;
 
         public int CurrentIndexSelection
@@ -44,10 +39,11 @@ namespace BlackFox
 
         void UpdateUIPoints()
         {
-            Player1Points.text = P1KillPoints + " / 5";
-            Player2Points.text = P2KillPoints + " / 5";
-            Player3Points.text = P3KillPoints + " / 5";
-            Player4Points.text = P4KillPoints + " / 5";
+            // TODO : leggere i punti dal level manager e settarli dalla macchina a stati
+            //Player1Points.text = P1KillPoints + " / 5";
+            //Player2Points.text = P2KillPoints + " / 5";
+            //Player3Points.text = P3KillPoints + " / 5";
+            //Player4Points.text = P4KillPoints + " / 5";
         }
 
         #region API 
@@ -55,60 +51,9 @@ namespace BlackFox
         public void AddKillPointToUI(Avatar _attacker, Avatar _victim)
         {
 
-            if (_attacker != null)
-            {
-                switch (_attacker.PlayerId)
-                {
-                    case PlayerLabel.One:
-                        P1KillPoints++;
-                        break;
-                    case PlayerLabel.Two:
-                        P2KillPoints++;
-                        break;
-                    case PlayerLabel.Three:
-                        P3KillPoints++;
-                        break;
-                    case PlayerLabel.Four:
-                        P4KillPoints++;
-                        break;
-                    default:
-                        break;
-                } 
-            }
-
-            switch (_victim.PlayerId)
-            {
-                case PlayerLabel.One:
-                    if (P1KillPoints != 0)
-                        P1KillPoints--;
-                    break;
-                case PlayerLabel.Two:
-                    if (P2KillPoints != 0)
-                        P2KillPoints--;
-                    break;
-                case PlayerLabel.Three:
-                    if (P3KillPoints != 0)
-                        P3KillPoints--;
-                    break;
-                case PlayerLabel.Four:
-                    if (P4KillPoints != 0)
-                        P4KillPoints--;
-                    break;
-                default:
-                    break;
-            }
-
             EventName.text = GameManager.Instance.LevelMng.EndLevelPanelLable;
 
             UpdateUIPoints();
-        }
-
-        public void ClearTheUIPoints()
-        {
-            P1KillPoints = 0;
-            P2KillPoints = 0;
-            P3KillPoints = 0;
-            P4KillPoints = 0;
         }
 
         public void Selection()

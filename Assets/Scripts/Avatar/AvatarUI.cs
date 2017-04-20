@@ -10,21 +10,12 @@ namespace BlackFox {
     public class AvatarUI : MonoBehaviour {
         public Image KillToview;
         public Slider Ring;
-        
-        
-        Avatar agent;
-        LevelManager levelManager;
-
-        // Use this for initialization
-        void Awake() {
-            agent = GetComponentInParent<Avatar>();
-        }
+              
+        Ship ship;
 
         private void Start()
         {
-            levelManager = GameManager.Instance.LevelMng;
-            Ring.value = 0.5f;
-            
+            Ring.value = 0.5f;         
         }
 
         private void Update()
@@ -37,10 +28,10 @@ namespace BlackFox {
         /// <summary>
         /// Setta il valore della slider che mostra la vita
         /// </summary>
-        /// <param name="_agent"></param>
-        void OnDataChange(Avatar _agent) {
+        /// <param name="_ship"></param>
+        void OnDataChange(Ship _ship) {
             // Aggiorno la UI
-            Ring.value =  (0.5f * _agent.Life) / _agent.MaxLife;
+            Ring.value =  (0.5f * _ship.Life) / _ship.MaxLife;
 
             //Logica per cambiare il colore della barra della vita
             //if (Ring.fillAmount < 0.3f) {
@@ -57,26 +48,18 @@ namespace BlackFox {
 
         private void OnEnable()
         {
-            agent.OnDataChange += OnDataChange;
+            ship.OnDataChange += OnDataChange;
         }
 
         private void OnDisable() {
-            agent.OnDataChange -= OnDataChange;
+            ship.OnDataChange -= OnDataChange;
         }
         #endregion
 
         public void KillView() {
-
-            
             KillToview.transform.DOScale(new Vector3(1f, 1f, 1f), 1f).OnComplete(() => {
                 KillToview.transform.localScale = Vector3.zero;
             }).SetEase(Ease.OutBounce);
-            
         }
-       
-         
-        
-
-
     }
 }

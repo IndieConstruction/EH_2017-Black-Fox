@@ -11,25 +11,17 @@ namespace BlackFox {
         public Image KillToview;
         public Slider Ring;
               
-        Ship ship;
 
         private void Start()
         {
-            Ring.value = 0.5f;         
+            Ring.value = 0.5f;
         }
-
-        private void Update()
-        {
-            if (Input.GetKey(KeyCode.O))
-            {
-                KillView();
-            }
-        }
+        
         /// <summary>
         /// Setta il valore della slider che mostra la vita
         /// </summary>
         /// <param name="_ship"></param>
-        void OnDataChange(Ship _ship) {
+        public void SetLifeSliderValue(Ship _ship) {
             // Aggiorno la UI
             Ring.value =  (0.5f * _ship.Life) / _ship.MaxLife;
 
@@ -43,19 +35,7 @@ namespace BlackFox {
             //}
                 
         }
-
-        #region Events
-
-        private void OnEnable()
-        {
-            ship.OnDataChange += OnDataChange;
-        }
-
-        private void OnDisable() {
-            ship.OnDataChange -= OnDataChange;
-        }
-        #endregion
-
+        
         public void KillView() {
             KillToview.transform.DOScale(new Vector3(1f, 1f, 1f), 1f).OnComplete(() => {
                 KillToview.transform.localScale = Vector3.zero;

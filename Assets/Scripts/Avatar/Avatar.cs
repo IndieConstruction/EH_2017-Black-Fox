@@ -91,6 +91,17 @@ namespace BlackFox {
                     EventManager.OnAgentKilled(null, this);
             }
         }
+
+        /// <summary>
+        /// Scatena l'evento per aggiornare i proiettili nella UI
+        /// </summary>
+        /// <param name="_ammo">Le munizioni che rimangono</param>
+        public void OnAmmoUpdate(int _ammo)
+        {
+            EventManager.OnAmmoValueChanged(Player.ID, _ammo);
+        }
+
+
         #endregion
     }
 

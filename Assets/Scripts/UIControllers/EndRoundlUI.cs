@@ -36,24 +36,44 @@ namespace BlackFox
         {
             EndLevelPanel.SetActive(false);
         }
-
-        void UpdateUIPoints()
+        
+        /// <summary>
+        /// Cerca il totale di ogni player e lo mostra in una casella di testo
+        /// </summary>
+        void GetAvatasKillPoints()
         {
-            // TODO : leggere i punti dal level manager e settarli dalla macchina a stati
-            //Player1Points.text = P1KillPoints + " / 5";
-            //Player2Points.text = P2KillPoints + " / 5";
-            //Player3Points.text = P3KillPoints + " / 5";
-            //Player4Points.text = P4KillPoints + " / 5";
+            for (int i = 1; i <= 4; i++)
+            {
+                int tempPoints = GameManager.Instance.LevelMng.GetPlayerKillPoints((PlayerLabel)i);
+                switch (i)
+                {
+                    case 1:
+                        Player1Points.text = tempPoints + " / 5";
+                        break;
+                    case 2:
+                        Player2Points.text = tempPoints + " / 5";
+                        break;
+                    case 3:
+                        Player3Points.text = tempPoints + " / 5";
+                        break;
+                    case 4:
+                        Player4Points.text = tempPoints + " / 5";
+                        break;
+                }
+            }
+
         }
+        
+        #region API
 
-        #region API 
-
-        public void AddKillPointToUI(Avatar _attacker, Avatar _victim)
+        /// <summary>
+        /// Attiva End Round Panel e mostrare i punti degli avatar
+        /// </summary>
+        public void SetEndRoundPanelStatus(bool _status)
         {
-
-            EventName.text = GameManager.Instance.LevelMng.EndLevelPanelLable;
-
-            UpdateUIPoints();
+            EndLevelPanel.SetActive(_status);
+            if (_status)
+                GetAvatasKillPoints(); 
         }
 
         public void Selection()
@@ -62,5 +82,6 @@ namespace BlackFox
         }
 
         #endregion
+
     }
 }

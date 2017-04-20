@@ -51,27 +51,27 @@ namespace BlackFox
                     break;
             }
         }
+        
 
         /// <summary>
-        /// Quando viene richiamata aggiorna i Kill point per il player che ha ucciso qualcuno e per la vittima
+        /// Quando viene richiamata va a leggere i punti del player richiesto nel levelMng e li aggiorna nella UI.
         /// </summary>
         /// <param name="_playerID">Il giocatore a cui aggiornare i punti uccisione nella Ui</param>
-        /// <param name="_playerPoints">I punti da visualizzare nella UI</param>
-        public void SetKillPointsUI(PlayerLabel _playerID, int _playerPoints)
+        public void SetKillPointsUI(PlayerLabel _playerID)
         {
             switch (_playerID)
             {
                 case PlayerLabel.One:
-                    Player1KillPoints.text = _playerPoints.ToString();
+                    Player1KillPoints.text = GameManager.Instance.LevelMng.GetPlayerKillPoints(_playerID).ToString();
                     break;                   
                 case PlayerLabel.Two:        
-                    Player2KillPoints.text = _playerPoints.ToString();
+                    Player2KillPoints.text = GameManager.Instance.LevelMng.GetPlayerKillPoints(_playerID).ToString();
                     break;                   
                 case PlayerLabel.Three:      
-                    Player3KillPoints.text = _playerPoints.ToString();
+                    Player3KillPoints.text = GameManager.Instance.LevelMng.GetPlayerKillPoints(_playerID).ToString();
                     break;                   
                 case PlayerLabel.Four:       
-                    Player4KillPoints.text = _playerPoints.ToString();
+                    Player4KillPoints.text = GameManager.Instance.LevelMng.GetPlayerKillPoints(_playerID).ToString();
                     break;
                 default:
                     break;

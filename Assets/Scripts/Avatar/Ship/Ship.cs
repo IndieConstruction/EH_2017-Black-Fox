@@ -15,6 +15,7 @@ namespace BlackFox {
 
         MovementController movment;
         PlacePin pinPlacer;
+        AvatarUI avatarUi;
 
         Tweener damageTween;
 
@@ -25,8 +26,8 @@ namespace BlackFox {
             get { return _life; }
             private set {
                 _life = value;
-                if (OnDataChange != null)
-                    OnDataChange(this);
+                if (avatarUi != null)
+                    avatarUi.SetLifeSliderValue(this);
             }
         }
 
@@ -43,6 +44,7 @@ namespace BlackFox {
             Shooter = GetComponent<Shooter>();
             movment = GetComponent<MovementController>();
             pinPlacer = GetComponent<PlacePin>();
+            avatarUi = GetComponentInChildren<AvatarUI>();
             pinPlacer.SetOwner(this);
             LoadIDamageablePrefab();
         }
@@ -110,8 +112,7 @@ namespace BlackFox {
         /// </summary>
         public void AddShooterAmmo() {
             Shooter.AddAmmo();
-            if (OnDataChange != null)
-                OnDataChange(this);
+            avatar.OnAmmoUpdate(Shooter.ammo);
         }
 
         #region IShooter
@@ -172,8 +173,7 @@ namespace BlackFox {
 
         void Shoot() {
             Shooter.ShootBullet();
-            if (OnDataChange != null)
-                OnDataChange(this);
+            avatar.OnAmmoUpdate(Shooter.ammo);
         }
 
         void PlacePin(bool _isRight) {
@@ -197,12 +197,7 @@ namespace BlackFox {
             previousSpeed = rigid.velocity;
         }
         #endregion
-
-        #region Events
-        public delegate void AgentDataChangedEvent(Ship _ship);
-
-        public AgentDataChangedEvent OnDataChange;
-        #endregion
+        
     }
 
     [Serializable]

@@ -14,12 +14,23 @@ namespace BlackFox
         public static AgentSpawnEvent OnAgentSpawn;
         #endregion
 
+        #region AvatarEvents
+
+        public delegate void AvatarUIEvent(PlayerLabel _playerID, int _ammo);
+
+        /// <summary>
+        /// Evento che avvisa lo UIManager di aggiornare le munizioni per un dato Avatar
+        /// </summary>
+        public static AvatarUIEvent OnAmmoValueChanged;
+
         #region AgentKilledEvent
         public delegate void AgentKilledEvent(Avatar _killer, Avatar _victim);
         /// <summary>
         /// Evento chiamato alla morte di un agente
         /// </summary>
         public static AgentKilledEvent OnAgentKilled;
+        #endregion
+
         #endregion
 
         #region LevelEvent

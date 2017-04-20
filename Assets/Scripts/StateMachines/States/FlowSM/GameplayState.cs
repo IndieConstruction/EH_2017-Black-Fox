@@ -18,7 +18,7 @@ namespace BlackFox
             StateMachineBase.OnMachineEnd += OnMachineEnd;
             GameManager.Instance.UiMng.CreateGameMenu();
             GameManager.Instance.InstantiateLevelManager();
-            GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.PlayInputState);
+            GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.PlayInput);
         }
 
         public override void OnEnd()

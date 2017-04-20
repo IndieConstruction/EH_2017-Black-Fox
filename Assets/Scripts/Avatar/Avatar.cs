@@ -83,15 +83,17 @@ namespace BlackFox {
 
         private void Update() {
             if (State == AvatarState.Enabled) {
-                CheckInputStatus(Player.inputStatus); 
+                CheckInputStatus(Player.InputStatus); 
             }
         }
 
         private void OnDestroy() {
             if (transform.parent != null)
                 State = AvatarState.Disabled;
-            
+
+            Destroy(rope.gameObject);
         }
+
         /// <summary>
         /// Menage the state switches
         /// </summary>
@@ -112,10 +114,11 @@ namespace BlackFox {
                 break;
             }
         }
+
         /// <summary>
         /// Initialize initial values of Avatar
         /// </summary>
-        private void Init() {
+        void Init() {
             Life = MaxLife;
 
             if (GameManager.Instance.LevelMng.RopeMng != null && rope == null)
@@ -248,15 +251,14 @@ namespace BlackFox {
         public List<IDamageable> GetDamageable() {
             return damageables;
         }
-
         /// <summary>
-        /// Ritorna il gameobject a cui è attaccato il component
+        /// Return the one who shot
         /// </summary>
         /// <returns></returns>
-        public GameObject GetOwner() {
+        public GameObject GetOwner()
+        {
             return gameObject;
         }
-
         #endregion
 
         #region IDamageable

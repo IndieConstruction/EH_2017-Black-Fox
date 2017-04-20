@@ -114,15 +114,6 @@ namespace BlackFox
             StartCoroutine(RespawnCooldown(_player,_spawnTime));
         }
 
-        #region Destroy Agents
-        public void DestroyAgents() {
-            // TODO : da correggere
-            foreach (Avatar agent in FindObjectsOfType<Avatar>()) {
-                Destroy(agent.gameObject);
-            }
-        }
-        #endregion
-
         #endregion
 
         [Serializable]

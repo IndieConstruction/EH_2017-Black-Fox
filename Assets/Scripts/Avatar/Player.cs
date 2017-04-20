@@ -39,18 +39,20 @@ namespace BlackFox
 
         public float SpawnTime = 0;
 
-        protected void Update()
+        private void Update()
         {
             switch (PlayerCurrentState)
             {
                 case PlayerState.Blocked:
-                    // Stato in cui i comandi del player sono ingorati
                     break;
-                case PlayerState.MenuInputState:
-                    CheckMenuInputStatus(playerInput.GetPlayerInputStatus());
+                case PlayerState.MenuInput:
+                    InputStatus = playerInput.GetPlayerInputStatus();
+                    CheckMenuInputStatus();
                     break;
-                case PlayerState.PlayInputState:
-                    inputStatus = playerInput.GetPlayerInputStatus();
+                case PlayerState.PlayInput:
+                    InputStatus = playerInput.GetPlayerInputStatus();
+                    break;
+                default:
                     break;
             }
         }
@@ -75,38 +77,44 @@ namespace BlackFox
 
             Avatar.Setup(this);
         }
+
+        /// <summary>
+        /// Destroy the Avatar istance and the connected rope if there is one
+        /// </summary>
+        public void DestroyAvatar()
+        {
+            if (Avatar)
+                Destroy(Avatar.gameObject);
+        }
         #endregion
 
         #region PlayerSM
-        PlayerState playerCurrentState;
+        PlayerState _playerCurrentState;
         /// <summary>
         /// Stato attuale.
         /// </summary>
         public PlayerState PlayerCurrentState
         {
-            get { return playerCurrentState; }
-            set
-            {
-                if (playerCurrentState != value)
-                    onStateChanged(playerCurrentState, value);
-                playerCurrentState = value;
+            get { return _playerCurrentState; }
+            set {
+                if(_playerCurrentState != value)
+                    StateChange(value, _playerCurrentState);
+                _playerCurrentState = value;
             }
         }
 
-        /// <summary>
-        /// Accade ogni volta che cambia stato.
-        /// </summary>
-        void onStateChanged(PlayerState _oldState, PlayerState _newState)
+        void StateChange(PlayerState _newState, PlayerState _oldState)
         {
             switch (_newState)
             {
                 case PlayerState.Blocked:
-                    inputStatus = new InputStatus();
+                    InputStatus.Reset();
                     break;
-                case PlayerState.MenuInputState:
-                    inputStatus = new InputStatus();
+                case PlayerState.MenuInput:
                     break;
-                case PlayerState.PlayInputState:
+                case PlayerState.PlayInput:
+                    break;
+                default:
                     break;
             }
         }
@@ -114,37 +122,47 @@ namespace BlackFox
 
         #region Input
         //Input fields
-        public InputStatus inputStatus;
         PlayerInput playerInput;
+        private InputStatus _inputStatus;
+        public InputStatus InputStatus
+        {
+            get {
+                if (_inputStatus == null)
+                    _inputStatus = new InputStatus();
+                return _inputStatus;
+            }
+            set { _inputStatus = value; }
+        }
+
         bool isReleased = true;
 
         /// <summary>
         /// Controlla l'inpunt da passare al menù corrente 
         /// </summary>
-        /// <param name="_inputStatus"></param>
-        void CheckMenuInputStatus(InputStatus _inputStatus)
+        /// <param name="inputStatus"></param>
+        void CheckMenuInputStatus()
         {
-            if (_inputStatus.LeftThumbSticksAxisY <= 0.2 && _inputStatus.LeftThumbSticksAxisY >= -0.2)
+            if (InputStatus.LeftThumbSticksAxisY <= 0.2 && InputStatus.LeftThumbSticksAxisY >= -0.2)
                 isReleased = true;
 
-            if ((_inputStatus.DPadUp == ButtonState.Pressed || _inputStatus.LeftThumbSticksAxisY >= 0.5) && isReleased)
+            if ((InputStatus.DPadUp == ButtonState.Pressed || InputStatus.LeftThumbSticksAxisY >= 0.5) && isReleased)
             {
                 isReleased = false;
                 GameManager.Instance.UiMng.GoUpInMenu();
             }
 
-            if ((_inputStatus.DPadDown == ButtonState.Pressed || _inputStatus.LeftThumbSticksAxisY <= -0.5) && isReleased)
+            if ((InputStatus.DPadDown == ButtonState.Pressed || InputStatus.LeftThumbSticksAxisY <= -0.5) && isReleased)
             {
                 isReleased = false;
                 GameManager.Instance.UiMng.GoDownInMenu();
             }
 
-            if (_inputStatus.A == ButtonState.Pressed)
+            if (InputStatus.A == ButtonState.Pressed)
             {
                 GameManager.Instance.UiMng.SelectInMenu();
             }
 
-            if (_inputStatus.B == ButtonState.Pressed)
+            if (InputStatus.B == ButtonState.Pressed)
             {
                 // TODO : call go back in menù
             }

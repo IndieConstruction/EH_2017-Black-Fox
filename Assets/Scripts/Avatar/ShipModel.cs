@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShipModel : ScriptableObject {
-
-    public Mesh mesh;
-    public Material material;
-
+namespace BlackFox
+{
+    public class ShipModel : ScriptableObject
+    {         
+        public Mesh mesh;
+        public Material material;
+    }
 }

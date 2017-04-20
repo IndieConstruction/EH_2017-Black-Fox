@@ -12,7 +12,7 @@ namespace BlackFox
         PlayerIndex playerIndex;
         GamePadState state;
         GamePadState prevState;
-    
+
         public PlayerInput(PlayerLabel _playerID)
         {
             switch (_playerID)
@@ -44,7 +44,7 @@ namespace BlackFox
         public InputStatus GetPlayerInputStatus()
         {
             InputStatus inputStatus = ControllerInput();
-            if(!inputStatus.IsConnected)
+            if (!inputStatus.IsConnected)
                 inputStatus = KeyboardInput();
 
             return inputStatus;
@@ -200,13 +200,13 @@ namespace BlackFox
     {
         Released = 0,
         Pressed = 1,
-        Held = 2       
+        Held = 2
     }
 
     /// <summary>
     /// Strutta che contine tutti i comandi del joystick
     /// </summary>
-    public struct InputStatus
+    public class InputStatus
     {
         public bool IsConnected;
 
@@ -237,5 +237,41 @@ namespace BlackFox
 
         public ButtonState Start;
         public ButtonState Select;
+
+        /// <summary>
+        /// Reset the value of each field as default
+        /// </summary>
+        public void Reset()
+        {
+            IsConnected = false;
+
+            LeftTriggerAxis = 0;
+            RightTriggerAxis = 0;
+
+            LeftThumbSticksAxisX = 0;
+            LeftThumbSticksAxisY = 0;
+
+            RightThumbSticksAxisX = 0;
+            RightThumbSticksAxisY = 0;
+
+            A = ButtonState.Released;
+            B = ButtonState.Released;
+            X = ButtonState.Released;
+            Y = ButtonState.Released;
+
+            LeftShoulder = ButtonState.Released;
+            RightShoulder = ButtonState.Released;
+
+            LeftThumbSticks = ButtonState.Released;
+            RightThumbSticks = ButtonState.Released;
+
+            DPadUp = ButtonState.Released;
+            DPadLeft = ButtonState.Released;
+            DPadDown = ButtonState.Released;
+            DPadRight = ButtonState.Released;
+
+            Start = ButtonState.Released;
+            Select = ButtonState.Released;
+        }
     }
 }

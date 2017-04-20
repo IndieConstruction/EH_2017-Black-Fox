@@ -9,7 +9,6 @@ namespace BlackFox
     /// </summary>
     public interface IShooter
     {
-
         List<IDamageable> GetDamageable();
 
         GameObject GetOwner();

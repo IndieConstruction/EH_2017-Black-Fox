@@ -142,7 +142,20 @@ namespace BlackFox
         {
             return levelPointsCounter.GetPlayerKillPoints(_playerID);
         }
-
+        /// <summary>
+        /// Destroy all Avatars
+        /// </summary>
+        public void DestroyAllAvatars()
+        {
+            foreach (Player player in gameMngr.PlayerMng.Players)
+            {
+                player.DestroyAvatar();
+            }
+        }
+        /// <summary>
+        /// Instance new avatars
+        /// </summary>
+        /// <param name="_spawnTime"></param>
         public void SpawnAllAvatar(float _spawnTime) {
             foreach (Player player in GameManager.Instance.PlayerMng.Players) {
                 AvatarSpwn.RespawnAvatar(player, _spawnTime);
@@ -196,7 +209,7 @@ namespace BlackFox
             if (!IsGamePaused)
             {
                 IsGamePaused = true;
-                GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInputState, _playerID, PlayerState.Blocked);
+                GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInput, _playerID, PlayerState.Blocked);
                 gameplaySM.GoToState(GamePlaySMStates.PauseState);
             }            
         }

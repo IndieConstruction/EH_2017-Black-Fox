@@ -10,7 +10,7 @@ namespace BlackFox {
             Debug.Log("CleanSceneState");
 
             GameManager.Instance.LevelMng.CleanPins();
-            GameManager.Instance.LevelMng.AvatarSpwn.DestroyAgents();
+            GameManager.Instance.LevelMng.DestroyAllAvatars();
         }
 
         public override void OnUpdate() {

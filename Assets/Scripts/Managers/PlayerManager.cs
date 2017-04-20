@@ -82,9 +82,9 @@ namespace BlackFox
     /// </summary>
     public enum PlayerState
     {
-        Blocked,
-        MenuInputState,
-        PlayInputState
+        Blocked = 0,
+        MenuInput = 1,
+        PlayInput = 2
     }
 }
 

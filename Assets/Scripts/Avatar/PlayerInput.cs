@@ -204,7 +204,7 @@ namespace BlackFox
     }
 
     /// <summary>
-    /// Strutta che contine tutti i comandi del joystick
+    /// Struttura che contine tutti i comandi del joystick
     /// </summary>
     public class InputStatus
     {

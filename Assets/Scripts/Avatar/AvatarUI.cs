@@ -36,6 +36,9 @@ namespace BlackFox {
                 
         }
         
+        /// <summary>
+        /// Fa comparire l'immagine +1
+        /// </summary>
         public void KillView() {
             KillToview.transform.DOScale(new Vector3(1f, 1f, 1f), 1f).OnComplete(() => {
                 KillToview.transform.localScale = Vector3.zero;

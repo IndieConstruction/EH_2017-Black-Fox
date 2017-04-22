@@ -83,6 +83,11 @@ namespace BlackFox {
             State = AvatarState.Ready;
         }
 
+        /// <summary>
+        /// L'ancia un evento alla distruzione della ship, 
+        /// passando come parametri chi ha distrutto la ship e l'ID del player a cui appartiene
+        /// </summary>
+        /// <param name="_attacker">L'avatar che ha distrutto la ship</param>
         public void ShipDestroy(Avatar _attacker) {
             if (EventManager.OnAgentKilled != null) {
                 if (_attacker != null)

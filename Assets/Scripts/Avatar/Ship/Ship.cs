@@ -112,7 +112,7 @@ namespace BlackFox {
         /// </summary>
         public void AddShooterAmmo() {
             Shooter.AddAmmo();
-            avatar.OnAmmoUpdate(Shooter.ammo);
+            avatar.OnAmmoUpdate(Shooter.ammo);                          // Ci sarà sempre un avatar?
         }
 
         #region IShooter

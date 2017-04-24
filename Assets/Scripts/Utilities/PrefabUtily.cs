@@ -69,7 +69,7 @@ public class PrefabUtily {
     /// <param name="_listGameObj"></param>
     /// <param name="_itemToIgnore"></param>
     /// <returns></returns>
-    private static List<GameObject> RemoveItemFromList(List<GameObject> _listGameObj, GameObject _itemToIgnore)
+    public static List<GameObject> RemoveItemFromList(List<GameObject> _listGameObj, GameObject _itemToIgnore)
     {
         GameObject itemToRemove = null;
 

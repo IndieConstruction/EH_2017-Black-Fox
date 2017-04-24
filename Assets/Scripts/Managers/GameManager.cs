@@ -22,6 +22,7 @@ namespace BlackFox
         public GameObject PlayerManagerPrefab;
         public GameObject CoinManagerPrefab;
         public GameObject AudioManagerPrefab;
+        public GameObject DamageableLoaderPrefab;
 
         public Level LevelScriptableObj;
 
@@ -37,6 +38,8 @@ namespace BlackFox
         public AudioManager AudioMng;
         [HideInInspector]
         public FlowSM flowSM;
+        [HideInInspector]
+        public DamageableLoader damageableLoader;
 
         private void Awake()
         {
@@ -100,6 +103,11 @@ namespace BlackFox
         public void InstantiateAudioManager()
         {
             AudioMng = Instantiate(AudioManagerPrefab, transform).GetComponent<AudioManager>();
+        }
+
+        public void InstantiateDamageableLoader()
+        {
+            damageableLoader = Instantiate(DamageableLoaderPrefab, transform).GetComponent<DamageableLoader>();
         }
         #endregion
         #endregion

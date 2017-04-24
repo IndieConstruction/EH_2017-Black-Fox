@@ -38,7 +38,7 @@ namespace BlackFox {
         }
 
         #region API
-        public void Setup(Avatar _avatar) {
+        public void Setup(Avatar _avatar, List<IDamageable> _damageablesPrefabs) {
             avatar = _avatar;
             rigid = GetComponent<Rigidbody>();
             Shooter = GetComponent<Shooter>();
@@ -46,7 +46,7 @@ namespace BlackFox {
             pinPlacer = GetComponent<PlacePin>();
             avatarUi = GetComponentInChildren<AvatarUI>();
             pinPlacer.SetOwner(this);
-            LoadIDamageablePrefab();
+            damageables = _damageablesPrefabs;
         }
 
         /// <summary>
@@ -94,18 +94,6 @@ namespace BlackFox {
         /// List of element damageable by this player
         /// </summary>
         List<IDamageable> damageables = new List<IDamageable>();
-
-        /// <summary>
-        /// Salva all'interno della lista di oggetti IDamageable, gli oggetti facenti parti della lista DamageablesPrefabs
-        /// </summary>
-        void LoadIDamageablePrefab() {
-            List<GameObject> DamageablesPrefabs = PrefabUtily.LoadAllPrefabsWithComponentOfType<IDamageable>("Prefabs", gameObject);
-
-            foreach (var k in DamageablesPrefabs) {
-                if (k.GetComponent<IDamageable>() != null)
-                    damageables.Add(k.GetComponent<IDamageable>());
-            }
-        }
 
         /// <summary>
         /// Chiama la funzione AddAmmo di shooter

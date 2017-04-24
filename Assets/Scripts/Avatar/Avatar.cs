@@ -77,7 +77,7 @@ namespace BlackFox {
         /// </summary>
         public void Setup(Player _player) {
             Player = _player;
-            ship.Setup(this);
+            ship.Setup(this, GameManager.Instance.damageableLoader.ReturnDamageablePrefabsForAvatar(ship.gameObject));
             if (GameManager.Instance.LevelMng.RopeMng != null && rope == null)
                 GameManager.Instance.LevelMng.RopeMng.AttachNewRope(this);
             State = AvatarState.Ready;

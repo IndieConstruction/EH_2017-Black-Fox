@@ -21,7 +21,7 @@ namespace BlackFox {
             else
                 originPos = _originRigid.transform;
 
-            newOrigin = Instantiate(RopeOrigin, originPos.position, originPos.rotation, _target.transform.parent);
+            newOrigin = Instantiate(RopeOrigin, originPos.position, originPos.rotation, _target.transform);
             newOrigin.name = _target.PlayerId + "Rope";
             
             if (_originRigid == null)
@@ -30,8 +30,8 @@ namespace BlackFox {
             //Set the AnchorPoint before the activation of the component
             RopeController rc = newOrigin.GetComponent<RopeController>();
             _target.rope = rc;
-            ConfigurableJoint cj = _target.GetComponent<ConfigurableJoint>();
-            rc.AnchorPoint = cj.connectedBody.transform;
+
+            rc.AnchorPoint = _target.ship.transform;
             newOrigin.GetComponent<RopeController>().InitRope();
             
             newOrigin.GetComponent<LineRenderer>().material = _target.ColorMaterial;          

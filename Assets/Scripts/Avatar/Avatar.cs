@@ -7,6 +7,7 @@ namespace BlackFox {
         /// <summary>
         /// Player who control this avatar
         /// </summary>
+        [HideInInspector]
         public Player Player;
         /// <summary>
         /// Index of th e player
@@ -19,14 +20,12 @@ namespace BlackFox {
             }
         }
 
-        public Material ColorMaterial { get { return Model.shipConfig.material; } }
+        public Material ColorMaterial { get { return AvatarData.shipConfig.material; } }
         /// <summary>
         /// Reference of the model to visualize
         /// </summary>
-        private AvatarData _model;
-        public AvatarData Model {
-            get { return _model; }
-            set { _model = value; }
+        public AvatarData AvatarData {
+            get { return Player.AvatarData; }
         }
 
         private AvatarState _state;
@@ -40,8 +39,10 @@ namespace BlackFox {
             }
         }
 
+        [HideInInspector]
         public RopeController rope;
-        Ship ship;
+        [HideInInspector]
+        public Ship ship;
 
         private void OnDestroy() {
             if (transform.parent != null)
@@ -77,10 +78,18 @@ namespace BlackFox {
         /// </summary>
         public void Setup(Player _player) {
             Player = _player;
-            ship.Setup(this, GameManager.Instance.damageableLoader.ReturnDamageablePrefabsForAvatar(ship.gameObject));
+            if (!ship)
+                InstantiateShip();
+            ship.Setup(this, LoadIDamageableForShip());
             if (GameManager.Instance.LevelMng.RopeMng != null && rope == null)
                 GameManager.Instance.LevelMng.RopeMng.AttachNewRope(this);
             State = AvatarState.Ready;
+        }
+
+        public void InstantiateShip()
+        {
+            // TODO : controllare che la ship non sia doppia
+            ship = Instantiate(AvatarData.shipConfig.Prefab).GetComponent<Ship>();
         }
 
         /// <summary>
@@ -105,9 +114,24 @@ namespace BlackFox {
         {
             EventManager.OnAmmoValueChanged(Player.ID, _ammo);
         }
-
-
         #endregion
+
+        /// <summary>
+        /// Carica la lista dei damageable per la propria ship da resources
+        /// </summary>
+        List<IDamageable> LoadIDamageableForShip()
+        {
+            List<IDamageable> damageablesList = new List<IDamageable>();
+            List<GameObject> damageablesPrefabs = PrefabUtily.LoadAllPrefabsWithComponentOfType<IDamageable>("Prefabs", ship.gameObject);
+
+            foreach (GameObject itemInRes in damageablesPrefabs)
+            {
+                if (itemInRes.GetComponent<IDamageable>() != null)
+                    damageablesList.Add(itemInRes.GetComponent<IDamageable>());
+            }
+
+            return damageablesList;
+        }
     }
 
     public enum AvatarState {

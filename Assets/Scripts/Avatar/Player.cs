@@ -20,16 +20,16 @@ namespace BlackFox
             protected set { _avatar = value; }
         }
 
-        private AvatarData _model;
-        public AvatarData Model
+        private AvatarData _avatarData;
+        public AvatarData AvatarData
         {
             get {
-                if (_model == null) {
-                    _model = Instantiate(Resources.Load("Prefabs/ShipModels/Owl") as AvatarData);// TODO : controllare riempimento avatar
+                if (_avatarData == null) {
+                    _avatarData = Instantiate(Resources.Load("Prefabs/ShipModels/Owl") as AvatarData);// TODO : controllare riempimento avatar
                 }
 
-                return _model; }
-            set { _model = value; }
+                return _avatarData; }
+            set { _avatarData = value; }
         }
 
         public float SpawnTime = 0;
@@ -63,12 +63,15 @@ namespace BlackFox
             playerInput = new PlayerInput(_playerID);
         }
 
+        #region Avatar
         /// <summary>
         /// Makes a new istance of the Avatar using the already loaded model
         /// </summary>
         public void InstanceAvatar()
         {
-            Avatar = Instantiate(Model.shipConfig.Prefab);
+            DestroyAvatar();
+            Avatar = new GameObject("Avatar" + ID).AddComponent<Avatar>();
+            Avatar.transform.parent = transform;
         }
 
         /// <summary>
@@ -92,6 +95,8 @@ namespace BlackFox
                 Destroy(Avatar.gameObject);
         }
         #endregion
+        #endregion
+
 
         #region PlayerSM
         PlayerState _playerCurrentState;

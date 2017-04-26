@@ -189,9 +189,9 @@ namespace BlackFox {
     }
 
     [Serializable]
-    public class ShipConfig {
-
-        public Avatar Prefab;
+    public class ShipConfig
+    {
+        public Ship Prefab;
         public Material material;
     }
 }

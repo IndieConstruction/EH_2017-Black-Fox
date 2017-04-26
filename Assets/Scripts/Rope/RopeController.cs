@@ -36,7 +36,8 @@ namespace Rope
             {
                 lineRend.SetPosition(i, fragments[i].transform.position);
             }
-            lineRend.SetPosition(fragments.Count, AnchorPoint.position);
+            if(AnchorPoint != null)
+                lineRend.SetPosition(fragments.Count, AnchorPoint.position);
         }
 
         /// <summary>

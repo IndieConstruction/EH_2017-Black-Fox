@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: Owl
   m_EditorClassIdentifier: 
   shipConfig:
-    Prefab: {fileID: 114371859010791612, guid: 5ec9573ff9116eb4aa325c7d97f652a5, type: 2}
+    Prefab: {fileID: 114084304304996402, guid: 1e454b20c5c81a94c83dfadd7cbda89e, type: 2}
     material: {fileID: 2100000, guid: b455c3223858069469d41b33d4033245, type: 2}

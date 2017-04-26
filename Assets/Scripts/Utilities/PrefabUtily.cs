@@ -2,12 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PrefabUtily {
+public static class PrefabUtily {
 
     #region API
-
-    public PrefabUtily(){ }
-
     /// <summary> 
     /// Load ALL resources from the specific path inside the Resources Folder
     /// </summary>
@@ -69,7 +66,7 @@ public class PrefabUtily {
     /// <param name="_listGameObj"></param>
     /// <param name="_itemToIgnore"></param>
     /// <returns></returns>
-    public static List<GameObject> RemoveItemFromList(List<GameObject> _listGameObj, GameObject _itemToIgnore)
+    static List<GameObject> RemoveItemFromList(List<GameObject> _listGameObj, GameObject _itemToIgnore)
     {
         GameObject itemToRemove = null;
 

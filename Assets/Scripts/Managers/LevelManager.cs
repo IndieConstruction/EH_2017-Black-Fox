@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -152,7 +152,7 @@ namespace BlackFox
         /// </summary>
         /// <param name="_spawnTime"></param>
         public void SpawnAllAvatar(float _spawnTime) {
-            foreach (Player player in GameManager.Instance.PlayerMng.Players) {
+            foreach (Player player in GameManager.Instance.PlayerMng.Players.Where(p => p.Avatar != null)) {
                 AvatarSpwn.RespawnAvatar(player, _spawnTime);
             }
         }

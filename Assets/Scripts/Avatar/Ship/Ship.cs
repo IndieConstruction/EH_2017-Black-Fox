@@ -16,7 +16,6 @@ namespace BlackFox {
         MovementController movment;
         PlacePin pinPlacer;
         AvatarUI avatarUi;
-
         Tweener damageTween;
 
         //Life fields

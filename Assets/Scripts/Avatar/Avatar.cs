@@ -76,14 +76,19 @@ namespace BlackFox {
         /// <summary>
         /// Required to setup the player (also launched on Start of this class)
         /// </summary>
-        public void Setup(Player _player) {
+        public void Setup(Player _player, bool withRope = false) {
             Player = _player;
             if (!ship)
                 InstantiateShip();
             ship.Setup(this, LoadIDamageableForShip());
+            if(withRope)
+                SetupRope();
+            State = AvatarState.Ready;
+        }
+
+        public void SetupRope() {
             if (GameManager.Instance.LevelMng.RopeMng != null && rope == null)
                 GameManager.Instance.LevelMng.RopeMng.AttachNewRope(this);
-            State = AvatarState.Ready;
         }
 
         public void InstantiateShip()

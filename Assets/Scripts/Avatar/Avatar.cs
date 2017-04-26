@@ -76,7 +76,7 @@ namespace BlackFox {
         /// <summary>
         /// Required to setup the player (also launched on Start of this class)
         /// </summary>
-        public void Setup(Player _player, bool withRope = false) {
+        public void Setup(Player _player, bool withRope = true) {
             Player = _player;
             if (!ship)
                 InstantiateShip();
@@ -94,7 +94,8 @@ namespace BlackFox {
         public void InstantiateShip()
         {
             // TODO : controllare che la ship non sia doppia
-            ship = Instantiate(AvatarData.shipConfig.Prefab).GetComponent<Ship>();
+            Transform transf = GameManager.Instance.LevelMng.AvatarSpwn.GetMySpawnPoint(PlayerId);
+            ship = Instantiate(AvatarData.shipConfig.Prefab,transf.position, transf.rotation , transform).GetComponent<Ship>();
         }
 
         /// <summary>

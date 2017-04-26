@@ -11,7 +11,6 @@ namespace BlackFox
     /// </summary>
     public class AvatarSpawner : MonoBehaviour
     {
-        private GameObject avatarContainer;
         
         private List<AvatarSpawnPoint> _originalSpawns;
         /// <summary>
@@ -31,11 +30,11 @@ namespace BlackFox
         /// Additional SpawnPoints
         /// </summary>
         public List<AvatarSpawnPoint> SpawnPoints;
-        
+
         /// <summary>
         /// Save the desired SpawnPoints
         /// </summary>
-        void Start()
+        public void Init()
         {           
             if (SpawnPoints != null)
                 foreach (AvatarSpawnPoint spwnPt in SpawnPoints)
@@ -74,12 +73,22 @@ namespace BlackFox
                         break;
                 }
             }
-
-            avatarContainer = new GameObject("AvatarContainer");
-            avatarContainer.transform.parent = GameManager.Instance.LevelMng.transform;
         }
 
         #region API
+        /// <summary>
+        /// Get the spawn point transform relative the the player(parameter)
+        /// </summary>
+        /// <param name="_label"></param>
+        /// <returns></returns>
+        public Transform GetMySpawnPoint(PlayerLabel _label) {
+            foreach (AvatarSpawnPoint spawnPt in OriginalSpawns) {
+                if (_label == spawnPt.PlayerID)
+                    return spawnPt.SpawnPosition;
+            }
+            return null;
+        }
+
         /// <summary>
         /// Respawn a Player without cooldown
         /// </summary>
@@ -93,9 +102,8 @@ namespace BlackFox
                 {
                     Avatar newAgent = _player.Avatar;
                     newAgent.State = AvatarState.Enabled;
-                    newAgent.transform.position = spawn.SpawnPosition.position;
-                    newAgent.transform.rotation = spawn.SpawnPosition.rotation;
-                    newAgent.transform.parent = avatarContainer.transform;
+                    newAgent.ship.transform.position = spawn.SpawnPosition.position;
+                    newAgent.ship.transform.rotation = spawn.SpawnPosition.rotation;
 
                     if(EventManager.OnAgentSpawn != null)
                         EventManager.OnAgentSpawn(newAgent.GetComponentInChildren<Avatar>());

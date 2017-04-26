@@ -95,6 +95,7 @@ namespace BlackFox
         public void InstantiateAvatarSpawner()
         {
             AvatarSpwn = Instantiate(AvatarSpwnPrefab, transform).GetComponent<AvatarSpawner>();
+            AvatarSpwn.Init();
         }
         /// <summary>
         /// Carica lo scriptable object del livello e istanzia il prefab del livello

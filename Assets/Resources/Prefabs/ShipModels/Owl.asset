@@ -13,4 +13,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shipConfig:
     Prefab: {fileID: 114084304304996402, guid: 1e454b20c5c81a94c83dfadd7cbda89e, type: 2}
-    material: {fileID: 2100000, guid: b455c3223858069469d41b33d4033245, type: 2}
+    Materials:
+    - {fileID: 2100000, guid: b455c3223858069469d41b33d4033245, type: 2}
+    - {fileID: 2100000, guid: 29df54d6c83797d48a9192516c6f576b, type: 2}
+    - {fileID: 2100000, guid: 6c2149cec69229845a1342714b62f467, type: 2}
+    - {fileID: 2100000, guid: 78e14e1d14f1a444fb182ccbb0c979ad, type: 2}

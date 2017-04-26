@@ -8,6 +8,8 @@ namespace BlackFox {
     [RequireComponent(typeof(MovementController), typeof(PlacePin), typeof(Shooter))]
     public class Ship : MonoBehaviour, IShooter, IDamageable {
 
+        public GameObject[] ObjToBeColored;
+
         [HideInInspector]
         public Avatar avatar;
 
@@ -191,6 +193,6 @@ namespace BlackFox {
     public class ShipConfig
     {
         public Ship Prefab;
-        public Material material;
+        public List<Material> Materials;
     }
 }

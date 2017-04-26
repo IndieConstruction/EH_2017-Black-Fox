@@ -20,7 +20,7 @@ namespace BlackFox {
             }
         }
 
-        public Material ColorMaterial { get { return AvatarData.shipConfig.material; } }
+        public Material ColorMaterial;
         /// <summary>
         /// Reference of the model to visualize
         /// </summary>

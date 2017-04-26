@@ -26,7 +26,6 @@ namespace BlackFox
             get {
                 if (_model == null) {
                     _model = Instantiate(Resources.Load("Prefabs/ShipModels/Owl") as AvatarData);// TODO : controllare riempimento avatar
-                    Avatar = Instantiate(_model.shipConfig.Prefab);
                 }
 
                 return _model; }
@@ -65,11 +64,22 @@ namespace BlackFox
         }
 
         /// <summary>
+        /// Makes a new istance of the Avatar using the already loaded model
+        /// </summary>
+        public void InstanceAvatar()
+        {
+            Avatar = Instantiate(Model.shipConfig.Prefab);
+        }
+
+        /// <summary>
         /// Setup the istance of the Avatar or instaciate a new one
         /// </summary>
-        public void AvatarSetup() {
+        /// <param name="_forceIstance">If true and no other istance of Avatar, istance a new one</param>
+        public void AvatarSetup(bool _forceIstance = false) {
             if (ID == PlayerLabel.None)
                 return;
+            if (Avatar == null && _forceIstance == true)
+                InstanceAvatar();
             Avatar.Setup(this);
         }
 

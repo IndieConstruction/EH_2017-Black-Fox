@@ -22,10 +22,13 @@ namespace BlackFox
                 Players.Add(newPlayer);
             }      
         }
-
-        public void SetupAvatars() {
+        /// <summary>
+        /// Setup all the avatars of the current players
+        /// </summary>
+        /// <param name="_forceIstance">If true ask for a new istance if there are none</param>
+        public void SetupAvatars(bool _forceIstance = false) {
             foreach (Player player in Players)
-                player.AvatarSetup();
+                player.AvatarSetup(_forceIstance);
         }
 
         /// <summary>

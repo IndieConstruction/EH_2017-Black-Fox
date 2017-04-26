@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 114803276105687232}
   - component: {fileID: 114308403311535660}
   - component: {fileID: 114864183614476062}
-  - component: {fileID: 153329193166999124}
+  - component: {fileID: 153917779377568440}
   m_Layer: 0
   m_Name: ShipBase
   m_TagString: Untagged
@@ -232,7 +232,7 @@ CapsuleCollider:
   m_Height: 4
   m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0}
---- !u!153 &153329193166999124
+--- !u!153 &153917779377568440
 ConfigurableJoint:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}

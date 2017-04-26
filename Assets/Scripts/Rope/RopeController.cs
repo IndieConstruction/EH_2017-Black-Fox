@@ -81,8 +81,7 @@ namespace Rope
                 }
             }
 
-            if (AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody == null)
-            {
+            if (AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody == null) {
                 AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = fragments[fragments.Count - 1].GetComponent<Rigidbody>();
                 Debug.Log("WARNING: MaxLength not enough to reach " + AnchorPoint.name + " in " + AnchorPoint.position);
                 int fragmentsNeeded = (int)(Vector3.Distance(AnchorPoint.position, fragments[fragments.Count - 1].transform.position) / offSet.magnitude);

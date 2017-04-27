@@ -28,7 +28,8 @@ namespace BlackFox
 
         void HandleOnAgentKilled(Avatar _killer, Avatar _victim)
         {
-            GameManager.Instance.LevelMng.AgentKilled(_killer, _victim);
+            GameManager.Instance.LevelMng.UpdateKillPoints(_killer, _victim);
+            GameManager.Instance.LevelMng.AvatarSpwn.RespawnAvatar(_victim.Player, 3);
             GameManager.Instance.UiMng.gameUIController.SetKillPointsUI(_killer.Player.ID);
             GameManager.Instance.UiMng.gameUIController.SetKillPointsUI(_victim.Player.ID);
         }

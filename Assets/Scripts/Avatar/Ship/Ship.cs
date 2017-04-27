@@ -8,7 +8,6 @@ namespace BlackFox {
     [RequireComponent(typeof(MovementController), typeof(PlacePin), typeof(Shooter))]
     public class Ship : MonoBehaviour, IShooter, IDamageable {
 
-        List<GameObject> ObjToBeColored;
 
         [HideInInspector]
         public Avatar avatar;
@@ -51,15 +50,15 @@ namespace BlackFox {
             avatarUi = GetComponentInChildren<AvatarUI>();
             pinPlacer.SetOwner(this);
             damageables = _damageablesPrefabs;
-            ChangeColor();
+            ChangeColor(config.Materials[(int)avatar.PlayerId - 1]);
         }
 
-        public void ChangeColor()
+        public void ChangeColor(Material _mat)
         {
-            foreach (MeshRenderer itemToColor in GetComponentsInChildren<MeshRenderer>())
-            {
-                itemToColor.material = config.Materials[(int)avatar.PlayerId];
-            }
+            foreach (var m in GetComponentsInChildren<MeshRenderer>()) {
+                Material[] mats = new Material[] { _mat };
+                m.materials = mats;
+            } 
         }
 
         /// <summary>
@@ -149,8 +148,8 @@ namespace BlackFox {
             damageTween = transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f);
             if (Life < 1) {
                 avatar.ShipDestroy(_attacker.GetComponent<Ship>().avatar);
-                GetComponent<CapsuleCollider>().enabled = false;
-                transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject); });
+                avatar.State = AvatarState.Disabled;
+                transform.DOScale(Vector3.zero, 0.5f);
                 return;
             }
         }
@@ -170,6 +169,8 @@ namespace BlackFox {
             pinPlacer.enabled = _active;
             Shooter.enabled = _active;
             movment.enabled = _active;
+            GetComponent<CapsuleCollider>().enabled = _active;
+
         }
 
         void Shoot() {
@@ -205,13 +206,6 @@ namespace BlackFox {
     public class ShipConfig
     {
         public Ship Prefab;
-        
-        public List<ColorVariant> Materials;
-
-        public struct ColorVariant
-        {
-            public int MaterialID;
-            public Material Material;
-        }
+        public List<Material> Materials;
     }
 }

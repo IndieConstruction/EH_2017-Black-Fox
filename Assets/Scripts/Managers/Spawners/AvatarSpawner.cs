@@ -101,11 +101,10 @@ namespace BlackFox
                 if (spawn.PlayerID == _player.ID)
                 {
                     Avatar newAgent = _player.Avatar;
-                    newAgent.State = AvatarState.Enabled;
                     newAgent.ship.transform.position = spawn.SpawnPosition.position;
                     newAgent.ship.transform.rotation = spawn.SpawnPosition.rotation;
-
-                    if(EventManager.OnAgentSpawn != null)
+                    newAgent.State = AvatarState.Enabled;
+                    if (EventManager.OnAgentSpawn != null)
                         EventManager.OnAgentSpawn(newAgent.GetComponentInChildren<Avatar>());
                     return;                    
                 }

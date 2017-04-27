@@ -25,11 +25,14 @@ namespace BlackFox
         {
             get {
                 if (_avatarData == null) {
-                    _avatarData = Instantiate(Resources.Load("Prefabs/ShipModels/Owl") as AvatarData);// TODO : controllare riempimento avatar
+                    _avatarData = Instantiate(Resources.Load("Prefabs/ShipModels/Owl") as AvatarData);
                 }
-
-                return _avatarData; }
-            set { _avatarData = value; }
+                return _avatarData;
+            }
+            set {
+                _avatarData = value;
+                // TODO : scatenare evento di re-setup al cambio dell'avatardata
+            }
         }
 
         public float SpawnTime = 0;

@@ -60,13 +60,17 @@ namespace BlackFox {
             switch (_newState) {
                 case AvatarState.Disabled:
                     ship.ToggleAbilities(false);
+                    if (rope != null) {
+                        Destroy(rope.gameObject); 
+                    }
                 break;
                 case AvatarState.Ready:
                     ship.Init();
                 break;
                 case AvatarState.Enabled:
                     ship.ToggleAbilities(true);
-                break;
+                    ship.transform.localScale = Vector3.one;
+                    break;
                 default:
                 break;
             }

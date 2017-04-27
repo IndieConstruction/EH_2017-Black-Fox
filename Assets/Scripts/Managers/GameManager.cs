@@ -63,7 +63,7 @@ namespace BlackFox
 
         private void Update()
         {
-            // TODO : togliere
+            // TODO : togliere (Luca dice che è da togliere)
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 QuitApplication();

@@ -109,11 +109,11 @@ namespace BlackFox
 
         #region Avatar
         /// <summary>
-        /// Funzione che contiene le azioni da eseguire alla morte di un player
+        /// Aggiorna i Kill point
         /// </summary>
         /// <param name="_killer"></param>
         /// <param name="_victim"></param>
-        public void AgentKilled(Avatar _killer, Avatar _victim)
+        public void UpdateKillPoints(Avatar _killer, Avatar _victim)
         {
             if (_killer != null)
             {
@@ -125,9 +125,6 @@ namespace BlackFox
             }
             if(EventManager.OnPointsUpdate != null)
                 EventManager.OnPointsUpdate();
-            
-            //Reaction of the AvatarSpawner to the OnAgentKilled event
-            AvatarSpwn.RespawnAvatar(_victim.Player, _victim.Player.SpawnTime);
         }
         /// <summary>
         /// Return the current points (due to kills) of the Player

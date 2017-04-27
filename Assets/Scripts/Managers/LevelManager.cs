@@ -11,13 +11,14 @@ namespace BlackFox
     /// </summary>
     public class LevelManager : MonoBehaviour
     {
+        // Da spostare in scriptable
         public int roundNumber = 1;
         public int MaxRound = 4;
         public int levelNumber;
-
         public int AddPoints = 1;
         public int SubPoints = 1;
         public int PointsToWin = 5;
+        // -------------------
 
         public GameObject SpawnerMngPrefab;
         public GameObject AvatarSpwnPrefab;
@@ -45,6 +46,16 @@ namespace BlackFox
         LevelPointsCounter levelPointsCounter;
 
         public bool IsGamePaused;
+
+        private bool _isRoundActive;
+        /// <summary>
+        /// Se true il round attuale è attivo.
+        /// </summary>
+        public bool IsRoundActive {
+            get { return _isRoundActive; }
+            set { _isRoundActive = value; }
+        }
+
 
         #region Containers
         public Transform PinsContainer;
@@ -107,6 +118,24 @@ namespace BlackFox
         }
         #endregion
 
+        #region Level
+
+        /// <summary>
+        /// Avanza di round.
+        /// </summary>
+        public void NextRound() {
+            roundNumber++;
+        }
+
+        /// <summary>
+        /// Chiamato quando inizia il round.
+        /// </summary>
+        public void RoundBegin() {
+            IsRoundActive = true;
+        }
+
+        #endregion
+
         #region Avatar
         /// <summary>
         /// Aggiorna i Kill point
@@ -150,7 +179,8 @@ namespace BlackFox
         /// </summary>
         /// <param name="_spawnTime"></param>
         public void SpawnAllAvatar(float _spawnTime) {
-            foreach (Player player in GameManager.Instance.PlayerMng.Players.Where(p => p.Avatar != null)) {
+            //foreach (Player player in GameManager.Instance.PlayerMng.Players.Where(p => p.Avatar != null)) {
+            foreach (Player player in GameManager.Instance.PlayerMng.Players) {
                 AvatarSpwn.RespawnAvatar(player, _spawnTime);
             }
         }
@@ -174,7 +204,8 @@ namespace BlackFox
         {
             levelPointsCounter.ClearAllKillPoints();
             EndLevelPanelLable = "Core Has Been Destroyed";
-            EventManager.TriggerPlayStateEnd();
+            gameplaySM.CurrentState.OnStateEnd();
+            //EventManager.TriggerPlayStateEnd();
         }
 
         /// <summary>
@@ -182,13 +213,13 @@ namespace BlackFox
         /// </summary>
         public void PlayerWin(string _winner)
         {
-            roundNumber++;
-            gameplaySM.SetRoundNumber(roundNumber);
             levelPointsCounter.ClearAllKillPoints();
             EndLevelPanelLable = "Player " + _winner + " Has Won";
-            EventManager.TriggerPlayStateEnd();
+            gameplaySM.CurrentState.OnStateEnd();
+            //EventManager.TriggerPlayStateEnd();
             CoinManager.Coins +=4;
             gameMngr.AddCoins();
+            IsRoundActive = false;
         }
 
         /// <summary>
@@ -215,9 +246,7 @@ namespace BlackFox
         void StartGameplaySM()
         {
             gameplaySM = gameObject.AddComponent<GameplaySM>();
-            gameplaySM.SetLevelNumber(levelNumber);
-            gameplaySM.SetMaxRoundNumber(MaxRound);
-            gameplaySM.SetRoundNumber(roundNumber);
+            gameplaySM.Init();
         }
         #endregion
 

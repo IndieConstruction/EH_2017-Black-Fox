@@ -39,7 +39,7 @@ namespace BlackFox
         /// <summary>
         /// Evento chiamato alla morte del core o alla vittoria dell'agente che innesca il cambio di stato della GameplaySM
         /// </summary>
-        public static LevelEvent TriggerPlayStateEnd;
+        //public static LevelEvent TriggerPlayStateEnd;
         #endregion
 
         #region UIEvent

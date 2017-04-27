@@ -56,17 +56,21 @@ MonoBehaviour:
   levelNumber: 1
   AddPoints: 1
   SubPoints: 1
-  PointsToWin: 5
+  PointsToWin: 2
   SpawnerMngPrefab: {fileID: 1426782863579316, guid: 6a5555b5239d1fd42ab0baa8e7b1f9ff,
     type: 2}
   AvatarSpwnPrefab: {fileID: 1908843494005796, guid: 0ff4a992816176340b31bf27c66057d5,
     type: 2}
   RopeMngPrefab: {fileID: 1445940252311144, guid: 0794285e6c4bb864fa11d1f9f452b63a,
     type: 2}
+  gameMngr: {fileID: 0}
   SpawnerMng: {fileID: 0}
   RopeMng: {fileID: 0}
   AvatarSpwn: {fileID: 0}
   CurrentLevel: {fileID: 0}
   Core: {fileID: 0}
   Arena: {fileID: 0}
+  gameplaySM: {fileID: 0}
+  EndLevelPanelLable: 
+  IsGamePaused: 0
   PinsContainer: {fileID: 0}

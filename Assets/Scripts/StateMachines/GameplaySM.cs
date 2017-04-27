@@ -5,14 +5,9 @@ namespace BlackFox {
 
     public class GameplaySM : StateMachineBase
     {
-        int roundNumber;
-        int levelNumber;
-        int MaxRound;
+        GamePlaySMStates NextState;
 
-        GamePlaySMStates NextState;        
-
-        private void Start()
-        {
+        public void Init() {
             Debug.Log("Start_GamePlaySM");
             CurrentState = new PreInitState();
             NextState = GamePlaySMStates.LevelInitState;
@@ -49,7 +44,7 @@ namespace BlackFox {
                     break;
                 case GamePlaySMStates.RoundEndState:
                     CurrentState = new RoundEndState();
-                    if(roundNumber < MaxRound)
+                    if(GameManager.Instance.LevelMng.roundNumber < GameManager.Instance.LevelMng.MaxRound)
                         NextState = GamePlaySMStates.UpgradeMenuState;
                     else
                         NextState = GamePlaySMStates.GameOverState;
@@ -73,21 +68,7 @@ namespace BlackFox {
             if (CurrentState.OnStateEnd != null)
                 CurrentState.OnStateEnd();
         }
-
-        public void SetRoundNumber(int _roundNumber)
-        {
-            roundNumber = _roundNumber;
-        }
-
-        public void SetMaxRoundNumber(int _maxRoundNumber)
-        {
-            MaxRound = _maxRoundNumber;
-        }
-
-        public void SetLevelNumber(int _levelNumber)
-        {
-            levelNumber = _levelNumber;
-        }
+        
         #endregion
     }
 

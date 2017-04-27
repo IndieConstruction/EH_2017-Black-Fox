@@ -39,7 +39,7 @@ namespace BlackFox
                     if (player.KillPoints == PointsToWin)
                     {
                         player.Victories += 1;
-                        PlayerWin(player.PlayerID);
+                        GameManager.Instance.LevelMng.PlayerWin(player.PlayerID.ToString());
                     }
                     break;
                 }
@@ -62,13 +62,6 @@ namespace BlackFox
             }
         }
 
-        /// <summary>
-        /// Funzione chiamata alla vittoria del player
-        /// </summary>
-        void PlayerWin(PlayerLabel _player)
-        {
-            GameManager.Instance.LevelMng.PlayerWin(_player.ToString());
-        }
 
         #region API
         public void UpdateKillPoints(PlayerLabel _killer, PlayerLabel _victim)

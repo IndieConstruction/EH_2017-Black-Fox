@@ -500,7 +500,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avatar: {fileID: 0}
   MaxLife: 10
-  fireRate: 0
+  fireRate: 0.3
 --- !u!114 &114308403311535660
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -514,7 +514,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PinPrefab: {fileID: 1844589482665234, guid: ea63e453c63a17240a1ecd1ef2fe0917, type: 2}
   PinSpanw: {fileID: 4931294485720276}
-  CoolDownTime: 0
+  CoolDownTime: 2
   CanPlace: 1
 --- !u!114 &114803276105687232
 MonoBehaviour:

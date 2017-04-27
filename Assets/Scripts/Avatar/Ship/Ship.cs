@@ -8,12 +8,15 @@ namespace BlackFox {
     [RequireComponent(typeof(MovementController), typeof(PlacePin), typeof(Shooter))]
     public class Ship : MonoBehaviour, IShooter, IDamageable {
 
-        public GameObject[] ObjToBeColored;
+        List<GameObject> ObjToBeColored;
 
         [HideInInspector]
         public Avatar avatar;
 
-        ShipConfig config;
+        ShipConfig config
+        {
+            get { return avatar.AvatarData.shipConfig; }
+        }
 
         MovementController movment;
         PlacePin pinPlacer;
@@ -48,6 +51,15 @@ namespace BlackFox {
             avatarUi = GetComponentInChildren<AvatarUI>();
             pinPlacer.SetOwner(this);
             damageables = _damageablesPrefabs;
+            ChangeColor();
+        }
+
+        public void ChangeColor()
+        {
+            foreach (MeshRenderer itemToColor in GetComponentsInChildren<MeshRenderer>())
+            {
+                itemToColor.material = config.Materials[(int)avatar.PlayerId];
+            }
         }
 
         /// <summary>
@@ -193,6 +205,13 @@ namespace BlackFox {
     public class ShipConfig
     {
         public Ship Prefab;
-        public List<Material> Materials;
+        
+        public List<ColorVariant> Materials;
+
+        public struct ColorVariant
+        {
+            public int MaterialID;
+            public Material Material;
+        }
     }
 }

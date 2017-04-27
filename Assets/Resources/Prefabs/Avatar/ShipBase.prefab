@@ -498,10 +498,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ee38f66dd8831b43983c29c34c3d0ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjToBeColored:
-  - {fileID: 1208037827019600}
-  - {fileID: 1751797724988260}
-  - {fileID: 1309182698458114}
   avatar: {fileID: 0}
   MaxLife: 10
   fireRate: 0

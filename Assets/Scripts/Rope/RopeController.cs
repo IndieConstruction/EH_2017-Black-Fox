@@ -18,7 +18,6 @@ namespace Rope
         float ropeWidth;
         Vector3 offSet;
         float fragmentDistance;
-        bool IsDestroyingSelf = false;
 
         void Start()
         {
@@ -39,8 +38,6 @@ namespace Rope
             }
             if(AnchorPoint != null)
                 lineRend.SetPosition(fragments.Count, AnchorPoint.position);
-            if(IsDestroyingSelf)
-                DemolishByLast();
         }
 
         /// <summary>
@@ -91,13 +88,6 @@ namespace Rope
                 Debug.Log(fragmentsNeeded + MaxLength + " needed");
             }
             lineRend.positionCount = (fragments.Count) + 1;
-        }
-        /// <summary>
-        /// Destroy last fragment
-        /// </summary>
-        void DemolishByLast()
-        {
-                Destroy(fragments[fragments.Count-1]);
         }
         /// <summary>
         /// Get the offSet vector toward the AnchorPoint
@@ -189,8 +179,13 @@ namespace Rope
         /// </summary>
         public void DestroyDynamically()
         {
+            float destroyTimer = 0;
             AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = null;
-            IsDestroyingSelf = true;
+            for (int i = fragments.Count -1; i >= 0; i--)
+            {
+                destroyTimer += .1f;
+                Destroy(fragments[i], destroyTimer);
+            }
         }
         #endregion
     }

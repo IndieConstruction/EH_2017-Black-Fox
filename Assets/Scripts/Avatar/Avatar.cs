@@ -44,14 +44,6 @@ namespace BlackFox {
         [HideInInspector]
         public Ship ship;
 
-        private void OnDestroy()
-        {
-            if (transform.parent != null)
-                State = AvatarState.Disabled;
-            if(rope != null)
-                Destroy(rope.gameObject);
-        }
-
         /// <summary>
         /// Menage the state switches
         /// </summary>
@@ -124,6 +116,9 @@ namespace BlackFox {
                 else
                     EventManager.OnAgentKilled(null, this);
             }
+
+            if (rope != null)
+                rope.DestroyDynamically();
         }
 
         /// <summary>
@@ -132,7 +127,7 @@ namespace BlackFox {
         /// <param name="_ammo">Le munizioni che rimangono</param>
         public void OnAmmoUpdate(int _ammo)
         {
-            EventManager.OnAmmoValueChanged(Player.ID, _ammo);
+            EventManager.OnAmmoValueChange(this);
         }
         #endregion
 

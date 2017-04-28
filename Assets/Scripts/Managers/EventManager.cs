@@ -16,12 +16,16 @@ namespace BlackFox
 
         #region AvatarEvents
 
-        public delegate void AvatarUIEvent(PlayerLabel _playerID, int _ammo);
+        public delegate void AvatarUIEvent(Avatar _avatar);
 
         /// <summary>
         /// Evento che avvisa lo UIManager di aggiornare le munizioni per un dato Avatar
         /// </summary>
-        public static AvatarUIEvent OnAmmoValueChanged;
+        public static AvatarUIEvent OnAmmoValueChange;
+        /// <summary>
+        /// Evento da chiamare alla variazione delle vita del avatar(o della ship collegata)
+        /// </summary>
+        public static AvatarUIEvent OnLifeValueChange;
 
         #region AgentKilledEvent
         public delegate void AgentKilledEvent(Avatar _killer, Avatar _victim);

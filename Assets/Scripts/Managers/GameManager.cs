@@ -6,16 +6,7 @@ namespace BlackFox
 {
     public class GameManager : MonoBehaviour
     {
-        int levelNumber;
-        public int LevelNumber {
-            get { return levelNumber; }
-            set { levelNumber = value; }
-        }
-
-        public int CurrentCoins;//100
         public static GameManager Instance;
-
-        public bool dontDestroyOnLoad;
 
         public GameObject LevelManagerPrefab;
         public GameObject UIManagerPrefab;
@@ -43,22 +34,14 @@ namespace BlackFox
         {
             //Singleton paradigm
             if (Instance == null)
-            {
                 Instance = this;
-                //For actual debug pourpose
-                if (dontDestroyOnLoad)
-                    DontDestroyOnLoad(gameObject);
-            }
             else
-            {
                 DestroyImmediate(gameObject);
-            }
         }
 
         void Start()
         {
             flowSM = gameObject.AddComponent<FlowSM>();
-            CurrentCoins = PlayerPrefs.GetInt("CurrentCoins");
         }
 
         private void Update()
@@ -74,12 +57,6 @@ namespace BlackFox
         public void QuitApplication()
         {
             Application.Quit();
-        }
-
-        public void AddCoins()
-        {
-            CurrentCoins = CurrentCoins + CoinManager.Coins;
-            PlayerPrefs.SetInt("CurrentCoins", CurrentCoins);
         }
 
         #region Instantiate Managers

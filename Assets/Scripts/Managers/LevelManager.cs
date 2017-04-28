@@ -125,7 +125,6 @@ namespace BlackFox
             levelPointsCounter.ClearAllKillPoints();
             EndLevelPanelLable = "Core Has Been Destroyed";
             gameplaySM.CurrentState.OnStateEnd();
-            //EventManager.TriggerPlayStateEnd();
         }
 
         /// <summary>
@@ -136,9 +135,6 @@ namespace BlackFox
             levelPointsCounter.ClearAllKillPoints();
             EndLevelPanelLable = "Player " + _winner + " Has Won";
             gameplaySM.CurrentState.OnStateEnd();
-            //EventManager.TriggerPlayStateEnd();
-            CoinManager.Coins += 4;
-            gameMngr.AddCoins();
             IsRoundActive = false;
         }
 

@@ -132,6 +132,7 @@ namespace BlackFox
         /// </summary>
         public void PlayerWin(string _winner)
         {
+            NextRound();
             levelPointsCounter.ClearAllKillPoints();
             EndLevelPanelLable = "Player " + _winner + " Has Won";
             gameplaySM.CurrentState.OnStateEnd();

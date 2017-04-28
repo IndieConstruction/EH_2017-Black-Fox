@@ -43,6 +43,15 @@ namespace BlackFox {
         public RopeController rope;
         [HideInInspector]
         public Ship ship;
+        AvatarUI avatarUI;
+
+        /// <summary>
+        /// Crea e prende riferimento dell'AvatarUI
+        /// </summary>
+        void CreateShipUI()
+        {
+            avatarUI = GameManager.Instance.UiMng.CreateAvatarUI(ship.gameObject);
+        }
 
         /// <summary>
         /// Menage the state switches
@@ -78,7 +87,8 @@ namespace BlackFox {
             if (!ship)
                 InstantiateShip();
             ship.Setup(this, LoadIDamageableForShip());
-            if(withRope)
+            CreateShipUI();
+            if (withRope)
                 SetupRope();
         }
 
@@ -129,6 +139,7 @@ namespace BlackFox {
         {
             EventManager.OnAmmoValueChange(this);
         }
+
         #endregion
 
         /// <summary>

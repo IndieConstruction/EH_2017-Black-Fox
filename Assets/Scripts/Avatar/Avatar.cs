@@ -123,7 +123,7 @@ namespace BlackFox {
         /// <param name="_ammo">Le munizioni che rimangono</param>
         public void OnAmmoUpdate(int _ammo)
         {
-            EventManager.OnAmmoValueChanged(Player.ID, _ammo);
+            EventManager.OnAmmoValueChange(this);
         }
         #endregion
 

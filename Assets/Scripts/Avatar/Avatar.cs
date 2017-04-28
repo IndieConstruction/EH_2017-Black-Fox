@@ -44,14 +44,6 @@ namespace BlackFox {
         [HideInInspector]
         public Ship ship;
 
-        private void OnDestroy()
-        {
-            if (transform.parent != null)
-                State = AvatarState.Disabled;
-            if(rope != null)
-                Destroy(rope.gameObject);
-        }
-
         /// <summary>
         /// Menage the state switches
         /// </summary>
@@ -120,6 +112,9 @@ namespace BlackFox {
                 else
                     EventManager.OnAgentKilled(null, this);
             }
+
+            if (rope != null)
+                rope.DestroyDynamically();
         }
 
         /// <summary>

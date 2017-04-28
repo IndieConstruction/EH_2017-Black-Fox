@@ -22,6 +22,8 @@ namespace BlackFox
         [HideInInspector]
         public PauseMenuController pauseMenuController;
 
+        public GameObject AvatarUI;
+
         public IMenu CurrentMenu;
 
         #region API
@@ -123,6 +125,21 @@ namespace BlackFox
             EventManager.OnAmmoValueChanged -= gameUIController.SetBulletsValue;
             Destroy(canvasGameMenu);
         }
+        #endregion
+
+        #region AvatarUI
+
+        /// <summary>
+        /// Crea l'avatarUI
+        /// </summary>
+        /// <param name="_target">l'oggetto a cui attaccare la UI</param>
+        public AvatarUI CreateAvatarUI(GameObject _target)
+        {
+            GameObject tempObj;
+            tempObj = Instantiate(AvatarUI, _target.transform.position, _target.transform.rotation, _target.transform);
+            return tempObj.GetComponentInChildren<AvatarUI>();
+        }
+
         #endregion
 
         #endregion

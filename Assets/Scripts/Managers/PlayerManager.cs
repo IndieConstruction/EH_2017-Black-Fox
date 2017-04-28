@@ -10,34 +10,17 @@ namespace BlackFox
         public List<Player> Players = new List<Player>();
 
         #region API
+        #region Player
         /// <summary>
         /// Instanzia i player
         /// </summary>
         public void InstantiatePlayers()
         {
-            for(int i = 1; i <= 4; i++)
+            for (int i = 1; i <= 4; i++)
             {
                 Player newPlayer = gameObject.AddComponent<Player>();
                 newPlayer.Setup((PlayerLabel)i);
                 Players.Add(newPlayer);
-            }      
-        }
-
-        /// <summary>
-        /// Setup all the avatars of the current players
-        /// </summary>
-        /// <param name="_forceIstance">If true ask for a new istance if there are none</param>
-        public void SetupAvatars(bool _forceIstance = false)
-        {
-            foreach (Player player in Players)
-                player.AvatarSetup(_forceIstance);
-        }
-
-        public void DisableAvatars()
-        {
-            foreach (Player player in Players)
-            {
-                player.Avatar.State = AvatarState.Disabled;
             }
         }
 
@@ -90,6 +73,33 @@ namespace BlackFox
             }
             return null;
         }
+        #endregion
+
+        #region Avatar
+        /// <summary>
+        /// Setup all the avatars of the current players
+        /// </summary>
+        /// <param name="_forceIstance">If true ask for a new istance if there are none</param>
+        public void SetupAvatars(bool _forceIstance = false)
+        {
+            foreach (Player player in Players)
+                player.AvatarSetup(_forceIstance);
+        }
+
+        public void InitAvatars()
+        {
+            foreach (Player player in Players)
+                player.AvatarInit();
+        }
+
+        public void ChangeAvatarsState(AvatarState _state)
+        {
+            foreach (Player player in Players)
+            {
+                player.Avatar.State = _state;
+            }
+        }
+        #endregion
         #endregion
     }
 

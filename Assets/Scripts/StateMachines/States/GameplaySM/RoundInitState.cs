@@ -6,7 +6,6 @@ namespace BlackFox {
 
     public class RoundInitState : StateBase
     {
-
         public override void OnStart()
         {
             Debug.Log("RoundInitState");
@@ -14,7 +13,7 @@ namespace BlackFox {
             GameManager.Instance.LevelMng.InitCore();
             GameManager.Instance.LevelMng.SpawnAllAvatar(0);
             GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.Blocked);
-
+            GameManager.Instance.PlayerMng.InitAvatars();
         }
 
         public override void OnUpdate()

@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace BlackFox {
 
-    public class LevelInitState : StateBase
+    public class RoundInitState : StateBase
     {
 
         public override void OnStart()
         {
-            Debug.Log("LevelInitState");
+            Debug.Log("RoundInitState");
             GameManager.Instance.UiMng.UpdateLevelInformation();
             GameManager.Instance.LevelMng.InitCore();
             GameManager.Instance.LevelMng.SpawnAllAvatar(0);

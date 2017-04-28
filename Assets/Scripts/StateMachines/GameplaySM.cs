@@ -10,7 +10,7 @@ namespace BlackFox {
         public void Init() {
             Debug.Log("Start_GamePlaySM");
             CurrentState = new PreInitState();
-            NextState = GamePlaySMStates.LevelInitState;
+            NextState = GamePlaySMStates.RoundInitState;
         }
 
         protected override void OnCurrentStateEnded()
@@ -20,10 +20,10 @@ namespace BlackFox {
                 case GamePlaySMStates.PreInitState:
                     // caso attualmente non utilizzato
                     CurrentState = new PreInitState();
-                    NextState = GamePlaySMStates.LevelInitState;
+                    NextState = GamePlaySMStates.RoundInitState;
                     break;
-                case GamePlaySMStates.LevelInitState:
-                    CurrentState = new LevelInitState();
+                case GamePlaySMStates.RoundInitState:
+                    CurrentState = new RoundInitState();
                     NextState = GamePlaySMStates.PreStartState;
                     break;
                 case GamePlaySMStates.PreStartState:
@@ -51,7 +51,7 @@ namespace BlackFox {
                     break;
                 case GamePlaySMStates.UpgradeMenuState:
                     CurrentState = new UpgradeMenuState();
-                    NextState = GamePlaySMStates.LevelInitState;
+                    NextState = GamePlaySMStates.RoundInitState;
                     break;
                 case GamePlaySMStates.GameOverState:
                     CurrentState = new GameOverState();
@@ -75,7 +75,7 @@ namespace BlackFox {
     public enum GamePlaySMStates
     {
         PreInitState,
-        LevelInitState,
+        RoundInitState,
         PreStartState,
         PlayState,
         PauseState,

@@ -10,8 +10,8 @@ namespace BlackFox {
     public class AvatarUI : MonoBehaviour {
         public Image KillToview;
         public Slider Ring;
-              
 
+        
         private void Start()
         {
             Ring.value = 0.5f;
@@ -20,10 +20,11 @@ namespace BlackFox {
         /// <summary>
         /// Setta il valore della slider che mostra la vita
         /// </summary>
-        /// <param name="_ship"></param>
-        public void SetLifeSliderValue(Ship _ship) {
-            // Aggiorno la UI
-            Ring.value =  (0.5f * _ship.Life) / _ship.MaxLife;
+        /// <param name="_avatar"></param>
+        public void SetLifeSliderValue(Avatar _avatar) {
+            // Aggiorno la UI se l'avatar che gli viene passato è uguale al componente che ha come padre
+            if (_avatar == GetComponentInParent<Avatar>())
+                Ring.value =  (0.5f * _avatar.ship.Life) / _avatar.ship.MaxLife;
 
             //Logica per cambiare il colore della barra della vita
             //if (Ring.fillAmount < 0.3f) {
@@ -44,5 +45,18 @@ namespace BlackFox {
                 KillToview.transform.localScale = Vector3.zero;
             }).SetEase(Ease.OutBounce);
         }
+
+
+        #region Events
+        private void OnEnable()
+        {
+            EventManager.OnLifeValueChange += SetLifeSliderValue;
+        }
+
+        private void OnDisable()
+        {
+            EventManager.OnLifeValueChange -= SetLifeSliderValue;
+        }
+        #endregion
     }
 }

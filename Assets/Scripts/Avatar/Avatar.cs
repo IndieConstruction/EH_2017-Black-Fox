@@ -33,7 +33,8 @@ namespace BlackFox {
             get { return _state; }
             set {
                 if (Player != null) {
-                    OnStateChange(value, _state);
+                    if(_state != value)
+                        OnStateChange(value, _state);
                     _state = value;
                 }
             }
@@ -43,6 +44,15 @@ namespace BlackFox {
         public RopeController rope;
         [HideInInspector]
         public Ship ship;
+        AvatarUI avatarUI;
+
+        /// <summary>
+        /// Crea e prende riferimento dell'AvatarUI
+        /// </summary>
+        void CreateShipUI()
+        {
+            avatarUI = GameManager.Instance.UiMng.CreateAvatarUI(ship.gameObject);
+        }
 
         /// <summary>
         /// Menage the state switches
@@ -65,8 +75,6 @@ namespace BlackFox {
                     ship.ToggleAbilities(true);
                     ship.transform.localScale = Vector3.one;
                     break;
-                default:
-                    break;
             }
         }
 
@@ -80,9 +88,16 @@ namespace BlackFox {
             if (!ship)
                 InstantiateShip();
             ship.Setup(this, LoadIDamageableForShip());
-            if(withRope)
+            CreateShipUI();
+            if (withRope)
                 SetupRope();
+        }
+
+        public void Init(bool withRope = true)
+        {
             State = AvatarState.Ready;
+            if (withRope)
+                SetupRope();
         }
 
         public void SetupRope()
@@ -125,6 +140,7 @@ namespace BlackFox {
         {
             EventManager.OnAmmoValueChange(this);
         }
+
         #endregion
 
         /// <summary>

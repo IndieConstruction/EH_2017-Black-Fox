@@ -24,24 +24,26 @@ namespace BlackFox {
 
         //Life fields
         public float MaxLife = 10;
-        private float _life = 10;
+        private float _life;
         public float Life {
             get { return _life; }
             private set {
                 _life = value;
-                if (avatarUi != null)
-                    avatarUi.SetLifeSliderValue(this);
+                EventManager.OnLifeValueChange(avatar);
             }
         }
 
-        private void Update() {
-            if (avatar.State == AvatarState.Enabled) {
+        private void Update()
+        {
+            if (avatar.State == AvatarState.Enabled)
+            {
                 CheckInputStatus(avatar.Player.InputStatus);
             }
         }
 
         #region API
-        public void Setup(Avatar _avatar, List<IDamageable> _damageablesPrefabs) {
+        public void Setup(Avatar _avatar, List<IDamageable> _damageablesPrefabs)
+        {
             avatar = _avatar;
             rigid = GetComponent<Rigidbody>();
             Shooter = GetComponent<Shooter>();
@@ -53,20 +55,23 @@ namespace BlackFox {
             ChangeColor(config.Materials[(int)avatar.PlayerId - 1]);
         }
 
+        /// <summary>
+        /// Initialize initial values of Avatar
+        /// </summary>
+        public void Init()
+        {
+            Life = MaxLife;
+        }
+
         public void ChangeColor(Material _mat)
         {
-            foreach (var m in GetComponentsInChildren<MeshRenderer>()) {
+            foreach (var m in GetComponentsInChildren<MeshRenderer>())
+            {
                 Material[] mats = new Material[] { _mat };
                 m.materials = mats;
             } 
         }
 
-        /// <summary>
-        /// Initialize initial values of Avatar
-        /// </summary>
-        public void Init() {
-            Life = MaxLife;
-        }
         #endregion
 
         void CheckInputStatus(InputStatus _inputStatus) {
@@ -146,7 +151,8 @@ namespace BlackFox {
 
             Life -= _damage;
             damageTween = transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f);
-            if (Life < 1) {
+            if (Life < 1)
+            {
                 avatar.ShipDestroy(_attacker.GetComponent<Ship>().avatar);
                 avatar.State = AvatarState.Disabled;
                 transform.DOScale(Vector3.zero, 0.5f);

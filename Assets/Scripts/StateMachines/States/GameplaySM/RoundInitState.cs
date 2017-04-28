@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BlackFox {
 
-    public class LevelInitState : StateBase
+    public class RoundInitState : StateBase
     {
 
         public override void OnStart()

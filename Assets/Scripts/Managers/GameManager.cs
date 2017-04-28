@@ -6,13 +6,6 @@ namespace BlackFox
 {
     public class GameManager : MonoBehaviour
     {
-        int levelNumber;
-
-        public int LevelNumber {
-            get { return levelNumber; }
-            set { levelNumber = value; }
-        }
-        public int CurrentCoins;//100
         public static GameManager Instance;
 
         public bool dontDestroyOnLoad;
@@ -58,7 +51,6 @@ namespace BlackFox
         void Start()
         {
             flowSM = gameObject.AddComponent<FlowSM>();
-            CurrentCoins = PlayerPrefs.GetInt("CurrentCoins");
         }
 
         private void Update()
@@ -104,10 +96,6 @@ namespace BlackFox
         }
         #endregion
         #endregion
-      public void AddCoins(){
-            CurrentCoins = CurrentCoins + CoinManager.Coins;
-            PlayerPrefs.SetInt("CurrentCoins", CurrentCoins);
-        }
     }
     
    

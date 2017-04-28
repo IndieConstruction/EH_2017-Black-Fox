@@ -8,8 +8,6 @@ namespace BlackFox
     {
         public static GameManager Instance;
 
-        public bool dontDestroyOnLoad;
-
         public GameObject LevelManagerPrefab;
         public GameObject UIManagerPrefab;
         public GameObject PlayerManagerPrefab;
@@ -36,16 +34,9 @@ namespace BlackFox
         {
             //Singleton paradigm
             if (Instance == null)
-            {
                 Instance = this;
-                //For actual debug pourpose
-                if (dontDestroyOnLoad)
-                    DontDestroyOnLoad(gameObject);
-            }
             else
-            {
                 DestroyImmediate(gameObject);
-            }
         }
 
         void Start()

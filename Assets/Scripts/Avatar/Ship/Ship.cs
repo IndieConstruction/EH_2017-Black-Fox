@@ -29,8 +29,7 @@ namespace BlackFox {
             get { return _life; }
             private set {
                 _life = value;
-                if (avatarUi != null)
-                    avatarUi.SetLifeSliderValue(this);
+                EventManager.OnLifeValueChange(avatar);
             }
         }
 

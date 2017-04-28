@@ -33,7 +33,8 @@ namespace BlackFox {
             get { return _state; }
             set {
                 if (Player != null) {
-                    OnStateChange(value, _state);
+                    if(_state != value)
+                        OnStateChange(value, _state);
                     _state = value;
                 }
             }

@@ -31,21 +31,21 @@ namespace BlackFox
         /// </summary>
         /// <param name="_playerID"></param>
         /// <param name="_remainigAmmo"></param>
-        public void SetBulletsValue(PlayerLabel _playerID, int _remainigAmmo)
+        public void SetBulletsValue(Avatar _avatar)
         {
-            switch (_playerID)   
+            switch (_avatar.PlayerId)   
             {
                 case PlayerLabel.One:
-                    Player1BulletCount.text = _remainigAmmo.ToString();
+                    Player1BulletCount.text = _avatar.ship.Shooter.ammo.ToString();
                     break;
                 case PlayerLabel.Two:
-                    Player2BulletCount.text = _remainigAmmo.ToString();
+                    Player2BulletCount.text = _avatar.ship.Shooter.ammo.ToString();
                     break;
                 case PlayerLabel.Three:
-                    Player3BulletCount.text = _remainigAmmo.ToString();
+                    Player3BulletCount.text = _avatar.ship.Shooter.ammo.ToString();
                     break;
                 case PlayerLabel.Four:
-                    Player4BulletCount.text = _remainigAmmo.ToString();
+                    Player4BulletCount.text = _avatar.ship.Shooter.ammo.ToString();
                     break;
                 default:
                     break;

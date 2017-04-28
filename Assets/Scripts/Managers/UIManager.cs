@@ -114,7 +114,7 @@ namespace BlackFox
             pauseMenuController = GetComponentInChildren<PauseMenuController>();
             gameUIController = GetComponentInChildren<GameUIController>();
             Counter = GetComponentInChildren<Counter>();
-            EventManager.OnAmmoValueChanged += gameUIController.SetBulletsValue;
+            EventManager.OnAmmoValueChange += gameUIController.SetBulletsValue;
         }
 
         /// <summary>
@@ -122,7 +122,7 @@ namespace BlackFox
         /// </summary>
         public void DestroyGameMenu()
         {
-            EventManager.OnAmmoValueChanged -= gameUIController.SetBulletsValue;
+            EventManager.OnAmmoValueChange -= gameUIController.SetBulletsValue;
             Destroy(canvasGameMenu);
         }
         #endregion
@@ -143,21 +143,5 @@ namespace BlackFox
         #endregion
 
         #endregion
-
-
-        #region Events
-
-        private void OnEnable()
-        {
-            
-        }
-
-        private void OnDisable()
-        {
-            
-        }
-
-        #endregion
-
     }
 }

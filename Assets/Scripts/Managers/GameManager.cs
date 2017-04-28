@@ -13,7 +13,6 @@ namespace BlackFox
         public GameObject PlayerManagerPrefab;
         public GameObject CoinManagerPrefab;
         public GameObject AudioManagerPrefab;
-        public GameObject DamageableLoaderPrefab;
 
         public Level LevelScriptableObj;
 

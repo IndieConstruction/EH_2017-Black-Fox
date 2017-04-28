@@ -44,7 +44,8 @@ namespace BlackFox {
         [HideInInspector]
         public Ship ship;
 
-        private void OnDestroy() {
+        private void OnDestroy()
+        {
             if (transform.parent != null)
                 State = AvatarState.Disabled;
             if(rope != null)
@@ -56,23 +57,24 @@ namespace BlackFox {
         /// </summary>
         /// <param name="_newState"></param>
         /// <param name="_oldState"></param>
-        void OnStateChange(AvatarState _newState, AvatarState _oldState) {
-            switch (_newState) {
+        void OnStateChange(AvatarState _newState, AvatarState _oldState)
+        {
+            switch (_newState)
+            {
                 case AvatarState.Disabled:
                     ship.ToggleAbilities(false);
-                    if (rope != null) {
+                    if (rope != null)
                         Destroy(rope.gameObject); 
-                    }
-                break;
+                    break;
                 case AvatarState.Ready:
                     ship.Init();
-                break;
+                    break;
                 case AvatarState.Enabled:
                     ship.ToggleAbilities(true);
                     ship.transform.localScale = Vector3.one;
                     break;
                 default:
-                break;
+                    break;
             }
         }
 
@@ -80,7 +82,8 @@ namespace BlackFox {
         /// <summary>
         /// Required to setup the player (also launched on Start of this class)
         /// </summary>
-        public void Setup(Player _player, bool withRope = true) {
+        public void Setup(Player _player, bool withRope = true)
+        {
             Player = _player;
             if (!ship)
                 InstantiateShip();
@@ -90,7 +93,8 @@ namespace BlackFox {
             State = AvatarState.Ready;
         }
 
-        public void SetupRope() {
+        public void SetupRope()
+        {
             if (GameManager.Instance.LevelMng.RopeMng != null && rope == null)
                 GameManager.Instance.LevelMng.RopeMng.AttachNewRope(this);
         }
@@ -99,7 +103,7 @@ namespace BlackFox {
         {
             // TODO : controllare che la ship non sia doppia
             Transform transf = GameManager.Instance.LevelMng.AvatarSpwn.GetMySpawnPoint(PlayerId);
-            ship = Instantiate(AvatarData.shipConfig.Prefab,transf.position, transf.rotation , transform).GetComponent<Ship>();
+            ship = Instantiate(AvatarData.shipConfig.Prefab, transf.position, transf.rotation , transform).GetComponent<Ship>();
         }
 
         /// <summary>
@@ -107,8 +111,10 @@ namespace BlackFox {
         /// passando come parametri chi ha distrutto la ship e l'ID del player a cui appartiene
         /// </summary>
         /// <param name="_attacker">L'avatar che ha distrutto la ship</param>
-        public void ShipDestroy(Avatar _attacker) {
-            if (EventManager.OnAgentKilled != null) {
+        public void ShipDestroy(Avatar _attacker)
+        {
+            if (EventManager.OnAgentKilled != null)
+            {
                 if (_attacker != null)
                     EventManager.OnAgentKilled(_attacker, this);
                 else
@@ -144,7 +150,8 @@ namespace BlackFox {
         }
     }
 
-    public enum AvatarState {
+    public enum AvatarState
+    {
         Disabled = 0,
         Ready = 1,
         Enabled = 2

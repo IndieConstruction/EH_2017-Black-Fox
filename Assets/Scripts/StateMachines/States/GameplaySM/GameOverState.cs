@@ -9,21 +9,13 @@ namespace BlackFox {
         public override void OnStart()
         {
             Debug.Log("GameOverState");
-            UnloadArena();
+            GameManager.Instance.DestroyLevelManager();
         }
 
         public override void OnUpdate()
         {
             if (OnStateEnd != null)
                 OnStateEnd();
-        }
-
-        /// <summary>
-        /// Distrugge il level manager che ha come figlo l'intero livello
-        /// </summary>
-        void UnloadArena()
-        {
-            GameObject.Destroy(GameManager.Instance.LevelMng.gameObject, 0.1f);
         }
     }
 }

@@ -10,8 +10,7 @@ namespace BlackFox
     /// It menages the SpawnPoint position during the Level
     /// </summary>
     public class AvatarSpawner : MonoBehaviour
-    {
-        
+    {      
         private List<AvatarSpawnPoint> _originalSpawns;
         /// <summary>
         /// Rende delle transform specifiche utilizzabili come spawn point per player specifico
@@ -81,8 +80,10 @@ namespace BlackFox
         /// </summary>
         /// <param name="_label"></param>
         /// <returns></returns>
-        public Transform GetMySpawnPoint(PlayerLabel _label) {
-            foreach (AvatarSpawnPoint spawnPt in OriginalSpawns) {
+        public Transform GetMySpawnPoint(PlayerLabel _label)
+        {
+            foreach (AvatarSpawnPoint spawnPt in OriginalSpawns)
+            {
                 if (_label == spawnPt.PlayerID)
                     return spawnPt.SpawnPosition;
             }

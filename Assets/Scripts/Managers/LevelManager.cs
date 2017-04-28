@@ -56,7 +56,6 @@ namespace BlackFox
             set { _isRoundActive = value; }
         }
 
-
         #region Containers
         public Transform PinsContainer;
         #endregion
@@ -69,7 +68,6 @@ namespace BlackFox
         }
 
         #region API
-
         #region Instantiation
         /// <summary>
         /// Funzione che ritorna lo scriptable del livello da caricare
@@ -119,21 +117,62 @@ namespace BlackFox
         #endregion
 
         #region Level
+        /// <summary>
+        /// Funzione da eseguire alla morte del core
+        /// </summary>
+        public void CoreDeath()
+        {
+            levelPointsCounter.ClearAllKillPoints();
+            EndLevelPanelLable = "Core Has Been Destroyed";
+            gameplaySM.CurrentState.OnStateEnd();
+            //EventManager.TriggerPlayStateEnd();
+        }
+
+        /// <summary>
+        /// Funzione che contiene le azioni da eseguire alla vittoria del player
+        /// </summary>
+        public void PlayerWin(string _winner)
+        {
+            levelPointsCounter.ClearAllKillPoints();
+            EndLevelPanelLable = "Player " + _winner + " Has Won";
+            gameplaySM.CurrentState.OnStateEnd();
+            //EventManager.TriggerPlayStateEnd();
+            CoinManager.Coins += 4;
+            gameMngr.AddCoins();
+            IsRoundActive = false;
+        }
+
+        /// <summary>
+        /// Attiva lo stato di pausa della GameplaySM e imposta a menu input i comandi del player che ha chiamato la fuznione
+        /// mentre l'input degli altri player viene disabilitato
+        /// </summary>
+        /// <param name="_playerID"></param>
+        public void PauseGame(PlayerLabel _playerID)
+        {
+            // TODO : controllare uso corretto di if
+            if (!IsGamePaused)
+            {
+                IsGamePaused = true;
+                GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInput, _playerID, PlayerState.Blocked);
+                gameplaySM.GoToState(GamePlaySMStates.PauseState);
+            }
+        }
 
         /// <summary>
         /// Avanza di round.
         /// </summary>
-        public void NextRound() {
+        public void NextRound()
+        {
             roundNumber++;
         }
 
         /// <summary>
         /// Chiamato quando inizia il round.
         /// </summary>
-        public void RoundBegin() {
+        public void RoundBegin()
+        {
             IsRoundActive = true;
         }
-
         #endregion
 
         #region Avatar
@@ -155,6 +194,7 @@ namespace BlackFox
             if(EventManager.OnPointsUpdate != null)
                 EventManager.OnPointsUpdate();
         }
+
         /// <summary>
         /// Return the current points (due to kills) of the Player
         /// </summary>
@@ -164,25 +204,16 @@ namespace BlackFox
         {
             return levelPointsCounter.GetPlayerKillPoints(_playerID);
         }
-        /// <summary>
-        /// Destroy all Avatars
-        /// </summary>
-        public void DestroyAllAvatars()
-        {
-            foreach (Player player in gameMngr.PlayerMng.Players)
-            {
-                player.DestroyAvatar();
-            }
-        }
+
         /// <summary>
         /// Instance new avatars
         /// </summary>
         /// <param name="_spawnTime"></param>
-        public void SpawnAllAvatar(float _spawnTime) {
+        public void SpawnAllAvatar(float _spawnTime)
+        {
             //foreach (Player player in GameManager.Instance.PlayerMng.Players.Where(p => p.Avatar != null)) {
-            foreach (Player player in GameManager.Instance.PlayerMng.Players) {
+            foreach (Player player in GameManager.Instance.PlayerMng.Players)
                 AvatarSpwn.RespawnAvatar(player, _spawnTime);
-            }
         }
         #endregion
 
@@ -196,47 +227,6 @@ namespace BlackFox
                 Core.Init();
         }
         #endregion
-
-        /// <summary>
-        /// Funzione da eseguire alla morte del core
-        /// </summary>
-        public void CoreDeath()
-        {
-            levelPointsCounter.ClearAllKillPoints();
-            EndLevelPanelLable = "Core Has Been Destroyed";
-            gameplaySM.CurrentState.OnStateEnd();
-            //EventManager.TriggerPlayStateEnd();
-        }
-
-        /// <summary>
-        /// Funzione che contiene le azioni da eseguire alla vittoria del player
-        /// </summary>
-        public void PlayerWin(string _winner)
-        {
-            levelPointsCounter.ClearAllKillPoints();
-            EndLevelPanelLable = "Player " + _winner + " Has Won";
-            gameplaySM.CurrentState.OnStateEnd();
-            //EventManager.TriggerPlayStateEnd();
-            CoinManager.Coins +=4;
-            gameMngr.AddCoins();
-            IsRoundActive = false;
-        }
-
-        /// <summary>
-        /// Attiva lo stato di pausa della GameplaySM e imposta a menu input i comandi del player che ha chiamato la fuznione
-        /// mentre l'input degli altri player viene disabilitato
-        /// </summary>
-        /// <param name="_playerID"></param>
-        public void PauseGame(PlayerLabel _playerID)
-        {
-            // TODO : controllare uso corretto di if
-            if (!IsGamePaused)
-            {
-                IsGamePaused = true;
-                GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInput, _playerID, PlayerState.Blocked);
-                gameplaySM.GoToState(GamePlaySMStates.PauseState);
-            }            
-        }
         #endregion
 
         #region GameplaySM
@@ -254,16 +244,19 @@ namespace BlackFox
         /// <summary>
         /// Destroy and Initialize a new PinsContainer
         /// </summary>
-        void ResetPinsContainer(Transform _parent) {
+        void ResetPinsContainer(Transform _parent)
+        {
             if (PinsContainer)
                 Destroy(PinsContainer.gameObject);
             PinsContainer = new GameObject("PinsContainer").transform;
             PinsContainer.transform.parent = _parent;
         }
+
         /// <summary>
         /// Remove all Pins in Scene
         /// </summary>
-        public void CleanPins() {
+        public void CleanPins()
+        {
             ResetPinsContainer(Arena.transform);
         }
         #endregion

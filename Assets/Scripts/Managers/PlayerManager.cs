@@ -22,13 +22,23 @@ namespace BlackFox
                 Players.Add(newPlayer);
             }      
         }
+
         /// <summary>
         /// Setup all the avatars of the current players
         /// </summary>
         /// <param name="_forceIstance">If true ask for a new istance if there are none</param>
-        public void SetupAvatars(bool _forceIstance = false) {
+        public void SetupAvatars(bool _forceIstance = false)
+        {
             foreach (Player player in Players)
                 player.AvatarSetup(_forceIstance);
+        }
+
+        public void DisableAvatars()
+        {
+            foreach (Player player in Players)
+            {
+                player.Avatar.State = AvatarState.Disabled;
+            }
         }
 
         /// <summary>
@@ -52,9 +62,7 @@ namespace BlackFox
         public void ChangeAllPlayersState(PlayerState _playerState)
         {
             foreach (Player player in Players)
-            {
                 player.PlayerCurrentState = _playerState;
-            }
         }
 
         public void ChangeAllPlayersStateExceptOne(PlayerState _playerState, PlayerLabel _playerID, PlayerState _otherPlayersState)

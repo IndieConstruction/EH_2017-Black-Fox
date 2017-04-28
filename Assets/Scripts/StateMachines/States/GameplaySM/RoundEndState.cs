@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using XInputDotNetPure;
-
 
 namespace BlackFox
 {
@@ -15,7 +13,6 @@ namespace BlackFox
             GameManager.Instance.UiMng.endRoundUI.SetEndRoundPanelStatus(true);
             GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInput, PlayerLabel.One, PlayerState.Blocked);
         }
-
         
         public override void OnEnd()
         {

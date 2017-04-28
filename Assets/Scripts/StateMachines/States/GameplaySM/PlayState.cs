@@ -8,8 +8,9 @@ namespace BlackFox
     {
         public override void OnStart()
         {
-            GameManager.Instance.LevelMng.RoundBegin();
             Debug.Log("PlayState");
+            GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.PlayInput);
+            GameManager.Instance.LevelMng.RoundBegin();
             EventManager.OnAgentKilled += HandleOnAgentKilled;
         }
 

@@ -27,10 +27,9 @@ namespace BlackFox
                         CounterLable.text = "GO!!!";
                         transform.DOScale(new Vector3(1f, 1f, 1f), 0.6f).OnComplete(() =>
                         {
-                            GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.PlayInput);
-                            GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
                             transform.DOScale(new Vector3(0f, 0f, 0f), 0.5f).OnComplete(() =>
                             {
+                                GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
                             }).SetEase(Ease.InExpo);
                         }).SetEase(Ease.OutBounce);
                     }).SetEase(Ease.OutBounce);
@@ -38,5 +37,7 @@ namespace BlackFox
             }).SetEase(Ease.OutBounce);
 
         }
+
+
     }
 }

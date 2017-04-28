@@ -7,11 +7,11 @@ namespace BlackFox
     public class GameManager : MonoBehaviour
     {
         int levelNumber;
-
         public int LevelNumber {
             get { return levelNumber; }
             set { levelNumber = value; }
         }
+
         public int CurrentCoins;//100
         public static GameManager Instance;
 
@@ -76,6 +76,12 @@ namespace BlackFox
             Application.Quit();
         }
 
+        public void AddCoins()
+        {
+            CurrentCoins = CurrentCoins + CoinManager.Coins;
+            PlayerPrefs.SetInt("CurrentCoins", CurrentCoins);
+        }
+
         #region Instantiate Managers
         public void InstantiateLevelManager()
         {
@@ -84,16 +90,23 @@ namespace BlackFox
             // TODO : modificare assegnazione del level number
             LevelMng.levelNumber = 1;
         }
+        public void DestroyLevelManager()
+        {
+            if(LevelMng)
+                Destroy(LevelMng.gameObject);
+        }
+
         public void InstantiateCoinManager()
         {
             CoinMng = Instantiate(CoinManagerPrefab, transform).GetComponent<CoinManager>();
         }
+
         public void InstantiateUIManager()
         {
             UiMng = Instantiate(UIManagerPrefab, transform).GetComponent<UIManager>();
         }
 
-        public void InstantiateAvatarManager()
+        public void InstantiatePlayerManager()
         {
             PlayerMng = Instantiate(PlayerManagerPrefab, transform).GetComponent<PlayerManager>();
         }
@@ -104,13 +117,6 @@ namespace BlackFox
         }
         #endregion
         #endregion
-      public void AddCoins(){
-            CurrentCoins = CurrentCoins + CoinManager.Coins;
-            PlayerPrefs.SetInt("CurrentCoins", CurrentCoins);
-        }
     }
-    
-   
-
 }
 

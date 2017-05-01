@@ -29,7 +29,8 @@ namespace BlackFox {
             get { return _life; }
             private set {
                 _life = value;
-                EventManager.OnLifeValueChange(avatar);
+                if(EventManager.OnLifeValueChange != null)
+                    EventManager.OnLifeValueChange(avatar);
             }
         }
 

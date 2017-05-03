@@ -137,6 +137,8 @@ namespace BlackFox
             EndLevelPanelLable = "Player " + _winner + " Has Won";
             gameplaySM.CurrentState.OnStateEnd();
             IsRoundActive = false;
+            CoinManager.coins += 4;
+            CoinManager.AddCoins();
         }
 
         /// <summary>

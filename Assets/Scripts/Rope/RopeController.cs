@@ -73,14 +73,14 @@ namespace Rope
                 //Is the AnchroPoint closer than the offSet? If so stop building the rope
                 if (Vector3.Distance(position, AnchorPoint.position) <= fragmentDistance)
                 {
-                    ForceConnect(AnchorPoint.gameObject, newFragment.GetComponent<Rigidbody>());
+                    ForceConnect(AnchorPoint.gameObject, newFragment.GetComponent<Rigidbody>(),offSet);
                     break;
                 }
             }
 
             if (AnchorPoint.GetComponent<ConfigurableJoint>() != null && AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody == null)
             {
-                ForceConnect(AnchorPoint.gameObject, fragments[fragments.Count - 1].GetComponent<Rigidbody>());
+                ForceConnect(AnchorPoint.gameObject, fragments[fragments.Count - 1].GetComponent<Rigidbody>(),offSet);
                 Debug.Log("WARNING: MaxLength not enough to reach " + AnchorPoint.name + " in " + AnchorPoint.position);
                 int fragmentsNeeded = (int)(Vector3.Distance(AnchorPoint.position, fragments[fragments.Count - 1].transform.position) / offSet.magnitude);
                 Debug.Log(fragmentsNeeded + MaxLength + " needed");
@@ -92,7 +92,7 @@ namespace Rope
         /// </summary>
         /// <param name="_target"></param>
         /// <param name="_elemToConnect"></param>
-        void ForceConnect(GameObject _target, Rigidbody _elemToConnect)
+        void ForceConnect(GameObject _target, Rigidbody _elemToConnect, Vector3 _offset)
         {
             ConfigurableJoint joint;
             if (_target.GetComponent<ConfigurableJoint>() != null)
@@ -103,6 +103,7 @@ namespace Rope
             joint.xMotion = ConfigurableJointMotion.Locked;
             joint.yMotion = ConfigurableJointMotion.Locked;
             joint.zMotion = ConfigurableJointMotion.Locked;
+            joint.connectedAnchor = _offset * 0.9f;
             joint.projectionMode = JointProjectionMode.PositionAndRotation;
 
             joint.connectedBody = _elemToConnect;
@@ -137,19 +138,7 @@ namespace Rope
             fragments.Add(gameObject);
             BuildRope(gameObject);
         }
-        /// <summary>
-        /// Extend the rope if possible
-        /// </summary>
-        public void ExtendRope()
-        {
-            //Prevent to extend the rope over MaxLength
-            if (fragments.Count >= MaxLength)
-                return;
-            if(AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody != null)
-                AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody = null;
-
-            BuildRope(fragments[fragments.Count - 1]);
-        }
+        
         /// <summary>
         /// Extend the rope by required amount
         /// </summary>
@@ -189,7 +178,7 @@ namespace Rope
                 joint.connectedAnchor = offSet * 0.9f;                
             }
             //Reconnect the AnchorPoint
-            ForceConnect(AnchorPoint.gameObject, fragments[fragments.Count -1].GetComponent<Rigidbody>());
+            ForceConnect(AnchorPoint.gameObject, fragments[fragments.Count -1].GetComponent<Rigidbody>(), offSet);
             
             lineRend.positionCount = (fragments.Count) + 1;
 
@@ -199,13 +188,14 @@ namespace Rope
         /// </summary>
         public void DestroyDynamically()
         {
-            float destroyTimer = 0;
+            Destroy(gameObject);
+            //float destroyTimer = 0;
             
-            for (int i = fragments.Count -1; i >= 0; i--)
-            {
-                destroyTimer += .1f;
-                Destroy(fragments[i], destroyTimer);
-            }
+            //for (int i = fragments.Count -1; i >= 0; i--)
+            //{
+            //    destroyTimer += .1f;
+            //    Destroy(fragments[i], destroyTimer);
+            //}
         }
         #endregion
     }

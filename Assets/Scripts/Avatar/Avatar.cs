@@ -127,7 +127,9 @@ namespace BlackFox {
             }
 
             if (rope != null)
+            {
                 rope.DestroyDynamically();
+            }
         }
 
         /// <summary>

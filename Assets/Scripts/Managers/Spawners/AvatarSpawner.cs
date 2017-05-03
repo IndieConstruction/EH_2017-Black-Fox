@@ -28,13 +28,33 @@ namespace BlackFox
         /// <summary>
         /// Additional SpawnPoints
         /// </summary>
-        public List<AvatarSpawnPoint> SpawnPoints;
+        public List<AvatarSpawnPoint> SpawnPoints;        
 
+        /// <summary>
+        /// Respawn a Player without cooldown
+        /// </summary>
+        /// <param name="_player">Player to spawn</param>
+        void Spawn(Player _player)
+        {
+            //con una lista che prevede il corretto criterio di selezione degli spawn points.
+            foreach (AvatarSpawnPoint spawn in OriginalSpawns)
+            {
+                if (spawn.PlayerID == _player.ID)
+                {
+                    Avatar newAgent = _player.Avatar;
+                    newAgent.ship.transform.position = spawn.SpawnPosition.position;
+                    newAgent.ship.transform.rotation = spawn.SpawnPosition.rotation;
+                    return;
+                }
+            }
+        }
+
+        #region API
         /// <summary>
         /// Save the desired SpawnPoints
         /// </summary>
         public void Init()
-        {           
+        {
             if (SpawnPoints != null)
                 foreach (AvatarSpawnPoint spwnPt in SpawnPoints)
                 {
@@ -73,27 +93,6 @@ namespace BlackFox
                 }
             }
         }
-
-        /// <summary>
-        /// Respawn a Player without cooldown
-        /// </summary>
-        /// <param name="_player">Player to spawn</param>
-        void Spawn(Player _player)
-        {
-            //con una lista che prevede il corretto criterio di selezione degli spawn points.
-            foreach (AvatarSpawnPoint spawn in OriginalSpawns)
-            {
-                if (spawn.PlayerID == _player.ID)
-                {
-                    Avatar newAgent = _player.Avatar;
-                    newAgent.ship.transform.position = spawn.SpawnPosition.position;
-                    newAgent.ship.transform.rotation = spawn.SpawnPosition.rotation;
-                    return;
-                }
-            }
-        }
-
-        #region API
         /// <summary>
         /// Get the spawn point transform relative the the player(parameter)
         /// </summary>
@@ -121,8 +120,8 @@ namespace BlackFox
         /// <param name="_playerIndx">Player to spawn</param>
         public void SpawnAvatar(Player _player, float _spawnTime)
         {
-            _player.Avatar.State = AvatarState.Ready;
             Spawn(_player);
+            _player.Avatar.State = AvatarState.Ready;
             StartCoroutine(RespawnCooldown(_player,_spawnTime));
         }
         IEnumerator RespawnCooldown(Player _playerID, float _spawnTime)

@@ -9,9 +9,9 @@ namespace BlackFox {
         public override void OnStart()
         {
             Debug.Log("RoundInitState");
+            GameManager.Instance.LevelMng.SpawnAllAvatar(0);
             GameManager.Instance.UiMng.UpdateLevelInformation();
             GameManager.Instance.LevelMng.InitCore();
-            GameManager.Instance.LevelMng.SpawnAllAvatar(0);
             GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.Blocked);
         }
 

@@ -43,7 +43,7 @@ namespace BlackFox
                     GameManager.Instance.LevelMng.PlayerWin("CheatCode");
                     break;
                 case "level":
-                    GameManager.Instance.LevelMng.gameplaySM.GoToState(GamePlaySMStates.GameOverState);
+                    GameManager.Instance.LevelMng.gameplaySM.SetPassThroughOrder(new List<StateBase>() { new CleanSceneState(), new GameOverState()});
                     break;
 
                 default:

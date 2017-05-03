@@ -15,50 +15,88 @@ namespace BlackFox {
 
         protected override void OnCurrentStateEnded()
         {
-            switch (NextState)
-            {
-                case GamePlaySMStates.PreInitState:
-                    // caso attualmente non utilizzato
-                    CurrentState = new PreInitState();
-                    NextState = GamePlaySMStates.RoundInitState;
-                    break;
-                case GamePlaySMStates.RoundInitState:
+            switch (CurrentState.StateName) {
+                case "BlackFox.PreInitState":
                     CurrentState = new RoundInitState();
-                    NextState = GamePlaySMStates.PreStartState;
                     break;
-                case GamePlaySMStates.PreStartState:
+                case "BlackFox.RoundInitState":
                     CurrentState = new PreStartState();
-                    NextState = GamePlaySMStates.PlayState;
                     break;
-                case GamePlaySMStates.PlayState:
+                case "BlackFox.PreStartState":
                     CurrentState = new PlayState();
-                    NextState = GamePlaySMStates.CleanSceneState;
                     break;
-                case GamePlaySMStates.PauseState:
-                    CurrentState = new PauseState();
-                    NextState = GamePlaySMStates.PlayState;
-                    break;
-                case GamePlaySMStates.CleanSceneState:
+                case "BlackFox.PlayState":
                     CurrentState = new CleanSceneState();
-                    NextState = GamePlaySMStates.RoundEndState;
                     break;
-                case GamePlaySMStates.RoundEndState:
+
+                case "BlackFox.PauseState":
+                    CurrentState = new PlayState();
+                    break;
+                case "BlackFox.CleanSceneState":
                     CurrentState = new RoundEndState();
+                    break;
+                case "BlackFox.RoundEndState":
                     if(GameManager.Instance.LevelMng.roundNumber < GameManager.Instance.LevelMng.MaxRound)
-                        NextState = GamePlaySMStates.UpgradeMenuState;
+                        CurrentState = new UpgradeMenuState();
                     else
-                        NextState = GamePlaySMStates.GameOverState;
+                        CurrentState = new GameOverState();
                     break;
-                case GamePlaySMStates.UpgradeMenuState:
-                    CurrentState = new UpgradeMenuState();
-                    NextState = GamePlaySMStates.RoundInitState;
+                case "BlackFox.UpgradeMenuState":
+                    CurrentState = new RoundInitState();
                     break;
-                case GamePlaySMStates.GameOverState:
-                    CurrentState = new GameOverState();
-                    if (OnMachineEnd != null)
-                        OnMachineEnd("GameplaySM");
+                case "BlackFox.GameOverState":
+                    if (GameplaySM.OnMachineEnd != null)
+                        GameplaySM.OnMachineEnd("GameplaySM");
                     break;
             }
+            
+        }
+
+        protected override bool CheckRules(StateBase _newState, StateBase _oldState) 
+        {
+            if (_oldState == null) 
+                return true;
+            
+
+            switch (_newState.StateName) {
+                case "BlackFox.PreInitState":
+                        return true;
+                case "BlackFox.RoundInitState":
+                    if (_oldState.StateName == "BlackFox.PreInitState")
+                        return true;
+                    break;
+                case "BlackFox.PreStartState":
+                    if (_oldState.StateName == "BlackFox.RoundInitState")
+                        return true;
+                    break;
+                case "BlackFox.PlayState":
+                    if (_oldState.StateName == "BlackFox.PreStartState")
+                        return true;
+                    break;
+                
+                case "BlackFox.PauseState":
+                    if (_oldState.StateName == "BlackFox.PlayState")
+                        return true;
+                    break;
+                case "BlackFox.CleanSceneState":
+                    if (_oldState.StateName == "BlackFox.PlayState" || _oldState.StateName == "BlackFox.PauseState")
+                        return true;
+                    break;
+                case "BlackFox.RoundEndState":
+                    if (_oldState.StateName == "BlackFox.CleanSceneState")
+                        return true;
+                    break;
+                case "BlackFox.UpgradeMenuState":
+                    if (_oldState.StateName == "BlackFox.RoundEndState")
+                        return true;
+                    break;
+                case "BlackFox.GameOverState":
+                    if (_oldState.StateName == "BlackFox.RoundEndState" || _oldState.StateName == "BlackFox.CleanSceneState")
+                        return true;
+                    break;
+
+            }
+            return false;
         }
 
         #region API

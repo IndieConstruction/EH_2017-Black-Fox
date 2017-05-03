@@ -24,6 +24,7 @@ namespace BlackFox
         public override void OnEnd()
         {
             GameManager.Instance.UiMng.DestroyGameMenu();
+            GameManager.Instance.DestroyLevelManager();
             StateMachineBase.OnMachineEnd -= OnMachineEnd;
         }
 

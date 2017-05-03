@@ -235,6 +235,8 @@ namespace BlackFox
             gameplaySM = gameObject.AddComponent<GameplaySM>();
             gameplaySM.Init();
         }
+
+        
         #endregion
 
         #region Pins

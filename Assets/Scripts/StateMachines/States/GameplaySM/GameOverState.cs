@@ -6,17 +6,15 @@ namespace BlackFox {
 
     public class GameOverState : StateBase {
 
-        public override void OnStart()
-        {
+        public override void OnStart() {
             Debug.Log("GameOverState");
             GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.Blocked);
-            GameManager.Instance.DestroyLevelManager();
         }
 
-        public override void OnUpdate()
-        {
+        public override void OnUpdate() {
             if (OnStateEnd != null)
                 OnStateEnd();
         }
+
     }
 }

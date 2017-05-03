@@ -28,7 +28,7 @@ namespace BlackFox
             GameManager.Instance.UiMng.gameUIController.SetKillPointsUI(_killer.Player.ID);
             GameManager.Instance.UiMng.gameUIController.SetKillPointsUI(_victim.Player.ID);
             if(GameManager.Instance.LevelMng.IsRoundActive)
-                GameManager.Instance.LevelMng.AvatarSpwn.RespawnAvatar(_victim.Player, 3);
+                GameManager.Instance.LevelMng.AvatarSpwn.SpawnAvatar(_victim.Player, 3);
 
         }
         #endregion

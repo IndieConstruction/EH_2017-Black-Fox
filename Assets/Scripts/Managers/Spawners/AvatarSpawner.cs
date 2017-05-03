@@ -74,22 +74,6 @@ namespace BlackFox
             }
         }
 
-        #region API
-        /// <summary>
-        /// Get the spawn point transform relative the the player(parameter)
-        /// </summary>
-        /// <param name="_label"></param>
-        /// <returns></returns>
-        public Transform GetMySpawnPoint(PlayerLabel _label)
-        {
-            foreach (AvatarSpawnPoint spawnPt in OriginalSpawns)
-            {
-                if (_label == spawnPt.PlayerID)
-                    return spawnPt.SpawnPosition;
-            }
-            return null;
-        }
-
         /// <summary>
         /// Respawn a Player without cooldown
         /// </summary>
@@ -107,21 +91,47 @@ namespace BlackFox
                     newAgent.State = AvatarState.Enabled;
                     if (EventManager.OnAgentSpawn != null)
                         EventManager.OnAgentSpawn(newAgent.GetComponentInChildren<Avatar>());
-                    return;                    
+                    return;
                 }
             }
         }
 
+        #region API
+        /// <summary>
+        /// Get the spawn point transform relative the the player(parameter)
+        /// </summary>
+        /// <param name="_label"></param>
+        /// <returns></returns>
+        public Transform GetMySpawnPoint(PlayerLabel _label)
+        {
+            foreach (AvatarSpawnPoint spawnPt in OriginalSpawns)
+            {
+                if (_label == spawnPt.PlayerID)
+                    return spawnPt.SpawnPosition;
+            }
+            return null;
+        }
+        /// <summary>
+        /// Interrupt queued spawns
+        /// </summary>
+        public void BreakSpawnsInQueue()
+        {
+            StopAllCoroutines();
+        }
         /// <summary>
         /// Respawn after a fixed amount of time
         /// </summary>
         /// <param name="_playerIndx">Player to spawn</param>
-        public void RespawnAvatar(Player _player, float _spawnTime)
+        public void SpawnAvatar(Player _player, float _spawnTime)
         {
             _player.Avatar.State = AvatarState.Ready;
             StartCoroutine(RespawnCooldown(_player,_spawnTime));
         }
-
+        IEnumerator RespawnCooldown(Player _playerID, float _spawnTime)
+        {
+            yield return new WaitForSeconds(_spawnTime);
+            Spawn(_playerID);
+        }
         #endregion
 
         [Serializable]
@@ -129,12 +139,6 @@ namespace BlackFox
         {
             public Transform SpawnPosition;
             public PlayerLabel PlayerID;
-        }
-
-        IEnumerator RespawnCooldown(Player _playerID, float _spawnTime)
-        {
-            yield return new WaitForSeconds(_spawnTime);
-            Spawn(_playerID);
         }
     }
 }

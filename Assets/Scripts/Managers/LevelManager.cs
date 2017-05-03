@@ -210,7 +210,7 @@ namespace BlackFox
         {
             //foreach (Player player in GameManager.Instance.PlayerMng.Players.Where(p => p.Avatar != null)) {
             foreach (Player player in GameManager.Instance.PlayerMng.Players)
-                AvatarSpwn.RespawnAvatar(player, _spawnTime);
+                AvatarSpwn.SpawnAvatar(player, _spawnTime);
         }
         #endregion
 

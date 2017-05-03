@@ -3,7 +3,7 @@ using UnityEngine;
 using Rope;
 
 namespace BlackFox {
-    public class Avatar : MonoBehaviour{
+    public class Avatar : MonoBehaviour {
         /// <summary>
         /// Player who control this avatar
         /// </summary>
@@ -33,7 +33,7 @@ namespace BlackFox {
             get { return _state; }
             set {
                 if (Player != null) {
-                    if(_state != value)
+                    if (_state != value)
                         OnStateChange(value, _state);
                     _state = value;
                 }
@@ -66,10 +66,10 @@ namespace BlackFox {
                 case AvatarState.Disabled:
                     ship.ToggleAbilities(false);
                     if (rope != null)
-                        Destroy(rope.gameObject); 
+                        Destroy(rope.gameObject);
                     break;
                 case AvatarState.Ready:
-                    ship.Init();
+                    Init();
                     break;
                 case AvatarState.Enabled:
                     ship.ToggleAbilities(true);
@@ -93,9 +93,10 @@ namespace BlackFox {
                 SetupRope();
         }
 
-        public void Init(bool withRope = true)
-        {
-            State = AvatarState.Ready;
+        void Init(bool withRope = true)
+        {     
+            ship.Init();
+
             if (withRope)
                 SetupRope();
         }

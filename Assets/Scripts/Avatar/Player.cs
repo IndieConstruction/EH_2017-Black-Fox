@@ -94,8 +94,7 @@ namespace BlackFox
         /// </summary>
         public void AvatarInit()
         {
-            Avatar.Init();
-            GameManager.Instance.LevelMng.AvatarSpwn.RespawnAvatar(this, 0);
+            GameManager.Instance.LevelMng.AvatarSpwn.SpawnAvatar(this, 0);
         }
 
         /// <summary>

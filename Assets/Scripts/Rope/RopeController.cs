@@ -78,7 +78,7 @@ namespace Rope
                 }
             }
 
-            if (fragments[fragments.Count-1].transform.parent != AnchorPoint)
+            if (AnchorPoint.GetComponent<ConfigurableJoint>() != null && AnchorPoint.GetComponent<ConfigurableJoint>().connectedBody == null)
             {
                 ForceConnect(AnchorPoint.gameObject, fragments[fragments.Count - 1].GetComponent<Rigidbody>());
                 Debug.Log("WARNING: MaxLength not enough to reach " + AnchorPoint.name + " in " + AnchorPoint.position);

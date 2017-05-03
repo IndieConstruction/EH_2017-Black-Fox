@@ -13,7 +13,6 @@ namespace BlackFox {
             GameManager.Instance.LevelMng.InitCore();
             GameManager.Instance.LevelMng.SpawnAllAvatar(0);
             GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.Blocked);
-            GameManager.Instance.PlayerMng.InitAvatars();
         }
 
         public override void OnUpdate()

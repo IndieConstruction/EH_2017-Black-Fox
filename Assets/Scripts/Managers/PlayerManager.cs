@@ -86,12 +86,6 @@ namespace BlackFox
                 player.AvatarSetup(_forceIstance);
         }
 
-        public void InitAvatars()
-        {
-            foreach (Player player in Players)
-                player.AvatarInit();
-        }
-
         public void ChangeAvatarsState(AvatarState _state)
         {
             foreach (Player player in Players)

@@ -88,9 +88,6 @@ namespace BlackFox
                     Avatar newAgent = _player.Avatar;
                     newAgent.ship.transform.position = spawn.SpawnPosition.position;
                     newAgent.ship.transform.rotation = spawn.SpawnPosition.rotation;
-                    newAgent.State = AvatarState.Enabled;
-                    if (EventManager.OnAgentSpawn != null)
-                        EventManager.OnAgentSpawn(newAgent.GetComponentInChildren<Avatar>());
                     return;
                 }
             }
@@ -125,12 +122,16 @@ namespace BlackFox
         public void SpawnAvatar(Player _player, float _spawnTime)
         {
             _player.Avatar.State = AvatarState.Ready;
+            Spawn(_player);
             StartCoroutine(RespawnCooldown(_player,_spawnTime));
         }
         IEnumerator RespawnCooldown(Player _playerID, float _spawnTime)
         {
             yield return new WaitForSeconds(_spawnTime);
-            Spawn(_playerID);
+
+            _playerID.Avatar.State = AvatarState.Enabled;
+            if (EventManager.OnAgentSpawn != null)
+                EventManager.OnAgentSpawn(_playerID.Avatar); ;
         }
         #endregion
 

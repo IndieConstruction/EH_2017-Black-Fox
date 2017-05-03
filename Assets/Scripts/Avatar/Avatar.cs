@@ -89,14 +89,11 @@ namespace BlackFox {
                 InstantiateShip();
             ship.Setup(this, LoadIDamageableForShip());
             CreateShipUI();
-            if (withRope)
-                SetupRope();
         }
 
         void Init(bool withRope = true)
-        {     
+        {
             ship.Init();
-
             if (withRope)
                 SetupRope();
         }

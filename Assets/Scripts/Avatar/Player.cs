@@ -90,14 +90,6 @@ namespace BlackFox
         }
 
         /// <summary>
-        /// Initialize the avatar
-        /// </summary>
-        public void AvatarInit()
-        {
-            GameManager.Instance.LevelMng.AvatarSpwn.SpawnAvatar(this, 0);
-        }
-
-        /// <summary>
         /// Destroy the Avatar istance and the connected rope if there is one
         /// </summary>
         public void DestroyAvatar()

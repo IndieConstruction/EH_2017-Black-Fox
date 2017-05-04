@@ -36,16 +36,16 @@ namespace BlackFox
             switch (_avatar.PlayerId)   
             {
                 case PlayerLabel.One:
-                    Player1BulletCount.text = _avatar.ship.Shooter.ammo.ToString();
+                    Player1BulletCount.text = _avatar.ship.shooter.Ammo.ToString();
                     break;
                 case PlayerLabel.Two:
-                    Player2BulletCount.text = _avatar.ship.Shooter.ammo.ToString();
+                    Player2BulletCount.text = _avatar.ship.shooter.Ammo.ToString();
                     break;
                 case PlayerLabel.Three:
-                    Player3BulletCount.text = _avatar.ship.Shooter.ammo.ToString();
+                    Player3BulletCount.text = _avatar.ship.shooter.Ammo.ToString();
                     break;
                 case PlayerLabel.Four:
-                    Player4BulletCount.text = _avatar.ship.Shooter.ammo.ToString();
+                    Player4BulletCount.text = _avatar.ship.shooter.Ammo.ToString();
                     break;
                 default:
                     break;

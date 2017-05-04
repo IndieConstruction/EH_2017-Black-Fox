@@ -76,7 +76,6 @@ namespace BlackFox {
                     break;
                 case AvatarState.Enabled:
                     ship.ToggleAbilities(true);
-                    ship.transform.localScale = Vector3.one;
                     break;
             }
         }
@@ -97,6 +96,7 @@ namespace BlackFox {
         void Init(bool withRope = true)
         {
             ship.Init();
+            ship.transform.localScale = Vector3.one;
             if (withRope)
                 SetupRope();
         }

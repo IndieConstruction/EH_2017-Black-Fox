@@ -189,6 +189,7 @@ namespace Rope
         /// </summary>
         public void DestroyDynamically()
         {
+            lineRend.enabled = false;
             Destroy(gameObject);
             //float destroyTimer = 0;
 

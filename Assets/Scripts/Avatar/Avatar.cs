@@ -73,10 +73,12 @@ namespace BlackFox {
                     break;
                 case AvatarState.Ready:
                     Init();
+                    rope.GetComponent<LineRenderer>().enabled = false;
                     break;
                 case AvatarState.Enabled:
                     ship.ToggleAbilities(true);
                     ship.transform.localScale = Vector3.one;
+                    rope.GetComponent<LineRenderer>().enabled = true;
                     break;
             }
         }
@@ -122,8 +124,7 @@ namespace BlackFox {
         public void ShipDestroy(Avatar _attacker)
         {
             State = AvatarState.Disabled;
-            if (EventManager.OnAgentKilled != null)
-            {
+            if (EventManager.OnAgentKilled != null) {
                 if (_attacker != null)
                     EventManager.OnAgentKilled(_attacker, this);
                 else

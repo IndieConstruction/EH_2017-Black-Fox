@@ -66,7 +66,10 @@ namespace BlackFox {
                 case AvatarState.Disabled:
                     ship.ToggleAbilities(false);
                     if (rope != null)
+                    {
                         rope.DestroyDynamically();
+                        rope = null;
+                    }
                     break;
                 case AvatarState.Ready:
                     Init();
@@ -118,17 +121,13 @@ namespace BlackFox {
         /// <param name="_attacker">L'avatar che ha distrutto la ship</param>
         public void ShipDestroy(Avatar _attacker)
         {
+            State = AvatarState.Disabled;
             if (EventManager.OnAgentKilled != null)
             {
                 if (_attacker != null)
                     EventManager.OnAgentKilled(_attacker, this);
                 else
                     EventManager.OnAgentKilled(null, this);
-            }
-
-            if (rope != null)
-            {
-                rope.DestroyDynamically();
             }
         }
 

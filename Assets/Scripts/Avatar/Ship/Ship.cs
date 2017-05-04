@@ -154,7 +154,6 @@ namespace BlackFox {
             damageTween = transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f);
             if (Life < 1)
             {
-                avatar.State = AvatarState.Disabled;
                 avatar.ShipDestroy(_attacker.GetComponent<Ship>().avatar);
                 transform.DOScale(Vector3.zero, 0.5f);
                 return;

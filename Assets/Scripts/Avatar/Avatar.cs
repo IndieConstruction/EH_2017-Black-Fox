@@ -20,7 +20,8 @@ namespace BlackFox {
             }
         }
 
-        public Material ColorMaterial;
+        public int ColorSetIndex;
+
         /// <summary>
         /// Reference of the model to visualize
         /// </summary>
@@ -92,6 +93,7 @@ namespace BlackFox {
             Player = _player;
             if (!ship)
                 InstantiateShip();
+            ColorSetIndex = (int)Player.ID;
             ship.Setup(this, LoadIDamageableForShip());
             CreateShipUI();
         }

@@ -26,7 +26,6 @@ namespace BlackFox
         }
 
         Ship ship;
-        bool cheatActive;
 
         #region API
         public void Init(Ship _ship)
@@ -36,15 +35,10 @@ namespace BlackFox
 
         public override void ShootBullet()
         {
-            if (cheatActive)
-                base.ShootBullet();
-            else
+            if (ammo > 0)
             {
-                if (ammo > 0)
-                {
-                    base.ShootBullet();
-                    ammo--;
-                }
+                base.ShootBullet();
+                ammo--;
             }
         }
 
@@ -58,10 +52,8 @@ namespace BlackFox
 
         public void AmmoCheat()
         {
-            if (cheatActive)
-                cheatActive = false;
-            else
-                cheatActive = true;
+            Ammo = 500;
+            shooterConfig.MaxAmmo = 500;
         }
         #endregion
     }

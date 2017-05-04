@@ -103,6 +103,7 @@ namespace Rope
             joint.xMotion = ConfigurableJointMotion.Locked;
             joint.yMotion = ConfigurableJointMotion.Locked;
             joint.zMotion = ConfigurableJointMotion.Locked;
+            joint.autoConfigureConnectedAnchor = false;
             joint.connectedAnchor = _offset * 0.9f;
             joint.projectionMode = JointProjectionMode.PositionAndRotation;
 

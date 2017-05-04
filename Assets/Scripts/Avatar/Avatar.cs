@@ -66,7 +66,7 @@ namespace BlackFox {
                 case AvatarState.Disabled:
                     ship.ToggleAbilities(false);
                     if (rope != null)
-                        Destroy(rope.gameObject);
+                        rope.DestroyDynamically();
                     break;
                 case AvatarState.Ready:
                     Init();

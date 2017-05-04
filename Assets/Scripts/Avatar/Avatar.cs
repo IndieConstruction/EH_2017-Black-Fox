@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Rope;
+using System;
 
 namespace BlackFox {
-    public class Avatar : MonoBehaviour {
+    public class Avatar : MonoBehaviour, IPowerUpCollector {
         /// <summary>
         /// Player who control this avatar
         /// </summary>
@@ -161,6 +162,10 @@ namespace BlackFox {
             }
 
             return damageablesList;
+        }
+
+        public void CollectPowerUp(IPowerUp _powerUp) {
+            
         }
     }
 

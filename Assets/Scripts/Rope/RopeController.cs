@@ -103,6 +103,7 @@ namespace Rope
             joint.xMotion = ConfigurableJointMotion.Locked;
             joint.yMotion = ConfigurableJointMotion.Locked;
             joint.zMotion = ConfigurableJointMotion.Locked;
+            joint.autoConfigureConnectedAnchor = false;
             joint.connectedAnchor = _offset * 0.9f;
             joint.projectionMode = JointProjectionMode.PositionAndRotation;
 
@@ -188,10 +189,11 @@ namespace Rope
         /// </summary>
         public void DestroyDynamically()
         {
+            lineRend.enabled = false;
             Destroy(gameObject);
             //float destroyTimer = 0;
-            
-            //for (int i = fragments.Count -1; i >= 0; i--)
+
+            //for (int i = fragments.Count - 1; i >= 0; i--)
             //{
             //    destroyTimer += .1f;
             //    Destroy(fragments[i], destroyTimer);

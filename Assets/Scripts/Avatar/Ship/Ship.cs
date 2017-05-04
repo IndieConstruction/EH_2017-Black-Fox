@@ -6,13 +6,12 @@ using DG.Tweening;
 
 namespace BlackFox {
     [RequireComponent(typeof(MovementController), typeof(PlacePin), typeof(Shooter))]
-    public class Ship : MonoBehaviour, IShooter, IDamageable {
-
-
+    public class Ship : MonoBehaviour, IShooter, IDamageable
+    {
         [HideInInspector]
         public Avatar avatar;
 
-        ShipConfig config
+        public ShipConfig config
         {
             get { return avatar.AvatarData.shipConfig; }
         }
@@ -22,8 +21,7 @@ namespace BlackFox {
         AvatarUI avatarUi;
         Tweener damageTween;
 
-        //Life fields
-        public float MaxLife = 10;
+        // Life fields
         private float _life;
         public float Life {
             get { return _life; }
@@ -47,13 +45,16 @@ namespace BlackFox {
         {
             avatar = _avatar;
             rigid = GetComponent<Rigidbody>();
-            Shooter = GetComponent<Shooter>();
-            movment = GetComponent<MovementController>();
-            pinPlacer = GetComponent<PlacePin>();
-            avatarUi = GetComponentInChildren<AvatarUI>();
-            pinPlacer.SetOwner(this);
             damageables = _damageablesPrefabs;
             ChangeColor(config.Materials[(int)avatar.PlayerId - 1]);
+
+            shooter = GetComponent<Shooter>();
+            shooter.Init(this);
+            movment = GetComponent<MovementController>();
+            movment.Init(this, rigid);
+            pinPlacer = GetComponent<PlacePin>();
+            pinPlacer.Init(this);
+            avatarUi = GetComponentInChildren<AvatarUI>();
         }
 
         /// <summary>
@@ -61,7 +62,7 @@ namespace BlackFox {
         /// </summary>
         public void Init()
         {
-            Life = MaxLife;
+            Life = config.MaxLife;
         }
 
         public void ChangeColor(Material _mat)
@@ -88,10 +89,10 @@ namespace BlackFox {
             }
 
             if (_inputStatus.A == ButtonState.Pressed) {
-                nextFire = Time.time + fireRate;
+                nextFire = Time.time + config.FireRate;
                 Shoot();
             } else if (_inputStatus.A == ButtonState.Held && Time.time > nextFire) {
-                nextFire = Time.time + fireRate;
+                nextFire = Time.time + config.FireRate;
                 Shoot();
             }
 
@@ -102,10 +103,9 @@ namespace BlackFox {
 
         #region Shoot
 
-        public Shooter Shooter { get; private set; }
+        public Shooter shooter { get; private set; }
 
         //Shooting fields
-        public float fireRate;
         float nextFire;
 
         /// <summary>
@@ -117,8 +117,8 @@ namespace BlackFox {
         /// Chiama la funzione AddAmmo di shooter
         /// </summary>
         public void AddShooterAmmo() {
-            Shooter.AddAmmo();
-            avatar.OnAmmoUpdate(Shooter.ammo);                          // Ci sarà sempre un avatar?
+            shooter.AddAmmo();
+            avatar.OnAmmoUpdate(shooter.Ammo);                          // Ci sarà sempre un avatar?
         }
 
         #region IShooter
@@ -174,15 +174,15 @@ namespace BlackFox {
         public void ToggleAbilities(bool _active = true) {
 
             pinPlacer.enabled = _active;
-            Shooter.enabled = _active;
+            shooter.enabled = _active;
             movment.enabled = _active;
             GetComponent<CapsuleCollider>().enabled = _active;
 
         }
 
         void Shoot() {
-            Shooter.ShootBullet();
-            avatar.OnAmmoUpdate(Shooter.ammo);
+            shooter.ShootBullet();
+            avatar.OnAmmoUpdate(shooter.Ammo);
         }
 
         void PlacePin(bool _isRight) {
@@ -214,5 +214,11 @@ namespace BlackFox {
     {
         public Ship Prefab;
         public List<Material> Materials;
+        [Header("Ship Parameters")]
+        public float FireRate;
+        public float MaxLife;
+        public MovementControllerConfig movementConfig;
+        public ShooterConfig shooterConfig;
+        public PlacePinConfig placePinConfig;
     }
 }

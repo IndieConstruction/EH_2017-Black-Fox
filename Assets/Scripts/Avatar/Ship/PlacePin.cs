@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,13 +7,17 @@ namespace BlackFox
 {
     public class PlacePin : MonoBehaviour
     {
-        public GameObject PinPrefab;
-        public Transform PinSpanw;
-        public float CoolDownTime;
         [HideInInspector]
         public bool CanPlace = true;
 
-        Ship owner;
+        public Transform PinSpanw;
+
+        PlacePinConfig placePinConfig
+        {
+            get { return ship.avatar.AvatarData.shipConfig.placePinConfig; }
+        }
+
+        Ship ship;
 
         float xValue;
         float prectime;
@@ -30,9 +35,9 @@ namespace BlackFox
         }
 
         #region API
-        public void SetOwner(Ship _owner)
+        public void Init(Ship _owner)
         {
-            owner = _owner;
+            ship = _owner;
         }
         
         /// <summary>
@@ -43,9 +48,9 @@ namespace BlackFox
             if (prectime <= 0 && CanPlace == true)
             {
                 SetPinSpawnPosition(_isRight);
-                Instantiate(PinPrefab, PinSpanw.position, PinSpanw.rotation, GameManager.Instance.LevelMng.PinsContainer);
-                owner.AddShooterAmmo();
-                prectime = CoolDownTime;
+                Instantiate(placePinConfig.PinPrefab, PinSpanw.position, PinSpanw.rotation, GameManager.Instance.LevelMng.PinsContainer);
+                ship.AddShooterAmmo();
+                prectime = placePinConfig.CoolDownTime;
             }
         }
         #endregion
@@ -54,10 +59,10 @@ namespace BlackFox
         {
             // TODO : togliere la vibrazione durante il count down (da fare nel refactoring dell'avatar)
             if(!GameManager.Instance.LevelMng.IsGamePaused)
-               owner.avatar.Player.ControllerVibration(0.5f, 0.5f);
+               ship.avatar.Player.ControllerVibration(0.5f, 0.5f);
 
             yield return new WaitForSeconds(_rumbleTime);
-            owner.avatar.Player.ControllerVibration(0f, 0f);
+            ship.avatar.Player.ControllerVibration(0f, 0f);
         }
 
         /// <summary>
@@ -76,5 +81,12 @@ namespace BlackFox
             }
         }
 
+    }
+
+    [Serializable]
+    public class PlacePinConfig
+    {
+        public GameObject PinPrefab;
+        public float CoolDownTime;
     }
 }

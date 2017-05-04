@@ -138,6 +138,7 @@ namespace BlackFox {
         /// <param name="_ammo">Le munizioni che rimangono</param>
         public void OnAmmoUpdate(int _ammo)
         {
+            // TODO : da rivedere
             EventManager.OnAmmoValueChange(this);
         }
 

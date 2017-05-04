@@ -498,8 +498,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   avatar: {fileID: 0}
-  MaxLife: 10
-  fireRate: 0.3
 --- !u!114 &114308403311535660
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -511,10 +509,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b029b59fa1671d47a31f1bef5e80299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PinPrefab: {fileID: 1844589482665234, guid: ea63e453c63a17240a1ecd1ef2fe0917, type: 2}
-  PinSpanw: {fileID: 4931294485720276}
-  CoolDownTime: 2
   CanPlace: 1
+  PinSpanw: {fileID: 4931294485720276}
 --- !u!114 &114803276105687232
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -526,8 +522,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a435a47f34b1f734ea916cecc28a85d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationSpeed: 300
-  MovmentSpeed: 500
 --- !u!114 &114864183614476062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -539,12 +533,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8c7b008845a38a45913545d94ac33c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 1501574659777150, guid: c24e5fd438cd1d64c8ae981b5a429fe1, type: 2}
-  LifeTime: 10
-  bulletSpeed: 150
-  AddedAmmo: 10
-  MaxAmmo: 50
-  ammo: 0
 --- !u!136 &136859151690121598
 CapsuleCollider:
   m_ObjectHideFlags: 1

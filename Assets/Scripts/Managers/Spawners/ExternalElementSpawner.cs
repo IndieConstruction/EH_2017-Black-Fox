@@ -22,7 +22,8 @@ namespace BlackFox
             LoadIDamageablePrefab();
         }
 
-        public override SpawnerBase Init(SpawnerOptions options) {
+        public override SpawnerBase Init(SpawnerOptions options)
+        {
             Options = options as ExternalElementOptions;
             return this;
         }

@@ -24,7 +24,7 @@ namespace BlackFox {
         public void SetLifeSliderValue(Avatar _avatar) {
             // Aggiorno la UI se l'avatar che gli viene passato è uguale al componente che ha come padre
             if (_avatar == GetComponentInParent<Avatar>())
-                Ring.value =  (0.5f * _avatar.ship.Life) / _avatar.ship.MaxLife;
+                Ring.value =  (0.5f * _avatar.ship.Life) / _avatar.ship.config.MaxLife;
 
             //Logica per cambiare il colore della barra della vita
             //if (Ring.fillAmount < 0.3f) {

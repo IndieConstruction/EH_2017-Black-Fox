@@ -34,8 +34,7 @@ namespace BlackFox
                 case "ammo":
                     foreach (Player player in GameManager.Instance.PlayerMng.Players)
                     {
-                        player.Avatar.ship.Shooter.MaxAmmo = 500;
-                        player.Avatar.ship.Shooter.ammo = 500;
+                        player.Avatar.ship.shooter.AmmoCheat();
                     }
                     Debug.Log("Infinite Ammo");
                     break;

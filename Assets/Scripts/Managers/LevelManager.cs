@@ -153,7 +153,7 @@ namespace BlackFox
             {
                 IsGamePaused = true;
                 GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInput, _playerID, PlayerState.Blocked);
-                gameplaySM.GoToState(GamePlaySMStates.PauseState);
+                GameManager.Instance.LevelMng.gameplaySM.SetPassThroughOrder(new List<StateBase>() { new PauseState() });
             }
         }
 

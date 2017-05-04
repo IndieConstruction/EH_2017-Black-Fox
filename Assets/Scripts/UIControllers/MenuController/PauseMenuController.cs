@@ -39,7 +39,7 @@ namespace BlackFox
                     GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
                     break;
                 case 1:
-                    GameManager.Instance.LevelMng.gameplaySM.GoToState(GamePlaySMStates.GameOverState);
+                    GameManager.Instance.LevelMng.gameplaySM.SetPassThroughOrder(new List<StateBase>() { new CleanSceneState(), new GameOverState() });
                     break;
             }
         }

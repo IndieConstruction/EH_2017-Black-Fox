@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace BlackFox {
 
+    /// <summary>
+    /// State machine che gestisce il flow di gameplay
+    /// </summary>
     public class GameplaySM : StateMachineBase
     {
-        GamePlaySMStates NextState;
-
-        public void Init() {
+        public void Init()
+        {
             Debug.Log("Start_GamePlaySM");
             CurrentState = new PreInitState();
-            NextState = GamePlaySMStates.RoundInitState;
         }
 
         protected override void OnCurrentStateEnded()
@@ -36,7 +37,7 @@ namespace BlackFox {
                     CurrentState = new RoundEndState();
                     break;
                 case "BlackFox.RoundEndState":
-                    if(GameManager.Instance.LevelMng.roundNumber < GameManager.Instance.LevelMng.MaxRound)
+                    if(GameManager.Instance.LevelMng.roundNumber <= GameManager.Instance.LevelMng.MaxRound)
                         CurrentState = new UpgradeMenuState();
                     else
                         CurrentState = new GameOverState();
@@ -48,21 +49,20 @@ namespace BlackFox {
                     if (GameplaySM.OnMachineEnd != null)
                         GameplaySM.OnMachineEnd("GameplaySM");
                     break;
-            }
-            
+            }   
         }
 
         protected override bool CheckRules(StateBase _newState, StateBase _oldState) 
         {
             if (_oldState == null) 
                 return true;
-            
 
-            switch (_newState.StateName) {
+            switch (_newState.StateName)
+            {
                 case "BlackFox.PreInitState":
                         return true;
                 case "BlackFox.RoundInitState":
-                    if (_oldState.StateName == "BlackFox.PreInitState")
+                    if (_oldState.StateName == "BlackFox.PreInitState" || _oldState.StateName == "BlackFox.UpgradeMenuState")
                         return true;
                     break;
                 case "BlackFox.PreStartState":
@@ -96,30 +96,8 @@ namespace BlackFox {
                     break;
 
             }
+
             return false;
         }
-
-        #region API
-        public void GoToState(GamePlaySMStates _nextState)
-        {
-            NextState = _nextState;
-            if (CurrentState.OnStateEnd != null)
-                CurrentState.OnStateEnd();
-        }
-        
-        #endregion
-    }
-
-    public enum GamePlaySMStates
-    {
-        PreInitState,
-        RoundInitState,
-        PreStartState,
-        PlayState,
-        PauseState,
-        CleanSceneState,
-        RoundEndState,
-        UpgradeMenuState,
-        GameOverState
     }
 }

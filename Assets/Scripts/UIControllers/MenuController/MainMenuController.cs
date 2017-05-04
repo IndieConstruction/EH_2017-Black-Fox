@@ -20,7 +20,7 @@ namespace BlackFox
             {
                 case 0:
                     // Cambia stato in level selection
-                    GameManager.Instance.flowSM.GoToState(FlowSMStates.LevelSelectionState);
+                    GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new LevelSelectionState() });
                     break;
                 case 1:
                     // Apre i credits

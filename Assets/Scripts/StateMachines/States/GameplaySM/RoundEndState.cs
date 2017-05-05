@@ -17,6 +17,7 @@ namespace BlackFox
         public override void OnEnd()
         {
             GameManager.Instance.UiMng.endRoundUI.SetEndRoundPanelStatus(false);
+            GameManager.Instance.LevelMng.ClearPoints();
         }
     }
 }

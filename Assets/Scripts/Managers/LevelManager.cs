@@ -41,11 +41,12 @@ namespace BlackFox
         public GameplaySM gameplaySM;
 
         [HideInInspector]
-        public string EndLevelPanelLable;
+        public string EndLevelPanelLableText;
         
-        LevelPointsCounter levelPointsCounter;
-
+        [HideInInspector]
         public bool IsGamePaused;
+
+        LevelPointsCounter levelPointsCounter;
 
         private bool _isRoundActive;
         /// <summary>
@@ -64,7 +65,7 @@ namespace BlackFox
         {
             CurrentLevel = Instantiate(InstantiateLevel());
             StartGameplaySM();
-            levelPointsCounter = new LevelPointsCounter(AddPoints, SubPoints, PointsToWin);
+            levelPointsCounter = new LevelPointsCounter(this);
         }
 
         #region API
@@ -122,8 +123,7 @@ namespace BlackFox
         /// </summary>
         public void CoreDeath()
         {
-            levelPointsCounter.ClearAllKillPoints();
-            EndLevelPanelLable = "Core Has Been Destroyed";
+            EndLevelPanelLableText = "Core Has Been Destroyed";
             gameplaySM.CurrentState.OnStateEnd();
         }
 
@@ -133,8 +133,7 @@ namespace BlackFox
         public void PlayerWin(string _winner)
         {
             NextRound();
-            levelPointsCounter.ClearAllKillPoints();
-            EndLevelPanelLable = "Player " + _winner + " Has Won";
+            EndLevelPanelLableText = "Player " + _winner + " Has Won";
             gameplaySM.CurrentState.OnStateEnd();
             IsRoundActive = false;
             CoinManager.coins += 4;
@@ -148,7 +147,6 @@ namespace BlackFox
         /// <param name="_playerID"></param>
         public void PauseGame(PlayerLabel _playerID)
         {
-            // TODO : controllare uso corretto di if
             if (!IsGamePaused)
             {
                 IsGamePaused = true;
@@ -171,6 +169,14 @@ namespace BlackFox
         public void RoundBegin()
         {
             IsRoundActive = true;
+        }
+
+        /// <summary>
+        /// Azzera il contatore dei punti
+        /// </summary>
+        public void ClearPoints()
+        {
+            levelPointsCounter.ClearAllKillPoints();
         }
         #endregion
 
@@ -236,9 +242,7 @@ namespace BlackFox
         {
             gameplaySM = gameObject.AddComponent<GameplaySM>();
             gameplaySM.Init();
-        }
-
-        
+        }       
         #endregion
 
         #region Pins

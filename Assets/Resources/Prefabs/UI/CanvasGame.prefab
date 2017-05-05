@@ -1031,7 +1031,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0 / 5
+  m_Text: 
 --- !u!114 &114097668933301762
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1064,7 +1064,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0 / 5
+  m_Text: 
 --- !u!114 &114101729364522574
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1119,11 +1119,11 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 205afb780b3b26248814b025130b94de, type: 3}
-    m_FontSize: 1
+    m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 40
+    m_MaxSize: 50
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -1492,7 +1492,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0 / 5
+  m_Text: 
 --- !u!114 &114350980379392784
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1837,10 +1837,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb73265f6b59174386d858c8103eecb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player1Points: {fileID: 114627955998980146}
-  Player2Points: {fileID: 114344283802616758}
-  Player3Points: {fileID: 114097668933301762}
-  Player4Points: {fileID: 114059695606289232}
+  PlayerPoints:
+  - {fileID: 114627955998980146}
+  - {fileID: 114344283802616758}
+  - {fileID: 114097668933301762}
+  - {fileID: 114059695606289232}
   EventName: {fileID: 114106449775113048}
   EndLevelPanel: {fileID: 1564803154884996}
 --- !u!114 &114572842237764778
@@ -1902,7 +1903,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 3
+  m_Text: 
 --- !u!114 &114612106131260670
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2001,7 +2002,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0 / 5
+  m_Text: 
 --- !u!114 &114629174181074040
 MonoBehaviour:
   m_ObjectHideFlags: 1

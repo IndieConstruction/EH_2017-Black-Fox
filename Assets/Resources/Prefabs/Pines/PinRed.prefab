@@ -37,11 +37,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4277827705590830}
   - component: {fileID: 135190381961845448}
-  - component: {fileID: 114857089506257130}
   - component: {fileID: 122941598328145484}
   m_Layer: 0
   m_Name: PinBlocker
-  m_TagString: Untagged
+  m_TagString: PinBlockArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -144,7 +143,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1796246005193180}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.38, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4277827705590830}
@@ -273,17 +272,6 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &114857089506257130
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1678987062594622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59c29e9d98208d84f91ff03387995a8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!122 &122941598328145484
 Halo:
   m_ObjectHideFlags: 1

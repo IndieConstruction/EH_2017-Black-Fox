@@ -5,7 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 
 namespace BlackFox {
-    [RequireComponent(typeof(MovementController), typeof(PlacePin), typeof(Shooter))]
+    [RequireComponent(typeof(MovementController), typeof(Shooter))]
     public class Ship : MonoBehaviour, IShooter, IDamageable
     {
         [HideInInspector]
@@ -52,8 +52,8 @@ namespace BlackFox {
             shooter.Init(this);
             movment = GetComponent<MovementController>();
             movment.Init(this, rigid);
-            pinPlacer = GetComponent<PlacePin>();
-            pinPlacer.Init(this);
+            pinPlacer = GetComponentInChildren<PlacePin>();
+            pinPlacer.Setup(this);
             avatarUi = GetComponentInChildren<AvatarUI>();
         }
 
@@ -185,7 +185,8 @@ namespace BlackFox {
         }
 
         void PlacePin(bool _isRight) {
-            pinPlacer.placeThePin(_isRight);
+            pinPlacer.PlaceThePin(_isRight);
+            AddShooterAmmo();
         }
 
         void GoForward(float _amount) {

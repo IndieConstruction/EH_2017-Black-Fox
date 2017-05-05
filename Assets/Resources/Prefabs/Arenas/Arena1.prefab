@@ -187,7 +187,7 @@ GameObject:
   - component: {fileID: 136660897762457082}
   m_Layer: 0
   m_Name: Core
-  m_TagString: Core
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -317,10 +317,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4542318849548590}
   - component: {fileID: 135104190945441538}
-  - component: {fileID: 114526788884066822}
   m_Layer: 0
   m_Name: PinBlocker
-  m_TagString: Untagged
+  m_TagString: PinBlockArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1456,17 +1455,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114526788884066822
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1538100493826036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59c29e9d98208d84f91ff03387995a8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114541622717084548
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -395,10 +395,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b029b59fa1671d47a31f1bef5e80299, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PinPrefab: {fileID: 1097988506308288, guid: baccb8959d76334439938581d821f6b6, type: 2}
-  PinSpanw: {fileID: 4743978323625190}
-  CoolDownTime: 3
-  CanPlace: 1
 --- !u!114 &114125700760528308
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -474,9 +470,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6116c7f43a8f3964db2240b1007b4dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerIndex: 3
-  MaxLife: 15
-  fireRate: 0.5
+  Player: {fileID: 0}
+  ColorSetIndex: 0
+  rope: {fileID: 0}
+  ship: {fileID: 0}
 --- !u!114 &114436172855648470
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -613,8 +610,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a435a47f34b1f734ea916cecc28a85d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RotationSpeed: 300
-  MovmentSpeed: 500
 --- !u!114 &114826523480459044
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -626,13 +621,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8c7b008845a38a45913545d94ac33c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectile: {fileID: 1324583927385362, guid: 03a35e42f4b03124e9652a6ddf027306, type: 2}
-  LifeTime: 0.5
-  bulletSpeed: 150
-  AddedAmmo: 15
-  MaxAmmo: 50
-  ammo: 0
-  playerIndex: 0
 --- !u!114 &114997520129952254
 MonoBehaviour:
   m_ObjectHideFlags: 1

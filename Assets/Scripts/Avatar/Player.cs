@@ -183,7 +183,8 @@ namespace BlackFox
 
         public void ControllerVibration(float _leftMotor, float _rightMotor)
         {
-            playerInput.SetControllerVibration(_leftMotor, _rightMotor);
+            if(InputStatus.IsConnected)
+                playerInput.SetControllerVibration(_leftMotor, _rightMotor);
         }
         #endregion
 

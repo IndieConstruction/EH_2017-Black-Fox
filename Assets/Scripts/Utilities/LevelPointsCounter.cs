@@ -5,9 +5,20 @@ namespace BlackFox
 {
     public class LevelPointsCounter
     {
-        int AddPoints = 1;
-        int SubPoints = 1;
-        int PointsToWin = 5;
+        LevelManager levelManager;
+
+        int AddPoints
+        {
+            get { return levelManager.AddPoints; }
+        }
+        int SubPoints
+        {
+            get { return levelManager.SubPoints; }
+        }
+        int PointsToWin
+        {
+            get { return levelManager.PointsToWin; }
+        }
 
         List<PlayerStats> playerStats = new List<PlayerStats>()
         {   new PlayerStats(PlayerLabel.One),
@@ -16,11 +27,9 @@ namespace BlackFox
             new PlayerStats(PlayerLabel.Four)
         };
 
-        public LevelPointsCounter(int _addPoints, int _subPoints, int _pointsToWin)
+        public LevelPointsCounter(LevelManager _levelManager)
         {
-            AddPoints = _addPoints;
-            SubPoints = _subPoints;
-            PointsToWin = _pointsToWin;
+            levelManager = _levelManager;
         }
 
         /// <summary>
@@ -102,9 +111,19 @@ namespace BlackFox
                 player.ResetKillPoints();
             }
         }
+
+        /// <summary>
+        /// Azzera i punti uccisione di tutti i player
+        /// </summary>
+        public void ClearAllVictories()
+        {
+            foreach (PlayerStats player in playerStats)
+            {
+                player.ResetVictories();
+            }
+        }
         #endregion
     }
-
 
     /// <summary>
     /// Contenitore dei punti del player
@@ -142,5 +161,9 @@ namespace BlackFox
             killPoints = 0;
         }
 
+        public void ResetVictories()
+        {
+            Victories = 0;
+        }
     }
 }

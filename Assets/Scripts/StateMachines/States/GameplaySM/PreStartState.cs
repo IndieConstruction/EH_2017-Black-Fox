@@ -9,7 +9,7 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("PreStartState");
-            GameManager.Instance.UiMng.Counter.DoCountDown();
+            GameManager.Instance.UiMng.canvasGameMenu.Counter.DoCountDown();
         }
     }
 }

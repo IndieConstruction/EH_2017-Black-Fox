@@ -357,6 +357,7 @@ GameObject:
   - component: {fileID: 223133049465465774}
   - component: {fileID: 114309573975230014}
   - component: {fileID: 114451250389712066}
+  - component: {fileID: 114069635737859392}
   m_Layer: 5
   m_Name: CanvasGame
   m_TagString: Untagged
@@ -1032,6 +1033,21 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
+--- !u!114 &114069635737859392
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1345720058335310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76f54f35f04509f4e874b47acf45e0b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameUIController: {fileID: 114425961484400578}
+  endRoundUI: {fileID: 114554809992754134}
+  pauseMenuController: {fileID: 114492919097580566}
+  Counter: {fileID: 114620178131797512}
 --- !u!114 &114097668933301762
 MonoBehaviour:
   m_ObjectHideFlags: 1

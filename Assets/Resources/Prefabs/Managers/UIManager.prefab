@@ -51,11 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e29967a51552c7245ab2cf367eabd491, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endRoundUI: {fileID: 0}
-  gameUIController: {fileID: 0}
   canvasMenu: {fileID: 0}
   canvasLevelSelection: {fileID: 0}
   canvasGameMenu: {fileID: 0}
-  Counter: {fileID: 0}
-  pauseMenuController: {fileID: 0}
   AvatarUI: {fileID: 1432734274521742, guid: 728a6e3d94c86094599d5995915c6a7f, type: 2}

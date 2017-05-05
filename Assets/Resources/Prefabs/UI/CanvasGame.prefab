@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 222923476372457306}
   - component: {fileID: 114394878759132852}
   m_Layer: 5
-  m_Name: KillPint
+  m_Name: KillPoint4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -644,7 +644,7 @@ GameObject:
   - component: {fileID: 222485806715491226}
   - component: {fileID: 114107455332355858}
   m_Layer: 5
-  m_Name: KillPint
+  m_Name: KillPoint2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -678,7 +678,7 @@ GameObject:
   - component: {fileID: 222918405297967738}
   - component: {fileID: 114519627763923210}
   m_Layer: 5
-  m_Name: KillPint
+  m_Name: KillPoint3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -864,7 +864,7 @@ GameObject:
   - component: {fileID: 222159364762702406}
   - component: {fileID: 114634099692464248}
   m_Layer: 5
-  m_Name: KillPint
+  m_Name: KillPoint1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1651,14 +1651,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e699f0a6f6fba041a7dcd9c7a3ee975, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player1BulletCount: {fileID: 114999694799405076}
-  Player2BulletCount: {fileID: 114863873430175950}
-  Player3BulletCount: {fileID: 114493588250307794}
-  Player4BulletCount: {fileID: 114488229853982008}
-  Player1KillPoints: {fileID: 114634099692464248}
-  Player2KillPoints: {fileID: 114107455332355858}
-  Player3KillPoints: {fileID: 114519627763923210}
-  Player4KillPoints: {fileID: 114394878759132852}
+  PlayersBulletCount:
+  - {fileID: 114999694799405076}
+  - {fileID: 114863873430175950}
+  - {fileID: 114493588250307794}
+  - {fileID: 114488229853982008}
+  PlayersKillPoints:
+  - {fileID: 114634099692464248}
+  - {fileID: 114107455332355858}
+  - {fileID: 114519627763923210}
+  - {fileID: 114394878759132852}
   ElementZeroSlider: {fileID: 114174500756642932}
   LevelIndicationText: {fileID: 114101729364522574}
 --- !u!114 &114451250389712066

@@ -70,7 +70,7 @@ namespace BlackFox {
                         return true;
                     break;
                 case "BlackFox.PlayState":
-                    if (_oldState.StateName == "BlackFox.PreStartState")
+                    if (_oldState.StateName == "BlackFox.PreStartState" || _oldState.StateName == "BlackFox.PauseState")
                         return true;
                     break;
                 

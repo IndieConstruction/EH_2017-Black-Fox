@@ -100,7 +100,6 @@ namespace BlackFox
         #endregion
         #endregion
 
-
         #region PlayerSM
         PlayerState _playerCurrentState;
         /// <summary>
@@ -186,7 +185,6 @@ namespace BlackFox
             playerInput.SetControllerVibration(_leftMotor, _rightMotor);
         }
         #endregion
-
     }
 
     public enum PlayerLabel

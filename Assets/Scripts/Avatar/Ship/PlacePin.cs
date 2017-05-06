@@ -19,13 +19,15 @@ namespace BlackFox
                     data = ship.avatar.AvatarData.shipConfig.placePinConfig;
                 return data; }
         }
+        Transform initialTransf;
         Ship ship;
         float prectime;
+        bool isRight;
         bool isRecharging = false;
 
         private void Update()
         {
-            if(ship != null)
+            if (ship != null)
             {
                 if (!GameManager.Instance.LevelMng.IsGamePaused)
                     prectime -= Time.deltaTime;
@@ -56,17 +58,18 @@ namespace BlackFox
         {
             ship = _owner;
             prectime = placePinConfig.CoolDownTime;
+            initialTransf = transform;
         }
-        
+
         /// <summary>
-        /// Instantiate the pin on the PinSpawn
+        /// Instantiate the pin on the PinSpawn (true/false switch between right/left)
         /// </summary>
         public void PlaceThePin(bool _placeRight)
         {
+            SetPinSpawnPosition(_placeRight);
             if (prectime <= 0 && canPlace == true)
             {
-                Debug.Log(GetPinSpawnPosition(_placeRight));
-                GameObject pin = Instantiate(placePinConfig.PinPrefab, GetPinSpawnPosition(_placeRight), Quaternion.identity);
+                GameObject pin = Instantiate(placePinConfig.PinPrefab, transform.position , Quaternion.identity);
                 pin.transform.parent = GameManager.Instance.LevelMng.PinsContainer;
                 prectime = placePinConfig.CoolDownTime;
             }
@@ -88,12 +91,18 @@ namespace BlackFox
         /// Change the position of the PinSpawnPoint
         /// </summary>
         /// <param name="_isRight"></param>
-        Vector3 GetPinSpawnPosition(bool _isRight)
+        void SetPinSpawnPosition(bool _isRight)
         {
-            if (_isRight)
-                return transform.localPosition;
-            else
-                return new Vector3(-transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
+            if (_isRight && !isRight)
+            {
+                transform.localPosition = initialTransf.localPosition;
+                isRight = _isRight;
+            }
+            else if(!_isRight && isRight)
+            {
+                transform.localPosition = new Vector3(-initialTransf.localPosition.x, initialTransf.localPosition.y, initialTransf.localPosition.z);
+                isRight = _isRight;
+            }
         }
     }
 

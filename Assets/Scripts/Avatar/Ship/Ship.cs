@@ -74,6 +74,13 @@ namespace BlackFox {
             } 
         }
 
+        /// <summary>
+        /// Remove all the placed Pins of this ship
+        /// </summary>
+        public void RemoveAllPins()
+        {
+            pinPlacer.RemoveAllPins();
+        }
         #endregion
 
         void CheckInputStatus(InputStatus _inputStatus) {
@@ -206,6 +213,8 @@ namespace BlackFox {
             previousSpeed = rigid.velocity;
         }
         #endregion
+
+        
         
     }
 

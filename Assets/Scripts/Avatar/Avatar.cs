@@ -89,6 +89,7 @@ namespace BlackFox {
             switch (_newState)
             {
                 case AvatarState.Disabled:
+                    ship.RemoveAllPins();
                     ship.ToggleAbilities(false);
                     if (rope != null)
                     {

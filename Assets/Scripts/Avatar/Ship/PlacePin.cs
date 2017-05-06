@@ -19,6 +19,7 @@ namespace BlackFox
                     data = ship.avatar.AvatarData.shipConfig.placePinConfig;
                 return data; }
         }
+        List<GameObject> pinsPlaced = new List<GameObject>();
         Transform initialTransf;
         Ship ship;
         float prectime;
@@ -70,9 +71,25 @@ namespace BlackFox
             if (prectime <= 0 && canPlace == true)
             {
                 GameObject pin = Instantiate(placePinConfig.PinPrefab, transform.position , Quaternion.identity);
+                pinsPlaced.Add(pin);
+                foreach (Renderer pinRend in pin.GetComponentsInChildren<Renderer>())
+                {
+                    pinRend.material = ship.avatar.AvatarData.shipConfig.ColorSets[ship.avatar.ColorSetIndex].PinMaterial;
+                }
                 pin.transform.parent = GameManager.Instance.LevelMng.PinsContainer;
                 prectime = placePinConfig.CoolDownTime;
             }
+        }
+        /// <summary>
+        /// Remove all the placed Pins
+        /// </summary>
+        public void RemoveAllPins()
+        {
+            foreach (GameObject pin in pinsPlaced)
+            {
+                Destroy(pin);
+            }
+            pinsPlaced.Clear();
         }
         #endregion
 

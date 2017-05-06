@@ -9,6 +9,6 @@ namespace BlackFox {
 
         public Material ShipMaterialMain;
         public Material RopeMaterial;
-
+        public Material PinMaterial;
     }
 }

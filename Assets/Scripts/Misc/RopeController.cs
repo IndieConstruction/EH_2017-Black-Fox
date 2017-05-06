@@ -189,15 +189,7 @@ namespace Rope
         /// </summary>
         public void DestroyDynamically()
         {
-            lineRend.enabled = false;
             Destroy(gameObject);
-            //float destroyTimer = 0;
-
-            //for (int i = fragments.Count - 1; i >= 0; i--)
-            //{
-            //    destroyTimer += .1f;
-            //    Destroy(fragments[i], destroyTimer);
-            //}
         }
         #endregion
     }

@@ -133,17 +133,52 @@ MonoBehaviour:
     SmallIcon: {fileID: 2800000, guid: b8e8a328d6527a14783473666c1f8a08, type: 3}
     LargeIcon: {fileID: 2800000, guid: 010e6d817952d434197d318f48b2f16a, type: 3}
   - Type: 1
+    Key: Assets/XInputDotNet
+    IsRecursive: 0
+    SmallIcon: {fileID: 2800000, guid: 8f45cff1df9688244b1fa6e2da91e05f, type: 3}
+    LargeIcon: {fileID: 2800000, guid: 15c3471930a7ff44aa9a30bc21a5ea06, type: 3}
+  - Type: 1
     Key: Assets/Models
     IsRecursive: 0
     SmallIcon: {fileID: 2800000, guid: 268edea26d8cd504da659cc71a1d8549, type: 3}
     LargeIcon: {fileID: 2800000, guid: e69e4447e8078c441b3a955855f4f080, type: 3}
   - Type: 1
-    Key: Assets/Demigiant
+    Key: Assets/Scripts/Avatar
     IsRecursive: 0
-    SmallIcon: {fileID: 2800000, guid: 0a498e8f7fbcbef4db91d2d411e3f70f, type: 3}
-    LargeIcon: {fileID: 2800000, guid: b88339035f924f94eab1e64bac79149f, type: 3}
+    SmallIcon: {fileID: 2800000, guid: a65c70fcbe9ac0b4fbcbac4a0b67e64f, type: 3}
+    LargeIcon: {fileID: 2800000, guid: 3d8f946e891cc8f4e81b1a296f8fb6be, type: 3}
   - Type: 1
-    Key: Assets/XInputDotNet
+    Key: Assets/Scripts/UIControllers
     IsRecursive: 0
-    SmallIcon: {fileID: 2800000, guid: 0a498e8f7fbcbef4db91d2d411e3f70f, type: 3}
-    LargeIcon: {fileID: 2800000, guid: b88339035f924f94eab1e64bac79149f, type: 3}
+    SmallIcon: {fileID: 2800000, guid: e4d497fd8f72b5241b762a7ed649ee83, type: 3}
+    LargeIcon: {fileID: 2800000, guid: 0532ea3a1890c8946b6d842beeab51b8, type: 3}
+  - Type: 1
+    Key: Assets/Scripts/Managers
+    IsRecursive: 0
+    SmallIcon: {fileID: 2800000, guid: 0379f5bc653a23045a15e41eb54d6db8, type: 3}
+    LargeIcon: {fileID: 2800000, guid: 575f900c4ff32fa42a779d65da794c83, type: 3}
+  - Type: 1
+    Key: Assets/Scripts/StateMachines
+    IsRecursive: 0
+    SmallIcon: {fileID: 2800000, guid: bd871a1c68938b848adc74c50bb04a4d, type: 3}
+    LargeIcon: {fileID: 2800000, guid: 980ffdf13df9e86469913858907674fd, type: 3}
+  - Type: 1
+    Key: Assets/Resources/Prefabs/Managers
+    IsRecursive: 0
+    SmallIcon: {fileID: 2800000, guid: 0379f5bc653a23045a15e41eb54d6db8, type: 3}
+    LargeIcon: {fileID: 2800000, guid: 575f900c4ff32fa42a779d65da794c83, type: 3}
+  - Type: 1
+    Key: Assets/Resources/Prefabs/UI
+    IsRecursive: 0
+    SmallIcon: {fileID: 2800000, guid: e4d497fd8f72b5241b762a7ed649ee83, type: 3}
+    LargeIcon: {fileID: 2800000, guid: 0532ea3a1890c8946b6d842beeab51b8, type: 3}
+  - Type: 1
+    Key: Assets/Resources/Prefabs/Avatar
+    IsRecursive: 0
+    SmallIcon: {fileID: 2800000, guid: a65c70fcbe9ac0b4fbcbac4a0b67e64f, type: 3}
+    LargeIcon: {fileID: 2800000, guid: 3d8f946e891cc8f4e81b1a296f8fb6be, type: 3}
+  - Type: 1
+    Key: Assets/Resources/Prefabs/ShipModels
+    IsRecursive: 0
+    SmallIcon: {fileID: 2800000, guid: 6ecc649ba46fa2c448d60a663be30ffd, type: 3}
+    LargeIcon: {fileID: 2800000, guid: 7ce51c638aeaa3840ab61c4a4af3885b, type: 3}

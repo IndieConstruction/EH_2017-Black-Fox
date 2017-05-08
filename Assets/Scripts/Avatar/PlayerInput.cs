@@ -135,8 +135,11 @@ namespace BlackFox
         InputStatus KeyboardInput()
         {
             InputStatus inputStatus = new InputStatus();
-            inputStatus.RightTriggerAxis = Input.GetAxis("Key" + (int)playerIndex + "_Forward");
             inputStatus.LeftThumbSticksAxisX = Input.GetAxis("Key" + (int)playerIndex + "_Horizonatal");
+            inputStatus.LeftThumbSticksAxisY = Input.GetAxis("Key" + (int)playerIndex + "_Forward");
+
+            inputStatus.RightThumbSticksAxisX = Input.GetAxis("Horizontal");
+            inputStatus.RightThumbSticksAxisY = Input.GetAxis("Vertical");
 
             if (Input.GetButtonDown("Key" + (int)playerIndex + "_PlaceRight"))
             {

@@ -22,22 +22,17 @@ namespace BlackFox
             ship = _ship;
             rigid = _rigid;
         }
-
         /// <summary>
-        /// Add a relative force to the rigidbody of the object.
+        /// Self orient and propel toward _target
         /// </summary>
-        /// <param name="_axisValue">the speed that the object must to have</param>
-        public void Movement(float _axisValue)
+        /// <param name="_target">Provide direction of acceleration and magnitude of the pulse</param>
+        public void Move(Vector3 _target)
         {
-            rigid.AddRelativeForce(Vector3.forward * _axisValue * MovementConfig.MovmentSpeed, ForceMode.Force);
+            rigid.AddForce(_target * MovementConfig.MovmentSpeed, ForceMode.Force);
+            if(_target != Vector3.zero)
+                rigid.MoveRotation(Quaternion.Slerp(rigid.rotation,Quaternion.LookRotation(_target),Time.deltaTime * MovementConfig.RotationSpeed));
         }
-
-        public void Rotation(float _axisValue)
-        {
-            //rotazione in base all'agente
-            rigid.MoveRotation(rigid.rotation * Quaternion.Euler(Vector3.up * MovementConfig.RotationSpeed * _axisValue * Time.deltaTime));
-        }
-        #endregion
+        #endregion        
     }
 
     [Serializable]

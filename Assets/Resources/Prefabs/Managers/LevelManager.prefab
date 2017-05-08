@@ -63,10 +63,14 @@ MonoBehaviour:
     type: 2}
   RopeMngPrefab: {fileID: 1445940252311144, guid: 0794285e6c4bb864fa11d1f9f452b63a,
     type: 2}
+  gameMngr: {fileID: 0}
   SpawnerMng: {fileID: 0}
   RopeMng: {fileID: 0}
   AvatarSpwn: {fileID: 0}
   CurrentLevel: {fileID: 0}
   Core: {fileID: 0}
   Arena: {fileID: 0}
+  gameplaySM: {fileID: 0}
+  EndLevelPanelLable: 
+  IsGamePaused: 0
   PinsContainer: {fileID: 0}

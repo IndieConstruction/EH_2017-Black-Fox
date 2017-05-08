@@ -8,7 +8,6 @@ namespace BlackFox
     {
         new public TurretSpawnerOptions Options;
         public int Spawnedturrent = 0;
-        Vector3 randomPosition;
 
         void Update()
         {
@@ -26,7 +25,7 @@ namespace BlackFox
             }
         }
 
-        // TODO : chiamare la funzione a initio round
+        // TODO : chiamare la funzione a inizio round (controllare cos'è)
         void OnRoundPlay()
         {
             Vector3 randomPosition = new Vector3(Random.Range(-70.0f, 100.0f), 0, Random.Range(-100.0f, 100.0f));

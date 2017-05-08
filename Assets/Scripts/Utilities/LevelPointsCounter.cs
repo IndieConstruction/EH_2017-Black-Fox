@@ -1,27 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using XInputDotNetPure;
 
 namespace BlackFox
 {
     public class LevelPointsCounter
     {
-        int AddPoints = 1;
-        int SubPoints = 1;
-        int PointsToWin = 5;
+        LevelManager levelManager;
+
+        int AddPoints
+        {
+            get { return levelManager.AddPoints; }
+        }
+        int SubPoints
+        {
+            get { return levelManager.SubPoints; }
+        }
+        int PointsToWin
+        {
+            get { return levelManager.PointsToWin; }
+        }
 
         List<PlayerStats> playerStats = new List<PlayerStats>()
-        {   new PlayerStats(PlayerIndex.One),
-            new PlayerStats(PlayerIndex.Two),
-            new PlayerStats(PlayerIndex.Three),
-            new PlayerStats(PlayerIndex.Four)
+        {   new PlayerStats(PlayerLabel.One),
+            new PlayerStats(PlayerLabel.Two),
+            new PlayerStats(PlayerLabel.Three),
+            new PlayerStats(PlayerLabel.Four)
         };
 
-        public LevelPointsCounter(int _addPoints, int _subPoints, int _pointsToWin)
+        public LevelPointsCounter(LevelManager _levelManager)
         {
-            AddPoints = _addPoints;
-            SubPoints = _subPoints;
-            PointsToWin = _pointsToWin;
+            levelManager = _levelManager;
         }
 
         /// <summary>
@@ -29,18 +37,18 @@ namespace BlackFox
         /// </summary>
         /// <param name="_killer"></param>
         /// <param name="_victim"></param>
-        void AddKillPoints(PlayerIndex _killer)
+        void AddKillPoints(PlayerLabel _killer)
         {
             foreach (PlayerStats player in playerStats)
             {
-                if (player.PlayerIndex == _killer)
+                if (player.PlayerID == _killer)
                 {
                     player.KillPoints += AddPoints;
 
                     if (player.KillPoints == PointsToWin)
                     {
                         player.Victories += 1;
-                        PlayerWin(player.PlayerIndex);
+                        GameManager.Instance.LevelMng.PlayerWin(player.PlayerID.ToString());
                     }
                     break;
                 }
@@ -51,11 +59,11 @@ namespace BlackFox
         /// Aggiorna i punti uccisione del player che è morto
         /// </summary>
         /// <param name="_victim"></param>
-        void SubKillPoints(PlayerIndex _victim)
+        void SubKillPoints(PlayerLabel _victim)
         {
             foreach (PlayerStats player in playerStats)
             {
-                if (player.PlayerIndex == _victim && player.KillPoints > 0)
+                if (player.PlayerID == _victim && player.KillPoints > 0)
                 {
                     player.KillPoints -= SubPoints;
                     break;
@@ -63,22 +71,15 @@ namespace BlackFox
             }
         }
 
-        /// <summary>
-        /// Funzione chiamata alla vittoria del player
-        /// </summary>
-        void PlayerWin(PlayerIndex _player)
-        {
-            GameManager.Instance.LevelMng.PlayerWin(_player.ToString());
-        }
 
         #region API
-        public void UpdateKillPoints(PlayerIndex _killer, PlayerIndex _victim)
+        public void UpdateKillPoints(PlayerLabel _killer, PlayerLabel _victim)
         {
             AddKillPoints(_killer);
             SubKillPoints(_victim);
         }
 
-        public void UpdateKillPoints(PlayerIndex _victim)
+        public void UpdateKillPoints(PlayerLabel _victim)
         {
             SubKillPoints(_victim);
         }
@@ -86,13 +87,13 @@ namespace BlackFox
         /// <summary>
         /// Ritorna i punti uccisione del player che chiama la funzione
         /// </summary>
-        /// <param name="_playerIndex">Indice del Player</param>
+        /// <param name="_playerID">Indice del Player</param>
         /// <returns></returns>
-        public int GetPlayerKillPoints(PlayerIndex _playerIndex)
+        public int GetPlayerKillPoints(PlayerLabel _playerID)
         {
             foreach (PlayerStats player in playerStats)
             {
-                if (player.PlayerIndex == _playerIndex)
+                if (player.PlayerID == _playerID)
                 {
                     return player.KillPoints;
                 }
@@ -110,22 +111,32 @@ namespace BlackFox
                 player.ResetKillPoints();
             }
         }
+
+        /// <summary>
+        /// Azzera i punti uccisione di tutti i player
+        /// </summary>
+        public void ClearAllVictories()
+        {
+            foreach (PlayerStats player in playerStats)
+            {
+                player.ResetVictories();
+            }
+        }
         #endregion
     }
-
 
     /// <summary>
     /// Contenitore dei punti del player
     /// </summary>
     public class PlayerStats
     {
-        PlayerIndex playerIndex;
+        PlayerLabel playerID;
         int killPoints;
         int victories;
 
-        public PlayerIndex PlayerIndex
+        public PlayerLabel PlayerID
         {
-            get { return playerIndex; }
+            get { return playerID; }
         }
 
         public int KillPoints
@@ -140,9 +151,9 @@ namespace BlackFox
             set { victories = value; }
         }
 
-        public PlayerStats(PlayerIndex _playerIndex)
+        public PlayerStats(PlayerLabel _playerIndex)
         {
-            playerIndex = _playerIndex;
+            playerID = _playerIndex;
         }
 
         public void ResetKillPoints()
@@ -150,5 +161,9 @@ namespace BlackFox
             killPoints = 0;
         }
 
+        public void ResetVictories()
+        {
+            Victories = 0;
+        }
     }
 }

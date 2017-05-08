@@ -1,125 +1,66 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using XInputDotNetPure;
-
 using UnityEngine.UI;
-using System;
 
 namespace BlackFox
 {
     public class EndRoundlUI : MonoBehaviour, IMenu
     {
-
-        public Text Player1Points;
-        public Text Player2Points;
-        public Text Player3Points;
-        public Text Player4Points;
+        public Text[] PlayerPoints = new Text[4];
         public Text EventName;
         public GameObject EndLevelPanel;
 
-        int P1KillPoints;
-        int P2KillPoints;
-        int P3KillPoints;
-        int P4KillPoints;
+        int currentIndexSelection = 0;
 
-        int totalIndexSelection = 1;
-        int currentInexSelection = 1;
-
-        public int CurrentInexSelection
+        public int CurrentIndexSelection
         {
             get { return 1; }
-            set { currentInexSelection = value; }
+            set { currentIndexSelection = value; }
         }
 
-        public int TotalIndexSelection {
-            get { return 1; }
-            set { totalIndexSelection = value; }
-            }
+        List<ISelectable> selectableButton = new List<ISelectable>();
 
+        public List<ISelectable> SelectableButtons
+        {
+            get { return selectableButton; }
+            set { selectableButton = value; }
+        }
 
-        // Use this for initialization
         void Start()
         {
             EndLevelPanel.SetActive(false);
-            GameManager.Instance.UiMng.CurrentMenu = this;
         }
-
-
-        void UpdateUIPoints()
+        
+        /// <summary>
+        /// Cerca il totale di ogni player e lo mostra in una casella di testo
+        /// </summary>
+        void ShowAvatarsKillPoints()
         {
-            Player1Points.text = P1KillPoints + " / 5";
-            Player2Points.text = P2KillPoints + " / 5";
-            Player3Points.text = P3KillPoints + " / 5";
-            Player4Points.text = P4KillPoints + " / 5";
-        }
-
-        #region API 
-
-        public void AddKillPointToUI(Avatar _attacker, Avatar _victim)
-        {
-
-            if (_attacker != null)
+            for (int i = 0; i < PlayerPoints.Length; i++)
             {
-                switch (_attacker.playerIndex)
-                {
-                    case PlayerIndex.One:
-                        P1KillPoints++;
-                        break;
-                    case PlayerIndex.Two:
-                        P2KillPoints++;
-                        break;
-                    case PlayerIndex.Three:
-                        P3KillPoints++;
-                        break;
-                    case PlayerIndex.Four:
-                        P4KillPoints++;
-                        break;
-                    default:
-                        break;
-                } 
+                PlayerPoints[i].text = GameManager.Instance.LevelMng.GetPlayerKillPoints((PlayerLabel)i+1) + " / " + GameManager.Instance.LevelMng.PointsToWin;
             }
-
-            switch (_victim.playerIndex)
-            {
-                case PlayerIndex.One:
-                    if (P1KillPoints != 0)
-                        P1KillPoints--;
-                    break;
-                case PlayerIndex.Two:
-                    if (P2KillPoints != 0)
-                        P2KillPoints--;
-                    break;
-                case PlayerIndex.Three:
-                    if (P3KillPoints != 0)
-                        P3KillPoints--;
-                    break;
-                case PlayerIndex.Four:
-                    if (P4KillPoints != 0)
-                        P4KillPoints--;
-                    break;
-                default:
-                    break;
-            }
-            UpdateUIPoints();
-            EventName.text = GameManager.Instance.LevelMng.EndLevelPanelLable;
         }
-
-        public void ClearTheUIPoints()
+        
+        #region API
+        /// <summary>
+        /// Attiva End Round Panel e mostrare i punti degli avatar
+        /// </summary>
+        public void SetEndRoundPanelStatus(bool _status)
         {
-            P1KillPoints = 0;
-            P2KillPoints = 0;
-            P3KillPoints = 0;
-            P4KillPoints = 0;
+            if (_status)
+            {
+                ShowAvatarsKillPoints();
+                EventName.text = GameManager.Instance.LevelMng.EndLevelPanelLableText;
+            }
+            EndLevelPanel.SetActive(_status);
         }
 
         public void Selection()
         {
             GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
         }
-
         #endregion
-
-
     }
 }

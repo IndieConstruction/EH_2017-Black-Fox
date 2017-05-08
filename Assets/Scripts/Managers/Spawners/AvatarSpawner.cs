@@ -10,21 +10,11 @@ namespace BlackFox
     /// It menages the SpawnPoint position during the Level
     /// </summary>
     public class AvatarSpawner : MonoBehaviour
-    {
-        /// <summary>
-        /// Time between death and respawn
-        /// </summary>
-        public float RespawnTime = 0;
-        /// <summary>
-        /// Use the Specifiied prefabas as player to respawn
-        /// </summary>
-        public bool UseSpecifiedPrefabs = false;
-        /// <summary>
-        /// Prefabs of Avatar to respawn
-        /// </summary>
-        public GameObject[] AvatarPrefabs = new GameObject[4];
-        private GameObject avatarContainer;
+    {      
         private List<AvatarSpawnPoint> _originalSpawns;
+        /// <summary>
+        /// Rende delle transform specifiche utilizzabili come spawn point per player specifico
+        /// </summary>
         public List<AvatarSpawnPoint> OriginalSpawns
         {
             get
@@ -38,19 +28,33 @@ namespace BlackFox
         /// <summary>
         /// Additional SpawnPoints
         /// </summary>
-        public List<AvatarSpawnPoint> SpawnPoints;
-        private GameObject[] agentsPrefb;
-        
+        public List<AvatarSpawnPoint> SpawnPoints;        
+
+        /// <summary>
+        /// Respawn a Player without cooldown
+        /// </summary>
+        /// <param name="_player">Player to spawn</param>
+        void Spawn(Player _player)
+        {
+            //con una lista che prevede il corretto criterio di selezione degli spawn points.
+            foreach (AvatarSpawnPoint spawn in OriginalSpawns)
+            {
+                if (spawn.PlayerID == _player.ID)
+                {
+                    Avatar newAgent = _player.Avatar;
+                    newAgent.ship.transform.position = spawn.SpawnPosition.position;
+                    newAgent.ship.transform.rotation = spawn.SpawnPosition.rotation;
+                    return;
+                }
+            }
+        }
+
+        #region API
         /// <summary>
         /// Save the desired SpawnPoints
         /// </summary>
-        void Start()
+        public void Init()
         {
-            if (UseSpecifiedPrefabs)
-                agentsPrefb = AvatarPrefabs;
-            else
-                agentsPrefb = Resources.LoadAll<GameObject>("Prefabs/Avatar");
-           
             if (SpawnPoints != null)
                 foreach (AvatarSpawnPoint spwnPt in SpawnPoints)
                 {
@@ -66,121 +70,75 @@ namespace BlackFox
                         break;
                     case SpawnPoint.AvatarSpawnType.Blue:
                         spwnPt.SpawnPosition = spawn.transform;
-                        spwnPt.PlayerIndx = PlayerIndex.One;
+                        spwnPt.PlayerID = PlayerLabel.One;
                         OriginalSpawns.Add(spwnPt);
                         break;
                     case SpawnPoint.AvatarSpawnType.Red:
                         spwnPt.SpawnPosition = spawn.transform;
-                        spwnPt.PlayerIndx = PlayerIndex.Two;
+                        spwnPt.PlayerID = PlayerLabel.Two;
                         OriginalSpawns.Add(spwnPt);
                         break;
                     case SpawnPoint.AvatarSpawnType.Green:
                         spwnPt.SpawnPosition = spawn.transform;
-                        spwnPt.PlayerIndx = PlayerIndex.Three;
+                        spwnPt.PlayerID = PlayerLabel.Three;
                         OriginalSpawns.Add(spwnPt);
                         break;
                     case SpawnPoint.AvatarSpawnType.Purple:
                         spwnPt.SpawnPosition = spawn.transform;
-                        spwnPt.PlayerIndx = PlayerIndex.Four;
+                        spwnPt.PlayerID = PlayerLabel.Four;
                         OriginalSpawns.Add(spwnPt);
                         break;
                     default:
                         break;
                 }
             }
-
-            avatarContainer = new GameObject("AvatarContainer");
-            avatarContainer.transform.parent = GameManager.Instance.LevelMng.transform;
         }
-
-        #region API
-        public Avatar[] GetAllPlayer()
-        {
-            // TODO : tenere riferimenti fissi
-            return FindObjectsOfType<Avatar>();
-        }
-
         /// <summary>
-        /// Respawn all Players
+        /// Get the spawn point transform relative the the player(parameter)
         /// </summary>
-        public void RespawnAllImmediate()
+        /// <param name="_label"></param>
+        /// <returns></returns>
+        public Transform GetMySpawnPoint(PlayerLabel _label)
+        {
+            foreach (AvatarSpawnPoint spawnPt in OriginalSpawns)
+            {
+                if (_label == spawnPt.PlayerID)
+                    return spawnPt.SpawnPosition;
+            }
+            return null;
+        }
+        /// <summary>
+        /// Interrupt queued spawns
+        /// </summary>
+        public void BreakSpawnsInQueue()
         {
             StopAllCoroutines();
-            for (int i = 0; i < agentsPrefb.Length; i++)
-            {
-                RespawnImmediate(agentsPrefb[i].GetComponentInChildren<Avatar>().playerIndex);
-            }
         }
-
-        /// <summary>
-        /// Respawn a Player without cooldown
-        /// </summary>
-        /// <param name="_playerIndx">Player to spawn</param>
-        public void RespawnImmediate(PlayerIndex _playerIndx)
-        {
-            //Prevent double istance
-            foreach (Avatar agnt in FindObjectsOfType<Avatar>())
-            {
-                if (agnt.playerIndex == _playerIndx)
-                    Destroy(agnt);
-            }
-
-            //TODO: sostituire la lista SpawnPoint nel successivo foreach
-            //con una lista che prevede il corretto criterio di selezione degli spawn points.
-            foreach (AvatarSpawnPoint spawn in OriginalSpawns)
-            {
-                if (spawn.PlayerIndx == _playerIndx)
-                {
-                    for (int i = 0; i < agentsPrefb.Length; i++)
-                    {
-                        if (agentsPrefb[i].GetComponentInChildren<Avatar>().playerIndex == _playerIndx)
-                        {
-                            GameObject newAgent = Instantiate(agentsPrefb[i], spawn.SpawnPosition.position, spawn.SpawnPosition.rotation);
-                            newAgent.transform.parent = avatarContainer.transform;
-
-                            if (GameManager.Instance.LevelMng.RopeMng != null)
-                                GameManager.Instance.LevelMng.RopeMng.AttachNewRope(newAgent.GetComponentInChildren<Avatar>());
-
-                            if(EventManager.OnAgentSpawn != null)
-                                EventManager.OnAgentSpawn(newAgent.GetComponentInChildren<Avatar>());
-                            return;
-                        }
-                    }
-                }
-            }
-        }
-
         /// <summary>
         /// Respawn after a fixed amount of time
         /// </summary>
         /// <param name="_playerIndx">Player to spawn</param>
-        public void RespawnAvatar(Avatar _victim)
+        public void SpawnAvatar(Player _player, float _spawnTime)
         {
-            StartCoroutine("RespawnCooldown", _victim.playerIndex);
+            Spawn(_player);
+            _player.Avatar.State = AvatarState.Ready;
+            StartCoroutine(RespawnCooldown(_player,_spawnTime));
         }
+        IEnumerator RespawnCooldown(Player _playerID, float _spawnTime)
+        {
+            yield return new WaitForSeconds(_spawnTime);
 
-        #region Destroy Agents
-        public void DestroyAgents() {
-            // TODO : da correggere
-            foreach (Avatar agent in FindObjectsOfType<Avatar>()) {
-                Destroy(agent.gameObject);
-            }
+            _playerID.Avatar.State = AvatarState.Enabled;
+            if (EventManager.OnAgentSpawn != null)
+                EventManager.OnAgentSpawn(_playerID.Avatar); ;
         }
-        #endregion
-
         #endregion
 
         [Serializable]
         public struct AvatarSpawnPoint
         {
             public Transform SpawnPosition;
-            public PlayerIndex PlayerIndx;
-        }
-
-        IEnumerator RespawnCooldown(PlayerIndex _playerIndx)
-        {
-            yield return new WaitForSeconds(RespawnTime);
-            RespawnImmediate(_playerIndx);
+            public PlayerLabel PlayerID;
         }
     }
 }

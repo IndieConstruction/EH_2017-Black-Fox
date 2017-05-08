@@ -9,33 +9,27 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("PlayState");
-            EventManager.TriggerPlayStateEnd += HandleTriggerPlayStateEnd;
+            GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.PlayInput);
+            GameManager.Instance.LevelMng.RoundBegin();
             EventManager.OnAgentKilled += HandleOnAgentKilled;
-            EventManager.OnAgentSpawn += HandleOnAgentSpawn;
         }
 
         public override void OnEnd()
         {
             // passaggio informazioni essenziali al gestore del livello
-            EventManager.TriggerPlayStateEnd -= HandleTriggerPlayStateEnd;
             EventManager.OnAgentKilled -= HandleOnAgentKilled;
-            EventManager.OnAgentSpawn -= HandleOnAgentSpawn;
         }
 
         #region Events Handler
-        void HandleTriggerPlayStateEnd()
-        {
-            OnStateEnd();
-        }
 
         void HandleOnAgentKilled(Avatar _killer, Avatar _victim)
         {
-            GameManager.Instance.LevelMng.AgentKilled(_killer, _victim);
-        }
+            GameManager.Instance.LevelMng.UpdateKillPoints(_killer, _victim);
+            GameManager.Instance.UiMng.canvasGameMenu.gameUIController.SetKillPointsUI(_killer.Player.ID);
+            GameManager.Instance.UiMng.canvasGameMenu.gameUIController.SetKillPointsUI(_victim.Player.ID);
+            if (GameManager.Instance.LevelMng.IsRoundActive)
+                GameManager.Instance.LevelMng.AvatarSpwn.SpawnAvatar(_victim.Player, 3);
 
-        void HandleOnAgentSpawn(Avatar _agent)
-        {
-            GameManager.Instance.LevelMng.AgentSpawn(_agent);
         }
         #endregion
     }

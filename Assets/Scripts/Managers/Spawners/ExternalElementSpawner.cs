@@ -22,7 +22,8 @@ namespace BlackFox
             LoadIDamageablePrefab();
         }
 
-        public override SpawnerBase Init(SpawnerOptions options) {
+        public override SpawnerBase Init(SpawnerOptions options)
+        {
             Options = options as ExternalElementOptions;
             return this;
         }
@@ -35,6 +36,14 @@ namespace BlackFox
                 nextTime += Random.Range(Options.MinTime, Options.MaxTime);
             }
             GravityAround();
+        }
+
+        private void OnDestroy()
+        {
+            // TODO : da rifare
+            //per adesso solo per evitare che ci siano agenti esterni in giro a caso
+            foreach (ExternalAgent externalAgent in FindObjectsOfType<ExternalAgent>())
+                Destroy(externalAgent.gameObject);
         }
         #endregion
 

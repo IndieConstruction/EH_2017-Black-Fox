@@ -9,39 +9,31 @@ namespace BlackFox
     {
         public List<Player> Players = new List<Player>();
 
-        private void Update()
-        {
-            UpdatePlayers();
-        }
-
-        void UpdatePlayers()
-        {
-            foreach (Player player in Players)
-            {
-                player.OnUpdate();
-            }
-        }
-        
         #region API
+        #region Player
         /// <summary>
         /// Instanzia i player
         /// </summary>
         public void InstantiatePlayers()
         {
-            for(int i = 0; i < 4; i++)
-                Players.Add(new Player((PlayerIndex)i));
+            for (int i = 1; i <= 4; i++)
+            {
+                Player newPlayer = gameObject.AddComponent<Player>();
+                newPlayer.Setup((PlayerLabel)i);
+                Players.Add(newPlayer);
+            }
         }
 
         /// <summary>
         /// Cambia lo stato del player specificato
         /// </summary>
         /// <param name="_playerState"></param>
-        /// <param name="_playerIndex"></param>
-        public void ChangePlayerState(PlayerState _playerState, PlayerIndex _playerIndex)
+        /// <param name="_playerID"></param>
+        public void ChangePlayerState(PlayerState _playerState, PlayerLabel _playerID)
         {
             foreach (Player player in Players)
             {
-                if (player.playerIndex == _playerIndex)
+                if (player.ID == _playerID)
                     player.PlayerCurrentState = _playerState;
             }
         }
@@ -53,8 +45,17 @@ namespace BlackFox
         public void ChangeAllPlayersState(PlayerState _playerState)
         {
             foreach (Player player in Players)
-            {
                 player.PlayerCurrentState = _playerState;
+        }
+
+        public void ChangeAllPlayersStateExceptOne(PlayerState _playerState, PlayerLabel _playerID, PlayerState _otherPlayersState)
+        {
+            foreach (Player player in Players)
+            {
+                if (player.ID == _playerID)
+                    player.PlayerCurrentState = _playerState;
+                else
+                    player.PlayerCurrentState = _otherPlayersState;
             }
         }
 
@@ -63,15 +64,36 @@ namespace BlackFox
         /// </summary>
         /// <param name="_playerIndex"></param>
         /// <returns></returns>
-        public Player GetPlayer(PlayerIndex _playerIndex)
+        public Player GetPlayer(PlayerLabel _playerIndex)
         {
             foreach (Player player in Players)
             {
-                if (player.playerIndex == _playerIndex)
+                if (player.ID == _playerIndex)
                     return player;
             }
             return null;
         }
+        #endregion
+
+        #region Avatar
+        /// <summary>
+        /// Setup all the avatars of the current players
+        /// </summary>
+        /// <param name="_forceIstance">If true ask for a new istance if there are none</param>
+        public void SetupAvatars(bool _forceIstance = false)
+        {
+            foreach (Player player in Players)
+                player.AvatarSetup(_forceIstance);
+        }
+
+        public void ChangeAvatarsState(AvatarState _state)
+        {
+            foreach (Player player in Players)
+            {
+                player.Avatar.State = _state;
+            }
+        }
+        #endregion
         #endregion
     }
 
@@ -80,9 +102,9 @@ namespace BlackFox
     /// </summary>
     public enum PlayerState
     {
-        Blocked,
-        MenuInputState,
-        PlayInputState
+        Blocked = 0,
+        MenuInput = 1,
+        PlayInput = 2
     }
 }
 

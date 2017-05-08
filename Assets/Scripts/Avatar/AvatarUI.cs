@@ -10,37 +10,21 @@ namespace BlackFox {
     public class AvatarUI : MonoBehaviour {
         public Image KillToview;
         public Slider Ring;
-        
-        
-        Avatar agent;
-        LevelManager levelManager;
 
-        // Use this for initialization
-        void Awake() {
-            agent = GetComponentInParent<Avatar>();
-        }
-
+        
         private void Start()
         {
-            levelManager = GameManager.Instance.LevelMng;
             Ring.value = 0.5f;
-            
         }
-
-        private void Update()
-        {
-            if (Input.GetKey(KeyCode.O))
-            {
-                KillView();
-            }
-        }
+        
         /// <summary>
         /// Setta il valore della slider che mostra la vita
         /// </summary>
-        /// <param name="_agent"></param>
-        void OnDataChange(Avatar _agent) {
-            // Aggiorno la UI
-            Ring.value =  (0.5f * _agent.Life) / _agent.MaxLife;
+        /// <param name="_avatar"></param>
+        public void SetLifeSliderValue(Avatar _avatar) {
+            // Aggiorno la UI se l'avatar che gli viene passato è uguale al componente che ha come padre
+            if (_avatar == GetComponentInParent<Avatar>())
+                Ring.value =  (0.5f * _avatar.ship.Life) / _avatar.ship.config.MaxLife;
 
             //Logica per cambiare il colore della barra della vita
             //if (Ring.fillAmount < 0.3f) {
@@ -52,31 +36,27 @@ namespace BlackFox {
             //}
                 
         }
-
-        #region Events
-
-        private void OnEnable()
-        {
-            agent.OnDataChange += OnDataChange;
-        }
-
-        private void OnDisable() {
-            agent.OnDataChange -= OnDataChange;
-        }
-        #endregion
-
+        
+        /// <summary>
+        /// Fa comparire l'immagine +1
+        /// </summary>
         public void KillView() {
-
-            
             KillToview.transform.DOScale(new Vector3(1f, 1f, 1f), 1f).OnComplete(() => {
                 KillToview.transform.localScale = Vector3.zero;
             }).SetEase(Ease.OutBounce);
-            
         }
-       
-         
-        
 
 
+        #region Events
+        private void OnEnable()
+        {
+            EventManager.OnLifeValueChange += SetLifeSliderValue;
+        }
+
+        private void OnDisable()
+        {
+            EventManager.OnLifeValueChange -= SetLifeSliderValue;
+        }
+        #endregion
     }
 }

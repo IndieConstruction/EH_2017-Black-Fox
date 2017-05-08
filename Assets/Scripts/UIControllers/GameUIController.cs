@@ -2,80 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using XInputDotNetPure;
 
 namespace BlackFox
 {
     public class GameUIController : MonoBehaviour
     {
+        public Text[] PlayersBulletCount = new Text[4];
 
-        public Text Player1BulletCount;
-        public Text Player2BulletCount;
-        public Text Player3BulletCount;
-        public Text Player4BulletCount;
-
-        public Text Player1KillPoints;
-        public Text Player2KillPoints;
-        public Text Player3KillPoints;
-        public Text Player4KillPoints;
+        public Text[] PlayersKillPoints = new Text[4];
 
         public Slider ElementZeroSlider;
 
         public Text LevelIndicationText;       
-
-        
 
         #region API
 
         /// <summary>
         /// Quando viene richiamata la funzione, vengono visualizzati i proiettili del player che gli viene passato.
         /// </summary>
-        /// <param name="_playerIndex"></param>
+        /// <param name="_playerID"></param>
         /// <param name="_remainigAmmo"></param>
-        public void SetBulletsValue(PlayerIndex _playerIndex, int _remainigAmmo)
+        public void SetBulletsValue(Avatar _avatar)
         {
-            switch (_playerIndex)   
+            for (int i = 0; i < PlayersBulletCount.Length; i++)
             {
-                case PlayerIndex.One:
-                    Player1BulletCount.text = _remainigAmmo.ToString();
-                    break;
-                case PlayerIndex.Two:
-                    Player2BulletCount.text = _remainigAmmo.ToString();
-                    break;
-                case PlayerIndex.Three:
-                    Player3BulletCount.text = _remainigAmmo.ToString();
-                    break;
-                case PlayerIndex.Four:
-                    Player4BulletCount.text = _remainigAmmo.ToString();
-                    break;
-                default:
-                    break;
+                if(_avatar.PlayerId == (PlayerLabel)i + 1)
+                    PlayersBulletCount[i].text = _avatar.ship.shooter.Ammo.ToString();
             }
         }
+        
 
         /// <summary>
-        /// Quando viene richiamata aggiorna i Kill point per il player che ha ucciso qualcuno e per la vittima
+        /// Quando viene richiamata va a leggere i punti del player richiesto nel levelMng e li aggiorna nella UI.
         /// </summary>
-        /// <param name="_playerIndex">Il giocatore a cui aggiornare i punti uccisione nella Ui</param>
-        /// <param name="_playerPoints">I punti da visualizzare nella UI</param>
-        public void SetKillPointsUI(PlayerIndex _playerIndex, int _playerPoints)
+        /// <param name="_playerID">Il giocatore a cui aggiornare i punti uccisione nella Ui</param>
+        public void SetKillPointsUI(PlayerLabel _playerID)
         {
-            switch (_playerIndex)
+            for (int i = 0; i < PlayersKillPoints.Length; i++)
             {
-                case PlayerIndex.One:
-                    Player1KillPoints.text = _playerPoints.ToString();
-                    break;                   
-                case PlayerIndex.Two:        
-                    Player2KillPoints.text = _playerPoints.ToString();
-                    break;                   
-                case PlayerIndex.Three:      
-                    Player3KillPoints.text = _playerPoints.ToString();
-                    break;                   
-                case PlayerIndex.Four:       
-                    Player4KillPoints.text = _playerPoints.ToString();
-                    break;
-                default:
-                    break;
+                if (_playerID == (PlayerLabel)i + 1)
+                    PlayersKillPoints[i].text = GameManager.Instance.LevelMng.GetPlayerKillPoints(_playerID).ToString();
             }
         }
 

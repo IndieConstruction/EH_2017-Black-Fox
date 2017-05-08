@@ -12,10 +12,28 @@ namespace BlackFox
         PlayerIndex playerIndex;
         GamePadState state;
         GamePadState prevState;
-    
-        public PlayerInput(PlayerIndex _playerIndex)
+
+        public PlayerInput(PlayerLabel _playerID)
         {
-            playerIndex = _playerIndex;
+            switch (_playerID)
+            {
+                case PlayerLabel.None:
+                    break;
+                case PlayerLabel.One:
+                    playerIndex = PlayerIndex.One;
+                    break;
+                case PlayerLabel.Two:
+                    playerIndex = PlayerIndex.Two;
+                    break;
+                case PlayerLabel.Three:
+                    playerIndex = PlayerIndex.Three;
+                    break;
+                case PlayerLabel.Four:
+                    playerIndex = PlayerIndex.Four;
+                    break;
+                case PlayerLabel.Different:
+                    break;
+            }
         }
 
         #region API
@@ -26,10 +44,15 @@ namespace BlackFox
         public InputStatus GetPlayerInputStatus()
         {
             InputStatus inputStatus = ControllerInput();
-            if(!inputStatus.IsConnected)
+            if (!inputStatus.IsConnected)
                 inputStatus = KeyboardInput();
 
             return inputStatus;
+        }
+
+        public void SetControllerVibration(float _leftMotor, float _rightMotor)
+        {
+            GamePad.SetVibration(playerIndex, _leftMotor, _rightMotor);
         }
         #endregion
 
@@ -96,6 +119,11 @@ namespace BlackFox
                 inputStatus.DPadRight = ButtonState.Pressed;
             }
 
+            if (prevState.Buttons.Start == XInputDotNetPure.ButtonState.Released && state.Buttons.Start == XInputDotNetPure.ButtonState.Pressed)
+            {
+                inputStatus.Start = ButtonState.Pressed;
+            }
+
             return inputStatus;
         }
         #endregion
@@ -155,6 +183,11 @@ namespace BlackFox
                 inputStatus.A = ButtonState.Pressed;
             }
 
+            if (Input.GetButtonDown("Pause"))
+            {
+                inputStatus.Start = ButtonState.Pressed;
+            }
+
             return inputStatus;
         }
         #endregion
@@ -167,13 +200,13 @@ namespace BlackFox
     {
         Released = 0,
         Pressed = 1,
-        Held = 2       
+        Held = 2
     }
 
     /// <summary>
-    /// Strutta che contine tutti i comandi del joystick
+    /// Struttura che contine tutti i comandi del joystick
     /// </summary>
-    public struct InputStatus
+    public class InputStatus
     {
         public bool IsConnected;
 
@@ -204,5 +237,41 @@ namespace BlackFox
 
         public ButtonState Start;
         public ButtonState Select;
+
+        /// <summary>
+        /// Reset the value of each field as default
+        /// </summary>
+        public void Reset()
+        {
+            IsConnected = false;
+
+            LeftTriggerAxis = 0;
+            RightTriggerAxis = 0;
+
+            LeftThumbSticksAxisX = 0;
+            LeftThumbSticksAxisY = 0;
+
+            RightThumbSticksAxisX = 0;
+            RightThumbSticksAxisY = 0;
+
+            A = ButtonState.Released;
+            B = ButtonState.Released;
+            X = ButtonState.Released;
+            Y = ButtonState.Released;
+
+            LeftShoulder = ButtonState.Released;
+            RightShoulder = ButtonState.Released;
+
+            LeftThumbSticks = ButtonState.Released;
+            RightThumbSticks = ButtonState.Released;
+
+            DPadUp = ButtonState.Released;
+            DPadLeft = ButtonState.Released;
+            DPadDown = ButtonState.Released;
+            DPadRight = ButtonState.Released;
+
+            Start = ButtonState.Released;
+            Select = ButtonState.Released;
+        }
     }
 }

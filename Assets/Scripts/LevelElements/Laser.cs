@@ -54,7 +54,7 @@ namespace BlackFox {
                     Timer = Random.Range(5, 15);
                     break;
                 case States.Alert:
-                    Timer = Random.Range(0.5f, 2.5f); ;
+                    Timer = Random.Range(0.5f, 2.5f);
                     break;
                 case States.Shoot:
                     break;

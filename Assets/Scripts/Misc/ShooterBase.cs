@@ -1,23 +1,31 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BlackFox;
 
 public class ShooterBase : MonoBehaviour {
 
-    public GameObject projectile;
-    public float LifeTime = 10f;
-    public float bulletSpeed = 150f;
+    protected ShooterBaseConfig shooterBaseConfig;
 
-
+    #region API
     /// <summary>
     /// Spara un proiettile
     /// </summary>
     public virtual void ShootBullet()
     {
-        GameObject instantiatedProjectile = Instantiate(projectile, transform.position, transform.rotation);
-        instantiatedProjectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * bulletSpeed, ForceMode.Impulse);
+        GameObject instantiatedProjectile = Instantiate(shooterBaseConfig.ProjectilePrefab, transform.position, transform.rotation);
+        instantiatedProjectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * shooterBaseConfig.BulletSpeed, ForceMode.Impulse);
         instantiatedProjectile.GetComponent<Projectile>().SetOwner(GetComponentInParent<IShooter>());
-        Destroy(instantiatedProjectile, LifeTime);
+        Destroy(instantiatedProjectile, shooterBaseConfig.LifeTime);
     }
+    #endregion
+}
+
+[Serializable]
+public class ShooterBaseConfig
+{
+    public GameObject ProjectilePrefab;
+    public float LifeTime;
+    public float BulletSpeed;
 }

@@ -6,20 +6,15 @@ namespace BlackFox
 {
     public class GameManager : MonoBehaviour
     {
-        int levelNumber;
-
-        public int LevelNumber {
-            get { return levelNumber; }
-            set { levelNumber = value; }
-        }
-
         public static GameManager Instance;
-
-        public bool dontDestroyOnLoad;
 
         public GameObject LevelManagerPrefab;
         public GameObject UIManagerPrefab;
         public GameObject PlayerManagerPrefab;
+        public GameObject CoinManagerPrefab;
+        public GameObject AudioManagerPrefab;
+
+        public Level LevelScriptableObj;
 
         [HideInInspector]
         public LevelManager LevelMng;
@@ -28,22 +23,19 @@ namespace BlackFox
         [HideInInspector]
         public PlayerManager PlayerMng;
         [HideInInspector]
+        public CoinManager CoinMng;
+        [HideInInspector]
+        public AudioManager AudioMng;
+        [HideInInspector]
         public FlowSM flowSM;
 
         private void Awake()
         {
             //Singleton paradigm
             if (Instance == null)
-            { 
                 Instance = this;
-                //For actual debug pourpose
-                if (dontDestroyOnLoad)
-                    DontDestroyOnLoad(gameObject);
-            }
             else
-            { 
                 DestroyImmediate(gameObject);
-            }
         }
 
         void Start()
@@ -53,35 +45,53 @@ namespace BlackFox
 
         private void Update()
         {
+            // TODO : togliere (Luca dice che è da togliere)
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                Application.Quit();
+                QuitApplication();
             }
         }
 
         #region API
+        public void QuitApplication()
+        {
+            Application.Quit();
+        }
 
-        //public FlowSM ReturnFlowSM()
-        //{
-        //    return flowSM;
-        //}
-
+        #region Instantiate Managers
         public void InstantiateLevelManager()
         {
             LevelMng = Instantiate(LevelManagerPrefab, transform).GetComponent<LevelManager>();
+            LevelMng.gameMngr = this;
             // TODO : modificare assegnazione del level number
             LevelMng.levelNumber = 1;
+        }
+        public void DestroyLevelManager()
+        {
+            if(LevelMng)
+                Destroy(LevelMng.gameObject);
+        }
+
+        public void InstantiateCoinManager()
+        {
+            CoinMng = Instantiate(CoinManagerPrefab, transform).GetComponent<CoinManager>();
         }
 
         public void InstantiateUIManager()
         {
             UiMng = Instantiate(UIManagerPrefab, transform).GetComponent<UIManager>();
         }
-        
-        public void InstantiateAvatarManager()
+
+        public void InstantiatePlayerManager()
         {
             PlayerMng = Instantiate(PlayerManagerPrefab, transform).GetComponent<PlayerManager>();
         }
+
+        public void InstantiateAudioManager()
+        {
+            AudioMng = Instantiate(AudioManagerPrefab, transform).GetComponent<AudioManager>();
+        }
+        #endregion
         #endregion
     }
 }

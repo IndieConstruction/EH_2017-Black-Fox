@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,90 +7,25 @@ using UnityEngine.UI;
 
 namespace BlackFox
 {
-    public class LevelSelectionController : MonoBehaviour, IMenu
+    public class LevelSelectionController : BaseMenu
     {
-        /// <summary>
-        /// Il "bottone" selezionato
-        /// </summary>
-        int currentInexSelection = 1;
-
-        public Text PlayText;
-        public Text MainMenuText;
-
-        /// <summary>
-        /// Il totale delle possibile scenlte
-        /// </summary>
-        int totalIndexSelection = 2;
-
-        public int CurrentInexSelection
-        {
-            get
-            {
-                return currentInexSelection;
-            }
-            set
-            {
-                /// Modifiche grafiche per cambiare colore alla nuova selezione e far tornare la vecchia selezione al colore precedente.
-                currentInexSelection = value;
-                UpdateGraphic();
-            }
-        }
-
-        public int TotalIndexSelection
-        {
-            get
-            {
-                return totalIndexSelection;
-            }
-            set
-            {
-                totalIndexSelection = value;
-            }
-        }
-
-        // Use this for initialization
         void Start()
         {
-            UpdateGraphic();
+            FindISelectableChildren();
             GameManager.Instance.UiMng.CurrentMenu = this;
         }
 
-        /// <summary>
-        /// Chiama la funzione per cambiare lo stato della StateMachine
-        /// </summary>
-        public void Selection()
+        public override void Selection()
         {
-            switch (CurrentInexSelection)
+            switch (CurrentIndexSelection)
             {
-                case 1:
-                    GameManager.Instance.flowSM.GoToState(FlowSMStates.GameplayState);
+                case 0:
+                    GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new GameplayState() });
                     break;
-                case 2:
-                    GameManager.Instance.flowSM.GoToState(FlowSMStates.MainMenuState);
+                case 1:
+                    GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new MainMenuState() });
                     break;
                 default:
-                    break;
-            }
-        }
-
-        /// <summary>
-        /// Aggiorna la grafica dei bottoni
-        /// </summary>
-        void UpdateGraphic()
-        {
-            switch (currentInexSelection)
-            {
-                case 1:
-                    PlayText.color = Color.red;
-                    MainMenuText.color = Color.white;
-                    break;
-                case 2:
-                    PlayText.color = Color.white;
-                    MainMenuText.color = Color.red;
-                    break;
-                default:
-                    PlayText.color = Color.white;
-                    MainMenuText.color = Color.white;
                     break;
             }
         }

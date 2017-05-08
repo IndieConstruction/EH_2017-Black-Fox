@@ -1,0 +1,25 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace BlackFox
+{
+    public class PauseState : StateBase
+    {
+        public override void OnStart()
+        {
+            Debug.Log("PauseState");
+            Time.timeScale = 0;
+            GameManager.Instance.UiMng.CurrentMenu = GameManager.Instance.UiMng.canvasGameMenu.pauseMenuController;
+            GameManager.Instance.UiMng.canvasGameMenu.pauseMenuController.ChildrenPanel.SetActive(true);
+        }
+
+        public override void OnEnd()
+        {
+            Time.timeScale = 1;
+            GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.PlayInput);
+            GameManager.Instance.LevelMng.IsGamePaused = false;
+            GameManager.Instance.UiMng.canvasGameMenu.pauseMenuController.ChildrenPanel.SetActive(false);
+        }
+    }
+}

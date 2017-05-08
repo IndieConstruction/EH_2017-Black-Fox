@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace BlackFox {
 
+    /// <summary>
+    /// State machine che gestisce il flow di gameplay
+    /// </summary>
     public class GameplaySM : StateMachineBase
     {
-        int roundNumber;
-        int levelNumber;
-        int MaxRound;
-
-        private void Start()
+        public void Init()
         {
             Debug.Log("Start_GamePlaySM");
             CurrentState = new PreInitState();
@@ -17,69 +16,88 @@ namespace BlackFox {
 
         protected override void OnCurrentStateEnded()
         {
-            if ("BlackFox.PreInitState" == CurrentState.StateName)
-            {
-                // PreInitState
-                CurrentState = new LevelInitState();
-            }
-            else if ("BlackFox.LevelInitState" == CurrentState.StateName)
-            {
-                // LevelInitState
-                CurrentState = new PreStartState();
-            }
-            else if ("BlackFox.PreStartState" == CurrentState.StateName)
-            {
-                // PreStartState
-                CurrentState = new PlayState();
-            }
-            else if ("BlackFox.PlayState" == CurrentState.StateName)
-            {
-                // PlayState
-                CurrentState = new CleanSceneState();
-            }else if("BlackFox.CleanSceneState" == CurrentState.StateName) {
-                // CleanSceneState
-                CurrentState = new RoundEndState();
-            }
-            else if ("BlackFox.RoundEndState" == CurrentState.StateName)
-            {
-                // RoundEndState
-                if (roundNumber <= MaxRound)
-                {
-                    CurrentState = new UpgradeMenuState();
-                }
-                else
-                {
-                    CurrentState = new GameOverState();
-                }
-            }
-            else if ("BlackFox.UpgradeMenuState" == CurrentState.StateName)
-            {
-                // UpgradeMenuState
-                CurrentState = new LevelInitState();
-            }
-            else if ("BlackFox.GameOverState" == CurrentState.StateName)
-            {
-                // GameOverState - EXIT POINT
-                if (OnMachineEnd != null)
-                    OnMachineEnd("GameplaySM");
-            }
+            switch (CurrentState.StateName) {
+                case "BlackFox.PreInitState":
+                    CurrentState = new RoundInitState();
+                    break;
+                case "BlackFox.RoundInitState":
+                    CurrentState = new PreStartState();
+                    break;
+                case "BlackFox.PreStartState":
+                    CurrentState = new PlayState();
+                    break;
+                case "BlackFox.PlayState":
+                    CurrentState = new CleanSceneState();
+                    break;
+
+                case "BlackFox.PauseState":
+                    CurrentState = new PlayState();
+                    break;
+                case "BlackFox.CleanSceneState":
+                    CurrentState = new RoundEndState();
+                    break;
+                case "BlackFox.RoundEndState":
+                    if(GameManager.Instance.LevelMng.roundNumber <= GameManager.Instance.LevelMng.MaxRound)
+                        CurrentState = new UpgradeMenuState();
+                    else
+                        CurrentState = new GameOverState();
+                    break;
+                case "BlackFox.UpgradeMenuState":
+                    CurrentState = new RoundInitState();
+                    break;
+                case "BlackFox.GameOverState":
+                    if (GameplaySM.OnMachineEnd != null)
+                        GameplaySM.OnMachineEnd("GameplaySM");
+                    break;
+            }   
         }
 
-        #region API
-        public void SetRoundNumber(int _roundNumber)
+        protected override bool CheckRules(StateBase _newState, StateBase _oldState) 
         {
-            roundNumber = _roundNumber;
-        }
+            if (_oldState == null) 
+                return true;
 
-        public void SetMaxRoundNumber(int _maxRoundNumber)
-        {
-            MaxRound = _maxRoundNumber;
-        }
+            switch (_newState.StateName)
+            {
+                case "BlackFox.PreInitState":
+                        return true;
+                case "BlackFox.RoundInitState":
+                    if (_oldState.StateName == "BlackFox.PreInitState" || _oldState.StateName == "BlackFox.UpgradeMenuState")
+                        return true;
+                    break;
+                case "BlackFox.PreStartState":
+                    if (_oldState.StateName == "BlackFox.RoundInitState")
+                        return true;
+                    break;
+                case "BlackFox.PlayState":
+                    if (_oldState.StateName == "BlackFox.PreStartState" || _oldState.StateName == "BlackFox.PauseState")
+                        return true;
+                    break;
+                
+                case "BlackFox.PauseState":
+                    if (_oldState.StateName == "BlackFox.PlayState")
+                        return true;
+                    break;
+                case "BlackFox.CleanSceneState":
+                    if (_oldState.StateName == "BlackFox.PlayState" || _oldState.StateName == "BlackFox.PauseState")
+                        return true;
+                    break;
+                case "BlackFox.RoundEndState":
+                    if (_oldState.StateName == "BlackFox.CleanSceneState")
+                        return true;
+                    break;
+                case "BlackFox.UpgradeMenuState":
+                    if (_oldState.StateName == "BlackFox.RoundEndState")
+                        return true;
+                    break;
+                case "BlackFox.GameOverState":
+                    if (_oldState.StateName == "BlackFox.RoundEndState" || _oldState.StateName == "BlackFox.CleanSceneState")
+                        return true;
+                    break;
 
-        public void SetLevelNumber(int _levelNumber)
-        {
-            levelNumber = _levelNumber;
+            }
+
+            return false;
         }
-        #endregion
     }
 }

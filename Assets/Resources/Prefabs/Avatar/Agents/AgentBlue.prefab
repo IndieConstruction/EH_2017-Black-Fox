@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 114653063964154760}
   - component: {fileID: 114011237456412974}
   - component: {fileID: 136471995185589414}
+  - component: {fileID: 114530994702273874}
   m_Layer: 0
   m_Name: AgentBlue
   m_TagString: Untagged
@@ -201,6 +202,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33225244708373714
 MeshFilter:
@@ -263,8 +265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44fa6584f3505ba49b8ecac0518f61c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ring: {fileID: 114585255017952178}
-  KillPoint: {fileID: 0}
+  KillToview: {fileID: 0}
+  Ring: {fileID: 0}
 --- !u!114 &114309175725356726
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -276,9 +278,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6116c7f43a8f3964db2240b1007b4dd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 10
   playerIndex: 0
+  MaxLife: 10
   fireRate: 0.5
+--- !u!114 &114530994702273874
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1368280926101798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 505be4d042dacf6449aea3571377234b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114537096427027322
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -387,7 +400,7 @@ Canvas:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1015483751083930}
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_RenderMode: 2
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
@@ -396,6 +409,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0

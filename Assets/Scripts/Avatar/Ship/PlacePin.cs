@@ -30,11 +30,12 @@ namespace BlackFox
         {
             if (ship != null)
             {
+                ship.avatar.Player.ControllerVibration(0f, 0f);
                 if (!GameManager.Instance.LevelMng.IsGamePaused)
                     prectime -= Time.deltaTime;
                 if (prectime <= 0 && !isRecharging)
                 {
-                    StartCoroutine(Vibrate(0.2f));
+                    ship.avatar.Player.ControllerVibration(0.5f, 0.5f);
                 }
             }
         }

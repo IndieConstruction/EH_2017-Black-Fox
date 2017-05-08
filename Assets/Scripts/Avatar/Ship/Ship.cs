@@ -20,7 +20,8 @@ namespace BlackFox {
         PlacePin pinPlacer;
         AvatarUI avatarUi;
         Tweener damageTween;
-        Vector3 stickDirection;
+        Vector3 leftStickDirection;
+        Vector3 rightStickDirection;
 
         // Life fields
         private float _life;
@@ -85,9 +86,11 @@ namespace BlackFox {
         #endregion
 
         void CheckInputStatus(InputStatus _inputStatus)
-        {
-            stickDirection = new Vector3(_inputStatus.LeftThumbSticksAxisX, 0, _inputStatus.LeftThumbSticksAxisY);
-            Move(stickDirection);
+        {            
+            leftStickDirection = new Vector3(_inputStatus.LeftThumbSticksAxisX, 0, _inputStatus.LeftThumbSticksAxisY);
+            rightStickDirection = new Vector3(_inputStatus.RightThumbSticksAxisX, 0, _inputStatus.RightThumbSticksAxisY);
+            Move(leftStickDirection);
+            DirectFire(rightStickDirection);
 
             if (_inputStatus.RightShoulder == ButtonState.Pressed) {
                 PlacePin(true);
@@ -186,6 +189,11 @@ namespace BlackFox {
             movment.enabled = _active;
             GetComponent<CapsuleCollider>().enabled = _active;
 
+        }
+
+        void DirectFire(Vector3 _direction)
+        {
+            shooter.SetFireDirection(_direction);
         }
 
         void Shoot() {

@@ -17,8 +17,9 @@ namespace BlackFox
             }
         }
 
-        int ammo;
+        Ship ship;
 
+        int ammo;
         public int Ammo
         {
             get { return ammo; }
@@ -26,8 +27,6 @@ namespace BlackFox
                 ship.avatar.OnAmmoUpdate();
             }
         }
-
-        Ship ship;
 
         #region API
         public void Init(Ship _ship)
@@ -39,15 +38,18 @@ namespace BlackFox
         {
             if (Ammo > 0)
             {
-                base.ShootBullet();
+                GameObject instantiatedProjectile = Instantiate(shooterBaseConfig.ProjectilePrefab, transform.position + transform.forward*shooterConfig.DistanceFromShipOrigin, transform.rotation);
+                instantiatedProjectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * shooterBaseConfig.BulletSpeed, ForceMode.Impulse);
+                instantiatedProjectile.GetComponent<Projectile>().SetOwner(GetComponentInParent<IShooter>());
+                Destroy(instantiatedProjectile, shooterBaseConfig.LifeTime);
                 Ammo--;
             }
         }
 
-        public override void SetFireDirection(Vector3 _direction)
+        public void SetFireDirection(Vector3 _direction)
         {
-            if(_direction != Vector3.zero)
-                direction = _direction;
+            if (_direction != Vector3.zero)
+                transform.rotation = Quaternion.LookRotation(_direction.normalized);
         }
 
         public void AddAmmo()
@@ -70,6 +72,7 @@ namespace BlackFox
     public class ShooterConfig
     {
         public ShooterBaseConfig ShooterBaseConfig;
+        public float DistanceFromShipOrigin;
         public int AddedAmmo;
         public int MaxAmmo;
     }

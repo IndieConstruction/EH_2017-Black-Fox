@@ -5,7 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 
 namespace BlackFox {
-    [RequireComponent(typeof(MovementController), typeof(Shooter))]
+    [RequireComponent(typeof(MovementController))]
     public class Ship : MonoBehaviour, IShooter, IDamageable
     {
         [HideInInspector]
@@ -20,8 +20,6 @@ namespace BlackFox {
         PlacePin pinPlacer;
         AvatarUI avatarUi;
         Tweener damageTween;
-        Vector3 leftStickDirection;
-        Vector3 rightStickDirection;
 
         // Life fields
         private float _life;
@@ -50,7 +48,7 @@ namespace BlackFox {
             damageables = _damageablesPrefabs;
             ChangeColor(config.ColorSets[avatar.ColorSetIndex].ShipMaterialMain);
 
-            shooter = GetComponent<Shooter>();
+            shooter = GetComponentInChildren<Shooter>();
             shooter.Init(this);
             movment = GetComponent<MovementController>();
             movment.Init(this, rigid);
@@ -85,30 +83,36 @@ namespace BlackFox {
         }
         #endregion
 
+        // Input Fields
+        Vector3 leftStickDirection;
+        Vector3 rightStickDirection;
+
         void CheckInputStatus(InputStatus _inputStatus)
         {            
             leftStickDirection = new Vector3(_inputStatus.LeftThumbSticksAxisX, 0, _inputStatus.LeftThumbSticksAxisY);
             rightStickDirection = new Vector3(_inputStatus.RightThumbSticksAxisX, 0, _inputStatus.RightThumbSticksAxisY);
+
             Move(leftStickDirection);
             DirectFire(rightStickDirection);
 
-            if (_inputStatus.RightShoulder == ButtonState.Pressed) {
-                PlacePin(true);
+            if (_inputStatus.RightShoulder == ButtonState.Pressed)
+            {
+                PlacePin();
             }
 
-            if (_inputStatus.LeftShoulder == ButtonState.Pressed) {
-                PlacePin(false);
-            }
-
-            if (_inputStatus.A == ButtonState.Pressed) {
-                nextFire = Time.time + config.FireRate;
-                Shoot();
-            } else if (_inputStatus.A == ButtonState.Held && Time.time > nextFire) {
+            if (_inputStatus.RightTrigger == ButtonState.Pressed)
+            {
                 nextFire = Time.time + config.FireRate;
                 Shoot();
             }
+            else if (_inputStatus.RightTrigger == ButtonState.Held && Time.time > nextFire)
+            {
+                nextFire = Time.time + config.FireRate;
+                Shoot();
+            }
 
-            if (_inputStatus.Start == ButtonState.Pressed) {
+            if (_inputStatus.Start == ButtonState.Pressed)
+            {
                 GameManager.Instance.LevelMng.PauseGame(avatar.Player.ID);
             }
         }
@@ -182,13 +186,12 @@ namespace BlackFox {
         /// Set all the Player abilities as active/inactive
         /// </summary>
         /// <param name="_active"></param>
-        public void ToggleAbilities(bool _active = true) {
-
+        public void ToggleAbilities(bool _active = true)
+        {
             pinPlacer.enabled = _active;
             shooter.enabled = _active;
             movment.enabled = _active;
             GetComponent<CapsuleCollider>().enabled = _active;
-
         }
 
         void DirectFire(Vector3 _direction)
@@ -196,13 +199,15 @@ namespace BlackFox {
             shooter.SetFireDirection(_direction);
         }
 
-        void Shoot() {
+        void Shoot()
+        {
             shooter.ShootBullet();
             //avatar.OnAmmoUpdate(shooter.Ammo);
         }
 
-        void PlacePin(bool _isRight) {
-            pinPlacer.PlaceThePin(_isRight);
+        void PlacePin()
+        {
+            pinPlacer.PlaceThePin();
             AddShooterAmmo();
         }
 
@@ -213,16 +218,14 @@ namespace BlackFox {
                 ExtendRope(_target.magnitude);
         }
 
-        void ExtendRope(float _amount) {
+        void ExtendRope(float _amount)
+        {
             if (_amount >= .95f) {
                 avatar.rope.ExtendRope(1);
             }
             previousSpeed = rigid.velocity;
         }
         #endregion
-
-        
-        
     }
 
     [Serializable]

@@ -27,8 +27,9 @@ public class ShooterBase : MonoBehaviour {
     /// </summary>
     public virtual void ShootBullet()
     {
-        GameObject instantiatedProjectile = Instantiate(shooterBaseConfig.ProjectilePrefab, transform.position + direction, Quaternion.LookRotation(transform.position + direction));
-        instantiatedProjectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * shooterBaseConfig.BulletSpeed, ForceMode.Impulse);
+        Debug.Log(direction);
+        GameObject instantiatedProjectile = Instantiate(shooterBaseConfig.ProjectilePrefab, transform.position + direction, Quaternion.LookRotation(direction));
+        instantiatedProjectile.GetComponent<Rigidbody>().AddRelativeForce(direction.normalized * shooterBaseConfig.BulletSpeed, ForceMode.Impulse);
         instantiatedProjectile.GetComponent<Projectile>().SetOwner(GetComponentInParent<IShooter>());
         Destroy(instantiatedProjectile, shooterBaseConfig.LifeTime);
     }
@@ -36,10 +37,7 @@ public class ShooterBase : MonoBehaviour {
     /// Determina la direzione di fuco. Spara verso Vector3.Forward se non settato manualmente
     /// </summary>
     /// <param name="_direction"></param>
-    public virtual void SetFireDirection(Vector3 _direction)
-    {
-        direction = transform.position;
-    }
+    public virtual void SetFireDirection(Vector3 _direction) { }
     #endregion
 }
 

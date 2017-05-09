@@ -44,7 +44,8 @@ namespace BlackFox
 
         public override void SetFireDirection(Vector3 _direction)
         {
-            direction = _direction;
+            if(_direction != Vector3.zero)
+                direction = _direction;
         }
 
         public void AddAmmo()

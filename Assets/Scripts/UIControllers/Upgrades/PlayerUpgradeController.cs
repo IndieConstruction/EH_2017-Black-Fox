@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -21,11 +22,11 @@ namespace BlackFox
 
         public void OnStart()
         {
-            foreach (IUpgrade item in GetComponentsInChildren<IUpgrade>())
-            {
-                item.PlayerUpgradeController = this;
-            }
-            //FindISelectableChildren();
+            //foreach (IUpgrade item in GetComponentsInChildren<IUpgrade>())
+            //{
+            //    item.PlayerUpgradeController = this;
+            //}
+            FindISelectableChildren();
         }
 
         //TODO: completare facendo da intermediario fra gli IUpgrade e l'avatar
@@ -34,6 +35,20 @@ namespace BlackFox
             
         }
 
+        public override void Selection()
+        {
+            
+        }
+
+        public override void GoRightInMenu(Player _player)
+        {
+            //selectableButton[currentIndexSelection].AddValue();
+        }
+
+        public override void GoLeftInMenu(Player _player)
+        {
+            
+        }
     }
 
     /// <summary>

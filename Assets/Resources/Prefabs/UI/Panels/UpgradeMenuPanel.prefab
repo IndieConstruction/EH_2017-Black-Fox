@@ -183,6 +183,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224466307436211826}
+  - component: {fileID: 114942871292634546}
   m_Layer: 5
   m_Name: Upgrade2
   m_TagString: Untagged
@@ -215,7 +216,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224451308895367358}
-  - component: {fileID: 114930698984651480}
+  - component: {fileID: 114538794627348102}
   m_Layer: 5
   m_Name: ProjectileLifeUpgrade
   m_TagString: Untagged
@@ -282,6 +283,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224091100371483034}
+  - component: {fileID: 114627519077508964}
   m_Layer: 5
   m_Name: ProjectileLifeUpgrade
   m_TagString: Untagged
@@ -314,6 +316,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224282025184828316}
+  - component: {fileID: 114418644376401184}
   m_Layer: 5
   m_Name: Upgrade3
   m_TagString: Untagged
@@ -559,6 +562,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224450717506449814}
+  - component: {fileID: 114075264202378394}
   m_Layer: 5
   m_Name: Upgrade2
   m_TagString: Untagged
@@ -693,6 +697,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224553992957262642}
+  - component: {fileID: 114986541617428288}
   m_Layer: 5
   m_Name: ProjectileLifeUpgrade
   m_TagString: Untagged
@@ -708,6 +713,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224385544129435286}
+  - component: {fileID: 114886915428453364}
   m_Layer: 5
   m_Name: Upgrade2
   m_TagString: Untagged
@@ -773,6 +779,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224650559450300454}
+  - component: {fileID: 114142101168671170}
   m_Layer: 5
   m_Name: Upgrade3
   m_TagString: Untagged
@@ -819,6 +826,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224531378311100044}
+  - component: {fileID: 114678691998908940}
   m_Layer: 5
   m_Name: Upgrade3
   m_TagString: Untagged
@@ -1112,6 +1120,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224982750292659908}
+  - component: {fileID: 114532423904429396}
   m_Layer: 5
   m_Name: Upgrade3
   m_TagString: Untagged
@@ -1195,6 +1204,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224029323698605104}
+  - component: {fileID: 114743692527183986}
   m_Layer: 5
   m_Name: ProjectileLifeUpgrade
   m_TagString: Untagged
@@ -1227,6 +1237,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224793078832036908}
+  - component: {fileID: 114723996104627628}
   m_Layer: 5
   m_Name: Upgrade2
   m_TagString: Untagged
@@ -1337,6 +1348,28 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114075264202378394
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1474800195534322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114142101168671170
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1624490087583124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114143561746758442
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1817,6 +1850,17 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114418644376401184
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1276524246072618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114424180909975526
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2012,6 +2056,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MenuID: 4
+--- !u!114 &114532423904429396
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1831413399094946}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114538794627348102
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1177478209749840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114545616118640646
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2186,6 +2252,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114627519077508964
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1266444797767472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114634243721695300
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2315,6 +2392,17 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114678691998908940
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1636126298316406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114685128852127006
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2363,6 +2451,17 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114723996104627628
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1933784470669530}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114737218905078834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2390,6 +2489,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114743692527183986
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1884155267379096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114758403071030960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2729,6 +2839,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114886915428453364
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1602902958350344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114899971390513690
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2822,6 +2943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UpgradePanel: {fileID: 1212302826383310}
+  PlayerUpgradeControllers: []
 --- !u!114 &114922658620981712
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2849,17 +2971,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114930698984651480
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1177478209749840}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68e749e9b0f648d48b9dba428c659647, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114931046929438944
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2887,6 +2998,17 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114942871292634546
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1159168125060884}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114946654367908470
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2989,6 +3111,17 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &114986541617428288
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1601918192219096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114988196141411780
 MonoBehaviour:
   m_ObjectHideFlags: 1

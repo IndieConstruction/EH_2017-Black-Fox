@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,6 +35,14 @@ namespace BlackFox
             set { selectableButton = value; }
         }
 
+        Player player;
+
+        public Player Player
+        {
+            get { return player; }
+            set { player = value; }
+        }
+
         /// <summary>
         /// Salva all'interno della lista SelectableButton tutti i bottoni con attaccato ISelectable, gli assegna un index
         /// </summary>
@@ -50,6 +59,32 @@ namespace BlackFox
             }
 
             selectableButton[0].IsSelected = true;
+        }
+
+        
+        public virtual void GoDownInMenu(Player _player)
+        {
+            CurrentIndexSelection++;
+            if (CurrentIndexSelection > SelectableButtons.Count - 1)
+                CurrentIndexSelection = 0;
+        }
+
+       
+        public virtual void GoUpInMenu(Player _player)
+        {
+            CurrentIndexSelection--;
+            if (CurrentIndexSelection < 0)
+                CurrentIndexSelection = SelectableButtons.Count - 1;
+        }
+
+        public virtual void GoRightInMenu(Player _player)
+        {
+            
+        }
+
+        public virtual void GoLeftInMenu(Player _player)
+        {
+
         }
 
         /// <summary>

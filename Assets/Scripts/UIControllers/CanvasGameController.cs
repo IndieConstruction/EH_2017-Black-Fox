@@ -10,6 +10,7 @@ namespace BlackFox
         public EndRoundlUI endRoundUI;
         public PauseMenuController pauseMenuController;
         public Counter Counter;
+        public UpgradeMenuManager upgradeMenuManager;
 
         #region API
         /// <summary>

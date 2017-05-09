@@ -146,7 +146,8 @@ namespace BlackFox
             set { _inputStatus = value; }
         }
 
-        bool isReleased = true;
+        bool isReleasedY = true;
+        bool isReleasedX = true;
 
         /// <summary>
         /// Controlla l'inpunt da passare al menù corrente 
@@ -155,18 +156,33 @@ namespace BlackFox
         void CheckMenuInputStatus()
         {
             if (InputStatus.LeftThumbSticksAxisY <= 0.2 && InputStatus.LeftThumbSticksAxisY >= -0.2)
-                isReleased = true;
+                isReleasedY = true;
 
-            if ((InputStatus.DPadUp == ButtonState.Pressed || InputStatus.LeftThumbSticksAxisY >= 0.5) && isReleased)
+            if ((InputStatus.DPadUp == ButtonState.Pressed || InputStatus.LeftThumbSticksAxisY >= 0.5) && isReleasedY)
             {
-                isReleased = false;
-                GameManager.Instance.UiMng.GoUpInMenu();
+                isReleasedY = false;
+                GameManager.Instance.UiMng.GoUpInMenu(this);
             }
 
-            if ((InputStatus.DPadDown == ButtonState.Pressed || InputStatus.LeftThumbSticksAxisY <= -0.5) && isReleased)
+            if ((InputStatus.DPadDown == ButtonState.Pressed || InputStatus.LeftThumbSticksAxisY <= -0.5) && isReleasedY)
             {
-                isReleased = false;
-                GameManager.Instance.UiMng.GoDownInMenu();
+                isReleasedY = false;
+                GameManager.Instance.UiMng.GoDownInMenu(this);
+            }
+
+            if (InputStatus.LeftThumbSticksAxisX <= 0.2 && InputStatus.LeftThumbSticksAxisX >= -0.2)
+                isReleasedX = true;
+
+            if ((InputStatus.DPadRight == ButtonState.Pressed || InputStatus.LeftThumbSticksAxisX >= 0.5) && isReleasedX)
+            {
+                isReleasedX = false;
+                GameManager.Instance.UiMng.GoRightInMenu(this);
+            }
+
+            if ((InputStatus.DPadLeft == ButtonState.Pressed || InputStatus.LeftThumbSticksAxisX <= -0.5) && isReleasedX)
+            {
+                isReleasedX = false;
+                GameManager.Instance.UiMng.GoLeftInMenu(this);
             }
 
             if (InputStatus.A == ButtonState.Pressed)

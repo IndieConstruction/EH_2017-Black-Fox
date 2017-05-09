@@ -79,17 +79,18 @@ namespace BlackFox
             inputStatus.RightTriggerAxis = state.Triggers.Right;
 
             // Trigger as button
-            if (inputStatus.RightTriggerAxis < 0.2f)
+            if (inputStatus.RightTriggerAxis < 0.4f)
             {
                 rightTriggerOldState = inputStatus.RightTrigger = ButtonState.Released;                
             }
-            if (inputStatus.RightTriggerAxis > 0.3f && rightTriggerOldState == ButtonState.Released)
+            if (inputStatus.RightTriggerAxis > 0.7f)
             {
+                if (rightTriggerOldState == ButtonState.Released)
                     rightTriggerOldState = inputStatus.RightTrigger = ButtonState.Pressed;
-            }
-            if (inputStatus.RightTriggerAxis > 0.3f && rightTriggerOldState == ButtonState.Pressed)
+
+                if (rightTriggerOldState == ButtonState.Pressed)
                     rightTriggerOldState = inputStatus.RightTrigger = ButtonState.Held;
-            
+            }
 
             inputStatus.LeftThumbSticksAxisX = state.ThumbSticks.Left.X;
             inputStatus.LeftThumbSticksAxisY = state.ThumbSticks.Left.Y;

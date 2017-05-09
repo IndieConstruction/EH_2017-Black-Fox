@@ -8,15 +8,20 @@ ModelImporter:
     100000: Object078
     100002: //RootNode
     100004: Perni_Navi001
+    100006: faro_LP
     400000: Object078
     400002: //RootNode
     400004: Perni_Navi001
+    400006: faro_LP
     2300000: Object078
     2300002: Perni_Navi001
+    2300004: faro_LP
     3300000: Object078
     3300002: Perni_Navi001
+    3300004: faro_LP
     4300000: Perni_Navi001
     4300002: Object078
+    4300004: faro_LP
     7400000: Take 001
     9500000: //RootNode
     11100000: //RootNode
@@ -30,6 +35,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 

@@ -13,8 +13,7 @@ namespace BlackFox {
 
         public override void OnUpdate()
         {
-            if (OnStateEnd != null)
-                OnStateEnd();
+
         }
     }
 }

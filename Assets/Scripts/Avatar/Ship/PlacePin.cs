@@ -66,12 +66,11 @@ namespace BlackFox
         /// <summary>
         /// Instantiate the pin on the PinSpawn (true/false switch between right/left)
         /// </summary>
-        public void PlaceThePin(bool _placeRight)
+        public void PlaceThePin()
         {
-            SetPinSpawnPosition(_placeRight);
             if (prectime <= 0 && canPlace == true)
             {
-                GameObject pin = Instantiate(placePinConfig.PinPrefab, transform.position , Quaternion.identity);
+                GameObject pin = Instantiate(placePinConfig.PinPrefab, transform.position + Vector3.forward*placePinConfig.DistanceFromShipOrigin, transform.rotation);
                 pinsPlaced.Add(pin);
                 foreach (Renderer pinRend in pin.GetComponentsInChildren<Renderer>())
                 {
@@ -104,24 +103,6 @@ namespace BlackFox
             isRecharging = false;
             ship.avatar.Player.ControllerVibration(0f, 0f);
         }
-
-        /// <summary>
-        /// Change the position of the PinSpawnPoint
-        /// </summary>
-        /// <param name="_isRight"></param>
-        void SetPinSpawnPosition(bool _isRight)
-        {
-            if (_isRight && !isRight)
-            {
-                transform.localPosition = initialTransf.localPosition;
-                isRight = _isRight;
-            }
-            else if(!_isRight && isRight)
-            {
-                transform.localPosition = new Vector3(-initialTransf.localPosition.x, initialTransf.localPosition.y, initialTransf.localPosition.z);
-                isRight = _isRight;
-            }
-        }
     }
 
     [Serializable]
@@ -129,5 +110,6 @@ namespace BlackFox
     {
         public GameObject PinPrefab;
         public float CoolDownTime = 3;
+        public float DistanceFromShipOrigin;
     }
 }

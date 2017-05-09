@@ -5,7 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 
 namespace BlackFox {
-    [RequireComponent(typeof(MovementController), typeof(Shooter))]
+    [RequireComponent(typeof(MovementController))]
     public class Ship : MonoBehaviour, IShooter, IDamageable
     {
         [HideInInspector]
@@ -50,7 +50,7 @@ namespace BlackFox {
             damageables = _damageablesPrefabs;
             ChangeColor(config.ColorSets[avatar.ColorSetIndex].ShipMaterialMain);
 
-            shooter = GetComponent<Shooter>();
+            shooter = GetComponentInChildren<Shooter>();
             shooter.Init(this);
             movment = GetComponent<MovementController>();
             movment.Init(this, rigid);
@@ -93,11 +93,7 @@ namespace BlackFox {
             DirectFire(rightStickDirection);
 
             if (_inputStatus.RightShoulder == ButtonState.Pressed) {
-                PlacePin(true);
-            }
-
-            if (_inputStatus.LeftShoulder == ButtonState.Pressed) {
-                PlacePin(false);
+                PlacePin();
             }
 
             if (_inputStatus.A == ButtonState.Pressed) {
@@ -201,8 +197,8 @@ namespace BlackFox {
             avatar.OnAmmoUpdate(shooter.Ammo);
         }
 
-        void PlacePin(bool _isRight) {
-            pinPlacer.PlaceThePin(_isRight);
+        void PlacePin() {
+            pinPlacer.PlaceThePin();
             AddShooterAmmo();
         }
 

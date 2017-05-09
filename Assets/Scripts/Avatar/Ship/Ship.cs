@@ -5,7 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 
 namespace BlackFox {
-    [RequireComponent(typeof(MovementController), typeof(Shooter))]
+    [RequireComponent(typeof(MovementController))]
     public class Ship : MonoBehaviour, IShooter, IDamageable
     {
         [HideInInspector]
@@ -48,7 +48,7 @@ namespace BlackFox {
             damageables = _damageablesPrefabs;
             ChangeColor(config.ColorSets[avatar.ColorSetIndex].ShipMaterialMain);
 
-            shooter = GetComponent<Shooter>();
+            shooter = GetComponentInChildren<Shooter>();
             shooter.Init(this);
             movment = GetComponent<MovementController>();
             movment.Init(this, rigid);
@@ -95,14 +95,10 @@ namespace BlackFox {
             Move(leftStickDirection);
             DirectFire(rightStickDirection);
 
+
             if (_inputStatus.RightShoulder == ButtonState.Pressed)
             {
-                PlacePin(true);
-            }
-
-            if (_inputStatus.LeftShoulder == ButtonState.Pressed)
-            {
-                PlacePin(false);
+                PlacePin();
             }
 
             if (_inputStatus.RightTriggerAxis < 0.1f)
@@ -196,13 +192,12 @@ namespace BlackFox {
         /// Set all the Player abilities as active/inactive
         /// </summary>
         /// <param name="_active"></param>
-        public void ToggleAbilities(bool _active = true) {
-
+        public void ToggleAbilities(bool _active = true)
+        {
             pinPlacer.enabled = _active;
             shooter.enabled = _active;
             movment.enabled = _active;
             GetComponent<CapsuleCollider>().enabled = _active;
-
         }
 
         void DirectFire(Vector3 _direction)
@@ -210,13 +205,15 @@ namespace BlackFox {
             shooter.SetFireDirection(_direction);
         }
 
-        void Shoot() {
+        void Shoot()
+        {
             shooter.ShootBullet();
             avatar.OnAmmoUpdate(shooter.Ammo);
         }
 
-        void PlacePin(bool _isRight) {
-            pinPlacer.PlaceThePin(_isRight);
+        void PlacePin()
+        {
+            pinPlacer.PlaceThePin();
             AddShooterAmmo();
         }
 
@@ -227,7 +224,8 @@ namespace BlackFox {
                 ExtendRope(_target.magnitude);
         }
 
-        void ExtendRope(float _amount) {
+        void ExtendRope(float _amount)
+        {
             if (_amount >= .95f) {
                 avatar.rope.ExtendRope(1);
             }

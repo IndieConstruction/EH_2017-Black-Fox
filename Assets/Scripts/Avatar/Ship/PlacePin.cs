@@ -30,14 +30,23 @@ namespace BlackFox
         {
             if (ship != null)
             {
-                ship.avatar.Player.ControllerVibration(0f, 0f);
-                if (!GameManager.Instance.LevelMng.IsGamePaused)
-                    prectime -= Time.deltaTime;
-                if (prectime <= 0 && !isRecharging)
+                if (!GameManager.Instance.LevelMng.IsGamePaused || GameManager.Instance.LevelMng.IsRoundActive)
                 {
-                    ship.avatar.Player.ControllerVibration(0.5f, 0.5f);
-                }
+                    prectime -= Time.deltaTime;
+                    if (prectime <= 0 && !isRecharging)
+                    {
+                        isRecharging = true;
+                        StartCoroutine(Rumble(0.2f));
+                    }
+                }                
             }
+        }
+
+        IEnumerator Rumble(float _rumbleTime)
+        {
+            ship.avatar.Player.ControllerVibration(0.5f, 0.5f);
+            yield return new WaitForSeconds(_rumbleTime);
+            ship.avatar.Player.ControllerVibration(0f, 0f);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -72,6 +81,7 @@ namespace BlackFox
             {
                 GameObject pin = Instantiate(placePinConfig.PinPrefab, transform.position + Vector3.forward*placePinConfig.DistanceFromShipOrigin, transform.rotation);
                 pinsPlaced.Add(pin);
+                isRecharging = false;
                 foreach (Renderer pinRend in pin.GetComponentsInChildren<Renderer>())
                 {
                     pinRend.material = ship.avatar.AvatarData.shipConfig.ColorSets[ship.avatar.ColorSetIndex].PinMaterial;
@@ -92,17 +102,6 @@ namespace BlackFox
             pinsPlaced.Clear();
         }
         #endregion
-
-        IEnumerator Vibrate(float _rumbleTime)
-        {
-            isRecharging = true;
-            // TODO : togliere la vibrazione durante il count down (da fare nel refactoring dell'avatar)
-            ship.avatar.Player.ControllerVibration(0.5f, 0.5f);
-
-            yield return new WaitForSeconds(_rumbleTime);
-            isRecharging = false;
-            ship.avatar.Player.ControllerVibration(0f, 0f);
-        }
     }
 
     [Serializable]

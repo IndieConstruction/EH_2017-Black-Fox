@@ -163,7 +163,7 @@ namespace BlackFox {
         /// Scatena l'evento per aggiornare i proiettili nella UI
         /// </summary>
         /// <param name="_ammo">Le munizioni che rimangono</param>
-        public void OnAmmoUpdate(int _ammo)
+        public void OnAmmoUpdate()
         {
             // TODO : da rivedere
             EventManager.OnAmmoValueChange(this);

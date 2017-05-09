@@ -9,22 +9,24 @@ namespace BlackFox {
 
     public class AvatarUI : MonoBehaviour {
         public Image KillToview;
-        public Slider Ring;
+        public Slider LifeSlider;
+        public Slider AmmoSlider;
 
         
         private void Start()
         {
-            Ring.value = 0.5f;
+            LifeSlider.value = 0.45f;
+            AmmoSlider.value = 0;
         }
         
         /// <summary>
         /// Setta il valore della slider che mostra la vita
         /// </summary>
         /// <param name="_avatar"></param>
-        public void SetLifeSliderValue(Avatar _avatar) {
+        void SetLifeSliderValue(Avatar _avatar) {
             // Aggiorno la UI se l'avatar che gli viene passato è uguale al componente che ha come padre
             if (_avatar == GetComponentInParent<Avatar>())
-                Ring.value =  (0.5f * _avatar.ship.Life) / _avatar.ship.config.MaxLife;
+                LifeSlider.value =  (0.45f * _avatar.ship.Life) / _avatar.ship.config.MaxLife;
 
             //Logica per cambiare il colore della barra della vita
             //if (Ring.fillAmount < 0.3f) {
@@ -35,6 +37,16 @@ namespace BlackFox {
             //    Ring.color = Color.yellow;
             //}
                 
+        }
+
+        /// <summary>
+        /// Setta il valore della slider che mostra la quantità di proiettili
+        /// </summary>
+        /// <param name="_avatar"></param>
+        void SetAmmoSlider(Avatar _avatar)
+        {
+            if (_avatar == GetComponentInParent<Avatar>())
+                AmmoSlider.value = (0.5f * _avatar.ship.shooter.Ammo) / _avatar.AvatarData.shipConfig.shooterConfig.MaxAmmo;
         }
         
         /// <summary>
@@ -51,11 +63,13 @@ namespace BlackFox {
         private void OnEnable()
         {
             EventManager.OnLifeValueChange += SetLifeSliderValue;
+            EventManager.OnAmmoValueChange += SetAmmoSlider;
         }
 
         private void OnDisable()
         {
             EventManager.OnLifeValueChange -= SetLifeSliderValue;
+            EventManager.OnAmmoValueChange -= SetAmmoSlider;
         }
         #endregion
     }

@@ -21,14 +21,5 @@ namespace BlackFox
         }
         #endregion
 
-        private void OnEnable()
-        {
-            EventManager.OnAmmoValueChange += gameUIController.SetBulletsValue;
-        }
-
-        private void OnDestroy()
-        {
-            EventManager.OnAmmoValueChange -= gameUIController.SetBulletsValue;
-        }
     }
 }

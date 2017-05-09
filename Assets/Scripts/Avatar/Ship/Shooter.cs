@@ -22,7 +22,9 @@ namespace BlackFox
         public int Ammo
         {
             get { return ammo; }
-            set { ammo = value; }
+            set { ammo = value;
+                ship.avatar.OnAmmoUpdate();
+            }
         }
 
         Ship ship;
@@ -35,10 +37,10 @@ namespace BlackFox
 
         public override void ShootBullet()
         {
-            if (ammo > 0)
+            if (Ammo > 0)
             {
                 base.ShootBullet();
-                ammo--;
+                Ammo--;
             }
         }
 

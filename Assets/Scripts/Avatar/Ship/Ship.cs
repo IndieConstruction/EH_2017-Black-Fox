@@ -130,7 +130,7 @@ namespace BlackFox {
         /// </summary>
         public void AddShooterAmmo() {
             shooter.AddAmmo();
-            avatar.OnAmmoUpdate(shooter.Ammo);                          // Ci sarà sempre un avatar?
+            //avatar.OnAmmoUpdate(shooter.Ammo);                          // Ci sarà sempre un avatar?
         }
 
         #region IShooter
@@ -198,7 +198,7 @@ namespace BlackFox {
 
         void Shoot() {
             shooter.ShootBullet();
-            avatar.OnAmmoUpdate(shooter.Ammo);
+            //avatar.OnAmmoUpdate(shooter.Ammo);
         }
 
         void PlacePin(bool _isRight) {

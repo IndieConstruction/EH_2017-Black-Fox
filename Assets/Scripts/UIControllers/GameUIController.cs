@@ -59,5 +59,18 @@ namespace BlackFox
         }
 
         #endregion
+
+
+        #region Events
+        private void OnEnable()
+        {
+            EventManager.OnAmmoValueChange += SetBulletsValue;
+        }
+
+        private void OnDisable()
+        {
+            EventManager.OnAmmoValueChange -= SetBulletsValue;
+        }
+        #endregion
     }
 }

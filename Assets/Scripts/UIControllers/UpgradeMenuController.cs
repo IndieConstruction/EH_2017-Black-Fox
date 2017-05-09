@@ -6,7 +6,7 @@ using XInputDotNetPure;
 namespace BlackFox
 {
 
-    public class UpgradeMenuController : BaseMenu
+    public class UpgradeMenuController : MonoBehaviour
     {
         public GameObject UpgradePanel;
 

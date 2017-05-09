@@ -76,8 +76,31 @@ namespace BlackFox
                 inputStatus.IsConnected = state.IsConnected;
 
             inputStatus.RightTriggerAxis = state.Triggers.Right;
+
+            // Trigger as button
+            bool isTriggerReleased = true;
+
+            if (inputStatus.RightTriggerAxis < 0.2f)
+            {
+                isTriggerReleased = true;
+                inputStatus.RightTrigger = ButtonState.Released;
+            }
+            else if (inputStatus.RightTriggerAxis > 0.8f && isTriggerReleased)
+            {
+                isTriggerReleased = false;
+                inputStatus.RightTrigger = ButtonState.Pressed;
+            }
+            else if (inputStatus.RightTriggerAxis > 0.8f && !isTriggerReleased)
+            {
+                inputStatus.RightTrigger = ButtonState.Held;
+            }
+            //############
+
             inputStatus.LeftThumbSticksAxisX = state.ThumbSticks.Left.X;
             inputStatus.LeftThumbSticksAxisY = state.ThumbSticks.Left.Y;
+
+            inputStatus.RightThumbSticksAxisX = state.ThumbSticks.Right.X;
+            inputStatus.RightThumbSticksAxisY = state.ThumbSticks.Right.Y;
 
             if (prevState.Buttons.RightShoulder == XInputDotNetPure.ButtonState.Released && state.Buttons.RightShoulder == XInputDotNetPure.ButtonState.Pressed)
             {
@@ -92,11 +115,6 @@ namespace BlackFox
             if (prevState.Buttons.A == XInputDotNetPure.ButtonState.Released && state.Buttons.A == XInputDotNetPure.ButtonState.Pressed)
             {
                 inputStatus.A = ButtonState.Pressed;
-            }
-
-            if (prevState.Buttons.A == XInputDotNetPure.ButtonState.Pressed && state.Buttons.A == XInputDotNetPure.ButtonState.Pressed)
-            {
-                inputStatus.A = ButtonState.Held;
             }
 
             if (prevState.DPad.Up == XInputDotNetPure.ButtonState.Released && state.DPad.Up == XInputDotNetPure.ButtonState.Pressed)
@@ -135,11 +153,12 @@ namespace BlackFox
         InputStatus KeyboardInput()
         {
             InputStatus inputStatus = new InputStatus();
+
             inputStatus.LeftThumbSticksAxisX = Input.GetAxis("Key" + (int)playerIndex + "_Horizonatal");
             inputStatus.LeftThumbSticksAxisY = Input.GetAxis("Key" + (int)playerIndex + "_Forward");
 
-            inputStatus.RightThumbSticksAxisX = Input.GetAxis("Horizontal");
-            inputStatus.RightThumbSticksAxisY = Input.GetAxis("Vertical");
+            inputStatus.RightThumbSticksAxisX = Input.GetAxis("Key" + (int)playerIndex + "_ShootX");
+            inputStatus.RightThumbSticksAxisY = Input.GetAxis("Key" + (int)playerIndex + "_ShootY");
 
             if (Input.GetButtonDown("Key" + (int)playerIndex + "_PlaceRight"))
             {
@@ -153,12 +172,12 @@ namespace BlackFox
 
             if (Input.GetButtonDown("Key" + (int)playerIndex + "_Fire"))
             {
-                inputStatus.A = ButtonState.Pressed;
+                inputStatus.RightTrigger = ButtonState.Pressed;
             }
 
             if (Input.GetButton("Key" + (int)playerIndex + "_Fire"))
             {
-                inputStatus.A = ButtonState.Held;
+                inputStatus.RightTrigger = ButtonState.Held;
             }
 
             if (Input.GetButtonDown("DPadUp"))
@@ -230,6 +249,9 @@ namespace BlackFox
         public ButtonState LeftShoulder;
         public ButtonState RightShoulder;
 
+        public ButtonState LeftTrigger;
+        public ButtonState RightTrigger;
+
         public ButtonState LeftThumbSticks;
         public ButtonState RightThumbSticks;
 
@@ -264,6 +286,9 @@ namespace BlackFox
 
             LeftShoulder = ButtonState.Released;
             RightShoulder = ButtonState.Released;
+
+            LeftTrigger = ButtonState.Released;
+            RightTrigger = ButtonState.Released;
 
             LeftThumbSticks = ButtonState.Released;
             RightThumbSticks = ButtonState.Released;

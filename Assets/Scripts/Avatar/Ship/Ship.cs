@@ -20,8 +20,6 @@ namespace BlackFox {
         PlacePin pinPlacer;
         AvatarUI avatarUi;
         Tweener damageTween;
-        Vector3 leftStickDirection;
-        Vector3 rightStickDirection;
 
         // Life fields
         private float _life;
@@ -85,6 +83,11 @@ namespace BlackFox {
         }
         #endregion
 
+        // Input Fields
+        bool isTriggerReleased = true;
+        Vector3 leftStickDirection;
+        Vector3 rightStickDirection;
+
         void CheckInputStatus(InputStatus _inputStatus)
         {            
             leftStickDirection = new Vector3(_inputStatus.LeftThumbSticksAxisX, 0, _inputStatus.LeftThumbSticksAxisY);
@@ -92,23 +95,34 @@ namespace BlackFox {
             Move(leftStickDirection);
             DirectFire(rightStickDirection);
 
-            if (_inputStatus.RightShoulder == ButtonState.Pressed) {
+            if (_inputStatus.RightShoulder == ButtonState.Pressed)
+            {
                 PlacePin(true);
             }
 
-            if (_inputStatus.LeftShoulder == ButtonState.Pressed) {
+            if (_inputStatus.LeftShoulder == ButtonState.Pressed)
+            {
                 PlacePin(false);
             }
 
-            if (_inputStatus.A == ButtonState.Pressed) {
+            if (_inputStatus.RightTriggerAxis < 0.1f)
+            {
+                isTriggerReleased = true;
+            }
+            else if (_inputStatus.RightTriggerAxis > 0.9f && isTriggerReleased)
+            {
+                isTriggerReleased = false;
                 nextFire = Time.time + config.FireRate;
                 Shoot();
-            } else if (_inputStatus.A == ButtonState.Held && Time.time > nextFire) {
+            }
+            else if (_inputStatus.RightTriggerAxis > 0.9f && Time.time > nextFire)
+            {
                 nextFire = Time.time + config.FireRate;
                 Shoot();
             }
 
-            if (_inputStatus.Start == ButtonState.Pressed) {
+            if (_inputStatus.Start == ButtonState.Pressed)
+            {
                 GameManager.Instance.LevelMng.PauseGame(avatar.Player.ID);
             }
         }
@@ -220,9 +234,6 @@ namespace BlackFox {
             previousSpeed = rigid.velocity;
         }
         #endregion
-
-        
-        
     }
 
     [Serializable]

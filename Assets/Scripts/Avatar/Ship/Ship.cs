@@ -100,15 +100,15 @@ namespace BlackFox {
                 PlacePin();
             }
 
-            if (_inputStatus.RightTrigger == ButtonState.Pressed)
+            //if (_inputStatus.RightTrigger == ButtonState.Pressed)
+            //{
+            //    Shoot();
+            //    nextFire = Time.time + config.FireRate;
+            //}
+            if (_inputStatus.RightTrigger == ButtonState.Held)
             {
-                nextFire = Time.time + config.FireRate;
                 Shoot();
-            }
-            else if (_inputStatus.RightTrigger == ButtonState.Held && Time.time > nextFire)
-            {
                 nextFire = Time.time + config.FireRate;
-                Shoot();
             }
 
             if (_inputStatus.Start == ButtonState.Pressed)

@@ -124,7 +124,6 @@ GameObject:
   - component: {fileID: 136859151690121598}
   - component: {fileID: 114084304304996402}
   - component: {fileID: 114803276105687232}
-  - component: {fileID: 114864183614476062}
   m_Layer: 0
   m_Name: ShipBase
   m_TagString: Untagged
@@ -516,17 +515,6 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1385676538460380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8c7b008845a38a45913545d94ac33c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114864183614476062
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1639392693601580}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8c7b008845a38a45913545d94ac33c1, type: 3}

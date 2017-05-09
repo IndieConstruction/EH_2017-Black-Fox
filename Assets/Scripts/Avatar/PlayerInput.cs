@@ -10,6 +10,7 @@ namespace BlackFox
     {
         // Variabili per il funzionamento dei controller
         PlayerIndex playerIndex;
+        ButtonState rightTriggerOldState;
         GamePadState state;
         GamePadState prevState;
 
@@ -78,23 +79,17 @@ namespace BlackFox
             inputStatus.RightTriggerAxis = state.Triggers.Right;
 
             // Trigger as button
-            bool isTriggerReleased = true;
-
             if (inputStatus.RightTriggerAxis < 0.2f)
             {
-                isTriggerReleased = true;
-                inputStatus.RightTrigger = ButtonState.Released;
+                rightTriggerOldState = inputStatus.RightTrigger = ButtonState.Released;                
             }
-            else if (inputStatus.RightTriggerAxis > 0.8f && isTriggerReleased)
+            if (inputStatus.RightTriggerAxis > 0.3f && rightTriggerOldState == ButtonState.Released)
             {
-                isTriggerReleased = false;
-                inputStatus.RightTrigger = ButtonState.Pressed;
+                    rightTriggerOldState = inputStatus.RightTrigger = ButtonState.Pressed;
             }
-            else if (inputStatus.RightTriggerAxis > 0.8f && !isTriggerReleased)
-            {
-                inputStatus.RightTrigger = ButtonState.Held;
-            }
-            //############
+            if (inputStatus.RightTriggerAxis > 0.3f && rightTriggerOldState == ButtonState.Pressed)
+                    rightTriggerOldState = inputStatus.RightTrigger = ButtonState.Held;
+            
 
             inputStatus.LeftThumbSticksAxisX = state.ThumbSticks.Left.X;
             inputStatus.LeftThumbSticksAxisY = state.ThumbSticks.Left.Y;

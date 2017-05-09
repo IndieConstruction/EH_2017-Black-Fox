@@ -2,40 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BlackFox
-{
-    // TODO : creare un controller separato per il canvas game invece di delegare la funzione allo ui manager
+namespace BlackFox {
     public class UIManager : MonoBehaviour
     {
         [HideInInspector]
-        public EndRoundlUI endRoundUI;
+        public MainMenuController canvasMenu;
         [HideInInspector]
-        public GameUIController gameUIController;
+        public LevelSelectionController canvasLevelSelection;
         [HideInInspector]
-        public Object canvasMenu;
-        [HideInInspector]
-        public Object canvasLevelSelection;
-        [HideInInspector]
-        public Object canvasGameMenu;
-        [HideInInspector]
-        public Counter Counter;
-        [HideInInspector]
-        public PauseMenuController pauseMenuController;
+        public CanvasGameController canvasGameMenu;
 
         public GameObject AvatarUI;
 
+        [HideInInspector]
         public IMenu CurrentMenu;
 
         #region API
-
-        /// <summary>
-        /// Richiama la funzione per visualizzare il numero del livello e del round 
-        /// </summary>
-        public void UpdateLevelInformation()
-        {
-            gameUIController.UpdateLevelInformation();
-        }
-
         #region Menu Controller
 
         public void GoUpInMenu()
@@ -72,7 +54,7 @@ namespace BlackFox
         /// </summary>
         public void CreateMainMenu()
         {
-            canvasMenu = Instantiate(Resources.Load("Prefabs/UI/CanvasMenu"), transform);
+            canvasMenu = Instantiate(Resources.Load("Prefabs/UI/CanvasMenu") as GameObject, transform).GetComponent<MainMenuController>();
         }
 
         /// <summary>
@@ -80,7 +62,7 @@ namespace BlackFox
         /// </summary>
         public void DestroyMainMenu()
         {
-            Destroy(canvasMenu);
+            Destroy(canvasMenu.gameObject);
         }
         #endregion
 
@@ -90,7 +72,7 @@ namespace BlackFox
         /// </summary>
         public void CreateLevelSelectionMenu()
         {
-            canvasLevelSelection = Instantiate(Resources.Load("Prefabs/UI/CanvasLevelSelection"), transform);
+            canvasLevelSelection = Instantiate(Resources.Load("Prefabs/UI/CanvasLevelSelection") as GameObject, transform).GetComponent<LevelSelectionController>();
         }
 
         /// <summary>
@@ -98,32 +80,25 @@ namespace BlackFox
         /// </summary>
         public void DestroyLevelSelectionMenu()
         {
-            Destroy(canvasLevelSelection);
+            Destroy(canvasLevelSelection.gameObject);
         }
         #endregion
 
         #region Game Menu
-
         /// <summary>
-        /// Crea il Canvas contenente il GameUIController e l'EndRoundUI
+        /// Crea il Canvas Game Menu
         /// </summary>
         public void CreateGameMenu()
         {
-            canvasGameMenu = Instantiate(Resources.Load("Prefabs/UI/CanvasGame"), transform);
-            endRoundUI = GetComponentInChildren<EndRoundlUI>();
-            pauseMenuController = GetComponentInChildren<PauseMenuController>();
-            gameUIController = GetComponentInChildren<GameUIController>();
-            Counter = GetComponentInChildren<Counter>();
-            EventManager.OnAmmoValueChange += gameUIController.SetBulletsValue;
+            canvasGameMenu = Instantiate(Resources.Load("Prefabs/UI/CanvasGame") as GameObject, transform).GetComponent<CanvasGameController>();
         }
 
         /// <summary>
-        /// Distrugge il Canvas contenente il GameUIController e l'EndRoundUI
+        /// Distrugge il Canvas Game Menu
         /// </summary>
         public void DestroyGameMenu()
         {
-            EventManager.OnAmmoValueChange -= gameUIController.SetBulletsValue;
-            Destroy(canvasGameMenu);
+            Destroy(canvasGameMenu.gameObject);
         }
         #endregion
 
@@ -135,9 +110,7 @@ namespace BlackFox
         /// <param name="_target">l'oggetto a cui attaccare la UI</param>
         public AvatarUI CreateAvatarUI(GameObject _target)
         {
-            GameObject tempObj;
-            tempObj = Instantiate(AvatarUI, _target.transform.position, _target.transform.rotation, _target.transform);
-            return tempObj.GetComponentInChildren<AvatarUI>();
+            return Instantiate(AvatarUI, _target.transform.position, _target.transform.rotation, _target.transform).GetComponentInChildren<AvatarUI>();
         }
 
         #endregion

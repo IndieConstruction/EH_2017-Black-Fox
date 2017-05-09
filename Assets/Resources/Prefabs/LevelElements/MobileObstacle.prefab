@@ -52,11 +52,10 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4408184737297744}
-  - component: {fileID: 114050722670356210}
   - component: {fileID: 135658665910831518}
   m_Layer: 0
   m_Name: BlockPin
-  m_TagString: Untagged
+  m_TagString: PinBlockArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,6 +131,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33872267162724336
 MeshFilter:
@@ -140,17 +140,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1154925964617414}
   m_Mesh: {fileID: 4300000, guid: 81d364509ca06f94d89beb52f1fa80c2, type: 3}
---- !u!114 &114050722670356210
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1701814188751108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59c29e9d98208d84f91ff03387995a8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!135 &135524931249972144
 SphereCollider:
   m_ObjectHideFlags: 1

@@ -7,22 +7,13 @@ namespace BlackFox
 {
     public class GameUIController : MonoBehaviour
     {
+        public Text[] PlayersBulletCount = new Text[4];
 
-        public Text Player1BulletCount;
-        public Text Player2BulletCount;
-        public Text Player3BulletCount;
-        public Text Player4BulletCount;
-
-        public Text Player1KillPoints;
-        public Text Player2KillPoints;
-        public Text Player3KillPoints;
-        public Text Player4KillPoints;
+        public Text[] PlayersKillPoints = new Text[4];
 
         public Slider ElementZeroSlider;
 
         public Text LevelIndicationText;       
-
-        
 
         #region API
 
@@ -33,22 +24,10 @@ namespace BlackFox
         /// <param name="_remainigAmmo"></param>
         public void SetBulletsValue(Avatar _avatar)
         {
-            switch (_avatar.PlayerId)   
+            for (int i = 0; i < PlayersBulletCount.Length; i++)
             {
-                case PlayerLabel.One:
-                    Player1BulletCount.text = _avatar.ship.shooter.Ammo.ToString();
-                    break;
-                case PlayerLabel.Two:
-                    Player2BulletCount.text = _avatar.ship.shooter.Ammo.ToString();
-                    break;
-                case PlayerLabel.Three:
-                    Player3BulletCount.text = _avatar.ship.shooter.Ammo.ToString();
-                    break;
-                case PlayerLabel.Four:
-                    Player4BulletCount.text = _avatar.ship.shooter.Ammo.ToString();
-                    break;
-                default:
-                    break;
+                if(_avatar.PlayerId == (PlayerLabel)i + 1)
+                    PlayersBulletCount[i].text = _avatar.ship.shooter.Ammo.ToString();
             }
         }
         
@@ -59,22 +38,10 @@ namespace BlackFox
         /// <param name="_playerID">Il giocatore a cui aggiornare i punti uccisione nella Ui</param>
         public void SetKillPointsUI(PlayerLabel _playerID)
         {
-            switch (_playerID)
+            for (int i = 0; i < PlayersKillPoints.Length; i++)
             {
-                case PlayerLabel.One:
-                    Player1KillPoints.text = GameManager.Instance.LevelMng.GetPlayerKillPoints(_playerID).ToString();
-                    break;                   
-                case PlayerLabel.Two:        
-                    Player2KillPoints.text = GameManager.Instance.LevelMng.GetPlayerKillPoints(_playerID).ToString();
-                    break;                   
-                case PlayerLabel.Three:      
-                    Player3KillPoints.text = GameManager.Instance.LevelMng.GetPlayerKillPoints(_playerID).ToString();
-                    break;                   
-                case PlayerLabel.Four:       
-                    Player4KillPoints.text = GameManager.Instance.LevelMng.GetPlayerKillPoints(_playerID).ToString();
-                    break;
-                default:
-                    break;
+                if (_playerID == (PlayerLabel)i + 1)
+                    PlayersKillPoints[i].text = GameManager.Instance.LevelMng.GetPlayerKillPoints(_playerID).ToString();
             }
         }
 

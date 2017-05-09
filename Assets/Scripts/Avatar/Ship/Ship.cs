@@ -5,7 +5,7 @@ using UnityEngine;
 using DG.Tweening;
 
 namespace BlackFox {
-    [RequireComponent(typeof(MovementController), typeof(PlacePin), typeof(Shooter))]
+    [RequireComponent(typeof(MovementController), typeof(Shooter))]
     public class Ship : MonoBehaviour, IShooter, IDamageable
     {
         [HideInInspector]
@@ -20,6 +20,8 @@ namespace BlackFox {
         PlacePin pinPlacer;
         AvatarUI avatarUi;
         Tweener damageTween;
+        Vector3 leftStickDirection;
+        Vector3 rightStickDirection;
 
         // Life fields
         private float _life;
@@ -52,8 +54,8 @@ namespace BlackFox {
             shooter.Init(this);
             movment = GetComponent<MovementController>();
             movment.Init(this, rigid);
-            pinPlacer = GetComponent<PlacePin>();
-            pinPlacer.Init(this);
+            pinPlacer = GetComponentInChildren<PlacePin>();
+            pinPlacer.Setup(this);
             avatarUi = GetComponentInChildren<AvatarUI>();
         }
 
@@ -74,11 +76,21 @@ namespace BlackFox {
             } 
         }
 
+        /// <summary>
+        /// Remove all the placed Pins of this ship
+        /// </summary>
+        public void RemoveAllPins()
+        {
+            pinPlacer.RemoveAllPins();
+        }
         #endregion
 
-        void CheckInputStatus(InputStatus _inputStatus) {
-            GoForward(_inputStatus.RightTriggerAxis);
-            Rotate(_inputStatus.LeftThumbSticksAxisX);
+        void CheckInputStatus(InputStatus _inputStatus)
+        {            
+            leftStickDirection = new Vector3(_inputStatus.LeftThumbSticksAxisX, 0, _inputStatus.LeftThumbSticksAxisY);
+            rightStickDirection = new Vector3(_inputStatus.RightThumbSticksAxisX, 0, _inputStatus.RightThumbSticksAxisY);
+            Move(leftStickDirection);
+            DirectFire(rightStickDirection);
 
             if (_inputStatus.RightShoulder == ButtonState.Pressed) {
                 PlacePin(true);
@@ -179,23 +191,26 @@ namespace BlackFox {
 
         }
 
+        void DirectFire(Vector3 _direction)
+        {
+            shooter.SetFireDirection(_direction);
+        }
+
         void Shoot() {
             shooter.ShootBullet();
             avatar.OnAmmoUpdate(shooter.Ammo);
         }
 
         void PlacePin(bool _isRight) {
-            pinPlacer.placeThePin(_isRight);
+            pinPlacer.PlaceThePin(_isRight);
+            AddShooterAmmo();
         }
 
-        void GoForward(float _amount) {
-            movment.Movement(_amount);
+        void Move(Vector3 _target)
+        {
+            movment.Move(_target);
             if (avatar.rope != null)
-                ExtendRope(_amount);
-        }
-
-        void Rotate(float _amount) {
-            movment.Rotation(_amount);
+                ExtendRope(_target.magnitude);
         }
 
         void ExtendRope(float _amount) {
@@ -205,6 +220,8 @@ namespace BlackFox {
             previousSpeed = rigid.velocity;
         }
         #endregion
+
+        
         
     }
 

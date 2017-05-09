@@ -7,63 +7,102 @@ namespace BlackFox
 {
     public class PlacePin : MonoBehaviour
     {
-        [HideInInspector]
-        public bool CanPlace = true;
-
-        public Transform PinSpanw;
+        protected bool canPlace = true;
 
         PlacePinConfig placePinConfig
         {
-            get { return ship.avatar.AvatarData.shipConfig.placePinConfig; }
+            get {
+                PlacePinConfig data;
+                if (ship.avatar.AvatarData.shipConfig.placePinConfig == null)
+                    data = new PlacePinConfig();
+                else
+                    data = ship.avatar.AvatarData.shipConfig.placePinConfig;
+                return data; }
         }
-
+        List<GameObject> pinsPlaced = new List<GameObject>();
+        Transform initialTransf;
         Ship ship;
-
-        float xValue;
         float prectime;
-
-        private void Start()
-        {
-            xValue = PinSpanw.localPosition.x;
-        }
+        bool isRight;
+        bool isRecharging = false;
 
         private void Update()
         {
-            prectime -= Time.deltaTime;
-            //if (prectime <= 0)
-            //    StartCoroutine(Vibrate(0.2f));
-        }
-
-        #region API
-        public void Init(Ship _owner)
-        {
-            ship = _owner;
-        }
-        
-        /// <summary>
-        /// Instantiate the pin on the PinSpawn
-        /// </summary>
-        public void placeThePin(bool _isRight)
-        {
-            if (prectime <= 0 && CanPlace == true)
+            if (ship != null)
             {
-                SetPinSpawnPosition(_isRight);
-                Instantiate(placePinConfig.PinPrefab, PinSpanw.position, PinSpanw.rotation, GameManager.Instance.LevelMng.PinsContainer);
-                ship.AddShooterAmmo();
-                prectime = placePinConfig.CoolDownTime;
+                if (!GameManager.Instance.LevelMng.IsGamePaused || GameManager.Instance.LevelMng.IsRoundActive)
+                {
+                    prectime -= Time.deltaTime;
+                    if (prectime <= 0 && !isRecharging)
+                    {
+                        isRecharging = true;
+                        StartCoroutine(Rumble(0.2f));
+                    }
+                }                
             }
         }
-        #endregion
 
-        IEnumerator Vibrate(float _rumbleTime)
+        IEnumerator Rumble(float _rumbleTime)
         {
-            // TODO : togliere la vibrazione durante il count down (da fare nel refactoring dell'avatar)
-            if(!GameManager.Instance.LevelMng.IsGamePaused)
-               ship.avatar.Player.ControllerVibration(0.5f, 0.5f);
-
+            ship.avatar.Player.ControllerVibration(0.5f, 0.5f);
             yield return new WaitForSeconds(_rumbleTime);
             ship.avatar.Player.ControllerVibration(0f, 0f);
         }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if(other.gameObject.tag == "PinBlockArea")
+                canPlace = false;
+        }
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject.tag == "PinBlockArea")
+                canPlace = true;
+        }
+
+        #region API
+        /// <summary>
+        /// Set working values for the componet
+        /// </summary>
+        /// <param name="_owner"></param>
+        public void Setup(Ship _owner)
+        {
+            ship = _owner;
+            prectime = placePinConfig.CoolDownTime;
+            initialTransf = transform;
+        }
+
+        /// <summary>
+        /// Instantiate the pin on the PinSpawn (true/false switch between right/left)
+        /// </summary>
+        public void PlaceThePin(bool _placeRight)
+        {
+            SetPinSpawnPosition(_placeRight);
+            if (prectime <= 0 && canPlace == true)
+            {
+                GameObject pin = Instantiate(placePinConfig.PinPrefab, transform.position , Quaternion.identity);
+                pinsPlaced.Add(pin);
+                isRecharging = false;
+                foreach (Renderer pinRend in pin.GetComponentsInChildren<Renderer>())
+                {
+                    pinRend.material = ship.avatar.AvatarData.shipConfig.ColorSets[ship.avatar.ColorSetIndex].PinMaterial;
+                }
+                pin.transform.parent = GameManager.Instance.LevelMng.PinsContainer;
+                prectime = placePinConfig.CoolDownTime;
+            }
+        }
+        /// <summary>
+        /// Remove all the placed Pins
+        /// </summary>
+        public void RemoveAllPins()
+        {
+            foreach (GameObject pin in pinsPlaced)
+            {
+                Destroy(pin);
+            }
+            pinsPlaced.Clear();
+        }
+        #endregion
 
         /// <summary>
         /// Change the position of the PinSpawnPoint
@@ -71,22 +110,23 @@ namespace BlackFox
         /// <param name="_isRight"></param>
         void SetPinSpawnPosition(bool _isRight)
         {
-            if (!_isRight)
+            if (_isRight && !isRight)
             {
-                PinSpanw.localPosition = new Vector3(-xValue, PinSpanw.localPosition.y, PinSpanw.localPosition.z);
+                transform.localPosition = initialTransf.localPosition;
+                isRight = _isRight;
             }
-            else
+            else if(!_isRight && isRight)
             {
-                PinSpanw.localPosition = new Vector3(xValue, PinSpanw.localPosition.y, PinSpanw.localPosition.z);
+                transform.localPosition = new Vector3(-initialTransf.localPosition.x, initialTransf.localPosition.y, initialTransf.localPosition.z);
+                isRight = _isRight;
             }
         }
-
     }
 
     [Serializable]
     public class PlacePinConfig
     {
         public GameObject PinPrefab;
-        public float CoolDownTime;
+        public float CoolDownTime = 3;
     }
 }

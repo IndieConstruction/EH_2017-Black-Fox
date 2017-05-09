@@ -42,6 +42,12 @@ namespace BlackFox
             }
         }
 
+        public override void SetFireDirection(Vector3 _direction)
+        {
+            if(_direction != Vector3.zero)
+                direction = _direction;
+        }
+
         public void AddAmmo()
         {
             if (Ammo < shooterConfig.MaxAmmo)

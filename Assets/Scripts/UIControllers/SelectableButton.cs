@@ -8,7 +8,6 @@ namespace BlackFox
 {
     public class SelectableButton : MonoBehaviour, ISelectable
     {
-        int index;
 
         bool isSelected;
 
@@ -18,6 +17,8 @@ namespace BlackFox
                 CheckIsSelected(isSelected);
                 }
         }
+
+        int index;
 
         public int Index
         {

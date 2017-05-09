@@ -3,16 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 namespace BlackFox
 {
     public class EndRoundlUI : MonoBehaviour, IMenu
     {
-
-        public Text Player1Points;
-        public Text Player2Points;
-        public Text Player3Points;
-        public Text Player4Points;
+        public Text[] PlayerPoints = new Text[4];
         public Text EventName;
         public GameObject EndLevelPanel;
 
@@ -40,48 +35,32 @@ namespace BlackFox
         /// <summary>
         /// Cerca il totale di ogni player e lo mostra in una casella di testo
         /// </summary>
-        void GetAvatasKillPoints()
+        void ShowAvatarsKillPoints()
         {
-            for (int i = 1; i <= 4; i++)
+            for (int i = 0; i < PlayerPoints.Length; i++)
             {
-                int tempPoints = GameManager.Instance.LevelMng.GetPlayerKillPoints((PlayerLabel)i);
-                switch (i)
-                {
-                    case 1:
-                        Player1Points.text = tempPoints + " / 5";
-                        break;
-                    case 2:
-                        Player2Points.text = tempPoints + " / 5";
-                        break;
-                    case 3:
-                        Player3Points.text = tempPoints + " / 5";
-                        break;
-                    case 4:
-                        Player4Points.text = tempPoints + " / 5";
-                        break;
-                }
+                PlayerPoints[i].text = GameManager.Instance.LevelMng.GetPlayerKillPoints((PlayerLabel)i+1) + " / " + GameManager.Instance.LevelMng.PointsToWin;
             }
-
         }
         
         #region API
-
         /// <summary>
         /// Attiva End Round Panel e mostrare i punti degli avatar
         /// </summary>
         public void SetEndRoundPanelStatus(bool _status)
         {
-            EndLevelPanel.SetActive(_status);
             if (_status)
-                GetAvatasKillPoints(); 
+            {
+                ShowAvatarsKillPoints();
+                EventName.text = GameManager.Instance.LevelMng.EndLevelPanelLableText;
+            }
+            EndLevelPanel.SetActive(_status);
         }
 
         public void Selection()
         {
             GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
         }
-
         #endregion
-
     }
 }

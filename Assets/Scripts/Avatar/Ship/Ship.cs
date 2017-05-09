@@ -84,7 +84,6 @@ namespace BlackFox {
         #endregion
 
         // Input Fields
-        bool isTriggerReleased = true;
         Vector3 leftStickDirection;
         Vector3 rightStickDirection;
 
@@ -92,26 +91,21 @@ namespace BlackFox {
         {            
             leftStickDirection = new Vector3(_inputStatus.LeftThumbSticksAxisX, 0, _inputStatus.LeftThumbSticksAxisY);
             rightStickDirection = new Vector3(_inputStatus.RightThumbSticksAxisX, 0, _inputStatus.RightThumbSticksAxisY);
+
             Move(leftStickDirection);
             DirectFire(rightStickDirection);
-
 
             if (_inputStatus.RightShoulder == ButtonState.Pressed)
             {
                 PlacePin();
             }
 
-            if (_inputStatus.RightTriggerAxis < 0.1f)
+            if (_inputStatus.RightTrigger == ButtonState.Pressed)
             {
-                isTriggerReleased = true;
-            }
-            else if (_inputStatus.RightTriggerAxis > 0.9f && isTriggerReleased)
-            {
-                isTriggerReleased = false;
                 nextFire = Time.time + config.FireRate;
                 Shoot();
             }
-            else if (_inputStatus.RightTriggerAxis > 0.9f && Time.time > nextFire)
+            else if (_inputStatus.RightTrigger == ButtonState.Held && Time.time > nextFire)
             {
                 nextFire = Time.time + config.FireRate;
                 Shoot();

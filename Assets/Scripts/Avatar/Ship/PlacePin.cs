@@ -23,7 +23,6 @@ namespace BlackFox
         Transform initialTransf;
         Ship ship;
         float prectime;
-        bool isRight;
         bool isRecharging = false;
 
         private void Update()
@@ -79,7 +78,7 @@ namespace BlackFox
         {
             if (prectime <= 0 && canPlace == true)
             {
-                GameObject pin = Instantiate(placePinConfig.PinPrefab, transform.position + Vector3.forward*placePinConfig.DistanceFromShipOrigin, transform.rotation);
+                GameObject pin = Instantiate(placePinConfig.PinPrefab, transform.position + transform.forward*placePinConfig.DistanceFromShipOrigin, transform.rotation);
                 pinsPlaced.Add(pin);
                 isRecharging = false;
                 foreach (Renderer pinRend in pin.GetComponentsInChildren<Renderer>())

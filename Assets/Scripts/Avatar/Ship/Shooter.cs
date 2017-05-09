@@ -35,7 +35,7 @@ namespace BlackFox
         {
             if (ammo > 0)
             {
-                GameObject instantiatedProjectile = Instantiate(shooterBaseConfig.ProjectilePrefab, transform.position + Vector3.forward*shooterConfig.DistanceFromShipOrigin, transform.rotation);
+                GameObject instantiatedProjectile = Instantiate(shooterBaseConfig.ProjectilePrefab, transform.position + transform.forward*shooterConfig.DistanceFromShipOrigin, transform.rotation);
                 instantiatedProjectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * shooterBaseConfig.BulletSpeed, ForceMode.Impulse);
                 instantiatedProjectile.GetComponent<Projectile>().SetOwner(GetComponentInParent<IShooter>());
                 Destroy(instantiatedProjectile, shooterBaseConfig.LifeTime);

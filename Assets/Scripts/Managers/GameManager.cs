@@ -8,14 +8,15 @@ namespace BlackFox
     {
         public static GameManager Instance;
 
+        #region Prefabs
         public GameObject LevelManagerPrefab;
         public GameObject UIManagerPrefab;
         public GameObject PlayerManagerPrefab;
         public GameObject CoinManagerPrefab;
         public GameObject AudioManagerPrefab;
+        #endregion
 
-        public Level LevelScriptableObj;
-
+        #region Managers
         [HideInInspector]
         public LevelManager LevelMng;
         [HideInInspector]
@@ -26,8 +27,12 @@ namespace BlackFox
         public CoinManager CoinMng;
         [HideInInspector]
         public AudioManager AudioMng;
+        #endregion
+
         [HideInInspector]
         public FlowSM flowSM;
+
+        public Level LevelScriptableObj;
 
         private void Awake()
         {
@@ -41,15 +46,6 @@ namespace BlackFox
         void Start()
         {
             flowSM = gameObject.AddComponent<FlowSM>();
-        }
-
-        private void Update()
-        {
-            // TODO : togliere (Luca dice che è da togliere)
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                QuitApplication();
-            }
         }
 
         #region API

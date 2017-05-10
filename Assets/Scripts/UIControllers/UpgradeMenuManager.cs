@@ -14,15 +14,15 @@ namespace BlackFox {
             UpgradePanel.SetActive(false);
         }
 
-        public void OnStart()
-        {
-            foreach (PlayerUpgradeController controller in PlayerUpgradeControllers)
+        public void OnStart(List<Player> _players)
+        { 
+            foreach (Player player in _players)
             {
-                foreach (Player player in GameManager.Instance.PlayerMng.Players)
+                foreach (PlayerUpgradeController controller in PlayerUpgradeControllers)
                 {
                     if ((int)player.ID == (int)controller.MenuID)
                     {
-                        controller.Avatar = player.Avatar;
+                        controller.Player = player;
                         controller.OnStart();
                         break;
                     }
@@ -35,7 +35,10 @@ namespace BlackFox {
             foreach (PlayerUpgradeController menu in PlayerUpgradeControllers)
             {
                 if ((int)menu.MenuID == (int)_player.ID)
+                {
                     menu.GoUpInMenu(_player);
+                    break;
+                }
             }
         }
 
@@ -44,7 +47,10 @@ namespace BlackFox {
             foreach (PlayerUpgradeController menu in PlayerUpgradeControllers)
             {
                 if ((int)menu.MenuID == (int)_player.ID)
+                {
                     menu.GoDownInMenu(_player);
+                    break;
+                }
             }
         }
 
@@ -53,7 +59,10 @@ namespace BlackFox {
             foreach (PlayerUpgradeController menu in PlayerUpgradeControllers)
             {
                 if ((int)menu.MenuID == (int)_player.ID)
+                {
                     menu.GoLeftInMenu(_player);
+                    break;
+                }
             }
         }
 
@@ -62,8 +71,16 @@ namespace BlackFox {
             foreach (PlayerUpgradeController menu in PlayerUpgradeControllers)
             {
                 if ((int)menu.MenuID == (int)_player.ID)
+                {
                     menu.GoRightInMenu(_player);
+                    break;
+                }
             }
+        }
+
+        public override void Selection()
+        {
+            
         }
     }
 }

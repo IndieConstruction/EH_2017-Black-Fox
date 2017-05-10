@@ -21,6 +21,5 @@ namespace BlackFox
             gameUIController.UpdateLevelInformation();
         }
         #endregion
-
     }
 }

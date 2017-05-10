@@ -10,14 +10,6 @@ namespace BlackFox
     {
         public UpgradeControllerID MenuID;
 
-        private Avatar avatar;
-
-        public Avatar Avatar
-        {
-            get { return avatar; }
-            set { avatar = value; }
-        }
-
         List<IUpgrade> upgradeItem = new List<IUpgrade>();
 
         public void OnStart()
@@ -59,6 +51,6 @@ namespace BlackFox
         One = 1,
         Two = 2,
         Three = 3,
-        Four = 4,
+        Four = 4
     }
 }

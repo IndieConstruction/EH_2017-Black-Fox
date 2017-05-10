@@ -9,15 +9,15 @@ namespace BlackFox
 
         int AddPoints
         {
-            get { return levelManager.AddPoints; }
+            get { return levelManager.levelOptions.AddPoints; }
         }
         int SubPoints
         {
-            get { return levelManager.SubPoints; }
+            get { return levelManager.levelOptions.SubPoints; }
         }
         int PointsToWin
         {
-            get { return levelManager.PointsToWin; }
+            get { return levelManager.levelOptions.PointsToWin; }
         }
 
         List<PlayerStats> playerStats = new List<PlayerStats>()

@@ -10,14 +10,6 @@ namespace BlackFox
     {
         public UpgradeControllerID MenuID;
 
-        private Avatar avatar;
-
-        public Avatar Avatar
-        {
-            get { return avatar; }
-            set { avatar = value; }
-        }
-
         List<IUpgrade> upgradeItem = new List<IUpgrade>();
 
         public void OnStart()
@@ -42,12 +34,14 @@ namespace BlackFox
 
         public override void GoRightInMenu(Player _player)
         {
-            //selectableButton[currentIndexSelection].AddValue();
+            SelectableUpgrade currentSlider = selectableButton[currentIndexSelection] as SelectableUpgrade;
+            currentSlider.AddValue();
         }
 
         public override void GoLeftInMenu(Player _player)
         {
-            
+            SelectableUpgrade currentSlider = selectableButton[currentIndexSelection] as SelectableUpgrade;
+            currentSlider.RemoveValue();
         }
     }
 
@@ -59,6 +53,6 @@ namespace BlackFox
         One = 1,
         Two = 2,
         Three = 3,
-        Four = 4,
+        Four = 4
     }
 }

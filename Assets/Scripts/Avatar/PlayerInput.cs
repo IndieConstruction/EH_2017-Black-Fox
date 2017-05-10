@@ -88,7 +88,7 @@ namespace BlackFox
                 if (rightTriggerOldState == ButtonState.Released)
                     rightTriggerOldState = inputStatus.RightTrigger = ButtonState.Pressed;
 
-                if (rightTriggerOldState == ButtonState.Pressed)
+                else if (rightTriggerOldState == ButtonState.Pressed)
                     rightTriggerOldState = inputStatus.RightTrigger = ButtonState.Held;
             }
 

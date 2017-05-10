@@ -23,7 +23,7 @@ namespace BlackFox
         {
             for (int i = 0; i < PlayerPoints.Length; i++)
             {
-                PlayerPoints[i].text = GameManager.Instance.LevelMng.GetPlayerKillPoints((PlayerLabel)i+1) + " / " + GameManager.Instance.LevelMng.PointsToWin;
+                PlayerPoints[i].text = GameManager.Instance.LevelMng.GetPlayerKillPoints((PlayerLabel)i+1) + " / " + GameManager.Instance.LevelMng.levelOptions.PointsToWin;
             }
         }
         

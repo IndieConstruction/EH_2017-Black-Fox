@@ -16,12 +16,19 @@ namespace BlackFox
         Ship ship;
         Rigidbody rigid;
         #region Rotation fields
-        Vector3 normal = Vector3.up;
+        Vector3 appliedTroque;
+        //yaw fileds
         Vector3 proj;
         Quaternion targetRotation;
         Quaternion deltaRotation;
         Vector3 deltaAngles;
         Vector3 worldDeltaAngles;
+        //roll fields
+        Vector3 rollProj;
+        Quaternion rollTargetRotation;
+        Quaternion rollDeltaRotation;
+        Vector3 rollDeltaAngles;
+        Vector3 rollWorldDeltaAngles;
         #endregion
 
         #region API
@@ -38,27 +45,40 @@ namespace BlackFox
         {
             rigid.AddForce(_target * MovementConfig.MovmentSpeed, ForceMode.Force);
 
-            if(_target != Vector3.zero)
-            Yaw(_target, Vector3.up);
+            if (_target != Vector3.zero)
+            {
+                appliedTroque = GetYawTroque(_target, Vector3.up);// + GetRollTroque(rigid.velocity, transform.forward);
+                rigid.AddTorque(appliedTroque, ForceMode.Force);
+            }
+                
         }
         #endregion
-        
-        void Yaw(Vector3 _target, Vector3 _normal)
+        Vector3 GetRollTroque( Vector3 _target, Vector3 _normal)
         {
-            normal = _normal;
             // Compute target rotation (align rigidybody's up direction to the normal vector)
 
-            proj = Vector3.ProjectOnPlane(_target, normal);
-            targetRotation = Quaternion.LookRotation(proj, normal); // The target rotation can be replaced with whatever rotation you want to align to
+            rollProj = Vector3.ProjectOnPlane(_target, _normal);
+            rollTargetRotation = Quaternion.FromToRotation(transform.up, rollProj);
+
+            rollDeltaRotation = Quaternion.Inverse(transform.rotation) * rollTargetRotation;
+            rollDeltaAngles = GetRelativeAngles(rollDeltaRotation.eulerAngles);
+            rollWorldDeltaAngles = transform.TransformDirection(rollDeltaAngles);
+
+            return MovementConfig.RotationSpeed * rollWorldDeltaAngles - MovementConfig.RotationSpeed * 10 * rigid.angularVelocity;
+        }
+        Vector3 GetYawTroque(Vector3 _target, Vector3 _normal)
+        {
+            // Compute target rotation (align rigidybody's up direction to the normal vector)
+
+            proj = Vector3.ProjectOnPlane(_target, _normal);
+            targetRotation = Quaternion.LookRotation(proj, _normal);
 
             deltaRotation = Quaternion.Inverse(transform.rotation) * targetRotation;
             deltaAngles = GetRelativeAngles(deltaRotation.eulerAngles);
             worldDeltaAngles = transform.TransformDirection(deltaAngles);
 
-            // alignmentSpeed controls how fast you rotate the body towards the target rotation
-            // alignmentDamping prevents overshooting the target rotation
-            // Values used: alignmentSpeed = 0.025, alignmentDamping = 0.2
-            rigid.AddTorque(MovementConfig.RotationSpeed * worldDeltaAngles - MovementConfig.RotationSpeed *10 * rigid.angularVelocity, ForceMode.Force);
+            // reference value: angular velocity more or less 10 times larger than worldDelta
+            return MovementConfig.RotationSpeed * worldDeltaAngles - MovementConfig.RotationSpeed * 10 * rigid.angularVelocity;
         }
 
         // Convert angles above 180 degrees into negative/relative angles

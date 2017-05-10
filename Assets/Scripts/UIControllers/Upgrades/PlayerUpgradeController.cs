@@ -34,12 +34,14 @@ namespace BlackFox
 
         public override void GoRightInMenu(Player _player)
         {
-            //selectableButton[currentIndexSelection].AddValue();
+            SelectableUpgrade currentSlider = selectableButton[currentIndexSelection] as SelectableUpgrade;
+            currentSlider.AddValue();
         }
 
         public override void GoLeftInMenu(Player _player)
         {
-            
+            SelectableUpgrade currentSlider = selectableButton[currentIndexSelection] as SelectableUpgrade;
+            currentSlider.RemoveValue();
         }
     }
 

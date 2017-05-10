@@ -59,6 +59,16 @@ namespace BlackFox
             set { _playerUpgradeController = value; }
         }
 
-        //TODO: aggiungere la funzione AddValue per la slider.
+        public void AddValue()
+        {
+            if (slider.value < slider.maxValue)
+                slider.value += 1;
+        }
+
+        public void RemoveValue()
+        {
+            if(slider.value > 0)
+                slider.value -= 1;
+        }
     }
 }

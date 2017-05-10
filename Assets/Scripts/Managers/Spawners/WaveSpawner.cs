@@ -6,29 +6,31 @@ namespace BlackFox {
     /// <summary>
     /// Spawn a Wave on a random SpawnPoint between the min/max given time
     /// </summary>
-    public class WaveSpawner : SpawnerBase {
+    public class WaveSpawner : SpawnerBase
+    {
         List<Transform> SpawnPoints = new List<Transform>();
         GameObject wave;
         float nextTime;
-        bool active;
         new public WaveSpawnerOptions Options;
 
-        public override SpawnerBase Init(SpawnerOptions options) {
+        public override SpawnerBase OptionInit(SpawnerOptions options)
+        {
             Options = options as WaveSpawnerOptions;
             return this;
         }
 
-        private void Start()
+        public override void Init()
         {
             nextTime += Random.Range(Options.MinTime, Options.MaxTime);
             foreach (var spawn in FindObjectsOfType<SpawnPoint>())
                 foreach (var item in spawn.ValidAs)
                     if (item == SpawnPoint.SpawnType.WaveSpawn)
-                        SpawnPoints.Add(spawn.transform);       
+                        SpawnPoints.Add(spawn.transform);
         }
 
-        void Update() {
-            if(active)
+        void Update()
+        {
+            if(IsActive)
                 Wave();            
         }
         
@@ -45,7 +47,8 @@ namespace BlackFox {
         /// Place a new wave in Scene or move the current one onto a different spawnpoit
         /// </summary>
         /// <param name="_spawn"></param>
-        void InstantiateWave(Transform _spawn) {
+        void InstantiateWave(Transform _spawn)
+        {
             if (!wave)
                 wave = Instantiate(Options.WavePrefab, _spawn.position, _spawn.rotation);
             else {
@@ -55,10 +58,6 @@ namespace BlackFox {
         }
 
         #region API
-        public override void Toggle()
-        {
-            active = !active;
-        }
         public override void Restart()
         {
             CleanSpawned();
@@ -67,8 +66,9 @@ namespace BlackFox {
             InstantiateWave(SpawnPoints[spawn]);
             nextTime += Random.Range(Options.MinTime, Options.MaxTime);
 
-            Toggle();
+            Toggle(true);
         }
+
         public override void CleanSpawned()
         {
             if (wave)
@@ -78,7 +78,8 @@ namespace BlackFox {
     }
 
     [System.Serializable]
-    public class WaveSpawnerOptions : SpawnerOptions {
+    public class WaveSpawnerOptions : SpawnerOptions
+    {
         public GameObject WavePrefab;
         public float MinTime = 20;
         public float MaxTime = 50;

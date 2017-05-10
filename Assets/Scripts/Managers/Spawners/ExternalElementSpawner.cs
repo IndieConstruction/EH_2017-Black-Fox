@@ -7,22 +7,27 @@ namespace BlackFox
     public class ExternalElementSpawner : SpawnerBase
     {
         new public ExternalElementOptions Options;
-        Transform target;                                       //Target of the ExternalElements
-        float nextTime;                                         //Timer
-        List<IDamageable> Damageables = new List<IDamageable>();//Lista di oggetti danneggiabili
+        Transform target;                                           //Target of the ExternalElements
+        float nextTime;                                             //Timer
+        List<IDamageable> Damageables = new List<IDamageable>();    //Lista di oggetti danneggiabili
+
+        GameObject container;
 
         #region SpawnerLifeFlow
-        void Start()
+        public override void Init()
         {
-            if(Options.ExternalAgent == null)
+            if (Options.ExternalAgent == null)
                 Options.ExternalAgent = (GameObject)Resources.Load("Prefabs/ExternalAgents/ExternalAgent1");
 
-            target = FindObjectOfType<Core>().transform;
+            target = GameManager.Instance.LevelMng.Core.transform;
             nextTime = Random.Range(Options.MinTime, Options.MaxTime);
             LoadIDamageablePrefab();
+
+            container = new GameObject("ExternalAgentContainer");
+            container.transform.parent = GameManager.Instance.LevelMng.Arena.transform;
         }
 
-        public override SpawnerBase Init(SpawnerOptions options)
+        public override SpawnerBase OptionInit(SpawnerOptions options)
         {
             Options = options as ExternalElementOptions;
             return this;
@@ -30,20 +35,26 @@ namespace BlackFox
 
         void Update()
         {
-            if (Time.time >= nextTime)
+            if(IsActive)
             {
-                InstantiateExternalAgent();
-                nextTime += Random.Range(Options.MinTime, Options.MaxTime);
+                if (Time.time >= nextTime)
+                {
+                    InstantiateExternalAgent();
+                    nextTime += Random.Range(Options.MinTime, Options.MaxTime);
+                }
+                GravityAround();
             }
-            GravityAround();
         }
 
-        private void OnDestroy()
+        public override void Restart()
         {
-            // TODO : da rifare
-            //per adesso solo per evitare che ci siano agenti esterni in giro a caso
-            foreach (ExternalAgent externalAgent in FindObjectsOfType<ExternalAgent>())
-                Destroy(externalAgent.gameObject);
+            CleanSpawned();
+            Init();
+        }
+
+        public override void CleanSpawned()
+        {
+            Destroy(container);
         }
         #endregion
 
@@ -80,7 +91,7 @@ namespace BlackFox
         /// </summary>
         void InstantiateExternalAgent()
         {
-            GameObject instantiateEA = Instantiate(Options.ExternalAgent, transform.position, transform.rotation);
+            GameObject instantiateEA = Instantiate(Options.ExternalAgent, transform.position, transform.rotation, container.transform);
             ExternalAgent eA = instantiateEA.GetComponent<ExternalAgent>();
             eA.Initialize(target, Damageables);
         }

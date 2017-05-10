@@ -105,10 +105,12 @@ namespace BlackFox {
                 Shoot();
                 nextFire = Time.time + config.FireRate;
             }
-            else if (_inputStatus.RightTrigger == ButtonState.Held && Time.time > nextFire)
+            else if (_inputStatus.RightTrigger == ButtonState.Held )
             {
-                Shoot();
-                nextFire = Time.time + config.FireRate;
+                if(Time.time > nextFire) { 
+                    Shoot();
+                    nextFire = Time.time + config.FireRate;
+                }
             }
 
             if (_inputStatus.Start == ButtonState.Pressed)

@@ -202,7 +202,6 @@ namespace BlackFox {
         void Shoot()
         {
             shooter.ShootBullet();
-            //avatar.OnAmmoUpdate(shooter.Ammo);
         }
 
         void PlacePin()

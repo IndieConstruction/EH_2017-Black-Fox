@@ -11,10 +11,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd0ef9c4d75af4b4fb57fa39733f9fec, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  Order: 1
+  LevelNumber: 1
   LevelName: Arena1
   ArenaPrefab: {fileID: 1590692792633676, guid: 7ea2bcd6e0fcc5341a5f7624e386a912,
     type: 2}
+  LevelOptions:
+    MaxRound: 4
+    AddPoints: 1
+    SubPoints: 1
+    PointsToWin: 5
   ArrowsSpawner:
     SpawnerPrefab: {fileID: 0}
     ArrowPrefab: {fileID: 0}

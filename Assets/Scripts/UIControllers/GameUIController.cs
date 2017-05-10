@@ -55,7 +55,8 @@ namespace BlackFox
         /// </summary>
         public void UpdateLevelInformation()
         {
-            LevelIndicationText.text = "Level: " + GameManager.Instance.LevelMng.levelNumber + "/" + "Round: " + GameManager.Instance.LevelMng.roundNumber;
+            LevelIndicationText.text = "Level: " + GameManager.Instance.LevelMng.LevelNumber + "/" 
+                + "Round: " + GameManager.Instance.LevelMng.RoundNumber;
         }
 
         #endregion

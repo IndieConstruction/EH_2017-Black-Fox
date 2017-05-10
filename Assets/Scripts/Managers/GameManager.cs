@@ -62,9 +62,6 @@ namespace BlackFox
         public void InstantiateLevelManager()
         {
             LevelMng = Instantiate(LevelManagerPrefab, transform).GetComponent<LevelManager>();
-            LevelMng.gameMngr = this;
-            // TODO : modificare assegnazione del level number
-            LevelMng.levelNumber = 1;
         }
         public void DestroyLevelManager()
         {

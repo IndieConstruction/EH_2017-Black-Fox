@@ -80,7 +80,7 @@ namespace BlackFox {
 
         public override void Selection()
         {
-            
+            GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
         }
     }
 }

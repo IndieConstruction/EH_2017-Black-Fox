@@ -43,24 +43,19 @@ namespace BlackFox {
         }
 
 
-        #region Upgrade_Properties
+        #region Upgrade
 
-        private int _projectileUpgradeLevel;
+        public List<IUpgrade> Upgrades = new List<IUpgrade>() {
+            new FireRateUpgrade(new float[] {0f, 0.01f, 0.02f, 0.03f, 0.04f, 0.27f}), // TODO : valori da mettere nello scriptable dell'avatar
+        };
 
-        public int ProgectileUpgradeLevel
-        {
-            get { return _projectileUpgradeLevel; }
-            set { _projectileUpgradeLevel = value; }
+        public IUpgrade GetUpgrade(UpgardeTypes _id) {
+            foreach (IUpgrade upgrade in Upgrades) {
+                if (upgrade.ID == _id)
+                    return upgrade;
+            }
+            return null;
         }
-
-        private int _pinPlacerUpgradeLevel;
-
-        public int PinPlacerUpgradeLevel
-        {
-            get { return _pinPlacerUpgradeLevel; }
-            set { _pinPlacerUpgradeLevel = value; }
-        }
-
 
         #endregion
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +7,7 @@ using UnityEngine.UI;
 namespace BlackFox
 {
 
-    public class SelectableUpgrade : MonoBehaviour, ISelectable
+    public class SelectableUpgrade : MonoBehaviour, ISelectableUpgrade
     {
         #region ISelectable
 
@@ -50,25 +51,35 @@ namespace BlackFox
 
         public Slider slider;
 
-        private PlayerUpgradeController _playerUpgradeController;
-
-        public PlayerUpgradeController PlayerUpgradeController
-        {
-            get { return _playerUpgradeController; }
-
-            set { _playerUpgradeController = value; }
-        }
+        public IUpgrade Upgrade;
 
         public void AddValue()
         {
-            if (slider.value < slider.maxValue)
+            if (slider.value < Upgrade.MaxLevel) {
                 slider.value += 1;
+                Upgrade.CurrentUpgradeLevel += 1;
+            }
         }
 
         public void RemoveValue()
         {
-            if(slider.value > 0)
+            if(slider.value > Upgrade.MinLevel) {
                 slider.value -= 1;
+                Upgrade.CurrentUpgradeLevel -= 1;
+            }
+
+        }
+
+        public void SetIUpgrade(IUpgrade _upgrade) {
+            Upgrade = _upgrade;
+            Upgrade.CurrentUpgradeLevel = Upgrade.MinLevel;
+            slider.value = Upgrade.CurrentUpgradeLevel;
+            slider.maxValue = Upgrade.MaxLevel;
+        }
+
+        public IUpgrade GetData() {
+            Upgrade.MinLevel = Upgrade.CurrentUpgradeLevel;
+            return Upgrade;
         }
     }
 }

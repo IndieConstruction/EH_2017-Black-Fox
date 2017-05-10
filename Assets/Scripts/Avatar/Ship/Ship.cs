@@ -109,7 +109,7 @@ namespace BlackFox {
             {
                 if(Time.time > nextFire) { 
                     Shoot();
-                    nextFire = Time.time + config.FireRate;
+                    nextFire = Time.time + FireRate;
                 }
             }
 
@@ -120,8 +120,15 @@ namespace BlackFox {
         }
 
         #region Shoot
-
         public Shooter shooter { get; private set; }
+
+        public float FireRate { get { 
+                    if (avatar.GetUpgrade(UpgardeTypes.FireRateUpgrade) != null)
+                        return avatar.GetUpgrade(UpgardeTypes.FireRateUpgrade).CalculateValue(config.FireRate);
+                    else
+                        return config.FireRate;
+                    }
+        }
 
         //Shooting fields
         float nextFire;

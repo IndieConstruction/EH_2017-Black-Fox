@@ -4,14 +4,26 @@ using UnityEngine;
 
 namespace BlackFox
 {
-
     public interface IUpgrade
     {
-        PlayerUpgradeController PlayerUpgradeController { get; set; }
+        UpgardeTypes ID { get; }
+        //PlayerUpgradeController PlayerUpgradeController { get; set; }
         int CurrentUpgradeLevel { get; set; }
-        int MaxLevel { get; set; }
+        int MaxLevel { get; }
         int MinLevel { get; set; }
 
-        void ApplyUpgrade();
+        float[] Values { get; set; }
+
+        float CalculateValue(float _value);
+    }
+
+    public interface ISelectableUpgrade : ISelectable {
+        void SetIUpgrade(IUpgrade _upgrade);
+
+        IUpgrade GetData();
+    }
+
+    public enum UpgardeTypes {
+        FireRateUpgrade
     }
 }

@@ -10,26 +10,25 @@ namespace BlackFox
     {
         public UpgradeControllerID MenuID;
 
-        List<IUpgrade> upgradeItem = new List<IUpgrade>();
+        public List<IUpgrade> Upgrades {
+            get { return Player.Avatar.Upgrades; }
+        }
+
 
         public void OnStart()
         {
-            //foreach (IUpgrade item in GetComponentsInChildren<IUpgrade>())
-            //{
-            //    item.PlayerUpgradeController = this;
-            //}
             FindISelectableChildren();
-        }
 
-        //TODO: completare facendo da intermediario fra gli IUpgrade e l'avatar
-        public void ApplyUpgrade(IUpgrade _upgrade)
-        {
-            
+            for (int i = 0; i < SelectableButtons.Count && i < Upgrades.Count; i++) {
+                (SelectableButtons[i] as ISelectableUpgrade).SetIUpgrade(Upgrades[i]);
+            }
         }
 
         public override void Selection()
         {
-            
+            for (int i = 0; i < Upgrades.Count; i++) {
+                Upgrades[i] = (SelectableButtons[i] as ISelectableUpgrade).GetData();
+            }
         }
 
         public override void GoRightInMenu(Player _player)

@@ -10,8 +10,6 @@ namespace BlackFox {
     {
         [HideInInspector]
         public Avatar Avatar;
-        [HideInInspector]
-        public GameObject Model;
         public ShipConfig Config
         {
             get { return Avatar.AvatarData.shipConfig; }
@@ -46,7 +44,6 @@ namespace BlackFox {
         {
             Avatar = _avatar;
             rigid = GetComponent<Rigidbody>();
-            Model = GetComponentInChildren<Animator>().gameObject;
             damageables = _damageablesPrefabs;
             ChangeColor(Config.ColorSets[Avatar.ColorSetIndex].ShipMaterialMain);
 

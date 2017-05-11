@@ -9,25 +9,27 @@ namespace BlackFox
     /// </summary>
     public class SpawnerManager : MonoBehaviour
     {
-        int Level;
-        int Round;
         public List<SpawnerBase> Spawners = new List<SpawnerBase>();
         
         #region API
         public void InstantiateNewSpawners(Level _currentLevel)
         {
-            Spawners.Add(_currentLevel.ArrowsSpawner.CreateInstance(_currentLevel.ArrowsSpawner, transform));
-            Spawners.Add( _currentLevel.BlackHoleSpawner.CreateInstance(_currentLevel.BlackHoleSpawner, transform));
-            Spawners.Add( _currentLevel.ExternalElementSpawner.CreateInstance(_currentLevel.ExternalElementSpawner, transform));
-            Spawners.Add( _currentLevel.TurretSpawner.CreateInstance(_currentLevel.TurretSpawner, transform));
-            Spawners.Add(_currentLevel.WaveSpawner.CreateInstance(_currentLevel.WaveSpawner, transform));
-        }
+            //Spawners.Add(_currentLevel.ArrowsSpawner.CreateInstance(_currentLevel.ArrowsSpawner, transform));
+            //Spawners.Add( _currentLevel.BlackHoleSpawner.CreateInstance(_currentLevel.BlackHoleSpawner, transform));
+            Spawners.Add(_currentLevel.ExternalElementSpawner.CreateInstance(_currentLevel.ExternalElementSpawner, transform));
+            //Spawners.Add( _currentLevel.TurretSpawner.CreateInstance(_currentLevel.TurretSpawner, transform));
+            //Spawners.Add(_currentLevel.WaveSpawner.CreateInstance(_currentLevel.WaveSpawner, transform));
 
-        public void Init(int _level, int _round, List<SpawnerOptions> _levelSpawners)
+            // TODO : eliminarre i null dalla lista
+        }      
+
+        public void InitSpawners()
         {
-            Level = _level;
-            Round = _round;
-        }        
+            foreach (SpawnerBase spawner in Spawners)
+            {
+                spawner.Init();
+            }
+        }
         #endregion
     }
 }

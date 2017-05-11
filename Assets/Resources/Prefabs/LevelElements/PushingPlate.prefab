@@ -20,10 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4944013623793466}
   - component: {fileID: 135493405206250496}
-  - component: {fileID: 114217492883070364}
   m_Layer: 0
   m_Name: PinBlocker
-  m_TagString: Untagged
+  m_TagString: PinBlockArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -132,6 +131,7 @@ MeshRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
+  m_SortingLayer: 0
   m_SortingOrder: 0
 --- !u!33 &33657664683874952
 MeshFilter:
@@ -140,17 +140,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1375387966516876}
   m_Mesh: {fileID: 4300000, guid: 08b20e0103cfe114b8a481d8cdbc8429, type: 3}
---- !u!114 &114217492883070364
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1321630704084064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59c29e9d98208d84f91ff03387995a8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114634660106196698
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -163,7 +152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Force: 200
-  IDSetup: 0
 --- !u!135 &135493405206250496
 SphereCollider:
   m_ObjectHideFlags: 1

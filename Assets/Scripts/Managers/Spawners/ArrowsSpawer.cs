@@ -15,7 +15,7 @@ namespace BlackFox
         int maxRandSetup = 0;
         int randomSetup = 1;
 
-        public override SpawnerBase Init(SpawnerOptions options)
+        public override SpawnerBase OptionInit(SpawnerOptions options)
         {
             Options = options as ArrowsSpawerOptions;
             return this;

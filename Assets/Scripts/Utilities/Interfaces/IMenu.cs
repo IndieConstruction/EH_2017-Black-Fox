@@ -5,6 +5,8 @@ using UnityEngine;
 namespace BlackFox {
     public interface IMenu
     {
+        Player Player { get; set; }
+
         int CurrentIndexSelection { get; set; }
        
         List<ISelectable> SelectableButtons { get; set; }
@@ -13,31 +15,26 @@ namespace BlackFox {
         /// Chiama la funzione per cambiare lo stato della StateMachine
         /// </summary>
         void Selection();
-    }
-
-    public static class IMenuExtension
-    {
-        /// <summary>
-        /// Sposta l'indice della selezione in avanti
-        /// </summary>
-        /// <param name="_this"></param>
-        public static void GoDownInMenu(this IMenu _this)
-        {
-            _this.CurrentIndexSelection++;
-            if (_this.CurrentIndexSelection > _this.SelectableButtons.Count -1)
-                _this.CurrentIndexSelection = 0;
-        }
 
         /// <summary>
         /// Sposta l'indice della selezione indietro
         /// </summary>
-        /// <param name="_this"></param>
-        public static void GoUpInMenu(this IMenu _this)
-        {
-            _this.CurrentIndexSelection--;
-            if (_this.CurrentIndexSelection < 0)
-                _this.CurrentIndexSelection = _this.SelectableButtons.Count - 1;
-        }
+        void GoUpInMenu(Player _player);
+              
+        /// <summary>
+        /// Sposta l'indice della selezione in avanti
+        /// </summary>
+        void GoDownInMenu(Player _player);
+
+        /// <summary>
+        /// Sposta l'indice della selezione a destra
+        /// </summary>
+        void GoRightInMenu(Player _player);
+
+        /// <summary>
+        /// Sposta l'indice della selezione a sinistra
+        /// </summary>
+        void GoLeftInMenu(Player _player);
     }
 
     /// <summary>

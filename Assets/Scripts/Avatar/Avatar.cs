@@ -42,6 +42,29 @@ namespace BlackFox {
             }
         }
 
+
+        #region Upgrade_Properties
+
+        private int _projectileUpgradeLevel;
+
+        public int ProgectileUpgradeLevel
+        {
+            get { return _projectileUpgradeLevel; }
+            set { _projectileUpgradeLevel = value; }
+        }
+
+        private int _pinPlacerUpgradeLevel;
+
+        public int PinPlacerUpgradeLevel
+        {
+            get { return _pinPlacerUpgradeLevel; }
+            set { _pinPlacerUpgradeLevel = value; }
+        }
+
+
+        #endregion
+
+
         [HideInInspector]
         public RopeController rope;
         [HideInInspector]
@@ -66,6 +89,7 @@ namespace BlackFox {
             switch (_newState)
             {
                 case AvatarState.Disabled:
+                    ship.RemoveAllPins();
                     ship.ToggleAbilities(false);
                     if (rope != null)
                     {
@@ -139,7 +163,7 @@ namespace BlackFox {
         /// Scatena l'evento per aggiornare i proiettili nella UI
         /// </summary>
         /// <param name="_ammo">Le munizioni che rimangono</param>
-        public void OnAmmoUpdate(int _ammo)
+        public void OnAmmoUpdate()
         {
             // TODO : da rivedere
             EventManager.OnAmmoValueChange(this);

@@ -49,8 +49,8 @@ namespace BlackFox
             
 
             fullTorque = Yaw(_target, Vector3.up);
-            if ((int)ship.Avatar.PlayerId == 3)
-                Debug.Log(fullTorque);
+            //if ((int)ship.Avatar.PlayerId == 3)
+                //Debug.Log(fullTorque);
             float roll = 0;
             if (fullTorque.y < -100)
                 roll = 1;

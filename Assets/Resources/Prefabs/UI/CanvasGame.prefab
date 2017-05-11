@@ -121,7 +121,6 @@ GameObject:
   - component: {fileID: 20610535671670074}
   - component: {fileID: 124741467071535936}
   - component: {fileID: 92107076626521966}
-  - component: {fileID: 81899828654145080}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -1157,7 +1156,6 @@ GameObject:
   - component: {fileID: 20877676848916288}
   - component: {fileID: 124751161970878974}
   - component: {fileID: 92365105193761114}
-  - component: {fileID: 81934564231902290}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -2154,7 +2152,6 @@ GameObject:
   - component: {fileID: 20311544857762722}
   - component: {fileID: 124213822836013076}
   - component: {fileID: 92862448632332224}
-  - component: {fileID: 81854424201578952}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -2425,7 +2422,6 @@ GameObject:
   - component: {fileID: 20963964624979166}
   - component: {fileID: 124303955615925918}
   - component: {fileID: 92707783953443780}
-  - component: {fileID: 81372229610520162}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -3256,34 +3252,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1492162563249848}
   m_Mesh: {fileID: 4300000, guid: 6c11e79470dad4b4bb66b279d2660007, type: 3}
---- !u!81 &81372229610520162
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1809979323852924}
-  m_Enabled: 1
---- !u!81 &81854424201578952
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1696498121762934}
-  m_Enabled: 1
---- !u!81 &81899828654145080
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1026801880037670}
-  m_Enabled: 1
---- !u!81 &81934564231902290
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1382671785084304}
-  m_Enabled: 1
 --- !u!92 &92107076626521966
 Behaviour:
   m_ObjectHideFlags: 1

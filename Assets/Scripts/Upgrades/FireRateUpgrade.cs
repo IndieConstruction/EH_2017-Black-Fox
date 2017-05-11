@@ -16,7 +16,7 @@ namespace BlackFox {
         public int CurrentUpgradeLevel {
             get { return _currentUpgradeLevel; }
             set {
-                if(value > MinLevel && value <= MaxLevel)
+                if(value >= MinLevel && value <= MaxLevel)
                     _currentUpgradeLevel = value;
             }
         }

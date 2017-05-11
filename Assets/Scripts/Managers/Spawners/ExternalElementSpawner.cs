@@ -20,7 +20,7 @@ namespace BlackFox
                 Options.ExternalAgent = (GameObject)Resources.Load("Prefabs/ExternalAgents/ExternalAgent1");
 
             target = GameManager.Instance.LevelMng.Core.transform;
-            nextTime = Random.Range(Options.MinTime, Options.MaxTime);
+            nextTime = Time.time + Random.Range(Options.MinTime, Options.MaxTime);
             LoadIDamageablePrefab();
 
             container = new GameObject("ExternalAgentContainer");
@@ -42,7 +42,7 @@ namespace BlackFox
                 if (Time.time >= nextTime)
                 {
                     InstantiateExternalAgent();
-                    nextTime += Random.Range(Options.MinTime, Options.MaxTime);
+                    nextTime = Time.time + Random.Range(Options.MinTime, Options.MaxTime);
                 }
                 GravityAround();
             }

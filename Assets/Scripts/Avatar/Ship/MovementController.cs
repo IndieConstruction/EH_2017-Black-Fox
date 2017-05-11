@@ -47,7 +47,8 @@ namespace BlackFox
                 _target = transform.forward;
 
             fullTorque = Yaw(_target, Vector3.up);
-            //fullTorque += Roll(Vector3.Cross(fullTorque,transform.forward), transform.forward);
+            //Vector3 rollTarget = Vector3.Cross(fullTorque, transform.forward) * Mathf.Sin(Vector3.Angle(Vector3.up,));
+            //fullTorque += Roll(rollTarget, transform.forward);
             rigid.AddTorque(fullTorque, ForceMode.Force);
         }
         #endregion

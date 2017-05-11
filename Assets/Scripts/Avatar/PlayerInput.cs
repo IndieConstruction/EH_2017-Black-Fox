@@ -175,32 +175,32 @@ namespace BlackFox
                 inputStatus.RightTrigger = ButtonState.Held;
             }
 
-            if (Input.GetButtonDown("DPadUp"))
+            if (Input.GetButtonDown("Key" + (int)playerIndex + "_DPadUp"))
             {
                 inputStatus.DPadUp = ButtonState.Pressed;
             }
 
-            if (Input.GetButtonDown("DPadLeft"))
+            if (Input.GetButtonDown("Key" + (int)playerIndex + "_DPadLeft"))
             {
                 inputStatus.DPadLeft = ButtonState.Pressed;
             }
 
-            if (Input.GetButtonDown("DPadDown"))
+            if (Input.GetButtonDown("Key" + (int)playerIndex + "_DPadDown"))
             {
                 inputStatus.DPadDown = ButtonState.Pressed;
             }
 
-            if (Input.GetButtonDown("DPadRight"))
+            if (Input.GetButtonDown("Key" + (int)playerIndex + "_DPadRight"))
             {
                 inputStatus.DPadRight = ButtonState.Pressed;
             }
 
-            if (Input.GetButtonDown("Submit"))
+            if (Input.GetButtonDown("Key" + (int)playerIndex + "_Submit"))
             {
                 inputStatus.A = ButtonState.Pressed;
             }
 
-            if (Input.GetButtonDown("Pause"))
+            if (Input.GetButtonDown("Key" + (int)playerIndex + "_Pause"))
             {
                 inputStatus.Start = ButtonState.Pressed;
             }

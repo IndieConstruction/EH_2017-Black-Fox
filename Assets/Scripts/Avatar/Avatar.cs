@@ -42,24 +42,6 @@ namespace BlackFox {
             }
         }
 
-
-        #region Upgrade
-
-        public List<IUpgrade> Upgrades = new List<IUpgrade>() {
-            new FireRateUpgrade(new float[] {0f, 0.01f, 0.02f, 0.03f, 0.04f, 0.27f}), // TODO : valori da mettere nello scriptable dell'avatar
-        };
-
-        public IUpgrade GetUpgrade(UpgardeTypes _id) {
-            foreach (IUpgrade upgrade in Upgrades) {
-                if (upgrade.ID == _id)
-                    return upgrade;
-            }
-            return null;
-        }
-
-        #endregion
-
-
         [HideInInspector]
         public RopeController rope;
         [HideInInspector]
@@ -164,6 +146,21 @@ namespace BlackFox {
             EventManager.OnAmmoValueChange(this);
         }
 
+        #region Upgrade
+        public List<IUpgrade> Upgrades = new List<IUpgrade>() {
+            new FireRateUpgrade(new float[] {0f, 0.01f, 0.02f, 0.03f, 0.04f, 0.27f}), // TODO : valori da mettere nello scriptable dell'avatar
+        };
+
+        public IUpgrade GetUpgrade(UpgardeTypes _id)
+        {
+            foreach (IUpgrade upgrade in Upgrades)
+            {
+                if (upgrade.ID == _id)
+                    return upgrade;
+            }
+            return null;
+        }
+        #endregion
         #endregion
 
         /// <summary>

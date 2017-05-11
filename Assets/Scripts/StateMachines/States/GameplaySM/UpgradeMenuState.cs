@@ -12,7 +12,7 @@ namespace BlackFox {
             GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.MenuInput);
             GameManager.Instance.UiMng.CurrentMenu = GameManager.Instance.UiMng.canvasGameMenu.upgradeMenuManager;
             GameManager.Instance.UiMng.canvasGameMenu.upgradeMenuManager.UpgradePanel.SetActive(true);
-            GameManager.Instance.UiMng.canvasGameMenu.upgradeMenuManager.OnStart(GameManager.Instance.PlayerMng.Players);
+            GameManager.Instance.UiMng.canvasGameMenu.upgradeMenuManager.Init(GameManager.Instance.PlayerMng.Players);
         }
 
         public override void OnEnd()

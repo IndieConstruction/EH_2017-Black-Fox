@@ -37,7 +37,7 @@ namespace BlackFox {
                     CurrentState = new RoundEndState();
                     break;
                 case "BlackFox.RoundEndState":
-                    if(GameManager.Instance.LevelMng.roundNumber <= GameManager.Instance.LevelMng.MaxRound)
+                    if(GameManager.Instance.LevelMng.RoundNumber <= GameManager.Instance.LevelMng.levelOptions.MaxRound)
                         CurrentState = new UpgradeMenuState();
                     else
                         CurrentState = new GameOverState();

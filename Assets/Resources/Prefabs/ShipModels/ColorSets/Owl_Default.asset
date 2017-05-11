@@ -13,3 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShipMaterialMain: {fileID: 2100000, guid: f813a3590bc6fa74f8e2301ee1373f84, type: 2}
   RopeMaterial: {fileID: 2100000, guid: f813a3590bc6fa74f8e2301ee1373f84, type: 2}
+  PinMaterial: {fileID: 2100000, guid: f5e92b9be6892004382fe6102cb428ca, type: 2}

@@ -6,11 +6,8 @@ TagManager:
   tags:
   - WindDisplay
   - TextofWin
-  - Wall
-  - Pin
-  - Core
-  - BlackHole
   - Coin
+  - PinBlockArea
   layers:
   - Default
   - TransparentFX

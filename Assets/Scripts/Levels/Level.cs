@@ -6,9 +6,12 @@ namespace BlackFox {
     [CreateAssetMenu(fileName = "LevelName", menuName = "Levels/NewLevel", order = 1)]
     public class Level : ScriptableObject {
 
-        public int Order;
+        public int LevelNumber;
         public string LevelName;
         public GameObject ArenaPrefab;
+
+        [Header("Level Options")]
+        public LevelOptions LevelOptions;
 
         [Header("Spawners")]
         public ArrowsSpawerOptions ArrowsSpawner;

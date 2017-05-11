@@ -9,12 +9,15 @@ namespace BlackFox {
         public override void OnStart()
         {
             Debug.Log("UpgradeMenuState");
+            GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.MenuInput);
+            GameManager.Instance.UiMng.CurrentMenu = GameManager.Instance.UiMng.canvasGameMenu.upgradeMenuManager;
+            GameManager.Instance.UiMng.canvasGameMenu.upgradeMenuManager.UpgradePanel.SetActive(true);
+            GameManager.Instance.UiMng.canvasGameMenu.upgradeMenuManager.OnStart(GameManager.Instance.PlayerMng.Players);
         }
 
-        public override void OnUpdate()
+        public override void OnEnd()
         {
-            if (OnStateEnd != null)
-                OnStateEnd();
+            GameManager.Instance.UiMng.canvasGameMenu.upgradeMenuManager.UpgradePanel.SetActive(false);
         }
     }
 }

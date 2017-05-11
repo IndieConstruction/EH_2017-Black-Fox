@@ -15,23 +15,37 @@ namespace BlackFox {
         public GameObject AvatarUI;
 
         [HideInInspector]
-        public IMenu CurrentMenu;
+        public BaseMenu CurrentMenu;
 
         #region API
         #region Menu Controller
 
-        public void GoUpInMenu()
-        {
-            if(GameManager.Instance.AudioMng != null)
-                GameManager.Instance.AudioMng.PlayMenuMovmentAudio();
-            CurrentMenu.GoUpInMenu();
-        }
-
-        public void GoDownInMenu()
+        public void GoUpInMenu(Player _player)
         {
             if (GameManager.Instance.AudioMng != null)
                 GameManager.Instance.AudioMng.PlayMenuMovmentAudio();
-            CurrentMenu.GoDownInMenu();
+            CurrentMenu.GoUpInMenu(_player);
+        }
+
+        public void GoDownInMenu(Player _player)
+        {
+            if (GameManager.Instance.AudioMng != null)
+                GameManager.Instance.AudioMng.PlayMenuMovmentAudio();
+            CurrentMenu.GoDownInMenu(_player);
+        }
+
+        public void GoLeftInMenu(Player _player)
+        {
+            if (GameManager.Instance.AudioMng != null)
+                GameManager.Instance.AudioMng.PlayMenuMovmentAudio();
+            CurrentMenu.GoLeftInMenu(_player);
+        }
+
+        public void GoRightInMenu(Player _player)
+        {
+            if (GameManager.Instance.AudioMng != null)
+                GameManager.Instance.AudioMng.PlayMenuMovmentAudio();
+            CurrentMenu.GoRightInMenu(_player);
         }
 
         public void GoBackInMenu()

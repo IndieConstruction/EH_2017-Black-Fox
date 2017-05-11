@@ -5,27 +5,11 @@ using UnityEngine.UI;
 
 namespace BlackFox
 {
-    public class EndRoundlUI : MonoBehaviour, IMenu
+    public class EndRoundlUI : BaseMenu
     {
         public Text[] PlayerPoints = new Text[4];
         public Text EventName;
         public GameObject EndLevelPanel;
-
-        int currentIndexSelection = 0;
-
-        public int CurrentIndexSelection
-        {
-            get { return 1; }
-            set { currentIndexSelection = value; }
-        }
-
-        List<ISelectable> selectableButton = new List<ISelectable>();
-
-        public List<ISelectable> SelectableButtons
-        {
-            get { return selectableButton; }
-            set { selectableButton = value; }
-        }
 
         void Start()
         {
@@ -39,7 +23,7 @@ namespace BlackFox
         {
             for (int i = 0; i < PlayerPoints.Length; i++)
             {
-                PlayerPoints[i].text = GameManager.Instance.LevelMng.GetPlayerKillPoints((PlayerLabel)i+1) + " / " + GameManager.Instance.LevelMng.PointsToWin;
+                PlayerPoints[i].text = GameManager.Instance.LevelMng.GetPlayerKillPoints((PlayerLabel)i+1) + " / " + GameManager.Instance.LevelMng.levelOptions.PointsToWin;
             }
         }
         
@@ -57,7 +41,7 @@ namespace BlackFox
             EndLevelPanel.SetActive(_status);
         }
 
-        public void Selection()
+        public override void Selection()
         {
             GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
         }

@@ -55,9 +55,23 @@ namespace BlackFox
         /// </summary>
         public void UpdateLevelInformation()
         {
-            LevelIndicationText.text = "Level: " + GameManager.Instance.LevelMng.levelNumber + "/" + "Round: " + GameManager.Instance.LevelMng.roundNumber;
+            LevelIndicationText.text = "Level: " + GameManager.Instance.LevelMng.LevelNumber + "/" 
+                + "Round: " + GameManager.Instance.LevelMng.RoundNumber;
         }
 
+        #endregion
+
+
+        #region Events
+        private void OnEnable()
+        {
+            EventManager.OnAmmoValueChange += SetBulletsValue;
+        }
+
+        private void OnDisable()
+        {
+            EventManager.OnAmmoValueChange -= SetBulletsValue;
+        }
         #endregion
     }
 }

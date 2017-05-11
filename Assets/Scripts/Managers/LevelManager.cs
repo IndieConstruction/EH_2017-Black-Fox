@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,42 +11,48 @@ namespace BlackFox
     /// </summary>
     public class LevelManager : MonoBehaviour
     {
-        // Da spostare in scriptable
-        public int roundNumber = 1;
-        public int MaxRound = 4;
-        public int levelNumber;
-        public int AddPoints = 1;
-        public int SubPoints = 1;
-        public int PointsToWin = 5;
-        // -------------------
-
+        #region Prefabs
         public GameObject SpawnerMngPrefab;
         public GameObject AvatarSpwnPrefab;
         public GameObject RopeMngPrefab;
-        public GameManager gameMngr;
+        #endregion
+
+        #region Managers
         [HideInInspector]
         public SpawnerManager SpawnerMng;
         [HideInInspector]
         public RopeManager RopeMng;
         [HideInInspector]
         public AvatarSpawner AvatarSpwn;
+        #endregion
+
+        #region Level
         [HideInInspector]
         public Level CurrentLevel;
         [HideInInspector]
-        public Core Core;
+        public GameplaySM gameplaySM;
         [HideInInspector]
         public GameObject Arena;
-        
+
         [HideInInspector]
-        public GameplaySM gameplaySM;
+        public Core Core;
 
         [HideInInspector]
         public string EndLevelPanelLableText;
         
         [HideInInspector]
-        public bool IsGamePaused;
+        public LevelOptions levelOptions;
 
-        LevelPointsCounter levelPointsCounter;
+        public int LevelNumber
+        {
+            get { return CurrentLevel.LevelNumber; }
+        }
+
+        #region Round
+        [HideInInspector]
+        public int RoundNumber;
+        [HideInInspector]
+        public bool IsGamePaused;
 
         private bool _isRoundActive;
         /// <summary>
@@ -56,19 +62,27 @@ namespace BlackFox
             get { return _isRoundActive; }
             set { _isRoundActive = value; }
         }
+        #endregion
 
         #region Containers
+        [HideInInspector]
         public Transform PinsContainer;
         #endregion
 
-        void Start()
-        {
-            CurrentLevel = Instantiate(InstantiateLevel());
-            StartGameplaySM();
-            levelPointsCounter = new LevelPointsCounter(this);
-        }
+        #endregion
+
+        LevelPointsCounter levelPointsCounter;
 
         #region API
+        public void Init()
+        {
+            CurrentLevel = Instantiate(InstantiateLevel());
+            levelOptions = CurrentLevel.LevelOptions;
+            StartGameplaySM();
+            levelPointsCounter = new LevelPointsCounter(this);
+            RoundNumber = 1;
+        }
+
         #region Instantiation
         /// <summary>
         /// Funzione che ritorna lo scriptable del livello da caricare
@@ -79,7 +93,7 @@ namespace BlackFox
             if (GameManager.Instance.LevelScriptableObj != null)
                 return GameManager.Instance.LevelScriptableObj;
             else
-                return Resources.Load<Level>("Levels/Level" + levelNumber);
+                return Resources.Load<Level>("Levels/Level" + LevelNumber);
         }
 
 
@@ -160,7 +174,7 @@ namespace BlackFox
         /// </summary>
         public void NextRound()
         {
-            roundNumber++;
+            RoundNumber++;
         }
 
         /// <summary>
@@ -265,5 +279,14 @@ namespace BlackFox
             ResetPinsContainer(Arena.transform);
         }
         #endregion
+    }
+
+    [Serializable]
+    public class LevelOptions
+    {
+        public int MaxRound;
+        public int AddPoints;
+        public int SubPoints;
+        public int PointsToWin;
     }
 }

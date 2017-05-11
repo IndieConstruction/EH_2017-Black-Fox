@@ -25,6 +25,8 @@ namespace BlackFox
 
             container = new GameObject("ExternalAgentContainer");
             container.transform.parent = GameManager.Instance.LevelMng.Arena.transform;
+
+            IsActive = true;
         }
 
         public override SpawnerBase OptionInit(SpawnerOptions options)

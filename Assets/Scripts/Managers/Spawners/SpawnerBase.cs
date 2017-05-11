@@ -18,7 +18,8 @@ namespace BlackFox {
             get { return GameManager.Instance.LevelMng.RoundNumber; }
         }
 
-        public bool IsActive;
+        [HideInInspector]
+        public bool IsActive = false;
 
         #region API
         /// <summary>

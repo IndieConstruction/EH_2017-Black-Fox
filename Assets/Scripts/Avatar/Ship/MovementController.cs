@@ -10,7 +10,7 @@ namespace BlackFox
     {
         MovementControllerConfig MovementConfig
         {
-            get { return ship.avatar.AvatarData.shipConfig.movementConfig; }
+            get { return ship.Avatar.AvatarData.shipConfig.movementConfig; }
         }
 
         Ship ship;
@@ -43,21 +43,23 @@ namespace BlackFox
         }
         #endregion
         
+        void Roll(Vector3 _angularVelocity)
+        {
+            ship.Model.transform.Rotate(transform.forward, _angularVelocity.magnitude);
+        }
+
         void Yaw(Vector3 _target, Vector3 _normal)
         {
             normal = _normal;
             // Compute target rotation (align rigidybody's up direction to the normal vector)
 
             proj = Vector3.ProjectOnPlane(_target, normal);
-            targetRotation = Quaternion.LookRotation(proj, normal); // The target rotation can be replaced with whatever rotation you want to align to
+            targetRotation = Quaternion.LookRotation(proj, normal);
 
             deltaRotation = Quaternion.Inverse(transform.rotation) * targetRotation;
             deltaAngles = GetRelativeAngles(deltaRotation.eulerAngles);
             worldDeltaAngles = transform.TransformDirection(deltaAngles);
 
-            // alignmentSpeed controls how fast you rotate the body towards the target rotation
-            // alignmentDamping prevents overshooting the target rotation
-            // Values used: alignmentSpeed = 0.025, alignmentDamping = 0.2
             rigid.AddTorque(MovementConfig.RotationSpeed * worldDeltaAngles - MovementConfig.RotationSpeed *10 * rigid.angularVelocity, ForceMode.Force);
         }
 

@@ -8,6 +8,8 @@ TagManager:
   - TextofWin
   - Coin
   - PinBlockArea
+  - Core
+  - Wall
   layers:
   - Default
   - TransparentFX

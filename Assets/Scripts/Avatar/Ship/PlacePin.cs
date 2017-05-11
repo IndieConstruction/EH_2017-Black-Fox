@@ -13,10 +13,10 @@ namespace BlackFox
         {
             get {
                 PlacePinConfig data;
-                if (ship.avatar.AvatarData.shipConfig.placePinConfig == null)
+                if (ship.Avatar.AvatarData.shipConfig.placePinConfig == null)
                     data = new PlacePinConfig();
                 else
-                    data = ship.avatar.AvatarData.shipConfig.placePinConfig;
+                    data = ship.Avatar.AvatarData.shipConfig.placePinConfig;
                 return data; }
         }
         List<GameObject> pinsPlaced = new List<GameObject>();
@@ -43,9 +43,9 @@ namespace BlackFox
 
         IEnumerator Rumble(float _rumbleTime)
         {
-            ship.avatar.Player.ControllerVibration(0.5f, 0.5f);
+            ship.Avatar.Player.ControllerVibration(0.5f, 0.5f);
             yield return new WaitForSeconds(_rumbleTime);
-            ship.avatar.Player.ControllerVibration(0f, 0f);
+            ship.Avatar.Player.ControllerVibration(0f, 0f);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -83,7 +83,7 @@ namespace BlackFox
                 isRecharging = false;
                 foreach (Renderer pinRend in pin.GetComponentsInChildren<Renderer>())
                 {
-                    pinRend.material = ship.avatar.AvatarData.shipConfig.ColorSets[ship.avatar.ColorSetIndex].PinMaterial;
+                    pinRend.material = ship.Avatar.AvatarData.shipConfig.ColorSets[ship.Avatar.ColorSetIndex].PinMaterial;
                 }
                 pin.transform.parent = GameManager.Instance.LevelMng.PinsContainer;
                 prectime = placePinConfig.CoolDownTime;

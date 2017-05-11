@@ -9,11 +9,10 @@ namespace BlackFox {
     public class Ship : MonoBehaviour, IShooter, IDamageable
     {
         [HideInInspector]
-        public Avatar avatar;
-
-        public ShipConfig config
+        public Avatar Avatar;
+        public ShipConfig Config
         {
-            get { return avatar.AvatarData.shipConfig; }
+            get { return Avatar.AvatarData.shipConfig; }
         }
 
         MovementController movment;
@@ -28,25 +27,25 @@ namespace BlackFox {
             private set {
                 _life = value;
                 if(EventManager.OnLifeValueChange != null)
-                    EventManager.OnLifeValueChange(avatar);
+                    EventManager.OnLifeValueChange(Avatar);
             }
         }
 
         private void Update()
         {
-            if (avatar.State == AvatarState.Enabled)
+            if (Avatar.State == AvatarState.Enabled)
             {
-                CheckInputStatus(avatar.Player.InputStatus);
+                CheckInputStatus(Avatar.Player.InputStatus);
             }
         }
 
         #region API
         public void Setup(Avatar _avatar, List<IDamageable> _damageablesPrefabs)
         {
-            avatar = _avatar;
+            Avatar = _avatar;
             rigid = GetComponent<Rigidbody>();
             damageables = _damageablesPrefabs;
-            ChangeColor(config.ColorSets[avatar.ColorSetIndex].ShipMaterialMain);
+            ChangeColor(Config.ColorSets[Avatar.ColorSetIndex].ShipMaterialMain);
 
             shooter = GetComponentInChildren<Shooter>();
             shooter.Init(this);
@@ -62,7 +61,7 @@ namespace BlackFox {
         /// </summary>
         public void Init()
         {
-            Life = config.MaxLife;
+            Life = Config.MaxLife;
         }
 
         public void ChangeColor(Material _mat)
@@ -103,7 +102,7 @@ namespace BlackFox {
             if (_inputStatus.RightTrigger == ButtonState.Pressed)
             {
                 Shoot();
-                nextFire = Time.time + config.FireRate;
+                nextFire = Time.time + Config.FireRate;
             }
             else if (_inputStatus.RightTrigger == ButtonState.Held )
             {
@@ -115,7 +114,7 @@ namespace BlackFox {
 
             if (_inputStatus.Start == ButtonState.Pressed)
             {
-                GameManager.Instance.LevelMng.PauseGame(avatar.Player.ID);
+                GameManager.Instance.LevelMng.PauseGame(Avatar.Player.ID);
             }
         }
 
@@ -123,10 +122,10 @@ namespace BlackFox {
         public Shooter shooter { get; private set; }
 
         public float FireRate { get { 
-                    if (avatar.GetUpgrade(UpgardeTypes.FireRateUpgrade) != null)
-                        return avatar.GetUpgrade(UpgardeTypes.FireRateUpgrade).CalculateValue(config.FireRate);
+                    if (Avatar.GetUpgrade(UpgardeTypes.FireRateUpgrade) != null)
+                        return Avatar.GetUpgrade(UpgardeTypes.FireRateUpgrade).CalculateValue(Config.FireRate);
                     else
-                        return config.FireRate;
+                        return Config.FireRate;
                     }
         }
 
@@ -179,7 +178,7 @@ namespace BlackFox {
             damageTween = transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f);
             if (Life < 1)
             {
-                avatar.ShipDestroy(_attacker.GetComponent<Ship>().avatar);
+                Avatar.ShipDestroy(_attacker.GetComponent<Ship>().Avatar);
                 transform.DOScale(Vector3.zero, 0.5f);
                 return;
             }
@@ -222,14 +221,14 @@ namespace BlackFox {
         void Move(Vector3 _target)
         {
             movment.Move(_target);
-            if (avatar.rope != null)
+            if (Avatar.rope != null)
                 ExtendRope(_target.magnitude);
         }
 
         void ExtendRope(float _amount)
         {
             if (_amount >= .95f) {
-                avatar.rope.ExtendRope(1);
+                Avatar.rope.ExtendRope(1);
             }
             previousSpeed = rigid.velocity;
         }

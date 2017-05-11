@@ -10,7 +10,7 @@ namespace BlackFox
     {
         public UpgradeControllerID MenuID;
 
-        public UpgradeMenuManager UpgradeMng;
+        UpgradeMenuManager UpgradeMng;
 
         UpgradeControllerState _currentState;
         public UpgradeControllerState CurrentState
@@ -19,8 +19,11 @@ namespace BlackFox
             set
             {
                 _currentState = value;
-                UpgradeMng.CheckUpgradeControllersState();
-                GameManager.Instance.PlayerMng.ChangePlayerState(PlayerState.Blocked, Player.ID);
+                if(_currentState == UpgradeControllerState.Ready)
+                {
+                    UpgradeMng.CheckUpgradeControllersState();
+                    GameManager.Instance.PlayerMng.ChangePlayerState(PlayerState.Blocked, Player.ID);
+                }
             }
         }
 
@@ -39,6 +42,7 @@ namespace BlackFox
         {
             for (int i = 0; i < SelectableButtons.Count && i < Upgrades.Count; i++)
                 (SelectableButtons[i] as ISelectableUpgrade).SetIUpgrade(Upgrades[i]); 
+            CurrentState = UpgradeControllerState.Unready;
         }
 
         public override void Selection(Player _player)

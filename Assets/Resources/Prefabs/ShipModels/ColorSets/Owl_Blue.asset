@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49da9a758077c124d9645884117fa0ed, type: 3}
   m_Name: Owl_Blue
   m_EditorClassIdentifier: 
-  ShipMaterialMain: {fileID: 2100000, guid: b455c3223858069469d41b33d4033245, type: 2}
+  ShipMaterialMain: {fileID: 2100000, guid: b1dbe1232b9e65a42894a71e5a3bbe96, type: 2}
   RopeMaterial: {fileID: 2100000, guid: b455c3223858069469d41b33d4033245, type: 2}
   PinMaterial: {fileID: 2100000, guid: b455c3223858069469d41b33d4033245, type: 2}

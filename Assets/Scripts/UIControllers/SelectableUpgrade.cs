@@ -55,7 +55,8 @@ namespace BlackFox
 
         public void AddValue()
         {
-            if (slider.value < Upgrade.MaxLevel) {
+            if (slider.value < Upgrade.MaxLevel)
+            {
                 slider.value += 1;
                 Upgrade.CurrentUpgradeLevel += 1;
             }
@@ -63,21 +64,23 @@ namespace BlackFox
 
         public void RemoveValue()
         {
-            if(slider.value > Upgrade.MinLevel) {
+            if(slider.value > Upgrade.MinLevel)
+            {
                 slider.value -= 1;
                 Upgrade.CurrentUpgradeLevel -= 1;
             }
-
         }
 
-        public void SetIUpgrade(IUpgrade _upgrade) {
+        public void SetIUpgrade(IUpgrade _upgrade)
+        {
             Upgrade = _upgrade;
             Upgrade.CurrentUpgradeLevel = Upgrade.MinLevel;
             slider.value = Upgrade.CurrentUpgradeLevel;
             slider.maxValue = Upgrade.MaxLevel;
         }
 
-        public IUpgrade GetData() {
+        public IUpgrade GetData()
+        {
             Upgrade.MinLevel = Upgrade.CurrentUpgradeLevel;
             return Upgrade;
         }

@@ -14,7 +14,7 @@ namespace BlackFox {
             UpgradePanel.SetActive(false);
         }
 
-        public void OnStart(List<Player> _players)
+        public void Init(List<Player> _players)
         { 
             foreach (Player player in _players)
             {
@@ -23,7 +23,7 @@ namespace BlackFox {
                     if ((int)player.ID == (int)controller.MenuID)
                     {
                         controller.Player = player;
-                        controller.OnStart();
+                        controller.Init();
                         break;
                     }
                 }
@@ -80,7 +80,7 @@ namespace BlackFox {
 
         public override void Selection()
         {
-            GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
+            //GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
         }
     }
 }

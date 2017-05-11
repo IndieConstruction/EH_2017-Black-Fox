@@ -10,12 +10,13 @@ namespace BlackFox
     {
         public UpgradeControllerID MenuID;
 
-        public List<IUpgrade> Upgrades {
+        public List<IUpgrade> Upgrades
+        {
             get { return Player.Avatar.Upgrades; }
         }
 
 
-        public void OnStart()
+        public void Init()
         {
             FindISelectableChildren();
 

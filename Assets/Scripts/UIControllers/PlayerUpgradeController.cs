@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace BlackFox
 {
@@ -11,6 +12,8 @@ namespace BlackFox
         public UpgradeControllerID MenuID;
 
         UpgradeMenuManager UpgradeMng;
+
+        public GameObject selectableUpgradePrefab;
 
         UpgradeControllerState _currentState;
         public UpgradeControllerState CurrentState
@@ -23,6 +26,7 @@ namespace BlackFox
                 {
                     UpgradeMng.CheckUpgradeControllersState();
                     GameManager.Instance.PlayerMng.ChangePlayerState(PlayerState.Blocked, Player.ID);
+                    Text.text = "Ready";
                 }
             }
         }
@@ -32,17 +36,35 @@ namespace BlackFox
             get { return Player.Avatar.Upgrades; }
         }
 
+        /// <summary>
+        /// Testo per indicare al player cosa deve premere o se è nello stato di Ready
+        /// </summary>
+        Text Text;
+
         public void Setup(UpgradeMenuManager _upgradeMng, Player _player)
         {
             UpgradeMng = _upgradeMng;
             Player = _player;
+            Text = GetComponentInChildren<Text>();
         }
+
+        /// <summary>
+        /// Crea la parte grafica degli upgrades
+        /// </summary>
+        //void CreateUpgradeSliders()
+        //{
+        //    foreach (IUpgrade upgrade in Player.Avatar.Upgrades)
+        //    {
+        //        Instantiate(selectableUpgradePrefab, new Vector3(0,157,0), Quaternion.identity, GetComponent<VerticalLayoutGroup>().transform);
+        //    }
+        //}
 
         public void Init()
         {
             for (int i = 0; i < SelectableButtons.Count && i < Upgrades.Count; i++)
                 (SelectableButtons[i] as ISelectableUpgrade).SetIUpgrade(Upgrades[i]); 
             CurrentState = UpgradeControllerState.Unready;
+            Text.text = "Press A to continue";
         }
 
         public override void Selection(Player _player)

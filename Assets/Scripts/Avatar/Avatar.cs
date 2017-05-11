@@ -149,6 +149,7 @@ namespace BlackFox {
         #region Upgrade
         public List<IUpgrade> Upgrades = new List<IUpgrade>() {
             new FireRateUpgrade(new float[] {0f, 0.01f, 0.02f, 0.03f, 0.04f, 0.27f}), // TODO : valori da mettere nello scriptable dell'avatar
+            new PinRateUpgrade(new float[] {0, 0.3f, 0.5f, 0.7f, 1f, 1.5f}),
         };
 
         public IUpgrade GetUpgrade(UpgardeTypes _id)

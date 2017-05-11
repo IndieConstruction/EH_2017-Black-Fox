@@ -24,6 +24,7 @@ namespace BlackFox
     }
 
     public enum UpgardeTypes {
-        FireRateUpgrade
+        FireRateUpgrade,
+        PinRateUpgrade,
     }
 }

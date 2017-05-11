@@ -59,6 +59,18 @@ namespace BlackFox
                 canPlace = true;
         }
 
+
+        public float CurrentPinRate
+        {
+            get
+            {
+                if (ship.Avatar.GetUpgrade(UpgardeTypes.PinRateUpgrade) != null)
+                    return ship.Avatar.GetUpgrade(UpgardeTypes.PinRateUpgrade).CalculateValue(placePinConfig.CoolDownTime);
+                else
+                    return placePinConfig.CoolDownTime;
+            }
+
+        }
         #region API
         /// <summary>
         /// Set working values for the componet
@@ -67,7 +79,7 @@ namespace BlackFox
         public void Setup(Ship _owner)
         {
             ship = _owner;
-            prectime = placePinConfig.CoolDownTime;
+            prectime = CurrentPinRate;
             initialTransf = transform;
         }
 
@@ -87,7 +99,7 @@ namespace BlackFox
                     pinRend.material = ship.Avatar.AvatarData.shipConfig.ColorSets[ship.Avatar.ColorSetIndex].PinMaterial;
                 }
                 pin.transform.parent = GameManager.Instance.LevelMng.PinsContainer;
-                prectime = placePinConfig.CoolDownTime;
+                prectime = CurrentPinRate;
             }
         }
         /// <summary>

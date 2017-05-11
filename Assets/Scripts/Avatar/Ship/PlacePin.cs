@@ -80,6 +80,7 @@ namespace BlackFox
             {
                 GameObject pin = Instantiate(placePinConfig.PinPrefab, transform.position + transform.forward*placePinConfig.DistanceFromShipOrigin, transform.rotation);
                 pinsPlaced.Add(pin);
+                ship.AddShooterAmmo();
                 isRecharging = false;
                 foreach (Renderer pinRend in pin.GetComponentsInChildren<Renderer>())
                 {

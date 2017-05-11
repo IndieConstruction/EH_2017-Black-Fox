@@ -140,9 +140,9 @@ namespace BlackFox {
         /// <summary>
         /// Chiama la funzione AddAmmo di shooter
         /// </summary>
-        public void AddShooterAmmo() {
+        public void AddShooterAmmo()
+        {
             shooter.AddAmmo();
-            //avatar.OnAmmoUpdate(shooter.Ammo);                          // Ci sarà sempre un avatar?
         }
 
         #region IShooter
@@ -215,7 +215,6 @@ namespace BlackFox {
         void PlacePin()
         {
             pinPlacer.PlaceThePin();
-            AddShooterAmmo();
         }
 
         void Move(Vector3 _target)

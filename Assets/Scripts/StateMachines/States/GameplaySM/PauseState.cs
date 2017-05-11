@@ -10,8 +10,8 @@ namespace BlackFox
         {
             Debug.Log("PauseState");
             Time.timeScale = 0;
-            GameManager.Instance.UiMng.CurrentMenu = GameManager.Instance.UiMng.canvasGameMenu.pauseMenuController;
-            GameManager.Instance.UiMng.canvasGameMenu.pauseMenuController.ChildrenPanel.SetActive(true);
+            GameManager.Instance.UiMng.CurrentMenu = GameManager.Instance.UiMng.canvasGame.pauseMenuController;
+            GameManager.Instance.UiMng.canvasGame.pauseMenuController.ChildrenPanel.SetActive(true);
         }
 
         public override void OnEnd()
@@ -19,7 +19,7 @@ namespace BlackFox
             Time.timeScale = 1;
             GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.PlayInput);
             GameManager.Instance.LevelMng.IsGamePaused = false;
-            GameManager.Instance.UiMng.canvasGameMenu.pauseMenuController.ChildrenPanel.SetActive(false);
+            GameManager.Instance.UiMng.canvasGame.pauseMenuController.ChildrenPanel.SetActive(false);
         }
     }
 }

@@ -41,7 +41,7 @@ namespace BlackFox
             EndLevelPanel.SetActive(_status);
         }
 
-        public override void Selection()
+        public override void Selection(Player _player)
         {
             GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
         }

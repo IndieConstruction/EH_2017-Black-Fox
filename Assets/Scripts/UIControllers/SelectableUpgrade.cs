@@ -55,7 +55,7 @@ namespace BlackFox
 
         public void AddValue()
         {
-            if (slider.value < Upgrade.MaxLevel)
+            if (Upgrade.CurrentUpgradeLevel < Upgrade.MaxLevel)
             {
                 slider.value += 1;
                 Upgrade.CurrentUpgradeLevel += 1;
@@ -64,7 +64,7 @@ namespace BlackFox
 
         public void RemoveValue()
         {
-            if(slider.value > Upgrade.MinLevel)
+            if(Upgrade.CurrentUpgradeLevel > Upgrade.MinLevel)
             {
                 slider.value -= 1;
                 Upgrade.CurrentUpgradeLevel -= 1;

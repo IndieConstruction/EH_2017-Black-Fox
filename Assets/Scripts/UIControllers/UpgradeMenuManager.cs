@@ -9,34 +9,47 @@ namespace BlackFox {
 
         public List<PlayerUpgradeController> PlayerUpgradeControllers = new List<PlayerUpgradeController>();
 
-        private void Start()
+        public void Setup(List<Player> _players)
         {
-            UpgradePanel.SetActive(false);
-        }
-
-        public void Init(List<Player> _players)
-        { 
             foreach (Player player in _players)
             {
                 foreach (PlayerUpgradeController controller in PlayerUpgradeControllers)
                 {
                     if ((int)player.ID == (int)controller.MenuID)
                     {
-                        controller.Player = player;
-                        controller.Init();
+                        controller.Setup(this, player);
+                        controller.FindISelectableChildren();
                         break;
                     }
                 }
             }
+            UpgradePanel.SetActive(false);
         }
-        
+
+        public void InitControllers()
+        { 
+            foreach (PlayerUpgradeController controller in PlayerUpgradeControllers)
+                controller.Init();
+        }
+
+        public void CheckUpgradeControllersState()
+        {
+            foreach (PlayerUpgradeController controller in PlayerUpgradeControllers)
+            {
+                if (controller.CurrentState == UpgradeControllerState.Unready)
+                    return;
+            }           
+            GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
+        }
+
+        #region Menu Actions
         public override void GoUpInMenu(Player _player)
         {
-            foreach (PlayerUpgradeController menu in PlayerUpgradeControllers)
+            foreach (PlayerUpgradeController controller in PlayerUpgradeControllers)
             {
-                if ((int)menu.MenuID == (int)_player.ID)
+                if ((int)controller.MenuID == (int)_player.ID)
                 {
-                    menu.GoUpInMenu(_player);
+                    controller.GoUpInMenu(_player);
                     break;
                 }
             }
@@ -44,11 +57,11 @@ namespace BlackFox {
 
         public override void GoDownInMenu(Player _player)
         {
-            foreach (PlayerUpgradeController menu in PlayerUpgradeControllers)
+            foreach (PlayerUpgradeController controller in PlayerUpgradeControllers)
             {
-                if ((int)menu.MenuID == (int)_player.ID)
+                if ((int)controller.MenuID == (int)_player.ID)
                 {
-                    menu.GoDownInMenu(_player);
+                    controller.GoDownInMenu(_player);
                     break;
                 }
             }
@@ -56,11 +69,11 @@ namespace BlackFox {
 
         public override void GoLeftInMenu(Player _player)
         {
-            foreach (PlayerUpgradeController menu in PlayerUpgradeControllers)
+            foreach (PlayerUpgradeController controller in PlayerUpgradeControllers)
             {
-                if ((int)menu.MenuID == (int)_player.ID)
+                if ((int)controller.MenuID == (int)_player.ID)
                 {
-                    menu.GoLeftInMenu(_player);
+                    controller.GoLeftInMenu(_player);
                     break;
                 }
             }
@@ -68,19 +81,27 @@ namespace BlackFox {
 
         public override void GoRightInMenu(Player _player)
         {
-            foreach (PlayerUpgradeController menu in PlayerUpgradeControllers)
+            foreach (PlayerUpgradeController controller in PlayerUpgradeControllers)
             {
-                if ((int)menu.MenuID == (int)_player.ID)
+                if ((int)controller.MenuID == (int)_player.ID)
                 {
-                    menu.GoRightInMenu(_player);
+                    controller.GoRightInMenu(_player);
                     break;
                 }
             }
         }
 
-        public override void Selection()
+        public override void Selection(Player _player)
         {
-            //GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
+            foreach (PlayerUpgradeController controller in PlayerUpgradeControllers)
+            {
+                if ((int)controller.MenuID == (int)_player.ID)
+                {
+                    controller.Selection(_player);
+                    break;
+                }
+            }
         }
+        #endregion
     }
 }

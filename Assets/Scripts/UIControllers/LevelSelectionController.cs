@@ -15,7 +15,7 @@ namespace BlackFox
             GameManager.Instance.UiMng.CurrentMenu = this;
         }
 
-        public override void Selection()
+        public override void Selection(Player _player)
         {
             switch (CurrentIndexSelection)
             {

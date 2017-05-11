@@ -10,38 +10,52 @@ namespace BlackFox
     {
         public UpgradeControllerID MenuID;
 
+        public UpgradeMenuManager UpgradeMng;
+
+        UpgradeControllerState _currentState;
+        public UpgradeControllerState CurrentState
+        {
+            get { return _currentState; }
+            set
+            {
+                _currentState = value;
+                UpgradeMng.CheckUpgradeControllersState();
+                GameManager.Instance.PlayerMng.ChangePlayerState(PlayerState.Blocked, Player.ID);
+            }
+        }
+
         public List<IUpgrade> Upgrades
         {
             get { return Player.Avatar.Upgrades; }
         }
 
+        public void Setup(UpgradeMenuManager _upgradeMng, Player _player)
+        {
+            UpgradeMng = _upgradeMng;
+            Player = _player;
+        }
 
         public void Init()
         {
-            FindISelectableChildren();
-
-            for (int i = 0; i < SelectableButtons.Count && i < Upgrades.Count; i++) {
-                (SelectableButtons[i] as ISelectableUpgrade).SetIUpgrade(Upgrades[i]);
-            }
+            for (int i = 0; i < SelectableButtons.Count && i < Upgrades.Count; i++)
+                (SelectableButtons[i] as ISelectableUpgrade).SetIUpgrade(Upgrades[i]); 
         }
 
-        public override void Selection()
+        public override void Selection(Player _player)
         {
-            for (int i = 0; i < Upgrades.Count; i++) {
+            for (int i = 0; i < Upgrades.Count; i++)
                 Upgrades[i] = (SelectableButtons[i] as ISelectableUpgrade).GetData();
-            }
+            CurrentState = UpgradeControllerState.Ready;
         }
 
         public override void GoRightInMenu(Player _player)
         {
-            SelectableUpgrade currentSlider = selectableButton[currentIndexSelection] as SelectableUpgrade;
-            currentSlider.AddValue();
+            (selectableButton[currentIndexSelection] as SelectableUpgrade).AddValue();
         }
 
         public override void GoLeftInMenu(Player _player)
         {
-            SelectableUpgrade currentSlider = selectableButton[currentIndexSelection] as SelectableUpgrade;
-            currentSlider.RemoveValue();
+            (selectableButton[currentIndexSelection] as SelectableUpgrade).RemoveValue();
         }
     }
 
@@ -54,5 +68,11 @@ namespace BlackFox
         Two = 2,
         Three = 3,
         Four = 4
+    }
+
+    public enum UpgradeControllerState
+    {
+        Unready = 0,
+        Ready = 1
     }
 }

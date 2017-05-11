@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace BlackFox
 {
@@ -45,8 +46,17 @@ namespace BlackFox
             rigid.AddForce(_target * MovementConfig.MovmentSpeed, ForceMode.Force);
             if (_target == Vector3.zero)
                 _target = transform.forward;
+            
 
             fullTorque = Yaw(_target, Vector3.up);
+            if ((int)ship.Avatar.PlayerId == 3)
+                Debug.Log(fullTorque);
+            float roll = 0;
+            if (fullTorque.y < -100)
+                roll = 1;
+            else if (fullTorque.y > 100)
+                roll = -1;
+             ship.GraphicContainer.DOLocalRotate(new Vector3(ship.GraphicContainer.rotation.x, ship.GraphicContainer.rotation.y, roll * 30), 0.2f);
             //Vector3 rollTarget = Vector3.Cross(fullTorque, transform.forward) * Mathf.Sin(Vector3.Angle(Vector3.up,));
             //fullTorque += Roll(rollTarget, transform.forward);
             rigid.AddTorque(fullTorque, ForceMode.Force);

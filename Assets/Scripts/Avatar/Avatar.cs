@@ -5,11 +5,13 @@ using System;
 
 namespace BlackFox {
     public class Avatar : MonoBehaviour, IPowerUpCollector {
+
         /// <summary>
         /// Player who control this avatar
         /// </summary>
         [HideInInspector]
         public Player Player;
+
         /// <summary>
         /// Index of th e player
         /// </summary>
@@ -46,6 +48,7 @@ namespace BlackFox {
         public RopeController rope;
         [HideInInspector]
         public Ship ship;
+
         AvatarUI avatarUI;
 
         /// <summary>
@@ -147,7 +150,12 @@ namespace BlackFox {
         }
 
         #region Upgrade
-        public List<IUpgrade> Upgrades = new List<IUpgrade>()  // TODO : valori da mettere nello scriptable dell'avatar
+        AvatarUpgradesConfig UpgradesConfig
+        {
+            get { return AvatarData.avatarUpgradesConfig; }
+        }
+
+        public List<IUpgrade> Upgrades = new List<IUpgrade>()  // TODO : collegare valori dello scriptable dell'avatar
         {
             new FireRateUpgrade(new float[] {0f, 0.01f, 0.02f, 0.03f, 0.04f, 0.27f}), 
             new PinRegenUpgrade(new float[] {0, 0.3f, 0.5f, 0.7f, 1f, 1.5f}),
@@ -184,7 +192,8 @@ namespace BlackFox {
             return damageablesList;
         }
 
-        public void CollectPowerUp(IPowerUp _powerUp) {
+        public void CollectPowerUp(IPowerUp _powerUp)
+        {
             
         }
     }
@@ -194,5 +203,14 @@ namespace BlackFox {
         Disabled = 0,
         Ready = 1,
         Enabled = 2
+    }
+
+    [Serializable]
+    public class AvatarUpgradesConfig
+    {
+        public float[] FireRateUpgrade;
+        public float[] PinRegenUpgrade;
+        public float[] PowerUpDurationUpgrade;
+        public float[] RopeLengthUpgrade;
     }
 }

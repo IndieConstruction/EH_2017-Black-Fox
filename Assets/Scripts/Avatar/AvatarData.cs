@@ -13,5 +13,8 @@ namespace BlackFox
     {
         // TODO : fare rope config 
         public ShipConfig shipConfig;
+
+        [Header("Avatar Upgrades")]
+        public AvatarUpgradesConfig avatarUpgradesConfig;
     }
 }

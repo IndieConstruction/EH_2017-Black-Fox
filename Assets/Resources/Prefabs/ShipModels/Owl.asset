@@ -38,3 +38,8 @@ MonoBehaviour:
         type: 2}
       CoolDownTime: 3
       DistanceFromShipOrigin: 3
+  avatarPowerUpConfig:
+    FireRateUpgrade: []
+    PinRegenUpgrade: []
+    PowerUpDurationUpgrade: []
+    RopeLengthUpgrade: []

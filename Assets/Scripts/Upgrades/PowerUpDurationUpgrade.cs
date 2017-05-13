@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BlackFox {
-    public class FireRateUpgrade : IUpgrade {
-
-        public FireRateUpgrade(float[] _upgradeValues) 
+namespace BlackFox
+{
+    public class PowerUpDurationUpgrade : IUpgrade
+    {
+        public PowerUpDurationUpgrade(float[] _upgradeValues)
         {
             Values = _upgradeValues;
         }
@@ -18,7 +18,7 @@ namespace BlackFox {
             get { return _currentUpgradeLevel; }
             set
             {
-                if(value >= MinLevel && value <= MaxLevel)
+                if (value >= MinLevel && value <= MaxLevel)
                     _currentUpgradeLevel = value;
             }
         }
@@ -28,14 +28,14 @@ namespace BlackFox {
 
         public UpgardeTypes ID
         {
-            get { return UpgardeTypes.FireRateUpgrade; }
+            get { return UpgardeTypes.PowerUpDurationUpgrade; }
         }
 
         public float[] Values { get; set; }
 
         public float CalculateValue(float _value)
         {
-            return _value - Values[CurrentUpgradeLevel];
+            return _value + Values[CurrentUpgradeLevel];
         }
     }
 }

@@ -64,8 +64,8 @@ namespace BlackFox
         {
             get
             {
-                if (ship.Avatar.GetUpgrade(UpgardeTypes.PinRateUpgrade) != null)
-                    return ship.Avatar.GetUpgrade(UpgardeTypes.PinRateUpgrade).CalculateValue(placePinConfig.CoolDownTime);
+                if (ship.Avatar.GetUpgrade(UpgardeTypes.PinRegenUpgrade) != null)
+                    return ship.Avatar.GetUpgrade(UpgardeTypes.PinRegenUpgrade).CalculateValue(placePinConfig.CoolDownTime);
                 else
                     return placePinConfig.CoolDownTime;
             }

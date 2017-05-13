@@ -7,7 +7,6 @@ namespace BlackFox
     public interface IUpgrade
     {
         UpgardeTypes ID { get; }
-        //PlayerUpgradeController PlayerUpgradeController { get; set; }
         int CurrentUpgradeLevel { get; set; }
         int MaxLevel { get; }
         int MinLevel { get; set; }
@@ -17,14 +16,17 @@ namespace BlackFox
         float CalculateValue(float _value);
     }
 
-    public interface ISelectableUpgrade : ISelectable {
+    public interface ISelectableUpgrade : ISelectable
+    {
         void SetIUpgrade(IUpgrade _upgrade);
-
         IUpgrade GetData();
     }
 
-    public enum UpgardeTypes {
+    public enum UpgardeTypes
+    {
         FireRateUpgrade,
-        PinRateUpgrade,
+        PinRegenUpgrade,
+        PowerUpDurationUpgrade,
+        RopeLengthUpgrade
     }
 }

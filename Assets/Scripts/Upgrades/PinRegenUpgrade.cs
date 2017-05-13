@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace BlackFox {
-
-    public class PinRateUpgrade : IUpgrade
+    public class PinRegenUpgrade : IUpgrade
     {
-        public PinRateUpgrade(float[] _upgradeValues)
+        public PinRegenUpgrade(float[] _upgradeValues)
         {
             Values = _upgradeValues;
         }
@@ -19,7 +18,7 @@ namespace BlackFox {
             get { return _currentUpgradeLevel; }
             set
             {
-                if (value >= MinLevel && value <= MaxLevel)
+                if(value >= MinLevel && value <= MaxLevel)
                     _currentUpgradeLevel = value;
             }
         }
@@ -29,7 +28,7 @@ namespace BlackFox {
 
         public UpgardeTypes ID
         {
-            get { return UpgardeTypes.PinRateUpgrade; }
+            get { return UpgardeTypes.PinRegenUpgrade; }
         }
 
         public float[] Values { get; set; }

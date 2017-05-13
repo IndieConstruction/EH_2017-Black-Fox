@@ -50,6 +50,7 @@ namespace BlackFox
         #endregion
 
         public Slider slider;
+        public Text text;
 
         public IUpgrade Upgrade;
 
@@ -77,6 +78,7 @@ namespace BlackFox
             Upgrade.CurrentUpgradeLevel = Upgrade.MinLevel;
             slider.value = Upgrade.CurrentUpgradeLevel;
             slider.maxValue = Upgrade.MaxLevel;
+            text.text = Upgrade.ID.ToString();
         }
 
         public IUpgrade GetData()

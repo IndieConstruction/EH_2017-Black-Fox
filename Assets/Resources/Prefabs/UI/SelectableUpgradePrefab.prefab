@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 224746453931445618}
   - component: {fileID: 114972087176923150}
   m_Layer: 5
-  m_Name: Upgrade1
+  m_Name: SelectableUpgradePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

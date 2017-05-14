@@ -44,6 +44,15 @@ namespace BlackFox {
             }
         }
 
+        private int _upgradePoints;
+
+        public int UpgradePoints
+        {
+            get { return _upgradePoints; }
+            set { _upgradePoints = value; }
+        }
+
+
         [HideInInspector]
         public RopeController rope;
         [HideInInspector]

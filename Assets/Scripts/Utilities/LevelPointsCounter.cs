@@ -48,6 +48,7 @@ namespace BlackFox
                     if (player.KillPoints == PointsToWin)
                     {
                         player.Victories += 1;
+                        GameManager.Instance.UpgradePointsMng.GivePoints(player.PlayerID);
                         GameManager.Instance.LevelMng.PlayerWin(player.PlayerID.ToString());
                     }
                     break;

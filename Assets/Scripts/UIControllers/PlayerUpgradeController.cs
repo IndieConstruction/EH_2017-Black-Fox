@@ -11,11 +11,29 @@ namespace BlackFox
     {
         public UpgradeControllerID MenuID;
 
+        /// <summary>
+        /// Variabile che si incrementa ogni volta che viene applicato un potenziamento. 
+        /// Una volta uguale ai punti upgrade dell'avatar, non è più possibile upgradare.
+        /// </summary>
+        int UpgradeCounter = 0;
+
+        public int AvatarUpgradePoints {
+            get
+            {
+                return Player.Avatar.UpgradePoints;
+            }
+            set
+            {
+                Player.Avatar.UpgradePoints = value;
+            }
+        }
+
         UpgradeMenuManager UpgradeMng;
 
         public GameObject selectableUpgradePrefab;
         public Text PlayerIdText;
         public Text ConfirmText;
+        public Text UpgradePintsText;
 
         UpgradeControllerState _currentState;
         public UpgradeControllerState CurrentState
@@ -37,6 +55,16 @@ namespace BlackFox
         {
             get { return Player.Avatar.Upgrades; }
         }
+
+        /// <summary>
+        /// Aggiorna la scritta che indica quanti punti potenziamento sono rimati
+        /// </summary>
+        void UpgradeGraphics()
+        {
+            UpgradePintsText.text = "= " + (AvatarUpgradePoints - UpgradeCounter);
+        }
+
+        #region API
 
         public void Setup(UpgradeMenuManager _upgradeMng, Player _player)
         {
@@ -60,6 +88,8 @@ namespace BlackFox
             for (int i = 0; i < SelectableButtons.Count && i < Upgrades.Count; i++)
                 (SelectableButtons[i] as ISelectableUpgrade).SetIUpgrade(Upgrades[i]); 
             CurrentState = UpgradeControllerState.Unready;
+            UpgradeCounter = 0;
+            UpgradeGraphics();
             ConfirmText.text = "Press A to continue";
             PlayerIdText.text = "Player " + Player.ID;
         }
@@ -69,17 +99,30 @@ namespace BlackFox
             for (int i = 0; i < Upgrades.Count; i++)
                 Upgrades[i] = (SelectableButtons[i] as ISelectableUpgrade).GetData();
             CurrentState = UpgradeControllerState.Ready;
+            AvatarUpgradePoints -= UpgradeCounter;
         }
 
         public override void GoRightInMenu(Player _player)
         {
-            (selectableButton[currentIndexSelection] as SelectableUpgrade).AddValue();
+            if (UpgradeCounter < AvatarUpgradePoints && (selectableButton[currentIndexSelection] as SelectableUpgrade).Upgrade.CurrentUpgradeLevel < (selectableButton[currentIndexSelection] as SelectableUpgrade).Upgrade.MaxLevel)
+            {
+                UpgradeCounter++;
+                (selectableButton[currentIndexSelection] as SelectableUpgrade).AddValue();
+                UpgradeGraphics();
+            }
         }
 
         public override void GoLeftInMenu(Player _player)
         {
-            (selectableButton[currentIndexSelection] as SelectableUpgrade).RemoveValue();
+            if (UpgradeCounter > 0 && (selectableButton[currentIndexSelection] as SelectableUpgrade).Upgrade.CurrentUpgradeLevel > (selectableButton[currentIndexSelection] as SelectableUpgrade).Upgrade.MinLevel)
+            {
+                UpgradeCounter--;
+                (selectableButton[currentIndexSelection] as SelectableUpgrade).RemoveValue();
+                UpgradeGraphics();
+            }
         }
+
+        #endregion
     }
 
     /// <summary>

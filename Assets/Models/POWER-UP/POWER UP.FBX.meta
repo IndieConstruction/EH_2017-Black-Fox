@@ -1,40 +1,15 @@
 fileFormatVersion: 2
-guid: 032120a8c2e5b134190f137bd26d8ff6
-timeCreated: 1494585521
+guid: 6b745860ecd49f14a8a48bef016cce8d
+timeCreated: 1494861831
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
-    100002: esterno_LP001
-    100004: faro_LP
-    100006: ingranaggio2
-    100008: n_LP
-    100010: rock2_LP
     400000: //RootNode
-    400002: esterno_LP001
-    400004: faro_LP
-    400006: ingranaggio2
-    400008: n_LP
-    400010: rock2_LP
     2300000: //RootNode
-    2300002: esterno_LP001
-    2300004: faro_LP
-    2300006: ingranaggio2
-    2300008: n_LP
-    2300010: rock2_LP
     3300000: //RootNode
-    3300002: esterno_LP001
-    3300004: faro_LP
-    3300006: ingranaggio2
-    3300008: n_LP
-    3300010: rock2_LP
-    4300000: ingranaggio2
-    4300002: esterno_LP001
-    4300004: faro_LP
-    4300006: rock2_LP
-    4300008: n_LP
-    4300010: Cylinder001
+    4300000: POWER UP
   materials:
     importMaterials: 1
     materialName: 0

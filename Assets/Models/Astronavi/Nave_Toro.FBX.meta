@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 2ce89ee7961a0904aa30adafd57a42a0
-timeCreated: 1494586393
+guid: ebcc752d4e3aea543ab2c1ba8af1d530
+timeCreated: 1494839521
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Cylinder003
+    4300000: Marmitte
   materials:
     importMaterials: 1
     materialName: 0

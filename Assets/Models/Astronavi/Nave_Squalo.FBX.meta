@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: b4dc3d8244a407e40b6261b67b0e08b9
-timeCreated: 1490262451
+guid: da135962de661e445ad0bab73014d9df
+timeCreated: 1494839521
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Astronave_Gufo
+    4300000: navetta_LP
   materials:
     importMaterials: 1
     materialName: 0
@@ -20,6 +20,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 

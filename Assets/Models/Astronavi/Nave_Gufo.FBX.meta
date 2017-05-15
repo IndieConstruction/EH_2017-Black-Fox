@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: ca30f5a4fdd654e4cab3db9ad1da19b1
-timeCreated: 1489422519
+guid: 911b85e7dc8efd24e9be4f6028221342
+timeCreated: 1494839521
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: proiettile
+    4300000: Elica_Dx
   materials:
     importMaterials: 1
     materialName: 0
@@ -20,6 +20,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 

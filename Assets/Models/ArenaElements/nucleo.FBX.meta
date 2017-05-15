@@ -13,6 +13,7 @@ ModelImporter:
     100010: Sphere002
     100012: Sphere003
     100014: n_LP
+    100016: Nucleo
     400000: //RootNode
     400002: Object001
     400004: Object002
@@ -21,6 +22,7 @@ ModelImporter:
     400010: Sphere002
     400012: Sphere003
     400014: n_LP
+    400016: Nucleo
     2300000: Object001
     2300002: Object002
     2300004: Object003
@@ -28,6 +30,7 @@ ModelImporter:
     2300008: Sphere002
     2300010: Sphere003
     2300012: n_LP
+    2300014: Nucleo
     3300000: Object001
     3300002: Object002
     3300004: Object003
@@ -35,6 +38,7 @@ ModelImporter:
     3300008: Sphere002
     3300010: Sphere003
     3300012: n_LP
+    3300014: Nucleo
     4300000: Sphere001
     4300002: Object002
     4300004: Object003
@@ -42,6 +46,7 @@ ModelImporter:
     4300008: Sphere003
     4300010: Object001
     4300012: n_LP
+    4300014: Nucleo
     7400000: Take 001
     9500000: //RootNode
     11100000: //RootNode

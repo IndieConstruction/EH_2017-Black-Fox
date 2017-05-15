@@ -58,6 +58,7 @@ ModelImporter:
     100100: Line006
     100102: //RootNode
     100104: Sphere001
+    100106: rock2_LP
     400000: Bone073
     400002: Bone074
     400004: Bone075
@@ -111,12 +112,16 @@ ModelImporter:
     400100: Line006
     400102: //RootNode
     400104: Sphere001
+    400106: rock2_LP
     2300000: Sphere001
+    2300002: rock2_LP
     3300000: Sphere001
+    3300002: rock2_LP
     4300000: Line004
     4300002: Line005
     4300004: Line006
     4300006: Sphere001
+    4300008: rock2_LP
     7400000: Take 001
     9500000: //RootNode
     11100000: //RootNode
@@ -133,6 +138,8 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 

@@ -129,7 +129,7 @@ namespace BlackFox {
         {
             // TODO : controllare che la ship non sia doppia
             Transform transf = GameManager.Instance.LevelMng.AvatarSpwn.GetMySpawnPoint(PlayerId);
-            ship = Instantiate(AvatarData.shipConfig.Prefab, transf.position, transf.rotation , transform).GetComponent<Ship>();
+            ship = Instantiate(AvatarData.BasePrefab, transf.position, transf.rotation , transform).GetComponent<Ship>();
         }
 
         /// <summary>

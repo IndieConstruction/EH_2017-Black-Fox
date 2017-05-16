@@ -46,7 +46,7 @@ namespace BlackFox {
             Avatar = _avatar;
             rigid = GetComponent<Rigidbody>();
             damageables = _damageablesPrefabs;
-            ChangeColor(Config.ColorSets[Avatar.ColorSetIndex].ShipMaterialMain);
+            ChangeColor(Avatar.AvatarData.ColorSets[Avatar.ColorSetIndex].ShipMaterialMain);
 
             shooter = GetComponentInChildren<Shooter>();
             shooter.Init(this);
@@ -238,8 +238,6 @@ namespace BlackFox {
     [Serializable]
     public class ShipConfig
     {
-        public Ship Prefab;
-        public List<ColorSetData> ColorSets;
         [Header("Ship Parameters")]
         public float FireRate;
         public float MaxLife;

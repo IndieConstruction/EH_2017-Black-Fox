@@ -28,6 +28,9 @@ namespace BlackFox {
         }
 
         private void OnTriggerEnter(Collider other) {
+            if (other.GetComponent<IPowerUpCollector>() == null)
+                return;
+
             collector = other.GetComponentInParent<IPowerUpCollector>();
             foreach (Player player in other.GetComponentInParent<Avatar>().Enemies)
             {

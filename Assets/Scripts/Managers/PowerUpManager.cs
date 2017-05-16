@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace BlackFox
 {
@@ -13,7 +14,7 @@ namespace BlackFox
         {
             if (Input.GetKeyDown(KeyCode.Z))
             {
-                SpawnPowerUp(ChoosePosition(GameManager.Instance.PlayerMng.Players));
+                SpawnPowerUp();
             }
         }
 
@@ -44,13 +45,20 @@ namespace BlackFox
         /// Spawna un pawerup in una posizione specifica
         /// </summary>
         /// <param name="_position">La posizione che deve avere il powerup.</param>
-        void SpawnPowerUp(Vector3 _position)
+        void SpawnPowerUp()
         {
             PowerUpBase tempPowerup;
             GameObject tempObj = ChoosePowerUp();
-            tempPowerup = Instantiate(tempObj, _position, Quaternion.identity).GetComponent< PowerUpBase>();
+            tempPowerup = Instantiate(tempObj, GameManager.Instance.LevelMng.Core.transform.position, Quaternion.identity).GetComponent< PowerUpBase>();
+            DrawParable(tempObj, ChoosePosition(GameManager.Instance.PlayerMng.Players));
             if(tempPowerup != null)
                 tempPowerup.LifeTime = PowerUpLifeTime;
+        }
+
+        void DrawParable(GameObject _objToMove, Vector3 _target)
+        {
+            _objToMove.transform.DOMoveX(_target.x,0.5f);
+            _objToMove.transform.DOMoveZ(_target.z, 0.5f);
         }
 
         Vector3 ChoosePosition(List<Player> players)

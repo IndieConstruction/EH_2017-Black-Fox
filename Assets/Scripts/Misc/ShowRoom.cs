@@ -7,7 +7,7 @@ namespace BlackFox
 {
     public class ShowRoom : MonoBehaviour
     {
-        List<GameObject> avatars;
+        List<GameObject> avatars = new List<GameObject>();
         Vector3 corridorVector;
         int indexOfCurrent;
         public Transform currentModel;
@@ -30,9 +30,11 @@ namespace BlackFox
         /// </summary>
         public void ShowNext()
         {
-            if(indexOfCurrent < avatars.Count-1)
-                modelContainer.transform.DOMove(- corridorVector, 0.5f);
-            indexOfCurrent++;
+            if (indexOfCurrent < avatars.Count - 1)
+            {
+                indexOfCurrent++;
+                modelContainer.transform.DOMove(- corridorVector*indexOfCurrent, 0.5f);
+            }
         }
         /// <summary>
         /// Display previous Model
@@ -40,8 +42,10 @@ namespace BlackFox
         public void ShowPrevious()
         {
             if (indexOfCurrent > 0)
-                modelContainer.transform.DOMove(corridorVector, 0.5f);
-            indexOfCurrent--;
+            {
+                indexOfCurrent--;
+                modelContainer.transform.DOMove(-corridorVector*indexOfCurrent, 0.5f);
+            }
         }
 
         #endregion
@@ -69,10 +73,12 @@ namespace BlackFox
             if (modelContainer)
                 DestroyImmediate(modelContainer);
             modelContainer = new GameObject("ModelContainer");
-
-            for (int i = 0; i < avatars.Count-1; i++)
+            modelContainer.transform.parent = transform;
+            GameObject temp;
+            for (int i = 0; i < _data.Length; i++)
             {
-                avatars.Add(Instantiate(_data[i].ModelPrefab, currentModel.position + corridorVector*i, nextModel.rotation, modelContainer.transform));
+                temp = Instantiate(_data[i].ModelPrefab, currentModel.position + corridorVector * i, nextModel.rotation, modelContainer.transform);
+                avatars.Add(temp);
             }
             currentModel = avatars[0].transform;
             nextModel = avatars[1].transform;

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelNumber: 1
   LevelName: Arena1
-  ArenaPrefab: {fileID: 1590692792633676, guid: 7ea2bcd6e0fcc5341a5f7624e386a912,
+  ArenaPrefab: {fileID: 1581467817650562, guid: 7ea2bcd6e0fcc5341a5f7624e386a912,
     type: 2}
   LevelOptions:
     MaxRound: 4
@@ -39,8 +39,8 @@ MonoBehaviour:
       type: 2}
     MinTime: 10
     MaxTime: 20
-    AngularSpeed: 10
-    TransSpeed: 10
+    AngularSpeed: 100
+    TransSpeed: 100
   TurretSpawner:
     SpawnerPrefab: {fileID: 0}
     Turrent: {fileID: 0}

@@ -7,6 +7,8 @@ namespace BlackFox
     public class PowerUpManager : MonoBehaviour
     {
 
+        public float PowerUpLifeTime = 10;
+
         /// <summary>
         /// Sceglie un powerup a caso
         /// </summary>
@@ -38,7 +40,9 @@ namespace BlackFox
         /// <param name="_position">La posizione che deve avere il powerup.</param>
         public void SpawnPowerUp(Vector3 _position)
         {
-            Instantiate(ChoosePowerUp(), _position, Quaternion.identity);
+            PowerUpBase tempObj;
+            tempObj = Instantiate(ChoosePowerUp(), _position, Quaternion.identity).GetComponent< PowerUpBase>();
+            tempObj.LifeTime = PowerUpLifeTime;
         }
 
         #endregion

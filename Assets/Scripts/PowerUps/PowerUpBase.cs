@@ -8,9 +8,23 @@ namespace BlackFox {
         protected IPowerUpCollector collector;
         protected List<IPowerUpCollector> enemyCollectors = new List<IPowerUpCollector>();
         public abstract void UsePowerUp();
+        private float _lifeTime = 10;
+
+        public float LifeTime
+        {
+            get { return _lifeTime; }
+            set { _lifeTime = value; }
+        }
 
         protected virtual void NotifyCollect(IPowerUpCollector _collector) {
             _collector.CollectPowerUp(this);
+        }
+
+        private void Update()
+        {
+            LifeTime -= Time.deltaTime;
+            if (LifeTime <= 0)
+                Destroy(gameObject);
         }
 
         private void OnTriggerEnter(Collider other) {
@@ -23,6 +37,7 @@ namespace BlackFox {
                 NotifyCollect(collector);
                 if (AutoUse)
                     UsePowerUp();
+                Destroy(gameObject);
             }
         }
     }

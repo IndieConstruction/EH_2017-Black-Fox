@@ -74,12 +74,10 @@ namespace BlackFox
                 DestroyImmediate(modelContainer);
             modelContainer = new GameObject("ModelContainer");
             modelContainer.transform.parent = transform;
-            GameObject temp;
+
             for (int i = 0; i < _data.Length; i++)
-            {
-                temp = Instantiate(_data[i].ModelPrefab, currentModel.position + corridorVector * i, nextModel.rotation, modelContainer.transform);
-                avatars.Add(temp);
-            }
+                avatars.Add(Instantiate(_data[i].ModelPrefab, currentModel.position + corridorVector * i, nextModel.rotation, modelContainer.transform));
+
             currentModel = avatars[0].transform;
             nextModel = avatars[1].transform;
         }

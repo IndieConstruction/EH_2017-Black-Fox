@@ -9,6 +9,14 @@ namespace BlackFox
 
         public float PowerUpLifeTime = 10;
 
+        private void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.Z))
+            {
+                SpawnPowerUp(ChoosePosition(GameManager.Instance.PlayerMng.Players));
+            }
+        }
+
         /// <summary>
         /// Sceglie un powerup a caso
         /// </summary>
@@ -20,31 +28,44 @@ namespace BlackFox
             switch (RandomNum)
             {
                 case 1:
-                    return Resources.Load("Prefabs/Prefabs/PowerUps/PowerUp_Blue") as GameObject;
+                    return Resources.Load("Prefabs/PowerUps/PowerUp_Blue") as GameObject;
                 case 2:
-                    return Resources.Load("Prefabs/Prefabs/PowerUps/PowerUp_Green") as GameObject;
+                    return Resources.Load("Prefabs/PowerUps/PowerUp_Green") as GameObject;
                 case 3:
-                    return Resources.Load("Prefabs/Prefabs/PowerUps/PowerUp_Purple") as GameObject;
+                    return Resources.Load("Prefabs/PowerUps/PowerUp_Purple") as GameObject;
                 case 4:
-                    return Resources.Load("Prefabs/Prefabs/PowerUps/PowerUp_Red") as GameObject;
+                    return Resources.Load("Prefabs/PowerUps/PowerUp_Red") as GameObject;
                 default:
-                    return  Resources.Load("Prefabs/Prefabs/PowerUps/PowerUp_Default") as GameObject;
+                    return  Resources.Load("Prefabs/PowerUps/PowerUp_Default") as GameObject;
             }
         }
-
-        #region API
 
         /// <summary>
         /// Spawna un pawerup in una posizione specifica
         /// </summary>
         /// <param name="_position">La posizione che deve avere il powerup.</param>
-        public void SpawnPowerUp(Vector3 _position)
+        void SpawnPowerUp(Vector3 _position)
         {
-            PowerUpBase tempObj;
-            tempObj = Instantiate(ChoosePowerUp(), _position, Quaternion.identity).GetComponent< PowerUpBase>();
-            tempObj.LifeTime = PowerUpLifeTime;
+            PowerUpBase tempPowerup;
+            GameObject tempObj = ChoosePowerUp();
+            tempPowerup = Instantiate(tempObj, _position, Quaternion.identity).GetComponent< PowerUpBase>();
+            if(tempPowerup != null)
+                tempPowerup.LifeTime = PowerUpLifeTime;
         }
 
-        #endregion
+        Vector3 ChoosePosition(List<Player> players)
+        {
+            Vector3 finalPosition = new Vector3();
+            for (int i = 0; i < players.Count; i++)
+            {
+                finalPosition = finalPosition + players[i].Avatar.ship.transform.position;
+            }
+            finalPosition.y /= players.Count;
+            finalPosition.x = (GameManager.Instance.LevelMng.Core.transform.position.x - finalPosition.x) * Random.Range(0f, 4f) / players.Count; ;
+            finalPosition.z = (GameManager.Instance.LevelMng.Core.transform.position.z - finalPosition.z) * Random.Range(0f, 4f) / players.Count; ;
+
+            return finalPosition;
+        }
+
     }
 }

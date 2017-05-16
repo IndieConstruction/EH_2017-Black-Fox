@@ -15,6 +15,7 @@ namespace BlackFox
         public GameObject CoinManagerPrefab;
         public GameObject AudioManagerPrefab;
         public GameObject UpgradePointsManagerPrefab;
+        public GameObject PowerUpManagerPrefab;
         #endregion
 
         #region Managers
@@ -30,6 +31,8 @@ namespace BlackFox
         public AudioManager AudioMng;
         [HideInInspector]
         public UpgradePointsManager UpgradePointsMng;
+        [HideInInspector]
+        public PowerUpManager PowerUpManager;
         #endregion
 
         [HideInInspector]
@@ -91,6 +94,11 @@ namespace BlackFox
         public void InstantiateUpgradePointsManager()
         {
             UpgradePointsMng = Instantiate(UpgradePointsManagerPrefab, transform).GetComponent<UpgradePointsManager>();
+        }
+
+        public void InstantiatePowerUpManager()
+        {
+            PowerUpManager = Instantiate(PowerUpManagerPrefab, transform).GetComponent<PowerUpManager>();
         }
         #endregion
         #endregion

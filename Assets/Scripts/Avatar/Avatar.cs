@@ -11,7 +11,7 @@ namespace BlackFox {
         /// </summary>
         [HideInInspector]
         public Player Player;
-
+        public List<Player> Enemies { get { return GameManager.Instance.PlayerMng.GetAllOtherPlayers(Player); } }
         /// <summary>
         /// Index of th e player
         /// </summary>

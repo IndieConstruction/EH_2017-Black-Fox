@@ -15,6 +15,7 @@ namespace BlackFox
             GameManager.Instance.InstantiateCoinManager();
             GameManager.Instance.InstantiateAudioManager();
             GameManager.Instance.InstantiateUpgradePointsManager();
+            GameManager.Instance.InstantiatePowerUpManager();
         }
 
         public override void OnUpdate()

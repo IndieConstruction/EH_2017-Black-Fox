@@ -11,14 +11,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9681a26f2f551234a8c74f5a6ef49a16, type: 3}
   m_Name: Owl
   m_EditorClassIdentifier: 
+  BasePrefab: {fileID: 114084304304996402, guid: 1e454b20c5c81a94c83dfadd7cbda89e,
+    type: 2}
+  ModelPrefab: {fileID: 1000013772491214, guid: 192b7fe2500f5e0449f21c651bc0474c,
+    type: 2}
+  ColorSets:
+  - {fileID: 11400000, guid: eb39c0c34e587a045ba43e8cc4994fb2, type: 2}
+  - {fileID: 11400000, guid: c0d8480790832cd4fbf3a963a4cded1c, type: 2}
+  - {fileID: 11400000, guid: 00387c7185e7a4d419217c93c5643965, type: 2}
+  - {fileID: 11400000, guid: 4f7d104e8296c744cae0d117fe6d4fee, type: 2}
+  - {fileID: 11400000, guid: 887514b0dce2cd24ea162fc71cac5469, type: 2}
   shipConfig:
-    Prefab: {fileID: 114084304304996402, guid: 1e454b20c5c81a94c83dfadd7cbda89e, type: 2}
-    ColorSets:
-    - {fileID: 11400000, guid: eb39c0c34e587a045ba43e8cc4994fb2, type: 2}
-    - {fileID: 11400000, guid: c0d8480790832cd4fbf3a963a4cded1c, type: 2}
-    - {fileID: 11400000, guid: 00387c7185e7a4d419217c93c5643965, type: 2}
-    - {fileID: 11400000, guid: 4f7d104e8296c744cae0d117fe6d4fee, type: 2}
-    - {fileID: 11400000, guid: 887514b0dce2cd24ea162fc71cac5469, type: 2}
     FireRate: 0.3
     MaxLife: 15
     movementConfig:
@@ -38,7 +41,7 @@ MonoBehaviour:
         type: 2}
       CoolDownTime: 3
       DistanceFromShipOrigin: 3
-  avatarPowerUpConfig:
+  avatarUpgradesConfig:
     FireRateUpgrade: []
     PinRegenUpgrade: []
     PowerUpDurationUpgrade: []

@@ -7,7 +7,7 @@ namespace BlackFox {
     public class SRManager : MonoBehaviour {
 
         public GameObject ShowroomPrefab;
-        List<ShowRoom> rooms = new List<ShowRoom>();
+        public List<ShowRoom> rooms = new List<ShowRoom>();
         List<RenderTexture> renders = new List<RenderTexture>();
 
         /// <summary>

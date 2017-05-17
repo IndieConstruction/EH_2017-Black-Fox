@@ -8,14 +8,13 @@ namespace BlackFox
 
     public class Cleaner : MonoBehaviour
     {
-        Tweener AnimationTween;
-
-        
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.layer == 9)
+            {
                 Destroy(other.gameObject);
+            }
         }
 
     }

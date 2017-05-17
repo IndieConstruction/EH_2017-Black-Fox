@@ -2,14 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace BlackFox
 {
 
     public class CleanSweep : PowerUpBase
     {
-        public Cleaner Cleaner;
-
+        public Cleaner cleaner;
         
         void Start()
         {
@@ -19,8 +19,8 @@ namespace BlackFox
         public override void UsePowerUp()
         {
             LifeTime = 5;
-            Cleaner.GetComponent<SphereCollider>().enabled = true;
             GetComponent<MeshRenderer>().enabled = false;
+            cleaner.transform.DOScale(10f, 2f).OnComplete(() => { cleaner.transform.DOScale(0f, 0.8f).SetDelay(LifeTime - 1f); });
         }
     }
 }

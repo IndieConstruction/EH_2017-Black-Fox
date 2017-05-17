@@ -73,6 +73,17 @@ namespace BlackFox
             }
             return null;
         }
+
+        public List<Player> GetAllOtherPlayers(Player _player)
+        {
+            List<Player> PlayersToReturn = new List<Player>();
+            foreach (Player player in Players)
+            {
+                if (player != _player)
+                    PlayersToReturn.Add(player);
+            }
+            return PlayersToReturn;
+        }
         #endregion
 
         #region Avatar

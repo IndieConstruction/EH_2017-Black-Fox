@@ -5,11 +5,13 @@ using System;
 
 namespace BlackFox {
     public class Avatar : MonoBehaviour, IPowerUpCollector {
+
         /// <summary>
         /// Player who control this avatar
         /// </summary>
         [HideInInspector]
         public Player Player;
+        public List<Player> Enemies { get { return GameManager.Instance.PlayerMng.GetAllOtherPlayers(Player); } }
         /// <summary>
         /// Index of th e player
         /// </summary>
@@ -42,33 +44,20 @@ namespace BlackFox {
             }
         }
 
+        private int _upgradePoints;
 
-        #region Upgrade_Properties
-
-        private int _projectileUpgradeLevel;
-
-        public int ProgectileUpgradeLevel
+        public int UpgradePoints
         {
-            get { return _projectileUpgradeLevel; }
-            set { _projectileUpgradeLevel = value; }
+            get { return _upgradePoints; }
+            set { _upgradePoints = value; }
         }
-
-        private int _pinPlacerUpgradeLevel;
-
-        public int PinPlacerUpgradeLevel
-        {
-            get { return _pinPlacerUpgradeLevel; }
-            set { _pinPlacerUpgradeLevel = value; }
-        }
-
-
-        #endregion
 
 
         [HideInInspector]
         public RopeController rope;
         [HideInInspector]
         public Ship ship;
+
         AvatarUI avatarUI;
 
         /// <summary>
@@ -140,7 +129,7 @@ namespace BlackFox {
         {
             // TODO : controllare che la ship non sia doppia
             Transform transf = GameManager.Instance.LevelMng.AvatarSpwn.GetMySpawnPoint(PlayerId);
-            ship = Instantiate(AvatarData.shipConfig.Prefab, transf.position, transf.rotation , transform).GetComponent<Ship>();
+            ship = Instantiate(AvatarData.BasePrefab, transf.position, transf.rotation , transform).GetComponent<Ship>();
         }
 
         /// <summary>
@@ -169,6 +158,30 @@ namespace BlackFox {
             EventManager.OnAmmoValueChange(this);
         }
 
+        #region Upgrade
+        AvatarUpgradesConfig UpgradesConfig
+        {
+            get { return AvatarData.avatarUpgradesConfig; }
+        }
+
+        public List<IUpgrade> Upgrades = new List<IUpgrade>()  // TODO : collegare valori dello scriptable dell'avatar
+        {
+            new FireRateUpgrade(new float[] {0f, 0.01f, 0.02f, 0.03f, 0.04f, 0.27f}), 
+            new PinRegenUpgrade(new float[] {0, 0.3f, 0.5f, 0.7f, 1f, 1.5f}),
+            new PowerUpDurationUpgrade(new float[] {0, 0.3f, 0.5f, 0.7f, 1f, 1.5f}),
+            new RopeLengthUpgrade(new float[] {0, 0.3f, 0.5f, 0.7f, 1f, 1.5f})
+        };
+
+        public IUpgrade GetUpgrade(UpgardeTypes _id)
+        {
+            foreach (IUpgrade upgrade in Upgrades)
+            {
+                if (upgrade.ID == _id)
+                    return upgrade;
+            }
+            return null;
+        }
+        #endregion
         #endregion
 
         /// <summary>
@@ -188,7 +201,8 @@ namespace BlackFox {
             return damageablesList;
         }
 
-        public void CollectPowerUp(IPowerUp _powerUp) {
+        public void CollectPowerUp(IPowerUp _powerUp)
+        {
             
         }
     }
@@ -198,5 +212,14 @@ namespace BlackFox {
         Disabled = 0,
         Ready = 1,
         Enabled = 2
+    }
+
+    [Serializable]
+    public class AvatarUpgradesConfig
+    {
+        public float[] FireRateUpgrade;
+        public float[] PinRegenUpgrade;
+        public float[] PowerUpDurationUpgrade;
+        public float[] RopeLengthUpgrade;
     }
 }

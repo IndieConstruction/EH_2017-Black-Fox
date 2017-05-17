@@ -79,16 +79,16 @@ namespace BlackFox
             inputStatus.RightTriggerAxis = state.Triggers.Right;
 
             // Trigger as button
-            if (inputStatus.RightTriggerAxis < 0.4f)
+            if (inputStatus.RightTriggerAxis <= 0.1f)
             {
+                // rilasciato
                 rightTriggerOldState = inputStatus.RightTrigger = ButtonState.Released;                
-            }
-            if (inputStatus.RightTriggerAxis > 0.7f)
+            }else//            if (inputStatus.RightTriggerAxis > 0.1f)
             {
                 if (rightTriggerOldState == ButtonState.Released)
                     rightTriggerOldState = inputStatus.RightTrigger = ButtonState.Pressed;
 
-                else if (rightTriggerOldState == ButtonState.Pressed)
+                else
                     rightTriggerOldState = inputStatus.RightTrigger = ButtonState.Held;
             }
 
@@ -170,38 +170,37 @@ namespace BlackFox
             {
                 inputStatus.RightTrigger = ButtonState.Pressed;
             }
-
-            if (Input.GetButton("Key" + (int)playerIndex + "_Fire"))
+            else if (Input.GetButton("Key" + (int)playerIndex + "_Fire"))
             {
                 inputStatus.RightTrigger = ButtonState.Held;
             }
 
-            if (Input.GetButtonDown("DPadUp"))
+            if (Input.GetButtonDown("Key" + (int)playerIndex + "_DPadUp"))
             {
                 inputStatus.DPadUp = ButtonState.Pressed;
             }
 
-            if (Input.GetButtonDown("DPadLeft"))
+            if (Input.GetButtonDown("Key" + (int)playerIndex + "_DPadLeft"))
             {
                 inputStatus.DPadLeft = ButtonState.Pressed;
             }
 
-            if (Input.GetButtonDown("DPadDown"))
+            if (Input.GetButtonDown("Key" + (int)playerIndex + "_DPadDown"))
             {
                 inputStatus.DPadDown = ButtonState.Pressed;
             }
 
-            if (Input.GetButtonDown("DPadRight"))
+            if (Input.GetButtonDown("Key" + (int)playerIndex + "_DPadRight"))
             {
                 inputStatus.DPadRight = ButtonState.Pressed;
             }
 
-            if (Input.GetButtonDown("Submit"))
+            if (Input.GetButtonDown("Key" + (int)playerIndex + "_Submit"))
             {
                 inputStatus.A = ButtonState.Pressed;
             }
 
-            if (Input.GetButtonDown("Pause"))
+            if (Input.GetButtonDown("Key" + (int)playerIndex + "_Pause"))
             {
                 inputStatus.Start = ButtonState.Pressed;
             }

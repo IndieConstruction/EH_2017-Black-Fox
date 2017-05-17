@@ -35,7 +35,7 @@ namespace BlackFox
             CurrentState = State.Timer;
         }
 
-        public override SpawnerBase Init(SpawnerOptions options) {
+        public override SpawnerBase OptionInit(SpawnerOptions options) {
             Options = options as BlackHoleSpawnerOptions;
             return this;
         }

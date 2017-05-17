@@ -13,6 +13,7 @@ namespace BlackFox
         private void Start()
         {
             inputField = GetComponentInChildren<InputField>();
+            inputField.DeactivateInputField();
             CheatPanel.SetActive(false);
         }
         private void Update()
@@ -50,6 +51,7 @@ namespace BlackFox
                     break;
             }
             inputField.text = "";
+            inputField.DeactivateInputField();
             CheatPanel.SetActive(false);
         }
 

@@ -11,7 +11,12 @@ namespace BlackFox
     [CreateAssetMenu(fileName = "AvatarData", menuName = "Avatar/NewShip", order = 1)]
     public class AvatarData : ScriptableObject
     {
-        // TODO : fare rope config 
+        public Ship BasePrefab;
+        public GameObject ModelPrefab;
+        public List<ColorSetData> ColorSets;
         public ShipConfig shipConfig;
+
+        [Header("Avatar Upgrades")]
+        public AvatarUpgradesConfig avatarUpgradesConfig;
     }
 }

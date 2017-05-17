@@ -24,6 +24,21 @@ public static class PrefabUtily {
         }
         return listGameObj;
     }
+
+    /*************************************************/
+    //public static List<T> LoadAllPrefabsWithComponentOfType<T>(string _path) {
+    //    List<T> listGameObj = new List<T>();
+    //    GameObject[] prefabs = Resources.LoadAll<GameObject>(_path);
+    //    foreach (var item in prefabs) {
+    //        if (item.GetComponent<T>() != null) {
+    //            listGameObj.Add(item.GetComponent<T>());
+    //        }
+    //    }
+    //    return listGameObj;
+    //}
+    /*************************************************/
+
+
     /// <summary>
     /// Load ALL resources from the specific path inside the Resources Folder ignoring the specific parameter GameObject 
     /// </summary>

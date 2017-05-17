@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace BlackFox
 {
@@ -10,20 +11,19 @@ namespace BlackFox
     {
         MovementControllerConfig MovementConfig
         {
-            get { return ship.avatar.AvatarData.shipConfig.movementConfig; }
+            get { return ship.Avatar.AvatarData.shipConfig.movementConfig; }
         }
 
         Ship ship;
         Rigidbody rigid;
+        Vector3 fullTorque;
         #region Rotation fields
-        Vector3 appliedTroque;
-        //yaw fileds
         Vector3 proj;
         Quaternion targetRotation;
         Quaternion deltaRotation;
         Vector3 deltaAngles;
         Vector3 worldDeltaAngles;
-        //roll fields
+
         Vector3 rollProj;
         Quaternion rollTargetRotation;
         Quaternion rollDeltaRotation;
@@ -44,29 +44,48 @@ namespace BlackFox
         public void Move(Vector3 _target)
         {
             rigid.AddForce(_target * MovementConfig.MovmentSpeed, ForceMode.Force);
+            if (_target == Vector3.zero)
+                _target = transform.forward;
+            
 
-            if (_target != Vector3.zero)
-            {
-                appliedTroque = GetYawTroque(_target, Vector3.up);// + GetRollTroque(rigid.velocity, transform.forward);
-                rigid.AddTorque(appliedTroque, ForceMode.Force);
-            }
-                
+            fullTorque = Yaw(_target, Vector3.up);
+            //if ((int)ship.Avatar.PlayerId == 3)
+                //Debug.Log(fullTorque);
+            float roll = 0;
+            if (fullTorque.y < -100)
+                roll = 1;
+            else if (fullTorque.y > 100)
+                roll = -1;
+             ship.Model.transform.DOLocalRotate(new Vector3(ship.Model.transform.rotation.x, ship.Model.transform.rotation.y, roll * 30), 0.2f);
+            //Vector3 rollTarget = Vector3.Cross(fullTorque, transform.forward) * Mathf.Sin(Vector3.Angle(Vector3.up,));
+            //fullTorque += Roll(rollTarget, transform.forward);
+            rigid.AddTorque(fullTorque, ForceMode.Force);
         }
         #endregion
-        Vector3 GetRollTroque( Vector3 _target, Vector3 _normal)
+
+        
+        Vector3 Roll(Vector3 _target, Vector3 _normal)
         {
             // Compute target rotation (align rigidybody's up direction to the normal vector)
 
             rollProj = Vector3.ProjectOnPlane(_target, _normal);
-            rollTargetRotation = Quaternion.FromToRotation(transform.up, rollProj);
+            rollTargetRotation = Quaternion.LookRotation(rollProj, _normal);
 
             rollDeltaRotation = Quaternion.Inverse(transform.rotation) * rollTargetRotation;
             rollDeltaAngles = GetRelativeAngles(rollDeltaRotation.eulerAngles);
             rollWorldDeltaAngles = transform.TransformDirection(rollDeltaAngles);
 
-            return MovementConfig.RotationSpeed * rollWorldDeltaAngles - MovementConfig.RotationSpeed * 10 * rigid.angularVelocity;
+            Vector3 appliedTorque = MovementConfig.RotationSpeed * rollWorldDeltaAngles - MovementConfig.RotationSpeed * 10 * rigid.angularVelocity;
+            return appliedTorque;
         }
-        Vector3 GetYawTroque(Vector3 _target, Vector3 _normal)
+
+        /// <summary>
+        /// Yaw the gameObj toward _target onto plane defined by _normal
+        /// </summary>
+        /// <param name="_target">Target to head to</param>
+        /// <param name="_normal">Plane on wich apply the rotation</param>
+        /// <returns>Applied torque</returns>
+        Vector3 Yaw(Vector3 _target, Vector3 _normal)
         {
             // Compute target rotation (align rigidybody's up direction to the normal vector)
 
@@ -76,9 +95,8 @@ namespace BlackFox
             deltaRotation = Quaternion.Inverse(transform.rotation) * targetRotation;
             deltaAngles = GetRelativeAngles(deltaRotation.eulerAngles);
             worldDeltaAngles = transform.TransformDirection(deltaAngles);
-
-            // reference value: angular velocity more or less 10 times larger than worldDelta
-            return MovementConfig.RotationSpeed * worldDeltaAngles - MovementConfig.RotationSpeed * 10 * rigid.angularVelocity;
+            Vector3 appliedTorque = MovementConfig.RotationSpeed * worldDeltaAngles - MovementConfig.RotationSpeed * 10 * rigid.angularVelocity;
+            return appliedTorque;
         }
 
         // Convert angles above 180 degrees into negative/relative angles

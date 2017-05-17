@@ -7,8 +7,10 @@ namespace BlackFox {
     public class AmmoCleaner : PowerUpBase {
 
         public override void UsePowerUp() {
-            Avatar avatarColl = collector as Avatar;
-            avatarColl.ship.shooter.Ammo = 0;
+            foreach (IPowerUpCollector enemy in enemyCollectors)
+            {
+                (enemy as Avatar).ship.shooter.Ammo = 0;
+            }
         }
     }
 }

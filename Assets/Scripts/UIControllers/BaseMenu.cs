@@ -90,6 +90,6 @@ namespace BlackFox
         /// <summary>
         /// Funzione che in base all'override esegue la funzione del bottone attualmente selezionato
         /// </summary>
-        public virtual void Selection() { }
+        public virtual void Selection(Player _player) { }
     }
 }

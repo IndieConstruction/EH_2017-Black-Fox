@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace BlackFox {
     public interface IMenu
@@ -14,7 +13,7 @@ namespace BlackFox {
         /// <summary>
         /// Chiama la funzione per cambiare lo stato della StateMachine
         /// </summary>
-        void Selection();
+        void Selection(Player _player);
 
         /// <summary>
         /// Sposta l'indice della selezione indietro

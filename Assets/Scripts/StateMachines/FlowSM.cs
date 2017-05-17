@@ -24,6 +24,9 @@ namespace BlackFox {
                     CurrentState = new LevelSelectionState();
                     break;
                 case "BlackFox.LevelSelectionState":
+                    CurrentState = new AvatarSelectionState();
+                    break;
+                case "BlackFox.AvatarSelectionState":
                     CurrentState = new GameplayState();
                     break;
                 case "BlackFox.GameplayState":
@@ -46,11 +49,15 @@ namespace BlackFox {
                         return true;
                     break;
                 case "BlackFox.LevelSelectionState":
-                    if (_oldState.StateName == "BlackFox.MainMenuState")
+                    if (_oldState.StateName == "BlackFox.MainMenuState" || _oldState.StateName == "BlackFox.AvatarSelectionState")
+                        return true;
+                    break;
+                case "BlackFox.AvatarSelectionState":
+                    if (_oldState.StateName == "BlackFox.LevelSelectionState")
                         return true;
                     break;
                 case "BlackFox.GameplayState":
-                    if (_oldState.StateName == "BlackFox.LevelSelectionState")
+                    if (_oldState.StateName == "BlackFox.AvatarSelectionState")
                         return true;
                     break;
             }

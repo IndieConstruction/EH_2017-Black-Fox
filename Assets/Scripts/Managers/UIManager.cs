@@ -10,7 +10,7 @@ namespace BlackFox {
         [HideInInspector]
         public LevelSelectionController canvasLevelSelection;
         [HideInInspector]
-        public CanvasGameController canvasGameMenu;
+        public CanvasGameController canvasGame;
 
         public GameObject AvatarUI;
 
@@ -53,11 +53,11 @@ namespace BlackFox {
             // TODO : implementare
         }
 
-        public void SelectInMenu()
+        public void SelectInMenu(Player _player)
         {
             if (GameManager.Instance.AudioMng != null)
                 GameManager.Instance.AudioMng.PlayMenuSelectionAudio();
-            CurrentMenu.Selection();
+            CurrentMenu.Selection(_player);
         }
 
         #endregion
@@ -104,7 +104,7 @@ namespace BlackFox {
         /// </summary>
         public void CreateGameMenu()
         {
-            canvasGameMenu = Instantiate(Resources.Load("Prefabs/UI/CanvasGame") as GameObject, transform).GetComponent<CanvasGameController>();
+            canvasGame = Instantiate(Resources.Load("Prefabs/UI/CanvasGame") as GameObject, transform).GetComponent<CanvasGameController>();
         }
 
         /// <summary>
@@ -112,7 +112,7 @@ namespace BlackFox {
         /// </summary>
         public void DestroyGameMenu()
         {
-            Destroy(canvasGameMenu.gameObject);
+            Destroy(canvasGame.gameObject);
         }
         #endregion
 

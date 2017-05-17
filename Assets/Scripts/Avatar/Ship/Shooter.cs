@@ -12,8 +12,8 @@ namespace BlackFox
             get
             {
                 if (shooterBaseConfig == null)
-                    shooterBaseConfig = ship.avatar.AvatarData.shipConfig.shooterConfig.ShooterBaseConfig;
-                return ship.avatar.AvatarData.shipConfig.shooterConfig;
+                    shooterBaseConfig = ship.Avatar.AvatarData.shipConfig.shooterConfig.ShooterBaseConfig;
+                return ship.Avatar.AvatarData.shipConfig.shooterConfig;
             }
         }
 
@@ -25,7 +25,7 @@ namespace BlackFox
         {
             get { return ammo; }
             set { ammo = value;
-                ship.avatar.OnAmmoUpdate();
+                ship.Avatar.OnAmmoUpdate();
             }
         }
 
@@ -40,7 +40,7 @@ namespace BlackFox
             if (Ammo > 0)
             {
                 GameObject instantiatedProjectile = Instantiate(shooterBaseConfig.ProjectilePrefab, transform.position + transform.forward*shooterConfig.DistanceFromShipOrigin, transform.rotation);
-                instantiatedProjectile.GetComponentInChildren<MeshRenderer>().material = ship.avatar.AvatarData.shipConfig.ColorSets[ship.avatar.ColorSetIndex].PinMaterial;
+                instantiatedProjectile.GetComponentInChildren<MeshRenderer>().material = ship.Avatar.AvatarData.ColorSets[ship.Avatar.ColorSetIndex].PinMaterial;
                 instantiatedProjectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * shooterBaseConfig.BulletSpeed, ForceMode.Impulse);
                 instantiatedProjectile.GetComponent<Projectile>().SetOwner(GetComponentInParent<IShooter>());
                 Destroy(instantiatedProjectile, shooterBaseConfig.LifeTime);

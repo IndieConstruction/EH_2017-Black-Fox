@@ -25,8 +25,8 @@ namespace BlackFox {
             for (int i = 0; i < _amountOf; i++)
             {
                 tempSR = Instantiate(ShowroomPrefab, transform);
+                tempSR.transform.localPosition = tempSR.transform.localPosition + Vector3.Cross(tempSR.GetComponent<ShowRoom>().CorridorVector, transform.forward)*i;
                 rooms.Add(tempSR.GetComponent<ShowRoom>());
-                tempSR.transform.localPosition = tempSR.transform.localPosition + Vector3.Cross(tempSR.GetComponent<ShowRoom>().CorridorVector, transform.forward);                
             }
         }
 

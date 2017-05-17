@@ -12,7 +12,7 @@ namespace BlackFox
         public Vector3 CorridorVector
         {
             get {
-                if (_corridorVector == null)
+                if (_corridorVector == Vector3.zero)
                     EvaluateDirection();
                 return _corridorVector;
             }

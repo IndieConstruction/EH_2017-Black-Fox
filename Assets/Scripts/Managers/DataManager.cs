@@ -31,8 +31,8 @@ namespace BlackFox
         /// </summary>
         void InstantiateAvatarDatas()
         {
-            foreach (AvatarData data in LoadAvatarDatas())
-                AvatarDatas.Add(Instantiate(data as AvatarData));
+            foreach (AvatarData data in LoadAvatar)
+                AvatarDatas.Add(Instantiate(data));
         }
     }
 }

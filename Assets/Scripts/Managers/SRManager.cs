@@ -21,9 +21,12 @@ namespace BlackFox {
 
         void CreateShowRooms(int _amountOf)
         {
+            GameObject tempSR;
             for (int i = 0; i < _amountOf; i++)
             {
-                rooms.Add(Instantiate(ShowroomPrefab, transform).GetComponent<ShowRoom>());
+                tempSR = Instantiate(ShowroomPrefab, transform);
+                rooms.Add(tempSR.GetComponent<ShowRoom>());
+                tempSR.transform.localPosition = tempSR.transform.localPosition + Vector3.Cross(tempSR.GetComponent<ShowRoom>().CorridorVector, transform.forward);                
             }
         }
 

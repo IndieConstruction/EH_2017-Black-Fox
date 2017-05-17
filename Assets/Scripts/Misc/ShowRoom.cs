@@ -8,7 +8,19 @@ namespace BlackFox
     public class ShowRoom : MonoBehaviour
     {
         List<GameObject> avatars = new List<GameObject>();
-        Vector3 corridorVector;
+        Vector3 _corridorVector;
+        public Vector3 CorridorVector
+        {
+            get {
+                if (_corridorVector == null)
+                    EvaluateDirection();
+                return _corridorVector;
+            }
+            protected set
+            {
+                _corridorVector = value;
+            }
+        }
         int indexOfCurrent;
         public Transform currentModel;
         public Transform nextModel;
@@ -22,7 +34,6 @@ namespace BlackFox
         /// <param name="_data"></param>
         public void Init(AvatarData[] _data)
         {
-            EvaluateDirection();
             InstanceModels(_data);
         }
         /// <summary>
@@ -33,7 +44,7 @@ namespace BlackFox
             if (indexOfCurrent < avatars.Count - 1)
             {
                 indexOfCurrent++;
-                modelContainer.transform.DOMove(- corridorVector*indexOfCurrent, 0.5f);
+                modelContainer.transform.DOMove(- CorridorVector*indexOfCurrent, 0.5f);
             }
         }
         /// <summary>
@@ -44,7 +55,7 @@ namespace BlackFox
             if (indexOfCurrent > 0)
             {
                 indexOfCurrent--;
-                modelContainer.transform.DOMove(-corridorVector*indexOfCurrent, 0.5f);
+                modelContainer.transform.DOMove(-CorridorVector*indexOfCurrent, 0.5f);
             }
         }
 
@@ -55,13 +66,13 @@ namespace BlackFox
         /// </summary>
         void EvaluateDirection()
         {
-            corridorVector = nextModel.position - currentModel.position;
+            CorridorVector = nextModel.position - currentModel.position;
 
             if (prevModel != null)
                 DestroyImmediate(prevModel.gameObject);
           
             prevModel = new GameObject("prevModelPosition").transform;
-            prevModel.position = -corridorVector;
+            prevModel.position = -CorridorVector;
             prevModel.rotation = nextModel.rotation;
         }
         /// <summary>
@@ -76,7 +87,7 @@ namespace BlackFox
             modelContainer.transform.parent = transform;
 
             for (int i = 0; i < _data.Length; i++)
-                avatars.Add(Instantiate(_data[i].ModelPrefab, currentModel.position + corridorVector * i, nextModel.rotation, modelContainer.transform));
+                avatars.Add(Instantiate(_data[i].ModelPrefab, currentModel.position + CorridorVector * i, nextModel.rotation, modelContainer.transform));
 
             currentModel = avatars[0].transform;
             nextModel = avatars[1].transform;

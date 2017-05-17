@@ -6,7 +6,7 @@ namespace BlackFox {
     public class SRManager : MonoBehaviour {
 
         public GameObject ShowroomPrefab;
-        List<ShowRoom> rooms;
+        List<ShowRoom> rooms = new List<ShowRoom>();
 
         /// <summary>
         /// Instance new Showrooms and Init them

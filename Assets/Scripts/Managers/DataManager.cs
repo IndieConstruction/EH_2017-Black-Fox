@@ -23,7 +23,7 @@ namespace BlackFox
         /// </summary>
         AvatarData[] LoadAvatarDatas()
         {
-            return Resources.LoadAll("ShipModels") as AvatarData[];            
+            return Resources.LoadAll<AvatarData>("ShipModels");            
         }
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace BlackFox
         /// </summary>
         void InstantiateAvatarDatas()
         {
-            foreach (AvatarData data in LoadAvatar)
+            foreach (AvatarData data in LoadAvatarDatas())
                 AvatarDatas.Add(Instantiate(data));
         }
     }

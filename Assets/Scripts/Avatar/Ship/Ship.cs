@@ -15,9 +15,11 @@ namespace BlackFox {
             get { return Avatar.AvatarData.shipConfig; }
         }
 
+        [HideInInspector]
+        public GameObject Model;
+
         MovementController movment;
         PlacePin pinPlacer;
-        public Transform GraphicContainer;
         AvatarUI avatarUi;
         Tweener damageTween;
 
@@ -35,9 +37,7 @@ namespace BlackFox {
         private void Update()
         {
             if (Avatar.State == AvatarState.Enabled)
-            {
                 CheckInputStatus(Avatar.Player.InputStatus);
-            }
         }
 
         #region API
@@ -45,6 +45,7 @@ namespace BlackFox {
         {
             Avatar = _avatar;
             rigid = GetComponent<Rigidbody>();
+            InstantiateModel();
             damageables = _damageablesPrefabs;
             ChangeColor(Avatar.AvatarData.ColorSets[Avatar.ColorSetIndex].ShipMaterialMain);
 
@@ -57,6 +58,11 @@ namespace BlackFox {
             avatarUi = GetComponentInChildren<AvatarUI>();
         }
 
+        public void InstantiateModel()
+        {
+            Model = Instantiate(Avatar.AvatarData.ModelPrefab, transform.position, transform.rotation, transform);
+        }
+
         /// <summary>
         /// Initialize initial values of Avatar
         /// </summary>
@@ -67,7 +73,7 @@ namespace BlackFox {
 
         public void ChangeColor(Material _mat)
         {
-            foreach (var m in GetComponentsInChildren<MeshRenderer>())
+            foreach (var m in Model.GetComponentsInChildren<MeshRenderer>())
             {
                 Material[] mats = new Material[] { _mat };
                 m.materials = mats;

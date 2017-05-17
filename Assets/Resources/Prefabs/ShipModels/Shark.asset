@@ -13,8 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BasePrefab: {fileID: 114084304304996402, guid: 1e454b20c5c81a94c83dfadd7cbda89e,
     type: 2}
-  ModelPrefab: {fileID: 1000012790150022, guid: c609ff1263f22a045a115cc9524ecdc7,
-    type: 2}
+  ModelPrefab: {fileID: 100000, guid: da135962de661e445ad0bab73014d9df, type: 3}
   ColorSets:
   - {fileID: 11400000, guid: eb39c0c34e587a045ba43e8cc4994fb2, type: 2}
   - {fileID: 11400000, guid: c0d8480790832cd4fbf3a963a4cded1c, type: 2}

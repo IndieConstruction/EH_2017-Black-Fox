@@ -56,7 +56,7 @@ namespace BlackFox
                 roll = 1;
             else if (fullTorque.y > 100)
                 roll = -1;
-             ship.GraphicContainer.DOLocalRotate(new Vector3(ship.GraphicContainer.rotation.x, ship.GraphicContainer.rotation.y, roll * 30), 0.2f);
+             ship.Model.transform.DOLocalRotate(new Vector3(ship.Model.transform.rotation.x, ship.Model.transform.rotation.y, roll * 30), 0.2f);
             //Vector3 rollTarget = Vector3.Cross(fullTorque, transform.forward) * Mathf.Sin(Vector3.Angle(Vector3.up,));
             //fullTorque += Roll(rollTarget, transform.forward);
             rigid.AddTorque(fullTorque, ForceMode.Force);

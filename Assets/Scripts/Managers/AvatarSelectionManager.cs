@@ -24,6 +24,17 @@ namespace BlackFox {
             //AvatarSelectionPanel.SetActive(false);
         }
 
+
+        public void CheckUpgradeControllersState()
+        {
+            foreach (AvatarSelectionController controller in avatarSelectionControllers)
+            {
+                if (controller.CurrentState == UpgradeControllerState.Unready)
+                    return;
+            }
+            GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new GameplayState() });
+        }
+
         public override void GoUpInMenu(Player _player) {
             foreach (AvatarSelectionController controller in avatarSelectionControllers) {
                 if ((int)controller.MenuID == (int)_player.ID) {

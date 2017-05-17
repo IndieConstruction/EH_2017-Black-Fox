@@ -16,7 +16,7 @@ namespace BlackFox
         public GameObject AudioManagerPrefab;
         public GameObject UpgradePointsManagerPrefab;
         public GameObject PowerUpManagerPrefab;
-        public GameObject ShowRoomPrefab;
+        public GameObject SRManagerPrefab;
         #endregion
 
         #region Managers
@@ -35,7 +35,7 @@ namespace BlackFox
         [HideInInspector]
         public PowerUpManager PowerUpManager;
         [HideInInspector]
-        public ShowRoom ShowRm;
+        public SRManager SRMng;
         #endregion
 
         [HideInInspector]
@@ -105,7 +105,7 @@ namespace BlackFox
 
         public void InstantiateShowRoom()
         {
-            ShowRm = Instantiate(ShowRoomPrefab, transform).GetComponent<ShowRoom>();
+            SRMng = Instantiate(SRManagerPrefab, transform).GetComponent<SRManager>();
         }
         #endregion
         #endregion

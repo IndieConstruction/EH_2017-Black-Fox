@@ -18,7 +18,7 @@ namespace BlackFox
             GameManager.Instance.InstantiatePowerUpManager();
             GameManager.Instance.InstantiateShowRoom();
 
-            GameManager.Instance.ShowRm.Init(Resources.LoadAll<AvatarData>("Prefabs/ShipModels"));
+            GameManager.Instance.SRMng.Init(GameManager.Instance.DataMng.AvatarDatas);
         }
 
         public override void OnUpdate()

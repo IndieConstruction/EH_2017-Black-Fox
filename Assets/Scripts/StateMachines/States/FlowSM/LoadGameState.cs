@@ -16,6 +16,8 @@ namespace BlackFox
             GameManager.Instance.InstantiateAudioManager();
             GameManager.Instance.InstantiateUpgradePointsManager();
             GameManager.Instance.InstantiatePowerUpManager();
+            GameManager.Instance.InstantiateDataManager();
+            GameManager.Instance.DataMng.Init();
             GameManager.Instance.InstantiateShowRoom();
 
             GameManager.Instance.SRMng.Init(GameManager.Instance.DataMng.AvatarDatas);

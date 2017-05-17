@@ -25,7 +25,7 @@ namespace BlackFox
         {
             get {
                 if (_avatarData == null) {
-                    _avatarData = Instantiate(Resources.Load("Prefabs/ShipModels/Owl") as AvatarData);
+                    _avatarData = Instantiate(Resources.Load("ShipModels/Owl") as AvatarData);
                 }
                 return _avatarData;
             }

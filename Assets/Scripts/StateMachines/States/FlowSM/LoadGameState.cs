@@ -16,6 +16,8 @@ namespace BlackFox
             GameManager.Instance.InstantiateAudioManager();
             GameManager.Instance.InstantiateUpgradePointsManager();
             GameManager.Instance.InstantiatePowerUpManager();
+            GameManager.Instance.InstantiateDataManager();
+            GameManager.Instance.DataMng.Init();
             GameManager.Instance.InstantiateShowRoom();
 
             GameManager.Instance.ShowRm.Init(Resources.LoadAll<AvatarData>("Prefabs/ShipModels"));

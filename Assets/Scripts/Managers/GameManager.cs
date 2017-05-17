@@ -16,6 +16,7 @@ namespace BlackFox
         public GameObject AudioManagerPrefab;
         public GameObject UpgradePointsManagerPrefab;
         public GameObject PowerUpManagerPrefab;
+        public GameObject DataMngPrefab;
         public GameObject ShowRoomPrefab;
         #endregion
 
@@ -34,6 +35,8 @@ namespace BlackFox
         public UpgradePointsManager UpgradePointsMng;
         [HideInInspector]
         public PowerUpManager PowerUpManager;
+        [HideInInspector]
+        public DataManager DataMng;
         [HideInInspector]
         public ShowRoom ShowRm;
         #endregion
@@ -56,6 +59,7 @@ namespace BlackFox
         {
             flowSM = gameObject.AddComponent<FlowSM>();
         }
+
         #region API
         public void QuitApplication()
         {
@@ -101,6 +105,11 @@ namespace BlackFox
         public void InstantiatePowerUpManager()
         {
             PowerUpManager = Instantiate(PowerUpManagerPrefab, transform).GetComponent<PowerUpManager>();
+        }
+
+        public void InstantiateDataManager()
+        {
+            DataMng = Instantiate(DataMngPrefab, transform).GetComponent<DataManager>();
         }
 
         public void InstantiateShowRoom()

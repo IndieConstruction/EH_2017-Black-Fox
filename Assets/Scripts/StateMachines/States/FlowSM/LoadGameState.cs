@@ -20,7 +20,7 @@ namespace BlackFox
             GameManager.Instance.DataMng.Init();
             GameManager.Instance.InstantiateShowRoom();
 
-            GameManager.Instance.SRMng.Init(GameManager.Instance.DataMng.AvatarDatas);
+            GameManager.Instance.SRMng.Init(GameManager.Instance.DataMng.AvatarDatas.ToArray());
         }
 
         public override void OnUpdate()

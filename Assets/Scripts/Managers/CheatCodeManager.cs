@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,8 @@ namespace BlackFox
     {
         public GameObject CheatPanel;
         InputField inputField;
+
+        char delimiter = '#';
 
         private void Start()
         {
@@ -30,26 +33,45 @@ namespace BlackFox
         /// <param name="_cheat"></param>
         public void GetInput(string _cheat)
         {
-            switch (_cheat)
+            if (_cheat == "ammo")
             {
-                case "ammo":
-                    foreach (Player player in GameManager.Instance.PlayerMng.Players)
-                    {
-                        player.Avatar.ship.shooter.AmmoCheat();
-                    }
-                    Debug.Log("Infinite Ammo");
-                    break;
-                case "round":
-                    GameManager.Instance.LevelMng.PlayerWin("CheatCode");
-                    break;
-                case "level":
-                    GameManager.Instance.LevelMng.gameplaySM.SetPassThroughOrder(new List<StateBase>() { new CleanSceneState(), new GameOverState()});
-                    break;
-
-                default:
-                    Debug.LogWarning("Wrong CheatCode");
-                    break;
+                foreach (Player player in GameManager.Instance.PlayerMng.Players)
+                {
+                    player.Avatar.ship.shooter.AmmoCheat();
+                }
+                Debug.Log("Infinite Ammo");
             }
+            else if (_cheat == "round")
+                GameManager.Instance.LevelMng.PlayerWin("CheatCode");
+            else if (_cheat == "level")
+                GameManager.Instance.LevelMng.gameplaySM.SetPassThroughOrder(new List<StateBase>() { new CleanSceneState(), new GameOverState() });
+            else if (_cheat.Contains("bull"))
+            {
+                string[] subStrings = _cheat.Split(delimiter);
+                int index = Int32.Parse(subStrings[1]);
+                GameManager.Instance.PlayerMng.Players[index].AvatarData = Instantiate(Resources.Load("ShipModels/Bull") as AvatarData);
+            }
+            else if(_cheat.Contains("hummingbird"))
+            {
+                string[] subStrings = _cheat.Split(delimiter);
+                int index = Int32.Parse(subStrings[1]);
+                GameManager.Instance.PlayerMng.Players[index].AvatarData = Instantiate(Resources.Load("ShipModels/Hummingbird") as AvatarData);
+            }
+            else if(_cheat.Contains("shark"))
+            {
+                string[] subStrings = _cheat.Split(delimiter);
+                int index = Int32.Parse(subStrings[1]);
+                GameManager.Instance.PlayerMng.Players[index].AvatarData = Instantiate(Resources.Load("ShipModels/Shark") as AvatarData);
+            }
+            else if(_cheat.Contains("owl"))
+            {
+                string[] subStrings = _cheat.Split(delimiter);
+                int index = Int32.Parse(subStrings[1]);
+                GameManager.Instance.PlayerMng.Players[index].AvatarData = Instantiate(Resources.Load("ShipModels/Owl") as AvatarData);
+            }
+            else
+                Debug.LogWarning("Wrong CheatCode");
+
             inputField.text = "";
             inputField.DeactivateInputField();
             CheatPanel.SetActive(false);

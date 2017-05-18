@@ -13,7 +13,10 @@ namespace BlackFox
             GameManager.Instance.LevelMng.InstantiateAvatarSpawner();
             GameManager.Instance.LevelMng.InstantiateRopeManager();
             GameManager.Instance.LevelMng.InstantiateSpawnerManager();
+            GameManager.Instance.LevelMng.SpawnerMng.InstantiateNewSpawners(GameManager.Instance.LevelMng.CurrentLevel);
+
             GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.Blocked);
+
             GameManager.Instance.UiMng.canvasGame.upgradeMenuManager.Setup(GameManager.Instance.PlayerMng.Players);
             GameManager.Instance.PlayerMng.SetupAvatars(true);
         }

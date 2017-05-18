@@ -9,6 +9,7 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("PlayState");
+            GameManager.Instance.LevelMng.SpawnerMng.ToggleSpawners(true);
             GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.PlayInput);
             GameManager.Instance.LevelMng.RoundBegin();
             EventManager.OnAgentKilled += HandleOnAgentKilled;

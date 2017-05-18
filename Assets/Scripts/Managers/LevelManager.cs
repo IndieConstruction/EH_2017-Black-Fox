@@ -96,15 +96,12 @@ namespace BlackFox
                 return Resources.Load<Level>("Levels/Level" + LevelNumber);
         }
 
-
         /// <summary>
         /// Instance a preloaded SpawnManager
         /// </summary>
         public void InstantiateSpawnerManager()
         {
             SpawnerMng = Instantiate(SpawnerMngPrefab, transform).GetComponent<SpawnerManager>();
-
-            SpawnerMng.InstantiateNewSpawners(CurrentLevel);
         }
         /// <summary>
         /// Instance a preloaded RopeManager

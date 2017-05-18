@@ -14,6 +14,9 @@ namespace BlackFox {
         [HideInInspector]
         public AvatarSelectionManager avatarSelectionManager;
 
+        [HideInInspector]
+        public LoadingScreen loadingCanvas;
+
         public GameObject AvatarUI;
 
         [HideInInspector]
@@ -62,6 +65,24 @@ namespace BlackFox {
             CurrentMenu.Selection(_player);
         }
 
+        #endregion
+
+        #region Loading Canvas
+        /// <summary>
+        /// Crea il CanvasMenu non appena subentra il MainMenuState
+        /// </summary>
+        public void CreateLoadingCanvas()
+        {
+            loadingCanvas = Instantiate(Resources.Load("Prefabs/UI/LoadingCanvas") as GameObject, transform).GetComponent<LoadingScreen>();
+        }
+
+        /// <summary>
+        /// Distrugge il CanvasMenu non appena subentra il MainMenuState
+        /// </summary
+        public void DestroyLoadingCanvas()
+        {
+            Destroy(loadingCanvas.gameObject);
+        }
         #endregion
 
         #region Main Menu

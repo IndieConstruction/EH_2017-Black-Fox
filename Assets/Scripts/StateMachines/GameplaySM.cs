@@ -96,7 +96,6 @@ namespace BlackFox {
                     break;
 
             }
-
             return false;
         }
     }

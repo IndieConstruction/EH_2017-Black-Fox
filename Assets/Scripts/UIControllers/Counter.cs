@@ -35,9 +35,6 @@ namespace BlackFox
                     }).SetEase(Ease.OutBounce);
                 }).SetEase(Ease.OutBounce);
             }).SetEase(Ease.OutBounce);
-
         }
-
-
     }
 }

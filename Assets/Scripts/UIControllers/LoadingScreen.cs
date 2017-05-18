@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace BlackFox{
+namespace BlackFox {
     public class LoadingScreen : MonoBehaviour
     {
         public Image LoadingPanel;

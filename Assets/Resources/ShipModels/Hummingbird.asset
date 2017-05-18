@@ -22,8 +22,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4f7d104e8296c744cae0d117fe6d4fee, type: 2}
   - {fileID: 11400000, guid: 887514b0dce2cd24ea162fc71cac5469, type: 2}
   shipConfig:
-    FireRate: 0.3
     MaxLife: 15
+    FireRate: 0.3
     movementConfig:
       RotationSpeed: 10
       MovmentSpeed: 1000
@@ -34,6 +34,7 @@ MonoBehaviour:
         LifeTime: 2
         BulletSpeed: 150
       DistanceFromShipOrigin: 3
+      ProjectileDamage: 1
       AddedAmmo: 15
       MaxAmmo: 50
     placePinConfig:

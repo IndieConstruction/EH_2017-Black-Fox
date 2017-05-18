@@ -48,12 +48,12 @@ namespace BlackFox {
 
         public override void GoUpInMenu(Player _player)
         {
-            //Change the color.
+            GameManager.Instance.SRMng.rooms[(int)_player.ID - 1].ShowNextColor();
         }
 
         public override void GoDownInMenu(Player _player)
         {
-            //Change the color.
+            GameManager.Instance.SRMng.rooms[(int)_player.ID - 1].ShowPreviousColor();
         }
 
         public override void Selection(Player _player)

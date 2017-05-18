@@ -35,7 +35,7 @@ namespace BlackFox
             if (IsActive)
             {
                 countdown -= Time.deltaTime;
-                if (timer <= 0)
+                if (countdown <= 0)
                 {
                     SpawnPowerUp();
                     countdown = timer;

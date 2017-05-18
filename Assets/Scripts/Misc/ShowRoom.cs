@@ -73,7 +73,7 @@ namespace BlackFox
                 colorIndex++;
                 foreach (MeshRenderer renderer in avatars[indexOfCurrent].GetComponentsInChildren<MeshRenderer>())
                 {
-                    renderer.materials[0] = datas[indexOfCurrent].ColorSets[colorIndex].ShipMaterialMain;
+                    renderer.materials = new Material[] { datas[indexOfCurrent].ColorSets[colorIndex].ShipMaterialMain };
                 }
             }
         }
@@ -88,7 +88,7 @@ namespace BlackFox
                 colorIndex--;
                 foreach (MeshRenderer renderer in avatars[indexOfCurrent].GetComponentsInChildren<MeshRenderer>())
                 {
-                    renderer.materials[0] = datas[indexOfCurrent].ColorSets[colorIndex].ShipMaterialMain;
+                    renderer.materials = new Material[] { datas[indexOfCurrent].ColorSets[colorIndex].ShipMaterialMain };
                 }
             }
         }
@@ -105,6 +105,7 @@ namespace BlackFox
                 DestroyImmediate(prevModel.gameObject);
 
             prevModel = new GameObject("prevModelPosition").transform;
+            prevModel.transform.parent = transform;
             prevModel.position = -CorridorVector;
             prevModel.rotation = nextModel.rotation;
         }

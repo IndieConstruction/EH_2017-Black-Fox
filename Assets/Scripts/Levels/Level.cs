@@ -12,6 +12,9 @@ namespace BlackFox {
 
         [Header("Level Options")]
         public LevelOptions LevelOptions;
+        public float MinPowerUpRatio;
+        public float MaxPowerUpRatio;
+
 
         [Header("Spawners")]
         public ArrowsSpawerOptions ArrowsSpawner;

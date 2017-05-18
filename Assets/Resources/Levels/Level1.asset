@@ -21,7 +21,7 @@ MonoBehaviour:
     SubPoints: 1
     PointsToWin: 5
   MinPowerUpRatio: 5
-  MaxPowerUpRatio: 15
+  MaxPowerUpRatio: 10
   ArrowsSpawner:
     SpawnerPrefab: {fileID: 0}
     ArrowPrefab: {fileID: 0}

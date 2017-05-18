@@ -1,14 +1,17 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
 namespace BlackFox
 {
-    public class ShowRoom : MonoBehaviour
+    public class ShowRoomController : MonoBehaviour
     {
         List<GameObject> avatars = new List<GameObject>();
-        AvatarData[] datas;
+        List<AvatarData> datas { get { return manager.datas; } }
+        Player player;
+        SRManager manager;
         Vector3 _corridorVector;
         public Vector3 CorridorVector
         {
@@ -23,8 +26,8 @@ namespace BlackFox
                 _corridorVector = value;
             }
         }
-        int indexOfCurrent;
-        int colorIndex;
+        public int indexOfCurrent { get; private set; }
+        public int colorIndex { get; private set; }
         public Transform currentModel;
         public Transform nextModel;
         Transform prevModel;
@@ -35,10 +38,11 @@ namespace BlackFox
         /// Reorder the direction to follow and the Istance of the Avatar Models
         /// </summary>
         /// <param name="_data"></param>
-        public void Init(AvatarData[] _data)
+        public void Init(Player myPlayer, SRManager _manager)
         {
-            datas = _data;
-            InstanceModels(_data);
+            player = myPlayer;
+            manager = _manager;
+            InstanceModels(datas.ToArray());
         }
         /// <summary>
         /// Dislay next Model
@@ -68,10 +72,10 @@ namespace BlackFox
         /// </summary>
         public void ShowNextColor()
         {
-            if (colorIndex < datas[indexOfCurrent].ColorSets.Count - 1)
+            colorIndex = manager.GetNextColorID(SRManager.ColorSelectDirection.up, colorIndex);
+            foreach (GameObject avatar in avatars)
             {
-                colorIndex++;
-                foreach (MeshRenderer renderer in avatars[indexOfCurrent].GetComponentsInChildren<MeshRenderer>())
+                foreach (MeshRenderer renderer in avatar.GetComponentsInChildren<MeshRenderer>())
                 {
                     renderer.materials = new Material[] { datas[indexOfCurrent].ColorSets[colorIndex].ShipMaterialMain };
                 }
@@ -83,16 +87,17 @@ namespace BlackFox
         /// </summary>
         public void ShowPreviousColor()
         {
-            if (colorIndex > 0)
+            colorIndex = manager.GetNextColorID(SRManager.ColorSelectDirection.down, colorIndex);
+            foreach (GameObject avatar in avatars)
             {
-                colorIndex--;
-                foreach (MeshRenderer renderer in avatars[indexOfCurrent].GetComponentsInChildren<MeshRenderer>())
+                foreach (MeshRenderer renderer in avatar.GetComponentsInChildren<MeshRenderer>())
                 {
                     renderer.materials = new Material[] { datas[indexOfCurrent].ColorSets[colorIndex].ShipMaterialMain };
                 }
             }
         }
         #endregion
+
         /// <summary>
         /// Used to evaluate the positive direction of the ShowRoom
         /// It also istance prevModel
@@ -121,9 +126,16 @@ namespace BlackFox
             modelContainer.transform.parent = transform;
 
             for (int i = 0; i < _data.Length; i++)
+            {
                 avatars.Add(Instantiate(_data[i].ModelPrefab, currentModel.position + CorridorVector * i, nextModel.rotation, modelContainer.transform));
+                foreach(MeshRenderer mesh in avatars[i].GetComponentsInChildren<MeshRenderer>())
+                {
+                    mesh.materials = new Material[] { datas[i].ColorSets[(int)player.ID].ShipMaterialMain };
+                }
+            }
 
             currentModel = avatars[0].transform;
+            colorIndex = (int)player.ID;
             nextModel = avatars[1].transform;
         }
     }

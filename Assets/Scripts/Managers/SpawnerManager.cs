@@ -31,6 +31,33 @@ namespace BlackFox
                     spawner.Init();
             }
         }
+
+        public void ReStartSpawners()
+        {
+            foreach (SpawnerBase spawner in Spawners)
+            {
+                if (spawner != null)
+                    spawner.Restart();
+            }
+        }
+
+        public void CleanSpawnersSpawnedElements()
+        {
+            foreach (SpawnerBase spawner in Spawners)
+            {
+                if (spawner != null)
+                    spawner.CleanSpawned();
+            }
+        }
+
+        public void ToggleSpawners(bool _value)
+        {
+            foreach (SpawnerBase spawner in Spawners)
+            {
+                if (spawner != null)
+                    spawner.Toggle(_value);
+            }
+        }
         #endregion
     }
 }

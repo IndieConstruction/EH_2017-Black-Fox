@@ -25,8 +25,6 @@ namespace BlackFox
 
             container = new GameObject("ExternalAgentContainer");
             container.transform.parent = GameManager.Instance.LevelMng.Arena.transform;
-
-            IsActive = true;
         }
 
         public override SpawnerBase OptionInit(SpawnerOptions options)
@@ -56,7 +54,8 @@ namespace BlackFox
 
         public override void CleanSpawned()
         {
-            Destroy(container);
+            if(container != null)
+                Destroy(container);
         }
         #endregion
 

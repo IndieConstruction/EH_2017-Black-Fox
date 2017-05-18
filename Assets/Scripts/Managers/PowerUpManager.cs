@@ -50,7 +50,6 @@ namespace BlackFox
             container = new GameObject("PowerUpContainer");
             container.transform.parent = transform;
             countdown = timer;
-            Toggle(true);
         }
 
         public void Toggle(bool _value)
@@ -58,7 +57,7 @@ namespace BlackFox
             IsActive = _value;
         }
 
-        void CleanSpawned()
+        public void CleanSpawned()
         {
             if (container != null)
                 Destroy(container); 

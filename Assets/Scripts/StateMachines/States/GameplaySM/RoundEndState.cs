@@ -10,6 +10,7 @@ namespace BlackFox
         {
             Debug.Log("RoundEndState");
             GameManager.Instance.LevelMng.SpawnerMng.ToggleSpawners(false);
+            GameManager.Instance.PowerUpManager.Toggle(false);
             GameManager.Instance.UiMng.CurrentMenu = GameManager.Instance.UiMng.canvasGame.endRoundUI;
             GameManager.Instance.UiMng.canvasGame.endRoundUI.SetEndRoundPanelStatus(true);
             GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInput, PlayerLabel.One, PlayerState.Blocked);

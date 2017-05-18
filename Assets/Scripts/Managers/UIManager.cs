@@ -131,7 +131,7 @@ namespace BlackFox {
         /// Distrugge il CanvasMenu non appena subentra il MainMenuState
         /// </summary>
         public void DestroyAvatarSelectionMenu() {
-            Destroy(avatarSelectionManager.gameObject);
+            //Destroy(avatarSelectionManager.gameObject);
         }
         #endregion
 

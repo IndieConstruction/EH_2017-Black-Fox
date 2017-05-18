@@ -13,8 +13,14 @@ namespace BlackFox
         List<GameObject> PowerUps = new List<GameObject>();
         bool IsActive = false;
         GameObject container;
-        public float MinTimeToSpawn;
-        public float MaxTimeToSpawn;
+        float MinTimeToSpawn
+        {
+            get { return GameManager.Instance.LevelMng.CurrentLevel.MinPowerUpRatio; }
+        }
+        float MaxTimeToSpawn
+        {
+            get { return GameManager.Instance.LevelMng.CurrentLevel.MaxPowerUpRatio; }
+        }
         float timer {
             get
             {

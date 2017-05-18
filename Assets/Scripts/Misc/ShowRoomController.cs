@@ -128,6 +128,7 @@ namespace BlackFox
             for (int i = 0; i < _data.Length; i++)
             {
                 avatars.Add(Instantiate(_data[i].ModelPrefab, currentModel.position + CorridorVector * i, nextModel.rotation, modelContainer.transform));
+                avatars[i].AddComponent<RotateOnPosition>();
                 foreach(MeshRenderer mesh in avatars[i].GetComponentsInChildren<MeshRenderer>())
                 {
                     mesh.materials = new Material[] { datas[i].ColorSets[(int)player.ID].ShipMaterialMain };

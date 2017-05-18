@@ -9,8 +9,8 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("PreInitState");
-            GameManager.Instance.UiMng.CreateLoadingCanvas();
-            GameManager.Instance.UiMng.loadingCanvas.FadeIn();
+            //GameManager.Instance.UiMng.CreateLoadingCanvas();
+            //GameManager.Instance.UiMng.loadingCanvas.FadeIn();
 
             GameManager.Instance.LevelMng.InstantiateArena();
             GameManager.Instance.LevelMng.InstantiateAvatarSpawner();
@@ -23,6 +23,7 @@ namespace BlackFox
             GameManager.Instance.LevelMng.SetupCore();
             GameManager.Instance.UiMng.canvasGame.upgradeMenuManager.Setup(GameManager.Instance.PlayerMng.Players);
             GameManager.Instance.PlayerMng.SetupAvatars(true);
+
         }
 
         public override void OnUpdate()

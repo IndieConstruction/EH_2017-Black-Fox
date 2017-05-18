@@ -8,10 +8,12 @@ namespace BlackFox
     public class ShowRoom : MonoBehaviour
     {
         List<GameObject> avatars = new List<GameObject>();
+        AvatarData[] datas;
         Vector3 _corridorVector;
         public Vector3 CorridorVector
         {
-            get {
+            get
+            {
                 if (_corridorVector == Vector3.zero)
                     EvaluateDirection();
                 return _corridorVector;
@@ -22,11 +24,12 @@ namespace BlackFox
             }
         }
         int indexOfCurrent;
+        int colorIndex;
         public Transform currentModel;
         public Transform nextModel;
         Transform prevModel;
         GameObject modelContainer;
-        
+
         #region API
         /// <summary>
         /// Reorder the direction to follow and the Istance of the Avatar Models
@@ -34,6 +37,7 @@ namespace BlackFox
         /// <param name="_data"></param>
         public void Init(AvatarData[] _data)
         {
+            datas = _data;
             InstanceModels(_data);
         }
         /// <summary>
@@ -44,7 +48,7 @@ namespace BlackFox
             if (indexOfCurrent < avatars.Count - 1)
             {
                 indexOfCurrent++;
-                modelContainer.transform.DOMove(- CorridorVector*indexOfCurrent, 0.5f);
+                modelContainer.transform.DOMove(-CorridorVector * indexOfCurrent, 0.5f);
             }
         }
         /// <summary>
@@ -55,10 +59,39 @@ namespace BlackFox
             if (indexOfCurrent > 0)
             {
                 indexOfCurrent--;
-                modelContainer.transform.DOMove(-CorridorVector*indexOfCurrent, 0.5f);
+                modelContainer.transform.DOMove(-CorridorVector * indexOfCurrent, 0.5f);
             }
         }
 
+        /// <summary>
+        /// Show next color of the ColorSet list of the current AvatarData
+        /// </summary>
+        public void ShowNextColor()
+        {
+            if (colorIndex < datas[indexOfCurrent].ColorSets.Count - 1)
+            {
+                colorIndex++;
+                foreach (MeshRenderer renderer in avatars[indexOfCurrent].GetComponentsInChildren<MeshRenderer>())
+                {
+                    renderer.materials[0] = datas[indexOfCurrent].ColorSets[colorIndex].ShipMaterialMain;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Show previous color of the ColorSet list of the current AvatarData
+        /// </summary>
+        public void ShowPreviousColor()
+        {
+            if (colorIndex > 0)
+            {
+                colorIndex--;
+                foreach (MeshRenderer renderer in avatars[indexOfCurrent].GetComponentsInChildren<MeshRenderer>())
+                {
+                    renderer.materials[0] = datas[indexOfCurrent].ColorSets[colorIndex].ShipMaterialMain;
+                }
+            }
+        }
         #endregion
         /// <summary>
         /// Used to evaluate the positive direction of the ShowRoom
@@ -70,7 +103,7 @@ namespace BlackFox
 
             if (prevModel != null)
                 DestroyImmediate(prevModel.gameObject);
-          
+
             prevModel = new GameObject("prevModelPosition").transform;
             prevModel.position = -CorridorVector;
             prevModel.rotation = nextModel.rotation;

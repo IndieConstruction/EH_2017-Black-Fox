@@ -7,61 +7,37 @@ namespace BlackFox
     public class DataManager : MonoBehaviour
     {
         List<AvatarData> _avatarDatas = new List<AvatarData>();
-        public List<AvatarData> AvatarDatas
-        {
-            get { return _avatarDatas; }
-            private set { _avatarDatas = value; }
+        public List<AvatarData> AvatarDatas;
+        List<ConstrainedAvatarData> _playerSelection;
+        public List<ConstrainedAvatarData> PlayerSelection {
+            get { return _playerSelection; }
+            set { _playerSelection = value; }
         }
-
-        List<ModelConstrain> modelConstrains = new List<ModelConstrain>();
 
         public void Init()
         {
             InstantiateAvatarDatas();
-            InitConstrains(GameManager.Instance.PlayerMng.Players);
+            EvaluateStartingSelections();
         }
 
-        public void SetConstrainsAvatar(Player _player, AvatarData _data)
+
+        void EvaluateStartingSelections()
         {
-            for (int i = 0; i < modelConstrains.Count; i++)
+            int firstDataIndex = 0;
+            int firstColorID = 0;
+            foreach (Player player in GameManager.Instance.PlayerMng.Players)
             {
-                if (modelConstrains[i].player == _player)
-                    modelConstrains[i].avatarData = AvatarDatas[i];
-            }
-        }
+                PlayerSelection.Add(new ConstrainedAvatarData(player, firstColorID, firstDataIndex));
 
-        public void SetConstrainsColor(Player _player, ColorSetData _color)
-        {
-            for (int i = 0; i < modelConstrains.Count; i++)
-            {
-                if (modelConstrains[i].player == _player)
-                    modelConstrains[i].colorSet = _color;
-            }
-        }
+                if (firstDataIndex < AvatarDatas.Count - 1)
+                    firstDataIndex++;
+                else
+                    firstDataIndex = 0;
 
-        public List<ModelConstrain> GetConstrains(Player _player)
-        {
-            List<ModelConstrain> constrains = new List<ModelConstrain>();
-            for (int i = 0; i < modelConstrains.Count; i++)
-            {
-                if (modelConstrains[i].player != _player)
-                    constrains.Add(modelConstrains[i]);
-            }
-            return constrains;
-        }
-
-        void InitConstrains(List<Player> _playerList)
-        {
-            for (int i = 0; i < _playerList.Count; i++)
-                modelConstrains.Add(new ModelConstrain(_playerList[i]));
-
-            for (int i = 0; i < modelConstrains.Count && i < AvatarDatas.Count; i++)
-            {
-                if (modelConstrains[i].avatarData == null)
-                    modelConstrains[i].avatarData = AvatarDatas[i];
-
-                if (modelConstrains[i].colorSet == null)
-                    modelConstrains[i].colorSet = AvatarDatas[i].ColorSets[i];
+                if (firstColorID < AvatarDatas[firstDataIndex - 1].ColorSets.Count - 1)
+                    firstColorID++;
+                else
+                    firstColorID = 0;
             }
         }
 
@@ -81,17 +57,41 @@ namespace BlackFox
             foreach (AvatarData data in LoadAvatarDatas())
                 AvatarDatas.Add(Instantiate(data));
         }
+
+        ConstrainedAvatarData OnConstrainSet(ConstrainedAvatarData _newData)
+        {
+            if (_newData.SelectedDataColorId >= _avatarDatas[_newData.SelectedDataIndex].ColorSets.Count)
+                return new ConstrainedAvatarData(_newData.player, 0, _newData.SelectedDataIndex);
+
+            if (_newData.SelectedDataIndex >= _avatarDatas.Count)
+                return new ConstrainedAvatarData(_newData.player);
+
+            ConstrainedAvatarData _oldData = new ConstrainedAvatarData(_newData.player);
+            foreach (ConstrainedAvatarData currData in PlayerSelection)
+                if (_newData.player == currData.player)
+                    _oldData = _newData;
+
+            foreach (ConstrainedAvatarData selection in PlayerSelection)
+            {
+                if (selection.SelectedDataColorId == _newData.SelectedDataColorId)
+                    return new ConstrainedAvatarData(_newData.player, (_newData.SelectedDataColorId < _oldData.SelectedDataColorId) ? _newData.SelectedDataColorId-- : _newData.SelectedDataColorId++);
+            }
+
+            return _newData;
+        }
     }
 
-    public class ModelConstrain
+    public class ConstrainedAvatarData
     {
         public Player player;
-        public AvatarData avatarData;
-        public ColorSetData colorSet;
+        public int SelectedDataIndex;
+        public int SelectedDataColorId;
 
-        public ModelConstrain(Player _player)
+        public ConstrainedAvatarData(Player _player, int _selectedDataColorId = 0, int _selectedDataIndex = 0)
         {
             player = _player;
+            SelectedDataIndex = _selectedDataIndex;
+            SelectedDataColorId = _selectedDataColorId;
         }
     }
 }

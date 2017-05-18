@@ -9,6 +9,9 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("PreInitState");
+            GameManager.Instance.UiMng.CreateLoadingCanvas();
+            GameManager.Instance.UiMng.loadingCanvas.FadeIn();
+
             GameManager.Instance.LevelMng.InstantiateArena();
             GameManager.Instance.LevelMng.InstantiateAvatarSpawner();
             GameManager.Instance.LevelMng.InstantiateRopeManager();

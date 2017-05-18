@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4747356291967296}
   - component: {fileID: 33279493503014352}
   - component: {fileID: 23950819384501800}
+  - component: {fileID: 135209404457936418}
   m_Layer: 0
   m_Name: PowerUp_Default
   m_TagString: Untagged
@@ -80,3 +81,15 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1837151283436778}
   m_Mesh: {fileID: 4300000, guid: 6b745860ecd49f14a8a48bef016cce8d, type: 3}
+--- !u!135 &135209404457936418
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1837151283436778}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.1622878
+  m_Center: {x: 0, y: 0, z: 0}

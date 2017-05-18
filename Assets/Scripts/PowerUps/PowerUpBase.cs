@@ -9,6 +9,11 @@ namespace BlackFox {
         protected List<IPowerUpCollector> enemyCollectors = new List<IPowerUpCollector>();
         public abstract void UsePowerUp();
         private float _lifeTime = 10;
+        
+        /// <summary>
+        /// Variabile che determina se il powerup deve essere distrutto una volta raccolto o meno.
+        /// </summary>
+        protected bool DestroyAfterUse = true;
 
         public float LifeTime
         {
@@ -28,7 +33,7 @@ namespace BlackFox {
         }
 
         private void OnTriggerEnter(Collider other) {
-            if (other.GetComponent<IPowerUpCollector>() == null)
+            if (other.GetComponentInParent<IPowerUpCollector>() == null)
                 return;
 
             collector = other.GetComponentInParent<IPowerUpCollector>();
@@ -40,7 +45,10 @@ namespace BlackFox {
                 NotifyCollect(collector);
                 if (AutoUse)
                     UsePowerUp();
-                Destroy(gameObject);
+                if (DestroyAfterUse)
+                {
+                    Destroy(gameObject); 
+                }
             }
         }
     }

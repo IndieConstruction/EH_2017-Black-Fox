@@ -9,7 +9,7 @@ namespace BlackFox
 
     public class PlayerUpgradeController : BaseMenu
     {
-        public UpgradeControllerID MenuID;
+        public UIControllerID MenuID;
 
         /// <summary>
         /// Variabile che si incrementa ogni volta che viene applicato un potenziamento. 
@@ -128,7 +128,7 @@ namespace BlackFox
     /// <summary>
     /// Serve per associare al upgrade controller il player corrispondente
     /// </summary>
-    public enum UpgradeControllerID
+    public enum UIControllerID
     {
         One = 1,
         Two = 2,

@@ -49,16 +49,26 @@ namespace BlackFox
         {
             PowerUpBase tempPowerup;
             GameObject tempObj = ChoosePowerUp();
-            tempPowerup = Instantiate(tempObj, GameManager.Instance.LevelMng.Core.transform.position, Quaternion.identity).GetComponent< PowerUpBase>();
-            DrawParable(tempObj, ChoosePosition(GameManager.Instance.PlayerMng.Players));
-            if(tempPowerup != null)
+            tempPowerup = Instantiate(tempObj, GameManager.Instance.LevelMng.Core.transform.position, Quaternion.identity).GetComponent<PowerUpBase>();
+            if(tempPowerup.GetComponent<Collider>()) tempPowerup.GetComponent<Collider>().enabled = false;
+            DrawParable(tempPowerup.gameObject, ChoosePosition(GameManager.Instance.PlayerMng.Players));
+            if (tempPowerup != null)
                 tempPowerup.LifeTime = PowerUpLifeTime;
         }
 
         void DrawParable(GameObject _objToMove, Vector3 _target)
         {
-            _objToMove.transform.DOMoveX(_target.x,0.5f);
-            _objToMove.transform.DOMoveZ(_target.z, 0.5f);
+            //_objToMove.transform.DOMove(_target, 0.5f).OnComplete(delegate {
+            //    Debug.Log("Do Move terminata " + _objToMove.transform.position);
+            //});
+
+            _objToMove.transform.DOMove(_target, 0.5f).OnComplete(delegate {
+                if(_objToMove.GetComponent<Collider>()) _objToMove.GetComponent<Collider>().enabled = true;
+                Debug.Log("Do Move terminata " + _objToMove.transform.position);
+            });
+
+            //_objToMove.transform.DOMoveX(_target.x, 0.5f).SetDelay(0.1f);
+            //_objToMove.transform.DOMoveZ(_target.z, 0.5f).SetDelay(0.1f);
         }
 
         Vector3 ChoosePosition(List<Player> players)

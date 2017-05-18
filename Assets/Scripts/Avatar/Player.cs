@@ -30,8 +30,15 @@ namespace BlackFox
                 return _avatarData;
             }
             set {
-                _avatarData = value;
-                // TODO : scatenare evento di re-setup al cambio dell'avatardata
+                if (_avatarData != null) {
+                    _avatarData = value;
+                    AvatarState tmpState = Avatar.State;
+                    AvatarSetup(true);
+                    Avatar.Init();
+                    Avatar.State = tmpState;
+                } else {
+                    _avatarData = value;
+                }
             }
         }
 
@@ -84,7 +91,7 @@ namespace BlackFox
         public void AvatarSetup(bool _forceIstance = false) {
             if (ID == PlayerLabel.None)
                 return;
-            if (Avatar == null && _forceIstance == true)
+            if (_forceIstance == true)
                 InstanceAvatar();
             Avatar.Setup(this);
         }

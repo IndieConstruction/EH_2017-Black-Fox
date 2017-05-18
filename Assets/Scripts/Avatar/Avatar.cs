@@ -112,7 +112,7 @@ namespace BlackFox {
             CreateShipUI();
         }
 
-        void Init(bool withRope = true)
+        public void Init(bool withRope = true)
         {
             ship.Init();
             if (withRope)

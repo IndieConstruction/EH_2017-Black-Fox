@@ -11,6 +11,8 @@ namespace BlackFox {
         public LevelSelectionController canvasLevelSelection;
         [HideInInspector]
         public CanvasGameController canvasGame;
+        [HideInInspector]
+        public AvatarSelectionManager avatarSelectionManager;
 
         public GameObject AvatarUI;
 
@@ -95,6 +97,20 @@ namespace BlackFox {
         public void DestroyLevelSelectionMenu()
         {
             Destroy(canvasLevelSelection.gameObject);
+        }
+        #endregion
+
+        #region AvatarSelection Menu
+
+        public void CreateAvatarSelectionMenu() {
+            avatarSelectionManager = Instantiate(Resources.Load("Prefabs/UI/AvatarSelectionCanvas") as GameObject, transform).GetComponent<AvatarSelectionManager>();
+        }
+
+        /// <summary>
+        /// Distrugge il CanvasMenu non appena subentra il MainMenuState
+        /// </summary>
+        public void DestroyAvatarSelectionMenu() {
+            Destroy(avatarSelectionManager.gameObject);
         }
         #endregion
 

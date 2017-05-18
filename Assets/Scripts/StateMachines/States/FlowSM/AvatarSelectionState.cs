@@ -9,12 +9,14 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("AvatarSelectionState");
+            GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.MenuInput);
+            GameManager.Instance.UiMng.CreateAvatarSelectionMenu();
+            GameManager.Instance.UiMng.CurrentMenu = GameManager.Instance.UiMng.avatarSelectionManager;
+            GameManager.Instance.UiMng.avatarSelectionManager.Setup(GameManager.Instance.PlayerMng.Players);
         }
 
-        public override void OnUpdate()
-        {
-            if (OnStateEnd != null)
-                OnStateEnd();
+        public override void OnEnd() {
+            GameManager.Instance.UiMng.DestroyAvatarSelectionMenu();
         }
     }
 }

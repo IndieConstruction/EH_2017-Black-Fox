@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +7,8 @@ namespace BlackFox {
     public class SRManager : MonoBehaviour {
 
         public GameObject ShowroomPrefab;
-        List<ShowRoom> rooms = new List<ShowRoom>();
+        public List<ShowRoom> rooms = new List<ShowRoom>();
+        List<RenderTexture> renders = new List<RenderTexture>();
 
         /// <summary>
         /// Instance new Showrooms and Init them
@@ -15,6 +17,7 @@ namespace BlackFox {
         /// <param name="_amountOfRooms">Amount of ShowRooms to create</param>
         public void Init(AvatarData[] _datas, int _amountOfRooms = 4)
         {
+            renders = Resources.LoadAll<RenderTexture>("Prefabs/ShowRoom").ToList();
             CreateShowRooms(_amountOfRooms);
             InitAllRooms(_datas);
         }
@@ -27,6 +30,7 @@ namespace BlackFox {
                 tempSR = Instantiate(ShowroomPrefab, transform);
                 tempSR.transform.localPosition = tempSR.transform.localPosition + Vector3.Cross(tempSR.GetComponent<ShowRoom>().CorridorVector, transform.forward)*i;
                 rooms.Add(tempSR.GetComponent<ShowRoom>());
+                tempSR.GetComponentInChildren<Camera>().targetTexture = renders[i];
             }
         }
 

@@ -17,6 +17,7 @@ namespace BlackFox
 
             GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.Blocked);
 
+            GameManager.Instance.LevelMng.SetupCore();
             GameManager.Instance.UiMng.canvasGame.upgradeMenuManager.Setup(GameManager.Instance.PlayerMng.Players);
             GameManager.Instance.PlayerMng.SetupAvatars(true);
         }

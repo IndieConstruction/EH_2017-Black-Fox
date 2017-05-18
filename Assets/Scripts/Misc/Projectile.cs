@@ -7,7 +7,7 @@ namespace BlackFox
     public class Projectile : MonoBehaviour
     {
         IShooter owner;
-        public float damage = 1;
+        float damage { get { return (owner as Ship).Config.shooterConfig.ProjectileDamage; } }
 
         private void OnTriggerEnter(Collider other)
         {
@@ -17,7 +17,7 @@ namespace BlackFox
                     return;
 
             //Se collide con un perno o con i muri si distrugge
-            if (other.gameObject.tag == "Pin" || other.gameObject.tag == "Wall")
+            if (other.gameObject.layer == 9 || other.gameObject.tag == "Wall" || other.gameObject.tag == "Core")
                 Destroy(gameObject);
 
             // Controlla se l'oggetto con cui ha colliso ha l'interfaccia IDamageable e salva un riferimento di tale interfaccia           
@@ -41,7 +41,7 @@ namespace BlackFox
         #region Interface
 
         //Setta chi è il proprietario del proiettile, cioé chi lo spara.
-        public void SetOwner(IShooter _owner)
+        public void Init(IShooter _owner)
         {
             owner = _owner;
         }

@@ -42,7 +42,7 @@ namespace BlackFox
                 GameObject instantiatedProjectile = Instantiate(shooterBaseConfig.ProjectilePrefab, transform.position + transform.forward*shooterConfig.DistanceFromShipOrigin, transform.rotation);
                 instantiatedProjectile.GetComponentInChildren<MeshRenderer>().material = ship.Avatar.AvatarData.ColorSets[ship.Avatar.ColorSetIndex].PinMaterial;
                 instantiatedProjectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * shooterBaseConfig.BulletSpeed, ForceMode.Impulse);
-                instantiatedProjectile.GetComponent<Projectile>().SetOwner(GetComponentInParent<IShooter>());
+                instantiatedProjectile.GetComponent<Projectile>().Init(GetComponentInParent<IShooter>());
                 Destroy(instantiatedProjectile, shooterBaseConfig.LifeTime);
                 Ammo--;
             }
@@ -75,6 +75,7 @@ namespace BlackFox
     {
         public ShooterBaseConfig ShooterBaseConfig;
         public float DistanceFromShipOrigin;
+        public float ProjectileDamage;
         public int AddedAmmo;
         public int MaxAmmo;
     }

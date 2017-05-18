@@ -245,8 +245,8 @@ namespace BlackFox {
     public class ShipConfig
     {
         [Header("Ship Parameters")]
-        public float FireRate;
         public float MaxLife;
+        public float FireRate;
         public MovementControllerConfig movementConfig;
         public ShooterConfig shooterConfig;
         public PlacePinConfig placePinConfig;

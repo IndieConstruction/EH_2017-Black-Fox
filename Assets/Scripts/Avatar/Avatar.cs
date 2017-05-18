@@ -190,7 +190,8 @@ namespace BlackFox {
         List<IDamageable> LoadIDamageableForShip()
         {
             List<IDamageable> damageablesList = new List<IDamageable>();
-            List<GameObject> damageablesPrefabs = PrefabUtily.LoadAllPrefabsWithComponentOfType<IDamageable>("Prefabs", ship.gameObject);
+            List<GameObject> prefabToRemove = new List<GameObject>() { ship.gameObject, GameManager.Instance.LevelMng.Core.gameObject};
+            List<GameObject> damageablesPrefabs = PrefabUtily.LoadAllPrefabsWithComponentOfType<IDamageable>("Prefabs", prefabToRemove);
 
             foreach (GameObject itemInRes in damageablesPrefabs)
             {

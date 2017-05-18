@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using DG.Tweening;
 
@@ -9,14 +10,55 @@ namespace BlackFox
     {
 
         public float PowerUpLifeTime = 10;
+        List<GameObject> PowerUps = new List<GameObject>();
+        bool IsActive = false;
+        GameObject container;
+        public float MinTimeToSpawn;
+        public float MaxTimeToSpawn;
+        float timer {
+            get
+            {
+                return Random.Range(MinTimeToSpawn, MaxTimeToSpawn);
+            }
+        }
+
+        float countdown;
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Z))
+            if (IsActive)
             {
-                SpawnPowerUp();
+                countdown -= Time.deltaTime;
+                if (timer <= 0)
+                {
+                    SpawnPowerUp();
+                    countdown = timer;
+                }
             }
         }
+
+        #region API
+        public void Init()
+        {
+            PowerUps = Resources.LoadAll<GameObject>("Prefabs/PowerUps").ToList();
+            container = new GameObject("PowerUpContainer");
+            container.transform.parent = transform;
+            countdown = timer;
+            Toggle(true);
+        }
+
+        public void Toggle(bool _value)
+        {
+            IsActive = _value;
+        }
+
+        void CleanSpawned()
+        {
+            if (container != null)
+                Destroy(container); 
+        }
+
+        #endregion
 
         /// <summary>
         /// Sceglie un powerup a caso
@@ -24,21 +66,7 @@ namespace BlackFox
         /// <returns></returns>
         GameObject ChoosePowerUp()
         {
-            int RandomNum = Random.Range(1, 5);
-
-            switch (RandomNum)
-            {
-                case 1:
-                    return Resources.Load("Prefabs/PowerUps/PowerUp_Blue") as GameObject;
-                case 2:
-                    return Resources.Load("Prefabs/PowerUps/PowerUp_Green") as GameObject;
-                case 3:
-                    return Resources.Load("Prefabs/PowerUps/PowerUp_Purple") as GameObject;
-                case 4:
-                    return Resources.Load("Prefabs/PowerUps/PowerUp_Red") as GameObject;
-                default:
-                    return  Resources.Load("Prefabs/PowerUps/PowerUp_Default") as GameObject;
-            }
+            return PowerUps[Random.Range(1, PowerUps.Count)];
         }
 
         /// <summary>
@@ -49,7 +77,7 @@ namespace BlackFox
         {
             PowerUpBase tempPowerup;
             GameObject tempObj = ChoosePowerUp();
-            tempPowerup = Instantiate(tempObj, GameManager.Instance.LevelMng.Core.transform.position, Quaternion.identity).GetComponent<PowerUpBase>();
+            tempPowerup = Instantiate(tempObj, GameManager.Instance.LevelMng.Core.transform.position, Quaternion.identity, container.transform).GetComponent<PowerUpBase>();
             if(tempPowerup.GetComponent<Collider>()) tempPowerup.GetComponent<Collider>().enabled = false;
             DrawParable(tempPowerup.gameObject, ChoosePosition(GameManager.Instance.PlayerMng.Players));
             if (tempPowerup != null)

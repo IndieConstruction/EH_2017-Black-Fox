@@ -16,7 +16,7 @@ public class ShooterBase : MonoBehaviour {
     {
         GameObject instantiatedProjectile = Instantiate(shooterBaseConfig.ProjectilePrefab, transform.position, transform.rotation);
         instantiatedProjectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * shooterBaseConfig.BulletSpeed, ForceMode.Impulse);
-        instantiatedProjectile.GetComponent<Projectile>().SetOwner(GetComponentInParent<IShooter>());
+        instantiatedProjectile.GetComponent<Projectile>().Init(GetComponentInParent<IShooter>());
         Destroy(instantiatedProjectile, shooterBaseConfig.LifeTime);
     }
     #endregion

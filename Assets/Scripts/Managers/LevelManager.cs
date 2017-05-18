@@ -234,6 +234,12 @@ namespace BlackFox
         #endregion
 
         #region Initialization
+        public void SetupCore()
+        {
+            Core = Arena.GetComponentInChildren<Core>();
+            if(Core != null)
+                Core.Setup();
+        }
         /// <summary>
         /// Inizializza il core
         /// </summary>

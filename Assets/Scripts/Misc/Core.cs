@@ -15,9 +15,8 @@ namespace BlackFox
 
         Image Ring;
 
-        private void Start()
+        public void Setup()
         {
-            GameManager.Instance.LevelMng.Core = this;
             Ring = GetComponentInChildren<Image>();
             life = MaxLife;
             OnDataChange();

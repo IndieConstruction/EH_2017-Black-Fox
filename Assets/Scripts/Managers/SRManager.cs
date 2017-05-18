@@ -83,6 +83,15 @@ namespace BlackFox {
             }
         }
 
+        public void LoadSelectedDatas()
+        {
+            foreach (ShowRoomController room in rooms)
+            {
+                room.player.AvatarData = Instantiate(datas[room.indexOfCurrent]);
+                room.player.AvatarData.ColorSetIndex = room.colorIndex;
+            }
+        }
+
         public enum ColorSelectDirection{up=0,down =1}
     }
 }

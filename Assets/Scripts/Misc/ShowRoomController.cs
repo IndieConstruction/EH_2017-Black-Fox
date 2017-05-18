@@ -10,7 +10,7 @@ namespace BlackFox
     {
         List<GameObject> avatars = new List<GameObject>();
         List<AvatarData> datas { get { return manager.datas; } }
-        Player player;
+        public Player player;
         SRManager manager;
         Vector3 _corridorVector;
         public Vector3 CorridorVector

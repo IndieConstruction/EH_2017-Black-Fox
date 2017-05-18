@@ -16,6 +16,9 @@ namespace BlackFox
         public List<ColorSetData> ColorSets;
         public ShipConfig shipConfig;
 
+        [HideInInspector]
+        public int ColorSetIndex;
+
         [Header("Avatar Upgrades")]
         public AvatarUpgradesConfig avatarUpgradesConfig;
     }

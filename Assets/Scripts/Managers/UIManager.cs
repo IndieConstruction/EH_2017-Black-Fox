@@ -73,7 +73,7 @@ namespace BlackFox {
         /// </summary>
         public void CreateLoadingCanvas()
         {
-            loadingCanvas = Instantiate(Resources.Load("Prefabs/UI/LoadingCanvas") as GameObject, transform).GetComponent<LoadingScreen>();
+            loadingCanvas = Instantiate(Resources.Load("Prefabs/UI/LoadingCanvas") as GameObject, transform).GetComponentInChildren<LoadingScreen>();
         }
 
         /// <summary>

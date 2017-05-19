@@ -7,11 +7,32 @@ namespace BlackFox
     public class ExternalElementSpawner : SpawnerBase
     {
         new public ExternalElementOptions Options;
+        
         Transform target;                                           //Target of the ExternalElements
         float nextTime;                                             //Timer
         List<IDamageable> Damageables = new List<IDamageable>();    //Lista di oggetti danneggiabili
 
         GameObject container;
+
+        #region Powerup region
+        [HideInInspector]
+        public bool IsKamikazeTime = false;
+
+        private float _powerupduration;
+
+        public float PowerupDuration
+        {
+            get { return _powerupduration; }
+            set { _powerupduration = value; }
+        }
+
+        public void ActiveKamikazeTime(float _time)
+        {
+            IsKamikazeTime = true;
+            PowerupDuration = _time;
+        }
+
+        #endregion
 
         #region SpawnerLifeFlow
         public override void Init()
@@ -25,6 +46,7 @@ namespace BlackFox
 
             container = new GameObject("ExternalAgentContainer");
             container.transform.parent = GameManager.Instance.LevelMng.Arena.transform;
+            ID = "ExternalElementSpawner";
         }
 
         public override SpawnerBase OptionInit(SpawnerOptions options)
@@ -40,8 +62,26 @@ namespace BlackFox
                 if (Time.time >= nextTime)
                 {
                     InstantiateExternalAgent();
-                    nextTime = Time.time + Random.Range(Options.MinTime, Options.MaxTime);
+                    if (IsKamikazeTime)
+                    {
+                        nextTime = Time.time + 1.5f;
+                        PowerupDuration -= nextTime;
+                        if (PowerupDuration <= 0)
+                            IsKamikazeTime = false;
+
+                    }
+                    else
+                        nextTime = Time.time + Random.Range(Options.MinTime, Options.MaxTime);
                 }
+
+                //if (IsKamikazeTime)
+                //{
+                //    PowerupDuration -= Time.deltaTime;
+                //    if (PowerupDuration <= 0)
+                //        IsKamikazeTime = false;
+                //}
+
+
                 GravityAround();
             }
         }

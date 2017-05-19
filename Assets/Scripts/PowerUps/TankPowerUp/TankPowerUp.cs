@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace BlackFox {
     public class TankPowerUp : PowerUpBase {
-        public float PowerUpDuration = 10;
 
         public override void UsePowerUp()
         {

@@ -7,6 +7,7 @@ namespace BlackFox {
     public abstract class SpawnerBase : MonoBehaviour
     {
         public SpawnerOptions Options;
+        public string ID;
 
         public int Level
         {

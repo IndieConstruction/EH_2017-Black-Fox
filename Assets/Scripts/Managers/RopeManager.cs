@@ -34,7 +34,7 @@ namespace BlackFox {
             rc.AnchorPoint = _target.ship.transform;
             newOrigin.GetComponent<RopeController>().InitRope();
             
-            newOrigin.GetComponent<LineRenderer>().material = _target.AvatarData.ColorSets[_target.ColorSetIndex].RopeMaterial;    
+            newOrigin.GetComponent<LineRenderer>().material = _target.AvatarData.ColorSets[_target.AvatarData.ColorSetIndex].RopeMaterial;    
         }        
     #endregion
     }

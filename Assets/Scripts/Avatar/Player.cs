@@ -34,7 +34,7 @@ namespace BlackFox
                     _avatarData = value;
                     AvatarState tmpState = Avatar.State;
                     AvatarSetup(true);
-                    Avatar.Init();
+                    Avatar.InitShip();
                     Avatar.State = tmpState;
                 } else {
                     _avatarData = value;
@@ -88,7 +88,8 @@ namespace BlackFox
         /// Setup the istance of the Avatar or instaciate a new one
         /// </summary>
         /// <param name="_forceIstance">If true and no other istance of Avatar, istance a new one</param>
-        public void AvatarSetup(bool _forceIstance = false) {
+        public void AvatarSetup(bool _forceIstance = false)
+        {
             if (ID == PlayerLabel.None)
                 return;
             if (_forceIstance == true)

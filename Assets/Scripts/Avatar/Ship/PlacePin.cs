@@ -96,7 +96,7 @@ namespace BlackFox
                 isRecharging = false;
                 foreach (Renderer pinRend in pin.GetComponentsInChildren<Renderer>())
                 {
-                    pinRend.material = ship.Avatar.AvatarData.ColorSets[ship.Avatar.ColorSetIndex].PinMaterial;
+                    pinRend.material = ship.Avatar.AvatarData.ColorSets[ship.Avatar.AvatarData.ColorSetIndex].PinMaterial;
                 }
                 pin.transform.parent = GameManager.Instance.LevelMng.PinsContainer;
                 prectime = CurrentPinRate;

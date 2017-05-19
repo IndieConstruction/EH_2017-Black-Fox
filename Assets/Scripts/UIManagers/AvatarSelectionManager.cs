@@ -29,9 +29,10 @@ namespace BlackFox {
         {
             foreach (AvatarSelectionController controller in avatarSelectionControllers)
             {
-                if (controller.CurrentState == UpgradeControllerState.Unready)
+                if (controller.CurrentState == AvatarSelectionControllerState.Unready)
                     return;
             }
+            GameManager.Instance.SRMng.LoadSelectedDatas();
             GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new GameplayState() });
         }
 

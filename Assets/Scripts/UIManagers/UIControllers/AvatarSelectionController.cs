@@ -14,14 +14,14 @@ namespace BlackFox {
         public UIControllerID MenuID;
 
 
-        UpgradeControllerState _currentState;
-        public UpgradeControllerState CurrentState
+        AvatarSelectionControllerState _currentState;
+        public AvatarSelectionControllerState CurrentState
         {
             get { return _currentState; }
             set
             {
                 _currentState = value;
-                if (_currentState == UpgradeControllerState.Ready)
+                if (_currentState == AvatarSelectionControllerState.Ready)
                 {
                     avatarSelectionManager.CheckUpgradeControllersState();
                     GameManager.Instance.PlayerMng.ChangePlayerState(PlayerState.Blocked, Player.ID);
@@ -33,7 +33,7 @@ namespace BlackFox {
         public void Setup(AvatarSelectionManager _avatarSelectionManager, Player _player) {
             avatarSelectionManager = _avatarSelectionManager;
             Player = _player;
-            CurrentState = UpgradeControllerState.Unready;
+            CurrentState = AvatarSelectionControllerState.Unready;
             ConfirmText.text = "Press A to continue";
         }
 
@@ -58,8 +58,13 @@ namespace BlackFox {
 
         public override void Selection(Player _player)
         {
-            CurrentState = UpgradeControllerState.Ready;
-            //Save the scriptable in the avatar
+            CurrentState = AvatarSelectionControllerState.Ready;
         }
+    }
+
+    public enum AvatarSelectionControllerState
+    {
+        Unready = 0,
+        Ready = 1
     }
 }

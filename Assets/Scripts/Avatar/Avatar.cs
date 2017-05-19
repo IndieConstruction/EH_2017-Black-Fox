@@ -23,8 +23,6 @@ namespace BlackFox {
             }
         }
 
-        public int ColorSetIndex;
-
         /// <summary>
         /// Reference of the model to visualize
         /// </summary>
@@ -78,8 +76,11 @@ namespace BlackFox {
             switch (_newState)
             {
                 case AvatarState.Disabled:
-                    ship.RemoveAllPins();
-                    ship.ToggleAbilities(false);
+                    if (ship != null)
+                    {
+                        ship.RemoveAllPins();
+                        ship.ToggleAbilities(false);
+                    }
                     if (rope != null)
                     {
                         rope.DestroyDynamically();
@@ -87,7 +88,7 @@ namespace BlackFox {
                     }
                     break;
                 case AvatarState.Ready:
-                    Init();
+                    InitShip();
                     rope.GetComponent<LineRenderer>().enabled = false;
                     break;
                 case AvatarState.Enabled:
@@ -102,17 +103,20 @@ namespace BlackFox {
         /// <summary>
         /// Required to setup the player (also launched on Start of this class)
         /// </summary>
-        public void Setup(Player _player, bool withRope = true)
+        public void Setup(Player _player)
         {
             Player = _player;
-            if (!ship)
-                InstantiateShip();
-            ColorSetIndex = (int)Player.ID;
+            SetupShip();
+        }
+
+        public void SetupShip()
+        {
+            InstantiateShip();
             ship.Setup(this, LoadIDamageableForShip());
             CreateShipUI();
         }
 
-        public void Init(bool withRope = true)
+        public void InitShip(bool withRope = true)
         {
             ship.Init();
             if (withRope)

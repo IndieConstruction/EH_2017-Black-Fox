@@ -51,7 +51,7 @@ namespace BlackFox
                 int index = Int32.Parse(subStrings[1]);
                 GameManager.Instance.PlayerMng.Players[index].AvatarData = Instantiate(Resources.Load("ShipModels/Bull") as AvatarData);
             }
-            else if(_cheat.Contains("hummingbird"))
+            else if(_cheat.Contains("bird"))
             {
                 string[] subStrings = _cheat.Split(delimiter);
                 int index = Int32.Parse(subStrings[1]);

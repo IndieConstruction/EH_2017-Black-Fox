@@ -23,6 +23,27 @@ namespace BlackFox {
         AvatarUI avatarUi;
         Tweener damageTween;
 
+        #region PowerUp comandi invertiti
+
+        private bool _isInverted;
+        /// <summary>
+        /// indica se i comandi sono invertiti
+        /// </summary>
+        public bool IsInverted
+        {
+            get { return _isInverted; }
+            set { _isInverted = value; }
+        }
+
+        float _timeofInvertion;
+
+        public float TimeofInvertion {
+            get { return _timeofInvertion; }
+            set { _timeofInvertion = value; }
+        }
+
+        #endregion
+
         // Life fields
         private float _life;
         public float Life {
@@ -37,7 +58,15 @@ namespace BlackFox {
         private void Update()
         {
             if (Avatar.State == AvatarState.Enabled)
+            {
                 CheckInputStatus(Avatar.Player.InputStatus);
+                if (IsInverted)
+                {
+                    TimeofInvertion -= Time.deltaTime;
+                    if (TimeofInvertion <= 0)
+                        IsInverted = false;
+                }
+            }
         }
 
         #region API
@@ -98,8 +127,18 @@ namespace BlackFox {
             leftStickDirection = new Vector3(_inputStatus.LeftThumbSticksAxisX, 0, _inputStatus.LeftThumbSticksAxisY);
             rightStickDirection = new Vector3(_inputStatus.RightThumbSticksAxisX, 0, _inputStatus.RightThumbSticksAxisY);
 
-            Move(leftStickDirection);
-            DirectFire(rightStickDirection);
+            // Se un giocatore avversario prende il Powerup per invertire i comandi
+            if (IsInverted)
+            {
+                Move(-leftStickDirection);
+                DirectFire(-rightStickDirection); 
+            }
+            else
+            {
+                Move(leftStickDirection);
+                DirectFire(rightStickDirection);
+            }
+
 
             if (_inputStatus.RightShoulder == ButtonState.Pressed)
             {

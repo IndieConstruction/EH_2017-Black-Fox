@@ -21,10 +21,10 @@ GameObject:
   - component: {fileID: 4700686200822720}
   - component: {fileID: 33091056415392816}
   - component: {fileID: 23182761413265182}
-  - component: {fileID: 114331742617382484}
   - component: {fileID: 135156413664162484}
+  - component: {fileID: 114932649214815828}
   m_Layer: 0
-  m_Name: PowerUp_Blue
+  m_Name: PowerUp_AmmoCleaner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +37,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1669368475531948}
   m_LocalRotation: {x: 0.19092758, y: 0.19092758, z: -0.68084264, w: 0.68084264}
-  m_LocalPosition: {x: -0.54776186, y: 8, z: 38.652798}
+  m_LocalPosition: {x: 0, y: 8, z: 0}
   m_LocalScale: {x: 2.1695273, y: 2.1695273, z: 2.1695273}
   m_Children: []
   m_Father: {fileID: 0}
@@ -82,7 +82,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1669368475531948}
   m_Mesh: {fileID: 4300000, guid: 6b745860ecd49f14a8a48bef016cce8d, type: 3}
---- !u!114 &114331742617382484
+--- !u!114 &114932649214815828
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -90,7 +90,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1669368475531948}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f77b1e0f6f4aa6146a66db7dbdce5236, type: 3}
+  m_Script: {fileID: 11500000, guid: f584861d61cde1a479098780ac5ccf7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   AutoUse: 1

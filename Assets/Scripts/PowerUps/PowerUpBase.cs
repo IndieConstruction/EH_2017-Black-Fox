@@ -9,6 +9,7 @@ namespace BlackFox {
         protected List<IPowerUpCollector> enemyCollectors = new List<IPowerUpCollector>();
         public abstract void UsePowerUp();
         private float _lifeTime = 10;
+        public float PowerUpDuration = 10;
         
         /// <summary>
         /// Variabile che determina se il powerup deve essere distrutto una volta raccolto o meno.
@@ -46,9 +47,7 @@ namespace BlackFox {
                 if (AutoUse)
                     UsePowerUp();
                 if (DestroyAfterUse)
-                {
                     Destroy(gameObject); 
-                }
             }
         }
     }

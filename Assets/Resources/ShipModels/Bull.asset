@@ -13,8 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BasePrefab: {fileID: 114084304304996402, guid: 1e454b20c5c81a94c83dfadd7cbda89e,
     type: 2}
-  ModelPrefab: {fileID: 1000013772491214, guid: 192b7fe2500f5e0449f21c651bc0474c,
-    type: 2}
+  ModelPrefab: {fileID: 100000, guid: ebcc752d4e3aea543ab2c1ba8af1d530, type: 3}
   ColorSets:
   - {fileID: 11400000, guid: eb39c0c34e587a045ba43e8cc4994fb2, type: 2}
   - {fileID: 11400000, guid: c0d8480790832cd4fbf3a963a4cded1c, type: 2}
@@ -42,6 +41,7 @@ MonoBehaviour:
         type: 2}
       CoolDownTime: 3
       DistanceFromShipOrigin: 3
+  ColorSetIndex: 0
   avatarUpgradesConfig:
     FireRateUpgrade: []
     PinRegenUpgrade: []

@@ -22,6 +22,11 @@ namespace BlackFox
             }
         }
 
-
+        public void CheatPoints(PlayerLabel _player)
+        {
+            if (_player == PlayerLabel.Different)
+                foreach (Player player in GameManager.Instance.PlayerMng.Players)
+                    player.Avatar.UpgradePoints += 20;
+        }
     }
 }

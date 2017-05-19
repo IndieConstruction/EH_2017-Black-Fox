@@ -42,7 +42,10 @@ namespace BlackFox
                 Debug.Log("Infinite Ammo");
             }
             else if (_cheat == "round")
+            {
                 GameManager.Instance.LevelMng.PlayerWin("CheatCode");
+                GameManager.Instance.UpgradePointsMng.CheatPoints(PlayerLabel.Different);
+            }
             else if (_cheat == "level")
                 GameManager.Instance.LevelMng.gameplaySM.SetPassThroughOrder(new List<StateBase>() { new CleanSceneState(), new GameOverState() });
             else if (_cheat.Contains("bull"))

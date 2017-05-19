@@ -106,6 +106,7 @@ namespace BlackFox {
         public void Setup(Player _player)
         {
             Player = _player;
+            LoadUpgradesValues();
             SetupShip();
         }
 
@@ -168,13 +169,7 @@ namespace BlackFox {
             get { return AvatarData.avatarUpgradesConfig; }
         }
 
-        public List<IUpgrade> Upgrades = new List<IUpgrade>()  // TODO : collegare valori dello scriptable dell'avatar
-        {
-            new FireRateUpgrade(new float[] {0f, 0.01f, 0.02f, 0.03f, 0.04f, 0.27f}), 
-            new PinRegenUpgrade(new float[] {0, 0.3f, 0.5f, 0.7f, 1f, 1.5f}),
-            new PowerUpDurationUpgrade(new float[] {0, 0.3f, 0.5f, 0.7f, 1f, 1.5f}),
-            new RopeLengthUpgrade(new float[] {0, 0.3f, 0.5f, 0.7f, 1f, 1.5f})
-        };
+        public List<IUpgrade> Upgrades = new List<IUpgrade>();
 
         public IUpgrade GetUpgrade(UpgardeTypes _id)
         {
@@ -184,6 +179,14 @@ namespace BlackFox {
                     return upgrade;
             }
             return null;
+        }
+
+        void LoadUpgradesValues()
+        {
+            Upgrades.Add(new FireRateUpgrade(UpgradesConfig.FireRateUpgrade));
+            Upgrades.Add(new PinRegenUpgrade(UpgradesConfig.PinRegenUpgrade));
+            Upgrades.Add(new PowerUpDurationUpgrade(UpgradesConfig.PowerUpDurationUpgrade));
+            Upgrades.Add(new RopeLengthUpgrade(UpgradesConfig.RopeLengthUpgrade));
         }
         #endregion
         #endregion

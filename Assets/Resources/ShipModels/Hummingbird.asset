@@ -43,7 +43,31 @@ MonoBehaviour:
       DistanceFromShipOrigin: 3
   ColorSetIndex: 0
   avatarUpgradesConfig:
-    FireRateUpgrade: []
-    PinRegenUpgrade: []
-    PowerUpDurationUpgrade: []
-    RopeLengthUpgrade: []
+    FireRateUpgrade:
+    - 0
+    - 0.01
+    - 0.02
+    - 0.03
+    - 0.04
+    - 0.05
+    PinRegenUpgrade:
+    - 0
+    - 0.3
+    - 0.5
+    - 0.7
+    - 1
+    - 1.5
+    PowerUpDurationUpgrade:
+    - 0
+    - 0.3
+    - 0.5
+    - 0.7
+    - 1
+    - 1.5
+    RopeLengthUpgrade:
+    - 0
+    - 0.3
+    - 0.5
+    - 0.7
+    - 1
+    - 1.5

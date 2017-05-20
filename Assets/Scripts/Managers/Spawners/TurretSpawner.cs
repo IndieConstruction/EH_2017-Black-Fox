@@ -7,30 +7,58 @@ namespace BlackFox
     public class TurretSpawner : SpawnerBase
     {
         new public TurretSpawnerOptions Options;
+        [HideInInspector]
         public int Spawnedturrent = 0;
+
+        GameObject container;
+
+        #region Spawner Life Flow
+        public override SpawnerBase OptionInit(SpawnerOptions options)
+        {
+            Options = options as TurretSpawnerOptions;
+            return this;
+        }
+
+        public override void Init()
+        {
+            Vector3 randomPosition = new Vector3(Random.Range(-70.0f, 100.0f), 0, Random.Range(-100.0f, 100.0f));
+            Instantiate(Options.Turrent, randomPosition, Quaternion.identity, container.transform);
+
+            container = new GameObject("TurretContainer");
+            container.transform.parent = GameManager.Instance.LevelMng.Arena.transform;
+            ID = "TurretSpawner";
+        }
 
         void Update()
         {
-            if (Time.time <= 0 && Spawnedturrent <= Options.MaxSpawnTurrent)
+            if (IsActive)
             {
-
-                if (Spawnedturrent == Options.MaxSpawnTurrent)
+                if (Time.time <= 0 && Spawnedturrent <= Options.MaxSpawnTurrent)
                 {
-                    Options.Turrent = null;
-                }
-                else
-                {
-                    Spawnedturrent++;
+                    if (Spawnedturrent == Options.MaxSpawnTurrent)
+                    {
+                        Options.Turrent = null;
+                    }
+                    else
+                    {
+                        Spawnedturrent++;
+                    }
                 }
             }
         }
 
-        // TODO : chiamare la funzione a inizio round (controllare cos'è)
-        void OnRoundPlay()
+        public override void Restart()
         {
-            Vector3 randomPosition = new Vector3(Random.Range(-70.0f, 100.0f), 0, Random.Range(-100.0f, 100.0f));
-            Instantiate(Options.Turrent, randomPosition, Quaternion.identity);
+            CleanSpawned();
+            Init();
         }
+
+        public override void CleanSpawned()
+        {
+            if (container != null)
+                Destroy(container);
+        }
+        #endregion
     }
 
     [System.Serializable]

@@ -139,7 +139,13 @@ namespace Rope
             fragments.Add(gameObject);
             BuildRope(gameObject);
         }
-        
+        /// <summary>
+        /// Set the parameter as a collision layer
+        /// </summary>
+        public void SetCollisionLayer(int _layerOrdinalNumber)
+        {
+            this.gameObject.layer = _layerOrdinalNumber;
+        }
         /// <summary>
         /// Extend the rope by required amount
         /// </summary>

@@ -34,7 +34,7 @@ namespace BlackFox
 
         #endregion
 
-        #region SpawnerLifeFlow
+        #region Spawner Life Flow
         public override void Init()
         {
             if (Options.ExternalAgent == null)

@@ -11,10 +11,12 @@ namespace BlackFox
 
         new public BlackHoleSpawnerOptions Options;
 
-        float Timer;
-        State _currentState;
+        GameObject container;
 
-        public State CurrentState
+        float Timer;
+        BlackHoleState _currentState;
+
+        public BlackHoleState CurrentState
         {
             get { return _currentState; }
             set
@@ -23,62 +25,75 @@ namespace BlackFox
             }
         }
 
-        public enum State
+        public enum BlackHoleState
         {
-            Timer,
-            Spawn,
-            Stop,
-        }
-        void Start()
-        {
-            Timer = Options.TimerToSpawn;
-            CurrentState = State.Timer;
+            Timer, Spawn, Stop,
         }
 
-        public override SpawnerBase OptionInit(SpawnerOptions options) {
+        #region Spawner Life Flow
+        public override SpawnerBase OptionInit(SpawnerOptions options)
+        {
             Options = options as BlackHoleSpawnerOptions;
             return this;
         }
 
+        public override void Init()
+        {
+            Timer = Options.TimerToSpawn;
+            CurrentState = BlackHoleState.Timer;
+
+            container = new GameObject("BlackHoleContainer");
+            container.transform.parent = GameManager.Instance.LevelMng.Arena.transform;
+            ID = "BlackHoleSpawner";
+        }
 
         void Update()
         {
-            switch (CurrentState)
+            if (IsActive)
             {
-                case State.Timer:
-                    Timer -= Time.deltaTime;
-                    if (Timer <= 0 && BlackHoleSpawned <= Options.BlackHoleToSpawn)
-                    {
-                        if (BlackHoleSpawned == Options.BlackHoleToSpawn)
+                switch (CurrentState)
+                {
+                    case BlackHoleState.Timer:
+                        Timer -= Time.deltaTime;
+                        if (Timer <= 0 && BlackHoleSpawned <= Options.BlackHoleToSpawn)
                         {
-                            CurrentState = State.Stop;
+                            if (BlackHoleSpawned == Options.BlackHoleToSpawn)
+                            {
+                                CurrentState = BlackHoleState.Stop;
+                            }
+                            else
+                            {
+                                CurrentState = BlackHoleState.Spawn;
+                            }
                         }
-                        else
-                        {
-                            CurrentState = State.Spawn;
-                        }
-                    }
-                    
-                    break;
-
-                case State.Spawn:
-
-                    SpawnBlackHole();
-                    BlackHoleSpawned++;
-                    Timer = Options.TimerToSpawn;
-                    CurrentState = State.Timer;
-
-                    break;
-
-                case State.Stop:
-                    enabled = false;
-                    break;
-
-                default:
-                    break;
+                        break;
+                    case BlackHoleState.Spawn:
+                        SpawnBlackHole();
+                        BlackHoleSpawned++;
+                        Timer = Options.TimerToSpawn;
+                        CurrentState = BlackHoleState.Timer;
+                        break;
+                    case BlackHoleState.Stop:
+                        enabled = false;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 
+        public override void Restart()
+        {
+            CleanSpawned();
+            Init();
+        }
+
+        public override void CleanSpawned()
+        {
+            if (container != null)
+                Destroy(container);
+        }
+        #endregion
 
         /// <summary>
         /// Istanzia il buco nero in una posizione randomica
@@ -86,14 +101,13 @@ namespace BlackFox
         void SpawnBlackHole()
         {
             randomPos = new Vector3(Random.Range(Options.minRandomX, Options.maxRandomX), 0, Random.Range(Options.minRandomZ, Options.maxRandomZ));
-            Instantiate(Options.BlackHolePrefab, randomPos, Quaternion.identity);
-
+            Instantiate(Options.BlackHolePrefab, randomPos, Quaternion.identity, container.transform);
         }
     }
 
     [System.Serializable]
-    public class BlackHoleSpawnerOptions : SpawnerOptions {
-
+    public class BlackHoleSpawnerOptions : SpawnerOptions
+    {
         public float minRandomX;
         public float maxRandomX;
         public float minRandomZ;

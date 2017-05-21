@@ -8,6 +8,7 @@ namespace BlackFox
     public class PlacePin : MonoBehaviour
     {
         protected bool canPlace = true;
+        int layer = 9;
 
         PlacePinConfig placePinConfig
         {
@@ -82,7 +83,18 @@ namespace BlackFox
             prectime = CurrentPinRate;
             initialTransf = transform;
         }
-
+        /// <summary>
+        /// Change the layer of collision of each Pin
+        /// </summary>
+        /// <param name="_layerOrdinalNumber">Actual ordinal number of the layer of collision</param>
+        public void SetCollisionLayer(int _layerOrdinalNumber)
+        {
+            layer = _layerOrdinalNumber;
+            foreach (GameObject pin in pinsPlaced)
+            {
+                pin.layer = layer;
+            }
+        }
         /// <summary>
         /// Instantiate the pin on the PinSpawn (true/false switch between right/left)
         /// </summary>
@@ -91,6 +103,7 @@ namespace BlackFox
             if (prectime <= 0 && canPlace == true)
             {
                 GameObject pin = Instantiate(placePinConfig.PinPrefab, transform.position + transform.forward*placePinConfig.DistanceFromShipOrigin, transform.rotation);
+                pin.layer = layer;
                 pinsPlaced.Add(pin);
                 ship.AddShooterAmmo();
                 isRecharging = false;

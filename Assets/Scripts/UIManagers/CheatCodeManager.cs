@@ -71,22 +71,22 @@ namespace BlackFox
                     index = Int32.Parse(subStrings[1]);
                     GameManager.Instance.PlayerMng.Players[index].AvatarData = Instantiate(Resources.Load("ShipModels/Owl") as AvatarData);
                     break;
-                case "collisionToTest":
+                case "NoBounds":
                     foreach (Player player in GameManager.Instance.PlayerMng.Players)
                     {
                         switch (player.ID)
                         {
                             case PlayerLabel.One:
-                                player.Avatar.rope.SetCollisionLayer(8);
+                                player.Avatar.SetNewCollisionLayers(8, 9);
                                 break;
                             case PlayerLabel.Two:
-                                player.Avatar.rope.SetCollisionLayer(10);
+                                player.Avatar.SetNewCollisionLayers(10, 11);
                                 break;
                             case PlayerLabel.Three:
-                                player.Avatar.rope.SetCollisionLayer(12);
+                                player.Avatar.SetNewCollisionLayers(12, 13);
                                 break;
                             case PlayerLabel.Four:
-                                player.Avatar.rope.SetCollisionLayer(14);
+                                player.Avatar.SetNewCollisionLayers(14, 15);
                                 break;
                             default:
                                 break;

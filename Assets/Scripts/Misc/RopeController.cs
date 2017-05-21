@@ -18,6 +18,7 @@ namespace Rope
         float ropeWidth;
         Vector3 offSet;
         float fragmentDistance;
+        int layer = 8;
 
         void Start()
         {
@@ -60,6 +61,7 @@ namespace Rope
                 position = fragments[i - 1].transform.position + offSet;
                 GameObject newFragment = Instantiate(FragmentPrefab, position, Quaternion.LookRotation(position));
                 fragments.Add(newFragment);
+                newFragment.layer = layer;
                 newFragment.transform.parent = fragments[0].transform;
                 newFragment.name = "Fragment_" + i;
                 //Collider configuration
@@ -144,7 +146,12 @@ namespace Rope
         /// </summary>
         public void SetCollisionLayer(int _layerOrdinalNumber)
         {
-            this.gameObject.layer = _layerOrdinalNumber;
+            layer = _layerOrdinalNumber;
+            this.gameObject.layer = layer;
+            foreach (GameObject fragment in fragments)
+            {
+                fragment.layer = layer;
+            }
         }
         /// <summary>
         /// Extend the rope by required amount

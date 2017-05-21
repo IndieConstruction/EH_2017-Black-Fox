@@ -107,15 +107,7 @@ namespace BlackFox {
                 Material[] mats = new Material[] { _mat };
                 m.materials = mats;
             } 
-        }
-
-        /// <summary>
-        /// Remove all the placed Pins of this ship
-        /// </summary>
-        public void RemoveAllPins()
-        {
-            pinPlacer.RemoveAllPins();
-        }
+        }        
         #endregion
 
         // Input Fields
@@ -163,6 +155,24 @@ namespace BlackFox {
                 GameManager.Instance.LevelMng.PauseGame(Avatar.Player.ID);
             }
         }
+
+        #region PinPlacer
+        /// <summary>
+        /// Remove all the placed Pins of this ship
+        /// </summary>
+        public void RemoveAllPins()
+        {
+            pinPlacer.RemoveAllPins();
+        }
+        /// <summary>
+        /// Set new collision layer of the pins
+        /// </summary>
+        /// <param name="_newLayer">Ordinal number of the layer</param>
+        public void SetNewPinLayer(int _newLayer)
+        {
+            pinPlacer.SetCollisionLayer(_newLayer);
+        }
+        #endregion
 
         #region Shoot
         public Shooter shooter { get; private set; }

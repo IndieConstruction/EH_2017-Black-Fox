@@ -136,6 +136,16 @@ namespace BlackFox {
             Transform transf = GameManager.Instance.LevelMng.AvatarSpwn.GetMySpawnPoint(PlayerId);
             ship = Instantiate(AvatarData.BasePrefab, transf.position, transf.rotation , transform).GetComponent<Ship>();
         }
+        /// <summary>
+        /// Set new layers of collision for Rope and Pin
+        /// </summary>
+        /// <param name="_ropeLayer">Ordinal number of collision Layer</param>
+        /// <param name="_pinLayer">Ordinal number of collision Layer</param>
+        public void SetNewCollisionLayers(int _ropeLayer, int _pinLayer)
+        {
+            rope.SetCollisionLayer(_ropeLayer);
+            ship.SetNewPinLayer(_pinLayer);
+        }
 
         /// <summary>
         /// L'ancia un evento alla distruzione della ship, 

@@ -91,17 +91,7 @@ namespace BlackFox
 
         void DrawParable(GameObject _objToMove, Vector3 _target)
         {
-            //_objToMove.transform.DOMove(_target, 0.5f).OnComplete(delegate {
-            //    Debug.Log("Do Move terminata " + _objToMove.transform.position);
-            //});
-
-            _objToMove.transform.DOMove(_target, 0.5f).OnComplete(delegate {
-                if(_objToMove.GetComponent<Collider>()) _objToMove.GetComponent<Collider>().enabled = true;
-                Debug.Log("Do Move terminata " + _objToMove.transform.position);
-            });
-
-            //_objToMove.transform.DOMoveX(_target.x, 0.5f).SetDelay(0.1f);
-            //_objToMove.transform.DOMoveZ(_target.z, 0.5f).SetDelay(0.1f);
+            _objToMove.transform.DOJump(_target, 50, 1, 1f);
         }
 
         Vector3 ChoosePosition(List<Player> players)

@@ -91,7 +91,7 @@ namespace BlackFox
 
         void DrawParable(GameObject _objToMove, Vector3 _target)
         {
-            _objToMove.transform.DOJump(_target, 50, 1, 1f);
+            _objToMove.transform.DOJump(_target, 50, 1, 1f).OnComplete(() => { _objToMove.GetComponent<Collider>().enabled = true;  });
         }
 
         Vector3 ChoosePosition(List<Player> players)

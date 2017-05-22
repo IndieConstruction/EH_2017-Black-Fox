@@ -94,6 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AutoUse: 1
+  PowerUpDuration: 5
 --- !u!135 &135795683864115434
 SphereCollider:
   m_ObjectHideFlags: 1

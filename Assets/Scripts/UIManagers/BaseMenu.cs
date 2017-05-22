@@ -16,23 +16,23 @@ namespace BlackFox
             {
                 // Modifiche grafiche per cambiare colore alla nuova selezione e far tornare la vecchia selezione al colore precedente.
                 currentIndexSelection = value;
-                for (int i = 0; i < selectableButton.Count; i++)
+                for (int i = 0; i < _selectableButtons.Count; i++)
                 {
-                    if (selectableButton[i].Index == value)
+                    if (_selectableButtons[i].Index == value)
                     {
-                        selectableButton[i].IsSelected = true;
+                        _selectableButtons[i].IsSelected = true;
                     }
-                    else { selectableButton[i].IsSelected = false; }
+                    else { _selectableButtons[i].IsSelected = false; }
                 }
             }
         }
 
-        protected List<ISelectable> selectableButton = new List<ISelectable>();
+        protected List<ISelectable> _selectableButtons = new List<ISelectable>();
 
         public List<ISelectable> SelectableButtons
         {
-            get { return selectableButton; }
-            set { selectableButton = value; }
+            get { return _selectableButtons; }
+            set { _selectableButtons = value; }
         }
 
         Player player;
@@ -53,12 +53,10 @@ namespace BlackFox
                 SelectableButtons.Add(item);
             }
 
-            for (int i = 0; i < selectableButton.Count; i++)
+            for (int i = 0; i < _selectableButtons.Count; i++)
             {
-                selectableButton[i].SetIndex(i);
+                _selectableButtons[i].SetIndex(i);
             }
-
-            selectableButton[0].IsSelected = true;
         }
 
         
@@ -91,5 +89,7 @@ namespace BlackFox
         /// Funzione che in base all'override esegue la funzione del bottone attualmente selezionato
         /// </summary>
         public virtual void Selection(Player _player) { }
+
+        public virtual void GoBack(Player _player) { }
     }
 }

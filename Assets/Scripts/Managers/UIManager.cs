@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace BlackFox {
     public class UIManager : MonoBehaviour
@@ -23,6 +24,12 @@ namespace BlackFox {
         public BaseMenu CurrentMenu;
 
         #region API
+
+        public void Init()
+        {
+            LoadButtonImage();
+        }
+
         #region Menu Controller
 
         public void GoUpInMenu(Player _player)
@@ -53,9 +60,11 @@ namespace BlackFox {
             CurrentMenu.GoRightInMenu(_player);
         }
 
-        public void GoBackInMenu()
+        public void GoBackInMenu(Player _player)
         {
-            // TODO : implementare
+            if (GameManager.Instance.AudioMng != null)
+                GameManager.Instance.AudioMng.PlayMenuMovmentAudio();
+            CurrentMenu.GoBack(_player);
         }
 
         public void SelectInMenu(Player _player)
@@ -92,6 +101,7 @@ namespace BlackFox {
         public void CreateMainMenu()
         {
             canvasMenu = Instantiate(Resources.Load("Prefabs/UI/CanvasMenu") as GameObject, transform).GetComponent<MainMenuController>();
+            canvasMenu.Init();
         }
 
         /// <summary>
@@ -162,6 +172,20 @@ namespace BlackFox {
         public AvatarUI CreateAvatarUI(GameObject _target)
         {
             return Instantiate(AvatarUI, _target.transform.position, _target.transform.rotation, _target.transform).GetComponentInChildren<AvatarUI>();
+        }
+
+        #endregion
+
+        #region Load Button Image
+        [HideInInspector]
+        public Sprite SelectedButton;
+        [HideInInspector]
+        public Sprite DeselectionButton;
+
+        void LoadButtonImage()
+        {
+            SelectedButton = Resources.Load("UI/MenuUI/tasto_acceso", typeof(Sprite)) as Sprite;
+            DeselectionButton = Resources.Load("UI/MenuUI/tasto", typeof(Sprite)) as Sprite;
         }
 
         #endregion

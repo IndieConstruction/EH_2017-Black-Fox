@@ -200,7 +200,7 @@ namespace BlackFox
 
             if (InputStatus.B == ButtonState.Pressed)
             {
-                // TODO : call go back in menù
+                GameManager.Instance.UiMng.GoBackInMenu(this);
             }
         }
 

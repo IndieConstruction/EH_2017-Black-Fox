@@ -33,14 +33,14 @@ MonoBehaviour:
         LifeTime: 2
         BulletSpeed: 150
       DistanceFromShipOrigin: 3
-      ProjectileDamage: 1
+      ProjectileDamage: 2
       AddedAmmo: 15
-      MaxAmmo: 50
+      MaxAmmo: 90
     placePinConfig:
       PinPrefab: {fileID: 1844589482665234, guid: ea63e453c63a17240a1ecd1ef2fe0917,
         type: 2}
       CoolDownTime: 3
-      DistanceFromShipOrigin: 3
+      DistanceFromShipOrigin: 4.5
   ColorSetIndex: 0
   avatarUpgradesConfig:
     FireRateUpgrade:

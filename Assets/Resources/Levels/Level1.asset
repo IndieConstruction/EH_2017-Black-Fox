@@ -18,7 +18,7 @@ MonoBehaviour:
   LevelOptions:
     MaxRound: 4
     AddPoints: 1
-    SubPoints: 1
+    SubPoints: 0
     PointsToWin: 5
   MinPowerUpRatio: 5
   MaxPowerUpRatio: 10

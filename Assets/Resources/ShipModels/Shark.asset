@@ -21,11 +21,11 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4f7d104e8296c744cae0d117fe6d4fee, type: 2}
   - {fileID: 11400000, guid: 887514b0dce2cd24ea162fc71cac5469, type: 2}
   shipConfig:
-    MaxLife: 15
+    MaxLife: 5
     FireRate: 0.3
     movementConfig:
-      RotationSpeed: 10
-      MovmentSpeed: 1000
+      RotationSpeed: 15
+      MovmentSpeed: 2000
     shooterConfig:
       ShooterBaseConfig:
         ProjectilePrefab: {fileID: 1501574659777150, guid: c24e5fd438cd1d64c8ae981b5a429fe1,
@@ -33,14 +33,14 @@ MonoBehaviour:
         LifeTime: 2
         BulletSpeed: 150
       DistanceFromShipOrigin: 3
-      ProjectileDamage: 1
+      ProjectileDamage: 4
       AddedAmmo: 15
-      MaxAmmo: 50
+      MaxAmmo: 90
     placePinConfig:
       PinPrefab: {fileID: 1844589482665234, guid: ea63e453c63a17240a1ecd1ef2fe0917,
         type: 2}
       CoolDownTime: 3
-      DistanceFromShipOrigin: 3
+      DistanceFromShipOrigin: 4.5
   ColorSetIndex: 0
   avatarUpgradesConfig:
     FireRateUpgrade:

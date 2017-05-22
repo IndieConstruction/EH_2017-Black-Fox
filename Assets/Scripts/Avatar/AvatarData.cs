@@ -15,6 +15,7 @@ namespace BlackFox
         public GameObject ModelPrefab;
         public List<ColorSetData> ColorSets;
         public ShipConfig shipConfig;
+        public RopeConfig ropeConfig;
 
         [HideInInspector]
         public int ColorSetIndex;

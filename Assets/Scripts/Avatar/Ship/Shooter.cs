@@ -29,6 +29,16 @@ namespace BlackFox
             }
         }
 
+        public float ShootingDistance
+        {
+            get {
+                if (ship.Avatar.GetUpgrade(UpgardeTypes.PinRegenUpgrade) != null)
+                    return ship.Avatar.GetUpgrade(UpgardeTypes.ShootingDistnceUpgrade).CalculateValue(shooterBaseConfig.LifeTime);
+                else
+                    return shooterBaseConfig.LifeTime;
+            }
+        }
+
         #region API
         public void Init(Ship _ship)
         {
@@ -43,7 +53,7 @@ namespace BlackFox
                 instantiatedProjectile.GetComponentInChildren<MeshRenderer>().material = ship.Avatar.AvatarData.ColorSets[ship.Avatar.AvatarData.ColorSetIndex].PinMaterial;
                 instantiatedProjectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * shooterBaseConfig.BulletSpeed, ForceMode.Impulse);
                 instantiatedProjectile.GetComponent<Projectile>().Init(GetComponentInParent<IShooter>());
-                Destroy(instantiatedProjectile, shooterBaseConfig.LifeTime);
+                Destroy(instantiatedProjectile, ShootingDistance);
                 Ammo--;
             }
         }
@@ -57,7 +67,7 @@ namespace BlackFox
         public void AddAmmo()
         {
             if (Ammo < shooterConfig.MaxAmmo)
-                Ammo += shooterConfig.AddedAmmo;
+                Ammo += (int)ship.Avatar.GetUpgrade(UpgardeTypes.AmmoRechargeUpgrade).CalculateValue(shooterConfig.AddedAmmo);
             else if (Ammo > shooterConfig.MaxAmmo)
                 Ammo = shooterConfig.MaxAmmo;
         }

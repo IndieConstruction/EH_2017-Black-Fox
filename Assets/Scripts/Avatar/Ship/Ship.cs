@@ -270,7 +270,8 @@ namespace BlackFox {
 
         void PlacePin()
         {
-            pinPlacer.PlaceThePin();
+            if(pinPlacer.PlaceThePin())
+                AddShooterAmmo();
         }
 
         void Move(Vector3 _target)

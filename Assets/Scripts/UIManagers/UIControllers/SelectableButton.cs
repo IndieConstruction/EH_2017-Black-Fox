@@ -8,6 +8,10 @@ namespace BlackFox
 {
     public class SelectableButton : MonoBehaviour, ISelectable
     {
+        Sprite SelectedButton;
+        Sprite DeselectionButton;
+
+        Image ButtonImage;
 
         bool isSelected;
 
@@ -27,22 +31,23 @@ namespace BlackFox
             set { index = value; }
         }
 
-        Text LabelText;
-
+        public void Init(Sprite _selectedImg, Sprite _deselectedImg)
+        {
+            SelectedButton =_selectedImg;
+            DeselectionButton = _deselectedImg;
+            ButtonImage = GetComponent<Image>();
+        }
         public void SetIndex(int _index)
         {  
             Index = _index;
         }
         
-
         public void CheckIsSelected(bool _isSelected)
         {
-            LabelText = GetComponentInChildren<Text>();
-
             if (_isSelected)
-                LabelText.color = Color.red; 
+                ButtonImage.sprite = SelectedButton;
             else
-                LabelText.color = Color.white;
+                ButtonImage.sprite = DeselectionButton;
         }
     }
 }

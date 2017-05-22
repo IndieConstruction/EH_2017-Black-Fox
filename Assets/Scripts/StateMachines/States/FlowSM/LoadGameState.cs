@@ -21,6 +21,7 @@ namespace BlackFox
             GameManager.Instance.PlayerMng.InstantiatePlayers();
             GameManager.Instance.DataMng.Init();
             GameManager.Instance.SRMng.Init(GameManager.Instance.PlayerMng.Players);
+            GameManager.Instance.UiMng.Init();
         }
 
         public override void OnUpdate()

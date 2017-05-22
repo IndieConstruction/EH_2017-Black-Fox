@@ -8,11 +8,21 @@ namespace BlackFox
 {
     public class MainMenuController : BaseMenu
     {
-        void Start()
+
+        public void Init()
         {
-            FindISelectableChildren();
             GameManager.Instance.UiMng.CurrentMenu = this;
+            FindISelectableChildren();
+            foreach (ISelectable button in SelectableButtons)
+            {
+                (button as SelectableButton).Init(GameManager.Instance.UiMng.SelectedButton, GameManager.Instance.UiMng.DeselectionButton);
+            }
+
+            SelectableButtons[0].IsSelected = true;
         }
+
+
+
 
         public override void Selection(Player _player)
         {

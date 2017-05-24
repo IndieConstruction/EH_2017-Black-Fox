@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace BlackFox
 {
@@ -130,7 +131,8 @@ namespace BlackFox
     }
 
     [System.Serializable]
-    public class ExternalElementOptions : SpawnerOptions {
+    public class ExternalElementOptions : SpawnerOptions
+    {
         public GameObject ExternalAgent;                        //Prefab of the ExternalAgent to instantiate         
         public float MinTime = 10;                              //Min time between Spawns
         public float MaxTime = 20;                              //Max time between Spawns

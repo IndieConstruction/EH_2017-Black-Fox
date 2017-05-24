@@ -1454,7 +1454,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224080821157657338}
-  - component: {fileID: 114653139665448338}
+  - component: {fileID: 114064793859000786}
   m_Layer: 5
   m_Name: UpgradeMenuPanel
   m_TagString: Untagged
@@ -2920,8 +2920,8 @@ GameObject:
   - component: {fileID: 222239727458715438}
   - component: {fileID: 114492186033535192}
   m_Layer: 5
-  m_Name: Panel
-  m_TagString: Untagged
+  m_Name: UpgradeMenuSubPanel
+  m_TagString: UpgradeMenuSubPanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3760,6 +3760,22 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
+--- !u!114 &114064793859000786
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1413643969688454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26261b969d64a414db5295a87dbdd0bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerUpgradeControllers:
+  - {fileID: 114194262697451422}
+  - {fileID: 114309579047677962}
+  - {fileID: 114835259948849834}
+  - {fileID: 114698898113195634}
 --- !u!114 &114068617540173040
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7185,23 +7201,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114653139665448338
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1413643969688454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26261b969d64a414db5295a87dbdd0bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UpgradePanel: {fileID: 1785314757405684}
-  PlayerUpgradeControllers:
-  - {fileID: 114194262697451422}
-  - {fileID: 114309579047677962}
-  - {fileID: 114835259948849834}
-  - {fileID: 114698898113195634}
 --- !u!114 &114688259609801116
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10286,7 +10285,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -23.9, y: -9.6}
+  m_AnchoredPosition: {x: -23.900002, y: -9.6}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224125671662103722
@@ -10553,7 +10552,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 56.7, y: 19}
+  m_AnchoredPosition: {x: 56.699997, y: 19}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224203821952823152
@@ -10787,7 +10786,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -108.1, y: 19.1}
+  m_AnchoredPosition: {x: -108.100006, y: 19.1}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224267874718169424
@@ -10924,7 +10923,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 25.3, y: -8.3}
+  m_AnchoredPosition: {x: 25.3, y: -8.300001}
   m_SizeDelta: {x: 37.7, y: 30.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224279731679471262
@@ -11832,7 +11831,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -55.8, y: -69.79999}
+  m_AnchoredPosition: {x: -55.800003, y: -69.79999}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224467499821207374
@@ -13253,7 +13252,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -16.8, y: 0.8}
+  m_AnchoredPosition: {x: -16.8, y: 0.8000002}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224840821531366702

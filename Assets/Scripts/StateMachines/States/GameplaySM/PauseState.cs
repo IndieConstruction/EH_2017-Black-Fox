@@ -12,6 +12,7 @@ namespace BlackFox
             Time.timeScale = 0;
             GameManager.Instance.UiMng.CurrentMenu = GameManager.Instance.UiMng.canvasGame.pauseMenuController;
             GameManager.Instance.UiMng.canvasGame.pauseMenuController.ChildrenPanel.SetActive(true);
+            GameManager.Instance.UiMng.canvasGame.pauseMenuController.Init();
         }
 
         public override void OnEnd()

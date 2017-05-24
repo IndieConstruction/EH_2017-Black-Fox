@@ -21,9 +21,6 @@ namespace BlackFox
             SelectableButtons[0].IsSelected = true;
         }
 
-
-
-
         public override void Selection(Player _player)
         {
             switch (CurrentIndexSelection)

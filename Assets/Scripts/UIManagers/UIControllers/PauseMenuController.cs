@@ -16,19 +16,15 @@ namespace BlackFox
             FindISelectableChildren();
         }
 
-        public override void FindISelectableChildren()
+        public void Init()
         {
-            foreach (ISelectable item in ChildrenPanel.GetComponentsInChildren<ISelectable>())
+            FindISelectableChildren();
+            foreach (ISelectable button in SelectableButtons)
             {
-                SelectableButtons.Add(item);
+                (button as SelectableButton).Init(GameManager.Instance.UiMng.SelectedButton, GameManager.Instance.UiMng.DeselectionButton);
             }
 
-            for (int i = 0; i < _selectableButtons.Count; i++)
-            {
-                _selectableButtons[i].SetIndex(i);
-            }
-
-            _selectableButtons[0].IsSelected = true;
+            SelectableButtons[0].IsSelected = true;
         }
 
         public override void Selection(Player _player)

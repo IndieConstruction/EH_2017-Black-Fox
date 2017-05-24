@@ -12,6 +12,7 @@ namespace BlackFox
         public float life = 10;
         public float velocity = 5;
         public float damage = 1;
+        AlertIndicator alertIndicator;
 
         List<IDamageable> damageablesList;
 
@@ -35,6 +36,7 @@ namespace BlackFox
         {
             target = _target;
             damageablesList = _damageables;
+            alertIndicator = GetComponent<AlertIndicator>();
         }
 
         private void OnCollisionEnter(Collision collision)

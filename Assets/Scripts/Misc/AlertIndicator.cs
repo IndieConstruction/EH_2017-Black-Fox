@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using BlackFox;
 using DG.Tweening;
 
-public class IndicatorTester : MonoBehaviour {
 
-    public Transform transformToIndicate;
-    public Image Indicator;
+public class AlertIndicator : MonoBehaviour {
+    
+    Image Indicator;
+    Vector3 centerPosition { get { return GameManager.Instance.LevelMng.Core.transform.position; } }
 
     private bool _offScreen;
 
@@ -19,32 +21,39 @@ public class IndicatorTester : MonoBehaviour {
         }
     }
 
-    private void Start() {
-        transformToIndicate = transform;
+    private void Start()
+    {
+        Indicator = Instantiate(Resources.Load<GameObject>("Prefabs/UI/AlertIndicator")).GetComponent<Image>();
+        Indicator.transform.SetParent(GameManager.Instance.UiMng.canvasGame.transform);
     }
 
-    void Update () {
+    void Update ()
+    {
         float offset = 0;//Indicator.rectTransform.sizeDelta.x;
-        OffScreen = false;
-        Indicator.transform.position = Camera.main.WorldToScreenPoint(transformToIndicate.position);
-        if (Indicator.transform.position.x > Screen.width) {
+        //OffScreen = false;
+        Indicator.transform.position = Camera.main.WorldToScreenPoint(Vector3.ProjectOnPlane(transform.position,-Camera.main.transform.forward));
+        if (Indicator.transform.position.x > Screen.width)
+        {
             Indicator.transform.position = new Vector2(Screen.width - offset, Indicator.transform.position.y);
             OffScreen = true;
         }
-        if (Indicator.transform.position.x < 0) {
+
+        if (Indicator.transform.position.x < 0)
+        {
             Indicator.transform.position = new Vector2(0 + offset, Indicator.transform.position.y);
             OffScreen = true;
         }
-        if (Indicator.transform.position.y > Screen.height) {
+
+        if (Indicator.transform.position.y > Screen.height)
+        {
             Indicator.transform.position = new Vector2(Indicator.transform.position.x, Screen.height - offset);
             OffScreen = true;
         }
-        if (Indicator.transform.position.y < 0) {
+
+        if (Indicator.transform.position.y < 0)
+        {
             Indicator.transform.position = new Vector2(Indicator.transform.position.x, 0 + offset);
             OffScreen = true;
-        }
-
-
-        
+        }  
     }
 }

@@ -2921,7 +2921,7 @@ GameObject:
   - component: {fileID: 114492186033535192}
   m_Layer: 5
   m_Name: UpgradeMenuSubPanel
-  m_TagString: UpgradeMenuSubPanel
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3824,8 +3824,7 @@ MonoBehaviour:
   endRoundUI: {fileID: 114554809992754134}
   pauseMenuController: {fileID: 114492919097580566}
   Counter: {fileID: 114620178131797512}
-  upgradeMenuManager: {fileID: 114728546927740678, guid: 6770c82a1a1509044a882ad8aafe4c29,
-    type: 2}
+  upgradeMenuManager: {fileID: 114064793859000786}
 --- !u!114 &114074518548365180
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -9741,7 +9740,7 @@ Canvas:
   m_GameObject: {fileID: 1345720058335310}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0

@@ -113,6 +113,11 @@ namespace BlackFox
                 inputStatus.A = ButtonState.Pressed;
             }
 
+            if (prevState.Buttons.B == XInputDotNetPure.ButtonState.Released && state.Buttons.B == XInputDotNetPure.ButtonState.Pressed)
+            {
+                inputStatus.B = ButtonState.Pressed;
+            }
+
             if (prevState.DPad.Up == XInputDotNetPure.ButtonState.Released && state.DPad.Up == XInputDotNetPure.ButtonState.Pressed)
             {
                 inputStatus.DPadUp = ButtonState.Pressed;
@@ -198,6 +203,11 @@ namespace BlackFox
             if (Input.GetButtonDown("Key" + (int)playerIndex + "_Submit"))
             {
                 inputStatus.A = ButtonState.Pressed;
+            }
+
+            if (Input.GetButtonDown("Key" + (int)playerIndex + "_Deselect"))
+            {
+                inputStatus.B = ButtonState.Pressed;
             }
 
             if (Input.GetButtonDown("Key" + (int)playerIndex + "_Pause"))

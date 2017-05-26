@@ -61,7 +61,6 @@ namespace BlackFox
 
         #endregion
 
-
         #region Events
         private void OnEnable()
         {

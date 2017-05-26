@@ -21,6 +21,20 @@ namespace BlackFox
             SelectableButtons[0].IsSelected = true;
         }
 
+        public override void GoDownInMenu(Player _player)
+        {
+            base.GoDownInMenu(_player);
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
+        }
+
+        public override void GoUpInMenu(Player _player)
+        {
+            base.GoUpInMenu(_player);
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
+        }
+
         public override void Selection(Player _player)
         {
             switch (CurrentIndexSelection)
@@ -36,6 +50,9 @@ namespace BlackFox
                     GameManager.Instance.QuitApplication();
                     break;
             }
+
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Selection);
         }
     }
 }

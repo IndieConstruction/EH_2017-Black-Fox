@@ -47,6 +47,9 @@ namespace BlackFox {
                     break;
                 }
             }
+
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
         }
 
         public override void GoDownInMenu(Player _player)
@@ -59,6 +62,9 @@ namespace BlackFox {
                     break;
                 }
             }
+
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
         }
 
         public override void GoLeftInMenu(Player _player)
@@ -71,6 +77,9 @@ namespace BlackFox {
                     break;
                 }
             }
+
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
         }
 
         public override void GoRightInMenu(Player _player)
@@ -83,6 +92,9 @@ namespace BlackFox {
                     break;
                 }
             }
+
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
         }
 
         public override void Selection(Player _player)
@@ -95,6 +107,9 @@ namespace BlackFox {
                     break;
                 }
             }
+
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Selection);
         }
 
         public override void GoBack(Player _player)
@@ -103,6 +118,9 @@ namespace BlackFox {
             {
                 if (_player.ID == PlayerLabel.One)
                 {
+                    if (EventManager.OnMenuAction != null)
+                        EventManager.OnMenuAction(AudioManager.UIAudio.Back);
+
                     GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new LevelSelectionState() });
                     break;
                 }

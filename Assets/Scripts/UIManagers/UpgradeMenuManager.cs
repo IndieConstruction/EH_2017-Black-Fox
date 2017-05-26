@@ -71,6 +71,9 @@ namespace BlackFox {
                     break;
                 }
             }
+
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
         }
 
         public override void GoDownInMenu(Player _player)
@@ -83,6 +86,9 @@ namespace BlackFox {
                     break;
                 }
             }
+
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
         }
 
         public override void GoLeftInMenu(Player _player)
@@ -95,6 +101,9 @@ namespace BlackFox {
                     break;
                 }
             }
+
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
         }
 
         public override void GoRightInMenu(Player _player)
@@ -107,6 +116,9 @@ namespace BlackFox {
                     break;
                 }
             }
+
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
         }
 
         public override void Selection(Player _player)
@@ -119,6 +131,9 @@ namespace BlackFox {
                     break;
                 }
             }
+
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Selection);
         }
         #endregion
     }

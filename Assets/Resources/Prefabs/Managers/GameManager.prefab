@@ -61,10 +61,6 @@ MonoBehaviour:
     type: 2}
   AudioManagerPrefab: {fileID: 1430661436070886, guid: 056d6142f48afb74e97dcdb173de4e80,
     type: 2}
-  UpgradePointsManagerPrefab: {fileID: 1626979337095788, guid: 7431b5c69261e3a49a4f393b347c2678,
-    type: 2}
-  PowerUpManagerPrefab: {fileID: 1974875444530600, guid: a643f6f472a5f5d4fb6dac55b8c2104b,
-    type: 2}
   DataManagerPrefab: {fileID: 1840109802485920, guid: f5a48c12d31181549b23fa01bce3654e,
     type: 2}
   SRManagerPrefab: {fileID: 1802479423604144, guid: 3267f0de12658e94d98d8ea376cd6dc4,
@@ -74,9 +70,8 @@ MonoBehaviour:
   PlayerMng: {fileID: 0}
   CoinMng: {fileID: 0}
   AudioMng: {fileID: 114780806946937844, guid: 056d6142f48afb74e97dcdb173de4e80, type: 2}
-  UpgradePointsMng: {fileID: 0}
-  PowerUpManager: {fileID: 0}
   DataMng: {fileID: 0}
   SRMng: {fileID: 0}
   flowSM: {fileID: 0}
-  LevelScriptableObj: {fileID: 11400000, guid: 8f955d3e75a08d34292082349f1986e7, type: 2}
+  LevelScriptableObjs:
+  - {fileID: 11400000, guid: 8f955d3e75a08d34292082349f1986e7, type: 2}

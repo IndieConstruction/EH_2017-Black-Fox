@@ -11,7 +11,7 @@ namespace BlackFox {
 
         public int Level
         {
-            get { return GameManager.Instance.LevelMng.LevelNumber; }
+            get { return GameManager.Instance.LevelMng.CurrentLevel.LevelNumber; }
         }
 
         public int Round

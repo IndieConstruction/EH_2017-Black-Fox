@@ -49,11 +49,6 @@ namespace BlackFox
         [HideInInspector]
         public LevelOptions levelOptions;
 
-        public int LevelNumber
-        {
-            get { return CurrentLevel.LevelNumber; }
-        }
-
         #region Round
         [HideInInspector]
         public int RoundNumber;
@@ -82,7 +77,7 @@ namespace BlackFox
         #region API
         public void Init()
         {
-            CurrentLevel = Instantiate(InstantiateLevel());
+            CurrentLevel = Instantiate(GameManager.Instance.GetSelectedLevel());
             levelOptions = CurrentLevel.LevelOptions;
             StartGameplaySM();
             levelPointsCounter = new LevelPointsCounter(this);
@@ -90,18 +85,6 @@ namespace BlackFox
         }
 
         #region Instantiation
-        /// <summary>
-        /// Funzione che ritorna lo scriptable del livello da caricare
-        /// </summary>
-        /// <returns></returns>
-        public Level InstantiateLevel()
-        {
-            if (GameManager.Instance.LevelScriptableObj != null)
-                return GameManager.Instance.LevelScriptableObj;
-            else
-                return Resources.Load<Level>("Levels/Level" + LevelNumber);
-        }
-
         /// <summary>
         /// Instance a preloaded SpawnManager
         /// </summary>

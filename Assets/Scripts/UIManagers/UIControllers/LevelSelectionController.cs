@@ -20,11 +20,13 @@ namespace BlackFox
             switch (CurrentIndexSelection)
             {
                 case 0:
-                    GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new AvatarSelectionState() });
+                    GameManager.Instance.SelectLevel(0);
                     break;
                 default:
                     break;
             }
+
+            GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new AvatarSelectionState() });
         }
 
         public override void GoBack(Player _player)

@@ -38,7 +38,8 @@ namespace BlackFox
         [HideInInspector]
         public FlowSM flowSM;
 
-        public Level LevelScriptableObj;
+        public Level[] LevelScriptableObjs;
+        int LevelSelected;
 
         private void Awake()
         {
@@ -58,6 +59,24 @@ namespace BlackFox
         public void QuitApplication()
         {
             Application.Quit();
+        }
+
+        /// <summary>
+        /// Funzione che salva il numero del livello selezionato
+        /// </summary>
+        /// <param name="_levelNumber"></param>
+        public void SelectLevel(int _levelNumber)
+        {
+            LevelSelected = _levelNumber;
+        }
+
+        /// <summary>
+        /// Funzione che ritorna lo scriptable del livello da caricare
+        /// </summary>
+        /// <returns></returns>
+        public Level GetSelectedLevel()
+        {
+            return LevelScriptableObjs[LevelSelected];
         }
 
         #region Instantiate Managers

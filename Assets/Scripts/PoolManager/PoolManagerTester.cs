@@ -17,8 +17,8 @@ public class PoolManagerTester : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Space)) {
-            IPoollableObject obj = poolManager.GetPooledObject() ;
-            obj.GameObject.transform.position = new Vector3(Random.Range(-3, 3), Random.Range(-3, 3), Random.Range(-3, 3));
+            IPoollableObject obj = poolManager.GetPooledObject(new Vector3(Random.Range(-3, 3), Random.Range(-3, 3), Random.Range(-3, 3))) ;
+            //obj.GameObject.transform.position = new Vector3(Random.Range(-3, 3), Random.Range(-3, 3), Random.Range(-3, 3));
         }	
 	}
 

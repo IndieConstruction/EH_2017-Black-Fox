@@ -61,6 +61,7 @@ namespace BlackFox
             transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0.1f), 0.5f);
             if (life < 1)
             {
+                GameManager.Instance.LevelMng.PoolMng.GetPooledObject(transform.position);
                 transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { GameManager.Instance.LevelMng.CoreDeath(); });
             }
         }

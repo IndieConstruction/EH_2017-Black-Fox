@@ -247,8 +247,10 @@ namespace BlackFox {
 
             Life -= _damage;
             damageTween = transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f);
+            ParticlesController.PlayParticles(ParticlesController.ParticlesType.Damage);
             if (Life < 1)
             {
+                GameManager.Instance.LevelMng.PoolMng.GetPooledObject(transform.position);
                 Avatar.ShipDestroy(_attacker.GetComponent<Ship>().Avatar);
                 transform.DOScale(Vector3.zero, 0.5f);
                 return;
@@ -281,7 +283,6 @@ namespace BlackFox {
         void Shoot()
         {
             shooter.ShootBullet();
-            ParticlesController.PlayParticles(ParticlesController.ParticlesType.Fire);
         }
 
         void PlacePin()
@@ -293,6 +294,7 @@ namespace BlackFox {
         void Move(Vector3 _target)
         {
             movment.Move(_target);
+            ParticlesController.PlayParticles(ParticlesController.ParticlesType.Movement);
             if (Avatar.rope != null)
                 ExtendRope(_target.magnitude);
         }

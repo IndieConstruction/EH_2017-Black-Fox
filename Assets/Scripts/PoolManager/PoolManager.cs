@@ -28,7 +28,12 @@ public class PoolManager {
 
     #region API
 
-    public IPoollableObject GetPooledObject() {
+    /// <summary>
+    /// Ritorna il primo IPollableObject disponibile
+    /// </summary>
+    /// <param name="_targetPosition">La posizione in cui deve essere posizionato l'oggetto/param>
+    /// <returns></returns>
+    public IPoollableObject GetPooledObject(Vector3 _targetPosition) {
         if (Pool.FindAll(o => o.IsActive == false).Count < 1) {
             createNewObject();
         }
@@ -37,6 +42,7 @@ public class PoolManager {
         for (int i = 0; i < Pool.Count; i++) {
             if (Pool[i].IsActive == false) {
                 Pool[i].Activate();
+                Pool[i].GameObject.transform.position = _targetPosition;
                 return Pool[i];
             }
         }
@@ -47,6 +53,7 @@ public class PoolManager {
         for (int i = 0; i < Pool.Count; i++) {
             if (!Pool[i].IsActive) {
                 if (objectToRelease.Equals(Pool[i])) {
+                    Pool[i].GameObject.transform.position = new Vector3(100, 100, 100);
                     //Pool[i].Deactivate();
                     break;
                 }

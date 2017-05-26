@@ -34,43 +34,43 @@ namespace BlackFox {
 
         public void GoUpInMenu(Player _player)
         {
-            if (GameManager.Instance.AudioMng != null)
-                GameManager.Instance.AudioMng.PlayMenuMovmentAudio();
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
             CurrentMenu.GoUpInMenu(_player);
         }
 
         public void GoDownInMenu(Player _player)
         {
-            if (GameManager.Instance.AudioMng != null)
-                GameManager.Instance.AudioMng.PlayMenuMovmentAudio();
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
             CurrentMenu.GoDownInMenu(_player);
         }
 
         public void GoLeftInMenu(Player _player)
         {
-            if (GameManager.Instance.AudioMng != null)
-                GameManager.Instance.AudioMng.PlayMenuMovmentAudio();
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
             CurrentMenu.GoLeftInMenu(_player);
         }
 
         public void GoRightInMenu(Player _player)
         {
-            if (GameManager.Instance.AudioMng != null)
-                GameManager.Instance.AudioMng.PlayMenuMovmentAudio();
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
             CurrentMenu.GoRightInMenu(_player);
         }
 
         public void GoBackInMenu(Player _player)
         {
-            if (GameManager.Instance.AudioMng != null)
-                GameManager.Instance.AudioMng.PlayMenuMovmentAudio();
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Back);
             CurrentMenu.GoBack(_player);
         }
 
         public void SelectInMenu(Player _player)
         {
-            if (GameManager.Instance.AudioMng != null)
-                GameManager.Instance.AudioMng.PlayMenuSelectionAudio();
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Selection);
             CurrentMenu.Selection(_player);
         }
 

@@ -18,6 +18,19 @@ namespace BlackFox {
         [HideInInspector]
         public GameObject Model;
 
+        private ParticlesController _particlesController;
+
+        public ParticlesController ParticlesController
+        {
+            get {
+                if (_particlesController != null)
+                    return _particlesController;
+                else return null;
+            }
+            set { _particlesController = value; }
+        }
+
+
         MovementController movment;
         PlacePin pinPlacer;
         AvatarUI avatarUi;
@@ -85,6 +98,8 @@ namespace BlackFox {
             pinPlacer = GetComponentInChildren<PlacePin>();
             pinPlacer.Setup(this);
             avatarUi = GetComponentInChildren<AvatarUI>();
+            ParticlesController = GetComponent<ParticlesController>();
+            ParticlesController.Init();
         }
 
         public void InstantiateModel()
@@ -266,6 +281,7 @@ namespace BlackFox {
         void Shoot()
         {
             shooter.ShootBullet();
+            ParticlesController.PlayParticles(ParticlesController.ParticlesType.Fire);
         }
 
         void PlacePin()

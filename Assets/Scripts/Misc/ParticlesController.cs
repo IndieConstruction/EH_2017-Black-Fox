@@ -4,26 +4,70 @@ using UnityEngine;
 
 public class ParticlesController : MonoBehaviour {
 
-    public ParticleSystem particles;
-
+    public ParticleSystem DamageParticles;
+    public ParticleSystem FireParticles;
+    public ParticleSystem MovementParticles;
     #region API
+
+    public void Init()
+    {
+        DamageParticles.Stop();
+        FireParticles.Stop();
+        MovementParticles.Stop();
+    }
+
 
     /// <summary>
     /// Play the Particles effect
     /// </summary>
-    public void PlayParticles()
+    public void PlayParticles(ParticlesType _type)
     {
-        particles.Play();
-        Debug.Log(particles.isEmitting);
+        switch (_type)
+        {
+            case ParticlesType.Damage:
+                    DamageParticles.Play();
+                break;
+            case ParticlesType.Fire:
+                FireParticles.Play();
+                break;
+            case ParticlesType.Movement:
+                MovementParticles.Play();
+                break;
+            default:
+                break;
+        }
+        
     }
 
     /// <summary>
     /// Stop the particles effect
     /// </summary>
-    public void StopParticles()
+    public void StopParticles(ParticlesType _type)
     {
-        particles.Stop();
+        switch (_type)
+        {
+            case ParticlesType.Damage:
+                    DamageParticles.Stop();
+                break;
+            case ParticlesType.Fire:
+                FireParticles.Stop();
+                break;
+            case ParticlesType.Movement:
+                MovementParticles.Stop();
+                break;
+            default:
+                break;
+        }
+
     }
 
     #endregion
+
+
+    public enum ParticlesType
+    {
+        Damage,
+        Fire,
+        Movement,
+    }
 }

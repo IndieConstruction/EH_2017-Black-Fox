@@ -15,6 +15,8 @@ namespace BlackFox
         public GameObject SpawnerMngPrefab;
         public GameObject AvatarSpwnPrefab;
         public GameObject RopeMngPrefab;
+        public GameObject UpgradePointsManagerPrefab;
+        public GameObject PowerUpManagerPrefab;
         #endregion
 
         #region Managers
@@ -24,6 +26,10 @@ namespace BlackFox
         public RopeManager RopeMng;
         [HideInInspector]
         public AvatarSpawner AvatarSpwn;
+        [HideInInspector]
+        public UpgradePointsManager UpgradePointsMng;
+        [HideInInspector]
+        public PowerUpManager PowerUpMng;
         #endregion
 
         #region Level
@@ -118,6 +124,23 @@ namespace BlackFox
             AvatarSpwn = Instantiate(AvatarSpwnPrefab, transform).GetComponent<AvatarSpawner>();
             AvatarSpwn.Init();
         }
+
+        /// <summary>
+        /// Istance a new UpgradePointsManager
+        /// </summary>
+        public void InstantiateUpgradePointsManager()
+        {
+            UpgradePointsMng = Instantiate(UpgradePointsManagerPrefab, transform).GetComponent<UpgradePointsManager>();
+        }
+
+        /// <summary>
+        /// Istance a new PowerUpManager
+        /// </summary>
+        public void InstantiatePowerUpManager()
+        {
+            PowerUpMng = Instantiate(PowerUpManagerPrefab, transform).GetComponent<PowerUpManager>();
+        }
+
         /// <summary>
         /// Carica lo scriptable object del livello e istanzia il prefab del livello
         /// </summary>

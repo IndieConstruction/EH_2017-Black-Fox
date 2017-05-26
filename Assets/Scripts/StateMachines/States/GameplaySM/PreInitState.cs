@@ -15,6 +15,8 @@ namespace BlackFox
             GameManager.Instance.LevelMng.InstantiateArena();
             GameManager.Instance.LevelMng.InstantiateAvatarSpawner();
             GameManager.Instance.LevelMng.InstantiateRopeManager();
+            GameManager.Instance.LevelMng.InstantiateUpgradePointsManager();
+            GameManager.Instance.LevelMng.InstantiatePowerUpManager();
             GameManager.Instance.LevelMng.InstantiateSpawnerManager();
             GameManager.Instance.LevelMng.SpawnerMng.InstantiateNewSpawners(GameManager.Instance.LevelMng.CurrentLevel);
 

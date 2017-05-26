@@ -14,8 +14,6 @@ namespace BlackFox
         public GameObject PlayerManagerPrefab;
         public GameObject CoinManagerPrefab;
         public GameObject AudioManagerPrefab;
-        public GameObject UpgradePointsManagerPrefab;
-        public GameObject PowerUpManagerPrefab;
         public GameObject DataManagerPrefab;
         public GameObject SRManagerPrefab;
         #endregion
@@ -31,10 +29,6 @@ namespace BlackFox
         public CoinManager CoinMng;
         [HideInInspector]
         public AudioManager AudioMng;
-        [HideInInspector]
-        public UpgradePointsManager UpgradePointsMng;
-        [HideInInspector]
-        public PowerUpManager PowerUpManager;
         [HideInInspector]
         public DataManager DataMng;
         [HideInInspector]
@@ -59,6 +53,7 @@ namespace BlackFox
         {
             flowSM = gameObject.AddComponent<FlowSM>();
         }
+
         #region API
         public void QuitApplication()
         {
@@ -94,16 +89,6 @@ namespace BlackFox
         public void InstantiateAudioManager()
         {
             AudioMng = Instantiate(AudioManagerPrefab, transform).GetComponent<AudioManager>();
-        }
-
-        public void InstantiateUpgradePointsManager()
-        {
-            UpgradePointsMng = Instantiate(UpgradePointsManagerPrefab, transform).GetComponent<UpgradePointsManager>();
-        }
-
-        public void InstantiatePowerUpManager()
-        {
-            PowerUpManager = Instantiate(PowerUpManagerPrefab, transform).GetComponent<PowerUpManager>();
         }
 
         public void InstantiateDataManager()

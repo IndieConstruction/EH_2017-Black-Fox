@@ -294,7 +294,11 @@ namespace BlackFox {
         void Move(Vector3 _target)
         {
             movment.Move(_target);
-            ParticlesController.PlayParticles(ParticlesController.ParticlesType.Movement);
+
+            if (_target.magnitude > 0.2f)
+                ParticlesController.PlayParticles(ParticlesController.ParticlesType.Movement);  
+            else
+                ParticlesController.StopParticles(ParticlesController.ParticlesType.Movement);
             if (Avatar.rope != null)
                 ExtendRope(_target.magnitude);
         }

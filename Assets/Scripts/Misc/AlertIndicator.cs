@@ -56,4 +56,9 @@ public class AlertIndicator : MonoBehaviour {
             OffScreen = true;
         }  
     }
+
+    private void OnDestroy()
+    {
+        Destroy(Indicator.gameObject);
+    }
 }

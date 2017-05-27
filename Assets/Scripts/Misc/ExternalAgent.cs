@@ -51,6 +51,7 @@ namespace BlackFox
                     // E' presente l'oggetto con cui l'agente esterno è entrato in collisione.
                     if (item.GetType() == damageable.GetType())
                     {
+                        GameManager.Instance.LevelMng.PoolMng.GetPooledObject(transform.position);
                         damageable.Damage(damage, null);        // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia
                         Destroy(gameObject);                    //Distrugge l'agente esterno
                         break;                                  // Ed esce dal foreach.

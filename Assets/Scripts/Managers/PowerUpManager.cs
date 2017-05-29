@@ -82,7 +82,9 @@ namespace BlackFox
         {
             PowerUpBase tempPowerup;
             GameObject tempObj = ChoosePowerUp();
-            tempPowerup = Instantiate(tempObj, GameManager.Instance.LevelMng.Core.transform.position, Quaternion.identity, container.transform).GetComponent<PowerUpBase>();
+			tempPowerup = Instantiate(tempObj, container.transform).GetComponent<PowerUpBase>();
+			// modifica la rotazione del powerup riportandola a 0,0,0
+            //tempPowerup = Instantiate(tempObj, GameManager.Instance.LevelMng.Core.transform.position, Quaternion.identity, container.transform).GetComponent<PowerUpBase>();
             if(tempPowerup.GetComponent<Collider>()) tempPowerup.GetComponent<Collider>().enabled = false;
             DrawParable(tempPowerup.gameObject, ChoosePosition(GameManager.Instance.PlayerMng.Players));
             if (tempPowerup != null)

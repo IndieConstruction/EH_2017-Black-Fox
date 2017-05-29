@@ -75,9 +75,9 @@ namespace BlackFox
             life -= _damage;
             OnDataChange();
             transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0.1f), 0.5f);
-            DamageParticles.transform.position = new Vector3(DamageParticles.transform.position.x + UnityEngine.Random.Range(0.1f, 0.5f), 
-                DamageParticles.transform.position.y + UnityEngine.Random.Range(0.1f, 0.5f), DamageParticles.transform.position.z + UnityEngine.Random.Range(0.1f, 0.5f));
-            ParticlesController.PlayParticles(ParticlesController.ParticlesType.Damage);
+            //DamageParticles.transform.position = new Vector3(DamageParticles.transform.position.x + UnityEngine.Random.Range(0.1f, 0.5f), 
+              //  DamageParticles.transform.position.y + UnityEngine.Random.Range(0.1f, 0.5f), DamageParticles.transform.position.z + UnityEngine.Random.Range(0.1f, 0.5f));
+            //ParticlesController.PlayParticles(ParticlesController.ParticlesType.Damage);
             
 
             if (life < 1)

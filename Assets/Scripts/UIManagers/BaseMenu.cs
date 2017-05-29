@@ -59,7 +59,7 @@ namespace BlackFox
             }
         }
 
-        
+        #region Menu Actions
         public virtual void GoDownInMenu(Player _player)
         {
             CurrentIndexSelection++;
@@ -91,5 +91,6 @@ namespace BlackFox
         public virtual void Selection(Player _player) { }
 
         public virtual void GoBack(Player _player) { }
+        #endregion
     }
 }

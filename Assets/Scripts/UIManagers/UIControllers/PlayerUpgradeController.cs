@@ -30,7 +30,6 @@ namespace BlackFox
 
         UpgradeMenuManager UpgradeMng;
 
-        public GameObject selectableUpgradePrefab;
         public Text PlayerIdText;
         public Text ConfirmText;
         public Text UpgradePintsText;

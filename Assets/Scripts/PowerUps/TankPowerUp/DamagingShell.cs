@@ -8,6 +8,7 @@ namespace BlackFox {
         List<IDamageable> _damageables = new List<IDamageable>();
         float duration = 0;
 
+		ParticleSystem particles;
         /// <summary>
         /// 
         /// </summary>

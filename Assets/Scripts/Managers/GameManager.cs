@@ -14,8 +14,6 @@ namespace BlackFox
         public GameObject PlayerManagerPrefab;
         public GameObject CoinManagerPrefab;
         public GameObject AudioManagerPrefab;
-        public GameObject UpgradePointsManagerPrefab;
-        public GameObject PowerUpManagerPrefab;
         public GameObject DataManagerPrefab;
         public GameObject SRManagerPrefab;
         #endregion
@@ -32,10 +30,6 @@ namespace BlackFox
         [HideInInspector]
         public AudioManager AudioMng;
         [HideInInspector]
-        public UpgradePointsManager UpgradePointsMng;
-        [HideInInspector]
-        public PowerUpManager PowerUpManager;
-        [HideInInspector]
         public DataManager DataMng;
         [HideInInspector]
         public SRManager SRMng;
@@ -44,7 +38,8 @@ namespace BlackFox
         [HideInInspector]
         public FlowSM flowSM;
 
-        public Level LevelScriptableObj;
+        public Level[] LevelScriptableObjs;
+        int LevelSelected;
 
         private void Awake()
         {
@@ -59,10 +54,29 @@ namespace BlackFox
         {
             flowSM = gameObject.AddComponent<FlowSM>();
         }
+
         #region API
         public void QuitApplication()
         {
             Application.Quit();
+        }
+
+        /// <summary>
+        /// Funzione che salva il numero del livello selezionato
+        /// </summary>
+        /// <param name="_levelNumber"></param>
+        public void SelectLevel(int _levelNumber)
+        {
+            LevelSelected = _levelNumber;
+        }
+
+        /// <summary>
+        /// Funzione che ritorna lo scriptable del livello da caricare
+        /// </summary>
+        /// <returns></returns>
+        public Level GetSelectedLevel()
+        {
+            return LevelScriptableObjs[LevelSelected];
         }
 
         #region Instantiate Managers
@@ -94,16 +108,6 @@ namespace BlackFox
         public void InstantiateAudioManager()
         {
             AudioMng = Instantiate(AudioManagerPrefab, transform).GetComponent<AudioManager>();
-        }
-
-        public void InstantiateUpgradePointsManager()
-        {
-            UpgradePointsMng = Instantiate(UpgradePointsManagerPrefab, transform).GetComponent<UpgradePointsManager>();
-        }
-
-        public void InstantiatePowerUpManager()
-        {
-            PowerUpManager = Instantiate(PowerUpManagerPrefab, transform).GetComponent<PowerUpManager>();
         }
 
         public void InstantiateDataManager()

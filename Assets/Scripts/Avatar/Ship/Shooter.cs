@@ -55,6 +55,7 @@ namespace BlackFox
                 instantiatedProjectile.GetComponent<Projectile>().Init(GetComponentInParent<IShooter>());
                 Destroy(instantiatedProjectile, ShootingDistance);
                 Ammo--;
+                ship.ParticlesController.PlayParticles(ParticlesController.ParticlesType.Fire);
             }
         }
 

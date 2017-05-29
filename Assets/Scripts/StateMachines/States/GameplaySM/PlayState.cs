@@ -12,7 +12,7 @@ namespace BlackFox
             GameManager.Instance.LevelMng.SpawnerMng.ToggleSpawners(true);
             GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.PlayInput);
             GameManager.Instance.LevelMng.RoundBegin();
-            GameManager.Instance.PowerUpManager.Toggle(true);
+            GameManager.Instance.LevelMng.PowerUpMng.Toggle(true);
             EventManager.OnAgentKilled += HandleOnAgentKilled;
         }
 

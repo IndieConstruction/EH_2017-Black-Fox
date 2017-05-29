@@ -18,6 +18,19 @@ namespace BlackFox {
         [HideInInspector]
         public GameObject Model;
 
+        private ParticlesController _particlesController;
+
+        public ParticlesController ParticlesController
+        {
+            get {
+                if (_particlesController != null)
+                    return _particlesController;
+                else return null;
+            }
+            set { _particlesController = value; }
+        }
+
+
         MovementController movment;
         PlacePin pinPlacer;
         AvatarUI avatarUi;
@@ -85,6 +98,8 @@ namespace BlackFox {
             pinPlacer = GetComponentInChildren<PlacePin>();
             pinPlacer.Setup(this);
             avatarUi = GetComponentInChildren<AvatarUI>();
+            ParticlesController = GetComponent<ParticlesController>();
+            ParticlesController.Init();
         }
 
         public void InstantiateModel()
@@ -232,8 +247,10 @@ namespace BlackFox {
 
             Life -= _damage;
             damageTween = transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f);
+            ParticlesController.PlayParticles(ParticlesController.ParticlesType.Damage);
             if (Life < 1)
             {
+                GameManager.Instance.LevelMng.PoolMng.GetPooledObject(transform.position);
                 Avatar.ShipDestroy(_attacker.GetComponent<Ship>().Avatar);
                 transform.DOScale(Vector3.zero, 0.5f);
                 return;
@@ -277,6 +294,11 @@ namespace BlackFox {
         void Move(Vector3 _target)
         {
             movment.Move(_target);
+
+            if (_target.magnitude > 0.2f)
+                ParticlesController.PlayParticles(ParticlesController.ParticlesType.Movement);  
+            else
+                ParticlesController.StopParticles(ParticlesController.ParticlesType.Movement);
             if (Avatar.rope != null)
                 ExtendRope(_target.magnitude);
         }

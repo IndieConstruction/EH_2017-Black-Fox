@@ -13,8 +13,6 @@ namespace BlackFox
             GameManager.Instance.InstantiateUIManager();
             GameManager.Instance.InstantiateCoinManager();
             GameManager.Instance.InstantiateAudioManager();
-            GameManager.Instance.InstantiateUpgradePointsManager();
-            GameManager.Instance.InstantiatePowerUpManager();
             GameManager.Instance.InstantiateDataManager();
             GameManager.Instance.InstantiateShowRoom();
 

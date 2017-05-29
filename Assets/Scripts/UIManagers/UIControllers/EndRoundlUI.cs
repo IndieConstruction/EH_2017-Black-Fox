@@ -44,6 +44,8 @@ namespace BlackFox
         public override void Selection(Player _player)
         {
             GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Selection);
         }
         #endregion
     }

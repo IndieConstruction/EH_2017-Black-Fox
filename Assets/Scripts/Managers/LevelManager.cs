@@ -15,6 +15,8 @@ namespace BlackFox
         public GameObject SpawnerMngPrefab;
         public GameObject AvatarSpwnPrefab;
         public GameObject RopeMngPrefab;
+        public GameObject UpgradePointsManagerPrefab;
+        public GameObject PowerUpManagerPrefab;
         #endregion
 
         #region Managers
@@ -24,6 +26,11 @@ namespace BlackFox
         public RopeManager RopeMng;
         [HideInInspector]
         public AvatarSpawner AvatarSpwn;
+        [HideInInspector]
+        public UpgradePointsManager UpgradePointsMng;
+        [HideInInspector]
+        public PowerUpManager PowerUpMng;
+        public PoolManager PoolMng;
         #endregion
 
         #region Level
@@ -42,11 +49,6 @@ namespace BlackFox
         
         [HideInInspector]
         public LevelOptions levelOptions;
-
-        public int LevelNumber
-        {
-            get { return CurrentLevel.LevelNumber; }
-        }
 
         #region Round
         [HideInInspector]
@@ -76,7 +78,7 @@ namespace BlackFox
         #region API
         public void Init()
         {
-            CurrentLevel = Instantiate(InstantiateLevel());
+            CurrentLevel = Instantiate(GameManager.Instance.GetSelectedLevel());
             levelOptions = CurrentLevel.LevelOptions;
             StartGameplaySM();
             levelPointsCounter = new LevelPointsCounter(this);
@@ -84,18 +86,6 @@ namespace BlackFox
         }
 
         #region Instantiation
-        /// <summary>
-        /// Funzione che ritorna lo scriptable del livello da caricare
-        /// </summary>
-        /// <returns></returns>
-        public Level InstantiateLevel()
-        {
-            if (GameManager.Instance.LevelScriptableObj != null)
-                return GameManager.Instance.LevelScriptableObj;
-            else
-                return Resources.Load<Level>("Levels/Level" + LevelNumber);
-        }
-
         /// <summary>
         /// Instance a preloaded SpawnManager
         /// </summary>
@@ -118,6 +108,23 @@ namespace BlackFox
             AvatarSpwn = Instantiate(AvatarSpwnPrefab, transform).GetComponent<AvatarSpawner>();
             AvatarSpwn.Init();
         }
+
+        /// <summary>
+        /// Istance a new UpgradePointsManager
+        /// </summary>
+        public void InstantiateUpgradePointsManager()
+        {
+            UpgradePointsMng = Instantiate(UpgradePointsManagerPrefab, transform).GetComponent<UpgradePointsManager>();
+        }
+
+        /// <summary>
+        /// Istance a new PowerUpManager
+        /// </summary>
+        public void InstantiatePowerUpManager()
+        {
+            PowerUpMng = Instantiate(PowerUpManagerPrefab, transform).GetComponent<PowerUpManager>();
+        }
+
         /// <summary>
         /// Carica lo scriptable object del livello e istanzia il prefab del livello
         /// </summary>
@@ -125,6 +132,14 @@ namespace BlackFox
         {
             Arena = Instantiate(CurrentLevel.ArenaPrefab, transform);
             ResetPinsContainer(Arena.transform);
+        }
+
+        public void InstantiatePoolManager()
+        {
+            object explosionPrefab = Resources.Load("Prefabs/Misc/ExplosionParticles");
+            IPoollableObject explosion = (explosionPrefab as GameObject).GetComponent<IPoollableObject>();
+
+            PoolMng = new PoolManager(new GameObject("Explosion Container").transform, explosion, 10);
         }
         #endregion
 

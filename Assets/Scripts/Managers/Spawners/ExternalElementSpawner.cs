@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace BlackFox
 {
@@ -37,6 +38,7 @@ namespace BlackFox
         #region Spawner Life Flow
         public override void Init()
         {
+            ID = "ExternalElementSpawner";
             if (Options.ExternalAgent == null)
                 Options.ExternalAgent = (GameObject)Resources.Load("Prefabs/ExternalAgents/ExternalAgent1");
 
@@ -46,7 +48,6 @@ namespace BlackFox
 
             container = new GameObject("ExternalAgentContainer");
             container.transform.parent = GameManager.Instance.LevelMng.Arena.transform;
-            ID = "ExternalElementSpawner";
         }
 
         public override SpawnerBase OptionInit(SpawnerOptions options)
@@ -64,8 +65,8 @@ namespace BlackFox
                     InstantiateExternalAgent();
                     if (IsKamikazeTime)
                     {
-                        nextTime = Time.time + 1.5f;
-                        PowerupDuration -= nextTime;
+                        nextTime = Time.time + 1f;
+                        PowerupDuration -= 1;
                         if (PowerupDuration <= 0)
                             IsKamikazeTime = false;
 
@@ -73,15 +74,6 @@ namespace BlackFox
                     else
                         nextTime = Time.time + Random.Range(Options.MinTime, Options.MaxTime);
                 }
-
-                //if (IsKamikazeTime)
-                //{
-                //    PowerupDuration -= Time.deltaTime;
-                //    if (PowerupDuration <= 0)
-                //        IsKamikazeTime = false;
-                //}
-
-
                 GravityAround();
             }
         }
@@ -139,7 +131,8 @@ namespace BlackFox
     }
 
     [System.Serializable]
-    public class ExternalElementOptions : SpawnerOptions {
+    public class ExternalElementOptions : SpawnerOptions
+    {
         public GameObject ExternalAgent;                        //Prefab of the ExternalAgent to instantiate         
         public float MinTime = 10;                              //Min time between Spawns
         public float MaxTime = 20;                              //Max time between Spawns

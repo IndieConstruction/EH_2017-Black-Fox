@@ -42,8 +42,8 @@ MonoBehaviour:
       CoolDownTime: 3
       DistanceFromShipOrigin: 4.5
   ropeConfig:
-    MaxLength: 80
-    DensityOfFragments: 0.1
+    MaxLength: 160
+    DensityOfFragments: 0.2
   ColorSetIndex: 0
   avatarUpgradesConfig:
     FireRateUpgrade:

@@ -36,50 +36,96 @@ namespace BlackFox {
             GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new GameplayState() });
         }
 
-        public override void GoUpInMenu(Player _player) {
-            foreach (AvatarSelectionController controller in avatarSelectionControllers) {
-                if ((int)controller.MenuID == (int)_player.ID) {
+        #region Menu Actions
+        public override void GoUpInMenu(Player _player)
+        {
+            foreach (AvatarSelectionController controller in avatarSelectionControllers)
+            {
+                if ((int)controller.MenuID == (int)_player.ID)
+                {
                     controller.GoUpInMenu(_player);
                     break;
                 }
             }
+
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
         }
 
-        public override void GoDownInMenu(Player _player) {
-            foreach (AvatarSelectionController controller in avatarSelectionControllers) {
-                if ((int)controller.MenuID == (int)_player.ID) {
+        public override void GoDownInMenu(Player _player)
+        {
+            foreach (AvatarSelectionController controller in avatarSelectionControllers)
+            {
+                if ((int)controller.MenuID == (int)_player.ID)
+                {
                     controller.GoDownInMenu(_player);
                     break;
                 }
             }
+
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
         }
 
-        public override void GoLeftInMenu(Player _player) {
-            foreach (AvatarSelectionController controller in avatarSelectionControllers) {
-                if ((int)controller.MenuID == (int)_player.ID) {
+        public override void GoLeftInMenu(Player _player)
+        {
+            foreach (AvatarSelectionController controller in avatarSelectionControllers)
+            {
+                if ((int)controller.MenuID == (int)_player.ID)
+                {
                     controller.GoLeftInMenu(_player);
                     break;
                 }
             }
+
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
         }
 
-        public override void GoRightInMenu(Player _player) {
-            foreach (AvatarSelectionController controller in avatarSelectionControllers) {
-                if ((int)controller.MenuID == (int)_player.ID) {
+        public override void GoRightInMenu(Player _player)
+        {
+            foreach (AvatarSelectionController controller in avatarSelectionControllers)
+            {
+                if ((int)controller.MenuID == (int)_player.ID)
+                {
                     controller.GoRightInMenu(_player);
                     break;
                 }
             }
+
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
         }
 
-        public override void Selection(Player _player) {
-            foreach (AvatarSelectionController controller in avatarSelectionControllers) {
-                if ((int)controller.MenuID == (int)_player.ID) {
+        public override void Selection(Player _player)
+        {
+            foreach (AvatarSelectionController controller in avatarSelectionControllers)
+            {
+                if ((int)controller.MenuID == (int)_player.ID)
+                {
                     controller.Selection(_player);
                     break;
                 }
             }
+
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Selection);
         }
 
+        public override void GoBack(Player _player)
+        {
+            foreach (AvatarSelectionController controller in avatarSelectionControllers)
+            {
+                if (_player.ID == PlayerLabel.One)
+                {
+                    if (EventManager.OnMenuAction != null)
+                        EventManager.OnMenuAction(AudioManager.UIAudio.Back);
+
+                    GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new LevelSelectionState() });
+                    break;
+                }
+            }
+        }
+        #endregion
     }
 }

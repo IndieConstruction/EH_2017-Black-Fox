@@ -15,10 +15,26 @@ namespace BlackFox
 
         Image Ring;
 
+        public GameObject DamageParticles;
+
+        private ParticlesController _particlesController;
+
+        public ParticlesController ParticlesController
+        {
+            get
+            {
+                if (_particlesController != null)
+                    return _particlesController;
+                else return null;
+            }
+            set { _particlesController = value; }
+        }
+
         public void Setup()
         {
             Ring = GetComponentInChildren<Image>();
             life = MaxLife;
+            ParticlesController = GetComponent<ParticlesController>();
             OnDataChange();
         }
 
@@ -59,8 +75,14 @@ namespace BlackFox
             life -= _damage;
             OnDataChange();
             transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0.1f), 0.5f);
+            //DamageParticles.transform.position = new Vector3(DamageParticles.transform.position.x + UnityEngine.Random.Range(0.1f, 0.5f), 
+              //  DamageParticles.transform.position.y + UnityEngine.Random.Range(0.1f, 0.5f), DamageParticles.transform.position.z + UnityEngine.Random.Range(0.1f, 0.5f));
+            //ParticlesController.PlayParticles(ParticlesController.ParticlesType.Damage);
+            
+
             if (life < 1)
             {
+                GameManager.Instance.LevelMng.PoolMng.GetPooledObject(transform.position);
                 transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { GameManager.Instance.LevelMng.CoreDeath(); });
             }
         }

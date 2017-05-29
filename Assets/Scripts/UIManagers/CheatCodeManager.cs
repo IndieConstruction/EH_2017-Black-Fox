@@ -46,7 +46,7 @@ namespace BlackFox
                     break;
                 case "round":
                     GameManager.Instance.LevelMng.PlayerWin("CheatCode");
-                    GameManager.Instance.UpgradePointsMng.CheatPoints(PlayerLabel.Different);
+                    GameManager.Instance.LevelMng.UpgradePointsMng.CheatPoints(PlayerLabel.Different);
                     break;
                 case "level":
                     GameManager.Instance.LevelMng.gameplaySM.SetPassThroughOrder(new List<StateBase>() { new CleanSceneState(), new GameOverState() });

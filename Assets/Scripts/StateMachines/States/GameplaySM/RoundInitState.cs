@@ -12,7 +12,7 @@ namespace BlackFox {
             GameManager.Instance.LevelMng.SpawnAllAvatar(0);
             GameManager.Instance.LevelMng.InitCore();
             GameManager.Instance.LevelMng.SpawnerMng.InitSpawners();
-            GameManager.Instance.PowerUpManager.Init();
+            GameManager.Instance.LevelMng.PowerUpMng.Init();
             GameManager.Instance.UiMng.canvasGame.gameUIController.UpdateLevelInformation();
             GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.Blocked);
         }

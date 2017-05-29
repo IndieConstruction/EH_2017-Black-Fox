@@ -1,11 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace BlackFox { 
     public class UpgradeMenuManager : BaseMenu
     {
-        public GameObject UpgradePanel;
+        GameObject _upgradePanel;
+        public GameObject UpgradePanel {
+            get {
+                if (_upgradePanel == null)
+                {
+                    Image[] tempList = GetComponentsInChildren<Image>();
+                    foreach (Image item in tempList)
+                    {
+                        if (item.name == "UpgradeMenuSubPanel")
+                            _upgradePanel = item.gameObject;
+                    }
+                }
+                return _upgradePanel;
+            }
+            set { _upgradePanel = value;
+                Debug.Log("");
+            }
+        }
 
         public List<PlayerUpgradeController> PlayerUpgradeControllers = new List<PlayerUpgradeController>();
 
@@ -53,6 +71,9 @@ namespace BlackFox {
                     break;
                 }
             }
+
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
         }
 
         public override void GoDownInMenu(Player _player)
@@ -65,6 +86,9 @@ namespace BlackFox {
                     break;
                 }
             }
+
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
         }
 
         public override void GoLeftInMenu(Player _player)
@@ -77,6 +101,9 @@ namespace BlackFox {
                     break;
                 }
             }
+
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
         }
 
         public override void GoRightInMenu(Player _player)
@@ -89,6 +116,9 @@ namespace BlackFox {
                     break;
                 }
             }
+
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
         }
 
         public override void Selection(Player _player)
@@ -101,6 +131,9 @@ namespace BlackFox {
                     break;
                 }
             }
+
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Selection);
         }
         #endregion
     }

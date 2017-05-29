@@ -16,19 +16,29 @@ namespace BlackFox
             FindISelectableChildren();
         }
 
-        public override void FindISelectableChildren()
+        public void Init()
         {
-            foreach (ISelectable item in ChildrenPanel.GetComponentsInChildren<ISelectable>())
+            FindISelectableChildren();
+            foreach (ISelectable button in SelectableButtons)
             {
-                SelectableButtons.Add(item);
+                (button as SelectableButton).Init(GameManager.Instance.UiMng.SelectedButton, GameManager.Instance.UiMng.DeselectionButton);
             }
 
-            for (int i = 0; i < _selectableButtons.Count; i++)
-            {
-                _selectableButtons[i].SetIndex(i);
-            }
+            SelectableButtons[0].IsSelected = true;
+        }
 
-            _selectableButtons[0].IsSelected = true;
+        public override void GoDownInMenu(Player _player)
+        {
+            base.GoDownInMenu(_player);
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
+        }
+
+        public override void GoUpInMenu(Player _player)
+        {
+            base.GoUpInMenu(_player);
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
         }
 
         public override void Selection(Player _player)
@@ -42,6 +52,9 @@ namespace BlackFox
                     GameManager.Instance.LevelMng.gameplaySM.SetPassThroughOrder(new List<StateBase>() { new CleanSceneState(), new GameOverState() });
                     break;
             }
+
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Selection);
         }
     }
 }

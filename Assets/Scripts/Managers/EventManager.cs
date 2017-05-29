@@ -51,7 +51,33 @@ namespace BlackFox
         /// <summary>
         /// Evento che si occupa di innescare l'update dei punti sulla UI
         /// </summary>
-        public static UIEvent OnPointsUpdate;       
+        public static UIEvent OnPointsUpdate;
+        #endregion
+
+        #region Audio Event
+        public delegate void UIAudioEvent(AudioManager.UIAudio _menuAudio);
+        /// <summary>
+        /// Evento che si occupa di innescare i souni dei player nei menù
+        /// </summary>
+        public static UIAudioEvent OnMenuAction;
+
+        public delegate void MusicEvent(AudioManager.Music _music);
+        /// <summary>
+        /// Evento che si occupa di innescare la musica
+        /// </summary>
+        public static MusicEvent OnMusicChange;
+
+        public delegate void AvatarAudioEvent(AudioManager.AvatarAudio _avatarAudio, PlayerLabel _playerId);
+        /// <summary>
+        /// Evento che si occupa di innescare i souni degli avatar in gioco
+        /// </summary>
+        public static AvatarAudioEvent OnAvatarAction;
+
+        public delegate void PowerUpAudioEvent(AudioManager.PowerUpAudio _powerUpAudio);
+        /// <summary>
+        /// Evento che si occupa di innescare i souni dei power up in gioco
+        /// </summary>
+        public static PowerUpAudioEvent OnPowerUpAction;
         #endregion
     }
 }

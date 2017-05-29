@@ -24,58 +24,46 @@ namespace BlackFox {
         public BaseMenu CurrentMenu;
 
         #region API
-
         public void Init()
         {
             LoadButtonImage();
         }
 
-        #region Menu Controller
+        #region Menu Actions
 
         public void GoUpInMenu(Player _player)
         {
-            if (GameManager.Instance.AudioMng != null)
-                GameManager.Instance.AudioMng.PlayMenuMovmentAudio();
             CurrentMenu.GoUpInMenu(_player);
         }
 
         public void GoDownInMenu(Player _player)
         {
-            if (GameManager.Instance.AudioMng != null)
-                GameManager.Instance.AudioMng.PlayMenuMovmentAudio();
             CurrentMenu.GoDownInMenu(_player);
         }
 
         public void GoLeftInMenu(Player _player)
         {
-            if (GameManager.Instance.AudioMng != null)
-                GameManager.Instance.AudioMng.PlayMenuMovmentAudio();
             CurrentMenu.GoLeftInMenu(_player);
         }
 
         public void GoRightInMenu(Player _player)
         {
-            if (GameManager.Instance.AudioMng != null)
-                GameManager.Instance.AudioMng.PlayMenuMovmentAudio();
             CurrentMenu.GoRightInMenu(_player);
         }
 
         public void GoBackInMenu(Player _player)
         {
-            if (GameManager.Instance.AudioMng != null)
-                GameManager.Instance.AudioMng.PlayMenuMovmentAudio();
             CurrentMenu.GoBack(_player);
         }
 
         public void SelectInMenu(Player _player)
         {
-            if (GameManager.Instance.AudioMng != null)
-                GameManager.Instance.AudioMng.PlayMenuSelectionAudio();
             CurrentMenu.Selection(_player);
         }
 
         #endregion
 
+        #region Menu Instantiate And Destroy
         #region Loading Canvas
         /// <summary>
         /// Crea il CanvasMenu non appena subentra il MainMenuState
@@ -189,7 +177,7 @@ namespace BlackFox {
         }
 
         #endregion
-
+        #endregion
         #endregion
     }
 }

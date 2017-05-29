@@ -12,6 +12,7 @@ namespace BlackFox
         public float life = 10;
         public float velocity = 5;
         public float damage = 1;
+        AlertIndicator alertIndicator;
 
         List<IDamageable> damageablesList;
 
@@ -35,6 +36,7 @@ namespace BlackFox
         {
             target = _target;
             damageablesList = _damageables;
+            alertIndicator = GetComponent<AlertIndicator>();
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -49,6 +51,7 @@ namespace BlackFox
                     // E' presente l'oggetto con cui l'agente esterno è entrato in collisione.
                     if (item.GetType() == damageable.GetType())
                     {
+                        GameManager.Instance.LevelMng.PoolMng.GetPooledObject(transform.position);
                         damageable.Damage(damage, null);        // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia
                         Destroy(gameObject);                    //Distrugge l'agente esterno
                         break;                                  // Ed esce dal foreach.
@@ -71,6 +74,7 @@ namespace BlackFox
             transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f);
             if (Life < 1)
             {
+                GameManager.Instance.LevelMng.PoolMng.GetPooledObject(transform.position);
                 transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject); });
             }
         }

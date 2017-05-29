@@ -23,12 +23,12 @@ namespace BlackFox
                 SelectableButtons.Add(item);
             }
 
-            for (int i = 0; i < selectableButton.Count; i++)
+            for (int i = 0; i < _selectableButtons.Count; i++)
             {
-                selectableButton[i].SetIndex(i);
+                _selectableButtons[i].SetIndex(i);
             }
 
-            selectableButton[0].IsSelected = true;
+            _selectableButtons[0].IsSelected = true;
         }
 
         public override void Selection(Player _player)

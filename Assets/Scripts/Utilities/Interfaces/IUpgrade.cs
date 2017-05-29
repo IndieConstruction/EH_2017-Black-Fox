@@ -27,6 +27,8 @@ namespace BlackFox
         FireRateUpgrade,
         PinRegenUpgrade,
         PowerUpDurationUpgrade,
-        RopeLengthUpgrade
+        RopeLengthUpgrade,
+        ShootingDistnceUpgrade,
+        AmmoRechargeUpgrade
     }
 }

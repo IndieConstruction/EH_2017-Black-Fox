@@ -14,9 +14,9 @@ namespace BlackFox {
         /// <param name="_target"></param>
         public void AttachNewRope(Avatar _target, Rigidbody _originRigid = null)
         {
-            RopeConfig newConfig = new RopeConfig();
-            newConfig.MaxLength = (int) _target.GetUpgrade(UpgardeTypes.RopeLengthUpgrade).CalculateValue(_target.AvatarData.ropeConfig.MaxLength);
-            newConfig.DensityOfFragments = _target.AvatarData.ropeConfig.DensityOfFragments;
+            //RopeConfig newConfig = new RopeConfig();
+            //newConfig.MaxLength = (int) _target.GetUpgrade(UpgardeTypes.RopeLengthUpgrade).CalculateValue(_target.AvatarData.ropeConfig.MaxLength);
+            //newConfig.DensityOfFragments = _target.AvatarData.ropeConfig.DensityOfFragments;
             GameObject newOrigin;
             Transform originPos;
             if (_originRigid == null)
@@ -35,7 +35,7 @@ namespace BlackFox {
             _target.rope = rc;
 
             rc.AnchorPoint = _target.ship.transform;
-            newOrigin.GetComponent<RopeController>().InitRope(newConfig);
+            newOrigin.GetComponent<RopeController>().InitRope(_target.AvatarData.ropeConfig);
             
             newOrigin.GetComponent<LineRenderer>().material = _target.AvatarData.ColorSets[_target.AvatarData.ColorSetIndex].RopeMaterial;    
         }        

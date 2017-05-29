@@ -52,24 +52,21 @@ MonoBehaviour:
     - 0.07
     - 0.11
     - 0.15
-    PinRegenUpgrade:
+    AmmoRechargeUpgrade:
     - 0
-    - 0.3
-    - 0.5
-    - 0.7
-    - 1
-    - 1.5
+    - 3
+    - 6
+    - 9
+    - 12
+    ShootingDistanceUpgrade:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
     PowerUpDurationUpgrade:
     - 0
-    - 0.3
-    - 0.5
-    - 0.7
     - 1
-    - 1.5
-    RopeLengthUpgrade:
-    - 20
-    - 40
-    - 60
-    - 80
-    - 100
-    - 1.5
+    - 2
+    - 3
+    - 4

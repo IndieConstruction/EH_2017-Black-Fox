@@ -96,16 +96,16 @@ namespace BlackFox
             }
         }
         /// <summary>
-        /// Instantiate the pin on the PinSpawn (true/false switch between right/left)
+        /// Instance a Pin if possible
         /// </summary>
-        public void PlaceThePin()
+        /// <returns>True is instance succeded</returns>
+        public bool PlaceThePin()
         {
             if (prectime <= 0 && canPlace == true)
             {
                 GameObject pin = Instantiate(placePinConfig.PinPrefab, transform.position + transform.forward*placePinConfig.DistanceFromShipOrigin, transform.rotation);
                 pin.layer = layer;
                 pinsPlaced.Add(pin);
-                ship.AddShooterAmmo();
                 isRecharging = false;
                 foreach (Renderer pinRend in pin.GetComponentsInChildren<Renderer>())
                 {
@@ -113,7 +113,9 @@ namespace BlackFox
                 }
                 pin.transform.parent = GameManager.Instance.LevelMng.PinsContainer;
                 prectime = CurrentPinRate;
+                return true;
             }
+            return false;
         }
         /// <summary>
         /// Remove all the placed Pins

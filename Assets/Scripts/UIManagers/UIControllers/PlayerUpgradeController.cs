@@ -104,20 +104,20 @@ namespace BlackFox
 
         public override void GoRightInMenu(Player _player)
         {
-            if (UpgradeCounter < AvatarUpgradePoints && (selectableButton[currentIndexSelection] as SelectableUpgrade).Upgrade.CurrentUpgradeLevel < (selectableButton[currentIndexSelection] as SelectableUpgrade).Upgrade.MaxLevel)
+            if (UpgradeCounter < AvatarUpgradePoints && (_selectableButtons[currentIndexSelection] as SelectableUpgrade).Upgrade.CurrentUpgradeLevel < (_selectableButtons[currentIndexSelection] as SelectableUpgrade).Upgrade.MaxLevel)
             {
                 UpgradeCounter++;
-                (selectableButton[currentIndexSelection] as SelectableUpgrade).AddValue();
+                (_selectableButtons[currentIndexSelection] as SelectableUpgrade).AddValue();
                 UpgradeGraphics();
             }
         }
 
         public override void GoLeftInMenu(Player _player)
         {
-            if (UpgradeCounter > 0 && (selectableButton[currentIndexSelection] as SelectableUpgrade).Upgrade.CurrentUpgradeLevel > (selectableButton[currentIndexSelection] as SelectableUpgrade).Upgrade.MinLevel)
+            if (UpgradeCounter > 0 && (_selectableButtons[currentIndexSelection] as SelectableUpgrade).Upgrade.CurrentUpgradeLevel > (_selectableButtons[currentIndexSelection] as SelectableUpgrade).Upgrade.MinLevel)
             {
                 UpgradeCounter--;
-                (selectableButton[currentIndexSelection] as SelectableUpgrade).RemoveValue();
+                (_selectableButtons[currentIndexSelection] as SelectableUpgrade).RemoveValue();
                 UpgradeGraphics();
             }
         }

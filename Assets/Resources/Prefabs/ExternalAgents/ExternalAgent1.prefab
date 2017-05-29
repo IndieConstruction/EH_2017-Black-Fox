@@ -134,7 +134,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1842433816405484}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5a33b8f4c58fa4f40a35d08179d2a135, type: 3}
   m_Name: 
@@ -153,7 +153,6 @@ MonoBehaviour:
   life: 1
   velocity: 5
   damage: 1
-  alertIndicator: {fileID: 114244984278187418}
 --- !u!136 &136298281779434568
 CapsuleCollider:
   m_ObjectHideFlags: 1

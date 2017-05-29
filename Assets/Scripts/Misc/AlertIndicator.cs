@@ -59,6 +59,7 @@ public class AlertIndicator : MonoBehaviour {
 
     private void OnDestroy()
     {
-        Destroy(Indicator.gameObject);
+		if(Indicator != null)
+        	Destroy(Indicator.gameObject);
     }
 }

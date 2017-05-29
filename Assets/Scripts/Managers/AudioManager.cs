@@ -10,11 +10,11 @@ namespace BlackFox
         public AudioClip MenuMovementAudioClip;
         public AudioClip MenuSelectionAudioClip;
 
+        public AudioSource[] PlayerAudioSurces;
         public AudioSource AudioSurceMenu;
         public AudioSource AudioSurceMusic;
         public AudioSource AudioSurceAmbience;
         public AudioSource AudioSurcePowerUp;
-        public AudioSource[] PlayerAudioSurces;
 
         #region Audio Actions
         void PlayUIAudio(UIAudio _menuAudio)
@@ -71,9 +71,7 @@ namespace BlackFox
                             break;
                         case AvatarAudio.Death:
                             break;
-                        case AvatarAudio.Movement:
-                            break;
-                        case AvatarAudio.Shot:
+                        case AvatarAudio.Shoot:
                             break;
                         case AvatarAudio.NoAmmo:
                             break;
@@ -142,8 +140,7 @@ namespace BlackFox
         {
             AmmoRecharge,
             Death,
-            Movement,
-            Shot,
+            Shoot,
             NoAmmo,
             PinPlaced,
             Collision

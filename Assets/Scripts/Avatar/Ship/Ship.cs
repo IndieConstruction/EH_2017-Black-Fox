@@ -34,6 +34,7 @@ namespace BlackFox {
         MovementController movment;
         PlacePin pinPlacer;
         AvatarUI avatarUi;
+        ShipAccelerationAudioController accelerationAudioController;
         Tweener damageTween;
 
         #region PowerUp comandi invertiti
@@ -100,6 +101,9 @@ namespace BlackFox {
             avatarUi = GetComponentInChildren<AvatarUI>();
             ParticlesController = GetComponent<ParticlesController>();
             ParticlesController.Init();
+
+            accelerationAudioController = GetComponentInChildren<ShipAccelerationAudioController>();
+            accelerationAudioController.Init(this);
         }
 
         public void InstantiateModel()
@@ -301,6 +305,8 @@ namespace BlackFox {
                 ParticlesController.StopParticles(ParticlesController.ParticlesType.Movement);
             if (Avatar.rope != null)
                 ExtendRope(_target.magnitude);
+
+            accelerationAudioController.Accelerate(_target.magnitude);
         }
 
         void ExtendRope(float _amount)

@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198407122403696360}
   - component: {fileID: 199131311924284122}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Piazza pulita
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

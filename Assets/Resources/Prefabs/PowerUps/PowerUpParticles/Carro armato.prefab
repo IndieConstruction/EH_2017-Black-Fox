@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 198851060594367486}
   - component: {fileID: 199780893473037874}
   m_Layer: 0
-  m_Name: carro armato
+  m_Name: Carro armato
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -8,7 +8,6 @@ namespace BlackFox
     public class EndRoundlUI : BaseMenu
     {
         public Text[] PlayerPoints = new Text[4];
-        public Text EventName;
         public GameObject EndLevelPanel;
 
         void Start()
@@ -36,7 +35,6 @@ namespace BlackFox
             if (_status)
             {
                 ShowAvatarsKillPoints();
-                EventName.text = GameManager.Instance.LevelMng.EndLevelPanelLableText;
             }
             EndLevelPanel.SetActive(_status);
         }

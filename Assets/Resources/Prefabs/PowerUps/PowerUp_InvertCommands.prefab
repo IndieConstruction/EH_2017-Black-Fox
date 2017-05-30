@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4270821021179470}
   - component: {fileID: 33201576974444040}
   - component: {fileID: 23952286716132696}
-  - component: {fileID: 135795683864115434}
   - component: {fileID: 114789177244439532}
   m_Layer: 0
   m_Name: PowerUp_InvertCommands
@@ -95,15 +94,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AutoUse: 1
   PowerUpDuration: 5
---- !u!135 &135795683864115434
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1083932658742572}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 5
-  m_Center: {x: 0, y: 0, z: 0}

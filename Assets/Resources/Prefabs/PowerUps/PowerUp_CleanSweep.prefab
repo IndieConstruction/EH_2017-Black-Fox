@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4965064144924020}
   - component: {fileID: 33787125530160312}
   - component: {fileID: 23130560338248212}
-  - component: {fileID: 135961990565403120}
   - component: {fileID: 114574409409879114}
   m_Layer: 0
   m_Name: PowerUp_CleanSweep
@@ -38,7 +37,6 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4814084498623260}
-  - component: {fileID: 135226971576565702}
   - component: {fileID: 114697004712949838}
   m_Layer: 0
   m_Name: Cleaner
@@ -169,30 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bb357f68d828ad4f8fbedc6559cbda1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &135226971576565702
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1378539960244238}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &135961990565403120
-SphereCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1187472140700354}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.1622878
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!198 &198098555024097620
 ParticleSystem:
   m_ObjectHideFlags: 1

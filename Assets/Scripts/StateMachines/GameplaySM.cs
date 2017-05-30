@@ -37,10 +37,10 @@ namespace BlackFox {
                     CurrentState = new RoundEndState();
                     break;
                 case "BlackFox.RoundEndState":
-                    if(GameManager.Instance.LevelMng.CheckRoundConditions())
-                        CurrentState = new UpgradeMenuState();
-                    else
+                    if(GameManager.Instance.LevelMng.CheckEndLevelConditions())
                         CurrentState = new GameOverState();
+                    else
+                        CurrentState = new UpgradeMenuState();
                     break;
                 case "BlackFox.UpgradeMenuState":
                     CurrentState = new RoundInitState();

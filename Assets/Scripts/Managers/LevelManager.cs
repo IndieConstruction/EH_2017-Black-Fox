@@ -179,19 +179,15 @@ namespace BlackFox
             }
         }
 
-        public bool CheckRoundConditions()
+        public bool CheckEndLevelConditions()
         {
-            bool value = false;
-            if (levelPointsCounter.CheckPlayerWithSameVictories())
-                value = true;
-            else
-            {
-                if (RoundNumber <= levelOptions.MaxRound)
-                    value = true;
-                if (levelPointsCounter.CheckNumberVictories())
-                    value = false;
-            }
-            return value;
+            //if (levelPointsCounter.CheckNumberVictories())
+            //    return true;
+            //if (RoundNumber >= levelOptions.MaxRound && levelPointsCounter.CurrentVictoriusPlayer != PlayerLabel.None)
+            //    return true;
+            if (RoundNumber >= levelOptions.MaxRound)
+                return true;
+            return false;
         }
 
         /// <summary>

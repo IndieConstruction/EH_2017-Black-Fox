@@ -20,6 +20,7 @@ MonoBehaviour:
     AddPoints: 1
     SubPoints: 0
     PointsToWin: 5
+    VictoriesToWin: 3
   MinPowerUpRatio: 5
   MaxPowerUpRatio: 10
   ArrowsSpawner:

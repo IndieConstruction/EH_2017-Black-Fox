@@ -24,6 +24,16 @@ namespace BlackFox
             get { return levelManager.levelOptions.VictoriesToWin; }
         }
 
+        private PlayerLabel _currentVictoriusPlayer;
+
+        public PlayerLabel CurrentVictoriusPlayer
+        {
+            get { return _currentVictoriusPlayer; }
+            set { CheckVictoriousPlayer(value); }
+        }
+
+        bool tie;
+
         List<PlayerStats> playerStats = new List<PlayerStats>()
         {   new PlayerStats(PlayerLabel.One),
             new PlayerStats(PlayerLabel.Two),
@@ -52,6 +62,7 @@ namespace BlackFox
                     if (player.KillPoints == PointsToWin)
                     {
                         player.Victories += 1;
+                        CurrentVictoriusPlayer = player.PlayerID;
                         GameManager.Instance.LevelMng.UpgradePointsMng.GivePoints(player.PlayerID);
                         GameManager.Instance.LevelMng.PlayerWin(player.PlayerID.ToString());
                     }
@@ -128,28 +139,6 @@ namespace BlackFox
         }
 
         /// <summary>
-        /// Ritorna true se all'ulitmo round ci sono due player con le stesse vittorie
-        /// </summary>
-        /// <returns></returns>
-        public bool CheckPlayerWithSameVictories()
-        {
-            if (levelManager.RoundNumber == levelManager.levelOptions.MaxRound)
-            {
-                for (int i = 0; i < playerStats.Count; i++)
-                {
-                    for (int j = 0; j < playerStats.Count; j++)
-                    {
-                        if (playerStats[j].PlayerID != playerStats[i].PlayerID)
-                            if (playerStats[j].Victories == playerStats[i].Victories)
-                                if(playerStats[j].Victories > 0 && playerStats[i].Victories > 0)
-                                    return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        /// <summary>
         /// Azzera i punti uccisione di tutti i player
         /// </summary>
         public void ClearAllKillPoints()
@@ -167,6 +156,22 @@ namespace BlackFox
                 player.ResetVictories();
         }
         #endregion
+
+        void CheckVictoriousPlayer(PlayerLabel _playerID)
+        {
+            if (_playerID != _currentVictoriusPlayer)
+            {
+                if(GetPlayerVictories(_playerID) == GetPlayerVictories(_currentVictoriusPlayer))
+                {
+                    tie = true;
+                    _currentVictoriusPlayer = PlayerLabel.None;
+                }
+                else if(GetPlayerVictories(_playerID) > GetPlayerVictories(_currentVictoriusPlayer))
+                {
+                    _currentVictoriusPlayer = _playerID;
+                }
+            }
+        }
     }
 
     /// <summary>

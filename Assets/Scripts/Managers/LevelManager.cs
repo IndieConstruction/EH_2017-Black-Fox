@@ -179,6 +179,21 @@ namespace BlackFox
             }
         }
 
+        public bool CheckRoundConditions()
+        {
+            bool value = false;
+            if (levelPointsCounter.CheckPlayerWithSameVictories())
+                value = true;
+            else
+            {
+                if (RoundNumber <= levelOptions.MaxRound)
+                    value = true;
+                if (levelPointsCounter.CheckNumberVictories())
+                    value = false;
+            }
+            return value;
+        }
+
         /// <summary>
         /// Avanza di round.
         /// </summary>
@@ -304,5 +319,6 @@ namespace BlackFox
         public int AddPoints;
         public int SubPoints;
         public int PointsToWin;
+        public int VictoriesToWin;
     }
 }

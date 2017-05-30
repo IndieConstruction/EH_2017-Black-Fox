@@ -7,6 +7,10 @@ namespace BlackFox
 {
     public class EndRoundlUI : BaseMenu
     {
+        public Sprite VictoryImg;
+        public Sprite DefeatImg;
+        public Image RecapImage;
+
         public Text[] PlayerPoints = new Text[4];
         public GameObject EndLevelPanel;
 
@@ -45,6 +49,26 @@ namespace BlackFox
             if (EventManager.OnMenuAction != null)
                 EventManager.OnMenuAction(AudioManager.UIAudio.Selection);
         }
+
+        /// <summary>
+        /// Cambia l'immagine del drappo da visualizzare
+        /// </summary>
+        /// <param name="_string">"Victory" per impostare il drappo di vittoria. "Defeat" per impostare il drappo di sconfitta</param>
+        public void SetRecapImage(string _string)
+        {
+            switch (_string)
+            {
+                case "Victory":
+                    RecapImage.sprite = VictoryImg;
+                    break;
+                case "Defeat":
+                    RecapImage.sprite = DefeatImg;
+                    break;
+                default:
+                    break;
+            }
+        }
+
         #endregion
     }
 }

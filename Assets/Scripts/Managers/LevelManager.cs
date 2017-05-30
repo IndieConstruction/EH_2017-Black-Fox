@@ -46,9 +46,6 @@ namespace BlackFox
         public Core Core;
 
         [HideInInspector]
-        public string EndLevelPanelLableText;
-        
-        [HideInInspector]
         public LevelOptions levelOptions;
 
         #region Round
@@ -150,7 +147,7 @@ namespace BlackFox
         /// </summary>
         public void CoreDeath()
         {
-            EndLevelPanelLableText = "Core Has Been Destroyed";
+            GameManager.Instance.UiMng.canvasGame.endRoundUI.SetRecapImage("Defeat");
             gameplaySM.CurrentState.OnStateEnd();
         }
 
@@ -160,7 +157,7 @@ namespace BlackFox
         public void PlayerWin(string _winner)
         {
             NextRound();
-            EndLevelPanelLableText = "Player " + _winner + " Has Won";
+            GameManager.Instance.UiMng.canvasGame.endRoundUI.SetRecapImage("Victory");
             gameplaySM.CurrentState.OnStateEnd();
             IsRoundActive = false;
             CoinManager.coins += 4;

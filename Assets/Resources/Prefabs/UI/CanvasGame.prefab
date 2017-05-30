@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 222477079790630464}
   - component: {fileID: 114614598051559118}
   m_Layer: 5
-  m_Name: Image
+  m_Name: RecapImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6728,6 +6728,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb73265f6b59174386d858c8103eecb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VictoryImg: {fileID: 21300000, guid: 09d7a8ab1a7d3c24f84ca51797635e3c, type: 3}
+  DefeatImg: {fileID: 21300000, guid: e2c122b70b06b3c48b8b734e24a675de, type: 3}
+  RecapImage: {fileID: 114614598051559118}
   PlayerPoints:
   - {fileID: 114627955998980146}
   - {fileID: 114344283802616758}
@@ -7026,7 +7029,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 09d7a8ab1a7d3c24f84ca51797635e3c, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

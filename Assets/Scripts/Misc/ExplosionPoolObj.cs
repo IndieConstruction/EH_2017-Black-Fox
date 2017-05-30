@@ -8,10 +8,7 @@ namespace BlackFox
 
     public class ExplosionPoolObj : MonoBehaviour, IPoollableObject
     {
-
-        float timeToKill = 3;
-
-        public ParticleSystem ExplosionParticles;
+        ParticleSystem ExplosionParticles { get { return GetComponent<ParticleSystem>(); } }
 
         public PoolManager poolManager { get; set; }
 
@@ -38,12 +35,8 @@ namespace BlackFox
         {
             if (!IsActive)
                 return;
-            timeToKill -= Time.deltaTime;
-            if (timeToKill < 0)
-            {
+            if (!ExplosionParticles.isPlaying)
                 Deactivate();
-                timeToKill = 1;
-            }
         }
     }
 }

@@ -46,7 +46,7 @@ namespace BlackFox
         #region API
         public void Init()
         {
-            PowerUps = Resources.LoadAll<GameObject>("Prefabs/PowerUps").ToList();
+            PowerUps = Resources.LoadAll<GameObject>("Prefabs/PowerUps").Where(p => p.GetComponent<PowerUpBase>() != null).ToList();
             container = new GameObject("PowerUpContainer");
             container.transform.parent = transform;
             countdown = timer;
@@ -94,7 +94,7 @@ namespace BlackFox
 
         void DrawParable(GameObject _objToMove, Vector3 _target)
         {
-            _objToMove.transform.DOJump(_target, 50, 1, 1f).OnComplete(() => { /*_objToMove.GetComponent<Collider>().enabled = true;*/ AddCollider(_objToMove); });
+            _objToMove.transform.DOJump(_target, 50, 1, 1f).OnComplete(() => {AddCollider(_objToMove); });
         }
 
         void AddCollider(GameObject _obj)

@@ -141,7 +141,8 @@ namespace BlackFox
                     {
                         if (playerStats[j].PlayerID != playerStats[i].PlayerID)
                             if (playerStats[j].Victories == playerStats[i].Victories)
-                                return true;
+                                if(playerStats[j].Victories > 0 && playerStats[i].Victories > 0)
+                                    return true;
                     }
                 }
             }

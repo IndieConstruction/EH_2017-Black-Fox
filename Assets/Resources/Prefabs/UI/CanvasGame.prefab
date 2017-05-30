@@ -3758,6 +3758,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectionImage: {fileID: 114476446640518384}
   slider: {fileID: 114165681938596094}
   text: {fileID: 114809192492140646}
 --- !u!114 &114059695606289232
@@ -3804,6 +3805,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26261b969d64a414db5295a87dbdd0bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ActiveSlide: {fileID: 21300000, guid: 7b9b32e6ab312a84199d5c4c8342756f, type: 3}
+  DeactiveSlider: {fileID: 21300000, guid: 7f5fa29301849504b9073540be4321b5, type: 3}
   PlayerUpgradeControllers:
   - {fileID: 114194262697451422}
   - {fileID: 114309579047677962}
@@ -4412,6 +4415,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectionImage: {fileID: 114231586214615702}
   slider: {fileID: 114503990631413818}
   text: {fileID: 114613851410220046}
 --- !u!114 &114151729828020780
@@ -4688,6 +4692,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectionImage: {fileID: 114475556410591626}
   slider: {fileID: 114898610284048450}
   text: {fileID: 114506822309068534}
 --- !u!114 &114194262697451422
@@ -4998,6 +5003,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectionImage: {fileID: 114577270488574384}
   slider: {fileID: 114467731946068636}
   text: {fileID: 114119109631418582}
 --- !u!114 &114252256062046450
@@ -5323,6 +5329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectionImage: {fileID: 114545806308875908}
   slider: {fileID: 114944091976970242}
   text: {fileID: 114878840983480070}
 --- !u!114 &114335731292303476
@@ -5363,6 +5370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectionImage: {fileID: 114872370301297826}
   slider: {fileID: 114199161347195024}
   text: {fileID: 114312278181681006}
 --- !u!114 &114344283802616758
@@ -5790,6 +5798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectionImage: {fileID: 114922962031092360}
   slider: {fileID: 114125185419533954}
   text: {fileID: 114110158075914208}
 --- !u!114 &114424478284565610
@@ -5983,6 +5992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectionImage: {fileID: 114207267185132840}
   slider: {fileID: 114994133175254690}
   text: {fileID: 114068617540173040}
 --- !u!114 &114467731946068636
@@ -6629,6 +6639,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectionImage: {fileID: 114945429529709282}
   slider: {fileID: 114805430071217034}
   text: {fileID: 114400125308021536}
 --- !u!114 &114545806308875908
@@ -6775,6 +6786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectionImage: {fileID: 114344334865585990}
   slider: {fileID: 114873421897890282}
   text: {fileID: 114594168905422018}
 --- !u!114 &114572842237764778
@@ -6815,6 +6827,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectionImage: {fileID: 114835416277112344}
   slider: {fileID: 114397549066151642}
   text: {fileID: 114013083663243322}
 --- !u!114 &114577270488574384
@@ -6888,6 +6901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectionImage: {fileID: 114441331165136232}
   slider: {fileID: 114027387224330010}
   text: {fileID: 114638886666001960}
 --- !u!114 &114594168905422018
@@ -7273,6 +7287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectionImage: {fileID: 114103390951388582}
   slider: {fileID: 114313565851752350}
   text: {fileID: 114952587336291456}
 --- !u!114 &114698017503396268
@@ -7972,6 +7987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectionImage: {fileID: 114812487666688450}
   slider: {fileID: 114757017664859766}
   text: {fileID: 114365864942790052}
 --- !u!114 &114832882462014788
@@ -7985,6 +8001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectionImage: {fileID: 114780988279265238}
   slider: {fileID: 114123066735475226}
   text: {fileID: 114135392809417168}
 --- !u!114 &114835259948849834
@@ -8613,6 +8630,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a361f5a2ca3aba64d9bc0e48760f7ff2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SelectionImage: {fileID: 114530052611520446}
   slider: {fileID: 114698017503396268}
   text: {fileID: 114445950970666892}
 --- !u!114 &114950643534030834

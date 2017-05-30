@@ -44,10 +44,9 @@ namespace BlackFox
                     GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new LevelSelectionState() });
                     break;
                 case 1:
-                    // Apre i credits
+                    GameManager.Instance.QuitApplication();
                     break;
                 case 2:
-                    GameManager.Instance.QuitApplication();
                     break;
             }
 

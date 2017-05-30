@@ -31,7 +31,7 @@ namespace BlackFox
         [HideInInspector]
         public PowerUpManager PowerUpMng;
         [HideInInspector]
-        public PoolManager PoolMng;
+        public PoolManager ExplosionPoolMng;
         #endregion
 
         #region Level
@@ -132,13 +132,15 @@ namespace BlackFox
             ResetPinsContainer(Arena.transform);
         }
 
-        public void InstantiatePoolManager()
+        public void InstantiateExplosionPoolManager()
         {
             GameObject explosionPrefab = Resources.Load<GameObject>("Prefabs/Misc/ExplosionParticles");
             IPoollableObject explosion = explosionPrefab.GetComponent<IPoollableObject>();
 
-            PoolMng = new PoolManager(new GameObject("Explosion Container").transform, explosion, 10);
+            ExplosionPoolMng = new PoolManager(new GameObject("Explosion Container").transform, explosion, 10);
         }
+
+        
         #endregion
 
         #region Level
@@ -160,8 +162,6 @@ namespace BlackFox
             GameManager.Instance.UiMng.canvasGame.endRoundUI.SetRecapImage("Victory");
             gameplaySM.CurrentState.OnStateEnd();
             IsRoundActive = false;
-            CoinManager.coins += 4;
-            CoinManager.AddCoins();
         }
 
         /// <summary>

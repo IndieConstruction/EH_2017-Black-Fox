@@ -18,7 +18,7 @@ namespace BlackFox
             GameManager.Instance.LevelMng.InstantiateUpgradePointsManager();
             GameManager.Instance.LevelMng.InstantiatePowerUpManager();
             GameManager.Instance.LevelMng.InstantiateSpawnerManager();
-            GameManager.Instance.LevelMng.InstantiatePoolManager();
+            GameManager.Instance.LevelMng.InstantiateExplosionPoolManager();
             GameManager.Instance.LevelMng.SpawnerMng.InstantiateNewSpawners(GameManager.Instance.LevelMng.CurrentLevel);
 
             GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.Blocked);

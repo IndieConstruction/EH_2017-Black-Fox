@@ -254,7 +254,7 @@ namespace BlackFox {
             ParticlesController.PlayParticles(ParticlesController.ParticlesType.Damage);
             if (Life < 1)
             {
-                GameManager.Instance.LevelMng.PoolMng.GetPooledObject(transform.position);
+                GameManager.Instance.LevelMng.ExplosionPoolMng.GetPooledObject(transform.position);
                 Avatar.ShipDestroy(_attacker.GetComponent<Ship>().Avatar);
                 transform.DOScale(Vector3.zero, 0.5f);
                 return;

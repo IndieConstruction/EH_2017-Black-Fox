@@ -85,7 +85,12 @@ namespace BlackFox
         public void Init()
         {
             for (int i = 0; i < SelectableButtons.Count && i < Upgrades.Count; i++)
-                (SelectableButtons[i] as ISelectableUpgrade).SetIUpgrade(Upgrades[i]); 
+            {
+                (SelectableButtons[i] as ISelectableUpgrade).SetIUpgrade(Upgrades[i]);
+                (SelectableButtons[i] as SelectableUpgrade).Init(UpgradeMng.ActiveSlide, UpgradeMng.DeactiveSlider);
+            }
+            SelectableButtons[0].IsSelected = true;
+
             CurrentState = UpgradeControllerState.Unready;
             UpgradeCounter = 0;
             UpgradeGraphics();

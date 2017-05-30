@@ -31,21 +31,24 @@ namespace BlackFox
             set { index = value; }
         }
 
-        Image SelectionImage;
 
         public void SetIndex(int _index)
         {
             Index = _index;
         }
 
+        public Image SelectionImage;
+        Sprite selectedImg;
+        Sprite deselectedImg;
+
         public void CheckIsSelected(bool _isSelected)
         {
             SelectionImage = GetComponentInChildren<Image>();
 
             if (_isSelected)
-                SelectionImage.color = Color.red;
+                SelectionImage.sprite = selectedImg;
             else
-                SelectionImage.color = Color.white;
+                SelectionImage.sprite = deselectedImg;
         }
         #endregion
 
@@ -53,6 +56,13 @@ namespace BlackFox
         public Text text;
 
         public IUpgrade Upgrade;
+
+        
+        public void Init(Sprite _activeSlider, Sprite _deactiveSlider)
+        {
+            selectedImg = _activeSlider;
+            deselectedImg = _deactiveSlider;
+        }
 
         public void AddValue()
         {

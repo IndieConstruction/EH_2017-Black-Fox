@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4344176947773156}
   - component: {fileID: 64920474002949272}
+  - component: {fileID: 114811826253321990}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Untagged
@@ -124,3 +125,14 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 1.00000005e-20
   m_Mesh: {fileID: 4300000, guid: fa52fb6995741964fb8b49665f41fa21, type: 3}
+--- !u!114 &114811826253321990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1002973844265788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c95ada49acacb3247b1ecf36712cfcbe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

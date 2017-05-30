@@ -18,7 +18,7 @@ namespace BlackFox {
         {
             _damageables = GetComponent<Ship>().GetDamageable();
             duration = _time;
-			ParticlesPrefab = Resources.Load<ParticleSystem> ("Prefabs/PowerUps/PowerUpParticles/Carro armato");
+			ParticlesPrefab = Resources.Load<ParticleSystem> ("Prefabs/Particles/PowerUpParticles/Carro armato");
 			particles = Instantiate (ParticlesPrefab, transform);
         }
 

@@ -30,6 +30,7 @@ namespace BlackFox
         public UpgradePointsManager UpgradePointsMng;
         [HideInInspector]
         public PowerUpManager PowerUpMng;
+        [HideInInspector]
         public PoolManager PoolMng;
         #endregion
 
@@ -136,8 +137,8 @@ namespace BlackFox
 
         public void InstantiatePoolManager()
         {
-            object explosionPrefab = Resources.Load("Prefabs/Misc/ExplosionParticles");
-            IPoollableObject explosion = (explosionPrefab as GameObject).GetComponent<IPoollableObject>();
+            GameObject explosionPrefab = Resources.Load<GameObject>("Prefabs/Misc/ExplosionParticles");
+            IPoollableObject explosion = explosionPrefab.GetComponent<IPoollableObject>();
 
             PoolMng = new PoolManager(new GameObject("Explosion Container").transform, explosion, 10);
         }

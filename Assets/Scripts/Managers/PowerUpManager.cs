@@ -85,7 +85,8 @@ namespace BlackFox
 			tempPowerup = Instantiate(tempObj, container.transform).GetComponent<PowerUpBase>();
 			// modifica la rotazione del powerup riportandola a 0,0,0
             //tempPowerup = Instantiate(tempObj, GameManager.Instance.LevelMng.Core.transform.position, Quaternion.identity, container.transform).GetComponent<PowerUpBase>();
-            if(tempPowerup.GetComponent<Collider>()) tempPowerup.GetComponent<Collider>().enabled = false;
+            //if(tempPowerup.GetComponent<Collider>())
+            //    tempPowerup.GetComponent<Collider>().enabled = false;
             DrawParable(tempPowerup.gameObject, ChoosePosition(GameManager.Instance.PlayerMng.Players));
             if (tempPowerup != null)
                 tempPowerup.LifeTime = PowerUpLifeTime;
@@ -93,7 +94,12 @@ namespace BlackFox
 
         void DrawParable(GameObject _objToMove, Vector3 _target)
         {
-            _objToMove.transform.DOJump(_target, 50, 1, 1f).OnComplete(() => { _objToMove.GetComponent<Collider>().enabled = true;  });
+            _objToMove.transform.DOJump(_target, 50, 1, 1f).OnComplete(() => { /*_objToMove.GetComponent<Collider>().enabled = true;*/ AddCollider(_objToMove); });
+        }
+
+        void AddCollider(GameObject _obj)
+        {
+            _obj.AddComponent<SphereCollider>().isTrigger = true;
         }
 
         Vector3 ChoosePosition(List<Player> players)

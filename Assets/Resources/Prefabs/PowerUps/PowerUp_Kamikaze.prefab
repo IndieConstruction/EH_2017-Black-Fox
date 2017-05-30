@@ -21,8 +21,8 @@ GameObject:
   - component: {fileID: 4719468518513696}
   - component: {fileID: 33922434417475546}
   - component: {fileID: 23431170683524038}
-  - component: {fileID: 135412268970637128}
   - component: {fileID: 114080053354760642}
+  - component: {fileID: 135299554274445752}
   m_Layer: 0
   m_Name: PowerUp_Kamikaze
   m_TagString: Untagged
@@ -95,14 +95,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AutoUse: 1
   PowerUpDuration: 10
---- !u!135 &135412268970637128
+--- !u!135 &135299554274445752
 SphereCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1066764681921808}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1.1622878

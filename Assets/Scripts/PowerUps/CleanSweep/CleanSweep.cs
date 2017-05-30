@@ -24,6 +24,7 @@ namespace BlackFox
             GetComponent<MeshRenderer>().enabled = false;
 			if (cleanerParticle != null)
 				cleanerParticle.Play ();
+            cleaner.gameObject.AddComponent<SphereCollider>().isTrigger = true;
             cleaner.transform.DOScale(10f, 2f).OnComplete(() => { cleaner.transform.DOScale(0f, 0.8f).SetDelay(LifeTime - 1f); });
         }
     }

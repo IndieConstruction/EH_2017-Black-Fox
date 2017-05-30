@@ -19,6 +19,10 @@ namespace BlackFox
         {
             get { return levelManager.levelOptions.PointsToWin; }
         }
+        int VictoriesToWin
+        {
+            get { return levelManager.levelOptions.VictoriesToWin; }
+        }
 
         List<PlayerStats> playerStats = new List<PlayerStats>()
         {   new PlayerStats(PlayerLabel.One),
@@ -93,13 +97,55 @@ namespace BlackFox
         public int GetPlayerKillPoints(PlayerLabel _playerID)
         {
             foreach (PlayerStats player in playerStats)
-            {
                 if (player.PlayerID == _playerID)
-                {
                     return player.KillPoints;
+            return -1;
+        }
+
+        /// <summary>
+        /// Ritorna le vittorie del player che chiama la funzione
+        /// </summary>
+        /// <param name="_playerID"></param>
+        /// <returns></returns>
+        public int GetPlayerVictories(PlayerLabel _playerID)
+        {
+            foreach (PlayerStats player in playerStats)
+                if (player.PlayerID == _playerID)
+                    return player.Victories;
+            return -1;
+        }
+
+        /// <summary>
+        /// Ritorna true se c'è un player che ha abbastanza vitorie per vincere
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckNumberVictories()
+        {
+            foreach (PlayerStats player in playerStats)
+                if (player.Victories == VictoriesToWin)
+                    return true;
+            return false;
+        }
+
+        /// <summary>
+        /// Ritorna true se all'ulitmo round ci sono due player con le stesse vittorie
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckPlayerWithSameVictories()
+        {
+            if (levelManager.RoundNumber == levelManager.levelOptions.MaxRound)
+            {
+                for (int i = 0; i < playerStats.Count; i++)
+                {
+                    for (int j = 0; j < playerStats.Count; j++)
+                    {
+                        if (playerStats[j].PlayerID != playerStats[i].PlayerID)
+                            if (playerStats[j].Victories == playerStats[i].Victories)
+                                return true;
+                    }
                 }
             }
-            return -1;
+            return false;
         }
 
         /// <summary>
@@ -108,9 +154,7 @@ namespace BlackFox
         public void ClearAllKillPoints()
         {
             foreach (PlayerStats player in playerStats)
-            {
                 player.ResetKillPoints();
-            }
         }
 
         /// <summary>
@@ -119,9 +163,7 @@ namespace BlackFox
         public void ClearAllVictories()
         {
             foreach (PlayerStats player in playerStats)
-            {
                 player.ResetVictories();
-            }
         }
         #endregion
     }

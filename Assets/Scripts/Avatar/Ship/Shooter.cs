@@ -78,6 +78,11 @@ namespace BlackFox
             Ammo = 500;
             shooterConfig.MaxAmmo = 500;
         }
+
+        public void DamageCheat()
+        {
+            shooterConfig.ProjectileDamage = 100;
+        }
         #endregion
     }
 

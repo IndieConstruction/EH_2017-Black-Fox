@@ -181,11 +181,9 @@ namespace BlackFox
 
         public bool CheckEndLevelConditions()
         {
-            //if (levelPointsCounter.CheckNumberVictories())
-            //    return true;
-            //if (RoundNumber >= levelOptions.MaxRound && levelPointsCounter.CurrentVictoriusPlayer != PlayerLabel.None)
-            //    return true;
-            if (RoundNumber >= levelOptions.MaxRound)
+            if (levelPointsCounter.CheckNumberVictories())
+                return true;
+            else if (RoundNumber >= levelOptions.MaxRound && levelPointsCounter.CurrentVictoriusPlayer != PlayerLabel.None)
                 return true;
             return false;
         }

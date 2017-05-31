@@ -9,6 +9,7 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("RoundEndState");
+            GameManager.Instance.LevelMng.AvatarSpwn.BreakSpawnsInQueue();
             GameManager.Instance.LevelMng.SpawnerMng.ToggleSpawners(false);
             GameManager.Instance.LevelMng.PowerUpMng.Toggle(false);
             GameManager.Instance.UiMng.CurrentMenu = GameManager.Instance.UiMng.canvasGame.endRoundUI;

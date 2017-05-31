@@ -51,25 +51,11 @@ namespace BlackFox
                 case "level":
                     GameManager.Instance.LevelMng.gameplaySM.SetPassThroughOrder(new List<StateBase>() { new CleanSceneState(), new GameOverState() });
                     break;
-                case "bull":
-                    subStrings = _cheat.Split(delimiter);
-                    index = Int32.Parse(subStrings[1]);
-                    GameManager.Instance.PlayerMng.Players[index].AvatarData = Instantiate(Resources.Load("ShipModels/Bull") as AvatarData);
-                    break;
-                case "bird":
-                    subStrings = _cheat.Split(delimiter);
-                    index = Int32.Parse(subStrings[1]);
-                    GameManager.Instance.PlayerMng.Players[index].AvatarData = Instantiate(Resources.Load("ShipModels/Hummingbird") as AvatarData);
-                    break;
-                case "shark":
-                    subStrings = _cheat.Split(delimiter);
-                    index = Int32.Parse(subStrings[1]);
-                    GameManager.Instance.PlayerMng.Players[index].AvatarData = Instantiate(Resources.Load("ShipModels/Hummingbird") as AvatarData);
-                    break;
-                case "owl":
-                    subStrings = _cheat.Split(delimiter);
-                    index = Int32.Parse(subStrings[1]);
-                    GameManager.Instance.PlayerMng.Players[index].AvatarData = Instantiate(Resources.Load("ShipModels/Owl") as AvatarData);
+                case "damage":
+                    foreach (Player player in GameManager.Instance.PlayerMng.Players)
+                    {
+                        player.Avatar.ship.shooter.DamageCheat();
+                    }
                     break;
                 case "NoBounds":
                     foreach (Player player in GameManager.Instance.PlayerMng.Players)

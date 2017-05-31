@@ -141,18 +141,13 @@ namespace BlackFox {
 
             // Se un giocatore avversario prende il Powerup per invertire i comandi
             if (IsInverted)
-            {
                 Move(-leftStickDirection);
-                DirectFire(-rightStickDirection); 
-            }
             else
-            {
                 Move(leftStickDirection);
-                DirectFire(rightStickDirection);
-            }
 
+            DirectFire(rightStickDirection);
 
-            if (_inputStatus.RightShoulder == ButtonState.Pressed)
+            if (_inputStatus.LeftTrigger == ButtonState.Pressed)
             {
                 PlacePin();
             }
@@ -164,7 +159,8 @@ namespace BlackFox {
             }
             else if (_inputStatus.RightTrigger == ButtonState.Held )
             {
-                if(Time.time > nextFire) { 
+                if(Time.time > nextFire)
+                { 
                     Shoot();
                     nextFire = Time.time + FireRate;
                 }

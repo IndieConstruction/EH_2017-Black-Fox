@@ -94,3 +94,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AutoUse: 1
   PowerUpDuration: 10
+  PowerUpDamage: 10

@@ -9,50 +9,47 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1893460981883836}
+  m_RootGameObject: {fileID: 1197600439605666}
   m_IsPrefabParent: 1
---- !u!1 &1893460981883836
+--- !u!1 &1197600439605666
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4719523377434432}
-  - component: {fileID: 114003087507945230}
+  - component: {fileID: 4771760886697292}
+  - component: {fileID: 114441977860327764}
   m_Layer: 0
-  m_Name: CoinManager
-  m_TagString: Coin
+  m_Name: RoundCoinController
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4719523377434432
+--- !u!4 &4771760886697292
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1893460981883836}
+  m_GameObject: {fileID: 1197600439605666}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 129.1876, y: 14.88028, z: 49.769524}
+  m_LocalPosition: {x: -8.565049, y: -10.113205, z: -15.232216}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114003087507945230
+--- !u!114 &114441977860327764
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1893460981883836}
+  m_GameObject: {fileID: 1197600439605666}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 505be4d042dacf6449aea3571377234b, type: 3}
+  m_Script: {fileID: 11500000, guid: 86c9eb5ecb0d3c7438da9b942bc6b0d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CoinControllerPrefab: {fileID: 1197600439605666, guid: 874c14de8db0bd04eb7fae69fcd509be,
+  CoinToInstantiate: {fileID: 1002973844265788, guid: cfc47eded1b66334f8a98670b451621e,
     type: 2}
-  CoinController: {fileID: 0}
-  CoinLife: 10
-  RoundCoins: 0

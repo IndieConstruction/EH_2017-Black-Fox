@@ -75,6 +75,7 @@ namespace BlackFox
             if (Life < 1)
             {
                 GameManager.Instance.LevelMng.ExplosionPoolMng.GetPooledObject(transform.position);
+                GameManager.Instance.CoinMng.CoinController.InstantiateCoin(transform.position);
                 transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject); });
             }
         }

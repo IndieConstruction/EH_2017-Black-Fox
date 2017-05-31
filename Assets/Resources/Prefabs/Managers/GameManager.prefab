@@ -65,6 +65,8 @@ MonoBehaviour:
     type: 2}
   SRManagerPrefab: {fileID: 1802479423604144, guid: 3267f0de12658e94d98d8ea376cd6dc4,
     type: 2}
+  CoinMngPrefab: {fileID: 1893460981883836, guid: 0183752bf96b90348b85aec2bf82f2e3,
+    type: 2}
   LevelMng: {fileID: 0}
   UiMng: {fileID: 0}
   PlayerMng: {fileID: 0}
@@ -72,6 +74,7 @@ MonoBehaviour:
   AudioMng: {fileID: 114780806946937844, guid: 056d6142f48afb74e97dcdb173de4e80, type: 2}
   DataMng: {fileID: 0}
   SRMng: {fileID: 0}
+  CoinManager: {fileID: 0}
   flowSM: {fileID: 0}
   LevelScriptableObjs:
   - {fileID: 11400000, guid: 8f955d3e75a08d34292082349f1986e7, type: 2}

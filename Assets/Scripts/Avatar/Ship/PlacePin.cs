@@ -8,6 +8,7 @@ namespace BlackFox
     public class PlacePin : MonoBehaviour
     {
         protected bool canPlace = true;
+        SphereCollider probe;
         int layer = 9;
 
         PlacePinConfig placePinConfig
@@ -82,6 +83,7 @@ namespace BlackFox
             ship = _owner;
             prectime = CurrentPinRate;
             initialTransf = transform;
+            ProbeSetup();
         }
         /// <summary>
         /// Change the layer of collision of each Pin
@@ -107,7 +109,7 @@ namespace BlackFox
                 pin.layer = layer;
                 pinsPlaced.Add(pin);
                 isRecharging = false;
-                foreach (Renderer pinRend in pin.GetComponentsInChildren<Renderer>())
+                foreach (Renderer pinRend in pin.GetComponentsInChildren<MeshRenderer>())
                 {
                     pinRend.material = ship.Avatar.AvatarData.ColorSets[ship.Avatar.AvatarData.ColorSetIndex].PinMaterial;
                 }
@@ -129,6 +131,17 @@ namespace BlackFox
             pinsPlaced.Clear();
         }
         #endregion
+
+        /// <summary>
+        /// Instance a point-like sphere collider onte the Pin drop position to check if it is a legal position or not
+        /// </summary>
+        void ProbeSetup()
+        {
+            probe = gameObject.AddComponent<SphereCollider>();
+            probe.radius = float.Epsilon;
+            probe.center = new Vector3(0, 0, placePinConfig.DistanceFromShipOrigin);
+            probe.isTrigger = true;
+        }
     }
 
     [Serializable]

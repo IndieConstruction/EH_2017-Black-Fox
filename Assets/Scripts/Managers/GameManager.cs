@@ -16,6 +16,7 @@ namespace BlackFox
         public GameObject AudioManagerPrefab;
         public GameObject DataManagerPrefab;
         public GameObject SRManagerPrefab;
+
         #endregion
 
         #region Managers
@@ -33,6 +34,7 @@ namespace BlackFox
         public DataManager DataMng;
         [HideInInspector]
         public SRManager SRMng;
+        
         #endregion
 
         [HideInInspector]

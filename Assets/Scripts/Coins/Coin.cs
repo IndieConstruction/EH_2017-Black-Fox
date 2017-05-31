@@ -5,32 +5,32 @@ using UnityEngine;
 
 namespace BlackFox {
 
-    public class Coin : MonoBehaviour, IPoollableObject {
+    public class Coin : MonoBehaviour {
 
-        public PoolManager poolManager { get; set; }
+        float lifeTime;
 
-        public GameObject GameObject { get { return gameObject; } }
+        RoundCoinController coinController;
 
-        public bool IsActive { get; set; }
-
-        public void Activate()
+        public void Init(RoundCoinController _controller, float _coinLife)
         {
-            IsActive = true;
-            GetComponent<MeshCollider>().enabled = true;
-        }
-
-        public void Deactivate()
-        {
-            IsActive = false;
+            coinController = _controller;
+            lifeTime = _coinLife;
         }
 
 
+        private void Update()
+        {
+            lifeTime -= Time.deltaTime;
+            if (lifeTime <= 0)
+                Destroy(gameObject);
+        }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.GetComponent<Ship>() != null)
             {
-
+                coinController.CoinCollected++;
+                Destroy(gameObject);
             }
         }
     }

@@ -109,7 +109,7 @@ namespace BlackFox
                 pin.layer = layer;
                 pinsPlaced.Add(pin);
                 isRecharging = false;
-                foreach (Renderer pinRend in pin.GetComponentsInChildren<Renderer>())
+                foreach (Renderer pinRend in pin.GetComponentsInChildren<MeshRenderer>())
                 {
                     pinRend.material = ship.Avatar.AvatarData.ColorSets[ship.Avatar.AvatarData.ColorSetIndex].PinMaterial;
                 }

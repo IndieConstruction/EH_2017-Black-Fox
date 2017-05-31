@@ -117,6 +117,7 @@ namespace BlackFox {
         public void Init()
         {
             Life = Config.MaxLife;
+            pinPlacer.Init();
         }
 
         public void ChangeColor(Material _mat)

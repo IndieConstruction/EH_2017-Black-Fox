@@ -21,6 +21,7 @@ namespace BlackFox
                     data = ship.Avatar.AvatarData.shipConfig.placePinConfig;
                 return data; }
         }
+
         List<GameObject> pinsPlaced = new List<GameObject>();
         Transform initialTransf;
         Ship ship;
@@ -73,6 +74,7 @@ namespace BlackFox
             }
 
         }
+
         #region API
         /// <summary>
         /// Set working values for the componet
@@ -85,6 +87,13 @@ namespace BlackFox
             initialTransf = transform;
             ProbeSetup();
         }
+
+        public void Init()
+        {
+            canPlace = true;
+            transform.rotation = Quaternion.identity;
+        }
+
         /// <summary>
         /// Change the layer of collision of each Pin
         /// </summary>
@@ -97,6 +106,7 @@ namespace BlackFox
                 pin.layer = layer;
             }
         }
+
         /// <summary>
         /// Instance a Pin if possible
         /// </summary>
@@ -119,6 +129,7 @@ namespace BlackFox
             }
             return false;
         }
+
         /// <summary>
         /// Remove all the placed Pins
         /// </summary>

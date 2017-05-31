@@ -33,7 +33,14 @@ namespace BlackFox
             set { CheckVictoriousPlayer(value); }
         }
 
-        bool tie;
+        private bool _tie;
+
+        public bool Tie
+        {
+            get { return _tie; }
+            set { _tie = value; }
+        }
+
 
         List<PlayerStats> playerStats = new List<PlayerStats>()
         {   new PlayerStats(PlayerLabel.One),
@@ -165,7 +172,7 @@ namespace BlackFox
             {
                 if(GetPlayerVictories(_playerID) == GetPlayerVictories(_currentVictoriusPlayer))
                 {
-                    tie = true;
+                    Tie = true;
                     _currentVictoriusPlayer = PlayerLabel.None;
                 }
                 else if(GetPlayerVictories(_playerID) > GetPlayerVictories(_currentVictoriusPlayer))

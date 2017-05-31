@@ -183,7 +183,7 @@ namespace BlackFox
         {
             if (levelPointsCounter.CheckNumberVictories())
                 return true;
-            else if (RoundNumber >= levelOptions.MaxRound && levelPointsCounter.CurrentVictoriusPlayer != PlayerLabel.None)
+            else if (RoundNumber >= levelOptions.MaxRound && !levelPointsCounter.Tie)
                 return true;
             return false;
         }

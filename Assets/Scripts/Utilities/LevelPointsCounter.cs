@@ -20,39 +20,18 @@ namespace BlackFox
         {
             get { return levelManager.levelOptions.PointsToWin; }
         }
-        int VictoriesToWin
-        {
-            get { return levelManager.levelOptions.VictoriesToWin; }
-        }
-
-        private PlayerLabel _currentVictoriusPlayer;
-
-        public PlayerLabel CurrentVictoriusPlayer
-        {
-            get { return _currentVictoriusPlayer; }
-            set { CheckVictoriousPlayer(value); }
-        }
-
-        private bool _tie;
-
-        public bool Tie
-        {
-            get { return _tie; }
-            set { _tie = value; }
-        }
 
         public List<PlayerLabel> PlayerToPlayOff = new List<PlayerLabel>();
 
-        List<PlayerStats> playerStats = new List<PlayerStats>()
-        {   new PlayerStats(PlayerLabel.One),
-            new PlayerStats(PlayerLabel.Two),
-            new PlayerStats(PlayerLabel.Three),
-            new PlayerStats(PlayerLabel.Four)
-        };
+        List<PlayerStats> playerStats = new List<PlayerStats>();
 
-        public LevelPointsCounter(LevelManager _levelManager)
+
+        public LevelPointsCounter(LevelManager _levelManager, List<Player> _players)
         {
             levelManager = _levelManager;
+            foreach (Player player in _players) {
+                playerStats.Add(new PlayerStats(player));
+            }
         }
 
         /// <summary>
@@ -64,18 +43,10 @@ namespace BlackFox
         {
             foreach (PlayerStats player in playerStats)
             {
-                if (player.PlayerID == _killer)
+                if (player.Player.ID == _killer)
                 {
                     player.KillPoints += AddPoints;
-
-                    if (player.KillPoints == PointsToWin)
-                    {
-                        player.Victories += 1;
-                        Debug.Log(player.PlayerID + " / " + player.Victories);
-                        CurrentVictoriusPlayer = player.PlayerID;
-                        GameManager.Instance.LevelMng.UpgradePointsMng.GivePoints(player.PlayerID);
-                        GameManager.Instance.LevelMng.PlayerWin(player.PlayerID.ToString());
-                    }
+                    levelManager.CheckRoundStatus();
                     break;
                 }
             }
@@ -89,7 +60,7 @@ namespace BlackFox
         {
             foreach (PlayerStats player in playerStats)
             {
-                if (player.PlayerID == _victim && player.KillPoints > 0)
+                if (player.Player.ID == _victim && player.KillPoints > 0)
                 {
                     player.KillPoints -= SubPoints;
                     break;
@@ -118,9 +89,16 @@ namespace BlackFox
         public int GetPlayerKillPoints(PlayerLabel _playerID)
         {
             foreach (PlayerStats player in playerStats)
-                if (player.PlayerID == _playerID)
+                if (player.Player.ID == _playerID)
                     return player.KillPoints;
             return -1;
+        }
+
+        public PlayerStats GetPlayerStats(PlayerLabel _playerID) {
+            foreach (PlayerStats player in playerStats)
+                if (player.Player.ID == _playerID)
+                    return player;
+            return null;
         }
 
         /// <summary>
@@ -131,21 +109,15 @@ namespace BlackFox
         public int GetPlayerVictories(PlayerLabel _playerID)
         {
             foreach (PlayerStats player in playerStats)
-                if (player.PlayerID == _playerID)
+                if (player.Player.ID == _playerID)
                     return player.Victories;
             return -1;
         }
 
-        /// <summary>
-        /// Ritorna true se c'è un player che ha abbastanza vitorie per vincere
-        /// </summary>
-        /// <returns></returns>
-        public bool CheckNumberVictories()
-        {
+        public void AddPlayerVictory(PlayerLabel _playerID) {
             foreach (PlayerStats player in playerStats)
-                if (player.Victories == VictoriesToWin)
-                    return true;
-            return false;
+                if (player.Player.ID == _playerID)
+                     player.Victories += 1;
         }
 
         /// <summary>
@@ -166,28 +138,6 @@ namespace BlackFox
                 player.ResetVictories();
         }
         #endregion
-
-        void CheckVictoriousPlayer(PlayerLabel _playerID)
-        {
-            if (_playerID != _currentVictoriusPlayer)
-            {
-                if(GetPlayerVictories(_playerID) == GetPlayerVictories(_currentVictoriusPlayer))
-                {
-                    Tie = true;
-                    _currentVictoriusPlayer = PlayerLabel.None;
-
-                    if (!PlayerToPlayOff.Contains(_playerID))
-                        PlayerToPlayOff.Add(_playerID);
-                    if (!PlayerToPlayOff.Contains(_currentVictoriusPlayer))
-                        PlayerToPlayOff.Add(_currentVictoriusPlayer);
-
-                }
-                else if(GetPlayerVictories(_playerID) > GetPlayerVictories(_currentVictoriusPlayer))
-                {
-                    _currentVictoriusPlayer = _playerID;
-                }
-            }
-        }
     }
 
     /// <summary>
@@ -195,13 +145,13 @@ namespace BlackFox
     /// </summary>
     public class PlayerStats
     {
-        PlayerLabel playerID;
+        Player player;
         int killPoints;
         int victories;
 
-        public PlayerLabel PlayerID
+        public Player Player
         {
-            get { return playerID; }
+            get { return player; }
         }
 
         public int KillPoints
@@ -216,9 +166,9 @@ namespace BlackFox
             set { victories = value; }
         }
 
-        public PlayerStats(PlayerLabel _playerIndex)
+        public PlayerStats(Player _player)
         {
-            playerID = _playerIndex;
+            player = _player;
         }
 
         public void ResetKillPoints()

@@ -66,6 +66,13 @@ namespace BlackFox
                 OnDataChange();
             }
         }
+
+        public bool IsCoreAlive() {
+            if (life < 1)
+                return false;
+            else
+                return true;
+        }
         #endregion
 
         #region Interfacce
@@ -80,10 +87,10 @@ namespace BlackFox
             //ParticlesController.PlayParticles(ParticlesController.ParticlesType.Damage);
             
 
-            if (life < 1)
+            if (!IsCoreAlive())
             {
                 GameManager.Instance.LevelMng.ExplosionPoolMng.GetPooledObject(transform.position);
-                transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { GameManager.Instance.LevelMng.CoreDeath(); });
+                transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { GameManager.Instance.LevelMng.CheckRoundStatus(); });
             }
         }
 

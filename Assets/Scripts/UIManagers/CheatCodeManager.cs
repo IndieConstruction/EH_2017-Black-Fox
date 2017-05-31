@@ -45,7 +45,7 @@ namespace BlackFox
                     Debug.Log("Infinite Ammo");
                     break;
                 case "round":
-                    GameManager.Instance.LevelMng.PlayerWin("CheatCode");
+                    GameManager.Instance.LevelMng.CheatCodeRoundEnd();
                     GameManager.Instance.LevelMng.UpgradePointsMng.CheatPoints(PlayerLabel.Different);
                     break;
                 case "level":

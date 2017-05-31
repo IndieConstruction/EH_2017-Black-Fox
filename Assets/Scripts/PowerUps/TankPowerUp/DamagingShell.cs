@@ -7,6 +7,7 @@ namespace BlackFox {
 
         List<IDamageable> _damageables = new List<IDamageable>();
         float duration = 0;
+        float damage;
 
 		ParticleSystem ParticlesPrefab;
 		ParticleSystem particles;
@@ -14,10 +15,11 @@ namespace BlackFox {
         /// 
         /// </summary>
         /// <param name="_time">la durata del power up</param>
-        public void Init(float _time)
+        public void Init(float _time, float _damage)
         {
             _damageables = GetComponent<Ship>().GetDamageable();
             duration = _time;
+            damage = _damage;
 			ParticlesPrefab = Resources.Load<ParticleSystem> ("Prefabs/Particles/PowerUpParticles/Carro armato");
 			particles = Instantiate (ParticlesPrefab, transform);
         }

@@ -76,6 +76,7 @@ namespace BlackFox
             {
                 GameManager.Instance.LevelMng.ExplosionPoolMng.GetPooledObject(transform.position);
                 GameManager.Instance.CoinMng.CoinController.InstantiateCoin(transform.position);
+                GetComponent<Collider>().enabled = false;
                 transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject); });
             }
         }

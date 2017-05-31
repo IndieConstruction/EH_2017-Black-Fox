@@ -9,6 +9,7 @@ namespace BlackFox {
         public override void OnStart() {
             Debug.Log("GameOverState");
             GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.Blocked);
+            GameManager.Instance.PlayerMng.DestroyAllAvatar();
         }
 
         public override void OnUpdate() {

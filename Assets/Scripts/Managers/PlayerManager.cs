@@ -104,6 +104,14 @@ namespace BlackFox
                 player.Avatar.State = _state;
             }
         }
+
+        public void DestroyAllAvatar()
+        {
+            foreach (Player player in Players)
+            {
+                Destroy(player.Avatar.gameObject);
+            }
+        }
         #endregion
         #endregion
     }

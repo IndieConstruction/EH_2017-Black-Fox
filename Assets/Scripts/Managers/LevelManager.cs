@@ -53,6 +53,8 @@ namespace BlackFox
         public int RoundNumber;
         [HideInInspector]
         public bool IsGamePaused;
+        [HideInInspector]
+        public bool PlayOff;
 
         private bool _isRoundActive;
         /// <summary>
@@ -194,6 +196,8 @@ namespace BlackFox
         public void NextRound()
         {
             RoundNumber++;
+            if (RoundNumber > levelOptions.MaxRound)
+                PlayOff = true;
         }
 
         /// <summary>
@@ -249,8 +253,22 @@ namespace BlackFox
         /// <param name="_spawnTime"></param>
         public void SpawnAllAvatar(float _spawnTime)
         {
-            //foreach (Player player in GameManager.Instance.PlayerMng.Players.Where(p => p.Avatar != null)) {
             foreach (Player player in GameManager.Instance.PlayerMng.Players)
+                AvatarSpwn.SpawnAvatar(player, _spawnTime);
+        }
+
+        public void SpawnSelectedAvatars(float _spawnTime)
+        {
+            List<Player> playerToPlayOff = new List<Player>();
+            foreach (Player player in GameManager.Instance.PlayerMng.Players)
+            {
+                foreach (PlayerLabel playerID in levelPointsCounter.PlayerToPlayOff)
+                {
+                    if (player.ID == playerID)
+                        playerToPlayOff.Add(player);
+                }
+            }
+            foreach (Player player in playerToPlayOff)
                 AvatarSpwn.SpawnAvatar(player, _spawnTime);
         }
         #endregion

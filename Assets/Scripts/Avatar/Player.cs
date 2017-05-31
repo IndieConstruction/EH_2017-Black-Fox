@@ -24,22 +24,11 @@ namespace BlackFox
         public AvatarData AvatarData
         {
             get {
-                if (_avatarData == null) {
+                if (_avatarData == null) 
                     _avatarData = Instantiate(Resources.Load("ShipModels/Owl") as AvatarData);
-                }
                 return _avatarData;
             }
-            set {
-                if (_avatarData != null) {
-                    _avatarData = value;
-                    AvatarState tmpState = Avatar.State;
-                    AvatarSetup(true);
-                    Avatar.InitShip();
-                    Avatar.State = tmpState;
-                } else {
-                    _avatarData = value;
-                }
-            }
+            set { _avatarData = value; }
         }
 
         public float SpawnTime = 0;

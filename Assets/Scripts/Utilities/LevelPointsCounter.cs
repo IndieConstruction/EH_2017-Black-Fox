@@ -41,6 +41,7 @@ namespace BlackFox
             set { _tie = value; }
         }
 
+        public List<PlayerLabel> PlayerToPlayOff = new List<PlayerLabel>();
 
         List<PlayerStats> playerStats = new List<PlayerStats>()
         {   new PlayerStats(PlayerLabel.One),
@@ -174,6 +175,12 @@ namespace BlackFox
                 {
                     Tie = true;
                     _currentVictoriusPlayer = PlayerLabel.None;
+
+                    if (!PlayerToPlayOff.Contains(_playerID))
+                        PlayerToPlayOff.Add(_playerID);
+                    if (!PlayerToPlayOff.Contains(_currentVictoriusPlayer))
+                        PlayerToPlayOff.Add(_currentVictoriusPlayer);
+
                 }
                 else if(GetPlayerVictories(_playerID) > GetPlayerVictories(_currentVictoriusPlayer))
                 {

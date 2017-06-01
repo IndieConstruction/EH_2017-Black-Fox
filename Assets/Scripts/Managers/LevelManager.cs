@@ -176,134 +176,6 @@ namespace BlackFox
         }
         #endregion
 
-        #region Level Rules
-
-        List<Player> playOffPlayers = new List<Player>();
-
-        /// <summary>
-        /// Controllo condizioni vittoria livello, true se la condizione di vittoria è verificata
-        /// </summary>
-        /// <returns></returns>
-        public bool CheckIfLevelIsWon()
-        {
-            if (CheckMathematicalWin())
-                return true;
-            if (RoundNumber > levelOptions.MaxRound && !CheckPlayOff())
-                return true;
-            return false;
-        }
-
-        /// <summary>
-        /// Controllo condizioni vittoria del round e condizioni di play off
-        /// </summary>
-        public void CheckRoundStatus()
-        {
-            if (CheckPlayOff())
-            {
-                // controllo regole di gioco durante il play off
-
-                // controllo se un player ha vinto
-                foreach (Player player in playOffPlayers)
-                {
-                    if (levelPointsCounter.GetPlayerKillPoints(player.ID) == levelOptions.PointsToWin)
-                    {
-                        levelPointsCounter.AddPlayerVictory(player.ID);
-                        PlayerWin(player);
-                        return;
-                    }
-                }
-
-                // controllo se il core è morto
-                if (!Core.IsCoreAlive())
-                {
-                    CoreDeath();
-                    return;
-                }
-            }
-            else
-            {
-                // controllo se un player ha vinto
-                foreach (Player player in GameManager.Instance.PlayerMng.Players)
-                {
-                    if (levelPointsCounter.GetPlayerKillPoints(player.ID) == levelOptions.PointsToWin)
-                    {
-                        levelPointsCounter.AddPlayerVictory(player.ID);
-                        PlayerWin(player);
-                        RoundNumber++;
-                        return;
-                    }
-                }
-
-                // controllo se il core è morto
-                if (!Core.IsCoreAlive())
-                {
-                    CoreDeath();
-                    return;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Controlla se c'è la possiblità di andare ai play off
-        /// </summary>
-        /// <returns></returns>
-        bool CheckPlayOff()
-        {
-            if (playOffPlayers.Count > 0)
-                return true;
-            if (RoundNumber > levelOptions.MaxRound)
-            {
-                List<PlayerStats> tempPlayersStats = new List<PlayerStats>();
-
-                for (int i = 0; i < GameManager.Instance.PlayerMng.Players.Count; i++)
-                {
-                    tempPlayersStats.Add(levelPointsCounter.GetPlayerStats(GameManager.Instance.PlayerMng.Players[i].ID));
-
-                    if (tempPlayersStats.Count == 0 || tempPlayersStats[i].Victories > tempPlayersStats[0].Victories)
-                    {
-                        tempPlayersStats.Clear();
-                        tempPlayersStats.Add(tempPlayersStats[i]);
-                    }
-                    else if (tempPlayersStats[i].Victories == tempPlayersStats[0].Victories)
-                    {
-                        tempPlayersStats.Add(tempPlayersStats[i]);
-                    }
-                    else
-                    {
-                        //do nothing
-                    }
-                }
-
-                if (tempPlayersStats.Count > 1)
-                {
-                    for (int i = 0; i < tempPlayersStats.Count; i++)
-                    {
-                        playOffPlayers.Add(tempPlayersStats[i].Player);
-                    }
-                }
-                else
-                {
-                    // player all'indice zero ha vinto
-                }
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Controlla se c'è la condizione di vittoria matematica
-        /// </summary>
-        /// <returns></returns>
-        bool CheckMathematicalWin()
-        {
-            int remainingRounds = levelOptions.MaxRound - RoundNumber;
-            return false;
-        }
-        #endregion
-
         #region CheatCode
 
         public void CheatCodeRoundEnd() {
@@ -385,6 +257,135 @@ namespace BlackFox
         #endregion
         #endregion
 
+        #region Level Rules
+
+        List<Player> playOffPlayers = new List<Player>();
+
+        /// <summary>
+        /// Controllo condizioni vittoria livello, true se la condizione di vittoria è verificata
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckIfLevelIsWon()
+        {
+            if (CheckMathematicalWin())
+                return true;
+            if (RoundNumber > levelOptions.MaxRound && !CheckPlayOff())
+                return true;
+            return false;
+        }
+
+        /// <summary>
+        /// Controllo condizioni vittoria del round e condizioni di play off mentre si è in gioco
+        /// </summary>
+        public void CheckRoundStatus()
+        {
+            if (CheckPlayOff())
+            {
+                // controllo regole di gioco durante il play off
+                Debug.LogWarning("PlayOff!");
+                // controllo se un player ha vinto
+                foreach (Player player in playOffPlayers)
+                {
+                    if (levelPointsCounter.GetPlayerKillPoints(player.ID) == levelOptions.PointsToWin)
+                    {
+                        levelPointsCounter.AddPlayerVictory(player.ID);
+                        PlayerWin(player);
+                        return;
+                    }
+                }
+
+                // controllo se il core è morto
+                if (!Core.IsCoreAlive())
+                {
+                    CoreDeath();
+                    return;
+                }
+            }
+            else
+            {
+                // controllo se un player ha vinto
+                foreach (Player player in GameManager.Instance.PlayerMng.Players)
+                {
+                    if (levelPointsCounter.GetPlayerKillPoints(player.ID) == levelOptions.PointsToWin)
+                    {
+                        PlayerWin(player);
+                        RoundNumber++;
+                        return;
+                    }
+                }
+
+                // controllo se il core è morto
+                if (!Core.IsCoreAlive())
+                {
+                    CoreDeath();
+                    return;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Controlla se c'è la possiblità di andare ai play off
+        /// </summary>
+        /// <returns></returns>
+        bool CheckPlayOff()
+        {
+            if (playOffPlayers.Count > 0)
+                return true;
+            if (RoundNumber > levelOptions.MaxRound)
+            {
+                List<PlayerStats> tempPlayersStats = new List<PlayerStats>();
+
+                for (int i = 0; i < GameManager.Instance.PlayerMng.Players.Count; i++)
+                {
+                    tempPlayersStats.Add(levelPointsCounter.GetPlayerStats(GameManager.Instance.PlayerMng.Players[i].ID));
+
+                    if (tempPlayersStats.Count == 0 || tempPlayersStats[i].Victories > tempPlayersStats[0].Victories)
+                    {
+                        tempPlayersStats.Clear();
+                        tempPlayersStats.Add(tempPlayersStats[i]);
+                    }
+                    else if (tempPlayersStats[i].Victories == tempPlayersStats[0].Victories)
+                    {
+                        tempPlayersStats.Add(tempPlayersStats[i]);
+                    }
+                    else
+                    {
+                        //do nothing
+                    }
+                }
+
+                if (tempPlayersStats.Count > 1)
+                {
+                    for (int i = 0; i < tempPlayersStats.Count; i++)
+                    {
+                        playOffPlayers.Add(tempPlayersStats[i].Player);
+                    }
+                }
+                else
+                {
+                    // player all'indice zero ha vinto
+                    return false;
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Controlla se c'è la condizione di vittoria matematica
+        /// </summary>
+        /// <returns></returns>
+        bool CheckMathematicalWin()
+        {
+            int remainingRounds = levelOptions.MaxRound - RoundNumber;
+            return false;
+        }
+        #endregion
+
+
         #region Level End Actions
         /// <summary>
         /// Funzione da eseguire alla morte del core
@@ -401,6 +402,7 @@ namespace BlackFox
         /// </summary>
         void PlayerWin(Player _player)
         {
+            levelPointsCounter.AddPlayerVictory(_player.ID);
             GameManager.Instance.UiMng.canvasGame.endRoundUI.SetRecapImage("Victory");
             GameManager.Instance.LevelMng.UpgradePointsMng.GivePoints(_player.ID);
             IsRoundActive = false;

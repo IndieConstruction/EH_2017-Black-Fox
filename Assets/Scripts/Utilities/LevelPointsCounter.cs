@@ -94,7 +94,8 @@ namespace BlackFox
             return -1;
         }
 
-        public PlayerStats GetPlayerStats(PlayerLabel _playerID) {
+        public PlayerStats GetPlayerStats(PlayerLabel _playerID)
+        {
             foreach (PlayerStats player in playerStats)
                 if (player.Player.ID == _playerID)
                     return player;
@@ -114,7 +115,8 @@ namespace BlackFox
             return -1;
         }
 
-        public void AddPlayerVictory(PlayerLabel _playerID) {
+        public void AddPlayerVictory(PlayerLabel _playerID)
+        {
             foreach (PlayerStats player in playerStats)
                 if (player.Player.ID == _playerID)
                      player.Victories += 1;
@@ -127,15 +129,6 @@ namespace BlackFox
         {
             foreach (PlayerStats player in playerStats)
                 player.ResetKillPoints();
-        }
-
-        /// <summary>
-        /// Azzera i punti uccisione di tutti i player
-        /// </summary>
-        public void ClearAllVictories()
-        {
-            foreach (PlayerStats player in playerStats)
-                player.ResetVictories();
         }
         #endregion
     }
@@ -174,11 +167,6 @@ namespace BlackFox
         public void ResetKillPoints()
         {
             killPoints = 0;
-        }
-
-        public void ResetVictories()
-        {
-            Victories = 0;
         }
     }
 }

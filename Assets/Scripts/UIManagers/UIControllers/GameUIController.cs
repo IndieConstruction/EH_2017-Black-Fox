@@ -45,6 +45,12 @@ namespace BlackFox
             }
         }
 
+        public void ResetKillPointsUI()
+        {
+            for (int i = 0; i < PlayersKillPoints.Length; i++)
+                    PlayersKillPoints[i].text = "0";
+        }
+
         public void SetElementZeroSlider(float _life, float _maxLife)
         {
             ElementZeroSlider.value = _life / _maxLife;                  // Da rivedere se il valore della vita cambia

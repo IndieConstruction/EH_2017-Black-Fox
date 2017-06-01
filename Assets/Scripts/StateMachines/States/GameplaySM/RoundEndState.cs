@@ -21,6 +21,7 @@ namespace BlackFox
         {
             GameManager.Instance.UiMng.canvasGame.endRoundUI.SetEndRoundPanelStatus(false);
             GameManager.Instance.LevelMng.ClearPoints();
+            GameManager.Instance.UiMng.canvasGame.gameUIController.ResetKillPointsUI();
         }
     }
 }

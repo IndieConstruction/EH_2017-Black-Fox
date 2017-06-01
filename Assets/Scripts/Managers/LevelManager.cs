@@ -282,7 +282,6 @@ namespace BlackFox
             if (CheckPlayOff())
             {
                 // controllo regole di gioco durante il play off
-                Debug.LogWarning("PlayOff!");
                 // controllo se un player ha vinto
                 foreach (Player player in playOffPlayers)
                 {
@@ -308,6 +307,7 @@ namespace BlackFox
                 {
                     if (levelPointsCounter.GetPlayerKillPoints(player.ID) == levelOptions.PointsToWin)
                     {
+                        levelPointsCounter.AddPlayerVictory(player.ID);
                         PlayerWin(player);
                         RoundNumber++;
                         return;
@@ -329,28 +329,25 @@ namespace BlackFox
         /// <returns></returns>
         bool CheckPlayOff()
         {
-            if (playOffPlayers.Count > 0)
+            if (playOffPlayers.Count >= 1)
                 return true;
             if (RoundNumber > levelOptions.MaxRound)
             {
                 List<PlayerStats> tempPlayersStats = new List<PlayerStats>();
 
-                for (int i = 0; i < GameManager.Instance.PlayerMng.Players.Count; i++)
+                for (int i = 0, j = 0; i < GameManager.Instance.PlayerMng.Players.Count; i++, j++)
                 {
                     tempPlayersStats.Add(levelPointsCounter.GetPlayerStats(GameManager.Instance.PlayerMng.Players[i].ID));
 
-                    if (tempPlayersStats.Count == 0 || tempPlayersStats[i].Victories > tempPlayersStats[0].Victories)
+                    if (tempPlayersStats.Count == 0 || tempPlayersStats[j].Victories > tempPlayersStats[0].Victories)
                     {
                         tempPlayersStats.Clear();
-                        tempPlayersStats.Add(tempPlayersStats[i]);
+                        tempPlayersStats.Add(tempPlayersStats[j]);
                     }
-                    else if (tempPlayersStats[i].Victories == tempPlayersStats[0].Victories)
+                    else if(tempPlayersStats[j].Victories < tempPlayersStats[0].Victories)
                     {
-                        tempPlayersStats.Add(tempPlayersStats[i]);
-                    }
-                    else
-                    {
-                        //do nothing
+                        tempPlayersStats.Remove(tempPlayersStats[j]);
+                        j--;
                     }
                 }
 
@@ -358,7 +355,8 @@ namespace BlackFox
                 {
                     for (int i = 0; i < tempPlayersStats.Count; i++)
                     {
-                        playOffPlayers.Add(tempPlayersStats[i].Player);
+                        if(!playOffPlayers.Contains(tempPlayersStats[i].Player))
+                            playOffPlayers.Add(tempPlayersStats[i].Player);
                     }
                 }
                 else
@@ -402,7 +400,6 @@ namespace BlackFox
         /// </summary>
         void PlayerWin(Player _player)
         {
-            levelPointsCounter.AddPlayerVictory(_player.ID);
             GameManager.Instance.UiMng.canvasGame.endRoundUI.SetRecapImage("Victory");
             GameManager.Instance.LevelMng.UpgradePointsMng.GivePoints(_player.ID);
             IsRoundActive = false;

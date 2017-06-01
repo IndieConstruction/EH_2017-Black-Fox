@@ -113,6 +113,18 @@ namespace BlackFox
             }
         }
         #endregion
+
+        /// <summary>
+        /// Azzera le munizioni di tutti i player
+        /// </summary>
+        public void CleanAllAmmo()
+        {
+            foreach (Player player in Players)
+            {
+                player.Avatar.ship.shooter.Ammo = 0;
+            }
+        }
+
         #endregion
     }
 

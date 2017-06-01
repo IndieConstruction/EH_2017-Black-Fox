@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -378,8 +378,18 @@ namespace BlackFox
         /// <returns></returns>
         bool CheckMathematicalWin()
         {
-            int remainingRounds = levelOptions.MaxRound - RoundNumber;
-            return false;
+            int remainingRounds = levelOptions.MaxRound - (RoundNumber - 1);
+
+            List<PlayerStats> tempPlayersStats = new List<PlayerStats>();
+
+            for (int i = 0; i < GameManager.Instance.PlayerMng.Players.Count; i++)
+                tempPlayersStats.Add(levelPointsCounter.GetPlayerStats(GameManager.Instance.PlayerMng.Players[i].ID));
+
+            tempPlayersStats.OrderBy(t => t.Victories);
+            if ((tempPlayersStats[1].Victories + remainingRounds) >= tempPlayersStats[0].Victories)
+                return false;
+            else
+                return true;
         }
         #endregion
 

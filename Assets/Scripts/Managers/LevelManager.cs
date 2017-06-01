@@ -188,7 +188,7 @@ namespace BlackFox
         {
             if (CheckMathematicalWin())
                 return true;
-            if (RoundNumber >= levelOptions.MaxRound && !CheckPlayOff())
+            if (RoundNumber > levelOptions.MaxRound && !CheckPlayOff())
                 return true;
             return false;
         }

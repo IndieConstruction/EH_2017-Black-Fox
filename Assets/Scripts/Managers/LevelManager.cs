@@ -200,8 +200,25 @@ namespace BlackFox
         {
             if (CheckPlayOff())
             {
-                Debug.Log("PlayOff!");
                 // controllo regole di gioco durante il play off
+
+                // controllo se un player ha vinto
+                foreach (Player player in playOffPlayers)
+                {
+                    if (levelPointsCounter.GetPlayerKillPoints(player.ID) == levelOptions.PointsToWin)
+                    {
+                        levelPointsCounter.AddPlayerVictory(player.ID);
+                        PlayerWin(player);
+                        return;
+                    }
+                }
+
+                // controllo se il core è morto
+                if (!Core.IsCoreAlive())
+                {
+                    CoreDeath();
+                    return;
+                }
             }
             else
             {
@@ -217,6 +234,7 @@ namespace BlackFox
                     }
                 }
 
+                // controllo se il core è morto
                 if (!Core.IsCoreAlive())
                 {
                     CoreDeath();
@@ -285,7 +303,6 @@ namespace BlackFox
             return false;
         }
         #endregion
-
 
         #region CheatCode
 

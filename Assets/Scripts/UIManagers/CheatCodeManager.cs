@@ -11,8 +11,6 @@ namespace BlackFox
         public GameObject CheatPanel;
         InputField inputField;
 
-        char delimiter = '#';
-
         private void Start()
         {
             inputField = GetComponentInChildren<InputField>();
@@ -33,8 +31,6 @@ namespace BlackFox
         /// <param name="_cheat"></param>
         public void GetInput(string _cheat)
         {
-            string[] subStrings;
-            int index;
             switch (_cheat)
             {
                 case "ammo":

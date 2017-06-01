@@ -33,7 +33,6 @@ namespace BlackFox {
 
         MovementController movment;
         PlacePin pinPlacer;
-        AvatarUI avatarUi;
         ShipAccelerationAudioController accelerationAudioController;
         Tweener damageTween;
 
@@ -98,7 +97,6 @@ namespace BlackFox {
             movment.Init(this, rigid);
             pinPlacer = GetComponentInChildren<PlacePin>();
             pinPlacer.Setup(this);
-            avatarUi = GetComponentInChildren<AvatarUI>();
             ParticlesController = GetComponent<ParticlesController>();
             ParticlesController.Init();
 

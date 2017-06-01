@@ -263,7 +263,7 @@ namespace BlackFox
         }
         #endregion
 
-            #region Avatar
+        #region Avatar
             /// <summary>
             /// Aggiorna i Kill point
             /// </summary>
@@ -337,23 +337,28 @@ namespace BlackFox
         #endregion
         #endregion
 
+        #region Level End Actions
         /// <summary>
         /// Funzione da eseguire alla morte del core
         /// </summary>
-        void CoreDeath() {
+        void CoreDeath()
+        {
             GameManager.Instance.UiMng.canvasGame.endRoundUI.SetRecapImage("Defeat");
+            IsRoundActive = false;
             gameplaySM.CurrentState.OnStateEnd();
         }
 
         /// <summary>
         /// Funzione che contiene le azioni da eseguire alla vittoria del player
         /// </summary>
-        void PlayerWin(Player _player) {
+        void PlayerWin(Player _player)
+        {
             GameManager.Instance.UiMng.canvasGame.endRoundUI.SetRecapImage("Victory");
             GameManager.Instance.LevelMng.UpgradePointsMng.GivePoints(_player.ID);
-            gameplaySM.CurrentState.OnStateEnd();
             IsRoundActive = false;
+            gameplaySM.CurrentState.OnStateEnd();
         }
+        #endregion
 
         #region GameplaySM
         /// <summary>

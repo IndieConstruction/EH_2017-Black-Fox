@@ -56,7 +56,7 @@ namespace BlackFox {
         [HideInInspector]
         public Ship ship;
 
-        AvatarUI avatarUI;
+        public AvatarUI avatarUI;
 
         /// <summary>
         /// Crea e prende riferimento dell'AvatarUI

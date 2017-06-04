@@ -3,12 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 namespace BlackFox
 {
     public class MainMenuController : BaseMenu
     {
-
+        public RectTransform PanelTransform;
         public void Init()
         {
             GameManager.Instance.UiMng.CurrentMenu = this;
@@ -41,7 +42,11 @@ namespace BlackFox
             {
                 case 0:
                     // Cambia stato in level selection
-                    GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new LevelSelectionState() });
+                    PanelTransform.DORotate(Vector3.up * 90, 0.8f, RotateMode.LocalAxisAdd).OnComplete(() =>
+                    {
+                        GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new LevelSelectionState() });
+                    });
+                    
                     break;
                 case 1:
                     GameManager.Instance.QuitApplication();

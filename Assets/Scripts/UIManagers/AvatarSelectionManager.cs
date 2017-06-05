@@ -7,13 +7,11 @@ namespace BlackFox {
 
     public class AvatarSelectionManager : BaseMenu {
 
-        public GameObject AvatarSelectionPanel;
 
         public List<AvatarSelectionController> avatarSelectionControllers = new List<AvatarSelectionController>();
 
 
         public void Setup(List<Player> _players) {
-            AvatarSelectionPanel.transform.DORotate(Vector3.up * -90, 0.8f, RotateMode.LocalAxisAdd);
             foreach (Player player in _players) {
                 foreach (AvatarSelectionController controller in avatarSelectionControllers) {
                     if ((int)player.ID == (int)controller.MenuID) {
@@ -35,9 +33,7 @@ namespace BlackFox {
                     return;
             }
             GameManager.Instance.SRMng.LoadSelectedDatas();
-            AvatarSelectionPanel.transform.DORotate(Vector3.up * 90, 0.8f, RotateMode.LocalAxisAdd).OnComplete(() => {
-                GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new GameplayState() });
-            });
+            GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new GameplayState() });
             
         }
 

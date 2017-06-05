@@ -67,12 +67,6 @@ namespace BlackFox
         /// </summary>
         public static MusicEvent OnMusicChange;
 
-        public delegate void AvatarAudioEvent(AudioManager.AvatarAudio _avatarAudio, PlayerLabel _playerId);
-        /// <summary>
-        /// Evento che si occupa di innescare i souni degli avatar in gioco
-        /// </summary>
-        public static AvatarAudioEvent OnAvatarAction;
-
         public delegate void PowerUpAudioEvent(AudioManager.PowerUpAudio _powerUpAudio);
         /// <summary>
         /// Evento che si occupa di innescare i souni dei power up in gioco

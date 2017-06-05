@@ -1,7 +1,11 @@
 fileFormatVersion: 2
 guid: 71f7e805a7fc35046afbcf5c2639d116
 timeCreated: 1466604313
+<<<<<<< HEAD
 licenseType: Store
+=======
+licenseType: Pro
+>>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c
 MonoImporter:
   serializedVersion: 2
   defaultReferences: []

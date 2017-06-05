@@ -8,30 +8,31 @@ namespace BlackFox
 {
     public class Counter : MonoBehaviour
     {
-        public Text CounterLable;
+        public Image CounterLable;
+
+        public Sprite Img1;
+        public Sprite Img2;
+        public Sprite Img3;
+
 
         public void DoCountDown()
         {
-            CounterLable.text = "3";
+            CounterLable.sprite = Img3;
             transform.DOScale(new Vector3(1f, 1f, 1f), 1f).OnComplete(() =>
             {
                 transform.localScale = Vector3.zero;
-                CounterLable.text = "2";
+                CounterLable.sprite = Img2;
                 transform.DOScale(new Vector3(1f, 1f, 1f), 1f).OnComplete(() =>
                 {
                     transform.localScale = Vector3.zero;
-                    CounterLable.text = "1";
+                    CounterLable.sprite = Img1; 
                     transform.DOScale(new Vector3(1f, 1f, 1f), 1f).OnComplete(() =>
                     {
                         transform.localScale = Vector3.zero;
-                        CounterLable.text = "GO!!!";
-                        transform.DOScale(new Vector3(1f, 1f, 1f), 0.6f).OnComplete(() =>
+                        transform.DOScale(new Vector3(0f, 0f, 0f), 0.5f).OnComplete(() =>
                         {
-                            transform.DOScale(new Vector3(0f, 0f, 0f), 0.5f).OnComplete(() =>
-                            {
-                                GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
-                            }).SetEase(Ease.InExpo);
-                        }).SetEase(Ease.OutBounce);
+                            GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
+                        }).SetEase(Ease.InExpo);
                     }).SetEase(Ease.OutBounce);
                 }).SetEase(Ease.OutBounce);
             }).SetEase(Ease.OutBounce);

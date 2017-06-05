@@ -63,7 +63,11 @@ Shader "Hidden/Post FX/FXAA"
 
             color.rgb = UberSecondPass(color.rgb, i.uv);
 
+<<<<<<< HEAD
             return color;
+=======
+            return half4(color.rgb, 1.0);
+>>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c
         }
 
     ENDCG

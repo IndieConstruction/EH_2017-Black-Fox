@@ -33,6 +33,10 @@ namespace UnityEngine.PostProcessing
         const float k_CurveStep = 1f / k_CurvePrecision;
 
         Texture2D m_GradingCurves;
+<<<<<<< HEAD
+=======
+        Color[] m_pixels = new Color[k_CurvePrecision * 2];
+>>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c
 
         public override bool active
         {
@@ -236,9 +240,13 @@ namespace UnityEngine.PostProcessing
                 };
             }
 
+<<<<<<< HEAD
             var pixels = new Color[k_CurvePrecision * 2];
             var curves = model.settings.curves;
 
+=======
+            var curves = model.settings.curves;
+>>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c
             curves.hueVShue.Cache();
             curves.hueVSsat.Cache();
 
@@ -251,17 +259,28 @@ namespace UnityEngine.PostProcessing
                 float y = curves.hueVSsat.Evaluate(t);
                 float z = curves.satVSsat.Evaluate(t);
                 float w = curves.lumVSsat.Evaluate(t);
+<<<<<<< HEAD
                 pixels[i] = new Color(x, y, z, w);
+=======
+                m_pixels[i] = new Color(x, y, z, w);
+>>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c
 
                 // YRGB
                 float m = curves.master.Evaluate(t);
                 float r = curves.red.Evaluate(t);
                 float g = curves.green.Evaluate(t);
                 float b = curves.blue.Evaluate(t);
+<<<<<<< HEAD
                 pixels[i + k_CurvePrecision] = new Color(r, g, b, m);
             }
 
             m_GradingCurves.SetPixels(pixels);
+=======
+                m_pixels[i + k_CurvePrecision] = new Color(r, g, b, m);
+            }
+
+            m_GradingCurves.SetPixels(m_pixels);
+>>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c
             m_GradingCurves.Apply(false, false);
 
             return m_GradingCurves;

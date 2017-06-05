@@ -8,7 +8,11 @@ namespace UnityEngine.PostProcessing
         [Serializable]
         public struct BloomSettings
         {
+<<<<<<< HEAD
             [Min(0f), Tooltip("Blend factor of the result image.")]
+=======
+            [Min(0f), Tooltip("Strength of the bloom filter.")]
+>>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c
             public float intensity;
 
             [Min(0f), Tooltip("Filters out pixels under this level of brightness.")]

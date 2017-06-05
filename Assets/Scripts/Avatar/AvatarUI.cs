@@ -11,6 +11,7 @@ namespace BlackFox {
         public Image KillToview;
         public Slider LifeSlider;
         public Slider AmmoSlider;
+        public Image PinCountDown;
 
         
         private void Start()

@@ -16,7 +16,16 @@
 // -----------------------------------------------------------------------------
 // Uniforms
 
+<<<<<<< HEAD
 sampler2D _MainTex;
+=======
+#if defined(SEPARATE_TEXTURE_SAMPLER)
+Texture2D _MainTex;
+SamplerState sampler_MainTex;
+#else
+sampler2D _MainTex;
+#endif
+>>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c
 float4 _MainTex_TexelSize;
 float4 _MainTex_ST;
 

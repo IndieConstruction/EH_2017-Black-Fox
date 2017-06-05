@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4cc1b38cfd7fb94883fa8ba33604fd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PanelTransform: {fileID: 224117358509079078}
+  Panel: {fileID: 114506843091733912}
 --- !u!114 &114843514839593978
 MonoBehaviour:
   m_ObjectHideFlags: 1

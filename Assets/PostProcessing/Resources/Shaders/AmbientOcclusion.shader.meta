@@ -1,7 +1,11 @@
 fileFormatVersion: 2
 guid: e881ae5627d1cc84395303acfbca6fb2
 timeCreated: 1462280790
+<<<<<<< HEAD
 licenseType: Store
+=======
+licenseType: Pro
+>>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c
 ShaderImporter:
   defaultTextures: []
   userData: 

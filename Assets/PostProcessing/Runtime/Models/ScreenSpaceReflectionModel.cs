@@ -69,7 +69,11 @@ namespace UnityEngine.PostProcessing
             [Range(0.1f, 8.0f)]
             public float reflectionBlur;
 
+<<<<<<< HEAD
             [Tooltip("Enable for a performance gain in scenes where most glossy objects are horizontal, like floors, water, and tables. Leave on for scenes with glossy vertical objects.")]
+=======
+            [Tooltip("Disable for a performance gain in scenes where most glossy objects are horizontal, like floors, water, and tables. Leave on for scenes with glossy vertical objects.")]
+>>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c
             public bool reflectBackfaces;
         }
 

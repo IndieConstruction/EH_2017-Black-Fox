@@ -35,6 +35,7 @@ namespace BlackFox
                 if (!GameManager.Instance.LevelMng.IsGamePaused || GameManager.Instance.LevelMng.IsRoundActive)
                 {
                     prectime -= Time.deltaTime;
+                    ship.Avatar.avatarUI.PinCountDown.fillAmount  -= Time.deltaTime / CurrentPinRate;
                     if (prectime <= 0 && !isRecharging)
                     {
                         isRecharging = true;
@@ -51,7 +52,7 @@ namespace BlackFox
             ship.Avatar.Player.ControllerVibration(0f, 0f);
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerStay(Collider other)
         {
             if(other.gameObject.tag == "PinBlockArea")
                 canPlace = false;
@@ -125,6 +126,7 @@ namespace BlackFox
                 }
                 pin.transform.parent = GameManager.Instance.LevelMng.PinsContainer;
                 prectime = CurrentPinRate;
+                ship.Avatar.avatarUI.PinCountDown.fillAmount = 1;
                 return true;
             }
             return false;

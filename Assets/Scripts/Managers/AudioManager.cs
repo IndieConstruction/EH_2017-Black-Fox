@@ -6,11 +6,12 @@ namespace BlackFox
 {
     public class AudioManager : MonoBehaviour
     {
-        //TODO : trovare modo funzionale di acricare e leggere le varie audio clips
+        //TODO : trovare modo funzionale di caricare e leggere le varie audio clips
         public AudioClip MenuMovementAudioClip;
         public AudioClip MenuSelectionAudioClip;
 
-        public AudioSource[] PlayerAudioSurces;
+        public AudioClip ShipAccelerationClip;
+
         public AudioSource AudioSurceMenu;
         public AudioSource AudioSurceMusic;
         public AudioSource AudioSurceAmbience;
@@ -58,34 +59,6 @@ namespace BlackFox
             }
         }
 
-        void PlayAvatarAudio(AvatarAudio _avatarAudio, PlayerLabel _playerId)
-        {
-            for (int i = 0; i < PlayerAudioSurces.Length; i++)
-            {
-                if (PlayerAudioSurces[i].name == "AudioSourcePlayer" + (int)_playerId)
-                {
-                    switch (_avatarAudio)
-                    {
-                        case AvatarAudio.AmmoRecharge:
-                            //PlayerAudioSurces[i].Play();
-                            break;
-                        case AvatarAudio.Death:
-                            break;
-                        case AvatarAudio.Shoot:
-                            break;
-                        case AvatarAudio.NoAmmo:
-                            break;
-                        case AvatarAudio.PinPlaced:
-                            break;
-                        case AvatarAudio.Collision:
-                            break;
-                        default:
-                            break;
-                    }
-                }
-            }
-        }
-
         void PlayPowerUpAudio(PowerUpAudio _powerUpAudio)
         {
             switch (_powerUpAudio)
@@ -106,7 +79,6 @@ namespace BlackFox
         {
             EventManager.OnMenuAction += PlayUIAudio;
             EventManager.OnMusicChange += PlayMusic;
-            EventManager.OnAvatarAction += PlayAvatarAudio;
             EventManager.OnPowerUpAction += PlayPowerUpAudio;
         }
 
@@ -114,7 +86,6 @@ namespace BlackFox
         {
             EventManager.OnMenuAction -= PlayUIAudio;
             EventManager.OnMusicChange -= PlayMusic;
-            EventManager.OnAvatarAction -= PlayAvatarAudio;
             EventManager.OnPowerUpAction -= PlayPowerUpAudio;
         }
         #endregion
@@ -134,16 +105,6 @@ namespace BlackFox
             MainTheme,
             GameTheme,
             Ambience
-        }
-
-        public enum AvatarAudio
-        {
-            AmmoRecharge,
-            Death,
-            Shoot,
-            NoAmmo,
-            PinPlaced,
-            Collision
         }
 
         public enum PowerUpAudio

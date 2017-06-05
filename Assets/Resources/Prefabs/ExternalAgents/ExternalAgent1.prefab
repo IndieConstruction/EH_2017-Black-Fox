@@ -152,7 +152,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 1
   velocity: 5
-  damage: 3
+  damage: 1
+  particleSistem: {fileID: 1295763399117534, guid: d35a36265bbfb1048828c4f2db9c6a30,
+    type: 2}
 --- !u!136 &136298281779434568
 CapsuleCollider:
   m_ObjectHideFlags: 1

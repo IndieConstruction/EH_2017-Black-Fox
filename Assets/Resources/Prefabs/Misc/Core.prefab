@@ -600,7 +600,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9bc484107850f0469f417003cdfab0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxLife: 20
+  MaxLife: 180
+  DamageParticles: {fileID: 0}
 --- !u!114 &114702709073053592
 MonoBehaviour:
   m_ObjectHideFlags: 1

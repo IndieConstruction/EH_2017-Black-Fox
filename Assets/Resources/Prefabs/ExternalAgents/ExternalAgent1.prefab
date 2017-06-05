@@ -152,7 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   life: 1
   velocity: 5
-  damage: 1
+  damage: 3
 --- !u!136 &136298281779434568
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -13,9 +13,9 @@ namespace BlackFox
         float life;
         public float MaxLife = 10;      // La vita massima che può avere il Core e che viene impostata al riavvio di un round perso
 
+        public ParticleSystem Particles;
         Image Ring;
 
-        public GameObject DamageParticles;
 
         private ParticlesController _particlesController;
 
@@ -83,15 +83,21 @@ namespace BlackFox
             OnDataChange();
             transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0.1f), 0.5f);
             //DamageParticles.transform.position = new Vector3(DamageParticles.transform.position.x + UnityEngine.Random.Range(0.1f, 0.5f), 
-              //  DamageParticles.transform.position.y + UnityEngine.Random.Range(0.1f, 0.5f), DamageParticles.transform.position.z + UnityEngine.Random.Range(0.1f, 0.5f));
+            //  DamageParticles.transform.position.y + UnityEngine.Random.Range(0.1f, 0.5f), DamageParticles.transform.position.z + UnityEngine.Random.Range(0.1f, 0.5f));
             //ParticlesController.PlayParticles(ParticlesController.ParticlesType.Damage);
-            
 
             if (!IsCoreAlive())
             {
-                GameManager.Instance.LevelMng.ExplosionPoolMng.GetPooledObject(transform.position);
-                transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { GameManager.Instance.LevelMng.CheckRoundStatus(); });
+                if(!Particles.isPlaying)
+                    StartCoroutine(CoreExplosionEffect());
             }
+        }
+
+        IEnumerator CoreExplosionEffect()
+        {
+            Particles.Play();
+            yield return new WaitForSeconds(Particles.main.duration - 0.5f);
+            transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { GameManager.Instance.LevelMng.CheckRoundStatus(); });
         }
 
         #endregion

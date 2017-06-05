@@ -26,6 +26,9 @@ namespace BlackFox {
         #region API
         public void Init()
         {
+            GameObject cam = GameObject.Find("CameraUI");
+            cam.SetActive(false);
+            cam.SetActive(true);
             LoadButtonImage();
         }
 

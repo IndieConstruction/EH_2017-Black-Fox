@@ -72,8 +72,9 @@ MonoBehaviour:
   FragmentPrefab: {fileID: 1083337657188362, guid: 2ee1f5e884c0e404ba1990bc9d106140,
     type: 2}
   AnchorPoint: {fileID: 0}
-  MaxLength: 500
-  DensityOfFragments: 0.25
+  config:
+    MaxLength: 80
+    DensityOfFragments: 0.1
 --- !u!120 &120073920322594396
 LineRenderer:
   m_ObjectHideFlags: 1
@@ -81,7 +82,7 @@ LineRenderer:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1744296215973444}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 2
   m_ReceiveShadows: 1
   m_MotionVectors: 0
   m_LightProbeUsage: 0

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: Owl_Purple
   m_EditorClassIdentifier: 
   ShipMaterialMain: {fileID: 2100000, guid: 05bb8cac4f4dfdd4da40c4f9423959c8, type: 2}
-  RopeMaterial: {fileID: 2100000, guid: 78e14e1d14f1a444fb182ccbb0c979ad, type: 2}
+  RopeMaterial: {fileID: 2100000, guid: 3a96a378185b35d468b9b75d1b718f1b, type: 2}
   PinMaterial: {fileID: 2100000, guid: 5afff9f31037d7440ad1317faea7e6fa, type: 2}

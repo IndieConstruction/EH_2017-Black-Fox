@@ -9,11 +9,9 @@ namespace BlackFox
 {
     public class LevelSelectionController : BaseMenu
     {
-        public RectTransform PanelTransform;
 
         void Start()
         {
-            PanelTransform.DORotate(Vector3.up * -90, 0.8f, RotateMode.LocalAxisAdd);
             FindISelectableChildren();
             GameManager.Instance.UiMng.CurrentMenu = this;
         }
@@ -50,9 +48,7 @@ namespace BlackFox
 
             if (EventManager.OnMenuAction != null)
                 EventManager.OnMenuAction(AudioManager.UIAudio.Selection);
-            PanelTransform.DORotate(Vector3.up * 90, 0.8f, RotateMode.LocalAxisAdd).OnComplete(()=> {
                 GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new AvatarSelectionState() });
-            });
         }
 
         public override void GoBack(Player _player)

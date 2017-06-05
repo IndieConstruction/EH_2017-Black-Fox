@@ -14,6 +14,8 @@ namespace BlackFox
         public float damage = 1;
         AlertIndicator alertIndicator;
 
+        ParticleSystem particleSistem;
+
         List<IDamageable> damageablesList;
 
         public float Life
@@ -74,7 +76,7 @@ namespace BlackFox
             transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f);
             if (Life < 1)
             {
-                GameManager.Instance.LevelMng.ExplosionPoolMng.GetPooledObject(transform.position);
+
                 GameManager.Instance.CoinMng.CoinController.InstantiateCoin(transform.position);
                 GetComponent<Collider>().enabled = false;
                 transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject); });

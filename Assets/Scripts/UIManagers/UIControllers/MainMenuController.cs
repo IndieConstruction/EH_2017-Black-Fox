@@ -3,13 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
 
 namespace BlackFox
 {
     public class MainMenuController : BaseMenu
     {
-        public RectTransform PanelTransform;
+
+        public Image Panel;
+        float tempa = 1;
+        
+        private void Update()
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                /// sfuma l'alfa del panello che contiene i bottoni ( i bottoni non vengono sfumati )
+                tempa = tempa - Time.deltaTime ;
+                Panel.color = new Color(Panel.color.r, Panel.color.g, Panel.color.b, tempa);
+            }
+        }
+
+
         public void Init()
         {
             GameManager.Instance.UiMng.CurrentMenu = this;
@@ -42,11 +55,7 @@ namespace BlackFox
             {
                 case 0:
                     // Cambia stato in level selection
-                    PanelTransform.DORotate(Vector3.up * 90, 0.8f, RotateMode.LocalAxisAdd).OnComplete(() =>
-                    {
-                        GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new LevelSelectionState() });
-                    });
-                    
+                    GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new LevelSelectionState() });
                     break;
                 case 1:
                     GameManager.Instance.QuitApplication();

@@ -14,6 +14,8 @@ namespace BlackFox
         public float damage = 1;
         AlertIndicator alertIndicator;
 
+        public GameObject particleSistem;
+
         List<IDamageable> damageablesList;
 
         public float Life
@@ -51,7 +53,7 @@ namespace BlackFox
                     // E' presente l'oggetto con cui l'agente esterno è entrato in collisione.
                     if (item.GetType() == damageable.GetType())
                     {
-                        GameManager.Instance.LevelMng.ExplosionPoolMng.GetPooledObject(transform.position);
+                        Deactivate();
                         damageable.Damage(damage, null);        // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia
                         Destroy(gameObject);                    //Distrugge l'agente esterno
                         break;                                  // Ed esce dal foreach.
@@ -74,11 +76,18 @@ namespace BlackFox
             transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f);
             if (Life < 1)
             {
-                GameManager.Instance.LevelMng.ExplosionPoolMng.GetPooledObject(transform.position);
+                Deactivate();
                 GameManager.Instance.CoinMng.CoinController.InstantiateCoin(transform.position);
-                GetComponent<Collider>().enabled = false;
                 transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject); });
             }
+        }
+
+        void Deactivate()
+        {
+            GetComponent<Collider>().enabled = false;
+            GetComponentInChildren<MeshRenderer>().enabled = false;
+            GetComponent<Rigidbody>().isKinematic = true;
+            Destroy(Instantiate(particleSistem, transform.position, Quaternion.identity), 4);
         }
 
         #endregion

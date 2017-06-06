@@ -250,7 +250,10 @@ namespace BlackFox {
             if (Life < 1)
             {
                 GameManager.Instance.LevelMng.ExplosionPoolMng.GetPooledObject(transform.position);
-                Avatar.ShipDestroy(_attacker.GetComponent<Ship>().Avatar);
+                if (_attacker.GetComponent<Ship>() != null)
+                    Avatar.ShipDestroy(_attacker.GetComponent<Ship>().Avatar);
+                else
+                    Avatar.ShipDestroy(null);
                 transform.DOScale(Vector3.zero, 0.5f);
                 return;
             }

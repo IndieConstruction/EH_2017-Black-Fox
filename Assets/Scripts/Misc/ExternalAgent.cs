@@ -54,7 +54,7 @@ namespace BlackFox
                     if (item.GetType() == damageable.GetType())
                     {
                         Deactivate();
-                        damageable.Damage(damage, null);        // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia
+                        damageable.Damage(damage, gameObject);        // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia
                         Destroy(gameObject);                    //Distrugge l'agente esterno
                         break;                                  // Ed esce dal foreach.
                     }

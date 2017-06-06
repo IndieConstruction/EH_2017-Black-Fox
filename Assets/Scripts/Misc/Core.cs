@@ -9,7 +9,6 @@ namespace BlackFox
 {
     public class Core : MonoBehaviour, IDamageable
     {
-
         float life;
         public float MaxLife = 10;      // La vita massima che può avere il Core e che viene impostata al riavvio di un round perso
 
@@ -84,6 +83,8 @@ namespace BlackFox
         {
             life -= _damage;
             OnDataChange();
+            if (damageTween != null)
+                damageTween.Complete();
             damageTween = transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0.1f), 0.5f);
             //DamageParticles.transform.position = new Vector3(DamageParticles.transform.position.x + UnityEngine.Random.Range(0.1f, 0.5f), 
             //  DamageParticles.transform.position.y + UnityEngine.Random.Range(0.1f, 0.5f), DamageParticles.transform.position.z + UnityEngine.Random.Range(0.1f, 0.5f));

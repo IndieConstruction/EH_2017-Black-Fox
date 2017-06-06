@@ -69,10 +69,7 @@ float4 _OcclusionTexture_TexelSize;
 half _Intensity;
 float _Radius;
 float _Downsample;
-<<<<<<< HEAD
-=======
 float3 _FogParams; // x: density, y: start, z: end
->>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c
 
 // Accessors for packed AO/normal buffer
 fixed4 PackAONormal(fixed ao, fixed3 n)
@@ -224,8 +221,6 @@ float3 PickSamplePoint(float2 uv, float index)
     return v * l;
 }
 
-<<<<<<< HEAD
-=======
 // Fog handling in forward
 half ComputeFog(float z)
 {
@@ -248,7 +243,6 @@ float ComputeDistance(float depth)
     return dist;
 }
 
->>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c
 //
 // Distance-based AO estimator based on Morgan 2011 http://goo.gl/2iz3P
 //
@@ -311,8 +305,6 @@ half4 FragAO(VaryingsMultitex i) : SV_Target
     // Apply other parameters.
     ao = pow(ao * _Intensity / _SampleCount, kContrast);
 
-<<<<<<< HEAD
-=======
     // Apply fog when enabled (forward-only)
 #if !FOG_OFF
     float d = Linear01Depth(SAMPLE_DEPTH_TEXTURE(_CameraDepthTexture, uv));
@@ -320,7 +312,6 @@ half4 FragAO(VaryingsMultitex i) : SV_Target
     ao *= ComputeFog(d);
 #endif
 
->>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c
     return PackAONormal(ao, norm_o);
 }
 

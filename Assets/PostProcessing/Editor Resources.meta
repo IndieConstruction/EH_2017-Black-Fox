@@ -1,15 +1,8 @@
 fileFormatVersion: 2
-<<<<<<< HEAD:Assets/Standard Assets/Effects.meta
-guid: ffc5066fe68e6e7499f1f32512a0ca07
-folderAsset: yes
-timeCreated: 1496649980
-licenseType: Free
-=======
 guid: 83715878d3a8db441aa5636641db69a3
 folderAsset: yes
 timeCreated: 1476176392
 licenseType: Pro
->>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c:Assets/PostProcessing/Editor Resources.meta
 DefaultImporter:
   userData: 
   assetBundleName: 

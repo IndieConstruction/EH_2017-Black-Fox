@@ -1,11 +1,7 @@
 fileFormatVersion: 2
 guid: 9d9b886f7a8fe7b4baf56624c42e3420
 timeCreated: 1459956392
-<<<<<<< HEAD
-licenseType: Store
-=======
 licenseType: Pro
->>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c
 ComputeShaderImporter:
   currentAPIMask: 4
   userData: 

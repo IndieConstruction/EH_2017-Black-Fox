@@ -43,14 +43,9 @@ Shader "Hidden/Post FX/Uber Shader"
         // Depth of field
         sampler2D_float _CameraDepthTexture;
         sampler2D _DepthOfFieldTex;
-<<<<<<< HEAD
-        float4 _DepthOfFieldTex_TexelSize;
-        float2 _DepthOfFieldParams; // x: distance, y: f^2 / (N * (S1 - f) * film_width * 2)
-=======
         sampler2D _DepthOfFieldCoCTex;
         float4 _DepthOfFieldTex_TexelSize;
         float3 _DepthOfFieldParams; // x: distance, y: f^2 / (N * (S1 - f) * film_width * 2), z: max coc
->>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c
 
         // Bloom
         sampler2D _BloomTex;
@@ -111,10 +106,7 @@ Shader "Hidden/Post FX/Uber Shader"
             half3 color = (0.0).xxx;
             #if DEPTH_OF_FIELD && CHROMATIC_ABERRATION
             half4 dof = (0.0).xxxx;
-<<<<<<< HEAD
-=======
             half ffa = 0.0; // far field alpha
->>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c
             #endif
 
             //
@@ -144,10 +136,7 @@ Shader "Hidden/Post FX/Uber Shader"
                     dofPos.y = 1.0 - dofPos.y;
                 }
                 half4 dofSum = (0.0).xxxx;
-<<<<<<< HEAD
-=======
                 half ffaSum = 0.0;
->>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c
                 #endif
 
                 for (int i = 0; i < samples; i++)
@@ -161,17 +150,12 @@ Shader "Hidden/Post FX/Uber Shader"
                     pos += delta;
 
                     #if DEPTH_OF_FIELD
-<<<<<<< HEAD
-                    half4 sdof = tex2Dlod(_DepthOfFieldTex, float4(UnityStereoScreenSpaceUVAdjust(dofPos, _MainTex_ST), 0, 0)).rgba;
-                    dofSum += sdof * half4(filter, 1);
-=======
                     float4 uvDof = float4(UnityStereoScreenSpaceUVAdjust(dofPos, _MainTex_ST), 0, 0);
                     half4 sdof = tex2Dlod(_DepthOfFieldTex, uvDof).rgba;
                     half scoc = tex2Dlod(_DepthOfFieldCoCTex, uvDof).r;
                     scoc = (scoc - 0.5) * 2 * _DepthOfFieldParams.z;
                     dofSum += sdof * half4(filter, 1);
                     ffaSum += smoothstep(_MainTex_TexelSize.y * 2, _MainTex_TexelSize.y * 4, scoc);
->>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c
                     dofPos += dofDelta;
                     #endif
                 }
@@ -179,10 +163,7 @@ Shader "Hidden/Post FX/Uber Shader"
                 color = sum / filterSum;
                 #if DEPTH_OF_FIELD
                 dof = dofSum / half4(filterSum, samples);
-<<<<<<< HEAD
-=======
                 ffa = ffaSum / samples;
->>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c
                 #endif
             }
             #else
@@ -202,18 +183,7 @@ Shader "Hidden/Post FX/Uber Shader"
             #endif
 
             // Depth of field
-<<<<<<< HEAD
-            #if DEPTH_OF_FIELD
-            {
-                #if !CHROMATIC_ABERRATION
-                half4 dof = tex2D(_DepthOfFieldTex, i.uvFlippedSPR);
-                #endif
-                color = color * dof.a + dof.rgb * autoExposure;
-            }
-            #elif DEPTH_OF_FIELD_COC_VIEW
-=======
             #if DEPTH_OF_FIELD_COC_VIEW
->>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c
             {
                 // Calculate the radiuses of CoC.
                 half4 src = tex2D(_DepthOfFieldTex, uv);
@@ -237,8 +207,6 @@ Shader "Hidden/Post FX/Uber Shader"
 
                 color = rgb;
             }
-<<<<<<< HEAD
-=======
             #elif DEPTH_OF_FIELD
             {
                 #if !CHROMATIC_ABERRATION
@@ -251,7 +219,6 @@ Shader "Hidden/Post FX/Uber Shader"
                 // lerp(lerp(color, dof, ffa), dof, dof.a)
                 color = lerp(color, dof.rgb * autoExposure, ffa + dof.a - ffa * dof.a);
             }
->>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c
             #endif
 
             // HDR Bloom
@@ -289,30 +256,18 @@ Shader "Hidden/Post FX/Uber Shader"
             #endif
 
             // HDR color grading & tonemapping
-<<<<<<< HEAD
-            #if COLOR_GRADING
-=======
             #if COLOR_GRADING_LOG_VIEW
             {
                 color *= _ExposureEV;
                 color = saturate(LinearToLogC(color));
             }
             #elif COLOR_GRADING
->>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c
             {
                 color *= _ExposureEV; // Exposure is in ev units (or 'stops')
 
                 half3 colorLogC = saturate(LinearToLogC(color));
                 color = ApplyLut2d(_LogLut, colorLogC, _LogLut_Params);
             }
-<<<<<<< HEAD
-            #elif COLOR_GRADING_LOG_VIEW
-            {
-                color *= _ExposureEV;
-                color = saturate(LinearToLogC(color));
-            }
-=======
->>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c
             #endif
 
             //

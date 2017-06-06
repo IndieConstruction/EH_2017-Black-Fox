@@ -14,11 +14,7 @@ namespace UnityEngine.PostProcessing
             [Range(0f, 1f), Tooltip("Grain strength. Higher means more visible grain.")]
             public float intensity;
 
-<<<<<<< HEAD
-            [Range(0.3f, 3f), Tooltip("Grain particle size in \"Filmic\" mode.")]
-=======
             [Range(0.3f, 3f), Tooltip("Grain particle size.")]
->>>>>>> 4a27596bb8cec86431ec3eabbef194b0b6e9967c
             public float size;
 
             [Range(0f, 1f), Tooltip("Controls the noisiness response curve based on scene luminance. Lower values mean less noise in dark areas.")]

@@ -53,14 +53,14 @@ namespace BlackFox
         {
             switch (CurrentIndexSelection)
             {
-                case 0:
-                    // Cambia stato in level selection
+                case 0:                   
                     GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new LevelSelectionState() });
                     break;
                 case 1:
-                    GameManager.Instance.QuitApplication();
+                    GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new CreditsState() });
                     break;
                 case 2:
+                    GameManager.Instance.QuitApplication();
                     break;
             }
 

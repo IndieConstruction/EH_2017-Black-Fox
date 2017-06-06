@@ -153,7 +153,7 @@ MonoBehaviour:
   life: 1
   velocity: 5
   damage: 1
-  particleSistem: {fileID: 1295763399117534, guid: d35a36265bbfb1048828c4f2db9c6a30,
+  particleSistem: {fileID: 1484587147987330, guid: 9a0bd6a03607f46488c281311376b0a3,
     type: 2}
 --- !u!136 &136298281779434568
 CapsuleCollider:

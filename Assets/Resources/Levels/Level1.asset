@@ -20,7 +20,6 @@ MonoBehaviour:
     AddPoints: 1
     SubPoints: 0
     PointsToWin: 5
-    VictoriesToWin: 3
   MinPowerUpRatio: 5
   MaxPowerUpRatio: 10
   ArrowsSpawner:
@@ -42,8 +41,8 @@ MonoBehaviour:
       type: 2}
     MinTime: 10
     MaxTime: 20
-    AngularSpeed: 100
-    TransSpeed: 100
+    AngularSpeed: 6789
+    KamikazeRatioMultiplayer: 20
   TurretSpawner:
     SpawnerPrefab: {fileID: 0}
     Turrent: {fileID: 0}

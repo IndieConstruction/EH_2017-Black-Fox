@@ -45,11 +45,15 @@ namespace BlackFox {
                 case "BlackFox.LoadGameState":
                     return true;
                 case "BlackFox.MainMenuState":
-                    if (_oldState.StateName == "BlackFox.LoadGameState" || _oldState.StateName == "BlackFox.LevelSelectionState" || _oldState.StateName == "BlackFox.GameplayState")
+                    if (_oldState.StateName == "BlackFox.LoadGameState" || _oldState.StateName == "BlackFox.LevelSelectionState" || _oldState.StateName == "BlackFox.GameplayState" || _oldState.StateName == "BlackFox.CreditsState")
                         return true;
                     break;
                 case "BlackFox.LevelSelectionState":
                     if (_oldState.StateName == "BlackFox.MainMenuState" || _oldState.StateName == "BlackFox.AvatarSelectionState")
+                        return true;
+                    break;
+                case "BlackFox.CreditsState":
+                    if (_oldState.StateName == "BlackFox.MainMenuState")
                         return true;
                     break;
                 case "BlackFox.AvatarSelectionState":

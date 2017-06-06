@@ -45,6 +45,7 @@ namespace BlackFox
             target = GameManager.Instance.LevelMng.Core.transform;
             nextTime = Time.time + Random.Range(Options.MinTime, Options.MaxTime);
             LoadIDamageablePrefab();
+            
 
             container = new GameObject("ExternalAgentContainer");
             container.transform.parent = GameManager.Instance.LevelMng.Arena.transform;
@@ -58,15 +59,16 @@ namespace BlackFox
 
         void Update()
         {
-            if(IsActive)
+            PowerupDuration -= Time.deltaTime;
+            if (IsActive)
             {
                 if (Time.time >= nextTime)
                 {
                     InstantiateExternalAgent();
                     if (IsKamikazeTime)
                     {
-                        nextTime = Time.time + 1f;
-                        PowerupDuration -= 1;
+                        nextTime = Time.time + Random.Range(Options.MinTime/Options.KamikazeRatioMultiplayer, Options.MaxTime/Options.KamikazeRatioMultiplayer);
+                        
                         if (PowerupDuration <= 0)
                             IsKamikazeTime = false;
 
@@ -96,13 +98,8 @@ namespace BlackFox
         /// </summary>
         void GravityAround()
         {
-            Vector3 relativePos = target.position - transform.position;
-            Quaternion rotation = Quaternion.LookRotation(relativePos);
-
-            Quaternion current = transform.localRotation;
-
-            transform.localRotation = Quaternion.Slerp(current, rotation, Options.AngularSpeed * Time.deltaTime);
-            transform.Translate(Options.TransSpeed * Time.deltaTime, 0, 0);
+            transform.LookAt(target);
+            transform.RotateAround(target.position, Vector3.up, Options.AngularSpeed * Time.deltaTime);
         }
 
         /// <summary>
@@ -137,6 +134,6 @@ namespace BlackFox
         public float MinTime = 10;                              //Min time between Spawns
         public float MaxTime = 20;                              //Max time between Spawns
         public float AngularSpeed = 1;                          //Rotation speed
-        public float TransSpeed = 1;                            //Precession speed
+        public float KamikazeRatioMultiplayer = 10;             //Multiplayer of ratio of spawn
     }
 }

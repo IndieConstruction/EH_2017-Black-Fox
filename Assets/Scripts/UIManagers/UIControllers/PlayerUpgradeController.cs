@@ -60,7 +60,7 @@ namespace BlackFox
         /// </summary>
         void UpgradeGraphics()
         {
-            UpgradePintsText.text = "= " + (AvatarUpgradePoints - UpgradeCounter);
+            UpgradePintsText.text = (AvatarUpgradePoints - UpgradeCounter).ToString();
         }
 
         #region API

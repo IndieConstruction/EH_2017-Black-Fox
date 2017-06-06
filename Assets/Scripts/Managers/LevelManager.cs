@@ -134,7 +134,7 @@ namespace BlackFox
 
         public void InstantiateExplosionPoolManager()
         {
-            GameObject explosionPrefab = Resources.Load<GameObject>("Prefabs/Misc/ExplosionParticles");
+            GameObject explosionPrefab = Resources.Load<GameObject>("Prefabs/Particles/esplosione navetta");
             IPoollableObject explosion = explosionPrefab.GetComponent<IPoollableObject>();
 
             ExplosionPoolMng = new PoolManager(new GameObject("Explosion Container").transform, explosion, 10);

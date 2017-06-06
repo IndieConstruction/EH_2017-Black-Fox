@@ -9,11 +9,7 @@ namespace BlackFox {
         public override void OnStart()
         {
             Debug.Log("RoundInitState");
-            //if(!GameManager.Instance.LevelMng.PlayOff)
-                GameManager.Instance.LevelMng.SpawnAllAvatar(0);
-            //else
-            //    GameManager.Instance.LevelMng.SpawnSelectedAvatars(0);
-
+            GameManager.Instance.LevelMng.SpawnAllAvatar(0);
             GameManager.Instance.LevelMng.InitCore();
             GameManager.Instance.LevelMng.SpawnerMng.InitSpawners();
             GameManager.Instance.LevelMng.PowerUpMng.Init();

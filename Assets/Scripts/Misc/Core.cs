@@ -16,6 +16,7 @@ namespace BlackFox
         public ParticleSystem Particles;
         Image Ring;
 
+        Tweener damageTween;
 
         private ParticlesController _particlesController;
 
@@ -59,7 +60,9 @@ namespace BlackFox
         #region API
         public void Init()
         {
-            transform.DOScale(Vector3.one, 0.1f);
+            if (damageTween != null)
+                damageTween.Complete();
+            damageTween = transform.DOScale(Vector3.one, 0.1f);
             if (life <= 0)
             {
                 life = MaxLife;
@@ -81,7 +84,7 @@ namespace BlackFox
         {
             life -= _damage;
             OnDataChange();
-            transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0.1f), 0.5f);
+            damageTween = transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0.1f), 0.5f);
             //DamageParticles.transform.position = new Vector3(DamageParticles.transform.position.x + UnityEngine.Random.Range(0.1f, 0.5f), 
             //  DamageParticles.transform.position.y + UnityEngine.Random.Range(0.1f, 0.5f), DamageParticles.transform.position.z + UnityEngine.Random.Range(0.1f, 0.5f));
             //ParticlesController.PlayParticles(ParticlesController.ParticlesType.Damage);

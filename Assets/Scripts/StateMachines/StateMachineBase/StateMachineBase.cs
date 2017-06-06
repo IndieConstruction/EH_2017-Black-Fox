@@ -54,7 +54,18 @@ public abstract class StateMachineBase : MonoBehaviour {
 
     public void SetPassThroughOrder(List<StateBase> _passThroughOrder) 
     {
-        PassThroughOrder = _passThroughOrder;
+        if(PassThroughOrder.Count > 0)
+        {
+            foreach (StateBase item in _passThroughOrder)
+            {
+                PassThroughOrder.Add(item);
+            }
+        }
+        else
+        {
+            PassThroughOrder = _passThroughOrder;
+        }
+            
         CurrentState = PassThroughOrder[0];
         PassThroughOrder.Remove(CurrentState);
     }

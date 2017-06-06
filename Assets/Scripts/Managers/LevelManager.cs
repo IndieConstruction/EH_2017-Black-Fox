@@ -222,21 +222,6 @@ namespace BlackFox
             foreach (Player player in GameManager.Instance.PlayerMng.Players)
                 AvatarSpwn.SpawnAvatar(player, _spawnTime);
         }
-
-        public void SpawnSelectedAvatars(float _spawnTime)
-        {
-            List<Player> playerToPlayOff = new List<Player>();
-            foreach (Player player in GameManager.Instance.PlayerMng.Players)
-            {
-                foreach (PlayerLabel playerID in levelPointsCounter.PlayerToPlayOff)
-                {
-                    if (player.ID == playerID)
-                        playerToPlayOff.Add(player);
-                }
-            }
-            foreach (Player player in playerToPlayOff)
-                AvatarSpwn.SpawnAvatar(player, _spawnTime);
-        }
         #endregion
 
         #region Initialization
@@ -392,7 +377,6 @@ namespace BlackFox
                 return true;
         }
         #endregion
-
 
         #region Level End Actions
         /// <summary>

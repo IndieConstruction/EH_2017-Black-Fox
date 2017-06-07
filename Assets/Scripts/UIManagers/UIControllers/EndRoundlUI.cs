@@ -58,7 +58,9 @@ namespace BlackFox
         {
             if (CanSelect)
             {
-                GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
+                GameManager.Instance.LoadingCtrl.ActivateLoadingPanel(() => {
+                    GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
+                });
                 if (EventManager.OnMenuAction != null)
                     EventManager.OnMenuAction(AudioManager.UIAudio.Selection);
                 CanSelect = false;

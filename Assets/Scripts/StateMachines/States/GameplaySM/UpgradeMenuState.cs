@@ -13,6 +13,7 @@ namespace BlackFox {
             GameManager.Instance.UiMng.CurrentMenu = GameManager.Instance.UiMng.canvasGame.upgradeMenuManager;
             GameManager.Instance.UiMng.canvasGame.upgradeMenuManager.UpgradePanel.SetActive(true);
             GameManager.Instance.UiMng.canvasGame.upgradeMenuManager.InitControllers();
+            GameManager.Instance.LoadingCtrl.DeactivateLoadingPanel();
         }
 
         public override void OnEnd()

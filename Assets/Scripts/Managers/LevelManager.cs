@@ -179,16 +179,18 @@ namespace BlackFox
         #region CheatCode
 
         public void CheatCodeRoundEnd() {
-            PlayerWin(GameManager.Instance.PlayerMng.Players[0]);
+            for (int i = 0; i < 5; i++) {
+                levelPointsCounter.UpdateKillPoints(PlayerLabel.One, PlayerLabel.Two);
+            }
         }
         #endregion
 
         #region Avatar
-            /// <summary>
-            /// Aggiorna i Kill point
-            /// </summary>
-            /// <param name="_killer"></param>
-            /// <param name="_victim"></param>
+        /// <summary>
+        /// Aggiorna i Kill point
+        /// </summary>
+        /// <param name="_killer"></param>
+        /// <param name="_victim"></param>
         public void UpdateKillPoints(Avatar _killer, Avatar _victim)
         {
             if (_killer != null)

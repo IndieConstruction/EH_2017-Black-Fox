@@ -37,6 +37,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4895682402864154}
   - component: {fileID: 111230428412653152}
+  - component: {fileID: 114284969000963050}
   m_Layer: 0
   m_Name: Perni_Navi 1
   m_TagString: Untagged
@@ -71,7 +72,6 @@ GameObject:
   - component: {fileID: 4680520105937050}
   - component: {fileID: 54655537444855234}
   - component: {fileID: 136312059101494218}
-  - component: {fileID: 114885312037999802}
   m_Layer: 9
   m_Name: PinDefault
   m_TagString: Untagged
@@ -142,7 +142,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1844589482665234}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -40.1, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4895682402864154}
@@ -157,7 +157,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1485661284396102}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4530900991921678}
@@ -232,18 +232,17 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!114 &114885312037999802
+--- !u!114 &114284969000963050
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1844589482665234}
+  m_GameObject: {fileID: 1485661284396102}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c88a3ba1b65b37347bcc9f6f5b196fd2, type: 3}
+  m_Script: {fileID: 11500000, guid: 44091c8fe41eb6f42961542c5c757a68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particles: {fileID: 0}
 --- !u!135 &135539403818025306
 SphereCollider:
   m_ObjectHideFlags: 1

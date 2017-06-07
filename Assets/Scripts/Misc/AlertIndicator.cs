@@ -31,6 +31,7 @@ public class AlertIndicator : MonoBehaviour {
         float offset = 0;//Indicator.rectTransform.sizeDelta.x;
         //OffScreen = false;
         Indicator.transform.position = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.z, transform.position.y));
+        Indicator.transform.position = new Vector3(Indicator.transform.position.x - 1, Indicator.transform.position.y, Indicator.transform.position.z);
         Indicator.transform.position += new Vector3(Screen.width / 2,0,0);
         if (Indicator.transform.position.x > Screen.width)
         {

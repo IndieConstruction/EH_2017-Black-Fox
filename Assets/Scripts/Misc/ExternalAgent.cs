@@ -13,7 +13,6 @@ namespace BlackFox
         public float velocity = 5;
         public float damage = 1;
         AlertIndicator alertIndicator;
-
         public GameObject particleSistem;
 
         List<IDamageable> damageablesList;
@@ -22,6 +21,13 @@ namespace BlackFox
         {
             get { return life; }
             set { life = value; }
+        }
+
+        private void Start()
+        {
+            Vector3 desiredDirection = transform.position - GameManager.Instance.LevelMng.Core.transform.position;
+            if (Vector3.Cross(desiredDirection, transform.forward).magnitude > .1f)
+                Destroy(gameObject);
         }
 
         private void Update()

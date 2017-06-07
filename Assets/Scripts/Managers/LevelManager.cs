@@ -322,19 +322,18 @@ namespace BlackFox
             {
                 List<PlayerStats> tempPlayersStats = new List<PlayerStats>();
 
-                for (int i = 0, j = 0; i < GameManager.Instance.PlayerMng.Players.Count; i++, j++)
-                {
+                for (int i = 0; i < GameManager.Instance.PlayerMng.Players.Count; i++) {
+
                     tempPlayersStats.Add(levelPointsCounter.GetPlayerStats(GameManager.Instance.PlayerMng.Players[i].ID));
 
-                    if (tempPlayersStats.Count == 0 || tempPlayersStats[j].Victories > tempPlayersStats[0].Victories)
+                    if (tempPlayersStats[tempPlayersStats.Count - 1].Victories > tempPlayersStats[0].Victories) 
                     {
                         tempPlayersStats.Clear();
-                        tempPlayersStats.Add(tempPlayersStats[j]);
-                    }
-                    else if(tempPlayersStats[j].Victories < tempPlayersStats[0].Victories)
+                        tempPlayersStats.Add(levelPointsCounter.GetPlayerStats(GameManager.Instance.PlayerMng.Players[i].ID));
+                    } 
+                    else if (tempPlayersStats[tempPlayersStats.Count - 1].Victories < tempPlayersStats[0].Victories) 
                     {
-                        tempPlayersStats.Remove(tempPlayersStats[j]);
-                        j--;
+                        tempPlayersStats.Remove(tempPlayersStats[tempPlayersStats.Count - 1]);
                     }
                 }
 
@@ -345,13 +344,13 @@ namespace BlackFox
                         if(!playOffPlayers.Contains(tempPlayersStats[i].Player))
                             playOffPlayers.Add(tempPlayersStats[i].Player);
                     }
+                    return true;
                 }
                 else
                 {
                     // player all'indice zero ha vinto
                     return false;
                 }
-                return true;
             }
             else
             {
@@ -372,7 +371,7 @@ namespace BlackFox
             for (int i = 0; i < GameManager.Instance.PlayerMng.Players.Count; i++)
                 tempPlayersStats.Add(levelPointsCounter.GetPlayerStats(GameManager.Instance.PlayerMng.Players[i].ID));
 
-            tempPlayersStats.OrderBy(t => t.Victories);
+            tempPlayersStats = tempPlayersStats.OrderByDescending(t => t.Victories).ToList();
             if ((tempPlayersStats[1].Victories + remainingRounds) >= tempPlayersStats[0].Victories)
                 return false;
             else

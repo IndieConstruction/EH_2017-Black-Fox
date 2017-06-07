@@ -33,7 +33,10 @@ namespace BlackFox {
                     return;
             }
             GameManager.Instance.SRMng.LoadSelectedDatas();
-            GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new GameplayState() });
+
+            GameManager.Instance.LoadingCtrl.ActivateLoadingPanel(() => {
+                GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new GameplayState() });
+            });
             
         }
 

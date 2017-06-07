@@ -51,18 +51,21 @@ namespace BlackFox
 
         public override void Selection(Player _player)
         {
-            switch (CurrentIndexSelection)
-            {
-                case 0:                   
-                    GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new LevelSelectionState() });
-                    break;
-                case 1:
-                    GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new CreditsState() });
-                    break;
-                case 2:
-                    GameManager.Instance.QuitApplication();
-                    break;
-            }
+            GameManager.Instance.LoadingCtrl.ActivateLoadingPanel(() => {
+
+                switch (CurrentIndexSelection)
+                {
+                    case 0:                   
+                        GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new LevelSelectionState() });
+                        break;
+                    case 1:
+                        GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new CreditsState() });
+                        break;
+                    case 2:
+                        GameManager.Instance.QuitApplication();
+                        break;
+                }
+            });
 
             if (EventManager.OnMenuAction != null)
                 EventManager.OnMenuAction(AudioManager.UIAudio.Selection);

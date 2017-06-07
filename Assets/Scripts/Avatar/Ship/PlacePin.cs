@@ -26,7 +26,6 @@ namespace BlackFox
         Transform initialTransf;
         Ship ship;
         float prectime;
-        bool isRecharging = false;
 
         private void Update()
         {
@@ -36,20 +35,8 @@ namespace BlackFox
                 {
                     prectime -= Time.deltaTime;
                     ship.Avatar.avatarUI.PinCountDown.fillAmount  -= Time.deltaTime / CurrentPinRate;
-                    if (prectime <= 0 && !isRecharging)
-                    {
-                        isRecharging = true;
-                        StartCoroutine(Rumble(0.2f));
-                    }
                 }                
             }
-        }
-
-        IEnumerator Rumble(float _rumbleTime)
-        {
-            ship.Avatar.Player.ControllerVibration(0.5f, 0.5f);
-            yield return new WaitForSeconds(_rumbleTime);
-            ship.Avatar.Player.ControllerVibration(0f, 0f);
         }
 
         private void OnTriggerStay(Collider other)
@@ -62,7 +49,6 @@ namespace BlackFox
             if (other.gameObject.tag == "PinBlockArea")
                 canPlace = true;
         }
-
 
         public float CurrentPinRate
         {
@@ -119,7 +105,6 @@ namespace BlackFox
                 GameObject pin = Instantiate(placePinConfig.PinPrefab, transform.position + transform.forward*placePinConfig.DistanceFromShipOrigin, transform.rotation);
                 pin.layer = layer;
                 pinsPlaced.Add(pin);
-                isRecharging = false;
                 foreach (Renderer pinRend in pin.GetComponentsInChildren<MeshRenderer>())
                 {
                     pinRend.material = ship.Avatar.AvatarData.ColorSets[ship.Avatar.AvatarData.ColorSetIndex].PinMaterial;

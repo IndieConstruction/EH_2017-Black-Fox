@@ -182,12 +182,12 @@ namespace BlackFox
                 GameManager.Instance.UiMng.GoLeftInMenu(this);
             }
 
-            if (InputStatus.A == ButtonState.Pressed)
+            if (InputStatus.RightTrigger == ButtonState.Pressed)
             {
                 GameManager.Instance.UiMng.SelectInMenu(this);
             }
 
-            if (InputStatus.B == ButtonState.Pressed)
+            if (InputStatus.LeftTrigger == ButtonState.Pressed)
             {
                 GameManager.Instance.UiMng.GoBackInMenu(this);
             }

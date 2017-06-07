@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -104,6 +105,8 @@ namespace BlackFox
             {
                 GameObject pin = Instantiate(placePinConfig.PinPrefab, transform.position + transform.forward*placePinConfig.DistanceFromShipOrigin, transform.rotation);
                 pin.layer = layer;
+                pin.transform.localScale = Vector3.zero;
+                pin.transform.DOScale(Vector3.one, 1f);
                 pinsPlaced.Add(pin);
                 foreach (Renderer pinRend in pin.GetComponentsInChildren<MeshRenderer>())
                 {

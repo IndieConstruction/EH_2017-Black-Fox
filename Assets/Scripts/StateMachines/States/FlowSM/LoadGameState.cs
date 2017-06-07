@@ -15,6 +15,7 @@ namespace BlackFox
             GameManager.Instance.InstantiateAudioManager();
             GameManager.Instance.InstantiateDataManager();
             GameManager.Instance.InstantiateShowRoom();
+            GameManager.Instance.InstantiateLoadingController();
 
             GameManager.Instance.PlayerMng.InstantiatePlayers();
             GameManager.Instance.DataMng.Init();
@@ -26,6 +27,10 @@ namespace BlackFox
         {
             if (OnStateEnd != null)
                 OnStateEnd();
+        }
+
+        public override void OnEnd() {
+            GameManager.Instance.LoadingCtrl.DeactivateLoadingPanel();
         }
     }
 }

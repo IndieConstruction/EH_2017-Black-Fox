@@ -12,7 +12,10 @@ namespace BlackFox
         public Image RecapImage;
 
         public Text[] PlayerPoints = new Text[4];
+        public Text ActionText;
         public GameObject EndLevelPanel;
+
+        bool CanSelect = false;
 
         void Start()
         {
@@ -29,6 +32,13 @@ namespace BlackFox
                 PlayerPoints[i].text = GameManager.Instance.LevelMng.GetPlayerKillPoints((PlayerLabel)i+1) + " / " + GameManager.Instance.LevelMng.levelOptions.PointsToWin;
             }
         }
+
+        IEnumerator Wait(float _timeToWait)
+        {
+            yield return new WaitForSeconds(_timeToWait);
+            ActionText.text = "Premi RT per Andare Avanti";
+            CanSelect = true;
+        }
         
         #region API
         /// <summary>
@@ -39,15 +49,21 @@ namespace BlackFox
             if (_status)
             {
                 ShowAvatarsKillPoints();
+                StartCoroutine(Wait(2f));
             }
             EndLevelPanel.SetActive(_status);
         }
 
         public override void Selection(Player _player)
         {
-            GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
-            if (EventManager.OnMenuAction != null)
-                EventManager.OnMenuAction(AudioManager.UIAudio.Selection);
+            if (CanSelect)
+            {
+                GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
+                if (EventManager.OnMenuAction != null)
+                    EventManager.OnMenuAction(AudioManager.UIAudio.Selection);
+                CanSelect = false;
+                ActionText.text = "";
+            }
         }
 
         /// <summary>

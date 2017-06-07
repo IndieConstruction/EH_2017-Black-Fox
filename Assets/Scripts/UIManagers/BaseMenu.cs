@@ -62,7 +62,8 @@ namespace BlackFox
         #region Menu Actions
         public virtual void GoDownInMenu(Player _player)
         {
-            CurrentIndexSelection++;
+            if (SelectableButtons.Count > 0)
+                CurrentIndexSelection++;
             if (CurrentIndexSelection > SelectableButtons.Count - 1)
                 CurrentIndexSelection = 0;
         }
@@ -70,7 +71,8 @@ namespace BlackFox
        
         public virtual void GoUpInMenu(Player _player)
         {
-            CurrentIndexSelection--;
+            if (SelectableButtons.Count > 0)
+                CurrentIndexSelection--;
             if (CurrentIndexSelection < 0)
                 CurrentIndexSelection = SelectableButtons.Count - 1;
         }

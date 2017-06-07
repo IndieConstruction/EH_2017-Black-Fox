@@ -12,7 +12,7 @@ namespace BlackFox
 
         void Start()
         {
-            FindISelectableChildren();
+            //FindISelectableChildren();
             GameManager.Instance.UiMng.CurrentMenu = this;
         }
 

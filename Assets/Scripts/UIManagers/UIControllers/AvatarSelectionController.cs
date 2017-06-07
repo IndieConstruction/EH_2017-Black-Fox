@@ -12,7 +12,7 @@ namespace BlackFox {
         public Text ConfirmText;
 
         public UIControllerID MenuID;
-
+        Slider[] sliders;
 
         AvatarSelectionControllerState _currentState;
         public AvatarSelectionControllerState CurrentState
@@ -30,11 +30,21 @@ namespace BlackFox {
             }
         }
 
+        public void SetSliderValues(int[] _values)
+        {
+            for (int i = 0; i < sliders.Length; i++)
+            {
+                sliders[i].value = _values[i];
+            }
+        }
+
+
         public void Setup(AvatarSelectionManager _avatarSelectionManager, Player _player) {
             avatarSelectionManager = _avatarSelectionManager;
             Player = _player;
             CurrentState = AvatarSelectionControllerState.Unready;
             ConfirmText.text = "Press A to continue";
+            sliders = GetComponentsInChildren<Slider>();
         }
 
 

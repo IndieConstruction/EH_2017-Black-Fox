@@ -13,6 +13,7 @@ namespace BlackFox
             GameManager.Instance.UiMng.CreateAvatarSelectionMenu();
             GameManager.Instance.UiMng.CurrentMenu = GameManager.Instance.UiMng.avatarSelectionManager;
             GameManager.Instance.UiMng.avatarSelectionManager.Setup(GameManager.Instance.PlayerMng.Players);
+            GameManager.Instance.SRMng.SetSliderValue();
             GameManager.Instance.LoadingCtrl.DeactivateLoadingPanel();
         }
 

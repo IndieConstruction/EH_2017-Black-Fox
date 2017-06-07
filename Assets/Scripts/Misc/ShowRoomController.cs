@@ -12,6 +12,7 @@ namespace BlackFox
         List<AvatarData> datas { get { return manager.datas; } }
         public Player player;
         SRManager manager;
+
         Vector3 _corridorVector;
         public Vector3 CorridorVector
         {
@@ -26,7 +27,16 @@ namespace BlackFox
                 _corridorVector = value;
             }
         }
-        public int indexOfCurrent { get; private set; }
+
+        int _indexOfCurrent;
+        public int IndexOfCurrent {
+            get { return _indexOfCurrent; }
+            private set {
+                _indexOfCurrent = value;
+                if(EventManager.OnShowRoomValueUpdate != null)
+                    EventManager.OnShowRoomValueUpdate(manager.datas[0].SelectionParameters[IndexOfCurrent], player);
+            }
+        }
         public int colorIndex { get; private set; }
         public Transform currentModel;
         public Transform nextModel;
@@ -43,16 +53,27 @@ namespace BlackFox
             player = myPlayer;
             manager = _manager;
             InstanceModels(datas.ToArray());
+            
         }
+
+        /// <summary>
+        /// Richiamata nello stato di avatar selection perchè lo show Room viene creato nei menu, ma ancora non sono presenti le slider, di conseguenza la prima volta le slider non hanno valore
+        /// </summary>
+        public void SetSliderValue()
+        {
+            if (EventManager.OnShowRoomValueUpdate != null)
+                EventManager.OnShowRoomValueUpdate(manager.datas[0].SelectionParameters[IndexOfCurrent], player);
+        }
+
         /// <summary>
         /// Dislay next Model
         /// </summary>
         public void ShowNext()
         {
-            if (indexOfCurrent < avatars.Count - 1)
+            if (IndexOfCurrent < avatars.Count - 1)
             {
-                indexOfCurrent++;
-                modelContainer.transform.DOMove(-CorridorVector * indexOfCurrent, 0.5f);
+                IndexOfCurrent++;
+                modelContainer.transform.DOMove(-CorridorVector * IndexOfCurrent, 0.5f);
             }
         }
         /// <summary>
@@ -60,10 +81,10 @@ namespace BlackFox
         /// </summary>
         public void ShowPrevious()
         {
-            if (indexOfCurrent > 0)
+            if (IndexOfCurrent > 0)
             {
-                indexOfCurrent--;
-                modelContainer.transform.DOMove(-CorridorVector * indexOfCurrent, 0.5f);
+                IndexOfCurrent--;
+                modelContainer.transform.DOMove(-CorridorVector * IndexOfCurrent, 0.5f);
             }
         }
 
@@ -77,7 +98,7 @@ namespace BlackFox
             {
                 foreach (MeshRenderer renderer in avatar.GetComponentsInChildren<MeshRenderer>())
                 {
-                    renderer.materials = new Material[] { datas[indexOfCurrent].ColorSets[colorIndex].ShipMaterialMain };
+                    renderer.materials = new Material[] { datas[IndexOfCurrent].ColorSets[colorIndex].ShipMaterialMain };
                 }
             }
         }
@@ -92,7 +113,7 @@ namespace BlackFox
             {
                 foreach (MeshRenderer renderer in avatar.GetComponentsInChildren<MeshRenderer>())
                 {
-                    renderer.materials = new Material[] { datas[indexOfCurrent].ColorSets[colorIndex].ShipMaterialMain };
+                    renderer.materials = new Material[] { datas[IndexOfCurrent].ColorSets[colorIndex].ShipMaterialMain };
                 }
             }
         }

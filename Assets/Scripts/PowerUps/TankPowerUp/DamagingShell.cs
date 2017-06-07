@@ -35,6 +35,7 @@ namespace BlackFox {
 				}
             } else
             {
+                Destroy(this);
                 if (particles != null)
                     Destroy(particles);
             }

@@ -100,8 +100,8 @@ namespace BlackFox
         IEnumerator CoreExplosionEffect()
         {
             Particles.Play();
-            yield return new WaitForSeconds(Particles.main.duration - 0.5f);
-            transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { GameManager.Instance.LevelMng.CheckRoundStatus(); });
+            yield return new WaitForSeconds(Particles.main.duration);
+            GameManager.Instance.LevelMng.CheckRoundStatus();
         }
 
         #endregion

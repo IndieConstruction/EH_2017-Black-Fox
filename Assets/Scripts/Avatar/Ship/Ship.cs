@@ -245,6 +245,8 @@ namespace BlackFox {
                 damageTween.Complete();
 
             Life -= _damage;
+            StopCoroutine("Rumble");
+            StartCoroutine(Rumble(0.2f));
             damageTween = transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f);
             ParticlesController.PlayParticles(ParticlesController.ParticlesType.Damage);
             if (Life < 1)
@@ -257,6 +259,13 @@ namespace BlackFox {
                 transform.DOScale(Vector3.zero, 0.5f);
                 return;
             }
+        }
+
+        IEnumerator Rumble(float _rumbleTime)
+        {
+            Avatar.Player.ControllerVibration(0.5f, 0.5f);
+            yield return new WaitForSeconds(_rumbleTime);
+            Avatar.Player.ControllerVibration(0f, 0f);
         }
         #endregion
 

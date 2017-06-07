@@ -211,12 +211,12 @@ namespace BlackFox
 
             if (Input.GetButtonDown("Key" + (int)playerIndex + "_Submit"))
             {
-                inputStatus.A = ButtonState.Pressed;
+                inputStatus.RightTrigger = ButtonState.Pressed;
             }
 
             if (Input.GetButtonDown("Key" + (int)playerIndex + "_Deselect"))
             {
-                inputStatus.B = ButtonState.Pressed;
+                inputStatus.LeftTrigger = ButtonState.Pressed;
             }
 
             if (Input.GetButtonDown("Key" + (int)playerIndex + "_Pause"))

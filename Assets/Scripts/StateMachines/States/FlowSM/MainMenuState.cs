@@ -12,11 +12,11 @@ namespace BlackFox
             Debug.Log("MainMenuState");
             GameManager.Instance.UiMng.CreateMainMenu();
             GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInput, PlayerLabel.One, PlayerState.Blocked);
+            GameManager.Instance.LoadingCtrl.DeactivateLoadingPanel();
         }
 
         public override void OnEnd()
         {
-            
             GameManager.Instance.UiMng.DestroyMainMenu();
         }
     }

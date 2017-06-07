@@ -28,9 +28,5 @@ namespace BlackFox
             if (OnStateEnd != null)
                 OnStateEnd();
         }
-
-        public override void OnEnd() {
-            GameManager.Instance.LoadingCtrl.DeactivateLoadingPanel();
-        }
     }
 }

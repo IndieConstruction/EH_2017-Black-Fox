@@ -72,7 +72,8 @@ namespace BlackFox {
         {
             if (Avatar.State == AvatarState.Enabled)
             {
-                CheckInputStatus(Avatar.Player.InputStatus);
+                if(!GameManager.Instance.LevelMng.IsGamePaused)
+                    CheckInputStatus(Avatar.Player.InputStatus);
                 if (IsInverted)
                 {
                     TimeofInvertion -= Time.deltaTime;

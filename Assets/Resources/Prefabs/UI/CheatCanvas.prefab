@@ -475,8 +475,8 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "Comandi Tastiera\nGioco :\nw, a, s, d / i, j, k, l -> movimento\nsu, gi\xF9,
     dx, sx/ su, gi\xF9, dx, sx(tastierino numerico) -> mira\nq / i -> sparo\ne / o
-    -> perno\nMen\xF9 :\nsu, gi\xF9, dx, sx/ su, gi\xF9, dx, sx(tastierino numerico)
-    -> movimento\nspazio, +, -, invio(tastierino numerico) -> conferma\n/(tastierino
+    -> perno\ncanc -> pausa\n\nMen\xF9 :\nsu, gi\xF9, dx, sx/ su, gi\xF9, dx, sx(tastierino
+    numerico) -> movimento\nspazio, +, -, invio(tastierino numerico) -> conferma\n/(tastierino
     numerico) -> torna indietro"
 --- !u!114 &114910971505406450
 MonoBehaviour:
@@ -727,8 +727,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 16, y: 307}
-  m_SizeDelta: {x: 718, y: 248}
+  m_AnchoredPosition: {x: 16, y: 261}
+  m_SizeDelta: {x: 718, y: 339}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224629247723424648
 RectTransform:
@@ -745,8 +745,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.028225806}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -3.5}
-  m_SizeDelta: {x: -85, y: 34}
+  m_AnchoredPosition: {x: 0, y: -4.7843}
+  m_SizeDelta: {x: 0, y: 9.5685}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224890561540240452
 RectTransform:

@@ -13,16 +13,16 @@ namespace BlackFox {
 
         public void ActivateLoadingPanel(TweenCallback _action = null) {
             if (_action != null)
-                panelImg.DOFade(1, 1).OnComplete(_action);
+                panelImg.DOFade(1, .3f).OnComplete(_action);
             else
-                panelImg.DOFade(1, 1);
+                panelImg.DOFade(1, 0.3f);
         }
 
         public void DeactivateLoadingPanel(TweenCallback _action = null) {
             if (_action != null)
-                panelImg.DOFade(0, 1).OnComplete(_action);
+                panelImg.DOFade(0, .3f).OnComplete(_action);
             else
-                panelImg.DOFade(0, 1);
+                panelImg.DOFade(0, .3f);
         }
 
         #endregion

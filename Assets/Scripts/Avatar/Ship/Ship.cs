@@ -47,13 +47,8 @@ namespace BlackFox {
             get { return _isInverted; }
             set { _isInverted = value; }
         }
-
-        float _timeofInvertion;
-
-        public float TimeofInvertion {
-            get { return _timeofInvertion; }
-            set { _timeofInvertion = value; }
-        }
+        Avatar inverter = null;
+        float timeofInvertion;
 
         #endregion
 
@@ -74,10 +69,16 @@ namespace BlackFox {
             {
                 if(!GameManager.Instance.LevelMng.IsGamePaused)
                     CheckInputStatus(Avatar.Player.InputStatus);
-                if (IsInverted)
+
+                if(inverter != null && inverter.State != AvatarState.Enabled)
                 {
-                    TimeofInvertion -= Time.deltaTime;
-                    if (TimeofInvertion <= 0)
+                    timeofInvertion = 0;
+                    IsInverted = false;
+                }
+                else if(IsInverted)
+                {
+                    timeofInvertion -= Time.deltaTime;
+                    if (timeofInvertion <= 0)
                         IsInverted = false;
                 }
             }
@@ -126,7 +127,14 @@ namespace BlackFox {
                 Material[] mats = new Material[] { _mat };
                 m.materials = mats;
             } 
-        }        
+        }       
+        
+        public void SetInverter(float _timeOfInvertion, Avatar _inverter)
+        {
+            inverter = _inverter;
+            timeofInvertion = _timeOfInvertion;
+            IsInverted = true;
+        }
         #endregion
 
         // Input Fields

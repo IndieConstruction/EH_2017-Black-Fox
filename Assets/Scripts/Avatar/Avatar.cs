@@ -230,8 +230,12 @@ namespace BlackFox {
         /// <param name="_time">Per quanto tempo devono rimanere invertiti</param>
         public void InvertCommands(float _time)
         {
-            ship.IsInverted = true;
-            ship.TimeofInvertion = _time;
+            if (_time != 0)
+            {
+                ship.IsInverted = true;
+                ship.TimeofInvertion = _time;
+            } else
+                ship.IsInverted = false;
         }
 
     }

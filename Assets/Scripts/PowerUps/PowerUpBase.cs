@@ -28,6 +28,11 @@ namespace BlackFox {
 
         private void Update()
         {
+            DestroyGameObjectAfterTime();
+        }
+
+        public virtual void DestroyGameObjectAfterTime()
+        {
             LifeTime -= Time.deltaTime;
             if (LifeTime <= 0)
                 Destroy(gameObject);

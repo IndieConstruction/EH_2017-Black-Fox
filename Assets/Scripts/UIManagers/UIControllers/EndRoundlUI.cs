@@ -12,6 +12,7 @@ namespace BlackFox
         public Image RecapImage;
 
         public Text[] PlayerPoints = new Text[4];
+        public Text[] PlayersText = new Text[4];
         public Text ActionText;
         public GameObject EndLevelPanel;
 
@@ -29,7 +30,9 @@ namespace BlackFox
         {
             for (int i = 0; i < PlayerPoints.Length; i++)
             {
-                PlayerPoints[i].text = GameManager.Instance.LevelMng.GetPlayerKillPoints((PlayerLabel)i+1) + " / " + GameManager.Instance.LevelMng.levelOptions.PointsToWin;
+                PlayerPoints[i].text = GameManager.Instance.LevelMng.GetPlayerKillPoints((PlayerLabel)i + 1).ToString();
+                if (GameManager.Instance.LevelMng.GetPlayerKillPoints((PlayerLabel)i + 1) == GameManager.Instance.LevelMng.levelOptions.PointsToWin)
+                    PlayersText[i].color = Color.yellow;
             }
         }
 

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace BlackFox
 {
@@ -101,6 +102,16 @@ namespace BlackFox
                 if (player.Player.ID == _playerID)
                     return player;
             return null;
+        }
+
+        /// <summary>
+        /// Ritorna la lista delle statistiche ordinata per vittorie
+        /// </summary>
+        /// <returns></returns>
+        public List<PlayerStats> GetPlayerStatsByKillPointsInOrderDesc()
+        {
+            List<PlayerStats> tempPlayerStats = playerStats.OrderByDescending(t => t.KillPoints).ToList();
+            return tempPlayerStats;
         }
 
         /// <summary>

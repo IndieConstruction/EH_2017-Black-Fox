@@ -215,6 +215,11 @@ namespace BlackFox
             return levelPointsCounter.GetPlayerKillPoints(_playerID);
         }
 
+        public List<PlayerStats> GetPlayerKillPointsInOrderDesc()
+        {
+            return levelPointsCounter.GetPlayerStatsByKillPointsInOrderDesc();
+        }
+
         /// <summary>
         /// Instance new avatars
         /// </summary>

@@ -4348,9 +4348,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'PLAYER 1
-
-'
+  m_Text: 
 --- !u!114 &114123066735475226
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5249,7 +5247,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: PLAYER 3
+  m_Text: 
 --- !u!114 &114290139071174440
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7023,7 +7021,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: PLAYER 2
+  m_Text: 
 --- !u!114 &114572842237764778
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7985,9 +7983,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'PLAYER 4
-
-'
+  m_Text: 
 --- !u!114 &114801688336722464
 MonoBehaviour:
   m_ObjectHideFlags: 1

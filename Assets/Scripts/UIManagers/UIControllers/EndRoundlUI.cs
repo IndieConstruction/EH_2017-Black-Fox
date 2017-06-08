@@ -45,7 +45,7 @@ namespace BlackFox
         IEnumerator Wait(float _timeToWait)
         {
             yield return new WaitForSeconds(_timeToWait);
-            ActionText.text = "Press RT";
+            ActionText.text = "Press RT to continue";
             CanSelect = true;
         }
         

@@ -43,7 +43,7 @@ namespace BlackFox {
             avatarSelectionManager = _avatarSelectionManager;
             Player = _player;
             CurrentState = AvatarSelectionControllerState.Unready;
-            ConfirmText.text = "Press A to continue";
+            ConfirmText.text = "Press RT to continue";
             sliders = GetComponentsInChildren<Slider>();
         }
 

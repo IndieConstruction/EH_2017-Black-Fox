@@ -7,15 +7,13 @@ namespace BlackFox
 {
 
     public class InvertCommands : PowerUpBase
-    {
+    { 
         public override void UsePowerUp()
         {
-            
             foreach (IPowerUpCollector enemy in enemyCollectors)
             {
-                (enemy as Avatar).InvertCommands(PowerUpDuration);
-            }
+                (enemy as Avatar).InvertCommands(PowerUpDuration, collector as Avatar);
+            }            
         }
-        
     }
 }

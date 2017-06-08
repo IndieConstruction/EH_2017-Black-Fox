@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 4946510220576282}
   - component: {fileID: 33102982117675170}
   - component: {fileID: 65531236132422712}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: NoPinZoneOvest
   m_TagString: PinBlockArea
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ GameObject:
   - component: {fileID: 4859641642157000}
   - component: {fileID: 33406874997422104}
   - component: {fileID: 65119933056757744}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: NoPinZoneSud
   m_TagString: PinBlockArea
   m_Icon: {fileID: 0}
@@ -517,7 +517,7 @@ GameObject:
   - component: {fileID: 4697540841093856}
   - component: {fileID: 33567660232079094}
   - component: {fileID: 65559177628768016}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: NoPinZoneEst
   m_TagString: PinBlockArea
   m_Icon: {fileID: 0}
@@ -616,7 +616,7 @@ GameObject:
   - component: {fileID: 4772179977383962}
   - component: {fileID: 33285631965754224}
   - component: {fileID: 65690366124656860}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: NoPinZoneNord
   m_TagString: PinBlockArea
   m_Icon: {fileID: 0}

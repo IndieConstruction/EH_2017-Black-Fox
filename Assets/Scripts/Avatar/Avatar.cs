@@ -228,12 +228,10 @@ namespace BlackFox {
         /// Funzione per invertire i comandi di moviemti nella ship
         /// </summary>
         /// <param name="_time">Per quanto tempo devono rimanere invertiti</param>
-        public void InvertCommands(float _time)
+        public void InvertCommands(float _time, Avatar _activatorOf)
         {
-            ship.IsInverted = true;
-            ship.TimeofInvertion = _time;
-        }
-
+            ship.SetInverter(_time, _activatorOf);
+        }       
     }
 
     public enum AvatarState

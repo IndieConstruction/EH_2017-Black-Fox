@@ -94,7 +94,7 @@ namespace BlackFox
             CurrentState = UpgradeControllerState.Unready;
             UpgradeCounter = 0;
             UpgradeGraphics();
-            ConfirmText.text = "Press A to continue";
+            ConfirmText.text = "Press RT to continue";
             PlayerIdText.text = "Player " + Player.ID;
         }
 

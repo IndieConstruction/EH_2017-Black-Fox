@@ -40,6 +40,36 @@ namespace BlackFox {
             
         }
 
+        #region ShowRoom Events
+
+        private void OnEnable()
+        {
+            EventManager.OnShowRoomValueUpdate += SetSliderValues;
+        }
+
+        private void OnDisable()
+        {
+            EventManager.OnShowRoomValueUpdate -= SetSliderValues;
+        }
+
+        /// <summary>
+        /// Passa i valori delle slider al controller giusto
+        /// </summary>
+        /// <param name="_values"></param>
+        /// <param name="_player"></param>
+        void SetSliderValues(int[] _values, Player _player)
+        {
+            foreach (AvatarSelectionController controller in avatarSelectionControllers)
+            {
+                if ((int)_player.ID == (int)controller.MenuID)
+                {
+                    controller.SetSliderValues(_values);
+                }
+            }
+        }
+
+        #endregion
+
         #region Menu Actions
         public override void GoUpInMenu(Player _player)
         {

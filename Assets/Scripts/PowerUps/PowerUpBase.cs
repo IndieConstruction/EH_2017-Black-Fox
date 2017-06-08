@@ -30,7 +30,7 @@ namespace BlackFox {
         {
             LifeTime -= Time.deltaTime;
             if (LifeTime <= 0)
-                Destroy(gameObject);
+                Destroy(gameObject); 
         }
 
         private void OnTriggerEnter(Collider other) {

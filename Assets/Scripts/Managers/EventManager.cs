@@ -52,6 +52,18 @@ namespace BlackFox
         /// Evento che si occupa di innescare l'update dei punti sulla UI
         /// </summary>
         public static UIEvent OnPointsUpdate;
+
+
+        #endregion
+
+        #region ShowRoomEvent
+        public delegate void ShowRoomValueChange(int[] _values, Player _player);
+
+        /// <summary>
+        /// Evento che modifica i valori delle slider dell'Avatar selection
+        /// </summary>
+        public static ShowRoomValueChange OnShowRoomValueUpdate;
+
         #endregion
 
         #region Audio Event

@@ -10,10 +10,10 @@ namespace BlackFox
     {
 
         public float PowerUpLifeTime = 10;
+        public float MinZ = 0;
+        public float MaxZ = 62;
         public float MinX = 0;
-        public float MaxX = 62;
-        public float MinY = 0;
-        public float MaxY = 32;
+        public float MaxX = 32;
         List<GameObject> PowerUps = new List<GameObject>();
         bool IsActive = false;
         GameObject container;
@@ -114,26 +114,25 @@ namespace BlackFox
                 finalPosition = finalPosition + players[i].Avatar.ship.transform.position;
             }
             finalPosition.y /= players.Count;
-            finalPosition.x = (GameManager.Instance.LevelMng.Core.transform.position.x - finalPosition.x) * Random.Range(0f, .4f) / players.Count; ;
-            finalPosition.z = (GameManager.Instance.LevelMng.Core.transform.position.z - finalPosition.z) * Random.Range(0f, .4f) / players.Count; ;
+            finalPosition.x = (GameManager.Instance.LevelMng.Core.transform.position.x - finalPosition.x) * Random.Range(0f, 2f) / players.Count; ;
+            finalPosition.z = (GameManager.Instance.LevelMng.Core.transform.position.z - finalPosition.z) * Random.Range(0f, 2f) / players.Count; ;
 
             //Check becero per tenere i power Up in scena
+            if (finalPosition.magnitude < new Vector3(MinX, 8, MinZ).magnitude)
+            {
+                finalPosition += Vector3.one;
+                finalPosition *= 2;
+            }
+
             if (finalPosition.x > MaxX)
                 finalPosition.x = MaxX;
-            if (finalPosition.x < MinX)
-                finalPosition.x = MinX;
-            if (finalPosition.y > MaxY)
-                finalPosition.y = MaxY;
-            if (finalPosition.y < MinY)
-                finalPosition.y = MinY;
             if (finalPosition.x < -MaxX)
                 finalPosition.x = -MaxX;
-            if (finalPosition.x > -MinX)
-                finalPosition.x = -MinX;
-            if (finalPosition.y < -MaxY)
-                finalPosition.y = -MaxY;
-            if (finalPosition.y > -MinY)
-                finalPosition.y = -MinY;
+
+            if (finalPosition.z > MaxZ)
+                finalPosition.z = MaxZ;
+            if (finalPosition.z < -MaxZ)
+                finalPosition.z = -MaxZ;
 
             return finalPosition;
         }

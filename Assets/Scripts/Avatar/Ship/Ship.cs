@@ -74,12 +74,16 @@ namespace BlackFox {
                 {
                     timeofInvertion = 0;
                     IsInverted = false;
+                    ParticlesController.StopParticles(ParticlesController.ParticlesType.InvertCommand);
                 }
                 else if(IsInverted)
                 {
                     timeofInvertion -= Time.deltaTime;
                     if (timeofInvertion <= 0)
+                    {
                         IsInverted = false;
+                        ParticlesController.StopParticles(ParticlesController.ParticlesType.InvertCommand);
+                    }
                 }
             }
         }
@@ -134,6 +138,7 @@ namespace BlackFox {
             inverter = _inverter;
             timeofInvertion = _timeOfInvertion;
             IsInverted = true;
+            ParticlesController.PlayParticles(ParticlesController.ParticlesType.InvertCommand);
         }
         #endregion
 

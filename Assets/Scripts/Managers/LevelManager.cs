@@ -247,6 +247,16 @@ namespace BlackFox
                 Core.Init();
         }
         #endregion
+
+        /// <summary>
+        /// Ritorna le vittorie di un player
+        /// </summary>
+        /// <param name="_playerIndex">L'indice del player da controllare</param>
+        /// <returns></returns>
+        public int GetPlayerVictory(int _playerIndex)
+        {
+            return levelPointsCounter.GetPlayerVictories(_playerIndex);
+        }
         #endregion
 
         #region Level Rules

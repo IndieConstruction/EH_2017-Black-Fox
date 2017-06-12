@@ -11,6 +11,8 @@ namespace BlackFox
     {
         public UIControllerID MenuID;
 
+        public List<Image> Cups = new List<Image>();
+
         /// <summary>
         /// Variabile che si incrementa ogni volta che viene applicato un potenziamento. 
         /// Una volta uguale ai punti upgrade dell'avatar, non è più possibile upgradare.
@@ -63,6 +65,22 @@ namespace BlackFox
             UpgradePintsText.text = (AvatarUpgradePoints - UpgradeCounter).ToString();
         }
 
+        /// <summary>
+        /// Si prende la quantità di vittorie relative al proprio player in base all'indice del menù
+        /// </summary>
+        void ShowVictories()
+        {
+            int victories = GameManager.Instance.LevelMng.GetPlayerVictory((int)MenuID);
+            if (victories > 0)
+            {
+                for (int i = 0; i < victories; i++)
+                {
+                    Cups[i].enabled = true;
+                } 
+            }
+        }
+
+
         #region API
 
         public void Setup(UpgradeMenuManager _upgradeMng, Player _player)
@@ -70,17 +88,6 @@ namespace BlackFox
             UpgradeMng = _upgradeMng;
             Player = _player;
         }
-
-        /// <summary>
-        /// Crea la parte grafica degli upgrades
-        /// </summary>
-        //void CreateUpgradeSliders()
-        //{
-        //    foreach (IUpgrade upgrade in Player.Avatar.Upgrades)
-        //    {
-        //        Instantiate(selectableUpgradePrefab, new Vector3(0,157,0), Quaternion.identity, GetComponent<VerticalLayoutGroup>().transform);
-        //    }
-        //}
 
         public void Init()
         {
@@ -90,6 +97,7 @@ namespace BlackFox
                 (SelectableButtons[i] as SelectableUpgrade).Init(UpgradeMng.ActiveSlide, UpgradeMng.DeactiveSlider);
             }
             SelectableButtons[0].IsSelected = true;
+            ShowVictories();
 
             CurrentState = UpgradeControllerState.Unready;
             UpgradeCounter = 0;

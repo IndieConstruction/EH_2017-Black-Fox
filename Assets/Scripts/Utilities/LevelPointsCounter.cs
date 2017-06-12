@@ -119,10 +119,10 @@ namespace BlackFox
         /// </summary>
         /// <param name="_playerID"></param>
         /// <returns></returns>
-        public int GetPlayerVictories(PlayerLabel _playerID)
+        public int GetPlayerVictories(int _playerID)
         {
             foreach (PlayerStats player in playerStats)
-                if (player.Player.ID == _playerID)
+                if ((int)player.Player.ID == _playerID)
                     return player.Victories;
             return -1;
         }

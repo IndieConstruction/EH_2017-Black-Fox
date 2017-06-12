@@ -67,7 +67,7 @@ namespace BlackFox
             InputStatus inputStatus = new InputStatus();
 
             prevState = state;
-            state = GamePad.GetState(playerIndex);
+            state = GamePad.GetState(playerIndex, GamePadDeadZone.Circular);
 
             if (!state.IsConnected)
             {

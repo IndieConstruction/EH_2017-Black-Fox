@@ -13,7 +13,9 @@ namespace BlackFox
 
         public Slider ElementZeroSlider;
 
-        public Text LevelIndicationText;       
+        public Text LevelIndicationText;
+
+        public Text CoinCollectedText;
 
         #region API
 

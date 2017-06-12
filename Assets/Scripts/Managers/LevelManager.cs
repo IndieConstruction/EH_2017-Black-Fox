@@ -401,6 +401,7 @@ namespace BlackFox
         void CoreDeath()
         {
             GameManager.Instance.UiMng.canvasGame.endRoundUI.SetRecapImage("Defeat");
+            GameManager.Instance.CoinMng.CoinController.ClearCoinCollected();
             IsRoundActive = false;
             gameplaySM.CurrentState.OnStateEnd();
         }
@@ -412,6 +413,7 @@ namespace BlackFox
         {
             GameManager.Instance.UiMng.canvasGame.endRoundUI.SetRecapImage("Victory");
             GameManager.Instance.LevelMng.UpgradePointsMng.GivePoints(_player.ID);
+            GameManager.Instance.CoinMng.CoinController.SavingCoinMng();
             IsRoundActive = false;
             gameplaySM.CurrentState.OnStateEnd();
         }

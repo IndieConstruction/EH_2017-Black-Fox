@@ -143,19 +143,26 @@ namespace BlackFox {
         #endregion
 
         // Input Fields
-        Vector3 leftStickDirection;
+        Vector3 _leftStickDirection;
+
+        public Vector3 LeftStickDirection
+        {
+            get { return _leftStickDirection; }
+            private set { _leftStickDirection = value; }
+        }
+
         Vector3 rightStickDirection;
 
         void CheckInputStatus(InputStatus _inputStatus)
         {            
-            leftStickDirection = new Vector3(_inputStatus.LeftThumbSticksAxisX, 0, _inputStatus.LeftThumbSticksAxisY);
+            LeftStickDirection = new Vector3(_inputStatus.LeftThumbSticksAxisX, 0, _inputStatus.LeftThumbSticksAxisY);
             rightStickDirection = new Vector3(_inputStatus.RightThumbSticksAxisX, 0, _inputStatus.RightThumbSticksAxisY);
 
             // Se un giocatore avversario prende il Powerup per invertire i comandi
             if (IsInverted)
-                Move(-leftStickDirection);
+                Move(-LeftStickDirection);
             else
-                Move(leftStickDirection);
+                Move(LeftStickDirection);
 
             DirectFire(rightStickDirection);
 

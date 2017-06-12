@@ -14,6 +14,9 @@ ModelImporter:
     100012: Sphere003
     100014: n_LP
     100016: Nucleo
+    100018: Object004
+    100020: Object005
+    100022: Object006
     400000: //RootNode
     400002: Object001
     400004: Object002
@@ -23,6 +26,9 @@ ModelImporter:
     400012: Sphere003
     400014: n_LP
     400016: Nucleo
+    400018: Object004
+    400020: Object005
+    400022: Object006
     2300000: Object001
     2300002: Object002
     2300004: Object003
@@ -31,6 +37,9 @@ ModelImporter:
     2300010: Sphere003
     2300012: n_LP
     2300014: Nucleo
+    2300016: Object004
+    2300018: Object005
+    2300020: Object006
     3300000: Object001
     3300002: Object002
     3300004: Object003
@@ -39,6 +48,9 @@ ModelImporter:
     3300010: Sphere003
     3300012: n_LP
     3300014: Nucleo
+    3300016: Object004
+    3300018: Object005
+    3300020: Object006
     4300000: Sphere001
     4300002: Object002
     4300004: Object003
@@ -47,6 +59,9 @@ ModelImporter:
     4300010: Object001
     4300012: n_LP
     4300014: Nucleo
+    4300016: Object004
+    4300018: Object005
+    4300020: Object006
     7400000: Take 001
     9500000: //RootNode
     11100000: //RootNode
@@ -70,14 +85,14 @@ ModelImporter:
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
-    animationWrapMode: 0
+    animationWrapMode: 2
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
       name: Take 001
       takeName: Take 001
       firstFrame: 0
-      lastFrame: 100
+      lastFrame: 150
       wrapMode: 2
       orientationOffsetY: 0
       level: 0

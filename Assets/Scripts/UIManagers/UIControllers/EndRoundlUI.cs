@@ -12,22 +12,41 @@ namespace BlackFox
         public Image RecapImage;
 
         public Text[] PlayerPoints = new Text[4];
+        public Text[] PlayersText = new Text[4];
+        public Text ActionText;
         public GameObject EndLevelPanel;
+
+        bool CanSelect = false;
 
         void Start()
         {
             EndLevelPanel.SetActive(false);
         }
-        
+
         /// <summary>
-        /// Cerca il totale di ogni player e lo mostra in una casella di testo
+        /// Cerca il totale di ogni player e lo mostra in una casella di testo ordinato per numero di uccisioni
         /// </summary>
         void ShowAvatarsKillPoints()
         {
-            for (int i = 0; i < PlayerPoints.Length; i++)
+            List<PlayerStats> pointsList = GameManager.Instance.LevelMng.GetPlayerKillPointsInOrderDesc();
+
+            for (int i = 0; i < PlayersText.Length || i < PlayerPoints.Length; i++)
             {
-                PlayerPoints[i].text = GameManager.Instance.LevelMng.GetPlayerKillPoints((PlayerLabel)i+1) + " / " + GameManager.Instance.LevelMng.levelOptions.PointsToWin;
+                PlayersText[i].text = "PLAYER " + (int)pointsList[i].Player.ID;
+                PlayerPoints[i].text = pointsList[i].KillPoints.ToString();
+                if (pointsList[i].KillPoints == GameManager.Instance.LevelMng.levelOptions.PointsToWin)
+                {
+                    PlayersText[i].color = Color.yellow;
+                    PlayerPoints[i].color = Color.yellow;
+                }
             }
+        }
+
+        IEnumerator Wait(float _timeToWait)
+        {
+            yield return new WaitForSeconds(_timeToWait);
+            ActionText.text = "Press RT to continue";
+            CanSelect = true;
         }
         
         #region API
@@ -39,15 +58,23 @@ namespace BlackFox
             if (_status)
             {
                 ShowAvatarsKillPoints();
+                StartCoroutine(Wait(2f));
             }
             EndLevelPanel.SetActive(_status);
         }
 
         public override void Selection(Player _player)
         {
-            GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
-            if (EventManager.OnMenuAction != null)
-                EventManager.OnMenuAction(AudioManager.UIAudio.Selection);
+            if (CanSelect)
+            {
+                GameManager.Instance.LoadingCtrl.ActivateLoadingPanel(() => {
+                    GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
+                });
+                if (EventManager.OnMenuAction != null)
+                    EventManager.OnMenuAction(AudioManager.UIAudio.Selection);
+                CanSelect = false;
+                ActionText.text = "";
+            }
         }
 
         /// <summary>

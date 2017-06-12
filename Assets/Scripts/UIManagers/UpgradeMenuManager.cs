@@ -59,8 +59,10 @@ namespace BlackFox {
             {
                 if (controller.CurrentState == UpgradeControllerState.Unready)
                     return;
-            }           
-            GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
+            }
+            GameManager.Instance.LoadingCtrl.ActivateLoadingPanel(() => {
+                GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
+            });           
         }
 
         #region Menu Actions

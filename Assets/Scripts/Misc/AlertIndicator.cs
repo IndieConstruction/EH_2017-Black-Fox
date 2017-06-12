@@ -9,7 +9,6 @@ using DG.Tweening;
 public class AlertIndicator : MonoBehaviour {
     
     Image Indicator;
-    Vector3 centerPosition { get { return GameManager.Instance.LevelMng.Core.transform.position; } }
 
     private bool _offScreen;
 
@@ -31,28 +30,30 @@ public class AlertIndicator : MonoBehaviour {
     {
         float offset = 0;//Indicator.rectTransform.sizeDelta.x;
         //OffScreen = false;
-        Indicator.transform.position = Camera.main.WorldToScreenPoint(Vector3.ProjectOnPlane(transform.position,-Camera.main.transform.forward));
+        Indicator.transform.position = Camera.main.WorldToScreenPoint(new Vector3(transform.position.x, transform.position.z, transform.position.y));
+        Indicator.transform.position = new Vector3(Indicator.transform.position.x, Screen.height - Indicator.transform.position.y, Indicator.transform.position.z);
+
         if (Indicator.transform.position.x > Screen.width)
         {
-            Indicator.transform.position = new Vector2(Screen.width - offset, Indicator.transform.position.y);
+            Indicator.transform.position = new Vector3(Screen.width - offset, Indicator.transform.position.y, 0);
             OffScreen = true;
         }
 
         if (Indicator.transform.position.x < 0)
         {
-            Indicator.transform.position = new Vector2(0 + offset, Indicator.transform.position.y);
+            Indicator.transform.position = new Vector3(0 + offset, Indicator.transform.position.y, 0);
             OffScreen = true;
         }
 
         if (Indicator.transform.position.y > Screen.height)
         {
-            Indicator.transform.position = new Vector2(Indicator.transform.position.x, Screen.height - offset);
+            Indicator.transform.position = new Vector3(Indicator.transform.position.x, Screen.height - offset, 0);
             OffScreen = true;
         }
 
         if (Indicator.transform.position.y < 0)
         {
-            Indicator.transform.position = new Vector2(Indicator.transform.position.x, 0 + offset);
+            Indicator.transform.position = new Vector3(Indicator.transform.position.x, 0 + offset,0);
             OffScreen = true;
         }  
     }

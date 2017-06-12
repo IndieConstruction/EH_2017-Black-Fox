@@ -7,6 +7,8 @@ public class ParticlesController : MonoBehaviour {
     public ParticleSystem DamageParticles;
     public ParticleSystem FireParticles;
     public ParticleSystem MovementParticles;
+    public ParticleSystem InverCommandParticles;
+
     #region API
 
     public void Init()
@@ -14,6 +16,7 @@ public class ParticlesController : MonoBehaviour {
         DamageParticles.Stop();
         FireParticles.Stop();
         MovementParticles.Stop();
+        InverCommandParticles.Stop();
     }
 
 
@@ -38,6 +41,10 @@ public class ParticlesController : MonoBehaviour {
                 if (!MovementParticles.isPlaying)
                     MovementParticles.Play();
                 break;
+            case ParticlesType.InvertCommand:
+                if (!InverCommandParticles.isPlaying)
+                    InverCommandParticles.Play();
+                break;
             default:
                 break;
         }
@@ -60,6 +67,9 @@ public class ParticlesController : MonoBehaviour {
             case ParticlesType.Movement:
                 MovementParticles.Stop();
                 break;
+            case ParticlesType.InvertCommand:
+                InverCommandParticles.Stop();
+                break;
             default:
                 break;
         }
@@ -74,5 +84,6 @@ public class ParticlesController : MonoBehaviour {
         Damage,
         Fire,
         Movement,
+        InvertCommand
     }
 }

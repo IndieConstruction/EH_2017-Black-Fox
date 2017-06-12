@@ -7,7 +7,11 @@ namespace BlackFox {
     {
         public override void GoBack(Player _player)
         {
-            GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new MainMenuState() });
+            GameManager.Instance.LoadingCtrl.ActivateLoadingPanel(() => {
+                GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new MainMenuState() });
+            });
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Back);
         }
     }
 }

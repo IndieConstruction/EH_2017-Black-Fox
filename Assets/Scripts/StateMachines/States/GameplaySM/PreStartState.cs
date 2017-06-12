@@ -9,7 +9,9 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("PreStartState");
-            GameManager.Instance.UiMng.canvasGame.Counter.DoCountDown();
+            GameManager.Instance.LoadingCtrl.DeactivateLoadingPanel(()=> {
+                GameManager.Instance.UiMng.canvasGame.Counter.DoCountDown();
+            });
         }
     }
 }

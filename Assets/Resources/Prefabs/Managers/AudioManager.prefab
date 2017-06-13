@@ -495,7 +495,7 @@ MonoBehaviour:
     type: 3}
   MenuSelectionAudioClip: {fileID: 8300000, guid: 235c61b01072c6a48a34dea4c7ca850b,
     type: 3}
-  ShipAccelerationClip: {fileID: 8300000, guid: aedc18ead1f5a8a4ba3f5cca2de36a89,
+  ShipAccelerationClip: {fileID: 8300000, guid: 55cb21dd28c9b4648a45e90978543ba4,
     type: 3}
   AudioSurceMenu: {fileID: 82184237479436918}
   AudioSurceMusic: {fileID: 82468422007962646}

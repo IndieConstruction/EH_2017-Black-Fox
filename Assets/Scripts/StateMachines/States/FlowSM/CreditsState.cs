@@ -12,6 +12,7 @@ namespace BlackFox
             GameManager.Instance.UiMng.CreateCreditsMenu();
             GameManager.Instance.UiMng.CurrentMenu = GameManager.Instance.UiMng.creditsMenuController;
             GameManager.Instance.LoadingCtrl.DeactivateLoadingPanel();
+            GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.MenuInput);
         }
 
         public override void OnEnd()

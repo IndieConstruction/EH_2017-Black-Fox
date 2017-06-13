@@ -13,6 +13,7 @@ namespace BlackFox
             GameManager.Instance.UiMng.CreateMainMenu();
             GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInput, PlayerLabel.One, PlayerState.Blocked);
             GameManager.Instance.LoadingCtrl.DeactivateLoadingPanel();
+            GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.MenuInput);
         }
 
         public override void OnEnd()

@@ -14,11 +14,11 @@ namespace BlackFox
         Rigidbody shipRigid;
 
         // Ship Accleleration Parameters
-        public float PitchMultiplier = 0f;
-        public float DecayMultiplier = 0f;
-        public float RisingMultiplier = 0f;
-        public float MinPitchValue;
-        public float MaxPitchValue;
+        public float PitchMultiplier = 1f;
+        public float DecayMultiplier = 1f;
+        public float RisingMultiplier = 1f;
+        public float MinPitchValue = 0;
+        public float MaxPitchValue = 3;
         float value;
 
         public void Init(Ship _ship)
@@ -32,32 +32,34 @@ namespace BlackFox
 
         private void Update()
         {
-            if (Vector3.Angle(shipRigid.velocity, ship.transform.forward) <= 90f && ship.LeftStickDirection != Vector3.zero)
-                value += Time.deltaTime * RisingMultiplier;
+            if(ship.LeftStickDirection != Vector3.zero)
+                value = Mathf.SmoothStep(AudioSurceAcceleration.pitch, MaxPitchValue, RisingMultiplier);
             else
-                value -= Time.deltaTime * DecayMultiplier;
+                value = Mathf.SmoothStep(AudioSurceAcceleration.pitch, MinPitchValue, DecayMultiplier);
 
-            if (value > MinPitchValue)
+            if (AudioSurceAcceleration.pitch > MaxPitchValue)
+                AudioSurceAcceleration.pitch = MaxPitchValue;
+
+            if (AudioSurceAcceleration.pitch < MinPitchValue)
+                AudioSurceAcceleration.pitch = MinPitchValue;
+
+            if(value > 0)
             {
+                if(value == MaxPitchValue)
+                {
+                    //aggiungi la seconda traccia e la metti in play
+                }
+                else
+                {
+                    //spegni la seconda traccia (se c'è)
+                }
+                AudioSurceAcceleration.pitch = value * PitchMultiplier;
                 if (!AudioSurceAcceleration.isPlaying)
                     AudioSurceAcceleration.Play();
             }
-            //else if(value >= 1) suono a velocità massima
             else
+            {
                 AudioSurceAcceleration.Stop();
-
-            AudioSurceAcceleration.pitch = value * PitchMultiplier;
-
-            if (AudioSurceAcceleration.pitch > MaxPitchValue)
-            {
-                AudioSurceAcceleration.pitch = MaxPitchValue;
-                value = MaxPitchValue;
-            }              
-
-            if (AudioSurceAcceleration.pitch < MinPitchValue)
-            {
-                AudioSurceAcceleration.pitch = MinPitchValue;
-                value = MinPitchValue;
             }
         }
     }

@@ -7,6 +7,7 @@ namespace BlackFox {
     {
         public override void GoBack(Player _player)
         {
+            GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.Blocked);
             GameManager.Instance.LoadingCtrl.ActivateLoadingPanel(() => {
                 GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new MainMenuState() });
             });

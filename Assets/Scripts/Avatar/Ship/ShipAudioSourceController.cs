@@ -14,7 +14,11 @@ namespace BlackFox
         Rigidbody shipRigid;
 
         // Ship Accleleration Parameters
-        public float PitchMultiplier = 0f;
+        public float PitchMultiplier = 1f;
+        public float DecayMultiplier = 1f;
+        public float RisingMultiplier = 1f;
+        public float MinPitchValue = 0;
+        public float MaxPitchValue = 3;
         float value;
 
         public void Init(Ship _ship)
@@ -22,22 +26,41 @@ namespace BlackFox
             ship = _ship;
             shipRigid = ship.GetComponent<Rigidbody>();
             AudioSurceAcceleration.clip = GameManager.Instance.AudioMng.ShipAccelerationClip;
+            AudioSurceAcceleration.pitch = MinPitchValue;
+            value = MinPitchValue;
         }
 
         private void Update()
         {
-            if (Vector3.Angle(shipRigid.velocity, ship.transform.forward) <= 90f)
-                value = shipRigid.velocity.magnitude;
+            if(ship.LeftStickDirection != Vector3.zero)
+                value = Mathf.SmoothStep(AudioSurceAcceleration.pitch, MaxPitchValue, RisingMultiplier);
             else
-                value -= Time.deltaTime;
+                value = Mathf.SmoothStep(AudioSurceAcceleration.pitch, MinPitchValue, DecayMultiplier);
 
-            if (value > 0)
-                AudioSurceAcceleration.Play();
-            //else if(value >= 1) suono a velocità massima
+            if (AudioSurceAcceleration.pitch > MaxPitchValue)
+                AudioSurceAcceleration.pitch = MaxPitchValue;
+
+            if (AudioSurceAcceleration.pitch < MinPitchValue)
+                AudioSurceAcceleration.pitch = MinPitchValue;
+
+            if(value > 0)
+            {
+                if(value == MaxPitchValue)
+                {
+                    //aggiungi la seconda traccia e la metti in play
+                }
+                else
+                {
+                    //spegni la seconda traccia (se c'è)
+                }
+                AudioSurceAcceleration.pitch = value * PitchMultiplier;
+                if (!AudioSurceAcceleration.isPlaying)
+                    AudioSurceAcceleration.Play();
+            }
             else
+            {
                 AudioSurceAcceleration.Stop();
-
-            AudioSurceAcceleration.pitch = value * PitchMultiplier;
+            }
         }
     }
 }

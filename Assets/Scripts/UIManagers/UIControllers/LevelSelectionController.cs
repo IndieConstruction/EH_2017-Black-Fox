@@ -37,6 +37,7 @@ namespace BlackFox
 
         public override void Selection(Player _player)
         {
+            GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.Blocked);
             GameManager.Instance.LoadingCtrl.ActivateLoadingPanel(() => {
 
                 switch (CurrentIndexSelection)

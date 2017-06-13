@@ -918,7 +918,11 @@ MonoBehaviour:
   AudioSurceAcceleration: {fileID: 82634062387438756}
   AudioSurceCollision: {fileID: 82257089229341116}
   AudioSurceGeneric: {fileID: 82007348896796744}
-  PitchMultiplier: 0
+  PitchMultiplier: 1.5
+  DecayMultiplier: 1.5
+  RisingMultiplier: 4
+  MinPitchValue: -1
+  MaxPitchValue: 1.5
 --- !u!114 &114934167031976110
 MonoBehaviour:
   m_ObjectHideFlags: 1

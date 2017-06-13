@@ -14,9 +14,6 @@ namespace BlackFox
 
         public float CoinLife = 10;
 
-
-        public int RoundCoins = 0;
-
         private int _totalCoin;
 
         public int TotalCoin
@@ -25,14 +22,7 @@ namespace BlackFox
             set { _totalCoin = value; }
         }
 
-        private int _roundCoin;
-
-        public int RoundCoin
-        {
-            get { return _roundCoin; }
-            set { _roundCoin = value; }
-        }
-        
+                
         public void InstantiateCoinController()
         {
             CoinController = Instantiate(CoinControllerPrefab, transform).GetComponent<RoundCoinController>();

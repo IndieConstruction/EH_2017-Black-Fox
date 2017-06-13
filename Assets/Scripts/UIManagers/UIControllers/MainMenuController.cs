@@ -51,11 +51,12 @@ namespace BlackFox
 
         public override void Selection(Player _player)
         {
+            GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.Blocked);
             GameManager.Instance.LoadingCtrl.ActivateLoadingPanel(() => {
 
                 switch (CurrentIndexSelection)
                 {
-                    case 0:                   
+                    case 0:
                         GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new LevelSelectionState() });
                         break;
                     case 1:

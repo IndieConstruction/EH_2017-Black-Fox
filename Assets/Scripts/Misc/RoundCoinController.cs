@@ -20,7 +20,7 @@ namespace BlackFox
             set
             {
                 _coinCollected = value;
-                //Aggiorna la UI
+                GameManager.Instance.UiMng.canvasGame.gameUIController.CoinCollectedText.text = "Coin = " + _coinCollected;
             }
         }
 
@@ -38,11 +38,20 @@ namespace BlackFox
         }
 
         /// <summary>
-        /// Funzione da chiamare alla fine del round solo in caso di vittoria per salvare le monete accumulate durante il round appena conclutosi
+        /// Funzione da chiamare alla fine del round in caso di sconfitta per azzerare i coin raccolti .
         /// </summary>
-        public void OnEndRoun()
+       public void ClearCoinCollected()
         {
-            coinMng.RoundCoin = CoinCollected;
+            CoinCollected = 0;
+        }
+
+        /// <summary>
+        /// Funzione da chiamare alla fine del round solo in caso di vittoria per salvare le monete accumulate durante il round appena concluso
+        /// </summary>
+        public void SavingCoinMng()
+        {
+            coinMng.TotalCoin = CoinCollected;
+            CoinCollected = 0;
         }
     }
 }

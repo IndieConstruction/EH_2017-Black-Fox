@@ -15,9 +15,8 @@ namespace BlackFox
             if(Camera.main.GetComponent<AudioListener>() != null)
                 Camera.main.GetComponent<AudioListener>().enabled = true;
 
-            GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInput, PlayerLabel.One, PlayerState.Blocked);
             GameManager.Instance.LoadingCtrl.DeactivateLoadingPanel();
-            GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.MenuInput);
+            GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInput, PlayerLabel.One, PlayerState.Blocked);
         }
 
         public override void OnEnd()

@@ -53,6 +53,7 @@ namespace BlackFox
         public void Init()
         {
             PowerUps = Resources.LoadAll<GameObject>("Prefabs/PowerUps").Where(p => p.GetComponent<PowerUpBase>() != null).ToList();
+            CalculatePercentage();
             container = new GameObject("PowerUpContainer");
             container.transform.parent = transform;
             countdown = timer;
@@ -71,25 +72,52 @@ namespace BlackFox
 
         #endregion
 
+        #region PowerUpSpawn
+
+        List<PowerupsPercentage> powerUpPercentages = new List<PowerupsPercentage>();
+
+        /// <summary>
+        /// Calcola la percentuale di probabilità con cui può essere spawnato
+        /// </summary>
         void CalculatePercentage()
         {
+            List<PowerUpBase> tempPowerUps = new List<PowerUpBase>();
             foreach (GameObject item in PowerUps)
             {
                 PowerUpBase powerup = item.GetComponent<PowerUpBase>();
                 PowerupRatioSum += powerup.SpawnRatio;
+                tempPowerUps.Add(powerup);
             }
 
-            /// Crea una struttura dove associ ad ogni powerup la propria percentuale di spawn
-            /// %diSpawn = (PowerupRatioSum * 100) / SpawnRatio(valore contenuto in ogni powerup)
+            for (int i = 0; i < tempPowerUps.Count; i++)
+            {
+                powerUpPercentages.Add(new PowerupsPercentage { PowerUpID = tempPowerUps[i].ID.ToString(), Percentage = (tempPowerUps[i].SpawnRatio * 100) / PowerupRatioSum });
+            }
         }
 
+
         /// <summary>
-        /// Sceglie un powerup a caso
+        /// Sceglie un pawerup in base alla percentuale di probabilità che abbia di essere spawnato
         /// </summary>
         /// <returns></returns>
         GameObject ChoosePowerUp()
         {
-            return PowerUps[Random.Range(1, PowerUps.Count)];
+            float randNum = Random.Range(0, PowerupRatioSum);
+            float tempMinValue = 0f;
+
+            for (int i = 0; i < powerUpPercentages.Count; i++)
+            {
+                if(randNum < (powerUpPercentages[i].Percentage + tempMinValue) && randNum >= tempMinValue)
+                {
+                    foreach (GameObject item in PowerUps)
+                    {
+                        if (item.GetComponent<PowerUpBase>().ID.ToString() == powerUpPercentages[i].PowerUpID)
+                            return item;
+                    } 
+                }
+                tempMinValue += powerUpPercentages[i].Percentage;
+            }
+            return null;
         }
 
         /// <summary>
@@ -109,6 +137,8 @@ namespace BlackFox
             if (tempPowerup != null)
                 tempPowerup.LifeTime = PowerUpLifeTime;
         }
+        
+        #endregion
 
         void DrawParable(GameObject _objToMove, Vector3 _target)
         {
@@ -152,4 +182,11 @@ namespace BlackFox
         }
 
     }
+
+    struct PowerupsPercentage
+    {
+        public string PowerUpID;
+        public float Percentage;
+    }
+
 }

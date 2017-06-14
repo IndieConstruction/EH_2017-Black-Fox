@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace BlackFox {
     public abstract class PowerUpBase : MonoBehaviour, IPowerUp {
+
+        public PowerUpID ID;
+
         public bool AutoUse = false;
         protected IPowerUpCollector collector;
         protected List<IPowerUpCollector> enemyCollectors = new List<IPowerUpCollector>();
@@ -52,5 +55,14 @@ namespace BlackFox {
                     Destroy(gameObject); 
             }
         }
+    }
+
+    public enum PowerUpID
+    {
+        Kamikaze,
+        AmmoCleaner,
+        CleanSweep,
+        Tank,
+        InvertCommands
     }
 }

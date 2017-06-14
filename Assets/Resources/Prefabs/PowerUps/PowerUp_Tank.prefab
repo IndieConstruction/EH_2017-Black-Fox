@@ -92,6 +92,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 953134c2e5d12a14ebbfdf9216231346, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID: 3
   AutoUse: 1
   PowerUpDuration: 10
+  SpawnRatio: 10
   PowerUpDamage: 7

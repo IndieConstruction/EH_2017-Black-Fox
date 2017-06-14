@@ -34,6 +34,8 @@ namespace BlackFox
 
         float countdown;
 
+        float PowerupRatioSum;
+
         private void Update()
         {
             if (IsActive)
@@ -68,6 +70,18 @@ namespace BlackFox
         }
 
         #endregion
+
+        void CalculatePercentage()
+        {
+            foreach (GameObject item in PowerUps)
+            {
+                PowerUpBase powerup = item.GetComponent<PowerUpBase>();
+                PowerupRatioSum += powerup.SpawnRatio;
+            }
+
+            /// Crea una struttura dove associ ad ogni powerup la propria percentuale di spawn
+            /// %diSpawn = (PowerupRatioSum * 100) / SpawnRatio(valore contenuto in ogni powerup)
+        }
 
         /// <summary>
         /// Sceglie un powerup a caso

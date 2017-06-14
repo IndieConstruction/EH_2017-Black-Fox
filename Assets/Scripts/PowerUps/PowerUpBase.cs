@@ -10,6 +10,7 @@ namespace BlackFox {
         public abstract void UsePowerUp();
         private float _lifeTime = 10;
         public float PowerUpDuration = 10;
+        public float SpawnRatio;
         
         /// <summary>
         /// Variabile che determina se il powerup deve essere distrutto una volta raccolto o meno.

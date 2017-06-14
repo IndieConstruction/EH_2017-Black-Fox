@@ -15,10 +15,10 @@ namespace BlackFox
 
         // Ship Accleleration Parameters
         public float PitchMultiplier = 1f;
-        public float DecayMultiplier = 1f;
-        public float RisingMultiplier = 1f;
-        public float MinPitchValue = 0;
-        public float MaxPitchValue = 3;
+        public float DecayMultiplier = 0.085f;
+        public float RisingMultiplier = 0.15f;
+        public float MinPitchValue = 0f;
+        public float MaxPitchValue = 2f;
         float value;
 
         public void Init(Ship _ship)

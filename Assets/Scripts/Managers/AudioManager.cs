@@ -59,20 +59,6 @@ namespace BlackFox
                     break;
             }
         }
-
-        void PlayPowerUpAudio(PowerUpAudio _powerUpAudio)
-        {
-            switch (_powerUpAudio)
-            {
-                case PowerUpAudio.Activation:
-                    //AudioSurcePowerUp.Play();
-                    break;
-                case PowerUpAudio.Spawn:
-                    break;
-                default:
-                    break;
-            }
-        }
         #endregion
 
         #region Events
@@ -80,14 +66,12 @@ namespace BlackFox
         {
             EventManager.OnMenuAction += PlayUIAudio;
             EventManager.OnMusicChange += PlayMusic;
-            EventManager.OnPowerUpAction += PlayPowerUpAudio;
         }
 
         private void OnDisable()
         {
             EventManager.OnMenuAction -= PlayUIAudio;
             EventManager.OnMusicChange -= PlayMusic;
-            EventManager.OnPowerUpAction -= PlayPowerUpAudio;
         }
         #endregion
 
@@ -106,12 +90,6 @@ namespace BlackFox
             MainTheme,
             GameTheme,
             Ambience
-        }
-
-        public enum PowerUpAudio
-        {
-            Activation,
-            Spawn
         }
         #endregion
     }

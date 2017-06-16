@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81676da29bc677d4a92b8c2485b2d34d, type: 3}
+  m_Name: SharkAudio
+  m_EditorClassIdentifier: 
+  AmmoRecharge: {fileID: 8300000, guid: 34c13d8bad1aa5e49b60b10effc122c2, type: 3}
+  Death: {fileID: 8300000, guid: 32de22beff19be74da3bef9707250058, type: 3}
+  Movement: {fileID: 8300000, guid: ecac77625ace4df459a1b5ccaf6ea573, type: 3}
+  NoAmmo: {fileID: 8300000, guid: d80af664933f8a54894e4e63d1834cdc, type: 3}
+  Shot: {fileID: 8300000, guid: f7ba576619dfec445b99e9bdeb18aa1f, type: 3}
+  PinPlaced: {fileID: 8300000, guid: cbaa284fe79a21941a1698609dd8f006, type: 3}

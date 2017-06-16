@@ -8,10 +8,14 @@ namespace BlackFox
     {
         public AudioSource AudioSurceAcceleration;
         public AudioSource AudioSurceCollision;
-        public AudioSource AudioSurceGeneric;
+        public AudioSource AudioSurceShoot;
+        public AudioSource AudioSourceAmmoRecharge;
+        public AudioSource AudioSourceDeath;
+        public AudioSource AudioSourceNoAmmo;
 
         Ship ship;
 
+        [Header("Acceleration Parameters")]
         // Ship Accleleration Parameters
         public float PitchMultiplier = 1f;
         public float DecayMultiplier = 0.085f;
@@ -23,10 +27,49 @@ namespace BlackFox
         public void Init(Ship _ship)
         {
             ship = _ship;
-            AudioSurceAcceleration.clip = GameManager.Instance.AudioMng.ShipAccelerationClip;
+
+            AudioSurceAcceleration.clip = ship.Avatar.AvatarData.ShipAudioSet.Movement;
+            AudioSurceCollision.clip = ship.Avatar.AvatarData.ShipAudioSet.Collision;
+            AudioSurceShoot.clip = ship.Avatar.AvatarData.ShipAudioSet.Shot;
+            AudioSourceAmmoRecharge.clip = ship.Avatar.AvatarData.ShipAudioSet.PinPlaced;
+            AudioSourceDeath.clip = ship.Avatar.AvatarData.ShipAudioSet.Death;
+            AudioSourceNoAmmo.clip = ship.Avatar.AvatarData.ShipAudioSet.NoAmmo;
+
             AudioSurceAcceleration.pitch = MinPitchValue;
             value = MinPitchValue;
         }
+
+        #region Play Audios
+        public void PlayShootAudio()
+        {
+            if (AudioSurceShoot.clip != null)
+                AudioSurceShoot.Play();
+        }
+
+        public void PlayAmmoRechargeAudio()
+        {
+            if (AudioSourceAmmoRecharge.clip != null)
+                AudioSourceAmmoRecharge.Play();
+        }
+
+        public void PlayDeathAudio()
+        {
+            if (AudioSourceDeath.clip != null)
+                AudioSourceDeath.Play();
+        }
+
+        public void PlayNoAmmoAudio()
+        {
+            if (AudioSourceNoAmmo.clip != null)
+                AudioSourceNoAmmo.Play();
+        }
+
+        public void PlayCollisionAudio()
+        {
+            if (AudioSurceCollision.clip != null)
+                AudioSurceCollision.Play();
+        }
+        #endregion
 
         private void Update()
         {

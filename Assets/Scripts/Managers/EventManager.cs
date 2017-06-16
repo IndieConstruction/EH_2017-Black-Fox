@@ -78,12 +78,6 @@ namespace BlackFox
         /// Evento che si occupa di innescare la musica
         /// </summary>
         public static MusicEvent OnMusicChange;
-
-        public delegate void PowerUpAudioEvent(AudioManager.PowerUpAudio _powerUpAudio);
-        /// <summary>
-        /// Evento che si occupa di innescare i souni dei power up in gioco
-        /// </summary>
-        public static PowerUpAudioEvent OnPowerUpAction;
         #endregion
     }
 }

@@ -18,7 +18,6 @@ namespace BlackFox
         }
 
         Ship ship;
-        Material bulletMaterial;
 
         int ammo;
         public int Ammo
@@ -49,7 +48,7 @@ namespace BlackFox
         {
             if (Ammo > 0)
             {
-                GameObject instantiatedProjectile = Instantiate(shooterBaseConfig.ProjectilePrefab, transform.position + transform.forward*shooterConfig.DistanceFromShipOrigin, transform.rotation);
+                GameObject instantiatedProjectile = Instantiate(shooterBaseConfig.ProjectilePrefab, transform.position + transform.forward * shooterConfig.DistanceFromShipOrigin, transform.rotation);
                 instantiatedProjectile.GetComponentInChildren<MeshRenderer>().material = ship.Avatar.AvatarData.ColorSets[ship.Avatar.AvatarData.ColorSetIndex].PinMaterial;
                 instantiatedProjectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * shooterBaseConfig.BulletSpeed, ForceMode.Impulse);
                 instantiatedProjectile.GetComponent<Projectile>().Init(GetComponentInParent<IShooter>());
@@ -57,6 +56,8 @@ namespace BlackFox
                 Ammo--;
                 ship.ParticlesController.PlayParticles(ParticlesController.ParticlesType.Fire);
             }
+            else
+                ship.NoAmmoAudio();
         }
 
         public void SetFireDirection(Vector3 _direction)

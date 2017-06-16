@@ -14,6 +14,7 @@ namespace BlackFox
         public Ship BasePrefab;
         public GameObject ModelPrefab;
         public List<ColorSetData> ColorSets;
+        public ShipAudioData ShipAudioSet;
         public ShipConfig shipConfig;
         public RopeConfig ropeConfig;
 

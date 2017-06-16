@@ -34,9 +34,12 @@ namespace BlackFox {
 
         private void Start()
         {
-            audioSurce = GetComponentInChildren<AudioSource>();
+            audioSurce = GetComponent<AudioSource>();
             audioSurce.clip = GameManager.Instance.AudioMng.PowerUpActivation;
+            Init();
         }
+
+        protected virtual void Init() { }
 
         private void Update()
         {
@@ -60,7 +63,7 @@ namespace BlackFox {
                 if (AutoUse)
                 {
                     UsePowerUp();
-                    if(audioSurce.clip != null)
+                    if(audioSurce != null && audioSurce.clip != null)
                         audioSurce.Play();
                 }
                 if (DestroyAfterUse)

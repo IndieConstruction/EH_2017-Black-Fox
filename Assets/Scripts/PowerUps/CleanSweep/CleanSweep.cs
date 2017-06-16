@@ -11,11 +11,11 @@ namespace BlackFox
     {
         public Cleaner cleaner;
 		ParticleSystem cleanerParticle;
-        
-        void Start()
+
+        protected override void Init()
         {
             DestroyAfterUse = false;
-			cleanerParticle = GetComponentInChildren<ParticleSystem> ();
+            cleanerParticle = GetComponentInChildren<ParticleSystem>();
         }
 
         public override void UsePowerUp()

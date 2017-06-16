@@ -7,15 +7,16 @@ namespace BlackFox
     public class AudioManager : MonoBehaviour
     {
         //TODO : trovare modo funzionale di caricare e leggere le varie audio clips
-        public AudioClip MenuMovementAudioClip;
-        public AudioClip MenuSelectionAudioClip;
-
-        public AudioClip ShipAccelerationClip;
 
         public AudioSource AudioSurceMenu;
         public AudioSource AudioSurceMusic;
         public AudioSource AudioSurceAmbience;
-        public AudioSource AudioSurcePowerUp;
+
+        [Header("Audio Clips")]
+        public AudioClip MenuMovementAudioClip;
+        public AudioClip MenuSelectionAudioClip;
+        public AudioClip GameplayAudioClip;
+        public AudioClip PowerUpActivation;
 
         #region Audio Actions
         void PlayUIAudio(UIAudio _menuAudio)
@@ -36,57 +37,66 @@ namespace BlackFox
                     break;
                 case UIAudio.CountDown:
                     break;
-                default:
-                    break;
             }
         }
 
-        void PlayMusic(Music _music)
+        void PlayMusic(Music _music, bool _play)
         {
-            switch (_music)
+            if(_play)
             {
-                case Music.MainTheme:
-                    //AudioSurceMusic.Play();
-                    break;
-                case Music.GameTheme:
-                    //AudioSurceMusic.Play();
-                    break;
-                case Music.Ambience:
-                    //AudioSurceAmbience.Play();
-                    break;
-                default:
-                    break;
+                switch (_music)
+                {
+                    case Music.MainTheme:
+                        //AudioSurceMusic.Play();
+                        break;
+                    case Music.GameTheme:
+                        AudioSurceMusic.clip = GameplayAudioClip;
+                        AudioSurceMusic.Play();
+                        break;
+                    case Music.Ambience:
+                        //AudioSurceAmbience.Play();
+                        break;
+                }
             }
-        }
-
-        void PlayPowerUpAudio(PowerUpAudio _powerUpAudio)
-        {
-            switch (_powerUpAudio)
+            else
             {
-                case PowerUpAudio.Activation:
-                    //AudioSurcePowerUp.Play();
-                    break;
-                case PowerUpAudio.Spawn:
-                    break;
-                default:
-                    break;
+                switch (_music)
+                {
+                    case Music.MainTheme:
+                        //StartCoroutine(FadeoutMusic(AudioSurceMusic, 1.5f));
+                        break;
+                    case Music.GameTheme:
+                        StartCoroutine(FadeoutMusic(AudioSurceMusic, 1.5f));
+                        break;
+                    case Music.Ambience:
+                        //StartCoroutine(FadeoutMusic(AudioSurceAmbience, 1f));
+                        break;
+                }
             }
         }
         #endregion
+
+        IEnumerator FadeoutMusic(AudioSource _surceToFade, float _speed)
+        {
+            while (_surceToFade.volume > 0)
+            {
+                _surceToFade.volume -= _speed * Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+            _surceToFade.Stop();
+        }
 
         #region Events
         private void OnEnable()
         {
             EventManager.OnMenuAction += PlayUIAudio;
             EventManager.OnMusicChange += PlayMusic;
-            EventManager.OnPowerUpAction += PlayPowerUpAudio;
         }
 
         private void OnDisable()
         {
             EventManager.OnMenuAction -= PlayUIAudio;
             EventManager.OnMusicChange -= PlayMusic;
-            EventManager.OnPowerUpAction -= PlayPowerUpAudio;
         }
         #endregion
 
@@ -105,12 +115,6 @@ namespace BlackFox
             MainTheme,
             GameTheme,
             Ambience
-        }
-
-        public enum PowerUpAudio
-        {
-            Activation,
-            Spawn
         }
         #endregion
     }

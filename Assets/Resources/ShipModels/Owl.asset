@@ -20,6 +20,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 00387c7185e7a4d419217c93c5643965, type: 2}
   - {fileID: 11400000, guid: 4f7d104e8296c744cae0d117fe6d4fee, type: 2}
   - {fileID: 11400000, guid: 887514b0dce2cd24ea162fc71cac5469, type: 2}
+  ShipAudioSet: {fileID: 11400000, guid: 01ecebd239ea47542819700ef9a59ae0, type: 2}
   shipConfig:
     MaxLife: 15
     FireRate: 0.3
@@ -60,10 +61,10 @@ MonoBehaviour:
     - 12
     ShootingDistanceUpgrade:
     - 0
-    - 0.5
-    - 0.7
-    - 0.9
-    - 1.2
+    - 0.19
+    - 0.31
+    - 0.43
+    - 0.55
     PowerUpDurationUpgrade:
     - 0
     - 1

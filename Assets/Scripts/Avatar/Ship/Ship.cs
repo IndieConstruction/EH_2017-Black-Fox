@@ -88,6 +88,11 @@ namespace BlackFox {
             }
         }
 
+        private void OnCollisionEnter(Collision collision)
+        {         
+            audioSourceController.PlayCollisionAudio();
+        }
+
         #region API
         public void Setup(Avatar _avatar, List<IDamageable> _damageablesPrefabs)
         {
@@ -236,6 +241,11 @@ namespace BlackFox {
             shooter.AddAmmo();
         }
 
+        public void NoAmmoAudio()
+        {
+            audioSourceController.PlayNoAmmoAudio();
+        }
+
         #region IShooter
         /// <summary>
         /// Ritorna la lista degli oggetti danneggiabili
@@ -277,6 +287,9 @@ namespace BlackFox {
                     Avatar.ShipDestroy(_attacker.GetComponent<Ship>().Avatar);
                 else
                     Avatar.ShipDestroy(null);
+
+                audioSourceController.PlayDeathAudio();
+
                 transform.DOScale(Vector3.zero, 0.5f);
                 return;
             }
@@ -315,12 +328,16 @@ namespace BlackFox {
         void Shoot()
         {
             shooter.ShootBullet();
+            audioSourceController.PlayShootAudio();
         }
 
         void PlacePin()
         {
-            if(pinPlacer.PlaceThePin())
+            if (pinPlacer.PlaceThePin())
+            {
                 AddShooterAmmo();
+                audioSourceController.PlayAmmoRechargeAudio();
+            }
         }
 
         void Move(Vector3 _target)

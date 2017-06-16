@@ -15,6 +15,7 @@ namespace BlackFox
             GameManager.Instance.UiMng.avatarSelectionManager.Setup(GameManager.Instance.PlayerMng.Players);
             GameManager.Instance.SRMng.SetSliderValue();
             GameManager.Instance.LoadingCtrl.DeactivateLoadingPanel();
+            GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.MenuInput);
         }
 
         public override void OnEnd() {

@@ -22,6 +22,9 @@ namespace BlackFox
             GameManager.Instance.LevelMng.SpawnerMng.InstantiateNewSpawners(GameManager.Instance.LevelMng.CurrentLevel);
             GameManager.Instance.CoinMng.InstantiateCoinController();
 
+            if (Camera.main.GetComponentInChildren<AudioListener>() != null)
+                Camera.main.GetComponentInChildren<AudioListener>().enabled = false;
+
             GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.Blocked);
 
             GameManager.Instance.LevelMng.SetupCore();

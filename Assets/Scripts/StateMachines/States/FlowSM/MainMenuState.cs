@@ -11,8 +11,12 @@ namespace BlackFox
         {
             Debug.Log("MainMenuState");
             GameManager.Instance.UiMng.CreateMainMenu();
-            GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInput, PlayerLabel.One, PlayerState.Blocked);
+
+            if(Camera.main.GetComponent<AudioListener>() != null)
+                Camera.main.GetComponent<AudioListener>().enabled = true;
+
             GameManager.Instance.LoadingCtrl.DeactivateLoadingPanel();
+            GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInput, PlayerLabel.One, PlayerState.Blocked);
         }
 
         public override void OnEnd()

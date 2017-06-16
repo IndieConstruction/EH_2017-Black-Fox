@@ -4,18 +4,22 @@ using UnityEngine;
 
 namespace BlackFox {
     public abstract class PowerUpBase : MonoBehaviour, IPowerUp {
+
+        public PowerUpID ID;
         public bool AutoUse = false;
+        public float PowerUpDuration = 10;
+        public float SpawnRatio;
+
         protected IPowerUpCollector collector;
         protected List<IPowerUpCollector> enemyCollectors = new List<IPowerUpCollector>();
-        public abstract void UsePowerUp();
-        private float _lifeTime = 10;
-        public float PowerUpDuration = 10;
-        
+        protected AudioSource audioSurce;
+
         /// <summary>
         /// Variabile che determina se il powerup deve essere distrutto una volta raccolto o meno.
         /// </summary>
         protected bool DestroyAfterUse = true;
 
+        private float _lifeTime = 10;
         public float LifeTime
         {
             get { return _lifeTime; }
@@ -25,6 +29,17 @@ namespace BlackFox {
         protected virtual void NotifyCollect(IPowerUpCollector _collector) {
             _collector.CollectPowerUp(this);
         }
+
+        public abstract void UsePowerUp();
+
+        private void Start()
+        {
+            audioSurce = GetComponent<AudioSource>();
+            audioSurce.clip = GameManager.Instance.AudioMng.PowerUpActivation;
+            Init();
+        }
+
+        protected virtual void Init() { }
 
         private void Update()
         {
@@ -46,10 +61,34 @@ namespace BlackFox {
             if (collector != null) {
                 NotifyCollect(collector);
                 if (AutoUse)
+                {
                     UsePowerUp();
+                    if(audioSurce != null && audioSurce.clip != null)
+                        audioSurce.Play();
+                }
                 if (DestroyAfterUse)
-                    Destroy(gameObject); 
+                    StartCoroutine(DestroyAfterAudioStopsPlaying());
             }
         }
+
+        /// <summary>
+        /// Corutine che distugge il powerup solo quando l'audio di attivazione smette di suonare
+        /// </summary>
+        /// <returns></returns>
+        IEnumerator DestroyAfterAudioStopsPlaying()
+        {
+            while (audioSurce.isPlaying)
+                yield return new WaitForEndOfFrame();
+            Destroy(gameObject);
+        }
+    }
+
+    public enum PowerUpID
+    {
+        Kamikaze,
+        AmmoCleaner,
+        CleanSweep,
+        Tank,
+        InvertCommands
     }
 }

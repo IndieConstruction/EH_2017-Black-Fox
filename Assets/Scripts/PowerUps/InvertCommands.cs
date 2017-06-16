@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace BlackFox
 {
-
     public class InvertCommands : PowerUpBase
     { 
         public override void UsePowerUp()

@@ -11,7 +11,6 @@ namespace BlackFox
         public AudioSource AudioSurceGeneric;
 
         Ship ship;
-        Rigidbody shipRigid;
 
         // Ship Accleleration Parameters
         public float PitchMultiplier = 1f;
@@ -24,7 +23,6 @@ namespace BlackFox
         public void Init(Ship _ship)
         {
             ship = _ship;
-            shipRigid = ship.GetComponent<Rigidbody>();
             AudioSurceAcceleration.clip = GameManager.Instance.AudioMng.ShipAccelerationClip;
             AudioSurceAcceleration.pitch = MinPitchValue;
             value = MinPitchValue;

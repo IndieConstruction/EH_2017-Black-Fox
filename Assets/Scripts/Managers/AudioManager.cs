@@ -7,15 +7,16 @@ namespace BlackFox
     public class AudioManager : MonoBehaviour
     {
         //TODO : trovare modo funzionale di caricare e leggere le varie audio clips
-        public AudioClip MenuMovementAudioClip;
-        public AudioClip MenuSelectionAudioClip;
-
-        public AudioClip ShipAccelerationClip;
 
         public AudioSource AudioSurceMenu;
         public AudioSource AudioSurceMusic;
         public AudioSource AudioSurceAmbience;
-        public AudioSource AudioSurcePowerUp;
+
+        [Header("Audio Clips")]
+        public AudioClip MenuMovementAudioClip;
+        public AudioClip MenuSelectionAudioClip;
+        public AudioClip PowerUpActivation;
+        public AudioClip ShipAccelerationClip;
 
         #region Audio Actions
         void PlayUIAudio(UIAudio _menuAudio)

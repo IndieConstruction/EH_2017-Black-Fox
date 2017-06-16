@@ -301,9 +301,9 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8f2c00bc979817e4d8751609c06c252e, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.3
+  m_Volume: 0.7
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -388,6 +388,5 @@ MonoBehaviour:
     type: 3}
   MenuSelectionAudioClip: {fileID: 8300000, guid: 235c61b01072c6a48a34dea4c7ca850b,
     type: 3}
+  GameplayAudioClip: {fileID: 8300000, guid: c1f49c345d891874eac11354e8389c52, type: 3}
   PowerUpActivation: {fileID: 8300000, guid: 235c61b01072c6a48a34dea4c7ca850b, type: 3}
-  ShipAccelerationClip: {fileID: 8300000, guid: 318e2794213d6774a858b35bd031e8a4,
-    type: 3}

@@ -15,8 +15,8 @@ namespace BlackFox
         [Header("Audio Clips")]
         public AudioClip MenuMovementAudioClip;
         public AudioClip MenuSelectionAudioClip;
+        public AudioClip GameplayAudioClip;
         public AudioClip PowerUpActivation;
-        public AudioClip ShipAccelerationClip;
 
         #region Audio Actions
         void PlayUIAudio(UIAudio _menuAudio)
@@ -37,29 +37,54 @@ namespace BlackFox
                     break;
                 case UIAudio.CountDown:
                     break;
-                default:
-                    break;
             }
         }
 
-        void PlayMusic(Music _music)
+        void PlayMusic(Music _music, bool _play)
         {
-            switch (_music)
+            if(_play)
             {
-                case Music.MainTheme:
-                    //AudioSurceMusic.Play();
-                    break;
-                case Music.GameTheme:
-                    //AudioSurceMusic.Play();
-                    break;
-                case Music.Ambience:
-                    //AudioSurceAmbience.Play();
-                    break;
-                default:
-                    break;
+                switch (_music)
+                {
+                    case Music.MainTheme:
+                        //AudioSurceMusic.Play();
+                        break;
+                    case Music.GameTheme:
+                        AudioSurceMusic.clip = GameplayAudioClip;
+                        AudioSurceMusic.Play();
+                        break;
+                    case Music.Ambience:
+                        //AudioSurceAmbience.Play();
+                        break;
+                }
+            }
+            else
+            {
+                switch (_music)
+                {
+                    case Music.MainTheme:
+                        //StartCoroutine(FadeoutMusic(AudioSurceMusic, 1.5f));
+                        break;
+                    case Music.GameTheme:
+                        StartCoroutine(FadeoutMusic(AudioSurceMusic, 1.5f));
+                        break;
+                    case Music.Ambience:
+                        //StartCoroutine(FadeoutMusic(AudioSurceAmbience, 1f));
+                        break;
+                }
             }
         }
         #endregion
+
+        IEnumerator FadeoutMusic(AudioSource _surceToFade, float _speed)
+        {
+            while (_surceToFade.volume > 0)
+            {
+                _surceToFade.volume -= _speed * Time.deltaTime;
+                yield return new WaitForEndOfFrame();
+            }
+            _surceToFade.Stop();
+        }
 
         #region Events
         private void OnEnable()

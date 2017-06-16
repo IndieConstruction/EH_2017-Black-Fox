@@ -73,7 +73,7 @@ namespace BlackFox
         /// </summary>
         public static UIAudioEvent OnMenuAction;
 
-        public delegate void MusicEvent(AudioManager.Music _music);
+        public delegate void MusicEvent(AudioManager.Music _music, bool _play);
         /// <summary>
         /// Evento che si occupa di innescare la musica
         /// </summary>

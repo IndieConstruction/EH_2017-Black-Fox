@@ -6,7 +6,12 @@ using UnityEngine;
 namespace BlackFox
 {
     public class InvertCommands : PowerUpBase
-    { 
+    {
+        protected override void Init()
+        {
+            base.Init();
+            SpawnRatio = GameManager.Instance.LevelMng.CurrentLevel.RatioInvertCommand;
+        }
         public override void UsePowerUp()
         {
             foreach (IPowerUpCollector enemy in enemyCollectors)

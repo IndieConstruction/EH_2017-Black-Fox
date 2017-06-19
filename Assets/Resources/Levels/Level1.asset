@@ -21,19 +21,19 @@ MonoBehaviour:
     SubPoints: 0
     PointsToWin: 5
   MinPowerUpRatio: 5
-  MaxPowerUpRatio: 10
+  MaxPowerUpRatio: 15
   PowerUpOptions:
     Percentages:
     - PowerUpID: 0
-      Percentage: 1
+      Percentage: 5
     - PowerUpID: 1
-      Percentage: 1
+      Percentage: 20
     - PowerUpID: 2
-      Percentage: 1
+      Percentage: 30
     - PowerUpID: 3
-      Percentage: 1
+      Percentage: 35
     - PowerUpID: 4
-      Percentage: 96
+      Percentage: 10
   ArrowsSpawner:
     SpawnerPrefab: {fileID: 0}
     ArrowPrefab: {fileID: 0}

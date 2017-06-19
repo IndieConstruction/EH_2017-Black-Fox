@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4530900991921678}
   - component: {fileID: 33012196232387126}
   - component: {fileID: 23854931373529496}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: faro_LP
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4895682402864154}
   - component: {fileID: 111230428412653152}
   - component: {fileID: 114284969000963050}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Perni_Navi 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4495800701089906}
   - component: {fileID: 198310600928868174}
   - component: {fileID: 199567504113890784}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: cerchio perno
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4628728408441682}
   - component: {fileID: 135539403818025306}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PinBlocker
   m_TagString: PinBlockArea
   m_Icon: {fileID: 0}

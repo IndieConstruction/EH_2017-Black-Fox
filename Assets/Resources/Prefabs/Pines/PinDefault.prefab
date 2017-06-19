@@ -88,7 +88,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4628728408441682}
   - component: {fileID: 135539403818025306}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: PinBlocker
   m_TagString: PinBlockArea
   m_Icon: {fileID: 0}
@@ -253,7 +253,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 11
+  m_Radius: 12
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &136312059101494218
 CapsuleCollider:
@@ -301,7 +301,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 2
-  randomSeed: 2119682925
+  randomSeed: 1489883963
   InitialModule:
     serializedVersion: 3
     enabled: 1

@@ -69,7 +69,7 @@ namespace BlackFox
         public void AddAmmo()
         {
             if (Ammo < shooterConfig.MaxAmmo)
-                Ammo += (int)ship.Avatar.GetUpgrade(UpgardeTypes.AmmoRechargeUpgrade).CalculateValue(shooterConfig.AddedAmmo);
+                Ammo += shooterConfig.AddedAmmo;
             else if (Ammo > shooterConfig.MaxAmmo)
                 Ammo = shooterConfig.MaxAmmo;
         }

@@ -10,6 +10,7 @@ TagManager:
   - PinBlockArea
   - Core
   - Wall
+  - HUDPlayer
   layers:
   - Default
   - TransparentFX

@@ -29,10 +29,10 @@ namespace BlackFox
             GameManager.Instance.LevelMng.UpdateKillPoints(_killer, _victim);
             if(_killer != null)
             {
-                GameManager.Instance.UiMng.canvasGame.gameUIController.SetKillPointsUI(_killer.Player.ID);
+                GameManager.Instance.UiMng.canvasGame.gameUIController.SetKillPointsUI(_killer.Player);
                 _killer.avatarUI.KillView();
             }
-            GameManager.Instance.UiMng.canvasGame.gameUIController.SetKillPointsUI(_victim.Player.ID);
+            GameManager.Instance.UiMng.canvasGame.gameUIController.SetKillPointsUI(_victim.Player);
             if (GameManager.Instance.LevelMng.IsRoundActive)
                 GameManager.Instance.LevelMng.AvatarSpwn.SpawnAvatar(_victim.Player, 3);
 

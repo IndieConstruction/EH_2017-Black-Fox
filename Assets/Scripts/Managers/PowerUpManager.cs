@@ -158,8 +158,8 @@ namespace BlackFox
                 finalPosition = finalPosition + players[i].Avatar.ship.transform.position;
             }
             finalPosition.y /= players.Count;
-            finalPosition.x = (GameManager.Instance.LevelMng.Core.transform.position.x - finalPosition.x) * Random.Range(0f, 2f) / players.Count; ;
-            finalPosition.z = (GameManager.Instance.LevelMng.Core.transform.position.z - finalPosition.z) * Random.Range(0f, 2f) / players.Count; ;
+            finalPosition.x = (GameManager.Instance.LevelMng.Core.transform.position.x - finalPosition.x) * Random.Range(-2f, 2f) / players.Count; ;
+            finalPosition.z = (GameManager.Instance.LevelMng.Core.transform.position.z - finalPosition.z) * Random.Range(-2f, 2f) / players.Count; ;
 
             //Check becero per tenere i power Up in scena
             if (finalPosition.magnitude < new Vector3(MinX, 8, MinZ).magnitude)

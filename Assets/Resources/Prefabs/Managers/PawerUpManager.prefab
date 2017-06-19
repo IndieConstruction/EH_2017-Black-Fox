@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PowerUpLifeTime: 10
-  MinZ: 2
-  MaxZ: 62
-  MinX: 2
-  MaxX: 128
+  MaxRandomOffSet: 2.5
+  CoreMinDistance: 10
+  ZOffSet: 50
+  XOffSet: 50

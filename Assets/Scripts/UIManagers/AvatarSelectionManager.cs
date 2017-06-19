@@ -156,7 +156,7 @@ namespace BlackFox {
                         EventManager.OnMenuAction(AudioManager.UIAudio.Back);
 
                     GameManager.Instance.LoadingCtrl.ActivateLoadingPanel(() => { 
-                        GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new LevelSelectionState() });
+                        GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new MainMenuState() });
                     });
                     break;
                 }

@@ -50,18 +50,6 @@ MonoBehaviour:
     DensityOfFragments: 0.2
   ColorSetIndex: 0
   avatarUpgradesConfig:
-    FireRateUpgrade:
-    - 0
-    - 0.03
-    - 0.07
-    - 0.11
-    - 0.15
-    AmmoRechargeUpgrade:
-    - 0
-    - 3
-    - 6
-    - 9
-    - 12
     ShootingDistanceUpgrade:
     - 0
     - 0.19
@@ -74,3 +62,9 @@ MonoBehaviour:
     - 2
     - 3
     - 4
+    PinRegenUpgrade:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0

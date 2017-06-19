@@ -193,10 +193,9 @@ namespace BlackFox {
 
         void LoadUpgradesValues()
         {
-            Upgrades.Add(new FireRateUpgrade(UpgradesConfig.FireRateUpgrade));
-            Upgrades.Add(new AmmoRechargeUpgrade(UpgradesConfig.AmmoRechargeUpgrade));
             Upgrades.Add(new PowerUpDurationUpgrade(UpgradesConfig.PowerUpDurationUpgrade));
             Upgrades.Add(new ShootingDistanceUpgrade(UpgradesConfig.ShootingDistanceUpgrade));
+            Upgrades.Add(new PinRegenUpgrade(UpgradesConfig.PinRegenUpgrade));
         }
         #endregion
         #endregion
@@ -244,9 +243,8 @@ namespace BlackFox {
     [Serializable]
     public class AvatarUpgradesConfig
     {
-        public float[] FireRateUpgrade;
-        public float[] AmmoRechargeUpgrade;
         public float[] ShootingDistanceUpgrade;
         public float[] PowerUpDurationUpgrade;
+        public float[] PinRegenUpgrade;
     }
 }

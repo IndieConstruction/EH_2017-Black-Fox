@@ -35,7 +35,7 @@ namespace BlackFox {
         private void Start()
         {
             audioSurce = GetComponent<AudioSource>();
-            audioSurce.clip = GameManager.Instance.AudioMng.PowerUpActivation;
+            audioSurce.clip = GameManager.Instance.AudioMng.GetPowerUpClip(ID);
             Init();
         }
 
@@ -91,4 +91,11 @@ namespace BlackFox {
         Tank,
         InvertCommands
     }
+
+    [System.Serializable]
+    public class PowerUpOptions
+    {
+        public List<PowerupsPercentage> Percentages = new List<PowerupsPercentage>();
+    }
+
 }

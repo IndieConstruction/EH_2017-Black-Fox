@@ -10,13 +10,15 @@ namespace BlackFox
     {
 
         public float PowerUpLifeTime = 10;
-        public float MinZ = 0;
-        public float MaxZ = 62;
-        public float MinX = 0;
-        public float MaxX = 32;
+        public float MaxRandomOffSet = 2.5f;
+        public float CoreMinDistance = 2;
+        public float ZOffSet = 32;
+        public float XOffSet = 64;
         List<GameObject> PowerUps = new List<GameObject>();
         bool IsActive = false;
         GameObject container;
+        AudioSource audioSurce;
+
         float MinTimeToSpawn
         {
             get { return GameManager.Instance.LevelMng.CurrentLevel.MinPowerUpRatio; }
@@ -53,10 +55,13 @@ namespace BlackFox
         public void Init()
         {
             PowerUps = Resources.LoadAll<GameObject>("Prefabs/PowerUps").Where(p => p.GetComponent<PowerUpBase>() != null).ToList();
+            powerUpsOptions = GameManager.Instance.LevelMng.CurrentLevel.PowerUpOptions;
             CalculatePercentage();
             container = new GameObject("PowerUpContainer");
             container.transform.parent = transform;
             countdown = timer;
+            audioSurce = GetComponent<AudioSource>();
+            audioSurce.clip = GameManager.Instance.AudioMng.PowerUpSpawn;
         }
 
         public void Toggle(bool _value)
@@ -74,6 +79,8 @@ namespace BlackFox
 
         #region PowerUpSpawn
 
+        PowerUpOptions powerUpsOptions;
+
         List<PowerupsPercentage> powerUpPercentages = new List<PowerupsPercentage>();
 
         /// <summary>
@@ -81,17 +88,16 @@ namespace BlackFox
         /// </summary>
         void CalculatePercentage()
         {
-            List<PowerUpBase> tempPowerUps = new List<PowerUpBase>();
-            foreach (GameObject item in PowerUps)
+            List<PowerupsPercentage> tempPowerUpsPercentage = new List<PowerupsPercentage>();
+            foreach (PowerupsPercentage powerUpPercentage in powerUpsOptions.Percentages)
             {
-                PowerUpBase powerup = item.GetComponent<PowerUpBase>();
-                PowerupRatioSum += powerup.SpawnRatio;
-                tempPowerUps.Add(powerup);
+                PowerupRatioSum += powerUpPercentage.Percentage;
+                tempPowerUpsPercentage.Add(powerUpPercentage);
             }
 
-            for (int i = 0; i < tempPowerUps.Count; i++)
+            for (int i = 0; i < tempPowerUpsPercentage.Count; i++)
             {
-                powerUpPercentages.Add(new PowerupsPercentage { PowerUpID = tempPowerUps[i].ID.ToString(), Percentage = (tempPowerUps[i].SpawnRatio * 100) / PowerupRatioSum });
+                powerUpPercentages.Add(new PowerupsPercentage { PowerUpID = tempPowerUpsPercentage[i].PowerUpID, Percentage = (tempPowerUpsPercentage[i].Percentage * 100) / PowerupRatioSum });
             }
         }
 
@@ -111,7 +117,7 @@ namespace BlackFox
                 {
                     foreach (GameObject item in PowerUps)
                     {
-                        if (item.GetComponent<PowerUpBase>().ID.ToString() == powerUpPercentages[i].PowerUpID)
+                        if (item.GetComponent<PowerUpBase>().ID == powerUpPercentages[i].PowerUpID)
                             return item;
                     } 
                 }
@@ -136,6 +142,8 @@ namespace BlackFox
             DrawParable(tempPowerup.gameObject, ChoosePosition(GameManager.Instance.PlayerMng.Players));
             if (tempPowerup != null)
                 tempPowerup.LifeTime = PowerUpLifeTime;
+            if (!audioSurce.isPlaying)
+                audioSurce.Play();
         }
         
         #endregion
@@ -152,40 +160,51 @@ namespace BlackFox
 
         Vector3 ChoosePosition(List<Player> players)
         {
+            float coreX = GameManager.Instance.LevelMng.Core.transform.position.x;
+            float coreZ = GameManager.Instance.LevelMng.Core.transform.position.z;
             Vector3 finalPosition = new Vector3();
             for (int i = 0; i < players.Count; i++)
             {
                 finalPosition = finalPosition + players[i].Avatar.ship.transform.position;
             }
             finalPosition.y /= players.Count;
-            finalPosition.x = (GameManager.Instance.LevelMng.Core.transform.position.x - finalPosition.x) * Random.Range(-2f, 2f) / players.Count; ;
-            finalPosition.z = (GameManager.Instance.LevelMng.Core.transform.position.z - finalPosition.z) * Random.Range(-2f, 2f) / players.Count; ;
+            finalPosition.x = (coreX - finalPosition.x) * Random.Range(0f, MaxRandomOffSet) / players.Count; ;
+            finalPosition.z = (coreZ - finalPosition.z) * Random.Range(0f, MaxRandomOffSet) / players.Count; ;
 
             //Check becero per tenere i power Up in scena
-            if (finalPosition.magnitude < new Vector3(MinX, 8, MinZ).magnitude)
+            Vector3 coreProjection = new Vector3(coreX, 8, coreZ);
+            if (Vector3.Distance(finalPosition, coreProjection) < CoreMinDistance)
             {
-                finalPosition += Vector3.one;
-                finalPosition *= 2;
+                while (Vector3.Distance(finalPosition, coreProjection) < CoreMinDistance)
+                {
+                    finalPosition = finalPosition + new Vector3(Random.Range(0f, CoreMinDistance), 0, Random.Range(0f, CoreMinDistance));
+                }
+                if (Random.Range(-1f, 1f) < 0)
+                    finalPosition.x *= -1f;
+                if (Random.Range(-1f, 1f) < 0)
+                    finalPosition.z *= -1f;
             }
 
-            if (finalPosition.x > MaxX)
-                finalPosition.x = MaxX;
-            if (finalPosition.x < -MaxX)
-                finalPosition.x = -MaxX;
+            if (finalPosition.x > XOffSet)
+                finalPosition.x = XOffSet;
+            if (finalPosition.x < -XOffSet)
+                finalPosition.x = -XOffSet;
 
-            if (finalPosition.z > MaxZ)
-                finalPosition.z = MaxZ;
-            if (finalPosition.z < -MaxZ)
-                finalPosition.z = -MaxZ;
+            if (finalPosition.z > ZOffSet)
+                finalPosition.z = ZOffSet;
+            if (finalPosition.z < -ZOffSet)
+                finalPosition.z = -ZOffSet;
 
+            finalPosition.y = 8;
             return finalPosition;
         }
 
     }
 
-    struct PowerupsPercentage
+    [System.Serializable]
+    public struct PowerupsPercentage
     {
-        public string PowerUpID;
+        public PowerUpID PowerUpID;
         public float Percentage;
     }
 

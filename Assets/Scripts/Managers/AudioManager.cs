@@ -10,13 +10,19 @@ namespace BlackFox
 
         public AudioSource AudioSurceMenu;
         public AudioSource AudioSurceMusic;
-        public AudioSource AudioSurceAmbience;
 
         [Header("Audio Clips")]
         public AudioClip MenuMovementAudioClip;
         public AudioClip MenuSelectionAudioClip;
         public AudioClip GameplayAudioClip;
-        public AudioClip PowerUpActivation;
+
+        [Header("PowerUp Audio Clips")]
+        public AudioClip PowerUpSpawn;
+        public AudioClip KamikazeActivation;
+        public AudioClip AmmoCleanerActivation;
+        public AudioClip CleanSweepActivation;   
+        public AudioClip TankActivation;
+        public AudioClip InvertCommandsActivation;
 
         #region Audio Actions
         void PlayUIAudio(UIAudio _menuAudio)
@@ -53,9 +59,6 @@ namespace BlackFox
                         AudioSurceMusic.clip = GameplayAudioClip;
                         AudioSurceMusic.Play();
                         break;
-                    case Music.Ambience:
-                        //AudioSurceAmbience.Play();
-                        break;
                 }
             }
             else
@@ -68,11 +71,32 @@ namespace BlackFox
                     case Music.GameTheme:
                         StartCoroutine(FadeoutMusic(AudioSurceMusic, 1.5f));
                         break;
-                    case Music.Ambience:
-                        //StartCoroutine(FadeoutMusic(AudioSurceAmbience, 1f));
-                        break;
                 }
             }
+        }
+
+        public AudioClip GetPowerUpClip(PowerUpID _powerUpID)
+        {
+            AudioClip clip = null;
+            switch (_powerUpID)
+            {
+                case PowerUpID.Kamikaze:
+                    clip = KamikazeActivation;
+                    break;
+                case PowerUpID.AmmoCleaner:
+                    clip = AmmoCleanerActivation;
+                    break;
+                case PowerUpID.CleanSweep:
+                    clip = CleanSweepActivation;
+                    break;
+                case PowerUpID.Tank:
+                    clip = TankActivation;
+                    break;
+                case PowerUpID.InvertCommands:
+                    clip = InvertCommandsActivation;
+                    break;
+            }
+            return clip;
         }
         #endregion
 
@@ -114,7 +138,6 @@ namespace BlackFox
         {
             MainTheme,
             GameTheme,
-            Ambience
         }
         #endregion
     }

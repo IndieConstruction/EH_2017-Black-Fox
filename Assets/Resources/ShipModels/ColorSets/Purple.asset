@@ -14,4 +14,4 @@ MonoBehaviour:
   ShipMaterialMain: {fileID: 2100000, guid: 99ce569298d98314ebdc5bc4c42310b2, type: 2}
   RopeMaterial: {fileID: 2100000, guid: 3a96a378185b35d468b9b75d1b718f1b, type: 2}
   PinMaterial: {fileID: 2100000, guid: ed8541286cd3db34994ca05c24ab5eff, type: 2}
-  ProjectileMaterial: {fileID: 2100000, guid: d2d73312869d767449d18ca2d958db56, type: 2}
+  HudColor: {fileID: 21300000, guid: f4ead69b5416f6c4d82bb5d5cf24d382, type: 3}

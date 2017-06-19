@@ -7,9 +7,7 @@ namespace BlackFox
 {
     public class GameUIController : MonoBehaviour
     {
-        public Text[] PlayersBulletCount = new Text[4];
-
-        public Text[] PlayersKillPoints = new Text[4];
+        List<PlayerHud> Huds = new List<PlayerHud>();
 
         public Slider ElementZeroSlider;
 
@@ -17,40 +15,54 @@ namespace BlackFox
 
         public Text CoinCollectedText;
 
+        List<GameObject> getHudPlayers()
+        {
+            List<GameObject> tempHudPlayers = new List<GameObject>();
+            foreach (RectTransform item in GetComponentsInChildren<RectTransform>())
+            {
+                if(item.tag == "HUDPlayer")
+                {
+                    tempHudPlayers.Add(item.gameObject);
+                }
+            }
+            return tempHudPlayers;
+        }
+
+
+
         #region API
 
-        /// <summary>
-        /// Quando viene richiamata la funzione, vengono visualizzati i proiettili del player che gli viene passato.
-        /// </summary>
-        /// <param name="_playerID"></param>
-        /// <param name="_remainigAmmo"></param>
-        public void SetBulletsValue(Avatar _avatar)
+        public void Init()
         {
-            for (int i = 0; i < PlayersBulletCount.Length; i++)
+            List<Player> players = GameManager.Instance.PlayerMng.Players;
+            List<GameObject> HudPlayer = getHudPlayers();
+            for (int i = 0; i < players.Count; i++)
             {
-                if(_avatar.PlayerId == (PlayerLabel)i + 1)
-                    PlayersBulletCount[i].text = _avatar.ship.shooter.Ammo.ToString();
+                PlayerHud temphud = new PlayerHud();
+                temphud.player = players[i];
+                temphud.Hud = HudPlayer[i];
+                temphud.GetImage().sprite = players[i].AvatarData.ColorSets[players[i].AvatarData.ColorSetIndex].HudColor;
+                Huds.Add(temphud);
             }
         }
-        
 
         /// <summary>
         /// Quando viene richiamata va a leggere i punti del player richiesto nel levelMng e li aggiorna nella UI.
         /// </summary>
-        /// <param name="_playerID">Il giocatore a cui aggiornare i punti uccisione nella Ui</param>
-        public void SetKillPointsUI(PlayerLabel _playerID)
+        /// <param name="_player">Il giocatore a cui aggiornare i punti uccisione nella Ui</param>
+        public void SetKillPointsUI(Player _player)
         {
-            for (int i = 0; i < PlayersKillPoints.Length; i++)
+            for (int i = 0; i < Huds.Count; i++)
             {
-                if (_playerID == (PlayerLabel)i + 1)
-                    PlayersKillPoints[i].text = GameManager.Instance.LevelMng.GetPlayerKillPoints(_playerID).ToString();
+                if (Huds[i].player == _player)
+                    Huds[i].GetText().text = GameManager.Instance.LevelMng.GetPlayerKillPoints(_player.ID).ToString();
             }
         }
 
         public void ResetKillPointsUI()
         {
-            for (int i = 0; i < PlayersKillPoints.Length; i++)
-                    PlayersKillPoints[i].text = "0";
+            for (int i = 0; i < Huds.Count; i++)
+                Huds[i].GetText().text = "0";
         }
 
         public void SetElementZeroSlider(float _life, float _maxLife)
@@ -69,16 +81,22 @@ namespace BlackFox
 
         #endregion
 
-        #region Events
-        private void OnEnable()
+        class PlayerHud
         {
-            EventManager.OnAmmoValueChange += SetBulletsValue;
+            public Player player;
+            public GameObject Hud;
+
+            public Text GetText()
+            {
+                return Hud.GetComponentInChildren<Text>();
+            }
+
+            public Image GetImage()
+            {
+                return Hud.GetComponentInChildren<Image>();
+            }
+
         }
 
-        private void OnDisable()
-        {
-            EventManager.OnAmmoValueChange -= SetBulletsValue;
-        }
-        #endregion
     }
 }

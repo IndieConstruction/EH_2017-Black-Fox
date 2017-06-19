@@ -29,7 +29,6 @@ namespace BlackFox {
                 case "BlackFox.PlayState":
                     CurrentState = new CleanSceneState();
                     break;
-
                 case "BlackFox.PauseState":
                     CurrentState = new PlayState();
                     break;

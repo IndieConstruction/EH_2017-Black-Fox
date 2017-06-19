@@ -56,8 +56,9 @@ namespace BlackFox
 
                 switch (CurrentIndexSelection)
                 {
+                    
                     case 0:
-                        GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new LevelSelectionState() });
+                        GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new AvatarSelectionState() });
                         break;
                     case 1:
                         GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new CreditsState() });

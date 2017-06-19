@@ -11,7 +11,7 @@ namespace BlackFox {
         protected override void Init()
         {
             base.Init();
-            SpawnRatio = GameManager.Instance.LevelMng.CurrentLevel.RatioTank;
+            //SpawnRatio = GameManager.Instance.LevelMng.CurrentLevel.RatioTank;
         }
         public override void UsePowerUp()
         {

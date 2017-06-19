@@ -91,4 +91,11 @@ namespace BlackFox {
         Tank,
         InvertCommands
     }
+
+    [System.Serializable]
+    public class PowerUpOptions
+    {
+        public List<PowerupsPercentage> Percentages = new List<PowerupsPercentage>();
+    }
+
 }

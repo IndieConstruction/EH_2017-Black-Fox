@@ -10,7 +10,7 @@ namespace BlackFox
         protected override void Init()
         {
             base.Init();
-            SpawnRatio = GameManager.Instance.LevelMng.CurrentLevel.RatioKamikaze;
+            //SpawnRatio = GameManager.Instance.LevelMng.CurrentLevel.RatioKamikaze;
         }
         public override void UsePowerUp()
         {

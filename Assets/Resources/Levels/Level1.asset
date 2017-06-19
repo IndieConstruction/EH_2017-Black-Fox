@@ -20,8 +20,8 @@ MonoBehaviour:
     AddPoints: 1
     SubPoints: 0
     PointsToWin: 5
-  MinPowerUpRatio: 0
-  MaxPowerUpRatio: 0
+  MinPowerUpRatio: 5
+  MaxPowerUpRatio: 10
   RatioTank: 0
   RatioCleanSweep: 0
   RatioKamikaze: 0

@@ -16,7 +16,7 @@ namespace BlackFox
         {
             DestroyAfterUse = false;
             cleanerParticle = GetComponentInChildren<ParticleSystem>();
-            SpawnRatio = GameManager.Instance.LevelMng.CurrentLevel.RatioCleanSweep;
+            //SpawnRatio = GameManager.Instance.LevelMng.CurrentLevel.RatioCleanSweep;
         }
 
         public override void UsePowerUp()

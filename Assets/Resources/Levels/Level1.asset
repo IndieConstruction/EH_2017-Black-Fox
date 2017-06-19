@@ -22,11 +22,18 @@ MonoBehaviour:
     PointsToWin: 5
   MinPowerUpRatio: 5
   MaxPowerUpRatio: 10
-  RatioTank: 20
-  RatioCleanSweep: 20
-  RatioKamikaze: 20
-  RatioAmmoCleaner: 20
-  RatioInvertCommand: 20
+  PowerUpOptions:
+    Percentages:
+    - PowerUpID: 0
+      Percentage: 1
+    - PowerUpID: 1
+      Percentage: 1
+    - PowerUpID: 2
+      Percentage: 1
+    - PowerUpID: 3
+      Percentage: 1
+    - PowerUpID: 4
+      Percentage: 96
   ArrowsSpawner:
     SpawnerPrefab: {fileID: 0}
     ArrowPrefab: {fileID: 0}

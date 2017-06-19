@@ -24,13 +24,16 @@ namespace BlackFox
         public float MaxPitchValue = 2f;
         float value;
 
+        List<AudioClip> shootSounds;
+        List<AudioClip> collisionSounds;
+
         public void Init(Ship _ship)
         {
             ship = _ship;
 
             AudioSurceAcceleration.clip = ship.Avatar.AvatarData.ShipAudioSet.Movement;
-            AudioSurceCollision.clip = ship.Avatar.AvatarData.ShipAudioSet.Collision;
-            AudioSurceShoot.clip = ship.Avatar.AvatarData.ShipAudioSet.Shot;
+            collisionSounds = ship.Avatar.AvatarData.ShipAudioSet.Collisions;
+            shootSounds = ship.Avatar.AvatarData.ShipAudioSet.Shoots;
             AudioSourceAmmoRecharge.clip = ship.Avatar.AvatarData.ShipAudioSet.PinPlaced;
             AudioSourceDeath.clip = ship.Avatar.AvatarData.ShipAudioSet.Death;
             AudioSourceNoAmmo.clip = ship.Avatar.AvatarData.ShipAudioSet.NoAmmo;
@@ -42,6 +45,8 @@ namespace BlackFox
         #region Play Audios
         public void PlayShootAudio()
         {
+            if (shootSounds.Count > 0)
+                AudioSurceShoot.clip = shootSounds[Random.Range(0, shootSounds.Count)];
             if (AudioSurceShoot.clip != null)
                 AudioSurceShoot.Play();
         }
@@ -66,7 +71,9 @@ namespace BlackFox
 
         public void PlayCollisionAudio()
         {
-            if (AudioSurceCollision.clip != null)
+            if(collisionSounds.Count > 0)
+                AudioSurceCollision.clip = collisionSounds[Random.Range(0, collisionSounds.Count)];
+            if (AudioSurceCollision.clip != null && !AudioSurceCollision.isPlaying)
                 AudioSurceCollision.Play();
         }
         #endregion

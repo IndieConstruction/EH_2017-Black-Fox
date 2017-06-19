@@ -17,6 +17,8 @@ namespace BlackFox
         List<GameObject> PowerUps = new List<GameObject>();
         bool IsActive = false;
         GameObject container;
+        AudioSource audioSurce;
+
         float MinTimeToSpawn
         {
             get { return GameManager.Instance.LevelMng.CurrentLevel.MinPowerUpRatio; }
@@ -57,6 +59,8 @@ namespace BlackFox
             container = new GameObject("PowerUpContainer");
             container.transform.parent = transform;
             countdown = timer;
+            audioSurce = GetComponent<AudioSource>();
+            audioSurce.clip = GameManager.Instance.AudioMng.PowerUpSpawn;
         }
 
         public void Toggle(bool _value)
@@ -136,6 +140,8 @@ namespace BlackFox
             DrawParable(tempPowerup.gameObject, ChoosePosition(GameManager.Instance.PlayerMng.Players));
             if (tempPowerup != null)
                 tempPowerup.LifeTime = PowerUpLifeTime;
+            if (!audioSurce.isPlaying)
+                audioSurce.Play();
         }
         
         #endregion

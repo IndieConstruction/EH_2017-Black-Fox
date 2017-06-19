@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: Orange
   m_EditorClassIdentifier: 
   ShipMaterialMain: {fileID: 2100000, guid: ed50f55be8a8feb479d02cccfed7723b, type: 2}
-  RopeMaterial: {fileID: 2100000, guid: ed50f55be8a8feb479d02cccfed7723b, type: 2}
+  RopeMaterial: {fileID: 2100000, guid: 514a9a328e76c9747b82f40545c8c81b, type: 2}
   PinMaterial: {fileID: 2100000, guid: ed50f55be8a8feb479d02cccfed7723b, type: 2}

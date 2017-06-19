@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: LightBlue
   m_EditorClassIdentifier: 
   ShipMaterialMain: {fileID: 2100000, guid: ed50f55be8a8feb479d02cccfed7723b, type: 2}
-  RopeMaterial: {fileID: 2100000, guid: ed50f55be8a8feb479d02cccfed7723b, type: 2}
+  RopeMaterial: {fileID: 2100000, guid: 0bb545a44558c3142a1f9b07f8c7e6aa, type: 2}
   PinMaterial: {fileID: 2100000, guid: ed50f55be8a8feb479d02cccfed7723b, type: 2}

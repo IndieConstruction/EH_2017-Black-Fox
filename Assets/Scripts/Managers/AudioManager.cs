@@ -1,12 +1,13 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 namespace BlackFox
 {
     public class AudioManager : MonoBehaviour
     {
-        //TODO : trovare modo funzionale di caricare e leggere le varie audio clips
+        public float MusicFadeOutTime = 0.8f;
+        public float MusicFadeInTime = 0.1f;
 
         public AudioSource AudioSurceMenu;
         public AudioSource AudioSurceMusic;
@@ -15,6 +16,8 @@ namespace BlackFox
         public AudioClip MenuMovementAudioClip;
         public AudioClip MenuSelectionAudioClip;
         public AudioClip GameplayAudioClip;
+        public AudioClip MenuAudioClip;
+
 
         [Header("PowerUp Audio Clips")]
         public AudioClip PowerUpSpawn;
@@ -23,6 +26,8 @@ namespace BlackFox
         public AudioClip CleanSweepActivation;   
         public AudioClip TankActivation;
         public AudioClip InvertCommandsActivation;
+
+        Tweener fade;
 
         #region Audio Actions
         void PlayUIAudio(UIAudio _menuAudio)
@@ -48,30 +53,26 @@ namespace BlackFox
 
         void PlayMusic(Music _music, bool _play)
         {
-            if(_play)
+            AudioSource surce = AudioSurceMusic;
+            if (AudioSurceMusic != null)
             {
-                switch (_music)
+                fade = AudioSurceMusic.DOFade(0, MusicFadeOutTime).OnComplete(() =>
                 {
-                    case Music.MainTheme:
-                        //AudioSurceMusic.Play();
-                        break;
-                    case Music.GameTheme:
-                        AudioSurceMusic.clip = GameplayAudioClip;
+                    if (_play)
+                    {
+                        switch (_music)
+                        {
+                            case Music.MenuTheme:
+                                AudioSurceMusic.clip = MenuAudioClip;
+                                break;
+                            case Music.GameTheme:
+                                AudioSurceMusic.clip = GameplayAudioClip;
+                                break;
+                        }
                         AudioSurceMusic.Play();
-                        break;
-                }
-            }
-            else
-            {
-                switch (_music)
-                {
-                    case Music.MainTheme:
-                        //StartCoroutine(FadeoutMusic(AudioSurceMusic, 1.5f));
-                        break;
-                    case Music.GameTheme:
-                        StartCoroutine(FadeoutMusic(AudioSurceMusic, 1.5f));
-                        break;
-                }
+                        AudioSurceMusic.DOFade(1, MusicFadeInTime);
+                    }
+                });
             }
         }
 
@@ -100,16 +101,6 @@ namespace BlackFox
         }
         #endregion
 
-        IEnumerator FadeoutMusic(AudioSource _surceToFade, float _speed)
-        {
-            while (_surceToFade.volume > 0)
-            {
-                _surceToFade.volume -= _speed * Time.deltaTime;
-                yield return new WaitForEndOfFrame();
-            }
-            _surceToFade.Stop();
-        }
-
         #region Events
         private void OnEnable()
         {
@@ -136,7 +127,7 @@ namespace BlackFox
 
         public enum Music
         {
-            MainTheme,
+            MenuTheme,
             GameTheme,
         }
         #endregion

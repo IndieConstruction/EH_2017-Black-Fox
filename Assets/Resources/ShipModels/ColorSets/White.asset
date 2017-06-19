@@ -11,6 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49da9a758077c124d9645884117fa0ed, type: 3}
   m_Name: White
   m_EditorClassIdentifier: 
-  ShipMaterialMain: {fileID: 2100000, guid: ed50f55be8a8feb479d02cccfed7723b, type: 2}
-  RopeMaterial: {fileID: 2100000, guid: b03987f081122f648834274c45413dd5, type: 2}
-  PinMaterial: {fileID: 2100000, guid: ed50f55be8a8feb479d02cccfed7723b, type: 2}
+  ShipMaterialMain: {fileID: 2100000, guid: 478c1b92c82feb94191c3ce0a554cdd2, type: 2}
+  RopeMaterial: {fileID: 2100000, guid: ed50f55be8a8feb479d02cccfed7723b, type: 2}
+  PinMaterial: {fileID: 2100000, guid: 95d69561335a6834d91216c7c055e5bd, type: 2}

@@ -14,7 +14,11 @@ namespace BlackFox {
         public LevelOptions LevelOptions;
         public float MinPowerUpRatio;
         public float MaxPowerUpRatio;
-
+        public float RatioTank;
+        public float RatioCleanSweep;
+        public float RatioKamikaze;
+        public float RatioAmmoCleaner;
+        public float RatioInvertCommand;
 
         [Header("Spawners")]
         public ArrowsSpawerOptions ArrowsSpawner;

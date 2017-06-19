@@ -108,7 +108,7 @@ namespace BlackFox
         /// <returns></returns>
         GameObject ChoosePowerUp()
         {
-            float randNum = Random.Range(0, PowerupRatioSum);
+            float randNum = Random.Range(0, 100);
             float tempMinValue = 0f;
 
             for (int i = 0; i < powerUpPercentages.Count; i++)

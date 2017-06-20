@@ -9,13 +9,13 @@ namespace BlackFox
 {
     public class Core : MonoBehaviour, IDamageable
     {
-
         float life;
         public float MaxLife = 10;      // La vita massima che può avere il Core e che viene impostata al riavvio di un round perso
 
+        public ParticleSystem Particles;
         Image Ring;
 
-        public GameObject DamageParticles;
+        Tweener damageTween;
 
         private ParticlesController _particlesController;
 
@@ -59,12 +59,21 @@ namespace BlackFox
         #region API
         public void Init()
         {
-            transform.DOScale(Vector3.one, 0.1f);
+            if (damageTween != null)
+                damageTween.Complete();
+            damageTween = transform.DOScale(Vector3.one, 0.1f);
             if (life <= 0)
             {
                 life = MaxLife;
                 OnDataChange();
             }
+        }
+
+        public bool IsCoreAlive() {
+            if (life < 1)
+                return false;
+            else
+                return true;
         }
         #endregion
 
@@ -74,17 +83,25 @@ namespace BlackFox
         {
             life -= _damage;
             OnDataChange();
-            transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0.1f), 0.5f);
+            if (damageTween != null)
+                damageTween.Complete();
+            damageTween = transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0.1f), 0.5f);
             //DamageParticles.transform.position = new Vector3(DamageParticles.transform.position.x + UnityEngine.Random.Range(0.1f, 0.5f), 
-              //  DamageParticles.transform.position.y + UnityEngine.Random.Range(0.1f, 0.5f), DamageParticles.transform.position.z + UnityEngine.Random.Range(0.1f, 0.5f));
+            //  DamageParticles.transform.position.y + UnityEngine.Random.Range(0.1f, 0.5f), DamageParticles.transform.position.z + UnityEngine.Random.Range(0.1f, 0.5f));
             //ParticlesController.PlayParticles(ParticlesController.ParticlesType.Damage);
-            
 
-            if (life < 1)
+            if (!IsCoreAlive())
             {
-                GameManager.Instance.LevelMng.PoolMng.GetPooledObject(transform.position);
-                transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { GameManager.Instance.LevelMng.CoreDeath(); });
+                if(!Particles.isPlaying)
+                    StartCoroutine(CoreExplosionEffect());
             }
+        }
+
+        IEnumerator CoreExplosionEffect()
+        {
+            Particles.Play();
+            yield return new WaitForSeconds(Particles.main.duration);
+            GameManager.Instance.LevelMng.CheckRoundStatus();
         }
 
         #endregion

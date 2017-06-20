@@ -18,7 +18,6 @@ namespace BlackFox
         }
 
         Ship ship;
-        Material bulletMaterial;
 
         int ammo;
         public int Ammo
@@ -32,7 +31,7 @@ namespace BlackFox
         public float ShootingDistance
         {
             get {
-                if (ship.Avatar.GetUpgrade(UpgardeTypes.PinRegenUpgrade) != null)
+                if (ship.Avatar.GetUpgrade(UpgardeTypes.ShootingDistnceUpgrade) != null)
                     return ship.Avatar.GetUpgrade(UpgardeTypes.ShootingDistnceUpgrade).CalculateValue(shooterBaseConfig.LifeTime);
                 else
                     return shooterBaseConfig.LifeTime;
@@ -49,7 +48,7 @@ namespace BlackFox
         {
             if (Ammo > 0)
             {
-                GameObject instantiatedProjectile = Instantiate(shooterBaseConfig.ProjectilePrefab, transform.position + transform.forward*shooterConfig.DistanceFromShipOrigin, transform.rotation);
+                GameObject instantiatedProjectile = Instantiate(shooterBaseConfig.ProjectilePrefab, transform.position + transform.forward * shooterConfig.DistanceFromShipOrigin, transform.rotation);
                 instantiatedProjectile.GetComponentInChildren<MeshRenderer>().material = ship.Avatar.AvatarData.ColorSets[ship.Avatar.AvatarData.ColorSetIndex].PinMaterial;
                 instantiatedProjectile.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * shooterBaseConfig.BulletSpeed, ForceMode.Impulse);
                 instantiatedProjectile.GetComponent<Projectile>().Init(GetComponentInParent<IShooter>());
@@ -57,6 +56,8 @@ namespace BlackFox
                 Ammo--;
                 ship.ParticlesController.PlayParticles(ParticlesController.ParticlesType.Fire);
             }
+            else
+                ship.NoAmmoAudio();
         }
 
         public void SetFireDirection(Vector3 _direction)
@@ -68,7 +69,7 @@ namespace BlackFox
         public void AddAmmo()
         {
             if (Ammo < shooterConfig.MaxAmmo)
-                Ammo += (int)ship.Avatar.GetUpgrade(UpgardeTypes.AmmoRechargeUpgrade).CalculateValue(shooterConfig.AddedAmmo);
+                Ammo += shooterConfig.AddedAmmo;
             else if (Ammo > shooterConfig.MaxAmmo)
                 Ammo = shooterConfig.MaxAmmo;
         }
@@ -77,6 +78,11 @@ namespace BlackFox
         {
             Ammo = 500;
             shooterConfig.MaxAmmo = 500;
+        }
+
+        public void DamageCheat()
+        {
+            shooterConfig.ProjectileDamage = 100;
         }
         #endregion
     }

@@ -11,6 +11,7 @@ namespace BlackFox
         // Variabili per il funzionamento dei controller
         PlayerIndex playerIndex;
         ButtonState rightTriggerOldState;
+        ButtonState leftTriggerOldState;
         GamePadState state;
         GamePadState prevState;
 
@@ -66,7 +67,7 @@ namespace BlackFox
             InputStatus inputStatus = new InputStatus();
 
             prevState = state;
-            state = GamePad.GetState(playerIndex);
+            state = GamePad.GetState(playerIndex, GamePadDeadZone.Circular);
 
             if (!state.IsConnected)
             {
@@ -78,18 +79,36 @@ namespace BlackFox
 
             inputStatus.RightTriggerAxis = state.Triggers.Right;
 
-            // Trigger as button
+            // Right Trigger as button
             if (inputStatus.RightTriggerAxis <= 0.1f)
             {
                 // rilasciato
                 rightTriggerOldState = inputStatus.RightTrigger = ButtonState.Released;                
-            }else//            if (inputStatus.RightTriggerAxis > 0.1f)
+            }
+            else
             {
                 if (rightTriggerOldState == ButtonState.Released)
                     rightTriggerOldState = inputStatus.RightTrigger = ButtonState.Pressed;
 
                 else
                     rightTriggerOldState = inputStatus.RightTrigger = ButtonState.Held;
+            }
+
+            inputStatus.LeftTriggerAxis = state.Triggers.Left;
+
+            // Left Trigger as button
+            if (inputStatus.LeftTriggerAxis <= 0.1f)
+            {
+                // rilasciato
+                leftTriggerOldState = inputStatus.LeftTrigger = ButtonState.Released;
+            }
+            else
+            {
+                if (leftTriggerOldState == ButtonState.Released)
+                    leftTriggerOldState = inputStatus.LeftTrigger = ButtonState.Pressed;
+
+                else
+                    leftTriggerOldState = inputStatus.LeftTrigger = ButtonState.Held;
             }
 
             inputStatus.LeftThumbSticksAxisX = state.ThumbSticks.Left.X;
@@ -101,11 +120,6 @@ namespace BlackFox
             if (prevState.Buttons.RightShoulder == XInputDotNetPure.ButtonState.Released && state.Buttons.RightShoulder == XInputDotNetPure.ButtonState.Pressed)
             {
                 inputStatus.RightShoulder = ButtonState.Pressed;
-            }
-
-            if (prevState.Buttons.LeftShoulder == XInputDotNetPure.ButtonState.Released && state.Buttons.LeftShoulder == XInputDotNetPure.ButtonState.Pressed)
-            {
-                inputStatus.LeftShoulder = ButtonState.Pressed;
             }
 
             if (prevState.Buttons.A == XInputDotNetPure.ButtonState.Released && state.Buttons.A == XInputDotNetPure.ButtonState.Pressed)
@@ -161,14 +175,9 @@ namespace BlackFox
             inputStatus.RightThumbSticksAxisX = Input.GetAxis("Key" + (int)playerIndex + "_ShootX");
             inputStatus.RightThumbSticksAxisY = Input.GetAxis("Key" + (int)playerIndex + "_ShootY");
 
-            if (Input.GetButtonDown("Key" + (int)playerIndex + "_PlaceRight"))
+            if (Input.GetButtonDown("Key" + (int)playerIndex + "_PlacePin"))
             {
-                inputStatus.RightShoulder = ButtonState.Pressed;
-            }
-
-            if (Input.GetButtonDown("Key" + (int)playerIndex + "_PlaceLeft"))
-            {
-                inputStatus.LeftShoulder = ButtonState.Pressed;
+                inputStatus.LeftTrigger = ButtonState.Pressed;
             }
 
             if (Input.GetButtonDown("Key" + (int)playerIndex + "_Fire"))
@@ -202,12 +211,12 @@ namespace BlackFox
 
             if (Input.GetButtonDown("Key" + (int)playerIndex + "_Submit"))
             {
-                inputStatus.A = ButtonState.Pressed;
+                inputStatus.RightTrigger = ButtonState.Pressed;
             }
 
             if (Input.GetButtonDown("Key" + (int)playerIndex + "_Deselect"))
             {
-                inputStatus.B = ButtonState.Pressed;
+                inputStatus.LeftTrigger = ButtonState.Pressed;
             }
 
             if (Input.GetButtonDown("Key" + (int)playerIndex + "_Pause"))

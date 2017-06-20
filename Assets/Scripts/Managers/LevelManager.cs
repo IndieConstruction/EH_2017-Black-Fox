@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections;
+using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -30,7 +30,8 @@ namespace BlackFox
         public UpgradePointsManager UpgradePointsMng;
         [HideInInspector]
         public PowerUpManager PowerUpMng;
-        public PoolManager PoolMng;
+        [HideInInspector]
+        public PoolManager ExplosionPoolMng;
         #endregion
 
         #region Level
@@ -44,9 +45,6 @@ namespace BlackFox
         [HideInInspector]
         public Core Core;
 
-        [HideInInspector]
-        public string EndLevelPanelLableText;
-        
         [HideInInspector]
         public LevelOptions levelOptions;
 
@@ -81,7 +79,7 @@ namespace BlackFox
             CurrentLevel = Instantiate(GameManager.Instance.GetSelectedLevel());
             levelOptions = CurrentLevel.LevelOptions;
             StartGameplaySM();
-            levelPointsCounter = new LevelPointsCounter(this);
+            levelPointsCounter = new LevelPointsCounter(this, GameManager.Instance.PlayerMng.Players);
             RoundNumber = 1;
         }
 
@@ -134,38 +132,18 @@ namespace BlackFox
             ResetPinsContainer(Arena.transform);
         }
 
-        public void InstantiatePoolManager()
+        public void InstantiateExplosionPoolManager()
         {
-            object explosionPrefab = Resources.Load("Prefabs/Misc/ExplosionParticles");
-            IPoollableObject explosion = (explosionPrefab as GameObject).GetComponent<IPoollableObject>();
+            GameObject explosionPrefab = Resources.Load<GameObject>("Prefabs/Particles/esplosione navetta");
+            IPoollableObject explosion = explosionPrefab.GetComponent<IPoollableObject>();
 
-            PoolMng = new PoolManager(new GameObject("Explosion Container").transform, explosion, 10);
+            ExplosionPoolMng = new PoolManager(new GameObject("Explosion Container").transform, explosion, 10);
         }
+
+
         #endregion
 
         #region Level
-        /// <summary>
-        /// Funzione da eseguire alla morte del core
-        /// </summary>
-        public void CoreDeath()
-        {
-            EndLevelPanelLableText = "Core Has Been Destroyed";
-            gameplaySM.CurrentState.OnStateEnd();
-        }
-
-        /// <summary>
-        /// Funzione che contiene le azioni da eseguire alla vittoria del player
-        /// </summary>
-        public void PlayerWin(string _winner)
-        {
-            NextRound();
-            EndLevelPanelLableText = "Player " + _winner + " Has Won";
-            gameplaySM.CurrentState.OnStateEnd();
-            IsRoundActive = false;
-            CoinManager.coins += 4;
-            CoinManager.AddCoins();
-        }
-
         /// <summary>
         /// Attiva lo stato di pausa della GameplaySM e imposta a menu input i comandi del player che ha chiamato la fuznione
         /// mentre l'input degli altri player viene disabilitato
@@ -182,14 +160,6 @@ namespace BlackFox
         }
 
         /// <summary>
-        /// Avanza di round.
-        /// </summary>
-        public void NextRound()
-        {
-            RoundNumber++;
-        }
-
-        /// <summary>
         /// Chiamato quando inizia il round.
         /// </summary>
         public void RoundBegin()
@@ -203,6 +173,15 @@ namespace BlackFox
         public void ClearPoints()
         {
             levelPointsCounter.ClearAllKillPoints();
+        }
+        #endregion
+
+        #region CheatCode
+
+        public void CheatCodeRoundEnd() {
+            for (int i = 0; i < 5; i++) {
+                levelPointsCounter.UpdateKillPoints(PlayerLabel.One, PlayerLabel.Two);
+            }
         }
         #endregion
 
@@ -236,13 +215,17 @@ namespace BlackFox
             return levelPointsCounter.GetPlayerKillPoints(_playerID);
         }
 
+        public List<PlayerStats> GetPlayerKillPointsInOrderDesc()
+        {
+            return levelPointsCounter.GetPlayerStatsByKillPointsInOrderDesc();
+        }
+
         /// <summary>
         /// Instance new avatars
         /// </summary>
         /// <param name="_spawnTime"></param>
         public void SpawnAllAvatar(float _spawnTime)
         {
-            //foreach (Player player in GameManager.Instance.PlayerMng.Players.Where(p => p.Avatar != null)) {
             foreach (Player player in GameManager.Instance.PlayerMng.Players)
                 AvatarSpwn.SpawnAvatar(player, _spawnTime);
         }
@@ -264,6 +247,176 @@ namespace BlackFox
                 Core.Init();
         }
         #endregion
+
+        /// <summary>
+        /// Ritorna le vittorie di un player
+        /// </summary>
+        /// <param name="_playerIndex">L'indice del player da controllare</param>
+        /// <returns></returns>
+        public int GetPlayerVictory(int _playerIndex)
+        {
+            return levelPointsCounter.GetPlayerVictories(_playerIndex);
+        }
+        #endregion
+
+        #region Level Rules
+
+        List<Player> playOffPlayers = new List<Player>();
+
+        /// <summary>
+        /// Controllo condizioni vittoria livello, true se la condizione di vittoria è verificata
+        /// </summary>
+        /// <returns></returns>
+        public bool CheckIfLevelIsWon()
+        {
+            if (CheckMathematicalWin())
+                return true;
+            if (RoundNumber > levelOptions.MaxRound && !CheckPlayOff())
+                return true;
+            return false;
+        }
+
+        /// <summary>
+        /// Controllo condizioni vittoria del round e condizioni di play off mentre si è in gioco
+        /// </summary>
+        public void CheckRoundStatus()
+        {
+            if (CheckPlayOff())
+            {
+                // controllo regole di gioco durante il play off
+                // controllo se un player ha vinto
+                foreach (Player player in playOffPlayers)
+                {
+                    if (levelPointsCounter.GetPlayerKillPoints(player.ID) == levelOptions.PointsToWin)
+                    {
+                        levelPointsCounter.AddPlayerVictory(player.ID);
+                        PlayerWin(player);
+                        return;
+                    }
+                }
+
+                // controllo se il core è morto
+                if (!Core.IsCoreAlive())
+                {
+                    CoreDeath();
+                    return;
+                }
+            }
+            else
+            {
+                // controllo se un player ha vinto
+                foreach (Player player in GameManager.Instance.PlayerMng.Players)
+                {
+                    if (levelPointsCounter.GetPlayerKillPoints(player.ID) == levelOptions.PointsToWin)
+                    {
+                        levelPointsCounter.AddPlayerVictory(player.ID);
+                        PlayerWin(player);
+                        RoundNumber++;
+                        return;
+                    }
+                }
+
+                // controllo se il core è morto
+                if (!Core.IsCoreAlive())
+                {
+                    CoreDeath();
+                    return;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Controlla se c'è la possiblità di andare ai play off
+        /// </summary>
+        /// <returns></returns>
+        bool CheckPlayOff()
+        {
+            if (playOffPlayers.Count >= 1)
+                return true;
+            if (RoundNumber > levelOptions.MaxRound)
+            {
+                List<PlayerStats> tempPlayersStats = new List<PlayerStats>();
+
+                for (int i = 0; i < GameManager.Instance.PlayerMng.Players.Count; i++) {
+
+                    tempPlayersStats.Add(levelPointsCounter.GetPlayerStats(GameManager.Instance.PlayerMng.Players[i].ID));
+
+                    if (tempPlayersStats[tempPlayersStats.Count - 1].Victories > tempPlayersStats[0].Victories) 
+                    {
+                        tempPlayersStats.Clear();
+                        tempPlayersStats.Add(levelPointsCounter.GetPlayerStats(GameManager.Instance.PlayerMng.Players[i].ID));
+                    } 
+                    else if (tempPlayersStats[tempPlayersStats.Count - 1].Victories < tempPlayersStats[0].Victories) 
+                    {
+                        tempPlayersStats.Remove(tempPlayersStats[tempPlayersStats.Count - 1]);
+                    }
+                }
+
+                if (tempPlayersStats.Count > 1)
+                {
+                    for (int i = 0; i < tempPlayersStats.Count; i++)
+                    {
+                        if(!playOffPlayers.Contains(tempPlayersStats[i].Player))
+                            playOffPlayers.Add(tempPlayersStats[i].Player);
+                    }
+                    return true;
+                }
+                else
+                {
+                    // player all'indice zero ha vinto
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Controlla se c'è la condizione di vittoria matematica
+        /// </summary>
+        /// <returns></returns>
+        bool CheckMathematicalWin()
+        {
+            int remainingRounds = levelOptions.MaxRound - (RoundNumber - 1);
+
+            List<PlayerStats> tempPlayersStats = new List<PlayerStats>();
+
+            for (int i = 0; i < GameManager.Instance.PlayerMng.Players.Count; i++)
+                tempPlayersStats.Add(levelPointsCounter.GetPlayerStats(GameManager.Instance.PlayerMng.Players[i].ID));
+
+            tempPlayersStats = tempPlayersStats.OrderByDescending(t => t.Victories).ToList();
+            if ((tempPlayersStats[1].Victories + remainingRounds) >= tempPlayersStats[0].Victories)
+                return false;
+            else
+                return true;
+        }
+        #endregion
+
+        #region Level End Actions
+        /// <summary>
+        /// Funzione da eseguire alla morte del core
+        /// </summary>
+        void CoreDeath()
+        {
+            GameManager.Instance.UiMng.canvasGame.endRoundUI.SetRecapImage("Defeat");
+            GameManager.Instance.CoinMng.CoinController.ClearCoinCollected();
+            IsRoundActive = false;
+            gameplaySM.CurrentState.OnStateEnd();
+        }
+
+        /// <summary>
+        /// Funzione che contiene le azioni da eseguire alla vittoria del player
+        /// </summary>
+        void PlayerWin(Player _player)
+        {
+            GameManager.Instance.UiMng.canvasGame.endRoundUI.SetRecapImage("Victory");
+            GameManager.Instance.LevelMng.UpgradePointsMng.GivePoints(_player.ID);
+            GameManager.Instance.CoinMng.CoinController.SavingCoinMng();
+            IsRoundActive = false;
+            gameplaySM.CurrentState.OnStateEnd();
+        }
         #endregion
 
         #region GameplaySM

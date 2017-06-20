@@ -11,6 +11,8 @@ namespace BlackFox
     {
         public UIControllerID MenuID;
 
+        public List<Image> Cups = new List<Image>();
+
         /// <summary>
         /// Variabile che si incrementa ogni volta che viene applicato un potenziamento. 
         /// Una volta uguale ai punti upgrade dell'avatar, non è più possibile upgradare.
@@ -60,8 +62,24 @@ namespace BlackFox
         /// </summary>
         void UpgradeGraphics()
         {
-            UpgradePintsText.text = "= " + (AvatarUpgradePoints - UpgradeCounter);
+            UpgradePintsText.text = (AvatarUpgradePoints - UpgradeCounter).ToString();
         }
+
+        /// <summary>
+        /// Si prende la quantità di vittorie relative al proprio player in base all'indice del menù
+        /// </summary>
+        void ShowVictories()
+        {
+            int victories = GameManager.Instance.LevelMng.GetPlayerVictory((int)MenuID);
+            if (victories > 0)
+            {
+                for (int i = 0; i < victories; i++)
+                {
+                    Cups[i].enabled = true;
+                } 
+            }
+        }
+
 
         #region API
 
@@ -71,25 +89,20 @@ namespace BlackFox
             Player = _player;
         }
 
-        /// <summary>
-        /// Crea la parte grafica degli upgrades
-        /// </summary>
-        //void CreateUpgradeSliders()
-        //{
-        //    foreach (IUpgrade upgrade in Player.Avatar.Upgrades)
-        //    {
-        //        Instantiate(selectableUpgradePrefab, new Vector3(0,157,0), Quaternion.identity, GetComponent<VerticalLayoutGroup>().transform);
-        //    }
-        //}
-
         public void Init()
         {
             for (int i = 0; i < SelectableButtons.Count && i < Upgrades.Count; i++)
-                (SelectableButtons[i] as ISelectableUpgrade).SetIUpgrade(Upgrades[i]); 
+            {
+                (SelectableButtons[i] as ISelectableUpgrade).SetIUpgrade(Upgrades[i]);
+                (SelectableButtons[i] as SelectableUpgrade).Init(UpgradeMng.ActiveSlide, UpgradeMng.DeactiveSlider);
+            }
+            SelectableButtons[0].IsSelected = true;
+            ShowVictories();
+
             CurrentState = UpgradeControllerState.Unready;
             UpgradeCounter = 0;
             UpgradeGraphics();
-            ConfirmText.text = "Press A to continue";
+            ConfirmText.text = "Press RT to continue";
             PlayerIdText.text = "Player " + Player.ID;
         }
 

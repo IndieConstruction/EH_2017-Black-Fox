@@ -9,6 +9,8 @@ namespace BlackFox
         {
             Debug.Log("LevelSelectionState");
             GameManager.Instance.UiMng.CreateLevelSelectionMenu();
+            GameManager.Instance.LoadingCtrl.DeactivateLoadingPanel();
+            GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInput, PlayerLabel.One, PlayerState.Blocked);
         }
 
         public override void OnEnd()

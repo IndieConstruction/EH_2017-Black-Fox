@@ -16,6 +16,8 @@ namespace BlackFox
         public GameObject AudioManagerPrefab;
         public GameObject DataManagerPrefab;
         public GameObject SRManagerPrefab;
+        public GameObject LoadingControllerPrefab;
+
         #endregion
 
         #region Managers
@@ -33,6 +35,9 @@ namespace BlackFox
         public DataManager DataMng;
         [HideInInspector]
         public SRManager SRMng;
+        [HideInInspector]
+        public LoadingController LoadingCtrl;
+        
         #endregion
 
         [HideInInspector]
@@ -119,6 +124,12 @@ namespace BlackFox
         {
             SRMng = Instantiate(SRManagerPrefab, transform).GetComponent<SRManager>();
         }
+
+        public void InstantiateLoadingController() 
+        {
+            LoadingCtrl = Instantiate(LoadingControllerPrefab, transform).GetComponent<LoadingController>();
+        }
+
         #endregion
         #endregion
     }

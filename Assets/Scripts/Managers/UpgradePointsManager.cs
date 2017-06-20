@@ -11,6 +11,10 @@ namespace BlackFox
         public int PointsForWinner = 2;
         public int PointsForLosers = 1;
 
+        /// <summary>
+        /// Assegna i punti di upgrade ai player
+        /// </summary>
+        /// <param name="_player"></param>
         public void GivePoints(PlayerLabel _player)
         {
             foreach (Player player in GameManager.Instance.PlayerMng.Players)

@@ -13,6 +13,7 @@ namespace BlackFox
         public float velocity = 5;
         public float damage = 1;
         AlertIndicator alertIndicator;
+        public GameObject particleSistem;
 
         List<IDamageable> damageablesList;
 
@@ -20,6 +21,13 @@ namespace BlackFox
         {
             get { return life; }
             set { life = value; }
+        }
+
+        private void Start()
+        {
+            Vector3 desiredDirection = transform.position - GameManager.Instance.LevelMng.Core.transform.position;
+            if (Vector3.Cross(desiredDirection, transform.forward).magnitude > .1f)
+                Destroy(gameObject);
         }
 
         private void Update()
@@ -51,8 +59,11 @@ namespace BlackFox
                     // E' presente l'oggetto con cui l'agente esterno è entrato in collisione.
                     if (item.GetType() == damageable.GetType())
                     {
-                        GameManager.Instance.LevelMng.PoolMng.GetPooledObject(transform.position);
-                        damageable.Damage(damage, null);        // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia
+                        if (collision.gameObject.GetComponent<Ship>() != null) {
+                            GameManager.Instance.CoinMng.CoinController.InstantiateCoin(transform.position);
+                        }
+                        Deactivate();
+                        damageable.Damage(damage, gameObject);        // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia
                         Destroy(gameObject);                    //Distrugge l'agente esterno
                         break;                                  // Ed esce dal foreach.
                     }
@@ -74,9 +85,18 @@ namespace BlackFox
             transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f);
             if (Life < 1)
             {
-                GameManager.Instance.LevelMng.PoolMng.GetPooledObject(transform.position);
+                Deactivate();
+                GameManager.Instance.CoinMng.CoinController.InstantiateCoin(transform.position);
                 transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => { Destroy(gameObject); });
             }
+        }
+
+        void Deactivate()
+        {
+            GetComponent<Collider>().enabled = false;
+            GetComponentInChildren<MeshRenderer>().enabled = false;
+            GetComponent<Rigidbody>().isKinematic = true;
+            Destroy(Instantiate(particleSistem, transform.position, Quaternion.identity), 4);
         }
 
         #endregion

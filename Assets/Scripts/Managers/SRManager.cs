@@ -83,11 +83,22 @@ namespace BlackFox {
             }
         }
 
+        /// <summary>
+        /// Richiamata la funzione per impostare i valori delle slider presente nello show room controller
+        /// </summary>
+        public void SetSliderValue()
+        {
+            foreach (ShowRoomController room in rooms)
+            {
+                room.SetSliderValue();
+            }
+        }
+
         public void LoadSelectedDatas()
         {
             foreach (ShowRoomController room in rooms)
             {
-                room.player.AvatarData = Instantiate(datas[room.indexOfCurrent]);
+                room.player.AvatarData = Instantiate(datas[room.IndexOfCurrent]);
                 room.player.AvatarData.ColorSetIndex = room.colorIndex;
             }
         }

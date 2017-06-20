@@ -104,7 +104,27 @@ namespace BlackFox
                 player.Avatar.State = _state;
             }
         }
+
+        public void DestroyAllAvatar()
+        {
+            foreach (Player player in Players)
+            {
+                Destroy(player.Avatar.gameObject);
+            }
+        }
         #endregion
+
+        /// <summary>
+        /// Azzera le munizioni di tutti i player
+        /// </summary>
+        public void CleanAllAmmo()
+        {
+            foreach (Player player in Players)
+            {
+                player.Avatar.ship.shooter.Ammo = 0;
+            }
+        }
+
         #endregion
     }
 

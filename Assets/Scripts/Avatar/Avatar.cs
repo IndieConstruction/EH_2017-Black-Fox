@@ -56,7 +56,7 @@ namespace BlackFox {
         [HideInInspector]
         public Ship ship;
 
-        AvatarUI avatarUI;
+        public AvatarUI avatarUI;
 
         /// <summary>
         /// Crea e prende riferimento dell'AvatarUI
@@ -193,10 +193,9 @@ namespace BlackFox {
 
         void LoadUpgradesValues()
         {
-            Upgrades.Add(new FireRateUpgrade(UpgradesConfig.FireRateUpgrade));
-            Upgrades.Add(new AmmoRechargeUpgrade(UpgradesConfig.AmmoRechargeUpgrade));
             Upgrades.Add(new PowerUpDurationUpgrade(UpgradesConfig.PowerUpDurationUpgrade));
             Upgrades.Add(new ShootingDistanceUpgrade(UpgradesConfig.ShootingDistanceUpgrade));
+            Upgrades.Add(new PinRegenUpgrade(UpgradesConfig.PinRegenUpgrade));
         }
         #endregion
         #endregion
@@ -228,12 +227,10 @@ namespace BlackFox {
         /// Funzione per invertire i comandi di moviemti nella ship
         /// </summary>
         /// <param name="_time">Per quanto tempo devono rimanere invertiti</param>
-        public void InvertCommands(float _time)
+        public void InvertCommands(float _time, Avatar _activatorOf)
         {
-            ship.IsInverted = true;
-            ship.TimeofInvertion = _time;
-        }
-
+            ship.SetInverter(_time, _activatorOf);
+        }       
     }
 
     public enum AvatarState
@@ -246,9 +243,8 @@ namespace BlackFox {
     [Serializable]
     public class AvatarUpgradesConfig
     {
-        public float[] FireRateUpgrade;
-        public float[] AmmoRechargeUpgrade;
         public float[] ShootingDistanceUpgrade;
         public float[] PowerUpDurationUpgrade;
+        public float[] PinRegenUpgrade;
     }
 }

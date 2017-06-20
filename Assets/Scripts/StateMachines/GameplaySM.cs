@@ -29,7 +29,6 @@ namespace BlackFox {
                 case "BlackFox.PlayState":
                     CurrentState = new CleanSceneState();
                     break;
-
                 case "BlackFox.PauseState":
                     CurrentState = new PlayState();
                     break;
@@ -37,10 +36,7 @@ namespace BlackFox {
                     CurrentState = new RoundEndState();
                     break;
                 case "BlackFox.RoundEndState":
-                    if(GameManager.Instance.LevelMng.RoundNumber <= GameManager.Instance.LevelMng.levelOptions.MaxRound)
-                        CurrentState = new UpgradeMenuState();
-                    else
-                        CurrentState = new GameOverState();
+                    ChangeRoundCondition();
                     break;
                 case "BlackFox.UpgradeMenuState":
                     CurrentState = new RoundInitState();
@@ -52,6 +48,15 @@ namespace BlackFox {
             }   
         }
 
+        void ChangeRoundCondition()
+        {
+            if (GameManager.Instance.LevelMng.CheckIfLevelIsWon())
+                CurrentState = new GameOverState();
+            else if (!GameManager.Instance.LevelMng.Core.IsCoreAlive())
+                CurrentState = new RoundInitState();
+            else
+                CurrentState = new UpgradeMenuState();
+        }
         protected override bool CheckRules(StateBase _newState, StateBase _oldState) 
         {
             if (_oldState == null) 
@@ -62,7 +67,7 @@ namespace BlackFox {
                 case "BlackFox.PreInitState":
                         return true;
                 case "BlackFox.RoundInitState":
-                    if (_oldState.StateName == "BlackFox.PreInitState" || _oldState.StateName == "BlackFox.UpgradeMenuState")
+                    if (_oldState.StateName == "BlackFox.PreInitState" || _oldState.StateName == "BlackFox.UpgradeMenuState" || _oldState.StateName == "BlackFox.RoundEndState")
                         return true;
                     break;
                 case "BlackFox.PreStartState":

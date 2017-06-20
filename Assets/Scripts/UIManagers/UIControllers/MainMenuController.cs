@@ -9,6 +9,20 @@ namespace BlackFox
     public class MainMenuController : BaseMenu
     {
 
+        public Image Panel;
+        float tempa = 1;
+        
+        private void Update()
+        {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                /// sfuma l'alfa del panello che contiene i bottoni ( i bottoni non vengono sfumati )
+                tempa = tempa - Time.deltaTime ;
+                Panel.color = new Color(Panel.color.r, Panel.color.g, Panel.color.b, tempa);
+            }
+        }
+
+
         public void Init()
         {
             GameManager.Instance.UiMng.CurrentMenu = this;
@@ -37,19 +51,23 @@ namespace BlackFox
 
         public override void Selection(Player _player)
         {
-            switch (CurrentIndexSelection)
-            {
-                case 0:
-                    // Cambia stato in level selection
-                    GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new LevelSelectionState() });
-                    break;
-                case 1:
-                    // Apre i credits
-                    break;
-                case 2:
-                    GameManager.Instance.QuitApplication();
-                    break;
-            }
+            GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.Blocked);
+            GameManager.Instance.LoadingCtrl.ActivateLoadingPanel(() => {
+
+                switch (CurrentIndexSelection)
+                {
+                    
+                    case 0:
+                        GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new AvatarSelectionState() });
+                        break;
+                    case 1:
+                        GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new CreditsState() });
+                        break;
+                    case 2:
+                        GameManager.Instance.QuitApplication();
+                        break;
+                }
+            });
 
             if (EventManager.OnMenuAction != null)
                 EventManager.OnMenuAction(AudioManager.UIAudio.Selection);

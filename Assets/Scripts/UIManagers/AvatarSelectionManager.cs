@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace BlackFox {
 
     public class AvatarSelectionManager : BaseMenu {
 
-        public GameObject AvatarSelectionPanel;
 
         public List<AvatarSelectionController> avatarSelectionControllers = new List<AvatarSelectionController>();
 
@@ -33,8 +33,42 @@ namespace BlackFox {
                     return;
             }
             GameManager.Instance.SRMng.LoadSelectedDatas();
-            GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new GameplayState() });
+
+            GameManager.Instance.LoadingCtrl.ActivateLoadingPanel(() => {
+                GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new GameplayState() });
+            });
+            
         }
+
+        #region ShowRoom Events
+
+        private void OnEnable()
+        {
+            EventManager.OnShowRoomValueUpdate += SetSliderValues;
+        }
+
+        private void OnDisable()
+        {
+            EventManager.OnShowRoomValueUpdate -= SetSliderValues;
+        }
+
+        /// <summary>
+        /// Passa i valori delle slider al controller giusto
+        /// </summary>
+        /// <param name="_values"></param>
+        /// <param name="_player"></param>
+        void SetSliderValues(int[] _values, Player _player)
+        {
+            foreach (AvatarSelectionController controller in avatarSelectionControllers)
+            {
+                if ((int)_player.ID == (int)controller.MenuID)
+                {
+                    controller.SetSliderValues(_values);
+                }
+            }
+        }
+
+        #endregion
 
         #region Menu Actions
         public override void GoUpInMenu(Player _player)
@@ -121,7 +155,9 @@ namespace BlackFox {
                     if (EventManager.OnMenuAction != null)
                         EventManager.OnMenuAction(AudioManager.UIAudio.Back);
 
-                    GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new LevelSelectionState() });
+                    GameManager.Instance.LoadingCtrl.ActivateLoadingPanel(() => { 
+                        GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new MainMenuState() });
+                    });
                     break;
                 }
             }

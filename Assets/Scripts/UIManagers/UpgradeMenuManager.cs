@@ -6,6 +6,9 @@ using UnityEngine.UI;
 namespace BlackFox { 
     public class UpgradeMenuManager : BaseMenu
     {
+        public Sprite ActiveSlide;
+        public Sprite DeactiveSlider;
+
         GameObject _upgradePanel;
         public GameObject UpgradePanel {
             get {
@@ -56,8 +59,10 @@ namespace BlackFox {
             {
                 if (controller.CurrentState == UpgradeControllerState.Unready)
                     return;
-            }           
-            GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
+            }
+            GameManager.Instance.LoadingCtrl.ActivateLoadingPanel(() => {
+                GameManager.Instance.LevelMng.gameplaySM.CurrentState.OnStateEnd();
+            });           
         }
 
         #region Menu Actions

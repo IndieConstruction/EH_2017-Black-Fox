@@ -8,9 +8,10 @@ using DG.Tweening;
 namespace BlackFox {
 
     public class AvatarUI : MonoBehaviour {
-        public Image KillToview;
+        public GameObject KillToview;
         public Slider LifeSlider;
         public Slider AmmoSlider;
+        public Image PinCountDown;
 
         
         private void Start()
@@ -52,12 +53,10 @@ namespace BlackFox {
         /// <summary>
         /// Fa comparire l'immagine +1
         /// </summary>
-        public void KillView() {
-            KillToview.transform.DOScale(new Vector3(1f, 1f, 1f), 1f).OnComplete(() => {
-                KillToview.transform.localScale = Vector3.zero;
-            }).SetEase(Ease.OutBounce);
+        public void KillView()
+        {
+            Instantiate(KillToview, transform.position , Quaternion.identity);            
         }
-
 
         #region Events
         private void OnEnable()

@@ -7,6 +7,7 @@ namespace BlackFox {
 
         List<IDamageable> _damageables = new List<IDamageable>();
         float duration = 0;
+        float damage;
 
 		ParticleSystem ParticlesPrefab;
 		ParticleSystem particles;
@@ -14,23 +15,29 @@ namespace BlackFox {
         /// 
         /// </summary>
         /// <param name="_time">la durata del power up</param>
-        public void Init(float _time)
+        public void Init(float _time, float _damage)
         {
             _damageables = GetComponent<Ship>().GetDamageable();
             duration = _time;
-			ParticlesPrefab = Resources.Load<ParticleSystem> ("Prefabs/PowerUps/PowerUpParticles/Carro armato");
+            damage = _damage;
+			ParticlesPrefab = Resources.Load<ParticleSystem> ("Prefabs/Particles/PowerUpParticles/Carro armato");
 			particles = Instantiate (ParticlesPrefab, transform);
         }
 
         private void Update()
         {
-            if(duration > 0) { 
+            if(duration > 0 && GetComponent<Ship>().Avatar.State == AvatarState.Enabled) { 
                 duration -= Time.deltaTime;
 				if (duration <= 0) {
 					Destroy (this); 
 					if (particles != null)
 						Destroy (particles);
 				}
+            } else
+            {
+                Destroy(this);
+                if (particles != null)
+                    Destroy(particles);
             }
         }
 
@@ -42,7 +49,7 @@ namespace BlackFox {
                 foreach (IDamageable damageable in _damageables)
                 {
                     if (damageable.GetType() == collidingDamageable.GetType())
-                        collidingDamageable.Damage(1, gameObject);
+                        collidingDamageable.Damage(damage, gameObject);
                 }
             }
         }

@@ -22,6 +22,18 @@ MonoBehaviour:
     PointsToWin: 5
   MinPowerUpRatio: 5
   MaxPowerUpRatio: 10
+  PowerUpOptions:
+    Percentages:
+    - PowerUpID: 0
+      Percentage: 1
+    - PowerUpID: 1
+      Percentage: 1
+    - PowerUpID: 2
+      Percentage: 1
+    - PowerUpID: 3
+      Percentage: 1
+    - PowerUpID: 4
+      Percentage: 96
   ArrowsSpawner:
     SpawnerPrefab: {fileID: 0}
     ArrowPrefab: {fileID: 0}
@@ -41,8 +53,8 @@ MonoBehaviour:
       type: 2}
     MinTime: 10
     MaxTime: 20
-    AngularSpeed: 100
-    TransSpeed: 100
+    AngularSpeed: 6789
+    KamikazeRatioMultiplayer: 20
   TurretSpawner:
     SpawnerPrefab: {fileID: 0}
     Turrent: {fileID: 0}

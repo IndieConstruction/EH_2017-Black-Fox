@@ -20,6 +20,7 @@ namespace BlackFox
             GameManager.Instance.InstantiateLevelManager();
             GameManager.Instance.LevelMng.Init();
             GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.PlayInput);
+            EventManager.OnMusicChange(AudioManager.Music.MenuTheme, false);
         }
 
         public override void OnEnd()

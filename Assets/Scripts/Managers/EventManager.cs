@@ -52,6 +52,18 @@ namespace BlackFox
         /// Evento che si occupa di innescare l'update dei punti sulla UI
         /// </summary>
         public static UIEvent OnPointsUpdate;
+
+
+        #endregion
+
+        #region ShowRoomEvent
+        public delegate void ShowRoomValueChange(int[] _values, Player _player);
+
+        /// <summary>
+        /// Evento che modifica i valori delle slider dell'Avatar selection
+        /// </summary>
+        public static ShowRoomValueChange OnShowRoomValueUpdate;
+
         #endregion
 
         #region Audio Event
@@ -61,23 +73,11 @@ namespace BlackFox
         /// </summary>
         public static UIAudioEvent OnMenuAction;
 
-        public delegate void MusicEvent(AudioManager.Music _music);
+        public delegate void MusicEvent(AudioManager.Music _music, bool _play);
         /// <summary>
         /// Evento che si occupa di innescare la musica
         /// </summary>
         public static MusicEvent OnMusicChange;
-
-        public delegate void AvatarAudioEvent(AudioManager.AvatarAudio _avatarAudio, PlayerLabel _playerId);
-        /// <summary>
-        /// Evento che si occupa di innescare i souni degli avatar in gioco
-        /// </summary>
-        public static AvatarAudioEvent OnAvatarAction;
-
-        public delegate void PowerUpAudioEvent(AudioManager.PowerUpAudio _powerUpAudio);
-        /// <summary>
-        /// Evento che si occupa di innescare i souni dei power up in gioco
-        /// </summary>
-        public static PowerUpAudioEvent OnPowerUpAction;
         #endregion
     }
 }

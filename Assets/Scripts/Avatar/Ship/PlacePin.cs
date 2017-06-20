@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace BlackFox
     public class PlacePin : MonoBehaviour
     {
         protected bool canPlace = true;
+        SphereCollider probe;
         int layer = 9;
 
         PlacePinConfig placePinConfig
@@ -20,11 +22,11 @@ namespace BlackFox
                     data = ship.Avatar.AvatarData.shipConfig.placePinConfig;
                 return data; }
         }
+
         List<GameObject> pinsPlaced = new List<GameObject>();
         Transform initialTransf;
         Ship ship;
         float prectime;
-        bool isRecharging = false;
 
         private void Update()
         {
@@ -33,23 +35,12 @@ namespace BlackFox
                 if (!GameManager.Instance.LevelMng.IsGamePaused || GameManager.Instance.LevelMng.IsRoundActive)
                 {
                     prectime -= Time.deltaTime;
-                    if (prectime <= 0 && !isRecharging)
-                    {
-                        isRecharging = true;
-                        StartCoroutine(Rumble(0.2f));
-                    }
+                    ship.Avatar.avatarUI.PinCountDown.fillAmount  -= Time.deltaTime / CurrentPinRate;
                 }                
             }
         }
 
-        IEnumerator Rumble(float _rumbleTime)
-        {
-            ship.Avatar.Player.ControllerVibration(0.5f, 0.5f);
-            yield return new WaitForSeconds(_rumbleTime);
-            ship.Avatar.Player.ControllerVibration(0f, 0f);
-        }
-
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerStay(Collider other)
         {
             if(other.gameObject.tag == "PinBlockArea")
                 canPlace = false;
@@ -59,7 +50,6 @@ namespace BlackFox
             if (other.gameObject.tag == "PinBlockArea")
                 canPlace = true;
         }
-
 
         public float CurrentPinRate
         {
@@ -72,6 +62,7 @@ namespace BlackFox
             }
 
         }
+
         #region API
         /// <summary>
         /// Set working values for the componet
@@ -82,7 +73,15 @@ namespace BlackFox
             ship = _owner;
             prectime = CurrentPinRate;
             initialTransf = transform;
+            ProbeSetup();
         }
+
+        public void Init()
+        {
+            canPlace = true;
+            transform.rotation = Quaternion.identity;
+        }
+
         /// <summary>
         /// Change the layer of collision of each Pin
         /// </summary>
@@ -95,6 +94,7 @@ namespace BlackFox
                 pin.layer = layer;
             }
         }
+
         /// <summary>
         /// Instance a Pin if possible
         /// </summary>
@@ -105,18 +105,21 @@ namespace BlackFox
             {
                 GameObject pin = Instantiate(placePinConfig.PinPrefab, transform.position + transform.forward*placePinConfig.DistanceFromShipOrigin, transform.rotation);
                 pin.layer = layer;
+                pin.transform.localScale = Vector3.zero;
+                pin.transform.DOScale(Vector3.one, 0.5f);
                 pinsPlaced.Add(pin);
-                isRecharging = false;
-                foreach (Renderer pinRend in pin.GetComponentsInChildren<Renderer>())
+                foreach (Renderer pinRend in pin.GetComponentsInChildren<MeshRenderer>())
                 {
                     pinRend.material = ship.Avatar.AvatarData.ColorSets[ship.Avatar.AvatarData.ColorSetIndex].PinMaterial;
                 }
                 pin.transform.parent = GameManager.Instance.LevelMng.PinsContainer;
                 prectime = CurrentPinRate;
+                ship.Avatar.avatarUI.PinCountDown.fillAmount = 1;
                 return true;
             }
             return false;
         }
+
         /// <summary>
         /// Remove all the placed Pins
         /// </summary>
@@ -129,6 +132,17 @@ namespace BlackFox
             pinsPlaced.Clear();
         }
         #endregion
+
+        /// <summary>
+        /// Instance a point-like sphere collider onte the Pin drop position to check if it is a legal position or not
+        /// </summary>
+        void ProbeSetup()
+        {
+            probe = gameObject.AddComponent<SphereCollider>();
+            probe.radius = float.Epsilon;
+            probe.center = new Vector3(0, 0, placePinConfig.DistanceFromShipOrigin);
+            probe.isTrigger = true;
+        }
     }
 
     [Serializable]

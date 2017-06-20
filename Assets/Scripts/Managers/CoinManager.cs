@@ -2,44 +2,44 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinManager : MonoBehaviour
+namespace BlackFox
 {
-
-
-    private static int _coins = 0;
-    public static int CurrentCoins; //monete salvate
-
-    public static int coins //monete acquisite ma non ancora salvate
+    public class CoinManager : MonoBehaviour
     {
-        get { return _coins; }
-        set { _coins = value; }
+
+        public GameObject CoinControllerPrefab;
+
+        [HideInInspector]
+        public RoundCoinController CoinController;
+
+        public float CoinLife = 10;
+
+        private int _totalCoin;
+
+        public int TotalCoin
+        {
+            get { return _totalCoin; }
+            set { _totalCoin = value; }
+        }
+
+                
+        public void InstantiateCoinController()
+        {
+            CoinController = Instantiate(CoinControllerPrefab, transform).GetComponent<RoundCoinController>();
+            CoinController.Init(this, CoinLife);
+        }
+        
+        /// <summary>
+        ///dove segue ho messo degli appunti per ricordare per quando si farà il boss e lo spawn in altri casi delle monete 
+        /// </summary>
+
+
+        //void Spawncoin(GameObject coinprefab, Transform.position){ }
+
+        //Instantiate(coinprefab, position);
+
+
+        //void bossdefeated(){ }
+        // Spawncoin
     }
-
-    void Awake()
-    {
-        CurrentCoins = PlayerPrefs.GetInt("CurrentCoins");
-    }
-
-    public static void AddCoins()
-    {
-        CurrentCoins = CurrentCoins + coins;
-        PlayerPrefs.SetInt("CurrentCoins", CurrentCoins);
-    }
-
-
-    /// <summary>
-    ///dove segue ho messo degli appunti per ricordare per quando si farà il boss e lo spawn in altri casi delle monete 
-    /// </summary>
-
-
-    //void Spawncoin(GameObject coinprefab, Transform.position){ }
-
-    //Instantiate(coinprefab, position);
-
-
-    //void bossdefeated(){ }
-    // Spawncoin
 }
-
-
-

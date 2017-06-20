@@ -1,20 +1,33 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 namespace BlackFox
 {
     public class AudioManager : MonoBehaviour
     {
-        //TODO : trovare modo funzionale di acricare e leggere le varie audio clips
-        public AudioClip MenuMovementAudioClip;
-        public AudioClip MenuSelectionAudioClip;
+        public float MusicFadeOutTime = 0.8f;
+        public float MusicFadeInTime = 0.1f;
 
-        public AudioSource[] PlayerAudioSurces;
         public AudioSource AudioSurceMenu;
         public AudioSource AudioSurceMusic;
-        public AudioSource AudioSurceAmbience;
-        public AudioSource AudioSurcePowerUp;
+
+        [Header("Audio Clips")]
+        public AudioClip MenuMovementAudioClip;
+        public AudioClip MenuSelectionAudioClip;
+        public AudioClip GameplayAudioClip;
+        public AudioClip MenuAudioClip;
+
+
+        [Header("PowerUp Audio Clips")]
+        public AudioClip PowerUpSpawn;
+        public AudioClip KamikazeActivation;
+        public AudioClip AmmoCleanerActivation;
+        public AudioClip CleanSweepActivation;   
+        public AudioClip TankActivation;
+        public AudioClip InvertCommandsActivation;
+
+        Tweener fade;
 
         #region Audio Actions
         void PlayUIAudio(UIAudio _menuAudio)
@@ -35,69 +48,56 @@ namespace BlackFox
                     break;
                 case UIAudio.CountDown:
                     break;
-                default:
-                    break;
             }
         }
 
-        void PlayMusic(Music _music)
+        void PlayMusic(Music _music, bool _play)
         {
-            switch (_music)
+            AudioSource surce = AudioSurceMusic;
+            if (AudioSurceMusic != null)
             {
-                case Music.MainTheme:
-                    //AudioSurceMusic.Play();
-                    break;
-                case Music.GameTheme:
-                    //AudioSurceMusic.Play();
-                    break;
-                case Music.Ambience:
-                    //AudioSurceAmbience.Play();
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        void PlayAvatarAudio(AvatarAudio _avatarAudio, PlayerLabel _playerId)
-        {
-            for (int i = 0; i < PlayerAudioSurces.Length; i++)
-            {
-                if (PlayerAudioSurces[i].name == "AudioSourcePlayer" + (int)_playerId)
+                fade = AudioSurceMusic.DOFade(0, MusicFadeOutTime).OnComplete(() =>
                 {
-                    switch (_avatarAudio)
+                    if (_play)
                     {
-                        case AvatarAudio.AmmoRecharge:
-                            //PlayerAudioSurces[i].Play();
-                            break;
-                        case AvatarAudio.Death:
-                            break;
-                        case AvatarAudio.Shoot:
-                            break;
-                        case AvatarAudio.NoAmmo:
-                            break;
-                        case AvatarAudio.PinPlaced:
-                            break;
-                        case AvatarAudio.Collision:
-                            break;
-                        default:
-                            break;
+                        switch (_music)
+                        {
+                            case Music.MenuTheme:
+                                AudioSurceMusic.clip = MenuAudioClip;
+                                break;
+                            case Music.GameTheme:
+                                AudioSurceMusic.clip = GameplayAudioClip;
+                                break;
+                        }
+                        AudioSurceMusic.Play();
+                        AudioSurceMusic.DOFade(1, MusicFadeInTime);
                     }
-                }
+                });
             }
         }
 
-        void PlayPowerUpAudio(PowerUpAudio _powerUpAudio)
+        public AudioClip GetPowerUpClip(PowerUpID _powerUpID)
         {
-            switch (_powerUpAudio)
+            AudioClip clip = null;
+            switch (_powerUpID)
             {
-                case PowerUpAudio.Activation:
-                    //AudioSurcePowerUp.Play();
+                case PowerUpID.Kamikaze:
+                    clip = KamikazeActivation;
                     break;
-                case PowerUpAudio.Spawn:
+                case PowerUpID.AmmoCleaner:
+                    clip = AmmoCleanerActivation;
                     break;
-                default:
+                case PowerUpID.CleanSweep:
+                    clip = CleanSweepActivation;
+                    break;
+                case PowerUpID.Tank:
+                    clip = TankActivation;
+                    break;
+                case PowerUpID.InvertCommands:
+                    clip = InvertCommandsActivation;
                     break;
             }
+            return clip;
         }
         #endregion
 
@@ -106,16 +106,12 @@ namespace BlackFox
         {
             EventManager.OnMenuAction += PlayUIAudio;
             EventManager.OnMusicChange += PlayMusic;
-            EventManager.OnAvatarAction += PlayAvatarAudio;
-            EventManager.OnPowerUpAction += PlayPowerUpAudio;
         }
 
         private void OnDisable()
         {
             EventManager.OnMenuAction -= PlayUIAudio;
             EventManager.OnMusicChange -= PlayMusic;
-            EventManager.OnAvatarAction -= PlayAvatarAudio;
-            EventManager.OnPowerUpAction -= PlayPowerUpAudio;
         }
         #endregion
 
@@ -131,25 +127,8 @@ namespace BlackFox
 
         public enum Music
         {
-            MainTheme,
+            MenuTheme,
             GameTheme,
-            Ambience
-        }
-
-        public enum AvatarAudio
-        {
-            AmmoRecharge,
-            Death,
-            Shoot,
-            NoAmmo,
-            PinPlaced,
-            Collision
-        }
-
-        public enum PowerUpAudio
-        {
-            Activation,
-            Spawn
         }
         #endregion
     }

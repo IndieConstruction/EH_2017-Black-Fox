@@ -51,3 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 505be4d042dacf6449aea3571377234b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CoinControllerPrefab: {fileID: 1197600439605666, guid: 874c14de8db0bd04eb7fae69fcd509be,
+    type: 2}
+  CoinController: {fileID: 0}
+  CoinLife: 10
+  RoundCoins: 0

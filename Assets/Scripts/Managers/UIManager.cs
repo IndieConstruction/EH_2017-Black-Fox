@@ -14,9 +14,8 @@ namespace BlackFox {
         public CanvasGameController canvasGame;
         [HideInInspector]
         public AvatarSelectionManager avatarSelectionManager;
-
         [HideInInspector]
-        public LoadingScreen loadingCanvas;
+        public CreditsMenuController creditsMenuController;
 
         public GameObject AvatarUI;
 
@@ -26,6 +25,9 @@ namespace BlackFox {
         #region API
         public void Init()
         {
+            GameObject cam = GameObject.Find("CameraUI");
+            cam.SetActive(false);
+            cam.SetActive(true);
             LoadButtonImage();
         }
 
@@ -64,24 +66,6 @@ namespace BlackFox {
         #endregion
 
         #region Menu Instantiate And Destroy
-        #region Loading Canvas
-        /// <summary>
-        /// Crea il CanvasMenu non appena subentra il MainMenuState
-        /// </summary>
-        public void CreateLoadingCanvas()
-        {
-            loadingCanvas = Instantiate(Resources.Load("Prefabs/UI/LoadingCanvas") as GameObject, transform).GetComponentInChildren<LoadingScreen>();
-        }
-
-        /// <summary>
-        /// Distrugge il CanvasMenu non appena subentra il MainMenuState
-        /// </summary
-        public void DestroyLoadingCanvas()
-        {
-            Destroy(loadingCanvas.gameObject);
-        }
-        #endregion
-
         #region Main Menu
         /// <summary>
         /// Crea il CanvasMenu non appena subentra il MainMenuState
@@ -116,6 +100,24 @@ namespace BlackFox {
         public void DestroyLevelSelectionMenu()
         {
             Destroy(canvasLevelSelection.gameObject);
+        }
+        #endregion
+
+        #region Credits Menu
+        /// <summary>
+        /// Crea il CreditsMenuController
+        /// </summary>
+        public void CreateCreditsMenu()
+        {
+            creditsMenuController = Instantiate(Resources.Load("Prefabs/UI/CanvasCredits") as GameObject, transform).GetComponent<CreditsMenuController>();
+        }
+
+        /// <summary>
+        /// Distrugge il CreditsMenuController
+        /// </summary>
+        public void DestroyCreditsMenu()
+        {
+            Destroy(creditsMenuController.gameObject);
         }
         #endregion
 

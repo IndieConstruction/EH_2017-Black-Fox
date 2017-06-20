@@ -33,8 +33,7 @@ namespace BlackFox {
 
         MovementController movment;
         PlacePin pinPlacer;
-        AvatarUI avatarUi;
-        ShipAccelerationAudioController accelerationAudioController;
+        ShipAudioSourceController audioSourceController;
         Tweener damageTween;
 
         #region PowerUp comandi invertiti
@@ -48,13 +47,8 @@ namespace BlackFox {
             get { return _isInverted; }
             set { _isInverted = value; }
         }
-
-        float _timeofInvertion;
-
-        public float TimeofInvertion {
-            get { return _timeofInvertion; }
-            set { _timeofInvertion = value; }
-        }
+        Avatar inverter = null;
+        float timeofInvertion;
 
         #endregion
 
@@ -73,14 +67,30 @@ namespace BlackFox {
         {
             if (Avatar.State == AvatarState.Enabled)
             {
-                CheckInputStatus(Avatar.Player.InputStatus);
-                if (IsInverted)
+                if(!GameManager.Instance.LevelMng.IsGamePaused)
+                    CheckInputStatus(Avatar.Player.InputStatus);
+
+                if(inverter != null && inverter.State != AvatarState.Enabled)
                 {
-                    TimeofInvertion -= Time.deltaTime;
-                    if (TimeofInvertion <= 0)
+                    timeofInvertion = 0;
+                    IsInverted = false;
+                    ParticlesController.StopParticles(ParticlesController.ParticlesType.InvertCommand);
+                }
+                else if(IsInverted)
+                {
+                    timeofInvertion -= Time.deltaTime;
+                    if (timeofInvertion <= 0)
+                    {
                         IsInverted = false;
+                        ParticlesController.StopParticles(ParticlesController.ParticlesType.InvertCommand);
+                    }
                 }
             }
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {         
+            audioSourceController.PlayCollisionAudio();
         }
 
         #region API
@@ -98,12 +108,11 @@ namespace BlackFox {
             movment.Init(this, rigid);
             pinPlacer = GetComponentInChildren<PlacePin>();
             pinPlacer.Setup(this);
-            avatarUi = GetComponentInChildren<AvatarUI>();
             ParticlesController = GetComponent<ParticlesController>();
             ParticlesController.Init();
 
-            accelerationAudioController = GetComponentInChildren<ShipAccelerationAudioController>();
-            accelerationAudioController.Init(this);
+            audioSourceController = GetComponentInChildren<ShipAudioSourceController>();
+            audioSourceController.Init(this);
         }
 
         public void InstantiateModel()
@@ -117,6 +126,7 @@ namespace BlackFox {
         public void Init()
         {
             Life = Config.MaxLife;
+            pinPlacer.Init();
         }
 
         public void ChangeColor(Material _mat)
@@ -126,32 +136,42 @@ namespace BlackFox {
                 Material[] mats = new Material[] { _mat };
                 m.materials = mats;
             } 
-        }        
+        }       
+        
+        public void SetInverter(float _timeOfInvertion, Avatar _inverter)
+        {
+            inverter = _inverter;
+            timeofInvertion = _timeOfInvertion;
+            IsInverted = true;
+            ParticlesController.PlayParticles(ParticlesController.ParticlesType.InvertCommand);
+        }
         #endregion
 
         // Input Fields
-        Vector3 leftStickDirection;
+        Vector3 _leftStickDirection;
+
+        public Vector3 LeftStickDirection
+        {
+            get { return _leftStickDirection; }
+            private set { _leftStickDirection = value; }
+        }
+
         Vector3 rightStickDirection;
 
         void CheckInputStatus(InputStatus _inputStatus)
         {            
-            leftStickDirection = new Vector3(_inputStatus.LeftThumbSticksAxisX, 0, _inputStatus.LeftThumbSticksAxisY);
+            LeftStickDirection = new Vector3(_inputStatus.LeftThumbSticksAxisX, 0, _inputStatus.LeftThumbSticksAxisY);
             rightStickDirection = new Vector3(_inputStatus.RightThumbSticksAxisX, 0, _inputStatus.RightThumbSticksAxisY);
 
             // Se un giocatore avversario prende il Powerup per invertire i comandi
             if (IsInverted)
-            {
-                Move(-leftStickDirection);
-                DirectFire(-rightStickDirection); 
-            }
+                Move(-LeftStickDirection);
             else
-            {
-                Move(leftStickDirection);
-                DirectFire(rightStickDirection);
-            }
+                Move(LeftStickDirection);
 
+            DirectFire(rightStickDirection);
 
-            if (_inputStatus.RightShoulder == ButtonState.Pressed)
+            if (_inputStatus.LeftTrigger == ButtonState.Pressed)
             {
                 PlacePin();
             }
@@ -163,7 +183,8 @@ namespace BlackFox {
             }
             else if (_inputStatus.RightTrigger == ButtonState.Held )
             {
-                if(Time.time > nextFire) { 
+                if(Time.time > nextFire)
+                { 
                     Shoot();
                     nextFire = Time.time + FireRate;
                 }
@@ -220,6 +241,11 @@ namespace BlackFox {
             shooter.AddAmmo();
         }
 
+        public void NoAmmoAudio()
+        {
+            audioSourceController.PlayNoAmmoAudio();
+        }
+
         #region IShooter
         /// <summary>
         /// Ritorna la lista degli oggetti danneggiabili
@@ -250,15 +276,30 @@ namespace BlackFox {
                 damageTween.Complete();
 
             Life -= _damage;
+            StopCoroutine("Rumble");
+            StartCoroutine(Rumble(0.2f));
             damageTween = transform.DOPunchScale(new Vector3(0.2f, 0.2f, 0.2f), 0.5f);
             ParticlesController.PlayParticles(ParticlesController.ParticlesType.Damage);
             if (Life < 1)
             {
-                GameManager.Instance.LevelMng.PoolMng.GetPooledObject(transform.position);
-                Avatar.ShipDestroy(_attacker.GetComponent<Ship>().Avatar);
+                GameManager.Instance.LevelMng.ExplosionPoolMng.GetPooledObject(transform.position);
+                if (_attacker.GetComponent<Ship>() != null)
+                    Avatar.ShipDestroy(_attacker.GetComponent<Ship>().Avatar);
+                else
+                    Avatar.ShipDestroy(null);
+
+                audioSourceController.PlayDeathAudio();
+
                 transform.DOScale(Vector3.zero, 0.5f);
                 return;
             }
+        }
+
+        IEnumerator Rumble(float _rumbleTime)
+        {
+            Avatar.Player.ControllerVibration(0.5f, 0.5f);
+            yield return new WaitForSeconds(_rumbleTime);
+            Avatar.Player.ControllerVibration(0f, 0f);
         }
         #endregion
 
@@ -287,12 +328,16 @@ namespace BlackFox {
         void Shoot()
         {
             shooter.ShootBullet();
+            audioSourceController.PlayShootAudio();
         }
 
         void PlacePin()
         {
-            if(pinPlacer.PlaceThePin())
+            if (pinPlacer.PlaceThePin())
+            {
                 AddShooterAmmo();
+                audioSourceController.PlayAmmoRechargeAudio();
+            }
         }
 
         void Move(Vector3 _target)
@@ -305,8 +350,6 @@ namespace BlackFox {
                 ParticlesController.StopParticles(ParticlesController.ParticlesType.Movement);
             if (Avatar.rope != null)
                 ExtendRope(_target.magnitude);
-
-            accelerationAudioController.Accelerate(_target.magnitude);
         }
 
         void ExtendRope(float _amount)

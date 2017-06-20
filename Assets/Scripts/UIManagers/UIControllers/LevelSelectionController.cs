@@ -3,15 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using DG.Tweening;
 
 namespace BlackFox
 {
     public class LevelSelectionController : BaseMenu
     {
+
         void Start()
         {
-            FindISelectableChildren();
+            //FindISelectableChildren();
             GameManager.Instance.UiMng.CurrentMenu = this;
         }
 
@@ -36,25 +37,31 @@ namespace BlackFox
 
         public override void Selection(Player _player)
         {
-            switch (CurrentIndexSelection)
-            {
-                case 0:
-                    GameManager.Instance.SelectLevel(0);
-                    break;
-                default:
-                    break;
-            }
+            GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.Blocked);
+            GameManager.Instance.LoadingCtrl.ActivateLoadingPanel(() => {
+
+                switch (CurrentIndexSelection)
+                {
+                    case 0:
+                        GameManager.Instance.SelectLevel(0);
+                        break;
+                    default:
+                        break;
+                }
+                GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new AvatarSelectionState() });
+            });
 
             if (EventManager.OnMenuAction != null)
                 EventManager.OnMenuAction(AudioManager.UIAudio.Selection);
-            GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new AvatarSelectionState() });
         }
 
         public override void GoBack(Player _player)
         {
             if (EventManager.OnMenuAction != null)
                 EventManager.OnMenuAction(AudioManager.UIAudio.Back);
-            GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new MainMenuState() });
+            GameManager.Instance.LoadingCtrl.ActivateLoadingPanel(() => {
+                GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new MainMenuState() });
+            });
         }
         #endregion
     }

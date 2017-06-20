@@ -53,7 +53,7 @@ namespace BlackFox {
                 return;
 
             collector = other.GetComponentInParent<IPowerUpCollector>();
-            PowerUpDuration = (collector as Avatar).GetUpgrade(UpgardeTypes.PowerUpDurationUpgrade).CalculateValue(PowerUpDuration);
+            PowerUpDuration = (collector as Avatar).GetUpgrade(UpgardeTypes.PowerUpDuration).CalculateValue(PowerUpDuration);
             foreach (Player player in other.GetComponentInParent<Avatar>().Enemies)
             {
                 enemyCollectors.Add(player.Avatar);

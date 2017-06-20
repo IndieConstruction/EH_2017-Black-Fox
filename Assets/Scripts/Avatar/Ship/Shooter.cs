@@ -31,8 +31,8 @@ namespace BlackFox
         public float ShootingDistance
         {
             get {
-                if (ship.Avatar.GetUpgrade(UpgardeTypes.ShootingDistnceUpgrade) != null)
-                    return ship.Avatar.GetUpgrade(UpgardeTypes.ShootingDistnceUpgrade).CalculateValue(shooterBaseConfig.LifeTime);
+                if (ship.Avatar.GetUpgrade(UpgardeTypes.BulletsRange) != null)
+                    return ship.Avatar.GetUpgrade(UpgardeTypes.BulletsRange).CalculateValue(shooterBaseConfig.LifeTime);
                 else
                     return shooterBaseConfig.LifeTime;
             }

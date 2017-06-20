@@ -64,6 +64,10 @@ namespace BlackFox
                         GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new CreditsState() });
                         break;
                     case 2:
+                        // Va alla schermata di Manual
+                        //GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { **** ManualState **** });
+                        break;
+                    case 3:
                         GameManager.Instance.QuitApplication();
                         break;
                 }

@@ -28,7 +28,7 @@ namespace BlackFox {
         {
             get
             {
-                return UpgardeTypes.AmmoRechargeUpgrade;
+                return UpgardeTypes.AmmoRecharge;
             }
         }
 

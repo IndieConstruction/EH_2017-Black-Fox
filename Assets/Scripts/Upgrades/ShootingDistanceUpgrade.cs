@@ -31,7 +31,7 @@ namespace BlackFox
         {
             get
             {
-                return UpgardeTypes.ShootingDistnceUpgrade;
+                return UpgardeTypes.BulletsRange;
             }
         }
 

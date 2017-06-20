@@ -218,8 +218,8 @@ namespace BlackFox {
         public Shooter shooter { get; private set; }
 
         public float FireRate { get { 
-                    if (Avatar.GetUpgrade(UpgardeTypes.FireRateUpgrade) != null)
-                        return Avatar.GetUpgrade(UpgardeTypes.FireRateUpgrade).CalculateValue(Config.FireRate);
+                    if (Avatar.GetUpgrade(UpgardeTypes.FireRate) != null)
+                        return Avatar.GetUpgrade(UpgardeTypes.FireRate).CalculateValue(Config.FireRate);
                     else
                         return Config.FireRate;
                     }

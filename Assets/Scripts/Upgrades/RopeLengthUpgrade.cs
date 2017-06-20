@@ -29,7 +29,7 @@ namespace BlackFox
 
         public UpgardeTypes ID
         {
-            get { return UpgardeTypes.RopeLengthUpgrade; }
+            get { return UpgardeTypes.RopeLength; }
         }
 
         public float[] Values { get; set; }

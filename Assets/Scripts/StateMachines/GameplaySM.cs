@@ -41,6 +41,9 @@ namespace BlackFox {
                 case "BlackFox.UpgradeMenuState":
                     CurrentState = new RoundInitState();
                     break;
+                case "BlackFox.TotalVictoryState":
+                    CurrentState = new GameOverState();
+                    break;
                 case "BlackFox.GameOverState":
                     if (GameplaySM.OnMachineEnd != null)
                         GameplaySM.OnMachineEnd("GameplaySM");
@@ -51,7 +54,7 @@ namespace BlackFox {
         void ChangeRoundCondition()
         {
             if (GameManager.Instance.LevelMng.CheckIfLevelIsWon())
-                CurrentState = new GameOverState();
+                CurrentState = new TotalVictoryState();
             else if (!GameManager.Instance.LevelMng.Core.IsCoreAlive())
                 CurrentState = new RoundInitState();
             else
@@ -91,12 +94,16 @@ namespace BlackFox {
                     if (_oldState.StateName == "BlackFox.CleanSceneState")
                         return true;
                     break;
+                case "BlackFox.TotalVictoryState":
+                    if (_oldState.StateName == "BlackFox.RoundEndState")
+                        return true;
+                    break;
                 case "BlackFox.UpgradeMenuState":
                     if (_oldState.StateName == "BlackFox.RoundEndState")
                         return true;
                     break;
                 case "BlackFox.GameOverState":
-                    if (_oldState.StateName == "BlackFox.RoundEndState" || _oldState.StateName == "BlackFox.CleanSceneState")
+                    if (_oldState.StateName == "BlackFox.RoundEndState" || _oldState.StateName == "BlackFox.TotalVictoryState")
                         return true;
                     break;
 

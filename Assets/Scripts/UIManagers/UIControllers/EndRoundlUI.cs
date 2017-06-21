@@ -9,18 +9,20 @@ namespace BlackFox
     {
         public Sprite VictoryImg;
         public Sprite DefeatImg;
+        public Sprite TotalVictory;
         public Image RecapImage;
 
         public Text[] PlayerPoints = new Text[4];
         public Text[] PlayersText = new Text[4];
         public Text ActionText;
+        public GameObject BackGround;
         public GameObject EndLevelPanel;
 
         bool CanSelect = false;
 
         void Start()
         {
-            EndLevelPanel.SetActive(false);
+            BackGround.SetActive(false);
         }
 
         /// <summary>
@@ -60,7 +62,15 @@ namespace BlackFox
                 ShowAvatarsKillPoints();
                 StartCoroutine(Wait(2f));
             }
-            EndLevelPanel.SetActive(_status);
+            BackGround.SetActive(_status);
+        }
+
+        public void ActiveTotalVictory()
+        {
+            BackGround.SetActive(true);
+            RecapImage.gameObject.SetActive(true);
+            PlayersText[0].GetComponentsInParent<Transform>()[1].gameObject.SetActive(false);
+            CanSelect = true;
         }
 
         public override void Selection(Player _player)
@@ -94,6 +104,12 @@ namespace BlackFox
                 default:
                     break;
             }
+        }
+
+        public void SetTotalVictoryImage(Player _winner)
+        {
+            RecapImage.sprite = TotalVictory;
+            RecapImage.GetComponentInChildren<Text>().text = "Player " +  _winner.ID;
         }
 
         #endregion

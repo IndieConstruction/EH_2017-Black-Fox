@@ -16,6 +16,8 @@ namespace BlackFox {
         public AvatarSelectionManager avatarSelectionManager;
         [HideInInspector]
         public CreditsMenuController creditsMenuController;
+        [HideInInspector]
+        public ManualController manualController;
 
         public GameObject AvatarUI;
 
@@ -101,6 +103,26 @@ namespace BlackFox {
         {
             Destroy(canvasLevelSelection.gameObject);
         }
+        #endregion
+
+        #region Manual Menu
+
+        /// <summary>
+        /// Crea il CanvasManual
+        /// </summary>
+        public void CreateManualCanvas()
+        {
+            manualController = Instantiate(Resources.Load("Prefabs/UI/CanvasManual") as GameObject, transform).GetComponent<ManualController>();
+        }
+
+        /// <summary>
+        /// Distrugge il CanvasManual
+        /// </summary>
+        public void DestroyManualCanvas()
+        {
+            Destroy(manualController.gameObject);
+        }
+        
         #endregion
 
         #region Credits Menu

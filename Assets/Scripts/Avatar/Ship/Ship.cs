@@ -100,7 +100,7 @@ namespace BlackFox {
             rigid = GetComponent<Rigidbody>();
             InstantiateModel();
             damageables = _damageablesPrefabs;
-            ChangeColor(Avatar.AvatarData.ColorSets[Avatar.AvatarData.ColorSetIndex].ShipMaterialMain);
+            ChangeColor(Avatar.AvatarData.ColorSets[Avatar.AvatarData.ColorSetIndex].Color.ShipMaterialMain);
 
             shooter = GetComponentInChildren<Shooter>();
             shooter.Init(this);

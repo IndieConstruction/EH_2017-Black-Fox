@@ -11,18 +11,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9681a26f2f551234a8c74f5a6ef49a16, type: 3}
   m_Name: Shark
   m_EditorClassIdentifier: 
+  IsPurchased: 0
   BasePrefab: {fileID: 114084304304996402, guid: 1e454b20c5c81a94c83dfadd7cbda89e,
     type: 2}
   ModelPrefab: {fileID: 100000, guid: da135962de661e445ad0bab73014d9df, type: 3}
   ColorSets:
-  - {fileID: 11400000, guid: c0d8480790832cd4fbf3a963a4cded1c, type: 2}
-  - {fileID: 11400000, guid: 4f7d104e8296c744cae0d117fe6d4fee, type: 2}
-  - {fileID: 11400000, guid: e2295d64592051f41bda98a63254a74f, type: 2}
-  - {fileID: 11400000, guid: 261924e405f932945a0c1bb2e7a467ad, type: 2}
-  - {fileID: 11400000, guid: 887514b0dce2cd24ea162fc71cac5469, type: 2}
-  - {fileID: 11400000, guid: 00387c7185e7a4d419217c93c5643965, type: 2}
-  - {fileID: 11400000, guid: 31650ded5974cc14d8c53e034b48171b, type: 2}
-  - {fileID: 11400000, guid: eb39c0c34e587a045ba43e8cc4994fb2, type: 2}
+  - Color: {fileID: 11400000, guid: c0d8480790832cd4fbf3a963a4cded1c, type: 2}
+    IsPurchased: 1
+  - Color: {fileID: 11400000, guid: 4f7d104e8296c744cae0d117fe6d4fee, type: 2}
+    IsPurchased: 1
+  - Color: {fileID: 11400000, guid: e2295d64592051f41bda98a63254a74f, type: 2}
+    IsPurchased: 0
+  - Color: {fileID: 11400000, guid: 261924e405f932945a0c1bb2e7a467ad, type: 2}
+    IsPurchased: 0
+  - Color: {fileID: 11400000, guid: 887514b0dce2cd24ea162fc71cac5469, type: 2}
+    IsPurchased: 1
+  - Color: {fileID: 11400000, guid: 00387c7185e7a4d419217c93c5643965, type: 2}
+    IsPurchased: 1
+  - Color: {fileID: 11400000, guid: 31650ded5974cc14d8c53e034b48171b, type: 2}
+    IsPurchased: 0
+  - Color: {fileID: 11400000, guid: eb39c0c34e587a045ba43e8cc4994fb2, type: 2}
+    IsPurchased: 0
   ShipAudioSet: {fileID: 11400000, guid: 38f0b9ad69757d4489d2dc8714f5eca3, type: 2}
   shipConfig:
     MaxLife: 7

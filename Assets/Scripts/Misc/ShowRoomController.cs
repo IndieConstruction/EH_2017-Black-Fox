@@ -93,12 +93,12 @@ namespace BlackFox
         /// </summary>
         public void ShowNextColor()
         {
-            colorIndex = manager.GetNextColorID(SRManager.ColorSelectDirection.up, colorIndex);
+            colorIndex = manager.GetNextColorID(SRManager.ColorSelectDirection.up, colorIndex, IndexOfCurrent);
             foreach (GameObject avatar in avatars)
             {
                 foreach (MeshRenderer renderer in avatar.GetComponentsInChildren<MeshRenderer>())
                 {
-                    renderer.materials = new Material[] { datas[IndexOfCurrent].ColorSets[colorIndex].ShipMaterialMain };
+                    renderer.materials = new Material[] { datas[IndexOfCurrent].ColorSets[colorIndex].Color.ShipMaterialMain };
                 }
             }
         }
@@ -108,12 +108,12 @@ namespace BlackFox
         /// </summary>
         public void ShowPreviousColor()
         {
-            colorIndex = manager.GetNextColorID(SRManager.ColorSelectDirection.down, colorIndex);
+            colorIndex = manager.GetNextColorID(SRManager.ColorSelectDirection.down, colorIndex, IndexOfCurrent);
             foreach (GameObject avatar in avatars)
             {
                 foreach (MeshRenderer renderer in avatar.GetComponentsInChildren<MeshRenderer>())
                 {
-                    renderer.materials = new Material[] { datas[IndexOfCurrent].ColorSets[colorIndex].ShipMaterialMain };
+                    renderer.materials = new Material[] { datas[IndexOfCurrent].ColorSets[colorIndex].Color.ShipMaterialMain };
                 }
             }
         }
@@ -152,13 +152,14 @@ namespace BlackFox
                 avatars[i].AddComponent<RotateOnPosition>();
                 foreach(MeshRenderer mesh in avatars[i].GetComponentsInChildren<MeshRenderer>())
                 {
-                    mesh.materials = new Material[] { datas[i].ColorSets[(int)player.ID].ShipMaterialMain };
+                    mesh.materials = new Material[] { datas[i].ColorSets[(int)player.ID - 1].Color.ShipMaterialMain };
                 }
             }
 
             currentModel = avatars[0].transform;
             colorIndex = (int)player.ID;
-            nextModel = avatars[1].transform;
+            if(avatars.Count > 1)
+                nextModel = avatars[1].transform;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Rope;
@@ -11,9 +12,10 @@ namespace BlackFox
     [CreateAssetMenu(fileName = "AvatarData", menuName = "Avatar/NewShip", order = 1)]
     public class AvatarData : ScriptableObject
     {
+        public bool IsPurchased;
         public Ship BasePrefab;
         public GameObject ModelPrefab;
-        public List<ColorSetData> ColorSets;
+        public List<ColorSetAvailability> ColorSets;
         public ShipAudioData ShipAudioSet;
         public ShipConfig shipConfig;
         public RopeConfig ropeConfig;
@@ -32,5 +34,12 @@ namespace BlackFox
 
         [Header("Avatar Upgrades")]
         public AvatarUpgradesConfig avatarUpgradesConfig;
+    }
+
+    [Serializable]
+    public class ColorSetAvailability
+    {
+        public ColorSetData Color;
+        public bool IsPurchased;
     }
 }

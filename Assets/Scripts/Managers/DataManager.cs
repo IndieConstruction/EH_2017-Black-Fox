@@ -14,6 +14,37 @@ namespace BlackFox
             InstantiateAvatarDatas();
         }
 
+        public void PurchaseAvatar(AvatarData _data)
+        {
+            foreach (AvatarData data in LoadAvatarDatas())
+            {
+                if (data == _data)
+                {
+                    data.IsPurchased = true;
+                    break;
+                }
+            }
+        }
+
+        public void PurchaseColorSet(AvatarData _data, ColorSetData _color)
+        {
+            foreach (AvatarData data in LoadAvatarDatas())
+            {
+                if (data == _data)
+                {
+                    foreach (ColorSetAvailability color in data.ColorSets)
+                    {
+                        if (color.Color == _color)
+                        {
+                            color.IsPurchased = true;
+                            break;
+                        }
+                    }
+                }
+            }
+
+        }
+
         /// <summary>
         /// Carica l'array di avatar data da Resources
         /// </summary>
@@ -23,12 +54,23 @@ namespace BlackFox
         }
 
         /// <summary>
+        /// Carica l'array di color set data da Resources
+        /// </summary>
+        ColorSetData[] LoadColorSets()
+        {
+            return Resources.LoadAll<ColorSetData>("ShipModels/ColorSets");
+        }
+
+        /// <summary>
         /// Istanzia gli avatar data
         /// </summary>
         void InstantiateAvatarDatas()
         {
             foreach (AvatarData data in LoadAvatarDatas())
-                AvatarDatas.Add(Instantiate(data));
+            {
+                if(data.IsPurchased)
+                    AvatarDatas.Add(Instantiate(data));
+            }
         }
     }
 

@@ -110,7 +110,7 @@ namespace BlackFox
                 pinsPlaced.Add(pin);
                 foreach (Renderer pinRend in pin.GetComponentsInChildren<MeshRenderer>())
                 {
-                    pinRend.material = ship.Avatar.AvatarData.ColorSets[ship.Avatar.AvatarData.ColorSetIndex].PinMaterial;
+                    pinRend.material = ship.Avatar.AvatarData.ColorSets[ship.Avatar.AvatarData.ColorSetIndex].Color.PinMaterial;
                 }
                 pin.transform.parent = GameManager.Instance.LevelMng.PinsContainer;
                 prectime = CurrentPinRate;

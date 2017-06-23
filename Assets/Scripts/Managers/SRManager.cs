@@ -55,11 +55,11 @@ namespace BlackFox {
 
         bool CheckForAvaibility(int _colorIndex, AvatarData _data)
         {
+            if (!_data.ColorSets[_colorIndex].IsPurchased)
+                return false;
             foreach (ShowRoomController room in rooms)
             {
                 if (_colorIndex == room.colorIndex)
-                    return false;
-                if (!_data.ColorSets[_colorIndex].IsPurchased)
                     return false;
             }
             return true;

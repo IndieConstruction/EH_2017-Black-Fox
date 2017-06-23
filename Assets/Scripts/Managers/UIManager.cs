@@ -18,6 +18,8 @@ namespace BlackFox {
         public CreditsMenuController creditsMenuController;
         [HideInInspector]
         public ManualController manualController;
+        [HideInInspector]
+        public StoreController storeController;
 
         public GameObject AvatarUI;
 
@@ -84,6 +86,25 @@ namespace BlackFox {
         public void DestroyMainMenu()
         {
             Destroy(canvasMenu.gameObject);
+        }
+        #endregion
+
+        #region Store Menu
+        /// <summary>
+        /// Crea il CanvasMenu non appena subentra il MainMenuState
+        /// </summary>
+        public void CreateStoreMenu()
+        {
+            storeController = Instantiate(Resources.Load("Prefabs/UI/ShopCanvas") as GameObject, transform).GetComponent<StoreController>();
+            storeController.Init();
+        }
+
+        /// <summary>
+        /// Distrugge il CanvasMenu non appena subentra il MainMenuState
+        /// </summary>
+        public void DestroyStoreMenu()
+        {
+            Destroy(storeController.gameObject);
         }
         #endregion
 

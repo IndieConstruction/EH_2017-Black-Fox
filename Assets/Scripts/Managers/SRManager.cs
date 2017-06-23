@@ -32,34 +32,34 @@ namespace BlackFox {
         /// <param name="_direction"></param>
         /// <param name="_currentColor"></param>
         /// <returns></returns>
-        public int GetNextColorID(ColorSelectDirection _direction, int _currentColor, int _indexOfCurrent)
+        public int GetNextColorID(ColorSelectDirection _direction, ShowRoomController _room, int _currentColor, int _indexOfCurrent)
         {
             if (_direction == ColorSelectDirection.Up)
             {
-                for (int i = _currentColor; i < datas[0].ColorSets.Count; i++)
+                for (int i = _currentColor + 1; i < datas[_indexOfCurrent].ColorSets.Count; i++)
                 {
-                    if (CheckForAvaibility(i, datas[_indexOfCurrent]))
+                    if (CheckForAvaibility(i, datas[_indexOfCurrent], _room))
                         return i;
                 }
             }
             else
             {
-                for (int i = _currentColor; i >= 0; i--)
+                for (int i = _currentColor - 1; i >= 0; i--)
                 {
-                    if (CheckForAvaibility(i, datas[_indexOfCurrent]))
+                    if (CheckForAvaibility(i, datas[_indexOfCurrent], _room))
                         return i;
                 }
             }
             return _currentColor;
         }
 
-        bool CheckForAvaibility(int _colorIndex, AvatarData _data)
+        bool CheckForAvaibility(int _colorIndex, AvatarData _data, ShowRoomController _room)
         {
             if (!_data.ColorSets[_colorIndex].IsPurchased)
                 return false;
             foreach (ShowRoomController room in rooms)
             {
-                if (_colorIndex == room.colorIndex)
+                if (room != _room && _colorIndex == room.colorIndex)
                     return false;
             }
             return true;

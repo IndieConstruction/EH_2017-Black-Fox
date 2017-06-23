@@ -70,12 +70,13 @@ namespace BlackFox
         /// </summary>
         public void ShowNextModel()
         {
-            for (int i = IndexOfCurrent; i < datas.Count; i++)
+            for (int i = IndexOfCurrent + 1; i < datas.Count; i++)
             {
                 if (datas[i].IsPurchased)
                 {
                     IndexOfCurrent = i;
                     modelContainer.transform.DOMove(-CorridorVector * IndexOfCurrent, 0.5f);
+                    break;
                 }
             }
         }
@@ -87,12 +88,13 @@ namespace BlackFox
         {
             if (IndexOfCurrent > 0)
             {
-                for (int i = IndexOfCurrent; i >= 0; i--)
+                for (int i = IndexOfCurrent - 1; i >= 0; i--)
                 {
                     if (datas[i].IsPurchased)
                     {
                         IndexOfCurrent = i;
                         modelContainer.transform.DOMove(-CorridorVector * IndexOfCurrent, 0.5f);
+                        break;
                     }
                 }
             }
@@ -103,7 +105,7 @@ namespace BlackFox
         /// </summary>
         public void ShowNextColor()
         {
-            colorIndex = manager.GetNextColorID(SRManager.ColorSelectDirection.Up, colorIndex, IndexOfCurrent);
+            colorIndex = manager.GetNextColorID(SRManager.ColorSelectDirection.Up, this, colorIndex, IndexOfCurrent);
             foreach (GameObject avatar in avatars)
             {
                 foreach (MeshRenderer renderer in avatar.GetComponentsInChildren<MeshRenderer>())
@@ -118,7 +120,7 @@ namespace BlackFox
         /// </summary>
         public void ShowPreviousColor()
         {
-            colorIndex = manager.GetNextColorID(SRManager.ColorSelectDirection.Down, colorIndex, IndexOfCurrent);
+            colorIndex = manager.GetNextColorID(SRManager.ColorSelectDirection.Down, this, colorIndex, IndexOfCurrent);
             foreach (GameObject avatar in avatars)
             {
                 foreach (MeshRenderer renderer in avatar.GetComponentsInChildren<MeshRenderer>())
@@ -163,7 +165,8 @@ namespace BlackFox
                 avatars[i].AddComponent<RotateOnPosition>();
                 foreach(MeshRenderer mesh in avatars[i].GetComponentsInChildren<MeshRenderer>())
                 {
-                    mesh.materials = new Material[] { datas[i].ColorSets[(int)player.ID - 1].Color.ShipMaterialMain };
+                    colorIndex = manager.GetNextColorID(SRManager.ColorSelectDirection.Up, this, (int)player.ID - 1, i);
+                    mesh.materials = new Material[] { datas[i].ColorSets[colorIndex].Color.ShipMaterialMain };
                 }
             }
 
@@ -179,8 +182,6 @@ namespace BlackFox
                     break;
                 }
             }
-
-            colorIndex = (int)player.ID;          
         }
     }
 }

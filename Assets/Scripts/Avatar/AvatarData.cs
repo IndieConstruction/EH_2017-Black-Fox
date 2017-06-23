@@ -13,6 +13,7 @@ namespace BlackFox
     public class AvatarData : ScriptableObject
     {
         public bool IsPurchased;
+        public int Price;
         public Ship BasePrefab;
         public GameObject ModelPrefab;
         public List<ColorSetAvailability> ColorSets;

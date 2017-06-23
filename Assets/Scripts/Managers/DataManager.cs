@@ -68,8 +68,7 @@ namespace BlackFox
         {
             foreach (AvatarData data in LoadAvatarDatas())
             {
-                if(data.IsPurchased)
-                    AvatarDatas.Add(Instantiate(data));
+                AvatarDatas.Add(Instantiate(data));
             }
         }
     }

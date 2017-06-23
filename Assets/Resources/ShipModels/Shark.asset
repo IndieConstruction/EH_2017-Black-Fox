@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Name: Shark
   m_EditorClassIdentifier: 
   IsPurchased: 0
+  Price: 20
   BasePrefab: {fileID: 114084304304996402, guid: 1e454b20c5c81a94c83dfadd7cbda89e,
     type: 2}
   ModelPrefab: {fileID: 100000, guid: da135962de661e445ad0bab73014d9df, type: 3}

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Name: Bull
   m_EditorClassIdentifier: 
   IsPurchased: 0
+  Price: 20
   BasePrefab: {fileID: 114084304304996402, guid: 1e454b20c5c81a94c83dfadd7cbda89e,
     type: 2}
   ModelPrefab: {fileID: 100000, guid: ebcc752d4e3aea543ab2c1ba8af1d530, type: 3}

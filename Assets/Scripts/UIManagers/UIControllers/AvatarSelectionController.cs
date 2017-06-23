@@ -49,11 +49,11 @@ namespace BlackFox {
 
 
         public override void GoRightInMenu(Player _player) {
-            GameManager.Instance.SRMng.rooms[(int)_player.ID - 1].ShowNext();
+            GameManager.Instance.SRMng.rooms[(int)_player.ID - 1].ShowNextModel();
         }
 
         public override void GoLeftInMenu(Player _player) {
-            GameManager.Instance.SRMng.rooms[(int)_player.ID - 1].ShowPrevious();
+            GameManager.Instance.SRMng.rooms[(int)_player.ID - 1].ShowPreviousModel();
         }
 
         public override void GoUpInMenu(Player _player)

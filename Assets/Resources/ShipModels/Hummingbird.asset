@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Name: Hummingbird
   m_EditorClassIdentifier: 
   IsPurchased: 0
+  Price: 20
   BasePrefab: {fileID: 114084304304996402, guid: 1e454b20c5c81a94c83dfadd7cbda89e,
     type: 2}
   ModelPrefab: {fileID: 100000, guid: fe00751b35ea08a4f8355376fb38d909, type: 3}

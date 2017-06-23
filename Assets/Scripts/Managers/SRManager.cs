@@ -34,7 +34,7 @@ namespace BlackFox {
         /// <returns></returns>
         public int GetNextColorID(ColorSelectDirection _direction, int _currentColor, int _indexOfCurrent)
         {
-            if (_direction == ColorSelectDirection.up)
+            if (_direction == ColorSelectDirection.Up)
             {
                 for (int i = _currentColor; i < datas[0].ColorSets.Count; i++)
                 {
@@ -105,6 +105,6 @@ namespace BlackFox {
             }
         }
 
-        public enum ColorSelectDirection{up=0,down =1}
+        public enum ColorSelectDirection{Up = 0, Down = 1}
     }
 }

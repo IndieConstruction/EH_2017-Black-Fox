@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Name: Owl
   m_EditorClassIdentifier: 
   IsPurchased: 1
+  Price: 20
   BasePrefab: {fileID: 114084304304996402, guid: 1e454b20c5c81a94c83dfadd7cbda89e,
     type: 2}
   ModelPrefab: {fileID: 100000, guid: 911b85e7dc8efd24e9be4f6028221342, type: 3}

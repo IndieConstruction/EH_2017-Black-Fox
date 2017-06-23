@@ -13,7 +13,7 @@ public class SkinPreviewContainer : BaseMenu
 
         int _currentIndexSelected;
 
-        int CurrentIndexSelected
+        public int CurrentIndexSelected
         {
             get { return _currentIndexSelected; }
             set
@@ -24,6 +24,9 @@ public class SkinPreviewContainer : BaseMenu
 
                 if (_currentIndexSelected < 0)
                     _currentIndexSelected = 4 - 1;
+
+                storeController.MoveActiveImage(Images[CurrentIndexSelected].rectTransform);
+
             }
         }
 
@@ -39,13 +42,11 @@ public class SkinPreviewContainer : BaseMenu
         public override void GoUpInMenu(Player _player)
         {
             CurrentIndexSelected--;
-            storeController.MoveActiveImage(Images[CurrentIndexSelected].rectTransform);
         }
 
         public override void GoDownInMenu(Player _player)
         {
             CurrentIndexSelected++;
-            storeController.MoveActiveImage(Images[CurrentIndexSelected].rectTransform);
         }
 
         public override void Selection(Player _player)
@@ -59,8 +60,5 @@ public class SkinPreviewContainer : BaseMenu
         }
 
         #endregion
-
-        
-
     }
 }

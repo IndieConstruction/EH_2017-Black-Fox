@@ -46,12 +46,14 @@ namespace BlackFox
 
         public override void GoRightInMenu(Player _player)
         {
-            ActiveSkinPanel();
+            if(currentPanelActive.GetComponent<SkinPreviewContainer>() == null)
+                ActiveSkinPanel();
         }
 
         public override void GoLeftInMenu(Player _player)
         {
-            ActiveModelPanel();
+            if (currentPanelActive.GetComponent<ModelPreviewContainer>() == null)
+                ActiveModelPanel();
         }
 
         #endregion
@@ -61,6 +63,7 @@ namespace BlackFox
             modelPreviewCtrl.gameObject.SetActive(true);
             skinPreviewCtrl.gameObject.SetActive(false);
             currentPanelActive = modelPreviewCtrl;
+            modelPreviewCtrl.CurrentIndexSelected = 0;
         }
 
         void ActiveSkinPanel()
@@ -68,6 +71,7 @@ namespace BlackFox
             modelPreviewCtrl.gameObject.SetActive(false);
             skinPreviewCtrl.gameObject.SetActive(true);
             currentPanelActive = skinPreviewCtrl;
+            skinPreviewCtrl.CurrentIndexSelected = 0;
         }
 
         public void MoveActiveImage(RectTransform _position)

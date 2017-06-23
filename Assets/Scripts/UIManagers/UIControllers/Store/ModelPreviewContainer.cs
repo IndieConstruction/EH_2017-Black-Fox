@@ -10,8 +10,8 @@ namespace BlackFox {
         List<RawImage> Images = new List<RawImage>();
         StoreController storeController;
         int _currentIndexSelected;
-        
-        int CurrentIndexSelected
+
+        public int CurrentIndexSelected
         {
             get { return _currentIndexSelected; }
             set
@@ -22,6 +22,9 @@ namespace BlackFox {
 
                 if (_currentIndexSelected < 0)
                     _currentIndexSelected = 4 - 1;
+
+                storeController.MoveActiveImage(Images[CurrentIndexSelected].rectTransform);
+
             }
         }
 
@@ -34,13 +37,11 @@ namespace BlackFox {
         public override void GoUpInMenu(Player _player)
         {
             CurrentIndexSelected--;
-            storeController.MoveActiveImage(Images[CurrentIndexSelected].rectTransform);
         }
 
         public override void GoDownInMenu(Player _player)
         {
             CurrentIndexSelected++;
-            storeController.MoveActiveImage(Images[CurrentIndexSelected].rectTransform);
         }
 
         public override void Selection(Player _player)

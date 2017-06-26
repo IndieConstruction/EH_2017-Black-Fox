@@ -53,6 +53,11 @@ namespace BlackFox {
             return _currentColor;
         }
 
+        public int CheckColorAvailability(ShowRoomController _room, int _currentColor, int _indexOfCurrent)
+        {
+            return GetNextColorID(SRManager.ColorSelectDirection.Up, _room, _currentColor - 1, _indexOfCurrent);
+        }
+
         bool CheckForAvaibility(int _colorIndex, AvatarData _data, ShowRoomController _room)
         {
             if (!_data.ColorSets[_colorIndex].IsPurchased)

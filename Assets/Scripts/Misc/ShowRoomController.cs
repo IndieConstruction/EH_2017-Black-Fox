@@ -52,7 +52,6 @@ namespace BlackFox
         {
             player = myPlayer;
             manager = _manager;
-            colorIndex = (int)player.ID - 1;
             InstanceModels(datas.ToArray());       
         }
 
@@ -165,7 +164,14 @@ namespace BlackFox
                 avatars[i].AddComponent<RotateOnPosition>();
                 foreach(MeshRenderer mesh in avatars[i].GetComponentsInChildren<MeshRenderer>())
                 {
-                    colorIndex = manager.GetNextColorID(SRManager.ColorSelectDirection.Up, this, colorIndex, i);
+                    if(player.ID == PlayerLabel.One)
+                    {
+                        colorIndex = 0;
+                    }
+                    else
+                    {
+                        colorIndex = manager.CheckColorAvailability(this, (int)player.ID - 1, i);
+                    }
                     mesh.materials = new Material[] { datas[i].ColorSets[colorIndex].ShipMaterialMain };
                 }
             }

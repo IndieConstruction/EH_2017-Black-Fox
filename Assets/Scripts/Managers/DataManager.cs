@@ -32,9 +32,9 @@ namespace BlackFox
             {
                 if (data == _data)
                 {
-                    foreach (ColorSetAvailability color in data.ColorSets)
+                    foreach (ColorSetData color in data.ColorSets)
                     {
-                        if (color.Color == _color)
+                        if (color == _color)
                         {
                             color.IsPurchased = true;
                             break;

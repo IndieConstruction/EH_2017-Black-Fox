@@ -110,7 +110,7 @@ namespace BlackFox
             {
                 foreach (MeshRenderer renderer in avatar.GetComponentsInChildren<MeshRenderer>())
                 {
-                    renderer.materials = new Material[] { datas[IndexOfCurrent].ColorSets[colorIndex].Color.ShipMaterialMain };
+                    renderer.materials = new Material[] { datas[IndexOfCurrent].ColorSets[colorIndex].ShipMaterialMain };
                 }
             }
         }
@@ -125,7 +125,7 @@ namespace BlackFox
             {
                 foreach (MeshRenderer renderer in avatar.GetComponentsInChildren<MeshRenderer>())
                 {
-                    renderer.materials = new Material[] { datas[IndexOfCurrent].ColorSets[colorIndex].Color.ShipMaterialMain };
+                    renderer.materials = new Material[] { datas[IndexOfCurrent].ColorSets[colorIndex].ShipMaterialMain };
                 }
             }
         }
@@ -166,7 +166,7 @@ namespace BlackFox
                 foreach(MeshRenderer mesh in avatars[i].GetComponentsInChildren<MeshRenderer>())
                 {
                     colorIndex = manager.GetNextColorID(SRManager.ColorSelectDirection.Up, this, colorIndex, i);
-                    mesh.materials = new Material[] { datas[i].ColorSets[colorIndex].Color.ShipMaterialMain };
+                    mesh.materials = new Material[] { datas[i].ColorSets[colorIndex].ShipMaterialMain };
                 }
             }
 

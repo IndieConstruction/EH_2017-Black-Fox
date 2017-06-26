@@ -41,7 +41,7 @@ namespace BlackFox
                 PlayerHud temphud = new PlayerHud();
                 temphud.player = players[i];
                 temphud.Hud = HudPlayer[i];
-                temphud.GetImage().sprite = players[i].AvatarData.ColorSets[players[i].AvatarData.ColorSetIndex].Color.HudColor;
+                temphud.GetImage().sprite = players[i].AvatarData.ColorSets[players[i].AvatarData.ColorSetIndex].HudColor;
                 Huds.Add(temphud);
             }
         }

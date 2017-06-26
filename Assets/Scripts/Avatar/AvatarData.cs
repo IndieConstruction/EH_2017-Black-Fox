@@ -16,7 +16,7 @@ namespace BlackFox
         public int Price;
         public Ship BasePrefab;
         public GameObject ModelPrefab;
-        public List<ColorSetAvailability> ColorSets;
+        public List<ColorSetData> ColorSets;
         public ShipAudioData ShipAudioSet;
         public ShipConfig shipConfig;
         public RopeConfig ropeConfig;
@@ -35,12 +35,5 @@ namespace BlackFox
 
         [Header("Avatar Upgrades")]
         public AvatarUpgradesConfig avatarUpgradesConfig;
-    }
-
-    [Serializable]
-    public class ColorSetAvailability
-    {
-        public ColorSetData Color;
-        public bool IsPurchased;
     }
 }

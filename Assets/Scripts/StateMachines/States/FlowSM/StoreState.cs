@@ -17,6 +17,7 @@ namespace BlackFox
 
         public override void OnEnd()
         {
+            GameManager.Instance.SRMng.rooms[0].ReSetFirstShowRoom();
             GameManager.Instance.UiMng.DestroyStoreMenu();
         }
     }

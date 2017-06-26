@@ -17,9 +17,9 @@ namespace BlackFox
 
         public void Init()
         {
-            room = GameManager.Instance.SRMng.rooms[0];
+            room = GameManager.Instance.ShopRoomMng.rooms[0];
             sliders = GetComponentsInChildren<Slider>().ToList();
-            SetSliderValues(GameManager.Instance.SRMng.datas[0].SelectionParameters[0], null);
+            SetSliderValues(GameManager.Instance.ShopRoomMng.datas[0].SelectionParameters[0], null);
             price = Chain.GetComponentInChildren<Text>();
             Chain.gameObject.SetActive(false);
             CoinText.text = GameManager.Instance.CoinMng.TotalCoin.ToString();
@@ -81,20 +81,21 @@ namespace BlackFox
         public override void Selection(Player _player)
         {
 
-            if (!GameManager.Instance.SRMng.datas[room.IndexOfCurrent].IsPurchased && (GameManager.Instance.SRMng.datas[room.IndexOfCurrent].Price <= GameManager.Instance.CoinMng.TotalCoin))
+            if (!GameManager.Instance.ShopRoomMng.datas[room.IndexOfCurrent].IsPurchased && (GameManager.Instance.ShopRoomMng.datas[room.IndexOfCurrent].Price <= GameManager.Instance.CoinMng.TotalCoin))
             {
-                GameManager.Instance.DataMng.PurchaseAvatar(room.IndexOfCurrent, GameManager.Instance.SRMng.datas[room.IndexOfCurrent]);
-                GameManager.Instance.CoinMng.TotalCoin -= GameManager.Instance.SRMng.datas[room.IndexOfCurrent].Price;
-
+                GameManager.Instance.DataMng.PurchaseAvatar(room.IndexOfCurrent, GameManager.Instance.ShopRoomMng.datas[room.IndexOfCurrent]);
+                GameManager.Instance.CoinMng.TotalCoin -= GameManager.Instance.ShopRoomMng.datas[room.IndexOfCurrent].Price;
+                Chain.gameObject.SetActive(false);
             }
-            else if (!GameManager.Instance.SRMng.datas[room.IndexOfCurrent].ColorSets[room.colorIndex].IsPurchased && (GameManager.Instance.SRMng.datas[room.IndexOfCurrent].ColorSets[room.colorIndex].Price <= GameManager.Instance.CoinMng.TotalCoin))
+            else if (!GameManager.Instance.ShopRoomMng.datas[room.IndexOfCurrent].ColorSets[room.colorIndex].IsPurchased && (GameManager.Instance.ShopRoomMng.datas[room.IndexOfCurrent].ColorSets[room.colorIndex].Price <= GameManager.Instance.CoinMng.TotalCoin))
             {
-                GameManager.Instance.DataMng.PurchaseColorSet(GameManager.Instance.SRMng.datas[room.IndexOfCurrent].ColorSets[room.colorIndex]);
-                GameManager.Instance.CoinMng.TotalCoin -= GameManager.Instance.SRMng.datas[room.IndexOfCurrent].ColorSets[room.colorIndex].Price;
+                GameManager.Instance.DataMng.PurchaseColorSet(GameManager.Instance.ShopRoomMng.datas[room.IndexOfCurrent].ColorSets[room.colorIndex]);
+                GameManager.Instance.CoinMng.TotalCoin -= GameManager.Instance.ShopRoomMng.datas[room.IndexOfCurrent].ColorSets[room.colorIndex].Price;
+                Chain.gameObject.SetActive(false);
             }
 
-            Chain.gameObject.SetActive(false);
             CoinText.text = GameManager.Instance.CoinMng.TotalCoin.ToString();
+            PlayerPrefs.Save();
         }
 
         public override void GoBack(Player _player)
@@ -111,16 +112,16 @@ namespace BlackFox
 
         void ToggleChain()
         {
-            if (GameManager.Instance.SRMng.datas[room.IndexOfCurrent].ColorSets[room.colorIndex].IsPurchased && GameManager.Instance.SRMng.datas[room.IndexOfCurrent].IsPurchased)
+            if (GameManager.Instance.ShopRoomMng.datas[room.IndexOfCurrent].ColorSets[room.colorIndex].IsPurchased && GameManager.Instance.ShopRoomMng.datas[room.IndexOfCurrent].IsPurchased)
             {
                 Chain.gameObject.SetActive(false);
             }
             else {
                 Chain.gameObject.SetActive(true);
-                if(!GameManager.Instance.SRMng.datas[room.IndexOfCurrent].IsPurchased)
-                    PriceText.text = "Ship Price : " + (GameManager.Instance.SRMng.datas[room.IndexOfCurrent].Price).ToString();
+                if(!GameManager.Instance.ShopRoomMng.datas[room.IndexOfCurrent].IsPurchased)
+                    PriceText.text = "Ship Price : " + (GameManager.Instance.ShopRoomMng.datas[room.IndexOfCurrent].Price).ToString();
                 else
-                    PriceText.text = "Skin Price : " +(GameManager.Instance.SRMng.datas[room.IndexOfCurrent].ColorSets[room.colorIndex].Price).ToString();
+                    PriceText.text = "Skin Price : " +(GameManager.Instance.ShopRoomMng.datas[room.IndexOfCurrent].ColorSets[room.colorIndex].Price).ToString();
 
             }
         }

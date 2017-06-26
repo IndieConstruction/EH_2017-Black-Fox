@@ -16,15 +16,14 @@ namespace BlackFox
 
         private int _totalCoin;
 
+        private int coinSaved { get { return PlayerPrefs.GetInt("Coins"); } }
+
         public int TotalCoin
         {
             get { return _totalCoin; }
             set {
-                _totalCoin = value;
-                int tempCoins = PlayerPrefs.GetInt("Coins");
-                tempCoins += _totalCoin;
+                _totalCoin = value + coinSaved;
                 PlayerPrefs.SetInt("Coins", _totalCoin);
-                Debug.Log(PlayerPrefs.GetInt("Coins"));
             }
         }
                 

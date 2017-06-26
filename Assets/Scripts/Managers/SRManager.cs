@@ -10,7 +10,7 @@ namespace BlackFox {
         public List<ShowRoomController> rooms = new List<ShowRoomController>();
         List<Player> playersSRs;
         List<RenderTexture> renders = new List<RenderTexture>();
-        public List<AvatarData> datas { get { return GameManager.Instance.DataMng.AvatarDatasInstances; } }       
+        public List<AvatarData> datas { get { return GameManager.Instance.DataMng.AvatarDatasInstances; } }
 
 
         /// <summary>
@@ -76,9 +76,10 @@ namespace BlackFox {
             for (int i = 0; i < _amountOf; i++)
             {
                 tempSR = Instantiate(ShowroomPrefab, transform);
-                tempSR.transform.localPosition = tempSR.transform.localPosition + Vector3.Cross(tempSR.GetComponent<ShowRoomController>().CorridorVector, transform.forward)*i;
+                tempSR.transform.localPosition = tempSR.transform.localPosition + Vector3.Cross(tempSR.GetComponent<ShowRoomController>().CorridorVector, transform.forward) * i;
                 rooms.Add(tempSR.GetComponent<ShowRoomController>());
-                tempSR.GetComponentInChildren<Camera>().targetTexture = renders[i];
+                if (tempSR.GetComponentInChildren<Camera>().targetTexture == null)
+                    tempSR.GetComponentInChildren<Camera>().targetTexture = renders[i];
             }
         }
 
@@ -110,6 +111,6 @@ namespace BlackFox {
             }
         }
 
-        public enum ColorSelectDirection{Up = 0, Down = 1}
+        public enum ColorSelectDirection { Up = 0, Down = 1 }
     }
 }

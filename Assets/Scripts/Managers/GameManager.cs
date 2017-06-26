@@ -17,6 +17,7 @@ namespace BlackFox
         public GameObject DataManagerPrefab;
         public GameObject SRManagerPrefab;
         public GameObject LoadingControllerPrefab;
+        public GameObject ShopRoomPrefab;
 
         #endregion
 
@@ -37,7 +38,9 @@ namespace BlackFox
         public SRManager SRMng;
         [HideInInspector]
         public LoadingController LoadingCtrl;
-        
+        [HideInInspector]
+        public SRManager ShopRoomMng;
+
         #endregion
 
         [HideInInspector]
@@ -125,6 +128,11 @@ namespace BlackFox
             SRMng = Instantiate(SRManagerPrefab, transform).GetComponent<SRManager>();
         }
 
+        public void InstantiateShopRoom()
+        {
+            ShopRoomMng = Instantiate(ShopRoomPrefab, transform).GetComponent<SRManager>();
+        }
+
         public void InstantiateLoadingController() 
         {
             LoadingCtrl = Instantiate(LoadingControllerPrefab, transform).GetComponent<LoadingController>();
@@ -132,6 +140,7 @@ namespace BlackFox
 
         #endregion
         #endregion
+               
     }
 }
 

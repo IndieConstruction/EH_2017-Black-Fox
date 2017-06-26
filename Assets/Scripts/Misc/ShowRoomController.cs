@@ -31,7 +31,7 @@ namespace BlackFox
         int _indexOfCurrent;
         public int IndexOfCurrent {
             get { return _indexOfCurrent; }
-            private set {
+            set {
                 _indexOfCurrent = value;
                 if(EventManager.OnShowRoomValueUpdate != null)
                     EventManager.OnShowRoomValueUpdate(manager.datas[IndexOfCurrent].SelectionParameters[IndexOfCurrent], player);
@@ -233,5 +233,10 @@ namespace BlackFox
                 }
             }
         }
+
+        public void ReSetFirstShowRoom() {
+           modelContainer.transform.DOMove(-CorridorVector * IndexOfCurrent, 0.5f);
+        }
+
     }
 }

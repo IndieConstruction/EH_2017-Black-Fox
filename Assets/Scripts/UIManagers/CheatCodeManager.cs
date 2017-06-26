@@ -75,6 +75,9 @@ namespace BlackFox
                         }
                     }
                     break;
+                case "coins":
+                    GameManager.Instance.CoinMng.TotalCoin += 100;
+                    break;
                 default:
                     Debug.LogWarning("Wrong CheatCode");
                     break;

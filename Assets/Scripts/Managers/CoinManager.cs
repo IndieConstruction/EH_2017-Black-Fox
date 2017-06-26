@@ -19,9 +19,14 @@ namespace BlackFox
         public int TotalCoin
         {
             get { return _totalCoin; }
-            set { _totalCoin = value; }
+            set {
+                _totalCoin = value;
+                int tempCoins = PlayerPrefs.GetInt("Coins");
+                tempCoins += _totalCoin;
+                PlayerPrefs.SetInt("Coins", _totalCoin);
+                Debug.Log(PlayerPrefs.GetInt("Coins"));
+            }
         }
-
                 
         public void InstantiateCoinController()
         {

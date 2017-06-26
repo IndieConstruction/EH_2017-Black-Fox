@@ -24,9 +24,6 @@ public class SkinPreviewContainer : BaseMenu
 
                 if (_IndexSelected < 0)
                     _IndexSelected = 4 - 1;
-
-                storeController.MoveActiveImage(Images[IndexSelected].rectTransform);
-
             }
         }
 
@@ -39,20 +36,11 @@ public class SkinPreviewContainer : BaseMenu
 
         #region Menu Action
 
-        public override void GoUpInMenu(Player _player)
-        {
-            IndexSelected--;
-        }
-
-        public override void GoDownInMenu(Player _player)
-        {
-            IndexSelected++;
-        }
-
         public override void Selection(Player _player)
         {
-            base.Selection(_player);
+            //GameManager.Instance.DataMng.PurchaseColorSet()
         }
+
         
 
         #endregion

@@ -67,11 +67,17 @@ namespace BlackFox
         /// <summary>
         /// Dislay next Model
         /// </summary>
-        public void ShowNextModel()
+        public void ShowNextModel(bool _isInShop = false)
         {
             for (int i = IndexOfCurrent + 1; i < datas.Count; i++)
             {
-                if (datas[i].IsPurchased)
+                if (_isInShop)
+                {
+                    IndexOfCurrent = i;
+                    modelContainer.transform.DOMove(-CorridorVector * IndexOfCurrent, 0.5f);
+                    break;
+                }
+                else if (datas[i].IsPurchased)
                 {
                     IndexOfCurrent = i;
                     modelContainer.transform.DOMove(-CorridorVector * IndexOfCurrent, 0.5f);
@@ -83,13 +89,19 @@ namespace BlackFox
         /// <summary>
         /// Display previous Model
         /// </summary>
-        public void ShowPreviousModel()
+        public void ShowPreviousModel(bool _isInShop = false)
         {
             if (IndexOfCurrent > 0)
             {
                 for (int i = IndexOfCurrent - 1; i >= 0; i--)
                 {
-                    if (datas[i].IsPurchased)
+                    if (_isInShop)
+                    {
+                        IndexOfCurrent = i;
+                        modelContainer.transform.DOMove(-CorridorVector * IndexOfCurrent, 0.5f);
+                        break;
+                    }
+                    else if (datas[i].IsPurchased)
                     {
                         IndexOfCurrent = i;
                         modelContainer.transform.DOMove(-CorridorVector * IndexOfCurrent, 0.5f);
@@ -102,14 +114,30 @@ namespace BlackFox
         /// <summary>
         /// Show next color of the ColorSet list of the current AvatarData
         /// </summary>
-        public void ShowNextColor()
+        public void ShowNextColor(bool _isInShop = false)
         {
-            colorIndex = manager.GetNextColorID(SRManager.ColorSelectDirection.Up, this, colorIndex, IndexOfCurrent);
-            foreach (GameObject avatar in avatars)
+            if (!_isInShop)
             {
-                foreach (MeshRenderer renderer in avatar.GetComponentsInChildren<MeshRenderer>())
+                colorIndex = manager.GetNextColorID(SRManager.ColorSelectDirection.Up, this, colorIndex, IndexOfCurrent);
+                foreach (GameObject avatar in avatars)
                 {
-                    renderer.materials = new Material[] { datas[IndexOfCurrent].ColorSets[colorIndex].ShipMaterialMain };
+                    foreach (MeshRenderer renderer in avatar.GetComponentsInChildren<MeshRenderer>())
+                    {
+                        renderer.materials = new Material[] { datas[IndexOfCurrent].ColorSets[colorIndex].ShipMaterialMain };
+                    }
+                } 
+            }
+            else
+            {
+                colorIndex++;
+                if (colorIndex >= datas[IndexOfCurrent].ColorSets.Count || colorIndex < 0)
+                    colorIndex--;
+                foreach (GameObject avatar in avatars)
+                {
+                    foreach (MeshRenderer renderer in avatar.GetComponentsInChildren<MeshRenderer>())
+                    {
+                        renderer.materials = new Material[] { datas[IndexOfCurrent].ColorSets[colorIndex].ShipMaterialMain };
+                    }
                 }
             }
         }
@@ -117,14 +145,30 @@ namespace BlackFox
         /// <summary>
         /// Show previous color of the ColorSet list of the current AvatarData
         /// </summary>
-        public void ShowPreviousColor()
+        public void ShowPreviousColor(bool _isInShop = false)
         {
-            colorIndex = manager.GetNextColorID(SRManager.ColorSelectDirection.Down, this, colorIndex, IndexOfCurrent);
-            foreach (GameObject avatar in avatars)
+            if (!_isInShop)
             {
-                foreach (MeshRenderer renderer in avatar.GetComponentsInChildren<MeshRenderer>())
+                colorIndex = manager.GetNextColorID(SRManager.ColorSelectDirection.Down, this, colorIndex, IndexOfCurrent);
+                foreach (GameObject avatar in avatars)
                 {
-                    renderer.materials = new Material[] { datas[IndexOfCurrent].ColorSets[colorIndex].ShipMaterialMain };
+                    foreach (MeshRenderer renderer in avatar.GetComponentsInChildren<MeshRenderer>())
+                    {
+                        renderer.materials = new Material[] { datas[IndexOfCurrent].ColorSets[colorIndex].ShipMaterialMain };
+                    }
+                } 
+            }
+            else
+            {
+                colorIndex--;
+                if (colorIndex >= datas[IndexOfCurrent].ColorSets.Count || colorIndex < 0)
+                    colorIndex++;
+                foreach (GameObject avatar in avatars)
+                {
+                    foreach (MeshRenderer renderer in avatar.GetComponentsInChildren<MeshRenderer>())
+                    {
+                        renderer.materials = new Material[] { datas[IndexOfCurrent].ColorSets[colorIndex].ShipMaterialMain };
+                    }
                 }
             }
         }

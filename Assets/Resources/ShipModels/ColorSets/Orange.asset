@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Name: Orange
   m_EditorClassIdentifier: 
   IsPurchased: 0
+  Price: 0
   ShipMaterialMain: {fileID: 2100000, guid: a5f1ec2ab18cf8a40808ac348e8f5a6d, type: 2}
   RopeMaterial: {fileID: 2100000, guid: ed50f55be8a8feb479d02cccfed7723b, type: 2}
   PinMaterial: {fileID: 2100000, guid: e1d14c1d50241c44bab9757581b23e10, type: 2}

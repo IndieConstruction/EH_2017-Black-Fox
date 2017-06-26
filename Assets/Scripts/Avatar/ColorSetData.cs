@@ -8,6 +8,7 @@ namespace BlackFox {
     public class ColorSetData : ScriptableObject
     {
         public bool IsPurchased;
+        public int Price;
         public Material ShipMaterialMain;
         public Material RopeMaterial;
         public Material PinMaterial;

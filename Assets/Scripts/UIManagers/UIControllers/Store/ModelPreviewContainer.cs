@@ -22,9 +22,6 @@ namespace BlackFox {
 
                 if (_IndexSelected < 0)
                     _IndexSelected = 4 - 1;
-
-                storeController.MoveActiveImage(Images[IndexSelected].rectTransform);
-
             }
         }
 
@@ -34,19 +31,24 @@ namespace BlackFox {
             Images = GetComponentsInChildren<RawImage>().ToList();
         }
 
-        public override void GoUpInMenu(Player _player)
-        {
-            IndexSelected--;
-        }
-
-        public override void GoDownInMenu(Player _player)
-        {
-            IndexSelected++;
-        }
+        #region Menu Actions
 
         public override void Selection(Player _player)
         {
-            //Logiche per acquistare le navi
+            //GameManager.Instance.DataMng.PurchaseAvatar()
         }
+
+
+        //public void SetSliderValues(int[] _values)
+        //{
+        //    for (int i = 0; i < sliders.Length; i++)
+        //    {
+        //        sliders[i].value = _values[i];
+        //    }
+        //}
+
+        
+
+        #endregion
     }
 }

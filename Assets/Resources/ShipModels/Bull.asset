@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9681a26f2f551234a8c74f5a6ef49a16, type: 3}
   m_Name: Bull
   m_EditorClassIdentifier: 
-  IsPurchased: 1
+  IsPurchased: 0
   Price: 20
   BasePrefab: {fileID: 114084304304996402, guid: 1e454b20c5c81a94c83dfadd7cbda89e,
     type: 2}

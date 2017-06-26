@@ -10,7 +10,7 @@ namespace BlackFox {
         public List<ShowRoomController> rooms = new List<ShowRoomController>();
         List<Player> playersSRs;
         List<RenderTexture> renders = new List<RenderTexture>();
-        public List<AvatarData> datas { get { return GameManager.Instance.DataMng.AvatarDatas; } }       
+        public List<AvatarData> datas { get { return GameManager.Instance.DataMng.AvatarDatasInstances; } }       
 
 
         /// <summary>

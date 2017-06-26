@@ -9,21 +9,21 @@ namespace BlackFox {
 
         List<RawImage> Images = new List<RawImage>();
         StoreController storeController;
-        int _currentIndexSelected;
+        int _IndexSelected;
 
-        public int CurrentIndexSelected
+        public int IndexSelected
         {
-            get { return _currentIndexSelected; }
+            get { return _IndexSelected; }
             set
             {
-                _currentIndexSelected = value;
-                if (_currentIndexSelected > 4 - 1)
-                    _currentIndexSelected = 0;
+                _IndexSelected = value;
+                if (_IndexSelected > 4 - 1)
+                    _IndexSelected = 0;
 
-                if (_currentIndexSelected < 0)
-                    _currentIndexSelected = 4 - 1;
+                if (_IndexSelected < 0)
+                    _IndexSelected = 4 - 1;
 
-                storeController.MoveActiveImage(Images[CurrentIndexSelected].rectTransform);
+                storeController.MoveActiveImage(Images[IndexSelected].rectTransform);
 
             }
         }
@@ -36,22 +36,17 @@ namespace BlackFox {
 
         public override void GoUpInMenu(Player _player)
         {
-            CurrentIndexSelected--;
+            IndexSelected--;
         }
 
         public override void GoDownInMenu(Player _player)
         {
-            CurrentIndexSelected++;
+            IndexSelected++;
         }
 
         public override void Selection(Player _player)
         {
-         
-        }
-
-        public override void GoBack(Player _player)
-        {
-         
+            //Logiche per acquistare le navi
         }
     }
 }

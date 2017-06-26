@@ -16,5 +16,10 @@ namespace BlackFox
             GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInput, PlayerLabel.One, PlayerState.Blocked);
 
         }
+
+        public override void OnEnd()
+        {
+            GameManager.Instance.UiMng.DestroyManualCanvas();
+        }
     }
 }

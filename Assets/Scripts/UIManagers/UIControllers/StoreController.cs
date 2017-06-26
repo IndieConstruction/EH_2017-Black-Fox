@@ -41,7 +41,12 @@ namespace BlackFox
 
         public override void GoBack(Player _player)
         {
-            currentPanelActive.GoBack(_player);
+            GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.Blocked);
+            GameManager.Instance.LoadingCtrl.ActivateLoadingPanel(() => {
+                GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new MainMenuState() });
+            });
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Back);
         }
 
         public override void GoRightInMenu(Player _player)
@@ -63,7 +68,7 @@ namespace BlackFox
             modelPreviewCtrl.gameObject.SetActive(true);
             skinPreviewCtrl.gameObject.SetActive(false);
             currentPanelActive = modelPreviewCtrl;
-            modelPreviewCtrl.CurrentIndexSelected = 0;
+            modelPreviewCtrl.IndexSelected = 0;
         }
 
         void ActiveSkinPanel()
@@ -71,7 +76,7 @@ namespace BlackFox
             modelPreviewCtrl.gameObject.SetActive(false);
             skinPreviewCtrl.gameObject.SetActive(true);
             currentPanelActive = skinPreviewCtrl;
-            skinPreviewCtrl.CurrentIndexSelected = 0;
+            skinPreviewCtrl.IndexSelected = 0;
         }
 
         public void MoveActiveImage(RectTransform _position)

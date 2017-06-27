@@ -12,6 +12,7 @@ namespace BlackFox
     [CreateAssetMenu(fileName = "AvatarData", menuName = "Avatar/NewShip", order = 1)]
     public class AvatarData : ScriptableObject
     {
+        public string DataName;
         public bool IsPurchased;
         public int Price;
         public Ship BasePrefab;

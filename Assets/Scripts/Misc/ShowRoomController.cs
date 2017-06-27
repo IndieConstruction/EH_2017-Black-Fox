@@ -220,6 +220,11 @@ namespace BlackFox
                 }
             }
 
+            ReSetFirstShowRoom();
+        }
+
+        public void ReSetFirstShowRoom()
+        {
             for (int i = 0; i < datas.Count; i++)
             {
                 if (datas[i].IsPurchased)
@@ -233,10 +238,5 @@ namespace BlackFox
                 }
             }
         }
-
-        public void ReSetFirstShowRoom() {
-           modelContainer.transform.DOMove(-CorridorVector * IndexOfCurrent, 0.5f);
-        }
-
     }
 }

@@ -91,6 +91,14 @@ namespace BlackFox {
             }
         }
 
+        public void ResetShowRooms()
+        {
+            foreach (var item in rooms)
+            {
+                item.ReSetFirstShowRoom();
+            }
+        }
+
         /// <summary>
         /// Richiamata la funzione per impostare i valori delle slider presente nello show room controller
         /// </summary>

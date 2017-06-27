@@ -83,7 +83,7 @@ namespace BlackFox
 
             if (!GameManager.Instance.ShopRoomMng.datas[room.IndexOfCurrent].IsPurchased && (GameManager.Instance.ShopRoomMng.datas[room.IndexOfCurrent].Price <= GameManager.Instance.CoinMng.TotalCoin))
             {
-                GameManager.Instance.DataMng.PurchaseAvatar(room.IndexOfCurrent, GameManager.Instance.ShopRoomMng.datas[room.IndexOfCurrent]);
+                GameManager.Instance.DataMng.PurchaseAvatar(GameManager.Instance.ShopRoomMng.datas[room.IndexOfCurrent]);
                 GameManager.Instance.CoinMng.TotalCoin -= GameManager.Instance.ShopRoomMng.datas[room.IndexOfCurrent].Price;
                 Chain.gameObject.SetActive(false);
             }

@@ -11,8 +11,6 @@ namespace BlackFox
 
         public Slider ElementZeroSlider;
 
-        public Text LevelIndicationText;
-
         public Text CoinCollectedText;
 
         List<GameObject> getHudPlayers()
@@ -68,14 +66,6 @@ namespace BlackFox
         public void SetElementZeroSlider(float _life, float _maxLife)
         {
             ElementZeroSlider.value = _life / _maxLife;                  // Da rivedere se il valore della vita cambia
-        }
-
-        /// <summary>
-        /// Aggiorna il numero del livello e del round visualizzati durante il round
-        /// </summary>
-        public void UpdateLevelInformation()
-        {
-            LevelIndicationText.text = "Round: " + GameManager.Instance.LevelMng.RoundNumber;
         }
 
         #endregion

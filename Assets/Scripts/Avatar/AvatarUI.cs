@@ -47,7 +47,9 @@ namespace BlackFox {
         void SetAmmoSlider(Avatar _avatar)
         {
             if (_avatar == GetComponentInParent<Avatar>())
-                AmmoSlider.value = (0.5f * _avatar.ship.shooter.Ammo) / _avatar.AvatarData.shipConfig.shooterConfig.MaxAmmo;
+                AmmoSlider.value = (0.87f * _avatar.ship.shooter.Ammo) / _avatar.AvatarData.shipConfig.shooterConfig.MaxAmmo;
+            if (AmmoSlider.value > 0.87f)
+                AmmoSlider.value = 0.87f;
         }
         
         /// <summary>

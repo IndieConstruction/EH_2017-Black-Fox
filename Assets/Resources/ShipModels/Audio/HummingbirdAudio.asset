@@ -15,7 +15,11 @@ MonoBehaviour:
   Death: {fileID: 8300000, guid: ae5619dc515e31540a916938435fa2b8, type: 3}
   Movement: {fileID: 8300000, guid: 318e2794213d6774a858b35bd031e8a4, type: 3}
   NoAmmo: {fileID: 8300000, guid: 02291affdbf0d5c488a637681233221a, type: 3}
-  Shoots: []
+  Shoots:
+  - {fileID: 8300000, guid: d6d6d2f06b68ba2418a0cf5668e39d3e, type: 3}
+  - {fileID: 8300000, guid: b8f710c40e705fb429b64ea4297159f6, type: 3}
+  - {fileID: 8300000, guid: c7eaf6cd3d7fff748a9c40f857334663, type: 3}
+  - {fileID: 8300000, guid: 7f5de837fb82b394987a26837e693247, type: 3}
   Collisions:
   - {fileID: 8300000, guid: 55bf301b984463744935b852f4abec41, type: 3}
   - {fileID: 8300000, guid: edf808551084b9049abfc87a4bb419d9, type: 3}

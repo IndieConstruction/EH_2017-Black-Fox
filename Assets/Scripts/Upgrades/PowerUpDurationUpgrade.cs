@@ -28,7 +28,7 @@ namespace BlackFox
 
         public UpgardeTypes ID
         {
-            get { return UpgardeTypes.PowerUpDurationUpgrade; }
+            get { return UpgardeTypes.PowerUpDuration; }
         }
 
         public float[] Values { get; set; }

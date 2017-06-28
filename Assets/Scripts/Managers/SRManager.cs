@@ -10,7 +10,7 @@ namespace BlackFox {
         public List<ShowRoomController> rooms = new List<ShowRoomController>();
         List<Player> playersSRs;
         List<RenderTexture> renders = new List<RenderTexture>();
-        public List<AvatarData> datas { get { return GameManager.Instance.DataMng.AvatarDatas; } }       
+        public List<AvatarData> datas { get { return GameManager.Instance.DataMng.AvatarDatasInstances; } }
 
 
         /// <summary>
@@ -32,32 +32,39 @@ namespace BlackFox {
         /// <param name="_direction"></param>
         /// <param name="_currentColor"></param>
         /// <returns></returns>
-        public int GetNextColorID(ColorSelectDirection _direction, int _currentColor)
+        public int GetNextColorID(ColorSelectDirection _direction, ShowRoomController _room, int _currentColor, int _indexOfCurrent)
         {
-            if (_direction == ColorSelectDirection.up)
+            if (_direction == ColorSelectDirection.Up)
             {
-                for (int i = _currentColor; i < datas[0].ColorSets.Count; i++)
+                for (int i = _currentColor + 1; i < datas[_indexOfCurrent].ColorSets.Count; i++)
                 {
-                    if (CheckForAvaibility(i))
+                    if (CheckForAvaibility(i, datas[_indexOfCurrent], _room))
                         return i;
                 }
             }
             else
             {
-                for (int i = _currentColor; i >= 0; i--)
+                for (int i = _currentColor - 1; i >= 0; i--)
                 {
-                    if (CheckForAvaibility(i))
+                    if (CheckForAvaibility(i, datas[_indexOfCurrent], _room))
                         return i;
                 }
             }
             return _currentColor;
         }
 
-        bool CheckForAvaibility(int _colorIndex)
+        public int CheckColorAvailability(ShowRoomController _room, int _currentColor, int _indexOfCurrent)
         {
+            return GetNextColorID(SRManager.ColorSelectDirection.Up, _room, _currentColor - 1, _indexOfCurrent);
+        }
+
+        bool CheckForAvaibility(int _colorIndex, AvatarData _data, ShowRoomController _room)
+        {
+            if (!_data.ColorSets[_colorIndex].IsPurchased)
+                return false;
             foreach (ShowRoomController room in rooms)
             {
-                if (_colorIndex == room.colorIndex)
+                if (room != _room && _colorIndex == room.colorIndex)
                     return false;
             }
             return true;
@@ -69,9 +76,10 @@ namespace BlackFox {
             for (int i = 0; i < _amountOf; i++)
             {
                 tempSR = Instantiate(ShowroomPrefab, transform);
-                tempSR.transform.localPosition = tempSR.transform.localPosition + Vector3.Cross(tempSR.GetComponent<ShowRoomController>().CorridorVector, transform.forward)*i;
+                tempSR.transform.localPosition = tempSR.transform.localPosition + Vector3.Cross(tempSR.GetComponent<ShowRoomController>().CorridorVector, transform.forward) * i;
                 rooms.Add(tempSR.GetComponent<ShowRoomController>());
-                tempSR.GetComponentInChildren<Camera>().targetTexture = renders[i];
+                if (tempSR.GetComponentInChildren<Camera>().targetTexture == null)
+                    tempSR.GetComponentInChildren<Camera>().targetTexture = renders[i];
             }
         }
 
@@ -80,6 +88,14 @@ namespace BlackFox {
             for (int i = 0; i < rooms.Count; i++)
             {
                 rooms[i].Init(playersSRs[i], this);
+            }
+        }
+
+        public void ResetShowRooms()
+        {
+            foreach (var item in rooms)
+            {
+                item.ReSetFirstShowRoom();
             }
         }
 
@@ -103,6 +119,6 @@ namespace BlackFox {
             }
         }
 
-        public enum ColorSelectDirection{up=0,down =1}
+        public enum ColorSelectDirection { Up = 0, Down = 1 }
     }
 }

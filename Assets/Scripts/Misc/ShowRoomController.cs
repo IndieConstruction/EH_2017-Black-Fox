@@ -31,10 +31,10 @@ namespace BlackFox
         int _indexOfCurrent;
         public int IndexOfCurrent {
             get { return _indexOfCurrent; }
-            private set {
+            set {
                 _indexOfCurrent = value;
                 if(EventManager.OnShowRoomValueUpdate != null)
-                    EventManager.OnShowRoomValueUpdate(manager.datas[0].SelectionParameters[IndexOfCurrent], player);
+                    EventManager.OnShowRoomValueUpdate(manager.datas[IndexOfCurrent].SelectionParameters[IndexOfCurrent], player);
             }
         }
         public int colorIndex { get; private set; }
@@ -52,8 +52,7 @@ namespace BlackFox
         {
             player = myPlayer;
             manager = _manager;
-            InstanceModels(datas.ToArray());
-            
+            InstanceModels(datas.ToArray());       
         }
 
         /// <summary>
@@ -62,43 +61,83 @@ namespace BlackFox
         public void SetSliderValue()
         {
             if (EventManager.OnShowRoomValueUpdate != null)
-                EventManager.OnShowRoomValueUpdate(manager.datas[0].SelectionParameters[IndexOfCurrent], player);
+                EventManager.OnShowRoomValueUpdate(manager.datas[IndexOfCurrent].SelectionParameters[IndexOfCurrent], player);
         }
 
         /// <summary>
         /// Dislay next Model
         /// </summary>
-        public void ShowNext()
+        public void ShowNextModel(bool _isInShop = false)
         {
-            if (IndexOfCurrent < avatars.Count - 1)
+            for (int i = IndexOfCurrent + 1; i < datas.Count; i++)
             {
-                IndexOfCurrent++;
-                modelContainer.transform.DOMove(-CorridorVector * IndexOfCurrent, 0.5f);
+                if (_isInShop)
+                {
+                    IndexOfCurrent = i;
+                    modelContainer.transform.DOMove(-CorridorVector * IndexOfCurrent, 0.5f);
+                    break;
+                }
+                else if (datas[i].IsPurchased)
+                {
+                    IndexOfCurrent = i;
+                    modelContainer.transform.DOMove(-CorridorVector * IndexOfCurrent, 0.5f);
+                    break;
+                }
             }
         }
+
         /// <summary>
         /// Display previous Model
         /// </summary>
-        public void ShowPrevious()
+        public void ShowPreviousModel(bool _isInShop = false)
         {
             if (IndexOfCurrent > 0)
             {
-                IndexOfCurrent--;
-                modelContainer.transform.DOMove(-CorridorVector * IndexOfCurrent, 0.5f);
+                for (int i = IndexOfCurrent - 1; i >= 0; i--)
+                {
+                    if (_isInShop)
+                    {
+                        IndexOfCurrent = i;
+                        modelContainer.transform.DOMove(-CorridorVector * IndexOfCurrent, 0.5f);
+                        break;
+                    }
+                    else if (datas[i].IsPurchased)
+                    {
+                        IndexOfCurrent = i;
+                        modelContainer.transform.DOMove(-CorridorVector * IndexOfCurrent, 0.5f);
+                        break;
+                    }
+                }
             }
         }
 
         /// <summary>
         /// Show next color of the ColorSet list of the current AvatarData
         /// </summary>
-        public void ShowNextColor()
+        public void ShowNextColor(bool _isInShop = false)
         {
-            colorIndex = manager.GetNextColorID(SRManager.ColorSelectDirection.up, colorIndex);
-            foreach (GameObject avatar in avatars)
+            if (!_isInShop)
             {
-                foreach (MeshRenderer renderer in avatar.GetComponentsInChildren<MeshRenderer>())
+                colorIndex = manager.GetNextColorID(SRManager.ColorSelectDirection.Up, this, colorIndex, IndexOfCurrent);
+                foreach (GameObject avatar in avatars)
                 {
-                    renderer.materials = new Material[] { datas[IndexOfCurrent].ColorSets[colorIndex].ShipMaterialMain };
+                    foreach (MeshRenderer renderer in avatar.GetComponentsInChildren<MeshRenderer>())
+                    {
+                        renderer.materials = new Material[] { datas[IndexOfCurrent].ColorSets[colorIndex].ShipMaterialMain };
+                    }
+                } 
+            }
+            else
+            {
+                colorIndex++;
+                if (colorIndex >= datas[IndexOfCurrent].ColorSets.Count || colorIndex < 0)
+                    colorIndex--;
+                foreach (GameObject avatar in avatars)
+                {
+                    foreach (MeshRenderer renderer in avatar.GetComponentsInChildren<MeshRenderer>())
+                    {
+                        renderer.materials = new Material[] { datas[IndexOfCurrent].ColorSets[colorIndex].ShipMaterialMain };
+                    }
                 }
             }
         }
@@ -106,14 +145,30 @@ namespace BlackFox
         /// <summary>
         /// Show previous color of the ColorSet list of the current AvatarData
         /// </summary>
-        public void ShowPreviousColor()
+        public void ShowPreviousColor(bool _isInShop = false)
         {
-            colorIndex = manager.GetNextColorID(SRManager.ColorSelectDirection.down, colorIndex);
-            foreach (GameObject avatar in avatars)
+            if (!_isInShop)
             {
-                foreach (MeshRenderer renderer in avatar.GetComponentsInChildren<MeshRenderer>())
+                colorIndex = manager.GetNextColorID(SRManager.ColorSelectDirection.Down, this, colorIndex, IndexOfCurrent);
+                foreach (GameObject avatar in avatars)
                 {
-                    renderer.materials = new Material[] { datas[IndexOfCurrent].ColorSets[colorIndex].ShipMaterialMain };
+                    foreach (MeshRenderer renderer in avatar.GetComponentsInChildren<MeshRenderer>())
+                    {
+                        renderer.materials = new Material[] { datas[IndexOfCurrent].ColorSets[colorIndex].ShipMaterialMain };
+                    }
+                } 
+            }
+            else
+            {
+                colorIndex--;
+                if (colorIndex >= datas[IndexOfCurrent].ColorSets.Count || colorIndex < 0)
+                    colorIndex++;
+                foreach (GameObject avatar in avatars)
+                {
+                    foreach (MeshRenderer renderer in avatar.GetComponentsInChildren<MeshRenderer>())
+                    {
+                        renderer.materials = new Material[] { datas[IndexOfCurrent].ColorSets[colorIndex].ShipMaterialMain };
+                    }
                 }
             }
         }
@@ -135,6 +190,7 @@ namespace BlackFox
             prevModel.position = -CorridorVector;
             prevModel.rotation = nextModel.rotation;
         }
+
         /// <summary>
         /// Place all the required Models in scene along the corridor of the ShowRoom
         /// </summary>
@@ -152,13 +208,35 @@ namespace BlackFox
                 avatars[i].AddComponent<RotateOnPosition>();
                 foreach(MeshRenderer mesh in avatars[i].GetComponentsInChildren<MeshRenderer>())
                 {
-                    mesh.materials = new Material[] { datas[i].ColorSets[(int)player.ID].ShipMaterialMain };
+                    if(player.ID == PlayerLabel.One)
+                    {
+                        colorIndex = 0;
+                    }
+                    else
+                    {
+                        colorIndex = manager.CheckColorAvailability(this, (int)player.ID - 1, i);
+                    }
+                    mesh.materials = new Material[] { datas[i].ColorSets[colorIndex].ShipMaterialMain };
                 }
             }
 
-            currentModel = avatars[0].transform;
-            colorIndex = (int)player.ID;
-            nextModel = avatars[1].transform;
+            ReSetFirstShowRoom();
+        }
+
+        public void ReSetFirstShowRoom()
+        {
+            for (int i = 0; i < datas.Count; i++)
+            {
+                if (datas[i].IsPurchased)
+                {
+                    IndexOfCurrent = i;
+                    currentModel = avatars[IndexOfCurrent].transform;
+                    modelContainer.transform.DOMove(-CorridorVector * IndexOfCurrent, 0.5f);
+                    if (avatars.Count > i + 1)
+                        nextModel = avatars[IndexOfCurrent + 1].transform;
+                    break;
+                }
+            }
         }
     }
 }

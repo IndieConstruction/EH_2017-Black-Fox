@@ -88,7 +88,29 @@ namespace BlackFox
             Upgrade.CurrentUpgradeLevel = Upgrade.MinLevel;
             slider.value = Upgrade.CurrentUpgradeLevel;
             slider.maxValue = Upgrade.MaxLevel;
-            text.text = Upgrade.ID.ToString();
+            switch (Upgrade.ID)
+            {
+                case UpgardeTypes.FireRate:
+                    text.text = "Fire Rate";
+                    break;
+                case UpgardeTypes.PinRegeneration:
+                    text.text = "Pin Regeneration";
+                    break;
+                case UpgardeTypes.PowerUpDuration:
+                    text.text = "Power Up Duration";
+                    break;
+                case UpgardeTypes.RopeLength:
+                    text.text = "Rope Lenght";
+                    break;
+                case UpgardeTypes.BulletsRange:
+                    text.text = "Bullets Range";
+                    break;
+                case UpgardeTypes.AmmoRecharge:
+                    text.text = "Ammo Recharge";
+                    break;
+                default:
+                    break;
+            }
         }
 
         public IUpgrade GetData()

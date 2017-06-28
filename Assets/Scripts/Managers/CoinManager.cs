@@ -14,14 +14,27 @@ namespace BlackFox
 
         public float CoinLife = 10;
 
-        private int _totalCoin;
+        private int _totalCoin = -1;
+
+        private int coinSaved { get { return PlayerPrefs.GetInt("Coins"); } }
 
         public int TotalCoin
         {
-            get { return _totalCoin; }
-            set { _totalCoin = value; }
+            get {
+                if(_totalCoin < 0)
+                {
+                    if (PlayerPrefs.HasKey("Coins"))
+                        _totalCoin = PlayerPrefs.GetInt("Coins");
+                    else
+                        _totalCoin = 0;
+                }
+                return _totalCoin;
+            }
+            set {
+                _totalCoin = value;
+                PlayerPrefs.SetInt("Coins", _totalCoin);
+            }
         }
-
                 
         public void InstantiateCoinController()
         {

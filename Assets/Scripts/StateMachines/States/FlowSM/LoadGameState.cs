@@ -16,10 +16,12 @@ namespace BlackFox
             GameManager.Instance.InstantiateDataManager();
             GameManager.Instance.InstantiateShowRoom();
             GameManager.Instance.InstantiateLoadingController();
+            GameManager.Instance.InstantiateShopRoom();
 
             GameManager.Instance.PlayerMng.InstantiatePlayers();
             GameManager.Instance.DataMng.Init();
             GameManager.Instance.SRMng.Init(GameManager.Instance.PlayerMng.Players);
+            GameManager.Instance.ShopRoomMng.Init(new List<Player>() { GameManager.Instance.PlayerMng.Players[0] });
             GameManager.Instance.UiMng.Init();
         }
 

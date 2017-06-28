@@ -50,7 +50,7 @@ namespace BlackFox
         /// </summary>
         public void SavingCoinMng()
         {
-            coinMng.TotalCoin = CoinCollected;
+            coinMng.TotalCoin += CoinCollected;
             CoinCollected = 0;
         }
     }

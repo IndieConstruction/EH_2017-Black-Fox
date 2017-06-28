@@ -11,6 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49da9a758077c124d9645884117fa0ed, type: 3}
   m_Name: Blue
   m_EditorClassIdentifier: 
+  IsPurchased: 1
+  Price: 5
   ShipMaterialMain: {fileID: 2100000, guid: 9b486ea21bb5ee347996ed5c8bcf89a0, type: 2}
   RopeMaterial: {fileID: 2100000, guid: e6a1699572ea16848b5aaa7f263ac522, type: 2}
   PinMaterial: {fileID: 2100000, guid: 90e4dcf026251fa4bbdf45d691373d23, type: 2}

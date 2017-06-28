@@ -61,9 +61,15 @@ namespace BlackFox
                         GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new AvatarSelectionState() });
                         break;
                     case 1:
-                        GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new CreditsState() });
+                        GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new StoreState() });
                         break;
                     case 2:
+                        GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new CreditsState() });
+                        break;
+                    case 3:
+                        GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new ManualState() });
+                        break;
+                    case 4:
                         GameManager.Instance.QuitApplication();
                         break;
                 }

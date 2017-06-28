@@ -28,7 +28,7 @@ namespace BlackFox {
 
         public UpgardeTypes ID
         {
-            get { return UpgardeTypes.PinRegenUpgrade; }
+            get { return UpgardeTypes.PinRegeneration; }
         }
 
         public float[] Values { get; set; }

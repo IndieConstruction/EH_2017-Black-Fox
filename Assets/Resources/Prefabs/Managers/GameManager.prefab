@@ -67,6 +67,8 @@ MonoBehaviour:
     type: 2}
   LoadingControllerPrefab: {fileID: 1530760943470038, guid: c2c556c64f3515f41befeb1c42f8183b,
     type: 2}
+  ShopRoomPrefab: {fileID: 1802479423604144, guid: 34fba117b8c93b848980b79d143f15ac,
+    type: 2}
   LevelMng: {fileID: 0}
   UiMng: {fileID: 0}
   PlayerMng: {fileID: 0}
@@ -75,6 +77,7 @@ MonoBehaviour:
   DataMng: {fileID: 0}
   SRMng: {fileID: 0}
   LoadingCtrl: {fileID: 0}
+  ShopRoomMng: {fileID: 0}
   flowSM: {fileID: 0}
   LevelScriptableObjs:
   - {fileID: 11400000, guid: 8f955d3e75a08d34292082349f1986e7, type: 2}

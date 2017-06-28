@@ -24,11 +24,11 @@ namespace BlackFox
 
     public enum UpgardeTypes
     {
-        FireRateUpgrade,
-        PinRegenUpgrade,
-        PowerUpDurationUpgrade,
-        RopeLengthUpgrade,
-        ShootingDistnceUpgrade,
-        AmmoRechargeUpgrade
+        FireRate,
+        PinRegeneration,
+        PowerUpDuration,
+        RopeLength,
+        BulletsRange,
+        AmmoRecharge
     }
 }

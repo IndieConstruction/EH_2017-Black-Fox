@@ -325,6 +325,8 @@ namespace BlackFox
             }
         }
 
+        public Player LevelWinner;
+
         /// <summary>
         /// Controlla se c'è la possiblità di andare ai play off
         /// </summary>
@@ -364,6 +366,7 @@ namespace BlackFox
                 else
                 {
                     // player all'indice zero ha vinto
+                    LevelWinner = tempPlayersStats[0].Player;
                     return false;
                 }
             }
@@ -388,7 +391,10 @@ namespace BlackFox
 
             tempPlayersStats = tempPlayersStats.OrderByDescending(t => t.Victories).ToList();
             if ((tempPlayersStats[1].Victories + remainingRounds) >= tempPlayersStats[0].Victories)
+            {
+                LevelWinner = tempPlayersStats[0].Player;
                 return false;
+            }
             else
                 return true;
         }

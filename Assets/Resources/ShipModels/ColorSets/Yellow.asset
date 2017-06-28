@@ -11,6 +11,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49da9a758077c124d9645884117fa0ed, type: 3}
   m_Name: Yellow
   m_EditorClassIdentifier: 
+  IsPurchased: 0
+  Price: 5
   ShipMaterialMain: {fileID: 2100000, guid: 79fa388e9964ebc4a9fac6df99f81356, type: 2}
   RopeMaterial: {fileID: 2100000, guid: b4a4906a927590943a334ad993715be3, type: 2}
   PinMaterial: {fileID: 2100000, guid: efd941f82c037eb4a94df718eb6d9adf, type: 2}

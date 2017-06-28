@@ -5,8 +5,10 @@ using UnityEngine;
 namespace BlackFox {
 
     [CreateAssetMenu(fileName = "ColorSetData", menuName = "Avatar/NewColorSet", order = 2)]
-    public class ColorSetData : ScriptableObject {
-
+    public class ColorSetData : ScriptableObject
+    {
+        public bool IsPurchased;
+        public int Price;
         public Material ShipMaterialMain;
         public Material RopeMaterial;
         public Material PinMaterial;

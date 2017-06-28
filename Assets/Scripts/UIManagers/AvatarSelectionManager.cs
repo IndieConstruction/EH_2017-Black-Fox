@@ -5,11 +5,9 @@ using DG.Tweening;
 
 namespace BlackFox {
 
-    public class AvatarSelectionManager : BaseMenu {
-
-
+    public class AvatarSelectionManager : BaseMenu
+    {
         public List<AvatarSelectionController> avatarSelectionControllers = new List<AvatarSelectionController>();
-
 
         public void Setup(List<Player> _players) {
             foreach (Player player in _players) {

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -12,20 +13,9 @@ namespace BlackFox
         public AudioSource AudioSurceMenu;
         public AudioSource AudioSurceMusic;
 
-        [Header("Audio Clips")]
-        public AudioClip MenuMovementAudioClip;
-        public AudioClip MenuSelectionAudioClip;
-        public AudioClip GameplayAudioClip;
-        public AudioClip MenuAudioClip;
-
-
-        [Header("PowerUp Audio Clips")]
-        public AudioClip PowerUpSpawn;
-        public AudioClip KamikazeActivation;
-        public AudioClip AmmoCleanerActivation;
-        public AudioClip CleanSweepActivation;   
-        public AudioClip TankActivation;
-        public AudioClip InvertCommandsActivation;
+        public MenuAudioData MenuAudio;
+        public PowerUpAudioData PowerUpAudio;
+        public ExternalAgentsAudioData ExternalAgentsAudio;
 
         Tweener fade;
 
@@ -35,25 +25,34 @@ namespace BlackFox
             switch (_menuAudio)
             {
                 case UIAudio.Movement:
-                    AudioSurceMenu.clip = MenuMovementAudioClip;
-                    AudioSurceMenu.Play();
+                    AudioSurceMenu.clip = MenuAudio.MenuMovementAudio.Clip;
+                    AudioSurceMenu.volume = MenuAudio.MenuMovementAudio.Volume;
+                    if(AudioSurceMenu.clip != null)
+                        AudioSurceMenu.Play();
                     break;
                 case UIAudio.Selection:
-                    AudioSurceMenu.clip = MenuSelectionAudioClip;
-                    AudioSurceMenu.Play();
-                    break;
-                case UIAudio.Wrong:
+                    AudioSurceMenu.clip = MenuAudio.MenuSelectionAudio.Clip;
+                    AudioSurceMenu.volume = MenuAudio.MenuSelectionAudio.Volume;
+                    if (AudioSurceMenu.clip != null)
+                        AudioSurceMenu.Play();
                     break;
                 case UIAudio.Back:
+                    AudioSurceMenu.clip = MenuAudio.MenuGoBackAudio.Clip;
+                    AudioSurceMenu.volume = MenuAudio.MenuGoBackAudio.Volume;
+                    if (AudioSurceMenu.clip != null)
+                        AudioSurceMenu.Play();
                     break;
                 case UIAudio.CountDown:
+                    AudioSurceMenu.clip = MenuAudio.CountDownAudio.Clip;
+                    AudioSurceMenu.volume = MenuAudio.CountDownAudio.Volume;
+                    if (AudioSurceMenu.clip != null)
+                        AudioSurceMenu.Play();
                     break;
             }
         }
 
         void PlayMusic(Music _music, bool _play)
         {
-            AudioSource surce = AudioSurceMusic;
             if (AudioSurceMusic != null)
             {
                 fade = AudioSurceMusic.DOFade(0, MusicFadeOutTime).OnComplete(() =>
@@ -63,41 +62,48 @@ namespace BlackFox
                         switch (_music)
                         {
                             case Music.MenuTheme:
-                                AudioSurceMusic.clip = MenuAudioClip;
+                                AudioSurceMusic.clip = MenuAudio.MenuMusic.Clip;
+                                AudioSurceMusic.Play();
+                                AudioSurceMusic.DOFade(MenuAudio.MenuMusic.Volume, MusicFadeInTime);
                                 break;
                             case Music.GameTheme:
-                                AudioSurceMusic.clip = GameplayAudioClip;
+                                AudioSurceMusic.clip = MenuAudio.GameplayMusic.Clip;
+                                AudioSurceMusic.Play();
+                                AudioSurceMusic.DOFade(MenuAudio.GameplayMusic.Volume, MusicFadeInTime);
                                 break;
                         }
-                        AudioSurceMusic.Play();
-                        AudioSurceMusic.DOFade(1, MusicFadeInTime);
                     }
                 });
             }
         }
 
-        public AudioClip GetPowerUpClip(PowerUpID _powerUpID)
+        public AudioParameter GetPowerUpClip(PowerUpID _powerUpID)
         {
-            AudioClip clip = null;
+            AudioParameter audioParameter = new AudioParameter();
             switch (_powerUpID)
             {
                 case PowerUpID.Kamikaze:
-                    clip = KamikazeActivation;
+                    audioParameter.Clip = PowerUpAudio.KamikazeActivation.Clip;
+                    audioParameter.Volume = PowerUpAudio.KamikazeActivation.Volume;
                     break;
                 case PowerUpID.AmmoCleaner:
-                    clip = AmmoCleanerActivation;
+                    audioParameter.Clip = PowerUpAudio.AmmoCleanerActivation.Clip;
+                    audioParameter.Volume = PowerUpAudio.AmmoCleanerActivation.Volume;
                     break;
                 case PowerUpID.CleanSweep:
-                    clip = CleanSweepActivation;
+                    audioParameter.Clip = PowerUpAudio.CleanSweepActivation.Clip;
+                    audioParameter.Volume = PowerUpAudio.CleanSweepActivation.Volume;
                     break;
                 case PowerUpID.Tank:
-                    clip = TankActivation;
+                    audioParameter.Clip = PowerUpAudio.TankActivation.Clip;
+                    audioParameter.Volume = PowerUpAudio.TankActivation.Volume;
                     break;
                 case PowerUpID.InvertCommands:
-                    clip = InvertCommandsActivation;
+                    audioParameter.Clip = PowerUpAudio.InvertCommandsActivation.Clip;
+                    audioParameter.Volume = PowerUpAudio.InvertCommandsActivation.Volume;
                     break;
             }
-            return clip;
+            return audioParameter;
         }
         #endregion
 
@@ -120,7 +126,6 @@ namespace BlackFox
         {
             Movement,
             Selection,
-            Wrong,
             Back,
             CountDown
         }
@@ -131,5 +136,12 @@ namespace BlackFox
             GameTheme,
         }
         #endregion
+    }
+
+    [Serializable]
+    public struct AudioParameter
+    {
+        public AudioClip Clip;
+        [Range(0f, 1f)] public float Volume;
     }
 }

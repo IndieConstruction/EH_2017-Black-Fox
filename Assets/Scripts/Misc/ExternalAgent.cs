@@ -16,6 +16,7 @@ namespace BlackFox
         public GameObject particleSistem;
 
         List<IDamageable> damageablesList;
+        AudioSource source;
 
         public float Life
         {
@@ -26,6 +27,9 @@ namespace BlackFox
         private void Start()
         {
             Vector3 desiredDirection = transform.position - GameManager.Instance.LevelMng.Core.transform.position;
+            source = GetComponent<AudioSource>();
+            source.clip = GameManager.Instance.AudioMng.ExternalAgentsAudio.ExternalAgentMovement.Clip;
+            source.volume = GameManager.Instance.AudioMng.ExternalAgentsAudio.ExternalAgentMovement.Volume;
             if (Vector3.Cross(desiredDirection, transform.forward).magnitude > .1f)
                 Destroy(gameObject);
         }
@@ -33,6 +37,18 @@ namespace BlackFox
         private void Update()
         {
             MoveTowards();
+            PlayMovemntSound(true);
+        }
+
+        void PlayMovemntSound(bool _toggle)
+        {
+            if (_toggle)
+            {
+                if (!source.isPlaying && source.clip != null)
+                    source.Play();
+            }
+            else
+                source.Stop();
         }
 
         void MoveTowards()
@@ -93,6 +109,7 @@ namespace BlackFox
 
         void Deactivate()
         {
+            PlayMovemntSound(false);
             GetComponent<Collider>().enabled = false;
             GetComponentInChildren<MeshRenderer>().enabled = false;
             GetComponent<Rigidbody>().isKinematic = true;

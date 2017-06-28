@@ -61,7 +61,7 @@ namespace BlackFox
             container.transform.parent = transform;
             countdown = timer;
             audioSurce = GetComponent<AudioSource>();
-            audioSurce.clip = GameManager.Instance.AudioMng.PowerUpSpawn;
+            audioSurce.clip = GameManager.Instance.AudioMng.PowerUpAudio.PowerUpSpawn.Clip;
         }
 
         public void Toggle(bool _value)

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21939b294e2f1864d959208647f50ca9, type: 3}
+  m_Name: MenuAudioData
+  m_EditorClassIdentifier: 
+  MenuMovementAudio:
+    Clip: {fileID: 8300000, guid: f7ba576619dfec445b99e9bdeb18aa1f, type: 3}
+    Volume: 1
+  MenuSelectionAudio:
+    Clip: {fileID: 8300000, guid: 235c61b01072c6a48a34dea4c7ca850b, type: 3}
+    Volume: 1
+  GameplayMusic:
+    Clip: {fileID: 8300000, guid: c1f49c345d891874eac11354e8389c52, type: 3}
+    Volume: 1
+  MenuMusic:
+    Clip: {fileID: 8300000, guid: 36693b52cda41c14999c29c9a0d60cbd, type: 3}
+    Volume: 1

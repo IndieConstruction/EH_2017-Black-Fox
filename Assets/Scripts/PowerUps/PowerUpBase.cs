@@ -35,7 +35,8 @@ namespace BlackFox {
         private void Start()
         {
             audioSurce = GetComponent<AudioSource>();
-            audioSurce.clip = GameManager.Instance.AudioMng.GetPowerUpClip(ID);
+            audioSurce.clip = GameManager.Instance.AudioMng.GetPowerUpClip(ID).Clip;
+            audioSurce.volume = GameManager.Instance.AudioMng.GetPowerUpClip(ID).Volume;
             Init();
         }
 

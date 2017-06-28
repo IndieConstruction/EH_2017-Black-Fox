@@ -27,18 +27,26 @@ namespace BlackFox
                 case UIAudio.Movement:
                     AudioSurceMenu.clip = MenuAudio.MenuMovementAudio.Clip;
                     AudioSurceMenu.volume = MenuAudio.MenuMovementAudio.Volume;
-                    AudioSurceMenu.Play();
+                    if(AudioSurceMenu.clip != null)
+                        AudioSurceMenu.Play();
                     break;
                 case UIAudio.Selection:
                     AudioSurceMenu.clip = MenuAudio.MenuSelectionAudio.Clip;
                     AudioSurceMenu.volume = MenuAudio.MenuSelectionAudio.Volume;
-                    AudioSurceMenu.Play();
-                    break;
-                case UIAudio.Wrong:
+                    if (AudioSurceMenu.clip != null)
+                        AudioSurceMenu.Play();
                     break;
                 case UIAudio.Back:
+                    AudioSurceMenu.clip = MenuAudio.MenuGoBackAudio.Clip;
+                    AudioSurceMenu.volume = MenuAudio.MenuGoBackAudio.Volume;
+                    if (AudioSurceMenu.clip != null)
+                        AudioSurceMenu.Play();
                     break;
                 case UIAudio.CountDown:
+                    AudioSurceMenu.clip = MenuAudio.CountDownAudio.Clip;
+                    AudioSurceMenu.volume = MenuAudio.CountDownAudio.Volume;
+                    if (AudioSurceMenu.clip != null)
+                        AudioSurceMenu.Play();
                     break;
             }
         }
@@ -118,7 +126,6 @@ namespace BlackFox
         {
             Movement,
             Selection,
-            Wrong,
             Back,
             CountDown
         }

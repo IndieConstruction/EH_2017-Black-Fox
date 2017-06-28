@@ -9,6 +9,8 @@ namespace BlackFox
     {
         public AudioParameter MenuMovementAudio;
         public AudioParameter MenuSelectionAudio;
+        public AudioParameter MenuGoBackAudio;
+        public AudioParameter CountDownAudio;
         public AudioParameter GameplayMusic;
         public AudioParameter MenuMusic;
     }

@@ -22,7 +22,6 @@ namespace BlackFox
                 {
                     (spawner as ExternalElementSpawner).ActiveKamikazeTime(PowerUpDuration);
                 }
-
             }
         }
     }

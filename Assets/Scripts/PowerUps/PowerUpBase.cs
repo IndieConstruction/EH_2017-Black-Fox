@@ -65,19 +65,9 @@ namespace BlackFox {
                         EventManager.OnPowerUpAction(ID);
                 }
                 if (DestroyAfterUse)
-                    StartCoroutine(DestroyAfterAudioStopsPlaying());
-            }
-        }
+                    Destroy(gameObject, Time.deltaTime);
 
-        /// <summary>
-        /// Corutine che distugge il powerup solo quando l'audio di attivazione smette di suonare
-        /// </summary>
-        /// <returns></returns>
-        IEnumerator DestroyAfterAudioStopsPlaying()
-        {
-            while (audioSurce.isPlaying)
-                yield return new WaitForEndOfFrame();
-            Destroy(gameObject);
+            }
         }
     }
 

@@ -40,7 +40,11 @@ namespace BlackFox
         {
             ID = "ExternalElementSpawner";
             if (Options.ExternalAgent == null)
-                Options.ExternalAgent = (GameObject)Resources.Load("Prefabs/ExternalAgents/ExternalAgent1");
+            {
+                Options.ExternalAgent[0] = (GameObject)Resources.Load("Prefabs/ExternalAgents/ExternalAgent1");
+                Options.ExternalAgent[1] = (GameObject)Resources.Load("Prefabs/ExternalAgents/ExternalAgent2");
+
+            }
 
             target = GameManager.Instance.LevelMng.Core.transform;
             nextTime = Time.time + Random.Range(Options.MinTime, Options.MaxTime);
@@ -121,7 +125,7 @@ namespace BlackFox
         /// </summary>
         void InstantiateExternalAgent()
         {
-            GameObject instantiateEA = Instantiate(Options.ExternalAgent, transform.position, transform.rotation, container.transform);
+            GameObject instantiateEA = Instantiate(Options.ExternalAgent[Random.Range(0, Options.ExternalAgent.Count)], transform.position, transform.rotation, container.transform);
             ExternalAgent eA = instantiateEA.GetComponent<ExternalAgent>();
             eA.Initialize(target, Damageables);
         }
@@ -130,7 +134,8 @@ namespace BlackFox
     [System.Serializable]
     public class ExternalElementOptions : SpawnerOptions
     {
-        public GameObject ExternalAgent;                        //Prefab of the ExternalAgent to instantiate         
+        public List<GameObject> ExternalAgent;                        //Prefab of the ExternalAgent to instantiate         
+
         public float MinTime = 10;                              //Min time between Spawns
         public float MaxTime = 20;                              //Max time between Spawns
         public float AngularSpeed = 1;                          //Rotation speed

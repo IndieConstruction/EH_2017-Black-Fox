@@ -14,7 +14,7 @@ namespace BlackFox
         }
         public override void UsePowerUp()
         {
-            GameManager.Instance.UiMng.canvasGame.gameUIController.RunKamikazeAlert();
+            //GameManager.Instance.UiMng.canvasGame.gameUIController.RunKamikazeAlert();
 
             foreach (SpawnerBase spawner in GameManager.Instance.LevelMng.SpawnerMng.Spawners)
             {

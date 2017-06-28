@@ -9,7 +9,6 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("PlayState");
-            EventManager.OnMusicChange(AudioManager.Music.GameTheme, true);
             GameManager.Instance.LevelMng.SpawnerMng.ToggleSpawners(true);
             GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.PlayInput);
             GameManager.Instance.LevelMng.RoundBegin();

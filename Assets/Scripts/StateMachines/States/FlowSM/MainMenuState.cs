@@ -17,6 +17,8 @@ namespace BlackFox
 
             GameManager.Instance.LoadingCtrl.DeactivateLoadingPanel();
             GameManager.Instance.PlayerMng.ChangeAllPlayersStateExceptOne(PlayerState.MenuInput, PlayerLabel.One, PlayerState.Blocked);
+            if (EventManager.OnMusicChange != null)
+                EventManager.OnMusicChange(AudioManager.Music.MenuTheme, true);
         }
 
         public override void OnEnd()

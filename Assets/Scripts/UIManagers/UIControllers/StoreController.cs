@@ -58,24 +58,32 @@ namespace BlackFox
         {
             room.ShowNextModel(true);
             ToggleChain();
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
         }
 
         public override void GoLeftInMenu(Player _player)
         {
             room.ShowPreviousModel(true);
             ToggleChain();
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
         }
 
         public override void GoUpInMenu(Player _player)
         {
             room.ShowNextColor(true);
             ToggleChain();
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
         }
 
         public override void GoDownInMenu(Player _player)
         {
             room.ShowPreviousColor(true);
             ToggleChain();
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
         }
 
         public override void Selection(Player _player)
@@ -86,12 +94,16 @@ namespace BlackFox
                 GameManager.Instance.DataMng.PurchaseAvatar(GameManager.Instance.ShopRoomMng.datas[room.IndexOfCurrent]);
                 GameManager.Instance.CoinMng.TotalCoin -= GameManager.Instance.ShopRoomMng.datas[room.IndexOfCurrent].Price;
                 Chain.gameObject.SetActive(false);
+                if (EventManager.OnMenuAction != null)
+                    EventManager.OnMenuAction(AudioManager.UIAudio.Selection);
             }
             else if (!GameManager.Instance.ShopRoomMng.datas[room.IndexOfCurrent].ColorSets[room.colorIndex].IsPurchased && (GameManager.Instance.ShopRoomMng.datas[room.IndexOfCurrent].ColorSets[room.colorIndex].Price <= GameManager.Instance.CoinMng.TotalCoin))
             {
                 GameManager.Instance.DataMng.PurchaseColorSet(GameManager.Instance.ShopRoomMng.datas[room.IndexOfCurrent].ColorSets[room.colorIndex]);
                 GameManager.Instance.CoinMng.TotalCoin -= GameManager.Instance.ShopRoomMng.datas[room.IndexOfCurrent].ColorSets[room.colorIndex].Price;
                 Chain.gameObject.SetActive(false);
+                if (EventManager.OnMenuAction != null)
+                    EventManager.OnMenuAction(AudioManager.UIAudio.Selection);
             }
 
             CoinText.text = GameManager.Instance.CoinMng.TotalCoin.ToString();

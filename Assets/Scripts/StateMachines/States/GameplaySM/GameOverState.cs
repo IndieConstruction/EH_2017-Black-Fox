@@ -10,7 +10,8 @@ namespace BlackFox {
             Debug.Log("GameOverState");
             GameManager.Instance.PlayerMng.ChangeAllPlayersState(PlayerState.Blocked);
             GameManager.Instance.PlayerMng.DestroyAllAvatar();
-            EventManager.OnMusicChange(AudioManager.Music.GameTheme, false);
+            if (EventManager.OnMusicChange != null)
+                EventManager.OnMusicChange(AudioManager.Music.GameTheme, true);
         }
 
         public override void OnUpdate() {

@@ -13,7 +13,6 @@ namespace BlackFox
             GameManager.Instance.LoadingCtrl.DeactivateLoadingPanel(()=> {
                 GameManager.Instance.UiMng.canvasGame.Counter.DoCountDown();
             });
-            EventManager.OnMusicChange(AudioManager.Music.GameTheme, true);
         }
     }
 }

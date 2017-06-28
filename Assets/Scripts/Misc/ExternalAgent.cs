@@ -54,7 +54,7 @@ namespace BlackFox
         void PlayCollisionSound()
         {
             source.clip = GameManager.Instance.AudioMng.ExternalAgentsAudio.Collisions[Random.Range(0, GameManager.Instance.AudioMng.ExternalAgentsAudio.Collisions.Count)].Clip;
-            source.volume = GameManager.Instance.AudioMng.ExternalAgentsAudio.ExternalAgentMovement.Volume;
+            source.volume = GameManager.Instance.AudioMng.ExternalAgentsAudio.Collisions[Random.Range(0, GameManager.Instance.AudioMng.ExternalAgentsAudio.Collisions.Count)].Volume;
 
             if (!source.isPlaying && source.clip != null)
                 source.Play();

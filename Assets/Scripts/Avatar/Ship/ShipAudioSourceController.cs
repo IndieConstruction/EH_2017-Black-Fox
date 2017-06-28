@@ -31,7 +31,7 @@ namespace BlackFox
         {
             ship = _ship;
 
-            AudioSurceAcceleration.clip = ship.Avatar.AvatarData.ShipAudioSet.Movement;
+            AudioSurceAcceleration.clip = ship.Avatar.AvatarData.ShipAudioSet.Movements[(int)ship.Avatar.Player.ID -1];
             collisionSounds = ship.Avatar.AvatarData.ShipAudioSet.Collisions;
             shootSounds = ship.Avatar.AvatarData.ShipAudioSet.Shoots;
             AudioSourceAmmoRecharge.clip = ship.Avatar.AvatarData.ShipAudioSet.PinPlaced;

@@ -14,7 +14,8 @@ namespace BlackFox {
         {
             get { return Avatar.AvatarData.shipConfig; }
         }
-
+        [HideInInspector]
+        public ShipAudioSourceController audioSourceController;
         [HideInInspector]
         public GameObject Model;
 
@@ -33,7 +34,6 @@ namespace BlackFox {
 
         MovementController movment;
         PlacePin pinPlacer;
-        ShipAudioSourceController audioSourceController;
         Tweener damageTween;
 
         #region PowerUp comandi invertiti
@@ -317,6 +317,8 @@ namespace BlackFox {
             pinPlacer.enabled = _active;
             shooter.enabled = _active;
             movment.enabled = _active;
+            if(!_active)
+                audioSourceController.StopAll();
             GetComponent<CapsuleCollider>().enabled = _active;
         }
 

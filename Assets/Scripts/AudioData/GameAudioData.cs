@@ -16,5 +16,6 @@ namespace BlackFox
         public AudioParameter Round4Audio;
         public AudioParameter Round5Audio;
         public AudioParameter GameplayMusic;
+        public List<AudioParameter> CoinCollected;
     }
 }

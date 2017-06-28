@@ -263,7 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   life: 1
-  velocity: 5
+  velocity: 15
   damage: 4
   particleSistem: {fileID: 1484587147987330, guid: 9a0bd6a03607f46488c281311376b0a3,
     type: 2}

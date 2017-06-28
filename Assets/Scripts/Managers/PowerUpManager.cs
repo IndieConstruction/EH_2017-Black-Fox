@@ -61,7 +61,9 @@ namespace BlackFox
             container.transform.parent = transform;
             countdown = timer;
             audioSurce = GetComponent<AudioSource>();
-            audioSurce.clip = GameManager.Instance.AudioMng.PowerUpAudio.PowerUpSpawn.Clip;
+            int random = Random.Range(0, GameManager.Instance.AudioMng.PowerUpAudio.PowerUpSpawn.Count);
+            audioSurce.clip = GameManager.Instance.AudioMng.PowerUpAudio.PowerUpSpawn[random].Clip;
+            audioSurce.volume = GameManager.Instance.AudioMng.PowerUpAudio.PowerUpSpawn[random].Volume;
         }
 
         public void Toggle(bool _value)

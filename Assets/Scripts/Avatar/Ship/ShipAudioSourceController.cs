@@ -50,13 +50,24 @@ namespace BlackFox
             value = MinPitchValue;
         }
 
+        public void StopAll()
+        {
+            AudioSurceAcceleration.Stop();
+            AudioSurceCollision.Stop();
+            AudioSurceShoot.Stop();
+            AudioSourceAmmoRecharge.Stop();
+            AudioSourceDeath.Stop();
+            AudioSourceNoAmmo.Stop();
+        }
+
         #region Play Audios
         public void PlayShootAudio()
         {
             if (shootSounds.Count > 0)
             {
-                AudioSurceShoot.clip = shootSounds[Random.Range(0, shootSounds.Count)].Clip;
-                AudioSurceShoot.volume = shootSounds[Random.Range(0, shootSounds.Count)].Volume;
+                int random = Random.Range(0, shootSounds.Count);
+                AudioSurceShoot.clip = shootSounds[random].Clip;
+                AudioSurceShoot.volume = shootSounds[random].Volume;
             }
             if (AudioSurceShoot.clip != null)
                 AudioSurceShoot.Play();

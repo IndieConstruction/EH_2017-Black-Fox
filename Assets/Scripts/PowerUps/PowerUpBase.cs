@@ -34,9 +34,6 @@ namespace BlackFox {
 
         private void Start()
         {
-            audioSurce = GetComponent<AudioSource>();
-            audioSurce.clip = GameManager.Instance.AudioMng.GetPowerUpClip(ID).Clip;
-            audioSurce.volume = GameManager.Instance.AudioMng.GetPowerUpClip(ID).Volume;
             Init();
         }
 
@@ -64,8 +61,8 @@ namespace BlackFox {
                 if (AutoUse)
                 {
                     UsePowerUp();
-                    if(audioSurce != null && audioSurce.clip != null)
-                        audioSurce.Play();
+                    if (EventManager.OnPowerUpAction != null)
+                        EventManager.OnPowerUpAction(ID);
                 }
                 if (DestroyAfterUse)
                     StartCoroutine(DestroyAfterAudioStopsPlaying());

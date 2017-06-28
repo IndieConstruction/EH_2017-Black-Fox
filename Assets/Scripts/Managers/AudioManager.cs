@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -13,6 +12,8 @@ namespace BlackFox
         public AudioSource AudioSurceMenu;
         public AudioSource AudioSurceMusic;
         public AudioSource AudioSurceGame;
+        public AudioSource AudioSurcePowerUp;
+        public AudioSource AudioSurceCoin;
 
         public MenuAudioData MenuAudio;
         public GameAudioData GameAudio;
@@ -99,6 +100,30 @@ namespace BlackFox
                     if (AudioSurceGame.clip != null)
                         AudioSurceGame.Play();
                     break;
+                case AudioInGame.CoinCollected:
+                    int random = Random.Range(0, GameAudio.CoinCollected.Count);
+                    AudioSurceGame.clip = GameAudio.CoinCollected[random].Clip;
+                    AudioSurceGame.volume = GameAudio.CoinCollected[random].Volume;
+                    if (AudioSurceGame.clip != null)
+                        AudioSurceGame.Play();
+                    break;
+            }
+        }
+
+        void PlayPowerUpSound(PowerUpID _id)
+        {
+            switch(_id)
+            {
+                case PowerUpID.Kamikaze:
+                    break;
+                case PowerUpID.AmmoCleaner:
+                    break;
+                case PowerUpID.CleanSweep:
+                    break;
+                case PowerUpID.Tank:
+                    break;
+                case PowerUpID.InvertCommands:
+                    break;
                 default:
                     break;
             }
@@ -166,6 +191,7 @@ namespace BlackFox
             EventManager.OnMenuAction += PlayUIAudio;
             EventManager.OnMusicChange += PlayMusic;
             EventManager.OnGameAction += PlayGameAudio;
+            EventManager.OnPowerUpAction += PlayPowerUpSound;
         }
 
         private void OnDisable()
@@ -173,6 +199,7 @@ namespace BlackFox
             EventManager.OnMenuAction -= PlayUIAudio;
             EventManager.OnMusicChange -= PlayMusic;
             EventManager.OnGameAction -= PlayGameAudio;
+            EventManager.OnPowerUpAction -= PlayPowerUpSound;
         }
         #endregion
 
@@ -193,7 +220,9 @@ namespace BlackFox
             Round2Audio,
             Round3Audio,
             Round4Audio,
-            Round5Audio
+            Round5Audio,
+            CoinCollected,
+            
     }
 
         public enum Music
@@ -204,7 +233,7 @@ namespace BlackFox
         #endregion
     }
 
-    [Serializable]
+    [System.Serializable]
     public struct AudioParameter
     {
         public AudioClip Clip;

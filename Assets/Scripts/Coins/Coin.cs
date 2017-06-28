@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,10 +9,12 @@ namespace BlackFox {
         float lifeTime;
 
         RoundCoinController coinController;
+        AudioSource source;
 
         public void Init(RoundCoinController _controller, float _coinLife)
         {
             coinController = _controller;
+            source = GetComponent<AudioSource>();
             lifeTime = _coinLife;
         }
 
@@ -30,6 +31,8 @@ namespace BlackFox {
             if (other.GetComponent<Ship>() != null)
             {
                 coinController.CoinCollected++;
+                if (EventManager.OnGameAction != null)
+                    EventManager.OnGameAction(AudioManager.AudioInGame.CoinCollected);
                 Destroy(gameObject);
             }
         }

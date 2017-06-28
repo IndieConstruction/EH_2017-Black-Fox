@@ -59,6 +59,14 @@ namespace BlackFox
             }
         }
 
+        public void StopPlayersAudio()
+        {
+            foreach (Player player in Players)
+            {
+                player.Avatar.ship.audioSourceController.StopAll();
+            }
+        }
+
         /// <summary>
         /// Ritorna il riferimento del player corrispondente all'indice passato
         /// </summary>

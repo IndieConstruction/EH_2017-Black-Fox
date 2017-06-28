@@ -84,6 +84,12 @@ namespace BlackFox
         /// Evento che si occupa di innescare la musica
         /// </summary>
         public static GameAudioEvent OnGameAction;
+
+        public delegate void PowerUpAudioEvent(PowerUpID _id);
+        /// <summary>
+        /// Evento che si occupa di innescare la musica
+        /// </summary>
+        public static PowerUpAudioEvent OnPowerUpAction;
         #endregion
     }
 }

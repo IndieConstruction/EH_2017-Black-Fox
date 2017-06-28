@@ -24,21 +24,29 @@ namespace BlackFox
         public float MaxPitchValue = 2f;
         float value;
 
-        List<AudioClip> shootSounds;
-        List<AudioClip> collisionSounds;
+        List<AudioParameter> shootSounds;
+        List<AudioParameter> collisionSounds;
 
         public void Init(Ship _ship)
         {
             ship = _ship;
 
-            AudioSurceAcceleration.clip = ship.Avatar.AvatarData.ShipAudioSet.Movements[(int)ship.Avatar.Player.ID -1];
             collisionSounds = ship.Avatar.AvatarData.ShipAudioSet.Collisions;
             shootSounds = ship.Avatar.AvatarData.ShipAudioSet.Shoots;
-            AudioSourceAmmoRecharge.clip = ship.Avatar.AvatarData.ShipAudioSet.PinPlaced;
-            AudioSourceDeath.clip = ship.Avatar.AvatarData.ShipAudioSet.Death;
-            AudioSourceNoAmmo.clip = ship.Avatar.AvatarData.ShipAudioSet.NoAmmo;
 
+            AudioSurceAcceleration.clip = ship.Avatar.AvatarData.ShipAudioSet.Movements[(int)ship.Avatar.Player.ID -1].Clip;
+            AudioSurceAcceleration.volume = ship.Avatar.AvatarData.ShipAudioSet.Movements[(int)ship.Avatar.Player.ID - 1].Volume;
             AudioSurceAcceleration.pitch = MinPitchValue;
+
+            AudioSourceAmmoRecharge.clip = ship.Avatar.AvatarData.ShipAudioSet.PinPlaced.Clip;
+            AudioSourceAmmoRecharge.volume = ship.Avatar.AvatarData.ShipAudioSet.PinPlaced.Volume;
+
+            AudioSourceDeath.clip = ship.Avatar.AvatarData.ShipAudioSet.Death.Clip;
+            AudioSourceDeath.volume = ship.Avatar.AvatarData.ShipAudioSet.Death.Volume;
+
+            AudioSourceNoAmmo.clip = ship.Avatar.AvatarData.ShipAudioSet.NoAmmo.Clip;
+            AudioSourceNoAmmo.volume = ship.Avatar.AvatarData.ShipAudioSet.NoAmmo.Volume;
+
             value = MinPitchValue;
         }
 
@@ -46,7 +54,10 @@ namespace BlackFox
         public void PlayShootAudio()
         {
             if (shootSounds.Count > 0)
-                AudioSurceShoot.clip = shootSounds[Random.Range(0, shootSounds.Count)];
+            {
+                AudioSurceShoot.clip = shootSounds[Random.Range(0, shootSounds.Count)].Clip;
+                AudioSurceShoot.volume = shootSounds[Random.Range(0, shootSounds.Count)].Volume;
+            }
             if (AudioSurceShoot.clip != null)
                 AudioSurceShoot.Play();
         }
@@ -72,7 +83,10 @@ namespace BlackFox
         public void PlayCollisionAudio()
         {
             if(collisionSounds.Count > 0)
-                AudioSurceCollision.clip = collisionSounds[Random.Range(0, collisionSounds.Count)];
+            {
+                AudioSurceCollision.clip = collisionSounds[Random.Range(0, collisionSounds.Count)].Clip;
+                AudioSurceCollision.volume = collisionSounds[Random.Range(0, collisionSounds.Count)].Volume;
+            }
             if (AudioSurceCollision.clip != null && !AudioSurceCollision.isPlaying)
                 AudioSurceCollision.Play();
         }

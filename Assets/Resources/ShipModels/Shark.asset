@@ -46,7 +46,7 @@ MonoBehaviour:
     placePinConfig:
       PinPrefab: {fileID: 1844589482665234, guid: ea63e453c63a17240a1ecd1ef2fe0917,
         type: 2}
-      CoolDownTime: 3
+      CoolDownTime: 4
       DistanceFromShipOrigin: 4.5
   ropeConfig:
     MaxLength: 160
@@ -67,7 +67,7 @@ MonoBehaviour:
     - 4
     PinRegenUpgrade:
     - 0
-    - 0
-    - 0
-    - 0
-    - 0
+    - 0.5
+    - 1
+    - 1.5
+    - 2

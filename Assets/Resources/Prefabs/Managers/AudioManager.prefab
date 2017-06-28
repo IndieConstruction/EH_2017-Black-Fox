@@ -275,15 +275,5 @@ MonoBehaviour:
   MusicFadeInTime: 0
   AudioSurceMenu: {fileID: 82184237479436918}
   AudioSurceMusic: {fileID: 82468422007962646}
-  MenuMovementAudioClip: {fileID: 8300000, guid: f7ba576619dfec445b99e9bdeb18aa1f,
-    type: 3}
-  MenuSelectionAudioClip: {fileID: 8300000, guid: 235c61b01072c6a48a34dea4c7ca850b,
-    type: 3}
-  GameplayAudioClip: {fileID: 8300000, guid: c1f49c345d891874eac11354e8389c52, type: 3}
-  MenuAudioClip: {fileID: 8300000, guid: 36693b52cda41c14999c29c9a0d60cbd, type: 3}
-  PowerUpSpawn: {fileID: 0}
-  KamikazeActivation: {fileID: 0}
-  AmmoCleanerActivation: {fileID: 0}
-  CleanSweepActivation: {fileID: 0}
-  TankActivation: {fileID: 0}
-  InvertCommandsActivation: {fileID: 0}
+  MenuAudio: {fileID: 11400000, guid: 879fc557b3d20ed4b85dea773d32a642, type: 2}
+  PowerUpAudio: {fileID: 11400000, guid: 5832f8890cbff5e40b65d4d972265fc8, type: 2}

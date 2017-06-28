@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -12,20 +13,8 @@ namespace BlackFox
         public AudioSource AudioSurceMenu;
         public AudioSource AudioSurceMusic;
 
-        [Header("Audio Clips")]
-        public AudioClip MenuMovementAudioClip;
-        public AudioClip MenuSelectionAudioClip;
-        public AudioClip GameplayAudioClip;
-        public AudioClip MenuAudioClip;
-
-
-        [Header("PowerUp Audio Clips")]
-        public AudioClip PowerUpSpawn;
-        public AudioClip KamikazeActivation;
-        public AudioClip AmmoCleanerActivation;
-        public AudioClip CleanSweepActivation;   
-        public AudioClip TankActivation;
-        public AudioClip InvertCommandsActivation;
+        public MenuAudioData MenuAudio;
+        public PowerUpAudioData PowerUpAudio;
 
         Tweener fade;
 
@@ -35,11 +24,11 @@ namespace BlackFox
             switch (_menuAudio)
             {
                 case UIAudio.Movement:
-                    AudioSurceMenu.clip = MenuMovementAudioClip;
+                    AudioSurceMenu.clip = MenuAudio.MenuMovementAudio.Clip;
                     AudioSurceMenu.Play();
                     break;
                 case UIAudio.Selection:
-                    AudioSurceMenu.clip = MenuSelectionAudioClip;
+                    AudioSurceMenu.clip = MenuAudio.MenuSelectionAudio.Clip;
                     AudioSurceMenu.Play();
                     break;
                 case UIAudio.Wrong:
@@ -63,10 +52,10 @@ namespace BlackFox
                         switch (_music)
                         {
                             case Music.MenuTheme:
-                                AudioSurceMusic.clip = MenuAudioClip;
+                                AudioSurceMusic.clip = MenuAudio.MenuMusic.Clip;
                                 break;
                             case Music.GameTheme:
-                                AudioSurceMusic.clip = GameplayAudioClip;
+                                AudioSurceMusic.clip = MenuAudio.GameplayMusic.Clip;
                                 break;
                         }
                         AudioSurceMusic.Play();
@@ -82,19 +71,19 @@ namespace BlackFox
             switch (_powerUpID)
             {
                 case PowerUpID.Kamikaze:
-                    clip = KamikazeActivation;
+                    clip = PowerUpAudio.KamikazeActivation.Clip;
                     break;
                 case PowerUpID.AmmoCleaner:
-                    clip = AmmoCleanerActivation;
+                    clip = PowerUpAudio.AmmoCleanerActivation.Clip;
                     break;
                 case PowerUpID.CleanSweep:
-                    clip = CleanSweepActivation;
+                    clip = PowerUpAudio.CleanSweepActivation.Clip;
                     break;
                 case PowerUpID.Tank:
-                    clip = TankActivation;
+                    clip = PowerUpAudio.TankActivation.Clip;
                     break;
                 case PowerUpID.InvertCommands:
-                    clip = InvertCommandsActivation;
+                    clip = PowerUpAudio.InvertCommandsActivation.Clip;
                     break;
             }
             return clip;
@@ -131,5 +120,12 @@ namespace BlackFox
             GameTheme,
         }
         #endregion
+    }
+
+    [Serializable]
+    public struct AudioParameter
+    {
+        public AudioClip Clip;
+        [Range(0f, 1f)] public float Volume;
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
@@ -51,6 +50,17 @@ namespace BlackFox
                 source.Stop();
         }
 
+
+        void PlayCollisionSound()
+        {
+            source.clip = GameManager.Instance.AudioMng.ExternalAgentsAudio.Collisions[Random.Range(0, GameManager.Instance.AudioMng.ExternalAgentsAudio.Collisions.Count)].Clip;
+            source.volume = GameManager.Instance.AudioMng.ExternalAgentsAudio.ExternalAgentMovement.Volume;
+
+            if (!source.isPlaying && source.clip != null)
+                source.Play();
+        }
+
+
         void MoveTowards()
         {
             GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * velocity, ForceMode.Acceleration);
@@ -79,6 +89,7 @@ namespace BlackFox
                             GameManager.Instance.CoinMng.CoinController.InstantiateCoin(transform.position);
                         }
                         Deactivate();
+                        PlayCollisionSound();
                         damageable.Damage(damage, gameObject);        // Se è un oggetto che può danneggiare, richiama la funzione che lo danneggia
                         Destroy(gameObject);                    //Distrugge l'agente esterno
                         break;                                  // Ed esce dal foreach.

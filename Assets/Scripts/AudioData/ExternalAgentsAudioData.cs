@@ -8,5 +8,6 @@ namespace BlackFox
     public class ExternalAgentsAudioData : ScriptableObject
     {
         public AudioParameter ExternalAgentMovement;
+        public List<AudioParameter> Collisions;
     }
 }

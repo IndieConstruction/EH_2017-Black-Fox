@@ -36,11 +36,15 @@ namespace BlackFox
         public override void GoRightInMenu(Player _player)
         {
             CurrentImgSelected++;
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
         }
 
         public override void GoLeftInMenu(Player _player)
         {
             CurrentImgSelected--;
+            if (EventManager.OnMenuAction != null)
+                EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
         }
 
         public override void GoBack(Player _player)
@@ -50,8 +54,7 @@ namespace BlackFox
                 GameManager.Instance.flowSM.SetPassThroughOrder(new List<StateBase>() { new MainMenuState() });
             });
             if (EventManager.OnMenuAction != null)
-                EventManager.OnMenuAction(AudioManager.UIAudio.Selection);
+                EventManager.OnMenuAction(AudioManager.UIAudio.Back);
         }
-
     }
 }

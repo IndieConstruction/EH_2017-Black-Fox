@@ -9,8 +9,8 @@ namespace BlackFox {
     {
         public AudioClip PinPlaced;
         public AudioClip Death;
-        public AudioClip Movement;
         public AudioClip NoAmmo;
+        public List<AudioClip> Movements;
         public List<AudioClip> Shoots;
         public List<AudioClip> Collisions;
     }

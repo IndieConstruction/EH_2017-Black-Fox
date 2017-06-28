@@ -15,6 +15,7 @@ namespace BlackFox
 
         public MenuAudioData MenuAudio;
         public PowerUpAudioData PowerUpAudio;
+        public ExternalAgentsAudioData ExternalAgentsAudio;
 
         Tweener fade;
 

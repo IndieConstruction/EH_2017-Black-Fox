@@ -277,3 +277,5 @@ MonoBehaviour:
   AudioSurceMusic: {fileID: 82468422007962646}
   MenuAudio: {fileID: 11400000, guid: 879fc557b3d20ed4b85dea773d32a642, type: 2}
   PowerUpAudio: {fileID: 11400000, guid: 5832f8890cbff5e40b65d4d972265fc8, type: 2}
+  ExternalAgentsAudio: {fileID: 11400000, guid: 6773dc84d9eecac4a91ff70088068817,
+    type: 2}

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   IsPurchased: 1
   Price: 5
-  ShipMaterialMain: {fileID: 2100000, guid: 9b486ea21bb5ee347996ed5c8bcf89a0, type: 2}
+  ShipMaterialMain: {fileID: 2100000, guid: 4ce02a6345930d349a04606c57d99b81, type: 2}
   RopeMaterial: {fileID: 2100000, guid: e6a1699572ea16848b5aaa7f263ac522, type: 2}
   PinMaterial: {fileID: 2100000, guid: 90e4dcf026251fa4bbdf45d691373d23, type: 2}
   HudColor: {fileID: 21300000, guid: 12e0f7ff6cac78546a3324d082157e9d, type: 3}

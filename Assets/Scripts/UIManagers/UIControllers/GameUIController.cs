@@ -63,6 +63,9 @@ namespace BlackFox
                 Huds[i].GetText().text = "0";
         }
 
+        /// <summary>
+        /// Popup per visualizzare la scritta "Kamikaze"
+        /// </summary>
         public void RunKamikazeAlert()
         {
             kamikazePowerUpAlert.DOFade(2, 1).OnComplete(() => { kamikazePowerUpAlert.DOFade(-1, 1); });

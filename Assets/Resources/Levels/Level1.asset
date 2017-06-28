@@ -49,8 +49,9 @@ MonoBehaviour:
   ExternalElementSpawner:
     SpawnerPrefab: {fileID: 1637366666661558, guid: 6389b3edb560e9741a9f9965a3fdc63f,
       type: 2}
-    ExternalAgent: {fileID: 1842433816405484, guid: 7c88d28d0bb7bed4da4b6aee0e1a6320,
-      type: 2}
+    ExternalAgent:
+    - {fileID: 1842433816405484, guid: 7c88d28d0bb7bed4da4b6aee0e1a6320, type: 2}
+    - {fileID: 1842433816405484, guid: f39e5bf2c7652084a80191c841014072, type: 2}
     MinTime: 10
     MaxTime: 20
     AngularSpeed: 6789

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Name: ExternalAgentsAudioData
   m_EditorClassIdentifier: 
   ExternalAgentMovement:
-    Clip: {fileID: 0}
+    Clip: {fileID: 8300000, guid: 2d0193465b6b9214ca4ad5e9223baab0, type: 3}
     Volume: 1

@@ -12,8 +12,10 @@ namespace BlackFox
 
         public AudioSource AudioSurceMenu;
         public AudioSource AudioSurceMusic;
+        public AudioSource AudioSurceGame;
 
         public MenuAudioData MenuAudio;
+        public GameAudioData GameAudio;
         public PowerUpAudioData PowerUpAudio;
         public ExternalAgentsAudioData ExternalAgentsAudio;
 
@@ -42,11 +44,62 @@ namespace BlackFox
                     if (AudioSurceMenu.clip != null)
                         AudioSurceMenu.Play();
                     break;
-                case UIAudio.CountDown:
-                    AudioSurceMenu.clip = MenuAudio.CountDownAudio.Clip;
-                    AudioSurceMenu.volume = MenuAudio.CountDownAudio.Volume;
-                    if (AudioSurceMenu.clip != null)
-                        AudioSurceMenu.Play();
+            }
+        }
+
+        void PlayGameAudio(AudioInGame _gameAudio)
+        {
+            switch (_gameAudio)
+            {
+                case AudioInGame.Count1DownAudio:
+                    AudioSurceGame.clip = GameAudio.Count1DownAudio.Clip;
+                    AudioSurceGame.volume = GameAudio.Count1DownAudio.Volume;
+                    if (AudioSurceGame.clip != null)
+                        AudioSurceGame.Play();
+                    break;
+                case AudioInGame.Count2DownAudio:
+                    AudioSurceGame.clip = GameAudio.Count2DownAudio.Clip;
+                    AudioSurceGame.volume = GameAudio.Count2DownAudio.Volume;
+                    if (AudioSurceGame.clip != null)
+                        AudioSurceGame.Play();
+                    break;
+                case AudioInGame.Count3DownAudio:
+                    AudioSurceGame.clip = GameAudio.Count3DownAudio.Clip;
+                    AudioSurceGame.volume = GameAudio.Count3DownAudio.Volume;
+                    if (AudioSurceGame.clip != null)
+                        AudioSurceGame.Play();
+                    break;
+                case AudioInGame.Round1Audio:
+                    AudioSurceGame.clip = GameAudio.Round1Audio.Clip;
+                    AudioSurceGame.volume = GameAudio.Round1Audio.Volume;
+                    if (AudioSurceGame.clip != null)
+                        AudioSurceGame.Play();
+                    break;
+                case AudioInGame.Round2Audio:
+                    AudioSurceGame.clip = GameAudio.Round2Audio.Clip;
+                    AudioSurceGame.volume = GameAudio.Round2Audio.Volume;
+                    if (AudioSurceGame.clip != null)
+                        AudioSurceGame.Play();
+                    break;
+                case AudioInGame.Round3Audio:
+                    AudioSurceGame.clip = GameAudio.Round3Audio.Clip;
+                    AudioSurceGame.volume = GameAudio.Round3Audio.Volume;
+                    if (AudioSurceGame.clip != null)
+                        AudioSurceGame.Play();
+                    break;
+                case AudioInGame.Round4Audio:
+                    AudioSurceGame.clip = GameAudio.Round4Audio.Clip;
+                    AudioSurceGame.volume = GameAudio.Round4Audio.Volume;
+                    if (AudioSurceGame.clip != null)
+                        AudioSurceGame.Play();
+                    break;
+                case AudioInGame.Round5Audio:
+                    AudioSurceGame.clip = GameAudio.Round5Audio.Clip;
+                    AudioSurceGame.volume = GameAudio.Round5Audio.Volume;
+                    if (AudioSurceGame.clip != null)
+                        AudioSurceGame.Play();
+                    break;
+                default:
                     break;
             }
         }
@@ -67,9 +120,9 @@ namespace BlackFox
                                 AudioSurceMusic.DOFade(MenuAudio.MenuMusic.Volume, MusicFadeInTime);
                                 break;
                             case Music.GameTheme:
-                                AudioSurceMusic.clip = MenuAudio.GameplayMusic.Clip;
+                                AudioSurceMusic.clip = GameAudio.GameplayMusic.Clip;
                                 AudioSurceMusic.Play();
-                                AudioSurceMusic.DOFade(MenuAudio.GameplayMusic.Volume, MusicFadeInTime);
+                                AudioSurceMusic.DOFade(GameAudio.GameplayMusic.Volume, MusicFadeInTime);
                                 break;
                         }
                     }
@@ -127,8 +180,19 @@ namespace BlackFox
             Movement,
             Selection,
             Back,
-            CountDown
         }
+
+        public enum AudioInGame
+        {
+            Count1DownAudio,
+            Count2DownAudio,
+            Count3DownAudio,
+            Round1Audio,
+            Round2Audio,
+            Round3Audio,
+            Round4Audio,
+            Round5Audio
+    }
 
         public enum Music
         {

@@ -15,17 +15,17 @@ MonoBehaviour:
     Clip: {fileID: 0}
     Volume: 1
   KamikazeActivation:
-    Clip: {fileID: 0}
+    Clip: {fileID: 8300000, guid: b258bfcbae934f74bbf2156ce2532064, type: 3}
     Volume: 1
   AmmoCleanerActivation:
     Clip: {fileID: 0}
     Volume: 1
   CleanSweepActivation:
-    Clip: {fileID: 0}
+    Clip: {fileID: 8300000, guid: cfd7b13428b2a224fb44f2a1bd8fc731, type: 3}
     Volume: 1
   TankActivation:
-    Clip: {fileID: 0}
+    Clip: {fileID: 8300000, guid: 2867077638b88014d9327f20d2aa23f3, type: 3}
     Volume: 1
   InvertCommandsActivation:
-    Clip: {fileID: 0}
+    Clip: {fileID: 8300000, guid: 3c8219add377a02468e1b797f7512873, type: 3}
     Volume: 1

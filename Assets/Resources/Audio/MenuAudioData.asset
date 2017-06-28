@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Name: MenuAudioData
   m_EditorClassIdentifier: 
   MenuMovementAudio:
-    Clip: {fileID: 8300000, guid: f7ba576619dfec445b99e9bdeb18aa1f, type: 3}
+    Clip: {fileID: 8300000, guid: 9e17277ac4520394583c770646f39d29, type: 3}
     Volume: 1
   MenuSelectionAudio:
-    Clip: {fileID: 8300000, guid: 235c61b01072c6a48a34dea4c7ca850b, type: 3}
+    Clip: {fileID: 8300000, guid: 010a3353ab0de744bba92e3a52ccef13, type: 3}
     Volume: 1
-  GameplayMusic:
-    Clip: {fileID: 8300000, guid: c1f49c345d891874eac11354e8389c52, type: 3}
+  MenuGoBackAudio:
+    Clip: {fileID: 8300000, guid: 0652af3bed549a64c8a9dd60fdbbb7c0, type: 3}
     Volume: 1
   MenuMusic:
     Clip: {fileID: 8300000, guid: 36693b52cda41c14999c29c9a0d60cbd, type: 3}

@@ -20,7 +20,7 @@ namespace BlackFox
             set
             {
                 _coinCollected = value;
-                GameManager.Instance.UiMng.canvasGame.gameUIController.CoinCollectedText.text = "Coin = " + _coinCollected;
+                GameManager.Instance.UiMng.canvasGame.gameUIController.CoinCollectedText.text =_coinCollected.ToString();
             }
         }
 

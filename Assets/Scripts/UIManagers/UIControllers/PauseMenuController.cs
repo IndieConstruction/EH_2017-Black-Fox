@@ -18,7 +18,8 @@ namespace BlackFox
 
         public void Init()
         {
-            FindISelectableChildren();
+            if(SelectableButtons.Count == 0)
+                FindISelectableChildren();
             foreach (ISelectable button in SelectableButtons)
             {
                 (button as SelectableButton).Init(GameManager.Instance.UiMng.SelectedButton, GameManager.Instance.UiMng.DeselectionButton);
@@ -29,6 +30,7 @@ namespace BlackFox
 
         public override void GoDownInMenu(Player _player)
         {
+            Debug.Log(SelectableButtons[CurrentIndexSelection]);
             base.GoDownInMenu(_player);
             if (EventManager.OnMenuAction != null)
                 EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
@@ -36,6 +38,7 @@ namespace BlackFox
 
         public override void GoUpInMenu(Player _player)
         {
+            Debug.Log(SelectableButtons[CurrentIndexSelection]);
             base.GoUpInMenu(_player);
             if (EventManager.OnMenuAction != null)
                 EventManager.OnMenuAction(AudioManager.UIAudio.Movement);
@@ -52,6 +55,8 @@ namespace BlackFox
                     GameManager.Instance.LevelMng.gameplaySM.SetPassThroughOrder(new List<StateBase>() { new CleanSceneState(), new GameOverState() });
                     break;
             }
+
+            CurrentIndexSelection = 0;
 
             if (EventManager.OnMenuAction != null)
                 EventManager.OnMenuAction(AudioManager.UIAudio.Selection);

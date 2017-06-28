@@ -75,6 +75,13 @@ namespace BlackFox
 
         private void OnCollisionEnter(Collision collision)
         {
+            GetComponentInChildren<ParticleSystem>().Stop();
+            if (collision.gameObject.GetComponent<ExternalAgent>() != null)
+            { 
+                Deactivate();
+                PlayCollisionSound();
+                Destroy(gameObject);
+            }
             // Controlla se l'oggetto con cui ha colliso ha l'interfaccia IDamageable e salva un riferimento di tale interfaccia
             IDamageable damageable = collision.gameObject.GetComponent<IDamageable>();
             if (damageable != null)

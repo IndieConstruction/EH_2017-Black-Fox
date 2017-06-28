@@ -14,6 +14,6 @@ MonoBehaviour:
   IsPurchased: 0
   Price: 5
   ShipMaterialMain: {fileID: 2100000, guid: 478c1b92c82feb94191c3ce0a554cdd2, type: 2}
-  RopeMaterial: {fileID: 2100000, guid: ed50f55be8a8feb479d02cccfed7723b, type: 2}
+  RopeMaterial: {fileID: 2100000, guid: b03987f081122f648834274c45413dd5, type: 2}
   PinMaterial: {fileID: 2100000, guid: 95d69561335a6834d91216c7c055e5bd, type: 2}
   HudColor: {fileID: 21300000, guid: c2ea08f7fe2b3fc4c8619b84c374af24, type: 3}

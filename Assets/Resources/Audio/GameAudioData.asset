@@ -37,11 +37,11 @@ MonoBehaviour:
     Volume: 0.6
   GameplayMusic:
     Clip: {fileID: 8300000, guid: c1f49c345d891874eac11354e8389c52, type: 3}
-    Volume: 0.6
+    Volume: 0.4
   CoinCollected:
   - Clip: {fileID: 8300000, guid: ea3090762e24e3943b18a6ca10b2d957, type: 3}
-    Volume: 1
+    Volume: 0.3
   - Clip: {fileID: 8300000, guid: 0da5b1245e538c041a87dde661956e97, type: 3}
-    Volume: 1
+    Volume: 0.3
   - Clip: {fileID: 8300000, guid: bb2271e0169cfc346b71982352ff98a0, type: 3}
-    Volume: 1
+    Volume: 0.3

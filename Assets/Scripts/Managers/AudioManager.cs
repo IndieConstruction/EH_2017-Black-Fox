@@ -102,10 +102,10 @@ namespace BlackFox
                     break;
                 case AudioInGame.CoinCollected:
                     int random = Random.Range(0, GameAudio.CoinCollected.Count);
-                    AudioSurceGame.clip = GameAudio.CoinCollected[random].Clip;
-                    AudioSurceGame.volume = GameAudio.CoinCollected[random].Volume;
-                    if (AudioSurceGame.clip != null)
-                        AudioSurceGame.Play();
+                    AudioSurceCoin.clip = GameAudio.CoinCollected[random].Clip;
+                    AudioSurceCoin.volume = GameAudio.CoinCollected[random].Volume;
+                    if (AudioSurceCoin.clip != null)
+                        AudioSurceCoin.Play();
                     break;
             }
         }
@@ -115,16 +115,39 @@ namespace BlackFox
             switch(_id)
             {
                 case PowerUpID.Kamikaze:
+                    if (!AudioSurcePowerUp.isPlaying)
+                        AudioSurcePowerUp.Stop();
+                    AudioSurcePowerUp.clip = PowerUpAudio.KamikazeActivation.Clip;
+                    AudioSurcePowerUp.volume = PowerUpAudio.KamikazeActivation.Volume;
+                    AudioSurcePowerUp.Play();
                     break;
                 case PowerUpID.AmmoCleaner:
+                    if (!AudioSurcePowerUp.isPlaying)
+                        AudioSurcePowerUp.Stop();
+                    AudioSurcePowerUp.clip = PowerUpAudio.AmmoCleanerActivation.Clip;
+                    AudioSurcePowerUp.volume = PowerUpAudio.AmmoCleanerActivation.Volume;
+                    AudioSurcePowerUp.Play();
                     break;
                 case PowerUpID.CleanSweep:
+                    if (!AudioSurcePowerUp.isPlaying)
+                        AudioSurcePowerUp.Stop();
+                    AudioSurcePowerUp.clip = PowerUpAudio.CleanSweepActivation.Clip;
+                    AudioSurcePowerUp.volume = PowerUpAudio.CleanSweepActivation.Volume;
+                    AudioSurcePowerUp.Play();
                     break;
                 case PowerUpID.Tank:
+                    if (!AudioSurcePowerUp.isPlaying)
+                        AudioSurcePowerUp.Stop();
+                    AudioSurcePowerUp.clip = PowerUpAudio.TankActivation.Clip;
+                    AudioSurcePowerUp.volume = PowerUpAudio.TankActivation.Volume;
+                    AudioSurcePowerUp.Play();
                     break;
                 case PowerUpID.InvertCommands:
-                    break;
-                default:
+                    if (!AudioSurcePowerUp.isPlaying)
+                        AudioSurcePowerUp.Stop();
+                    AudioSurcePowerUp.clip = PowerUpAudio.InvertCommandsActivation.Clip;
+                    AudioSurcePowerUp.volume = PowerUpAudio.InvertCommandsActivation.Volume;
+                    AudioSurcePowerUp.Play();
                     break;
             }
         }
@@ -153,35 +176,6 @@ namespace BlackFox
                     }
                 });
             }
-        }
-
-        public AudioParameter GetPowerUpClip(PowerUpID _powerUpID)
-        {
-            AudioParameter audioParameter = new AudioParameter();
-            switch (_powerUpID)
-            {
-                case PowerUpID.Kamikaze:
-                    audioParameter.Clip = PowerUpAudio.KamikazeActivation.Clip;
-                    audioParameter.Volume = PowerUpAudio.KamikazeActivation.Volume;
-                    break;
-                case PowerUpID.AmmoCleaner:
-                    audioParameter.Clip = PowerUpAudio.AmmoCleanerActivation.Clip;
-                    audioParameter.Volume = PowerUpAudio.AmmoCleanerActivation.Volume;
-                    break;
-                case PowerUpID.CleanSweep:
-                    audioParameter.Clip = PowerUpAudio.CleanSweepActivation.Clip;
-                    audioParameter.Volume = PowerUpAudio.CleanSweepActivation.Volume;
-                    break;
-                case PowerUpID.Tank:
-                    audioParameter.Clip = PowerUpAudio.TankActivation.Clip;
-                    audioParameter.Volume = PowerUpAudio.TankActivation.Volume;
-                    break;
-                case PowerUpID.InvertCommands:
-                    audioParameter.Clip = PowerUpAudio.InvertCommandsActivation.Clip;
-                    audioParameter.Volume = PowerUpAudio.InvertCommandsActivation.Volume;
-                    break;
-            }
-            return audioParameter;
         }
         #endregion
 

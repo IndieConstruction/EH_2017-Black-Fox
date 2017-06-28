@@ -13,21 +13,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PowerUpSpawn:
   - Clip: {fileID: 8300000, guid: a68ca95090cc9204db9d3daee1151434, type: 3}
-    Volume: 0.2
+    Volume: 0.3
   - Clip: {fileID: 8300000, guid: e2292326ab5c8b945932e2da8101ca9b, type: 3}
-    Volume: 0.2
+    Volume: 0.3
   KamikazeActivation:
     Clip: {fileID: 8300000, guid: b258bfcbae934f74bbf2156ce2532064, type: 3}
-    Volume: 0.6
+    Volume: 0.3
   AmmoCleanerActivation:
     Clip: {fileID: 8300000, guid: da8ccd3c8babf6042807c8c1dfc0f31a, type: 3}
-    Volume: 0.55
+    Volume: 0.3
   CleanSweepActivation:
     Clip: {fileID: 8300000, guid: cfd7b13428b2a224fb44f2a1bd8fc731, type: 3}
-    Volume: 0.55
+    Volume: 0.3
   TankActivation:
     Clip: {fileID: 8300000, guid: 2867077638b88014d9327f20d2aa23f3, type: 3}
-    Volume: 0.6
+    Volume: 0.3
   InvertCommandsActivation:
     Clip: {fileID: 8300000, guid: 3c8219add377a02468e1b797f7512873, type: 3}
-    Volume: 0.6
+    Volume: 0.3

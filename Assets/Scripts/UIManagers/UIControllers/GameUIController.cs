@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿using DG.Tweening;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,8 +9,8 @@ namespace BlackFox
     {
         List<PlayerHud> Huds = new List<PlayerHud>();
 
-        public Slider ElementZeroSlider;
-
+        public Image kamikazePowerUpAlert;
+        float timer = 0;
         public Text CoinCollectedText;
 
         List<GameObject> getHudPlayers()
@@ -27,11 +27,11 @@ namespace BlackFox
         }
 
 
-
         #region API
 
         public void Init()
         {
+            kamikazePowerUpAlert.color = new Color(kamikazePowerUpAlert.color.r, kamikazePowerUpAlert.color.g, kamikazePowerUpAlert.color.b, 0);
             List<Player> players = GameManager.Instance.PlayerMng.Players;
             List<GameObject> HudPlayer = getHudPlayers();
             for (int i = 0; i < players.Count; i++)
@@ -63,9 +63,9 @@ namespace BlackFox
                 Huds[i].GetText().text = "0";
         }
 
-        public void SetElementZeroSlider(float _life, float _maxLife)
+        public void RunKamikazeAlert()
         {
-            ElementZeroSlider.value = _life / _maxLife;                  // Da rivedere se il valore della vita cambia
+            kamikazePowerUpAlert.DOFade(2, 1).OnComplete(() => { kamikazePowerUpAlert.DOFade(-1, 1); });
         }
 
         #endregion

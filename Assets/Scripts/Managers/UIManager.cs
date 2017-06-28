@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 namespace BlackFox {
     public class UIManager : MonoBehaviour
@@ -25,6 +26,8 @@ namespace BlackFox {
 
         [HideInInspector]
         public BaseMenu CurrentMenu;
+
+        public List<Sprite> RoundsImage = new List<Sprite>();
 
         #region API
         public void Init()
@@ -223,6 +226,12 @@ namespace BlackFox {
 
         #endregion
         #endregion
+
+        public void SetRoundImage(int _roundNumber)
+        {
+            canvasGame.Counter.RoundNumber = RoundsImage[_roundNumber - 1];
+        }
         #endregion
+
     }
 }

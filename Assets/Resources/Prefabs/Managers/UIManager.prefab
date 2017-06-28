@@ -56,7 +56,15 @@ MonoBehaviour:
   canvasGame: {fileID: 0}
   avatarSelectionManager: {fileID: 0}
   creditsMenuController: {fileID: 0}
+  manualController: {fileID: 0}
+  storeController: {fileID: 0}
   AvatarUI: {fileID: 1432734274521742, guid: 728a6e3d94c86094599d5995915c6a7f, type: 2}
   CurrentMenu: {fileID: 0}
+  RoundsImage:
+  - {fileID: 21300000, guid: a752bb587d665c14e894f53d8ee143a9, type: 3}
+  - {fileID: 21300000, guid: 0d44bac3dd8eb864a8a0e83a748ca75e, type: 3}
+  - {fileID: 21300000, guid: 7264c57ecefc0fe4da85fd8fbcec2bc7, type: 3}
+  - {fileID: 21300000, guid: f0713b91b6a2d94448db13bf4f501eb5, type: 3}
+  - {fileID: 21300000, guid: 80078186e6e66a64f86d952dd8f56185, type: 3}
   SelectedButton: {fileID: 0}
   DeselectionButton: {fileID: 0}

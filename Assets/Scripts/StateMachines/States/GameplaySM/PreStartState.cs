@@ -9,6 +9,7 @@ namespace BlackFox
         public override void OnStart()
         {
             Debug.Log("PreStartState");
+            GameManager.Instance.UiMng.SetRoundImage(GameManager.Instance.LevelMng.RoundNumber);
             GameManager.Instance.LoadingCtrl.DeactivateLoadingPanel(()=> {
                 GameManager.Instance.UiMng.canvasGame.Counter.DoCountDown();
             });

@@ -165,12 +165,14 @@ namespace BlackFox
         {
             EventManager.OnMenuAction += PlayUIAudio;
             EventManager.OnMusicChange += PlayMusic;
+            EventManager.OnGameAction += PlayGameAudio;
         }
 
         private void OnDisable()
         {
             EventManager.OnMenuAction -= PlayUIAudio;
             EventManager.OnMusicChange -= PlayMusic;
+            EventManager.OnGameAction -= PlayGameAudio;
         }
         #endregion
 

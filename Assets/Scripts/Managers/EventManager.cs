@@ -78,6 +78,12 @@ namespace BlackFox
         /// Evento che si occupa di innescare la musica
         /// </summary>
         public static MusicEvent OnMusicChange;
+
+        public delegate void GameAudioEvent(AudioManager.AudioInGame _audio);
+        /// <summary>
+        /// Evento che si occupa di innescare la musica
+        /// </summary>
+        public static GameAudioEvent OnGameAction;
         #endregion
     }
 }

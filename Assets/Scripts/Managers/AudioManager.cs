@@ -45,7 +45,6 @@ namespace BlackFox
 
         void PlayMusic(Music _music, bool _play)
         {
-            AudioSource surce = AudioSurceMusic;
             if (AudioSurceMusic != null)
             {
                 fade = AudioSurceMusic.DOFade(0, MusicFadeOutTime).OnComplete(() =>
@@ -56,15 +55,15 @@ namespace BlackFox
                         {
                             case Music.MenuTheme:
                                 AudioSurceMusic.clip = MenuAudio.MenuMusic.Clip;
-                                AudioSurceMusic.volume = MenuAudio.MenuMusic.Volume;
+                                AudioSurceMusic.Play();
+                                AudioSurceMusic.DOFade(MenuAudio.MenuMusic.Volume, MusicFadeInTime);
                                 break;
                             case Music.GameTheme:
                                 AudioSurceMusic.clip = MenuAudio.GameplayMusic.Clip;
-                                AudioSurceMusic.volume = MenuAudio.GameplayMusic.Volume;
+                                AudioSurceMusic.Play();
+                                AudioSurceMusic.DOFade(MenuAudio.GameplayMusic.Volume, MusicFadeInTime);
                                 break;
                         }
-                        AudioSurceMusic.Play();
-                        AudioSurceMusic.DOFade(1, MusicFadeInTime);
                     }
                 });
             }

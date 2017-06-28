@@ -329,7 +329,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Concept Artist\n\nAnselmi Andrea\r\nAlessandro Febbraro\r\nDomenico Striarese\r\n"
+  m_Text: "Concept Artist\n\nAndrea\r Anselmi\nAlessandro Febbraro\r\nDomenico Strianese\r\n"
 --- !u!114 &114465819623892646
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -500,7 +500,7 @@ MonoBehaviour:
 
     Patrizio Mazziotti
 
-    Francesco Paganeli'
+    Francesco Paganelli'
 --- !u!222 &222087243786787182
 CanvasRenderer:
   m_ObjectHideFlags: 1

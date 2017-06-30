@@ -78,7 +78,7 @@ namespace BlackFox
                 case "coins":
                     GameManager.Instance.CoinMng.TotalCoin += 100;
                     break;
-                case "DataReset":
+                case "reset":
                     DataReset();
                     break;
                 default:

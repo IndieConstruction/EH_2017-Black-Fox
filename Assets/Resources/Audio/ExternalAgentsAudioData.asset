@@ -13,7 +13,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ExternalAgentMovement:
     Clip: {fileID: 8300000, guid: 2d0193465b6b9214ca4ad5e9223baab0, type: 3}
-    Volume: 0.15
+    Volume: 0.4
   Collisions:
   - Clip: {fileID: 8300000, guid: 55bf301b984463744935b852f4abec41, type: 3}
     Volume: 0.2

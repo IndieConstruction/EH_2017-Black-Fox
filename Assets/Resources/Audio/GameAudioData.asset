@@ -13,31 +13,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Count1DownAudio:
     Clip: {fileID: 8300000, guid: e4ba3eafcb7b3a441892f634c2d05f4b, type: 3}
-    Volume: 0.6
+    Volume: 1
   Count2DownAudio:
     Clip: {fileID: 8300000, guid: 2ee7abbb60da7ff4d83781afa41dcff8, type: 3}
-    Volume: 0.6
+    Volume: 1
   Count3DownAudio:
     Clip: {fileID: 8300000, guid: 4506c1ffd867ea842a996dfab3e9f8e2, type: 3}
-    Volume: 0.6
+    Volume: 1
   Round1Audio:
     Clip: {fileID: 8300000, guid: 4bb70f6ab9458b449b3a4a200b48cf36, type: 3}
-    Volume: 0.6
+    Volume: 0.8
   Round2Audio:
     Clip: {fileID: 8300000, guid: 1f6f1d89fe04a784e9b13f5d3ea0d644, type: 3}
-    Volume: 0.6
+    Volume: 0.8
   Round3Audio:
     Clip: {fileID: 8300000, guid: 64c447c8c1db10a49bb654f49e04f93f, type: 3}
-    Volume: 0.6
+    Volume: 0.8
   Round4Audio:
     Clip: {fileID: 8300000, guid: 47f0633a9822fd0468a54e45fc19681f, type: 3}
-    Volume: 0.6
+    Volume: 0.8
   Round5Audio:
     Clip: {fileID: 8300000, guid: 6c5e40c2f211be54393b40df6e4bc2b4, type: 3}
-    Volume: 0.6
+    Volume: 0.8
   GameplayMusic:
     Clip: {fileID: 8300000, guid: c1f49c345d891874eac11354e8389c52, type: 3}
-    Volume: 0.4
+    Volume: 0.7
   CoinCollected:
   - Clip: {fileID: 8300000, guid: ea3090762e24e3943b18a6ca10b2d957, type: 3}
     Volume: 0.3

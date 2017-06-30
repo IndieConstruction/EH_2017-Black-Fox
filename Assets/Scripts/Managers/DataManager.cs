@@ -8,15 +8,16 @@ namespace BlackFox
     public class DataManager : MonoBehaviour
     {
         [HideInInspector]
-        public List<AvatarData> AvatarDatasInstances { get { return DataSavedToAvatarData(datas); } }
+        public List<AvatarData> AvatarDatasInstances { get { return DataSavedToAvatarData(modelsDatas); } }
 
-        List<ColorSetData> colorData;
+        List<ColorSetData> colorData { get { return DataSavedToColorSetData(colorsDatas); } }
 
-        List<DataSaved> datas = new List<DataSaved>();
+        List<ModelsSaved> modelsDatas = new List<ModelsSaved>();
+        List<ColorsSaved> colorsDatas = new List<ColorsSaved>();
 
         public void Init()
         {
-            colorData = LoadColorSets();
+            GetPlayerPrefsForColors(LoadColorSets());
             InstantiateAvatarDatas(LoadAvatarDatas());
         }
 
@@ -29,12 +30,12 @@ namespace BlackFox
         {
             PlayerPrefs.SetInt(_data.DataName, 1);
 
-            for (int i = 0; i < datas.Count; i++)
+            for (int i = 0; i < modelsDatas.Count; i++)
             {
-                if (_data.DataName == datas[i].avatar.DataName)
+                if (_data.DataName == modelsDatas[i].avatar.DataName)
                 {
-                    AvatarData tempData = datas[i].avatar;                                  // Riutilizzo l'avatarData già contenuta all'interno di datas.avatar
-                    datas[i] = new DataSaved() { avatar = tempData, isPurchased = 1 };
+                    AvatarData tempData = modelsDatas[i].avatar;                                  // Riutilizzo l'avatarData già contenuta all'interno di datas.avatar
+                    modelsDatas[i] = new ModelsSaved() { avatar = tempData, isPurchased = 1 };
                 }
             }
 
@@ -44,12 +45,14 @@ namespace BlackFox
 
         public void PurchaseColorSet(ColorSetData _color)
         {
-            foreach (ColorSetData color in colorData)
+            PlayerPrefs.SetInt(_color.ColorName, 1);
+
+            for (int i = 0; i < colorsDatas.Count; i++)
             {
-                if (color == _color)
+                if (_color.ColorName == colorsDatas[i].color.ColorName)
                 {
-                    color.IsPurchased = true;
-                    break;
+                    ColorSetData tempData = colorsDatas[i].color;                                  // Riutilizzo l'avatarData già contenuta all'interno di datas.avatar
+                    colorsDatas[i] = new ColorsSaved() { color = tempData, isPurchased = 1 };
                 }
             }
 
@@ -79,59 +82,111 @@ namespace BlackFox
         {
             foreach (AvatarData data in _datas)
             {
-                DataSaved tempData = new DataSaved();
+                ModelsSaved tempData = new ModelsSaved();
                 tempData.avatar = Instantiate(data);
                 if (PlayerPrefs.HasKey(data.DataName)) 
                     tempData.isPurchased = PlayerPrefs.GetInt(data.DataName);
                 else
                     tempData.isPurchased = data.IsPurchased == true ? 1 : 0;
 
-                datas.Add(tempData);
+                modelsDatas.Add(tempData);
             }
         }
 
-        List<AvatarData> DataSavedToAvatarData(List<DataSaved> _data)
+        void GetPlayerPrefsForColors(List<ColorSetData> _datas)
+        {
+            foreach (ColorSetData data in _datas)
+            {
+                ColorsSaved tempData = new ColorsSaved();
+                tempData.color = data;
+                if (PlayerPrefs.HasKey(data.ColorName))
+                    tempData.isPurchased = PlayerPrefs.GetInt(data.ColorName);
+                else
+                    tempData.isPurchased = data.IsPurchased == true ? 1 : 0;
+
+                colorsDatas.Add(tempData);
+            }
+        }
+
+        List<AvatarData> DataSavedToAvatarData(List<ModelsSaved> _data)
         {
             List<AvatarData> DataToReturn = new List<AvatarData>();
-            foreach (DataSaved data in _data)
+            foreach (ModelsSaved data in _data)
             {
                 DataToReturn.Add(data.avatar);
             }
             return DataToReturn;
         }
 
+        List<ColorSetData> DataSavedToColorSetData(List<ColorsSaved> _data)
+        {
+            List<ColorSetData> DataToReturn = new List<ColorSetData>();
+            foreach (ColorsSaved data in colorsDatas)
+            {
+                DataToReturn.Add(data.color);
+            }
+            return DataToReturn;
+        }
+
         /// <summary>
-        /// Resetta le monete ed i modelli
+        /// Resetta i modelli ed i colori
         /// </summary>
         public void DataReset()
         {
             ResetModelsPurchased();
+            ResetColorsPurchased();
         }
 
         /// <summary>
-        /// Resetta tutti i modelli a Purchase tranne il gufo
+        /// Resetta tutti i modelli rendendo disponibile solo il gufo
         /// </summary>
         void ResetModelsPurchased()
         {
-            for (int i = 0; i < datas.Count; i++)
+            for (int i = 0; i < modelsDatas.Count; i++)
             {
-                if (datas[i].avatar.DataName != "Owl")
+                if (modelsDatas[i].avatar.DataName != "Owl")
                 {
-                    PlayerPrefs.SetInt(datas[i].avatar.DataName, 0);
-                    datas[i].avatar.IsPurchased = false;
+                    PlayerPrefs.SetInt(modelsDatas[i].avatar.DataName, 0);
+                    modelsDatas[i].avatar.IsPurchased = false;
                 }
                 else
                 {
-                    PlayerPrefs.SetInt(datas[i].avatar.DataName, 1);
-                    datas[i].avatar.IsPurchased = true;
+                    PlayerPrefs.SetInt(modelsDatas[i].avatar.DataName, 1);
+                    modelsDatas[i].avatar.IsPurchased = true;
                 }
             }
         }
 
-        struct DataSaved
+        /// <summary>
+        /// Resetta tutti i colori tranne i 4 principali
+        /// </summary>
+        void ResetColorsPurchased()
+        {
+            for (int i = 0; i < colorsDatas.Count; i++)
+            {
+                if(colorsDatas[i].color.ColorName != "Blue" && colorsDatas[i].color.ColorName != "Green" && colorsDatas[i].color.ColorName != "LightBlue" && colorsDatas[i].color.ColorName != "Orange")
+                {
+                    PlayerPrefs.SetInt(colorsDatas[i].color.ColorName, 0);
+                    colorsDatas[i].color.IsPurchased = false;
+                }
+                else
+                {
+                    PlayerPrefs.SetInt(colorsDatas[i].color.ColorName, 1);
+                    colorsDatas[i].color.IsPurchased = true;
+                }
+            }
+        }
+
+        struct ModelsSaved
         {
             public AvatarData avatar;
             public int isPurchased { set { avatar.IsPurchased = value == 0 ?  false : true; } }  // 1: Purchased, 0: non Purchased
+        }
+
+        struct ColorsSaved
+        {
+            public ColorSetData color;
+            public int isPurchased { set { color.IsPurchased = value == 0 ? false : true; } }  // 1: Purchased, 0: non Purchased
         }
     }
 

@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49da9a758077c124d9645884117fa0ed, type: 3}
   m_Name: Red
   m_EditorClassIdentifier: 
+  ColorName: Red
   IsPurchased: 0
   Price: 5
   ShipMaterialMain: {fileID: 2100000, guid: b648e4291d8e71f4985fb25fb1c6bc9d, type: 2}

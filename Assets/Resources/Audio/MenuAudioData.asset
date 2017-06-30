@@ -22,4 +22,4 @@ MonoBehaviour:
     Volume: 0.4
   MenuMusic:
     Clip: {fileID: 8300000, guid: 731265f5b40490c4c80f167a66e7c6e2, type: 3}
-    Volume: 0.85
+    Volume: 1

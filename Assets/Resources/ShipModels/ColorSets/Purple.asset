@@ -11,6 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49da9a758077c124d9645884117fa0ed, type: 3}
   m_Name: Purple
   m_EditorClassIdentifier: 
+  ColorName: Purple
   IsPurchased: 0
   Price: 5
   ShipMaterialMain: {fileID: 2100000, guid: 99ce569298d98314ebdc5bc4c42310b2, type: 2}
